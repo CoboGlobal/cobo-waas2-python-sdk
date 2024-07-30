@@ -1,0 +1,12 @@
+# TransactionSubStatus
+
+The transaction sub-status. Possible values include:    - `PendingDoubleCheck`: The transaction is pending a double check.    - `RejectedDoubleCheck`: The transaction is rejected because it failed a double check.   - `PendingSpenderCheck`: The transaction is pending a spender check.   - `RejectedSpenderAuth`: The transaction is rejected because it is rejected by the spender.   - `RejectedTravelRule`: The transaction is rejected because it failed to comply with the Travel Rule.   - `RejectedKYT`: The transaction is rejected because it did not pass the Know Your Transaction (KYT) compliance checks.   - `PendingRiskControlCheck`: The transaction is pending for a Risk Control check.   - `RejectedRiskControlCheck`: The transaction is rejected because it failed the Risk Control check.   - `PendingApproverCheck`: The transaction is pending approval from the approver.   - `RejectedApproverAuth`: The transaction is rejected by the approver.   - `RejectedbyMobileCosigner`: The transaction is rejected by a mobile cosigner.   - `RejectedCoboCheck`: The transaction is rejected because it failed the internal check by Cobo.   - `RejectedWhiteList`: The transaction is rejected because the sender or receiver is not included in a whitelist.   - `PendingWaitSigner`: The transaction is pending signature.   - `FailedBySigner`: The transaction failed during the signing process.   - `FailedBroadcasting`: The transaction failed to be broadcast to the blockchain network.   - `CanceledBySpender`: The transaction is canceled by a Spender.   - `CanceledByAPI`: The transaction is canceled by a [Cancel transaction](/v2/api-references/transactions/cancel-transaction) operation.   - `Queue`: The transaction is queued to be processed by Cobo Portal.   - `OnchainRejection`: The transaction is rejected from being added to the blockchain.   - `FailedOnChain`: The transaction failed on the blockchain.   - `PendingBlockConfirmations`: The transaction is awaiting the required number of confirmations.   - `ReplacedByNewTransaction`: The transaction has been replaced by a new transaction. 
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
