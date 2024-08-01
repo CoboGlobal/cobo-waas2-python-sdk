@@ -30,6 +30,9 @@ REQUIRES = [
     "ed25519==1.5"
 ]
 
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 setup(
     name=NAME,
     version=VERSION,
@@ -43,8 +46,6 @@ setup(
     include_package_data=True,
     license="Apache 2.0",
     long_description_content_type='text/markdown',
-    long_description="""\
-    The Cobo Wallet-as-a-Service (WaaS) 2.0 API is the latest version of Cobo’s WaaS API offering. It enables you to access Cobo’s full suite of crypto wallet technologies with powerful and flexible access controls. By encapsulating complex security protocols and streamlining blockchain interactions, this API allows you to concentrate on your core business activities without worrying about the safety of your assets. The WaaS 2.0 API presents the following key features:  - A unified API for Cobo’s [all four wallet types](https://manuals.cobo.com/en/portal/introduction#an-all-in-one-wallet-platform) - Support for 80+ chains and 3000+ tokens - A comprehensive selection of webhook events - Flexible usage models for MPC wallets, including [Organization-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/introduction) and [User-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/ucw/introduction) - Programmatic control of smart contract wallets such as Safe\\{Wallet\\} with fine-grained access controls - Seamlessly transfer funds across multiple exchanges, including Binance, OKX, Bybit, Deribit, and more  For more information about the WaaS 2.0 API, see [Introduction to WaaS 2.0](https://www.cobo.com/developers/v2/guides/overview/introduction). 
-    """,  # noqa: E501
+    long_description=long_description,
     package_data={"cobo_waas2": ["py.typed"]},
 )

@@ -26,10 +26,8 @@ Python 3.7+
 ## Installation & Usage
 ### pip install
 
-If the python package is hosted on a repository, you can install directly using:
-
 ```sh
-pip install git+https://github.com/CoboGlobal/cobo-waas2-python-sdk.git
+pip install cobo-waas2==1.0.0
 ```
 
 Then import the package:
