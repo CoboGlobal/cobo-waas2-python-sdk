@@ -54,20 +54,20 @@ configuration = cobo_waas2.Configuration(
 with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.WalletsApi(api_client)
-    wallet_type = cobo_waas2.WalletType()
-        wallet_subtype = cobo_waas2.WalletSubtype()
-        chain_ids = 'BTC,ETH'
-        limit = 10
-        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    wallet_type = cobo_waas2.WalletType.CUSTODIAL
+    wallet_subtype = cobo_waas2.WalletSubtype.ASSET
+    chain_ids = 'BTC,ETH'
+    limit = 10
+    before = ''
+    after = ''
 
-        try:
-            # List supported chains
-            api_response = api_instance.list_supported_chains(wallet_type=wallet_type, wallet_subtype=wallet_subtype, chain_ids=chain_ids, limit=limit, before=before, after=after)
-            print("The response of WalletsApi->list_supported_chains:\n")
-            pprint(api_response)
-        except Exception as e:
-            print("Exception when calling WalletsApi->list_supported_chains: %s\n" % e)
+    try:
+        # List supported chains
+        api_response = api_instance.list_supported_chains(wallet_type=wallet_type, wallet_subtype=wallet_subtype, chain_ids=chain_ids, limit=limit, before=before, after=after)
+        print("The response of WalletsApi->list_supported_chains:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WalletsApi->list_supported_chains: %s\n" % e)
 ```
 
 ## Documentation for API Endpoints

@@ -258,6 +258,7 @@ cobo_waas2/models/webhook_event_status.py
 cobo_waas2/models/webhook_event_type.py
 cobo_waas2/py.typed
 cobo_waas2/rest.py
+cobo_waas2/server_demo.py
 docs/Activity.md
 docs/ActivityAction.md
 docs/ActivityInitiator.md
