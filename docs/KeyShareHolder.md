@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **type** | [**KeyShareHolderType**](KeyShareHolderType.md) |  | [optional] 
 **tss_node_id** | **str** | The key share holder&#39;s TSS Node ID. | [optional] 
 **online** | **bool** | Whether the key share holder&#39;s TSS Node is online. - &#x60;true&#x60;: The TSS Node is online.  - &#x60;false&#x60;: The TSS Node is offline.  | [optional] 
+**signer** | **bool** | Whether the key share holder&#39;s TSS Node is a designated transaction signer. - &#x60;true&#x60;: The TSS Node is a designated transaction signer.  - &#x60;false&#x60;: The TSS Node is not a designated transaction signer.  | [optional] 
 **status** | [**KeyShareHolderStatus**](KeyShareHolderStatus.md) |  | [optional] 
 
 ## Example

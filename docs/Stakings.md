@@ -11,14 +11,14 @@ Name | Type | Description | Notes
 **address** | **str** | The staker wallet address. | 
 **amounts** | [**List[AmountDetailsInner]**](AmountDetailsInner.md) | The staking amount details. | 
 **initiator** | **str** | The initiator of the stake. | [optional] 
-**unlock_time** | **int** | The unlock time. | [optional] 
+**unlock_timestamp** | **int** | The unlock time. | [optional] 
 **unlock_block_height** | **int** | The unlock block height. | [optional] 
 **pool_id** | **str** | The unique pool id. | 
 **token_id** | **str** | The token id. | 
 **pos_chain** | **str** | The pos chain of the stake. | [optional] 
 **rewards_info** | **object** | The rewards info of the stake. | [optional] 
-**created_time** | **int** | The time when the stake was created. | 
-**updated_time** | **int** | The time when the stake was last updated. | 
+**created_timestamp** | **int** | The time when the stake was created. | 
+**updated_timestamp** | **int** | The time when the stake was last updated. | 
 **validator_info** | [**StakingsValidatorInfo**](StakingsValidatorInfo.md) |  | 
 
 ## Example

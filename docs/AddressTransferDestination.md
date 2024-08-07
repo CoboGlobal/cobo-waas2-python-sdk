@@ -1,6 +1,6 @@
 # AddressTransferDestination
 
-The information about the transaction destination. Specify either the `account_output` property or the `utxo_outputs` property. Only MPC Wallets as the transaction source can transfer tokens to multiple addresses by using the `utxo_outputs` property. 
+The information about the transaction destination type `Address`.   Specify either the `account_output` property or the `utxo_outputs` property. Only MPC Wallets as the transaction source can transfer tokens to multiple addresses by using the `utxo_outputs` property. 
 
 ## Properties
 

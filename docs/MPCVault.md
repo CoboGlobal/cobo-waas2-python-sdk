@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **name** | **str** | The vault name. | [optional] 
 **type** | [**MPCVaultType**](MPCVaultType.md) |  | [optional] 
 **root_pubkeys** | [**List[RootPubkey]**](RootPubkey.md) |  | [optional] 
-**create_timestamp** | **int** | The vault&#39;s creation time in Unix timestamp format, measured in milliseconds. | [optional] 
+**created_timestamp** | **int** | The vault&#39;s creation time in Unix timestamp format, measured in milliseconds. | [optional] 
 
 ## Example
 

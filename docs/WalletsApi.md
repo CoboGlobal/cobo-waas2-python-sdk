@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
  **token_id** | **str**| The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens). | 
  **fee_rate** | **str**| The fee rate in sats/vByte or gas price in wei. | 
  **to_address** | **str**| The recipient&#39;s address. | 
- **from_address** | **str**| The sender&#39;s address. | [optional] 
+ **from_address** | **str**| The sender&#39;s address. For EVM addresses in MPC Wallets, this parameter is required. | [optional] 
 
 ### Return type
 

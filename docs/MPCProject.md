@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **project_id** | **str** | The project ID. | [optional] 
 **org_id** | **str** | The [organization](https://manuals.cobo.com/en/portal/organization/introduction) ID. | [optional] 
 **name** | **str** | The project name. | [optional] 
-**node_count** | **int** | The number of key share holders in the project. | [optional] 
+**participants** | **int** | The number of key share holders in the project. | [optional] 
 **threshold** | **int** | The number of key share holders required to sign an operation in the project. | [optional] 
 **create_timestamp** | **int** | The project&#39;s creation time in Unix timestamp format, measured in milliseconds. | [optional] 
 

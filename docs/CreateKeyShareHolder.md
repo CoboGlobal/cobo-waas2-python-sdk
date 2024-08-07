@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Key share holder&#39;s name. | [optional] 
 **type** | [**KeyShareHolderType**](KeyShareHolderType.md) |  | [optional] 
-**tss_node_id** | **str** | The TSS Node ID. | [optional] 
+**tss_node_id** | **str** | Key share holder&#39;s TSS Node ID. | [optional] 
+**signer** | **bool** | Whether the key share holder&#39;s TSS Node is a designated transaction signer. - &#x60;true&#x60;: The TSS Node is a designated transaction signer.  - &#x60;false&#x60;: The TSS Node is not a designated transaction signer.  | [optional] 
 
 ## Example
 
