@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 **timeline** | [**List[ActivityTimeline]**](ActivityTimeline.md) | The timeline of the activity. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
 **status** | [**ActivityStatus**](ActivityStatus.md) |  | 
-**created_time** | **int** | The time when the activity was created. | [optional] 
-**updated_time** | **int** | The time when the activity was last updated. | [optional] 
+**created_timestamp** | **int** | The time when the activity was created. | [optional] 
+**updated_timestamp** | **int** | The time when the activity was last updated. | [optional] 
 
 ## Example
 

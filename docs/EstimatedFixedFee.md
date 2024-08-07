@@ -1,6 +1,6 @@
 # EstimatedFixedFee
 
-The transaction fee that you are willing to pay based on the fixed fee model for some blockchains. The fee can vary between different chains.
+In the fixed fee model, the transaction fee is a fixed amount within a certain amount of period regardless of the transaction size or network congestion, which can vary between different chains.
 
 ## Properties
 

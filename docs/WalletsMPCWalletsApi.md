@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 Create project
 
-This operation creates a project.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
+This operation creates a project.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
 
 ### Example
 
@@ -539,7 +539,7 @@ Name | Type | Description  | Notes
 
 Get project information
 
-This operation retrieves detailed information about a project. <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
+This operation retrieves detailed information about a project. <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
 
 ### Example
 
@@ -752,7 +752,7 @@ Name | Type | Description  | Notes
 
 List all Cobo key share holders
 
-This operation retrieves a list of all Cobo key share holders and their information.   <Note>When using this operation, `type` will only return `Cobo` and will never return `Mobile` or `API`.</Note> 
+This operation retrieves a list of all Cobo key share holders and their information.   <Info>When using this operation, `type` will only return `Cobo` and will never return `Mobile` or `API`.</Info> 
 
 ### Example
 
@@ -897,7 +897,7 @@ Name | Type | Description  | Notes
 
 List all projects
 
-This operation retrieves a list of all projects.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
+This operation retrieves a list of all projects.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
 
 ### Example
 
@@ -1204,7 +1204,7 @@ Name | Type | Description  | Notes
 
 Update project name
 
-This operation updates a project's name.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
+This operation updates a project's name.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
 
 ### Example
 

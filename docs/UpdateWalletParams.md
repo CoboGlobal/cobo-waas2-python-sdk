@@ -7,13 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wallet_type** | [**WalletType**](WalletType.md) |  | 
 **name** | **str** | The wallet name. | [optional] 
-**apikey** | **str** | The API key of your exchange account. This property is required when updating the information of an Exchange Wallet. | [optional] 
-**secret** | **str** | The API secret of your exchange account. This property is required when updating the information of an Exchange Wallet. | [optional] 
-**passphrase** | **str** | The passphrase of your exchange account. | [optional] 
-**memo** | **str** | The memo you use when applying for the API key of your exchange account. | [optional] 
-**account_identify** | **str** | The identifier of your exchange account. - For Binance, this is email address of your exchange account. - For OKX, this is the user name of your exchange account.  | [optional] 
-**ga_code** | **str** | The GA code for the exchange. | [optional] 
-**main_wallet_id** | **str** | The ID of the Exchange Wallet (Main Account). | [optional] 
 
 ## Example
 

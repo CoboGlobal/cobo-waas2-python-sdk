@@ -7,7 +7,7 @@ The information about the transaction block.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **block_number** | **int** | The block number. | [optional] 
-**block_time** | **int** | The time when the block was created, in Unix timestamp format, measured in milliseconds. | [optional] 
+**block_timestamp** | **int** | The time when the block was created, in Unix timestamp format, measured in milliseconds. | [optional] 
 **block_hash** | **str** | The block hash. | [optional] 
 
 ## Example

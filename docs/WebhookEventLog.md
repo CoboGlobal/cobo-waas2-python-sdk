@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **created_timestamp** | **int** | The time when the log was created, in Unix timestamp format, measured in milliseconds. | 
 **request_headers** | **object** | The request headers of the webhook event. | 
 **request_body** | [**WebhookEvent**](WebhookEvent.md) |  | 
-**response_body** | **object** | The response body of the webhook event. | [optional] 
+**response_body** | **str** | The response body of the webhook event. | [optional] 
 **response_status_code** | **int** | The response status code of the webhook event. | [optional] 
 **response_time** | **int** | The response time of the webhook event, in milliseconds. | [optional] 
 **success** | **bool** | Whether the webhook event has been successfully delivered. | 
