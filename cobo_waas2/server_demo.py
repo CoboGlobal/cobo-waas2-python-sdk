@@ -5,6 +5,7 @@ from typing import Optional
 
 import ed25519
 from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi.responses import PlainTextResponse
 
 from cobo_waas2 import WebhookEvent, Transaction
 
@@ -15,7 +16,8 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 
-# 替换成对应环境的pub key
+# Select the public key based on the environment that you use,
+# DEV for the development environment and PROD for the production environment.
 pub_keys = {
     "DEV": "a04ea1d5fa8da71f1dcfccf972b9c4eba0a2d8aba1f6da26f49977b08a0d2718",
     "PROD": "8d4a482641adb2a34b726f05827dba9a9653e5857469b8749052bf4458a86729",
@@ -41,7 +43,7 @@ async def handle_webhook(
     logger.info(event.data)
 
 
-@app.post("/api/callback")
+@app.post("/api/callback", response_class=PlainTextResponse)
 async def handle_callback(
     request: Request,
     biz_timestamp: Optional[str] = Header(None),
