@@ -10,7 +10,7 @@
 """  # noqa: E501
 
 from pydantic import validate_call, StrictFloat
-from typing import Dict, Tuple, Union
+from typing import Dict, Tuple, Union, List, Optional
 
 from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
