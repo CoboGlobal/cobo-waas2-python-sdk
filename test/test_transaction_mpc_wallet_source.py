@@ -46,7 +46,8 @@ class TestTransactionMPCWalletSource(unittest.TestCase):
                     cobo_waas2.models.transaction_utxo.TransactionUtxo(
                         tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
                         vout_n = 0, )
-                    ]
+                    ],
+                signer_key_share_holder_group_id = 'b33130a9-6e18-44a9-9e48-8b3b41921f0e'
             )
         else:
             return TransactionMPCWalletSource(

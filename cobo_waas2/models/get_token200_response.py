@@ -25,11 +25,11 @@ class GetToken200Response(BaseModel):
     """
     GetToken200Response
     """  # noqa: E501
-    access_token: Optional[StrictStr] = Field(default=None, description="The access token, used by Cobo Portal Apps to access specific resources of other organizations.")
-    token_type: Optional[StrictStr] = Field(default=None, description="The type of the tokens.")
-    scope: Optional[StrictStr] = Field(default=None, description="The scope of the access token. This property value is empty by design.")
+    access_token: Optional[StrictStr] = Field(default=None, description="The access token.")
+    token_type: Optional[StrictStr] = Field(default=None, description="The type of the tokens, which is Bearer.")
+    scope: Optional[StrictStr] = Field(default=None, description="The scope of the access token to limit the app's access to the organization's resources.  **Note**: Currently this property value is empty. The scope of the access token is based on the permissions granted when the app user installs the app. ")
     expires_in: Optional[StrictInt] = Field(default=None, description="The time in seconds in which the access token expires.")
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The refresh token, used by Cobo Portal Apps to obtain new access tokens when the access token expires.")
+    refresh_token: Optional[StrictStr] = Field(default=None, description="The refresh token, used to obtain a new access token when the current access token expires.")
     __properties: ClassVar[List[str]] = ["access_token", "token_type", "scope", "expires_in", "refresh_token"]
 
     model_config = ConfigDict(

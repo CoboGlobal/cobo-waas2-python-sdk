@@ -34,10 +34,11 @@ from cobo_waas2.models.webhook_endpoint import WebhookEndpoint
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -104,10 +105,11 @@ from cobo_waas2.models.webhook_endpoint import WebhookEndpoint
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -174,10 +176,11 @@ from cobo_waas2.models.webhook_event import WebhookEvent
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -248,10 +251,11 @@ from cobo_waas2.models.webhook_event_type import WebhookEventType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -326,10 +330,11 @@ from cobo_waas2.models.list_webhook_event_definitions200_response_inner import L
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -392,10 +397,11 @@ from cobo_waas2.models.list_webhook_event_logs200_response import ListWebhookEve
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -472,10 +478,11 @@ from cobo_waas2.models.webhook_event_type import WebhookEventType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -553,10 +560,11 @@ from cobo_waas2.models.retry_webhook_event_by_id201_response import RetryWebhook
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -627,10 +635,11 @@ from cobo_waas2.models.webhook_endpoint import WebhookEndpoint
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client

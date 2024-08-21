@@ -28,10 +28,11 @@ class EstimateUnstakeFee(BaseModel):
     EstimateUnstakeFee
     """  # noqa: E501
     activity_type: ActivityType
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization.")
     staking_id: StrictStr = Field(description="The id of the related staking.")
     amount: Optional[StrictStr] = Field(default=None, description="The amount to stake")
     fee: Optional[TransactionRequestFee] = None
-    __properties: ClassVar[List[str]] = ["activity_type", "staking_id", "amount", "fee"]
+    __properties: ClassVar[List[str]] = ["activity_type", "request_id", "staking_id", "amount", "fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +89,7 @@ class EstimateUnstakeFee(BaseModel):
 
         _obj = cls.model_validate({
             "activity_type": obj.get("activity_type"),
+            "request_id": obj.get("request_id"),
             "staking_id": obj.get("staking_id"),
             "amount": obj.get("amount"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None

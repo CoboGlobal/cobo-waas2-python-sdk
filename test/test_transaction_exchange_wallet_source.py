@@ -37,7 +37,7 @@ class TestTransactionExchangeWalletSource(unittest.TestCase):
                 source_type = 'DepositFromAddress',
                 exchange_id = 'binance',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                sub_wallet_id = 'Asset'
+                trading_account_type = 'Asset'
             )
         else:
             return TransactionExchangeWalletSource(

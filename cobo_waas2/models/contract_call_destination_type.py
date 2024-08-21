@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class ContractCallDestinationType(str, Enum):
     """
-    The type of the contract format. Possible values include: - `EVM`: EVM compatible contracts. 
+    The type of the contract format. Possible values include: - `EVM_Contract`: EVM compatible contracts. 
     """
 
     """

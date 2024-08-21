@@ -40,7 +40,9 @@ class TestCreatedWalletInfo(unittest.TestCase):
                 name = 'Example Wallet',
                 org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 project_id = '0111039d-27fb-49ba-b172-6e0aa80e37ec',
+                project_name = 'Project name',
                 vault_id = '',
+                vault_name = 'Vault name',
                 apikey = 'd8f062da-39f4-4a11-8b9d-12595854237f',
                 exchange_id = 'binance',
                 main_wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'

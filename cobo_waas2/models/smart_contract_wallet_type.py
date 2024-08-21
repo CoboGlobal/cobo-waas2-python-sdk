@@ -24,7 +24,7 @@ class SmartContractWalletType(str, Enum):
     """
     allowed enum values
     """
-    SAFEWALLET = 'SafeWallet'
+    SAFE_LEFT_CURLY_BRACKET_WALLET_RIGHT_CURLY_BRACKET = 'Safe{Wallet}'
 
     UNKNOWN = None
 

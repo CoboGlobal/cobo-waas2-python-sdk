@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **client_id** | **str** | The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval. | [optional] 
-**grant_type** | **str** | The type of the permission granting. To refresh an access token, you need to set the value as &#x60;refresh_token&#x60;. | [optional] 
-**refresh_token** | **str** | The refresh token of the expired or expiring access token. | [optional] 
+**grant_type** | **str** | The OAuth grant type. Set the value as &#x60;refresh_token&#x60;. | [optional] 
+**refresh_token** | **str** | The refresh token of the current access token. | [optional] 
 
 ## Example
 

@@ -1,6 +1,6 @@
 # ContractCallDestinationType
 
-The type of the contract format. Possible values include: - `EVM`: EVM compatible contracts. 
+The type of the contract format. Possible values include: - `EVM_Contract`: EVM compatible contracts. 
 
 ## Properties
 

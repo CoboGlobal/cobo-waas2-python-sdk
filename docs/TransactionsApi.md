@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 Cancel transaction
 
-This operation cancels a specified transaction. A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature`   A transaction request for tracking is returned upon successful operation. <Note>This operation only applies to transactions from MPC Wallets.</Note> 
+This operation cancels a specified transaction. A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature`   A transaction request for tracking is returned upon successful operation. <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note> 
 
 ### Example
 
@@ -33,10 +33,11 @@ from cobo_waas2.models.create_transfer_transaction201_response import CreateTran
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -91,7 +92,7 @@ Name | Type | Description  | Notes
 
 Call smart contract
 
-This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to blockchains that have a similar architecture to Ethereum.</Note> 
+This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from MPC Wallets or Smart Contract Wallets on the blockchains that have a similar architecture to Ethereum.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
 
 ### Example
 
@@ -105,10 +106,11 @@ from cobo_waas2.models.create_transfer_transaction201_response import CreateTran
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -163,7 +165,7 @@ Name | Type | Description  | Notes
 
 Sign message
 
-This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information).   <Note>Currently, only MPC Wallets support this type of transaction to sign a message.</Note> 
+This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
 
 ### Example
 
@@ -177,10 +179,11 @@ from cobo_waas2.models.message_sign_params import MessageSignParams
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -235,7 +238,7 @@ Name | Type | Description  | Notes
 
 Transfer token
 
-The operation transfers your assets from a wallet created on Cobo Protal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Only MPC Wallets as the transaction source can transfer tokens to multiple addresses by using the <code>utxo_outputs</code> property.</Note> 
+The operation transfers your assets from a wallet created on Cobo Protal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. You should use the <code>utxo_outputs</code> property to specify the destination addresses.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
 
 ### Example
 
@@ -249,10 +252,11 @@ from cobo_waas2.models.transfer_params import TransferParams
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -307,7 +311,7 @@ Name | Type | Description  | Notes
 
 Drop transaction
 
-This operation drops a specified transaction.   Dropping a transaction will trigger an Replace-By-Fee (RBF) transaction which is a new version of the original transaction. It has a higher transaction fee to incentivize miners to prioritize its confirmation over the original one. A transaction can be dropped if its status is `Broadcasting`.  <ul> <li>For EVM chains, this RBF transaction has a transfer amount of `0` and the sending address is the same as the receiving address.</li> <li>For UTXO chains, this RBF transaction has a transfer amount of `0` and the destination address is the same as the change address in the original transaction.</li> </ul> A transaction request for tracking is returned upon successful operation. <Note>This operation only applies to transactions from MPC Wallets, excluding transactions in the tokens VET, TRON, TVET, SOL, and TON.</Note> 
+This operation drops a specified transaction.   Dropping a transaction will trigger an Replace-By-Fee (RBF) transaction which is a new version of the original transaction. It has a higher transaction fee to incentivize miners to prioritize its confirmation over the original one. A transaction can be dropped if its status is `Broadcasting`.  <ul> <li>For EVM chains, this RBF transaction has a transfer amount of `0` and the sending address is the same as the receiving address.</li> <li>For UTXO chains, this RBF transaction has a transfer amount of `0` and the destination address is the same as the change address in the original transaction.</li> </ul>  A transaction request for tracking is returned upon successful operation.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you drop a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
 
 ### Example
 
@@ -320,10 +324,11 @@ from cobo_waas2.models.transaction_rbf import TransactionRbf
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -393,10 +398,11 @@ from cobo_waas2.models.estimated_fee import EstimatedFee
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -463,10 +469,11 @@ from cobo_waas2.models.transaction_detail import TransactionDetail
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -533,10 +540,11 @@ from cobo_waas2.models.list_transactions200_response import ListTransactions200R
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -582,12 +590,12 @@ Name | Type | Description  | Notes
  **transaction_ids** | **str**| A list of transaction IDs, separated by comma. | [optional] 
  **transaction_hashes** | **str**| A list of transaction hashes, separated by comma. | [optional] 
  **types** | **str**| A list of transaction types, separated by comma. Possible values include:    - &#x60;Deposit&#x60;: A deposit transaction.   - &#x60;Withdrawal&#x60;: A withdrawal transaction.   - &#x60;ContractCall&#x60;: A transaction that interacts with a smart contract.   - &#x60;MessageSign&#x60;: A transaction that signs a message.    - &#x60;ExternalSafeTx&#x60;: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.  | [optional] 
- **statuses** | **str**| A list of transaction statuses, separated by comma. Possible values include:    - &#x60;Submitted&#x60;: The transaction is submitted.   - &#x60;PendingScreening&#x60;: The transaction is pending screening by Risk Control.    - &#x60;PendingAuthorization&#x60;: The transaction is pending approvals.   - &#x60;PendingSignature&#x60;: The transaction is pending signature.    - &#x60;Broadcasting&#x60;: The transaction is being broadcast.   - &#x60;Confirming&#x60;: The transaction is waiting for the required number of confirmations.   - &#x60;Completed&#x60;: The transaction is completed.   - &#x60;Failed&#x60;: The transaction failed.   - &#x60;Rejected&#x60;: The transaction is rejected.   - &#x60;Pending&#x60;: The transaction is pending.  | [optional] 
+ **statuses** | **str**| A list of transaction statuses, separated by comma. Possible values include:    - &#x60;Submitted&#x60;: The transaction is submitted.   - &#x60;PendingScreening&#x60;: The transaction is pending screening by Risk Control.    - &#x60;PendingAuthorization&#x60;: The transaction is pending approvals.   - &#x60;PendingSignature&#x60;: The transaction is pending signature.    - &#x60;Broadcasting&#x60;: The transaction is being broadcast.   - &#x60;Confirming&#x60;: The transaction is waiting for the required number of confirmations.   - &#x60;Completed&#x60;: The transaction is completed.   - &#x60;Failed&#x60;: The transaction failed.   - &#x60;Rejected&#x60;: The transaction is rejected.   - &#x60;Pending&#x60;: The transaction is waiting to be included in the next block of the blockchain.  | [optional] 
  **wallet_ids** | **str**| A list of wallet IDs, separated by comma. | [optional] 
  **chain_ids** | **str**| A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains). | [optional] 
  **token_ids** | **str**| A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens). | [optional] 
  **asset_ids** | **str**| (This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account. | [optional] 
- **vault_id** | **str**| (This parameter is applicable to MPC Wallets only) The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallets/list-all-vaults). | [optional] 
+ **vault_id** | **str**| The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallets/list-all-vaults). | [optional] 
  **project_id** | **str**| The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects).  | [optional] 
  **min_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time. | [optional] 
  **max_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time. | [optional] 
@@ -623,7 +631,7 @@ Name | Type | Description  | Notes
 
 Resend transaction
 
-This operation resends a specified transaction. Resending a transaction initiates a new attempt to process the transaction that failed previously. A transaction can be resent if its status is `failed`.  A transaction request for tracking is returned upon successful operation. <Note>This operation only applies to transactions in the SOL token from MPC Wallets.</Note> 
+This operation resends a specified transaction. Resending a transaction initiates a new attempt to process the transaction that failed previously. A transaction can be resent if its status is `failed`.  A transaction request for tracking is returned upon successful operation. <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
 
 ### Example
 
@@ -636,10 +644,11 @@ from cobo_waas2.models.transaction_resend import TransactionResend
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -696,7 +705,7 @@ Name | Type | Description  | Notes
 
 Speed up transaction
 
-This operation accelerates a specified transaction.   Speeding up a transaction will trigger an Replace-By-Fee (RBF) transaction which is a new version of the original transaction. It shares the same inputs but has a higher transaction fee to incentivize miners to prioritize its confirmation over the previous one. A transaction can be accelerated if its status is `Broadcasting`.  A transaction request for tracking is returned upon successful operation. <Note>This operation only applies to transactions from MPC Wallets, excluding transactions in the tokens VET, TRON, TVET, SOL, and TON.</Note> 
+This operation accelerates a specified transaction.   Speeding up a transaction will trigger an Replace-By-Fee (RBF) transaction which is a new version of the original transaction. It shares the same inputs but has a higher transaction fee to incentivize miners to prioritize its confirmation over the previous one. A transaction can be accelerated if its status is `Broadcasting`.  A transaction request for tracking is returned upon successful operation.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
 
 ### Example
 
@@ -709,10 +718,11 @@ from cobo_waas2.models.transaction_rbf import TransactionRbf
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client

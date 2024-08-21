@@ -24,12 +24,12 @@ from typing_extensions import Self
 
 class SubWalletAssetBalance(BaseModel):
     """
-    The data for sub wallet asset balance information.
+    The information about the asset balance of a trading account.
     """  # noqa: E501
-    sub_wallet_id: Optional[StrictStr] = Field(default=None, description="The exchange trading account or a sub-wallet ID.")
-    asset_id: StrictStr = Field(description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
+    trading_account_type: Optional[StrictStr] = Field(default=None, description="The trading account type.")
+    asset_id: StrictStr = Field(description="The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
     balance: TokenBalanceBalance
-    __properties: ClassVar[List[str]] = ["sub_wallet_id", "asset_id", "balance"]
+    __properties: ClassVar[List[str]] = ["trading_account_type", "asset_id", "balance"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +85,7 @@ class SubWalletAssetBalance(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "sub_wallet_id": obj.get("sub_wallet_id"),
+            "trading_account_type": obj.get("trading_account_type"),
             "asset_id": obj.get("asset_id"),
             "balance": TokenBalanceBalance.from_dict(obj["balance"]) if obj.get("balance") is not None else None
         })

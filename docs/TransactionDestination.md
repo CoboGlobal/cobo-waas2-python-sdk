@@ -12,11 +12,11 @@ Name | Type | Description | Notes
 **force_internal** | **bool** | Whether the transaction request must be executed as a Loop transfer. For more information about Loop, see [Loop&#39;s website](https://loop.top/).   - &#x60;true&#x60;: The transaction request must be executed as a Loop transfer.   - &#x60;false&#x60;: The transaction request may not be executed as a Loop transfer.  | [optional] 
 **force_external** | **bool** | Whether the transaction request must not be executed as a Loop transfer. For more information about Loop, see [Loop&#39;s website](https://loop.top/).   - &#x60;true&#x60;: The transaction request must not be executed as a Loop transfer.   - &#x60;false&#x60;: The transaction request can be executed as a Loop transfer.  | [optional] 
 **wallet_id** | **str** | The wallet ID. | 
-**sub_wallet_id** | **str** | The exchange trading account or the sub-wallet ID. | [optional] 
+**trading_account_type** | **str** | The trading account type. | [optional] 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | [optional] 
-**amount** | **str** | The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | 
+**amount** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | 
 **address** | **str** | The destination address. | 
-**value** | **str** | The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | [optional] 
+**value** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | [optional] 
 **calldata** | **bytearray** | The data that is used to invoke a specific function or method within the specified contract at the destination address.  | 
 **message** | **str** | The raw data of the message to be signed, encoded in Base64 format. | 
 **structured_data** | **Dict[str, object]** | The structured data to be signed, formatted as a JSON object according to the EIP-712 standard. | 

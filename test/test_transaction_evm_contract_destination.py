@@ -37,13 +37,13 @@ class TestTransactionEvmContractDestination(unittest.TestCase):
                 destination_type = 'Address',
                 address = '0x0406db8351aa6839169bb363f63c2c808fee8f99',
                 value = '1.5',
-                calldata = '[B@2d8c729f'
+                calldata = '[B@47772462'
             )
         else:
             return TransactionEvmContractDestination(
                 destination_type = 'Address',
                 address = '0x0406db8351aa6839169bb363f63c2c808fee8f99',
-                calldata = '[B@2d8c729f',
+                calldata = '[B@47772462',
         )
         """
 

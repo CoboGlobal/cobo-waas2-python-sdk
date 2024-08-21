@@ -40,7 +40,7 @@ class TestSafeWallet(unittest.TestCase):
                 name = 'Example Wallet',
                 org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 chain_id = 'ETH',
-                smart_contract_wallet_type = 'SafeWallet',
+                smart_contract_wallet_type = 'Safe{Wallet}',
                 safe_address = '0x1234567890123456789012345678901234567890',
                 signers = [
                     '0x1234567890123456789012345678901234567890'
@@ -58,7 +58,7 @@ class TestSafeWallet(unittest.TestCase):
                 wallet_subtype = 'Asset',
                 name = 'Example Wallet',
                 org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                smart_contract_wallet_type = 'SafeWallet',
+                smart_contract_wallet_type = 'Safe{Wallet}',
         )
         """
 

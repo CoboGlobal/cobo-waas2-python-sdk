@@ -26,7 +26,7 @@ class AddressTransferDestinationUtxoOutputsInner(BaseModel):
     AddressTransferDestinationUtxoOutputsInner
     """  # noqa: E501
     address: StrictStr = Field(description="The destination address.")
-    amount: Optional[StrictStr] = Field(default=None, description="The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
+    amount: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
     script: Optional[StrictStr] = Field(default=None, description="The script of the output. It is a programmable code fragment that defines the conditions under which the UTXO can be spent.")
     __properties: ClassVar[List[str]] = ["address", "amount", "script"]
 

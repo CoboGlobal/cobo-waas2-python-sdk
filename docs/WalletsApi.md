@@ -5,6 +5,8 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**check_address_validity**](WalletsApi.md#check_address_validity) | **GET** /wallets/check_address_validity | Check address validity
+[**check_addresses_validity**](WalletsApi.md#check_addresses_validity) | **GET** /wallets/check_addresses_validity | Check addresses validity
+[**check_loop_transfers**](WalletsApi.md#check_loop_transfers) | **GET** /wallets/check_loop_transfers | Check Loop transfers
 [**create_address**](WalletsApi.md#create_address) | **POST** /wallets/{wallet_id}/addresses | Create addresses in wallet
 [**create_wallet**](WalletsApi.md#create_wallet) | **POST** /wallets | Create wallet
 [**delete_wallet_by_id**](WalletsApi.md#delete_wallet_by_id) | **POST** /wallets/{wallet_id}/delete | Delete wallet
@@ -44,10 +46,11 @@ from cobo_waas2.models.check_address_validity200_response import CheckAddressVal
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -99,6 +102,154 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **check_addresses_validity**
+> List[CheckAddressesValidity200ResponseInner] check_addresses_validity(chain_id, addresses)
+
+Check addresses validity
+
+This operation verifies if given addresses are valid for a specific chain. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.check_addresses_validity200_response_inner import CheckAddressesValidity200ResponseInner
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.WalletsApi(api_client)
+    chain_id = 'ETH'
+    addresses = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97'
+
+    try:
+        # Check addresses validity
+        api_response = api_instance.check_addresses_validity(chain_id, addresses)
+        print("The response of WalletsApi->check_addresses_validity:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WalletsApi->check_addresses_validity: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **chain_id** | **str**| The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains). | 
+ **addresses** | **str**| A list of wallet addresses, separated by comma. You can specify a maximum of 100 addresses. | 
+
+### Return type
+
+[**List[CheckAddressesValidity200ResponseInner]**](CheckAddressesValidity200ResponseInner.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **check_loop_transfers**
+> List[CheckLoopTransfers200ResponseInner] check_loop_transfers(token_id, source_wallet_id, destination_addresses)
+
+Check Loop transfers
+
+This operation verifies if the transactions from a given source wallet to a list of destination addresses can be executed as Loop transfers.   For more information about Loop, see [Loop's website](https://loop.top/). 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.check_loop_transfers200_response_inner import CheckLoopTransfers200ResponseInner
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.WalletsApi(api_client)
+    token_id = 'ETH_USDT'
+    source_wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    destination_addresses = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97'
+
+    try:
+        # Check Loop transfers
+        api_response = api_instance.check_loop_transfers(token_id, source_wallet_id, destination_addresses)
+        print("The response of WalletsApi->check_loop_transfers:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WalletsApi->check_loop_transfers: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens). | 
+ **source_wallet_id** | **str**| The source wallet ID. | 
+ **destination_addresses** | **str**| A list of destination wallet addresses, separated by comma. | 
+
+### Return type
+
+[**List[CheckLoopTransfers200ResponseInner]**](CheckLoopTransfers200ResponseInner.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_address**
 > List[AddressInfo] create_address(wallet_id, create_address_request=create_address_request)
 
@@ -118,10 +269,11 @@ from cobo_waas2.models.create_address_request import CreateAddressRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -178,7 +330,7 @@ Name | Type | Description  | Notes
 
 Create wallet
 
-This operation creates a wallet with the provided information. 
+This operation creates a wallet with the provided information.  <Note>This operation is not applicable to Smart Contract Wallets.</Note> 
 
 ### Example
 
@@ -192,10 +344,11 @@ from cobo_waas2.models.created_wallet_info import CreatedWalletInfo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -262,10 +415,11 @@ from cobo_waas2.models.delete_wallet_by_id201_response import DeleteWalletById20
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -332,10 +486,11 @@ from cobo_waas2.models.address_info import AddressInfo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -404,10 +559,11 @@ from cobo_waas2.models.chain_info import ChainInfo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -474,10 +630,11 @@ from cobo_waas2.models.max_transferable_value import MaxTransferableValue
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -552,10 +709,11 @@ from cobo_waas2.models.extended_token_info import ExtendedTokenInfo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -622,10 +780,11 @@ from cobo_waas2.models.wallet_info import WalletInfo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -692,10 +851,11 @@ from cobo_waas2.models.list_addresses200_response import ListAddresses200Respons
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -774,10 +934,11 @@ from cobo_waas2.models.wallet_type import WalletType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -854,10 +1015,11 @@ from cobo_waas2.models.wallet_type import WalletType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -922,7 +1084,7 @@ Name | Type | Description  | Notes
 
 List supported chains
 
-This operation retrieves all chains supported by a specific wallet type or subtype.   It provides details such as the chain ID, chain symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of chains supported by each wallet type. You can filter the result by chain IDs. The chain metadata is publicly available without any permission restrictions. 
+This operation retrieves all chains supported by a specific wallet type or subtype.   It provides details such as the chain ID, chain symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of chains supported by each wallet type. You can filter the result by chain IDs. The chain metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported chains [here](https://www.cobo.com/chains). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
 ### Example
 
@@ -936,10 +1098,11 @@ from cobo_waas2.models.wallet_type import WalletType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1004,7 +1167,7 @@ Name | Type | Description  | Notes
 
 List supported tokens
 
-This operation retrieves all tokens supported by a specific wallet type or subtype.   It provides details such as token ID, token symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of tokens supported by each wallet type. You can filter the result by token IDs or chain IDs. The token metadata is publicly available without any permission restrictions. 
+This operation retrieves all tokens supported by a specific wallet type or subtype.   It provides details such as token ID, token symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of tokens supported by each wallet type. You can filter the result by token IDs or chain IDs. The token metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported tokens [here](https://www.cobo.com/tokens). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
 ### Example
 
@@ -1018,10 +1181,11 @@ from cobo_waas2.models.wallet_type import WalletType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1088,7 +1252,7 @@ Name | Type | Description  | Notes
 
 List token balances by address
 
-The operation retrieves a list of token balances for a specified address within an MPC Wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
+The operation retrieves a list of token balances for a specified address within a wallet.   <Note>This operation is applicable to MPC Wallets and Smart Contract Wallets only.</Note> 
 
 ### Example
 
@@ -1100,10 +1264,11 @@ from cobo_waas2.models.list_token_balances_for_address200_response import ListTo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1168,7 +1333,7 @@ Name | Type | Description  | Notes
 
 List token balances by wallet
 
-The operation retrieves a list of token balances within a specified wallet.  <Note>This operation is applicable to Custodial Wallets and MPC Wallets only.</Note> 
+The operation retrieves a list of token balances within a specified wallet.  <Note>This operation is not applicable to Exchange Wallets.</Note> 
 
 ### Example
 
@@ -1180,10 +1345,11 @@ from cobo_waas2.models.list_token_balances_for_address200_response import ListTo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1258,10 +1424,11 @@ from cobo_waas2.models.list_utxos200_response import ListUtxos200Response
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1340,10 +1507,11 @@ from cobo_waas2.models.wallet_type import WalletType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1377,7 +1545,7 @@ Name | Type | Description  | Notes
  **wallet_type** | [**WalletType**](.md)| The wallet type.  - &#x60;Custodial&#x60;: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - &#x60;MPC&#x60;: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - &#x60;SmartContract&#x60;: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - &#x60;Exchange&#x60;: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction)  | [optional] 
  **wallet_subtype** | [**WalletSubtype**](.md)| The wallet subtype.  - &#x60;Asset&#x60;: Custodial Wallets (Asset Wallets)  - &#x60;Web3&#x60;: Custodial Wallets (Web3 Wallets)  - &#x60;Main&#x60;: Exchange Wallets (Main Account)  - &#x60;Sub&#x60;: Exchange Wallets (Sub Account)  - &#x60;Org-Controlled&#x60;: MPC Wallets (Organization-Controlled Wallets)  - &#x60;User-Controlled&#x60;: MPC Wallets (User-Controlled Wallets)  - &#x60;Safe{Wallet}&#x60;: Smart Contract Wallets (Safe{Wallet})  | [optional] 
  **project_id** | **str**| The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects).  | [optional] 
- **vault_id** | **str**| (This parameter is applicable to MPC Wallets only) The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallets/list-all-vaults). | [optional] 
+ **vault_id** | **str**| The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallets/list-all-vaults). | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
  **before** | **str**| An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify &#x60;before&#x60; as &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1&#x60;, the request will retrieve a list of data objects that end before the object with the object ID &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1&#x60;. You can set this parameter to the value of &#x60;pagination.before&#x60; in the response of the previous request.  - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur.  - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  - If you set &#x60;before&#x60; to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **after** | **str**| An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify &#x60;after&#x60; as &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;, the request will retrieve a list of data objects that start after the object with the object ID &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;. You can set this parameter to the value of &#x60;pagination.after&#x60; in the response of the previous request.  - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur.  - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
@@ -1424,10 +1592,11 @@ from cobo_waas2.models.lock_utxos_request import LockUtxosRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1498,10 +1667,11 @@ from cobo_waas2.models.lock_utxos_request import LockUtxosRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1572,10 +1742,11 @@ from cobo_waas2.models.wallet_info import WalletInfo
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client

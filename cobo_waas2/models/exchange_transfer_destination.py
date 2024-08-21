@@ -24,13 +24,13 @@ from typing_extensions import Self
 
 class ExchangeTransferDestination(BaseModel):
     """
-    The information about the transaction destination type `ExchangeWallet`.   An Exchange Wallet (Sub Account) as the transaction destination can only receives token transfers from another Exchange Wallet. 
+    The information about the transaction destination type `ExchangeWallet`.   An Exchange Wallet (Sub Account) can only receive asset transfers from another Exchange Wallet. 
     """  # noqa: E501
     destination_type: TransferDestinationType
     wallet_id: StrictStr = Field(description="The wallet ID.")
-    sub_wallet_id: StrictStr = Field(description="The exchange trading account or the sub-wallet ID.")
-    amount: StrictStr = Field(description="The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
-    __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "sub_wallet_id", "amount"]
+    trading_account_type: StrictStr = Field(description="The trading account type.")
+    amount: StrictStr = Field(description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
+    __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "trading_account_type", "amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +85,7 @@ class ExchangeTransferDestination(BaseModel):
         _obj = cls.model_validate({
             "destination_type": obj.get("destination_type"),
             "wallet_id": obj.get("wallet_id"),
-            "sub_wallet_id": obj.get("sub_wallet_id"),
+            "trading_account_type": obj.get("trading_account_type"),
             "amount": obj.get("amount")
         })
         return _obj

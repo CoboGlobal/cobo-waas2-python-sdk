@@ -36,7 +36,7 @@ class TransactionWebhookEventData(BaseModel):
     """
     TransactionWebhookEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description="The data type of the event. When `data_type` is `Transaction`, it means the event uses the `transaction` schema as its data type.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data.")
     transaction_id: StrictStr = Field(description="The transaction ID.")
     cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
@@ -70,8 +70,8 @@ class TransactionWebhookEventData(BaseModel):
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction']):
-            raise ValueError("must be one of enum values ('Transaction')")
+        if value not in set(['Transaction', 'TSSRequest']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest')")
         return value
 
     model_config = ConfigDict(

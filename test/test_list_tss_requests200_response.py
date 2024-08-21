@@ -44,7 +44,9 @@ class TestListTssRequests200Response(unittest.TestCase):
                                 ], ), 
                         target_key_share_holder_group_id = 'fd9519ae-507b-4605-b108-04d4e5ffcdd3', 
                         type = 'Recovery', 
-                        status = 'Success', )
+                        status = 'Success', 
+                        description = 'This is a request to create key shares using the Recovery Group for a key share holder in the Main Group if their key share has been lost (e.g. by losing their phone).', 
+                        created_timestamp = 1701396866000, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

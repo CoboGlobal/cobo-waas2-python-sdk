@@ -28,7 +28,7 @@ class EvmContractCallDestination(BaseModel):
     """  # noqa: E501
     destination_type: ContractCallDestinationType
     address: StrictStr = Field(description="The destination address.")
-    value: Optional[StrictStr] = Field(default=None, description="The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
+    value: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
     calldata: Union[StrictBytes, StrictStr] = Field(description="The data that is used to invoke a specific function or method within the specified contract at the destination address. ")
     __properties: ClassVar[List[str]] = ["destination_type", "address", "value", "calldata"]
 

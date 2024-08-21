@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class WebhookEventType(str, Enum):
     """
-    The event type.   - `wallets.transaction.created`: This event occurs when a transaction is created.   - `wallets.transaction.updated`: This event occurs when a transaction is created or when there is an update of the transaction status.   - `wallets.transaction.failed`: This event occurs when a transaction fails.   - `wallets.transaction.succeeded`: This event occurs when a transaction has been successfully completed.
+    The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](/v2/guides/webhooks-callbacks/webhook-event-type).
     """
 
     """
@@ -28,6 +28,10 @@ class WebhookEventType(str, Enum):
     WALLETS_DOT_TRANSACTION_DOT_UPDATED = 'wallets.transaction.updated'
     WALLETS_DOT_TRANSACTION_DOT_FAILED = 'wallets.transaction.failed'
     WALLETS_DOT_TRANSACTION_DOT_SUCCEEDED = 'wallets.transaction.succeeded'
+    WALLETS_DOT_MPC_DOT_TSS_REQUEST_DOT_CREATED = 'wallets.mpc.tss_request.created'
+    WALLETS_DOT_MPC_DOT_TSS_REQUEST_DOT_UPDATED = 'wallets.mpc.tss_request.updated'
+    WALLETS_DOT_MPC_DOT_TSS_REQUEST_DOT_FAILED = 'wallets.mpc.tss_request.failed'
+    WALLETS_DOT_MPC_DOT_TSS_REQUEST_DOT_SUCCEEDED = 'wallets.mpc.tss_request.succeeded'
 
     UNKNOWN = None
 

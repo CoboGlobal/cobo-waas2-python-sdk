@@ -1,6 +1,6 @@
 # WebhookEventType
 
-The event type.   - `wallets.transaction.created`: This event occurs when a transaction is created.   - `wallets.transaction.updated`: This event occurs when a transaction is created or when there is an update of the transaction status.   - `wallets.transaction.failed`: This event occurs when a transaction fails.   - `wallets.transaction.succeeded`: This event occurs when a transaction has been successfully completed.
+The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](/v2/guides/webhooks-callbacks/webhook-event-type).
 
 ## Properties
 

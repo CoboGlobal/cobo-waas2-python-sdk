@@ -39,8 +39,8 @@ class TestWebhookEventData(unittest.TestCase):
                 cobo_id = '20231213122855000000000000000000',
                 request_id = 'web_send_by_user_327_1610444045047',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                type = 'Deposit',
-                status = 'Submitted',
+                type = 'Recovery',
+                status = 'Success',
                 sub_status = 'PendingDoubleCheck',
                 failed_reason = 'Rejected by signer Cobo TSS',
                 chain_id = 'ETH',
@@ -77,17 +77,24 @@ class TestWebhookEventData(unittest.TestCase):
                 category = [
                     'Payment'
                     ],
-                description = 'withdrawal to exchange trading account',
+                description = 'This is a request to create key shares using the Recovery Group for a key share holder in the Main Group if their key share has been lost (e.g. by losing their phone).',
                 is_loop = False,
-                created_timestamp = 1610445878970,
-                updated_timestamp = 1610445878970
+                created_timestamp = 1701396866000,
+                updated_timestamp = 1610445878970,
+                tss_request_id = '20240711114129000132315000003970',
+                source_key_share_holder_group = cobo_waas2.models.source_group.SourceGroup(
+                    key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
+                    tss_node_ids = [
+                        'cobo5yb7BNEBwwp5XXedbhnzQfvQtp132W4dH4Jz4x4eDp4KA'
+                        ], ),
+                target_key_share_holder_group_id = 'fd9519ae-507b-4605-b108-04d4e5ffcdd3'
             )
         else:
             return WebhookEventData(
                 data_type = 'Transaction',
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                status = 'Submitted',
+                status = 'Success',
                 source = None,
                 destination = None,
                 initiator_type = 'API',

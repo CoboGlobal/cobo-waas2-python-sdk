@@ -25,7 +25,7 @@ class AssetInfo(BaseModel):
     """
     The asset information.
     """  # noqa: E501
-    asset_id: StrictStr = Field(description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
+    asset_id: StrictStr = Field(description="The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
     display_code: Optional[StrictStr] = Field(default=None, description="The asset symbol. You can use the value for display purposes.")
     description: Optional[StrictStr] = Field(default=None, description="The description of the asset.")
     icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the asset icon.")

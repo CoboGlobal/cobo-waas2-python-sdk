@@ -33,7 +33,8 @@ class KeyShareHolder(BaseModel):
     online: Optional[StrictBool] = Field(default=None, description="Whether the key share holder's TSS Node is online. - `true`: The TSS Node is online.  - `false`: The TSS Node is offline. ")
     signer: Optional[StrictBool] = Field(default=None, description="Whether the key share holder's TSS Node is a designated transaction signer. - `true`: The TSS Node is a designated transaction signer.  - `false`: The TSS Node is not a designated transaction signer. ")
     status: Optional[KeyShareHolderStatus] = None
-    __properties: ClassVar[List[str]] = ["name", "type", "tss_node_id", "online", "signer", "status"]
+    account_id: Optional[StrictStr] = Field(default=None, description="The key share holder's Cobo Portal account ID.")
+    __properties: ClassVar[List[str]] = ["name", "type", "tss_node_id", "online", "signer", "status", "account_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +92,8 @@ class KeyShareHolder(BaseModel):
             "tss_node_id": obj.get("tss_node_id"),
             "online": obj.get("online"),
             "signer": obj.get("signer"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "account_id": obj.get("account_id")
         })
         return _obj
 

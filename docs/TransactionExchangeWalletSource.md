@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **source_type** | [**TransactionSourceType**](TransactionSourceType.md) |  | 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | 
 **wallet_id** | **str** | The wallet ID. | 
-**sub_wallet_id** | **str** | The exchange trading account or a sub-wallet ID. | [optional] 
+**trading_account_type** | **str** | The exchange trading account or a sub-wallet ID. | [optional] 
 
 ## Example
 

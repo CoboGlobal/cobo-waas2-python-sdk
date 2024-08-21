@@ -1,6 +1,6 @@
 # ExchangeId
 
-The ID of the exchange:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io 
+The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget 
 
 ## Properties
 

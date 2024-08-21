@@ -36,7 +36,7 @@ class TestTransactionTransferToWalletDestination(unittest.TestCase):
             return TransactionTransferToWalletDestination(
                 destination_type = 'Address',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                sub_wallet_id = 'Asset',
+                trading_account_type = 'Asset',
                 exchange_id = 'binance',
                 amount = '1.5'
             )

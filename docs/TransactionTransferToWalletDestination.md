@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_type** | [**TransactionDestinationType**](TransactionDestinationType.md) |  | 
 **wallet_id** | **str** | The wallet ID. | 
-**sub_wallet_id** | **str** | The exchange trading account or the sub-wallet ID. | [optional] 
+**trading_account_type** | **str** | The trading account type. | [optional] 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | [optional] 
-**amount** | **str** | The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | 
+**amount** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | 
 
 ## Example
 

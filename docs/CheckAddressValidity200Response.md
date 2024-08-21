@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**validity** | **bool** | Whether the address is valid. - &#x60;true&#x60;: The address is valid. - &#x60;false&#x60;: the address is invalid.  | 
+**validity** | **bool** | Whether the address is valid. - &#x60;true&#x60;: The address is valid. - &#x60;false&#x60;: The address is invalid.  | 
 
 ## Example
 
