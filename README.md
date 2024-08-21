@@ -122,7 +122,7 @@ Class | Method | HTTP request | Description
 *WalletsApi* | [**unlock_utxos**](docs/WalletsApi.md#unlock_utxos) | **POST** /wallets/{wallet_id}/utxos/unlock | Unlock UTXOs
 *WalletsApi* | [**update_wallet_by_id**](docs/WalletsApi.md#update_wallet_by_id) | **PUT** /wallets/{wallet_id} | Update wallet
 *WalletsExchangeWalletApi* | [**list_asset_balances_for_exchange_wallet**](docs/WalletsExchangeWalletApi.md#list_asset_balances_for_exchange_wallet) | **GET** /wallets/{wallet_id}/exchanges/assets | List asset balances
-*WalletsExchangeWalletApi* | [**list_exchanges**](docs/WalletsExchangeWalletApi.md#list_exchanges) | **GET** /wallets/exchanges/settings | List supported exchanges
+*WalletsExchangeWalletApi* | [**list_exchanges**](docs/WalletsExchangeWalletApi.md#list_exchanges) | **GET** /wallets/exchanges | List supported exchanges
 *WalletsExchangeWalletApi* | [**list_supported_assets_for_exchange**](docs/WalletsExchangeWalletApi.md#list_supported_assets_for_exchange) | **GET** /wallets/exchanges/{exchange_id}/assets | List supported assets
 *WalletsExchangeWalletApi* | [**list_supported_chains_for_exchange**](docs/WalletsExchangeWalletApi.md#list_supported_chains_for_exchange) | **GET** /wallets/exchanges/{exchange_id}/assets/{asset_id}/chains | List supported chains
 *WalletsMPCWalletsApi* | [**cancel_tss_request_by_id**](docs/WalletsMPCWalletsApi.md#cancel_tss_request_by_id) | **POST** /wallets/mpc/vaults/{vault_id}/tss_requests/{tss_request_id}/cancel | Cancel TSS request
