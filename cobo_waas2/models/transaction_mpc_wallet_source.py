@@ -32,7 +32,8 @@ class TransactionMPCWalletSource(BaseModel):
     address: Optional[StrictStr] = Field(default=None, description="The wallet address.")
     included_utxos: Optional[List[TransactionUtxo]] = None
     excluded_utxos: Optional[List[TransactionUtxo]] = None
-    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "included_utxos", "excluded_utxos"]
+    signer_key_share_holder_group_id: Optional[StrictStr] = Field(default=None, description="The ID of the key share holder group that is selected to sign the transaction.")
+    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "included_utxos", "excluded_utxos", "signer_key_share_holder_group_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +104,8 @@ class TransactionMPCWalletSource(BaseModel):
             "wallet_id": obj.get("wallet_id"),
             "address": obj.get("address"),
             "included_utxos": [TransactionUtxo.from_dict(_item) for _item in obj["included_utxos"]] if obj.get("included_utxos") is not None else None,
-            "excluded_utxos": [TransactionUtxo.from_dict(_item) for _item in obj["excluded_utxos"]] if obj.get("excluded_utxos") is not None else None
+            "excluded_utxos": [TransactionUtxo.from_dict(_item) for _item in obj["excluded_utxos"]] if obj.get("excluded_utxos") is not None else None,
+            "signer_key_share_holder_group_id": obj.get("signer_key_share_holder_group_id")
         })
         return _obj
 

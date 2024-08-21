@@ -49,14 +49,14 @@ class TestTransferDestination(unittest.TestCase):
                 force_internal = False,
                 force_external = False,
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                sub_wallet_id = 'Asset',
+                trading_account_type = 'Asset',
                 amount = '1.5'
             )
         else:
             return TransferDestination(
                 destination_type = 'Address',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                sub_wallet_id = 'Asset',
+                trading_account_type = 'Asset',
                 amount = '1.5',
         )
         """

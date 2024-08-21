@@ -40,7 +40,8 @@ class TestCreateTssRequestRequest(unittest.TestCase):
                     key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
                     tss_node_ids = [
                         'cobo5yb7BNEBwwp5XXedbhnzQfvQtp132W4dH4Jz4x4eDp4KA'
-                        ], )
+                        ], ),
+                description = 'This is a request to create key shares using the Recovery Group for a key share holder in the Main Group if their key share has been lost (e.g. by losing their phone).'
             )
         else:
             return CreateTssRequestRequest(

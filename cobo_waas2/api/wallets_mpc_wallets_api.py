@@ -435,7 +435,7 @@ class WalletsMPCWalletsApi:
     ) -> MPCProject:
         """Create project
 
-        This operation creates a project.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation creates a project.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param create_mpc_project_request: The request body to create a project.
         :type create_mpc_project_request: CreateMpcProjectRequest
@@ -481,7 +481,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[MPCProject]:
         """Create project
 
-        This operation creates a project.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation creates a project.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param create_mpc_project_request: The request body to create a project.
         :type create_mpc_project_request: CreateMpcProjectRequest
@@ -527,7 +527,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """Create project
 
-        This operation creates a project.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation creates a project.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param create_mpc_project_request: The request body to create a project.
         :type create_mpc_project_request: CreateMpcProjectRequest
@@ -1325,7 +1325,7 @@ class WalletsMPCWalletsApi:
     ) -> MPCProject:
         """Get project information
 
-        This operation retrieves detailed information about a project. <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation retrieves detailed information about a project. <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param project_id: The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects). (required)
         :type project_id: str
@@ -1371,7 +1371,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[MPCProject]:
         """Get project information
 
-        This operation retrieves detailed information about a project. <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation retrieves detailed information about a project. <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param project_id: The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects). (required)
         :type project_id: str
@@ -1417,7 +1417,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """Get project information
 
-        This operation retrieves detailed information about a project. <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation retrieves detailed information about a project. <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param project_id: The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects). (required)
         :type project_id: str
@@ -2240,7 +2240,7 @@ class WalletsMPCWalletsApi:
     ) -> ListMpcProjects200Response:
         """List all projects
 
-        This operation retrieves a list of all projects.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation retrieves a list of all projects.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2294,7 +2294,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[ListMpcProjects200Response]:
         """List all projects
 
-        This operation retrieves a list of all projects.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation retrieves a list of all projects.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2348,7 +2348,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """List all projects
 
-        This operation retrieves a list of all projects.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation retrieves a list of all projects.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -3119,7 +3119,7 @@ class WalletsMPCWalletsApi:
     ) -> MPCProject:
         """Update project name
 
-        This operation updates a project's name.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation updates a project's name.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param project_id: The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects). (required)
         :type project_id: str
@@ -3169,7 +3169,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[MPCProject]:
         """Update project name
 
-        This operation updates a project's name.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation updates a project's name.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param project_id: The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects). (required)
         :type project_id: str
@@ -3219,7 +3219,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """Update project name
 
-        This operation updates a project's name.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+        This operation updates a project's name.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
         :param project_id: The project ID, which you can retrieve by calling [List all projects](/v2/api-references/wallets--mpc-wallets/list-all-projects). (required)
         :type project_id: str

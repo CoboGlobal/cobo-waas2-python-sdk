@@ -34,7 +34,7 @@ class TransactionDepositToAddressDestination(BaseModel):
     wallet_subtype: Optional[WalletSubtype] = None
     address: StrictStr = Field(description="The destination address.")
     memo: Optional[StrictStr] = Field(default=None, description="The memo that identifies a transaction in order to credit the correct account. For transfers out of Cobo Portal, it is highly recommended to include a memo for the chains such as XRP, EOS, XLM, IOST, BNB_BNB, ATOM, LUNA, and TON.")
-    amount: StrictStr = Field(description="The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
+    amount: StrictStr = Field(description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
     __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "wallet_type", "wallet_subtype", "address", "memo", "amount"]
 
     model_config = ConfigDict(

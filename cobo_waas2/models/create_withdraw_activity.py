@@ -26,11 +26,12 @@ class CreateWithdrawActivity(BaseModel):
     """
     CreateWithdrawActivity
     """  # noqa: E501
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization.")
     staking_id: StrictStr = Field(description="The id of the related staking.")
     amount: Optional[StrictStr] = Field(default=None, description="The amount to stake")
     address: Optional[StrictStr] = Field(default=None, description="The withdraw to address.")
     fee: TransactionRequestFee
-    __properties: ClassVar[List[str]] = ["staking_id", "amount", "address", "fee"]
+    __properties: ClassVar[List[str]] = ["request_id", "staking_id", "amount", "address", "fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,7 @@ class CreateWithdrawActivity(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "request_id": obj.get("request_id"),
             "staking_id": obj.get("staking_id"),
             "amount": obj.get("amount"),
             "address": obj.get("address"),

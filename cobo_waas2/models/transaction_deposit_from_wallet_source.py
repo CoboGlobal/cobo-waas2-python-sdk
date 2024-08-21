@@ -32,8 +32,8 @@ class TransactionDepositFromWalletSource(BaseModel):
     wallet_id: StrictStr = Field(description="The wallet ID.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    sub_wallet_id: Optional[StrictStr] = Field(default=None, description="The exchange trading account or a sub-wallet ID.")
-    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "wallet_type", "wallet_subtype", "sub_wallet_id"]
+    trading_account_type: Optional[StrictStr] = Field(default=None, description="The exchange trading account or a sub-wallet ID.")
+    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "wallet_type", "wallet_subtype", "trading_account_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,7 +90,7 @@ class TransactionDepositFromWalletSource(BaseModel):
             "wallet_id": obj.get("wallet_id"),
             "wallet_type": obj.get("wallet_type"),
             "wallet_subtype": obj.get("wallet_subtype"),
-            "sub_wallet_id": obj.get("sub_wallet_id")
+            "trading_account_type": obj.get("trading_account_type")
         })
         return _obj
 

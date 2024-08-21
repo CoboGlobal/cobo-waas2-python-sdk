@@ -28,12 +28,13 @@ class CreateStakeActivity(BaseModel):
     """
     CreateStakeActivity
     """  # noqa: E501
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization.")
     source: Optional[StakingSource] = None
     pool_id: StrictStr = Field(description="The id of the staking pool")
     amount: StrictStr = Field(description="The amount to stake")
     fee: TransactionRequestFee
     extra: CreateStakeActivityExtra
-    __properties: ClassVar[List[str]] = ["source", "pool_id", "amount", "fee", "extra"]
+    __properties: ClassVar[List[str]] = ["request_id", "source", "pool_id", "amount", "fee", "extra"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,7 @@ class CreateStakeActivity(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "request_id": obj.get("request_id"),
             "source": StakingSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "pool_id": obj.get("pool_id"),
             "amount": obj.get("amount"),

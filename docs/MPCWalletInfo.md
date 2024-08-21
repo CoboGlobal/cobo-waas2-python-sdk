@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **name** | **str** | The wallet name. | 
 **org_id** | **str** | The ID of the owning organization. | 
 **project_id** | **str** | The project ID. | [optional] 
+**project_name** | **str** | The project name. | [optional] 
 **vault_id** | **str** | The ID of the owning vault. | 
+**vault_name** | **str** | The vault name. | [optional] 
 
 ## Example
 

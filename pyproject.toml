@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cobo_waas2"
-version = "1.1.0"
+version = "1.2.0"
 description = "Cobo Wallet as a Service 2.0"
 authors = ["Cobo WaaS <support@cobo.com>"]
 license = "Apache 2.0"

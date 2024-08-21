@@ -33,8 +33,10 @@ class MPCWalletInfo(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     org_id: StrictStr = Field(description="The ID of the owning organization.")
     project_id: Optional[StrictStr] = Field(default=None, description="The project ID.")
+    project_name: Optional[StrictStr] = Field(default=None, description="The project name.")
     vault_id: StrictStr = Field(description="The ID of the owning vault.")
-    __properties: ClassVar[List[str]] = ["wallet_id", "wallet_type", "wallet_subtype", "name", "org_id", "project_id", "vault_id"]
+    vault_name: Optional[StrictStr] = Field(default=None, description="The vault name.")
+    __properties: ClassVar[List[str]] = ["wallet_id", "wallet_type", "wallet_subtype", "name", "org_id", "project_id", "project_name", "vault_id", "vault_name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +95,9 @@ class MPCWalletInfo(BaseModel):
             "name": obj.get("name"),
             "org_id": obj.get("org_id"),
             "project_id": obj.get("project_id"),
-            "vault_id": obj.get("vault_id")
+            "project_name": obj.get("project_name"),
+            "vault_id": obj.get("vault_id"),
+            "vault_name": obj.get("vault_name")
         })
         return _obj
 

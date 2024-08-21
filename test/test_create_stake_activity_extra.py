@@ -37,6 +37,7 @@ class TestCreateStakeActivityExtra(unittest.TestCase):
                 pool_type = 'Babylon',
                 finality_provider_public_key = '0000000000000000000000000000000000000000000000000000000000000000',
                 stake_block_time = 2000,
+                only_sign = True,
                 operator = '0xdAC17F958D2ee523a2206206994597C13D831ec7',
                 fee_recipient = 30
             )

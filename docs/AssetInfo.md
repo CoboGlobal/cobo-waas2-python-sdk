@@ -6,7 +6,7 @@ The asset information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asset_id** | **str** | (This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. | 
+**asset_id** | **str** | The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. | 
 **display_code** | **str** | The asset symbol. You can use the value for display purposes. | [optional] 
 **description** | **str** | The description of the asset. | [optional] 
 **icon_url** | **str** | The URL of the asset icon. | [optional] 

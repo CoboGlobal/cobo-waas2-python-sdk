@@ -33,10 +33,10 @@ class TransactionDepositToWalletDestination(BaseModel):
     wallet_id: StrictStr = Field(description="The wallet ID.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    sub_wallet_id: Optional[StrictStr] = Field(default=None, description="The exchange trading account or the sub-wallet ID.")
+    trading_account_type: Optional[StrictStr] = Field(default=None, description="The trading account type.")
     exchange_id: Optional[ExchangeId] = None
-    amount: StrictStr = Field(description="The quantity of the token in the transaction. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
-    __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "wallet_type", "wallet_subtype", "sub_wallet_id", "exchange_id", "amount"]
+    amount: StrictStr = Field(description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
+    __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "wallet_type", "wallet_subtype", "trading_account_type", "exchange_id", "amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +93,7 @@ class TransactionDepositToWalletDestination(BaseModel):
             "wallet_id": obj.get("wallet_id"),
             "wallet_type": obj.get("wallet_type"),
             "wallet_subtype": obj.get("wallet_subtype"),
-            "sub_wallet_id": obj.get("sub_wallet_id"),
+            "trading_account_type": obj.get("trading_account_type"),
             "exchange_id": obj.get("exchange_id"),
             "amount": obj.get("amount")
         })

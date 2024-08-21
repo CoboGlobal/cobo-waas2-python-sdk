@@ -33,7 +33,7 @@ class TestOAuthApi(unittest.TestCase):
         """
         Test case for get_token
 
-        Get Access Token
+        Get access token
         """
         """
         client_id = 'pvSwS8iFrfK0oZrB0ugG54XPDOLEv0Ij'
@@ -47,7 +47,7 @@ class TestOAuthApi(unittest.TestCase):
         """
         Test case for refresh_token
 
-        Refresh Access Token
+        Refresh access token
         """
         """
         refresh_token_request = cobo_waas2.RefreshTokenRequest()

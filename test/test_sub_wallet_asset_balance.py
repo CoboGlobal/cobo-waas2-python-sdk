@@ -34,7 +34,7 @@ class TestSubWalletAssetBalance(unittest.TestCase):
         model = SubWalletAssetBalance()
         if include_optional:
             return SubWalletAssetBalance(
-                sub_wallet_id = 'Asset',
+                trading_account_type = 'Spot',
                 asset_id = 'USDT',
                 balance = cobo_waas2.models.token_balance_balance.TokenBalance_balance(
                     total = '100.0', 

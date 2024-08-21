@@ -30,7 +30,8 @@ class CreateTssRequestRequest(BaseModel):
     type: TSSRequestType
     target_key_share_holder_group_id: StrictStr = Field(description="The target key share holder group ID.")
     source_key_share_holder_group: Optional[SourceGroup] = None
-    __properties: ClassVar[List[str]] = ["type", "target_key_share_holder_group_id", "source_key_share_holder_group"]
+    description: Optional[StrictStr] = Field(default=None, description="The description of the TSS request.")
+    __properties: ClassVar[List[str]] = ["type", "target_key_share_holder_group_id", "source_key_share_holder_group", "description"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,7 +89,8 @@ class CreateTssRequestRequest(BaseModel):
         _obj = cls.model_validate({
             "type": obj.get("type"),
             "target_key_share_holder_group_id": obj.get("target_key_share_holder_group_id"),
-            "source_key_share_holder_group": SourceGroup.from_dict(obj["source_key_share_holder_group"]) if obj.get("source_key_share_holder_group") is not None else None
+            "source_key_share_holder_group": SourceGroup.from_dict(obj["source_key_share_holder_group"]) if obj.get("source_key_share_holder_group") is not None else None,
+            "description": obj.get("description")
         })
         return _obj
 

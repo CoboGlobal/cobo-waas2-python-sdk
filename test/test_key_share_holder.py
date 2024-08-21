@@ -39,7 +39,8 @@ class TestKeyShareHolder(unittest.TestCase):
                 tss_node_id = 'coboAbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcdefghi',
                 online = True,
                 signer = True,
-                status = 'Valid'
+                status = 'Valid',
+                account_id = 'auth0|cobo|839305394802991371'
             )
         else:
             return KeyShareHolder(

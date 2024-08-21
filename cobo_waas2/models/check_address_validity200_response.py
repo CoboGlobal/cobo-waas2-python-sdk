@@ -25,7 +25,7 @@ class CheckAddressValidity200Response(BaseModel):
     """
     CheckAddressValidity200Response
     """  # noqa: E501
-    validity: StrictBool = Field(description="Whether the address is valid. - `true`: The address is valid. - `false`: the address is invalid. ")
+    validity: StrictBool = Field(description="Whether the address is valid. - `true`: The address is valid. - `false`: The address is invalid. ")
     __properties: ClassVar[List[str]] = ["validity"]
 
     model_config = ConfigDict(

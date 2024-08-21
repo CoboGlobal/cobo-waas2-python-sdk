@@ -36,7 +36,8 @@ class TestBabylonStakeExtra(unittest.TestCase):
             return BabylonStakeExtra(
                 pool_type = 'Babylon',
                 finality_provider_public_key = '0000000000000000000000000000000000000000000000000000000000000000',
-                stake_block_time = 2000
+                stake_block_time = 2000,
+                only_sign = True
             )
         else:
             return BabylonStakeExtra(

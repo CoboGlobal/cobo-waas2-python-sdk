@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **type** | [**TSSRequestType**](TSSRequestType.md) |  | 
 **target_key_share_holder_group_id** | **str** | The target key share holder group ID. | 
 **source_key_share_holder_group** | [**SourceGroup**](SourceGroup.md) |  | [optional] 
+**description** | **str** | The description of the TSS request. | [optional] 
 
 ## Example
 

@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.staking_pool_type import StakingPoolType
 from typing import Optional, Set
@@ -30,7 +30,8 @@ class BabylonStakeExtra(BaseModel):
     pool_type: StakingPoolType
     finality_provider_public_key: Annotated[str, Field(strict=True)] = Field(description="The public key of finality provider.")
     stake_block_time: StrictInt = Field(description="The stake block time.")
-    __properties: ClassVar[List[str]] = ["pool_type", "finality_provider_public_key", "stake_block_time"]
+    only_sign: Optional[StrictBool] = Field(default=None, description="Whether to only sign transactions. Default is `false`, if set to `true`,  the transaction will not be submitted to the blockchain automatically. You can call `Broadcast transactions` to submit the transaction to the blockchain,  Or you can find the signed raw_tx by `Get transaction information` and broadcast it yourself. ")
+    __properties: ClassVar[List[str]] = ["pool_type", "finality_provider_public_key", "stake_block_time", "only_sign"]
 
     @field_validator('finality_provider_public_key')
     def finality_provider_public_key_validate_regular_expression(cls, value):
@@ -92,7 +93,8 @@ class BabylonStakeExtra(BaseModel):
         _obj = cls.model_validate({
             "pool_type": obj.get("pool_type"),
             "finality_provider_public_key": obj.get("finality_provider_public_key"),
-            "stake_block_time": obj.get("stake_block_time")
+            "stake_block_time": obj.get("stake_block_time"),
+            "only_sign": obj.get("only_sign")
         })
         return _obj
 

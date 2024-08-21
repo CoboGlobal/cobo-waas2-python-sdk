@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.source_group import SourceGroup
 from cobo_waas2.models.tss_request_status import TSSRequestStatus
@@ -26,14 +26,16 @@ from typing_extensions import Self
 
 class TSSRequest(BaseModel):
     """
-    The data for the TSS request information.
+    The information about the TSS request.
     """  # noqa: E501
     tss_request_id: Optional[StrictStr] = Field(default=None, description="The TSS request ID.")
     source_key_share_holder_group: Optional[SourceGroup] = None
     target_key_share_holder_group_id: Optional[StrictStr] = Field(default=None, description="The target key share holder group ID.")
     type: Optional[TSSRequestType] = None
     status: Optional[TSSRequestStatus] = None
-    __properties: ClassVar[List[str]] = ["tss_request_id", "source_key_share_holder_group", "target_key_share_holder_group_id", "type", "status"]
+    description: Optional[StrictStr] = Field(default=None, description="The description of the TSS request.")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The TSS request's creation time in Unix timestamp format, measured in milliseconds.")
+    __properties: ClassVar[List[str]] = ["tss_request_id", "source_key_share_holder_group", "target_key_share_holder_group_id", "type", "status", "description", "created_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +95,9 @@ class TSSRequest(BaseModel):
             "source_key_share_holder_group": SourceGroup.from_dict(obj["source_key_share_holder_group"]) if obj.get("source_key_share_holder_group") is not None else None,
             "target_key_share_holder_group_id": obj.get("target_key_share_holder_group_id"),
             "type": obj.get("type"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "description": obj.get("description"),
+            "created_timestamp": obj.get("created_timestamp")
         })
         return _obj
 

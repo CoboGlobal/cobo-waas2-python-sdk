@@ -47,9 +47,10 @@ class TestTransactionSource(unittest.TestCase):
                         tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
                         vout_n = 0, )
                     ],
+                signer_key_share_holder_group_id = 'b33130a9-6e18-44a9-9e48-8b3b41921f0e',
                 delegate = None,
                 exchange_id = 'binance',
-                sub_wallet_id = 'Asset',
+                trading_account_type = 'Asset',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
                 addresses = [

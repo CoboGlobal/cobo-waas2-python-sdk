@@ -42,10 +42,11 @@ from cobo_waas2.models.tss_request import TSSRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -116,10 +117,11 @@ from cobo_waas2.models.key_share_holder_group import KeyShareHolderGroup
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -176,7 +178,7 @@ Name | Type | Description  | Notes
 
 Create project
 
-This operation creates a project.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+This operation creates a project.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
 ### Example
 
@@ -190,10 +192,11 @@ from cobo_waas2.models.mpc_project import MPCProject
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -262,10 +265,11 @@ from cobo_waas2.models.mpc_vault import MPCVault
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -334,10 +338,11 @@ from cobo_waas2.models.tss_request import TSSRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -407,10 +412,11 @@ from cobo_waas2.models.delete_key_share_holder_group_by_id201_response import De
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -479,10 +485,11 @@ from cobo_waas2.models.key_share_holder_group import KeyShareHolderGroup
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -539,7 +546,7 @@ Name | Type | Description  | Notes
 
 Get project information
 
-This operation retrieves detailed information about a project. <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+This operation retrieves detailed information about a project. <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
 ### Example
 
@@ -551,10 +558,11 @@ from cobo_waas2.models.mpc_project import MPCProject
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -621,10 +629,11 @@ from cobo_waas2.models.mpc_vault import MPCVault
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -692,10 +701,11 @@ from cobo_waas2.models.tss_request import TSSRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -764,10 +774,11 @@ from cobo_waas2.models.key_share_holder import KeyShareHolder
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -831,10 +842,11 @@ from cobo_waas2.models.list_key_share_holder_groups200_response import ListKeySh
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -897,7 +909,7 @@ Name | Type | Description  | Notes
 
 List all projects
 
-This operation retrieves a list of all projects.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+This operation retrieves a list of all projects.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
 ### Example
 
@@ -909,10 +921,11 @@ from cobo_waas2.models.list_mpc_projects200_response import ListMpcProjects200Re
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -984,10 +997,11 @@ from cobo_waas2.models.mpc_vault_type import MPCVaultType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1062,10 +1076,11 @@ from cobo_waas2.models.list_tss_requests200_response import ListTssRequests200Re
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1142,10 +1157,11 @@ from cobo_waas2.models.update_key_share_holder_group_by_id_request import Update
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1204,7 +1220,7 @@ Name | Type | Description  | Notes
 
 Update project name
 
-This operation updates a project's name.  <Info>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Info> 
+This operation updates a project's name.  <Note>This operation applies to MPC Wallets (User-Controlled Wallets) only.</Note> 
 
 ### Example
 
@@ -1218,10 +1234,11 @@ from cobo_waas2.models.update_mpc_project_by_id_request import UpdateMpcProjectB
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client
@@ -1292,10 +1309,11 @@ from cobo_waas2.models.update_mpc_vault_by_id_request import UpdateMpcVaultByIdR
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.dev.cobo.com/v2
-# See configuration.py for a list of all supported configuration parameters.
+# See configuration.py for a list of all supported configurations.
 configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
     api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
     host="https://api.dev.cobo.com/v2"
 )
 # Enter a context with an instance of the API client

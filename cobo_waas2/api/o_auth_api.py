@@ -15,6 +15,7 @@ from typing import Dict, Tuple, Union
 from pydantic import Field, StrictStr
 from typing_extensions import Annotated
 from cobo_waas2.models.get_token200_response import GetToken200Response
+from cobo_waas2.models.refresh_token200_response import RefreshToken200Response
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
@@ -38,8 +39,8 @@ class OAuthApi:
     def get_token(
         self,
         client_id: Annotated[StrictStr, Field(description="The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
-        org_id: Annotated[StrictStr, Field(description="Org ID, a unique identifier to distinguish different organizations. You can get the Org ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
-        grant_type: Annotated[StrictStr, Field(description="The type of the permission granting. To get an access token, you need to set the value as `org_implicit`.")],
+        org_id: Annotated[StrictStr, Field(description="Organization ID, a unique identifier to distinguish different organizations. You can get the Organization ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
+        grant_type: Annotated[StrictStr, Field(description="The OAuth grant type. Set the value as `org_implicit`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -49,15 +50,15 @@ class OAuthApi:
             ]
         ] = None,
     ) -> GetToken200Response:
-        """Get Access Token
+        """Get access token
 
-        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the OAuth authentication method that requires an App Key.</Note> This operation allows Cobo Portal Apps to get an access token and a refresh token with a specified App ID, Org ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission from the organization admin to access specific resources. Once the app has been granted permission by an organization admin, it can use this operation to obtain both an access token and a refresh token.  For security purposes, access tokens expire after a certain period. Once they expire, the app need to [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new access token and a new fresh token. 
+        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an access token and a refresh token with a specified App ID, Organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an access token and a refresh token.  For security purposes, access tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new access token and a new refresh token. 
 
         :param client_id: The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
         :type client_id: str
-        :param org_id: Org ID, a unique identifier to distinguish different organizations. You can get the Org ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
+        :param org_id: Organization ID, a unique identifier to distinguish different organizations. You can get the Organization ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
         :type org_id: str
-        :param grant_type: The type of the permission granting. To get an access token, you need to set the value as `org_implicit`. (required)
+        :param grant_type: The OAuth grant type. Set the value as `org_implicit`. (required)
         :type grant_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -92,8 +93,8 @@ class OAuthApi:
     def get_token_with_http_info(
         self,
         client_id: Annotated[StrictStr, Field(description="The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
-        org_id: Annotated[StrictStr, Field(description="Org ID, a unique identifier to distinguish different organizations. You can get the Org ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
-        grant_type: Annotated[StrictStr, Field(description="The type of the permission granting. To get an access token, you need to set the value as `org_implicit`.")],
+        org_id: Annotated[StrictStr, Field(description="Organization ID, a unique identifier to distinguish different organizations. You can get the Organization ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
+        grant_type: Annotated[StrictStr, Field(description="The OAuth grant type. Set the value as `org_implicit`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -103,15 +104,15 @@ class OAuthApi:
             ]
         ] = None,
     ) -> ApiResponse[GetToken200Response]:
-        """Get Access Token
+        """Get access token
 
-        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the OAuth authentication method that requires an App Key.</Note> This operation allows Cobo Portal Apps to get an access token and a refresh token with a specified App ID, Org ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission from the organization admin to access specific resources. Once the app has been granted permission by an organization admin, it can use this operation to obtain both an access token and a refresh token.  For security purposes, access tokens expire after a certain period. Once they expire, the app need to [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new access token and a new fresh token. 
+        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an access token and a refresh token with a specified App ID, Organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an access token and a refresh token.  For security purposes, access tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new access token and a new refresh token. 
 
         :param client_id: The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
         :type client_id: str
-        :param org_id: Org ID, a unique identifier to distinguish different organizations. You can get the Org ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
+        :param org_id: Organization ID, a unique identifier to distinguish different organizations. You can get the Organization ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
         :type org_id: str
-        :param grant_type: The type of the permission granting. To get an access token, you need to set the value as `org_implicit`. (required)
+        :param grant_type: The OAuth grant type. Set the value as `org_implicit`. (required)
         :type grant_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -146,8 +147,8 @@ class OAuthApi:
     def get_token_without_preload_content(
         self,
         client_id: Annotated[StrictStr, Field(description="The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
-        org_id: Annotated[StrictStr, Field(description="Org ID, a unique identifier to distinguish different organizations. You can get the Org ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
-        grant_type: Annotated[StrictStr, Field(description="The type of the permission granting. To get an access token, you need to set the value as `org_implicit`.")],
+        org_id: Annotated[StrictStr, Field(description="Organization ID, a unique identifier to distinguish different organizations. You can get the Organization ID by retrieving the Manifest file after receiving the notification of app launch approval.")],
+        grant_type: Annotated[StrictStr, Field(description="The OAuth grant type. Set the value as `org_implicit`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -157,15 +158,15 @@ class OAuthApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get Access Token
+        """Get access token
 
-        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the OAuth authentication method that requires an App Key.</Note> This operation allows Cobo Portal Apps to get an access token and a refresh token with a specified App ID, Org ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission from the organization admin to access specific resources. Once the app has been granted permission by an organization admin, it can use this operation to obtain both an access token and a refresh token.  For security purposes, access tokens expire after a certain period. Once they expire, the app need to [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new access token and a new fresh token. 
+        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an access token and a refresh token with a specified App ID, Organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an access token and a refresh token.  For security purposes, access tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new access token and a new refresh token. 
 
         :param client_id: The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
         :type client_id: str
-        :param org_id: Org ID, a unique identifier to distinguish different organizations. You can get the Org ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
+        :param org_id: Organization ID, a unique identifier to distinguish different organizations. You can get the Organization ID by retrieving the Manifest file after receiving the notification of app launch approval. (required)
         :type org_id: str
-        :param grant_type: The type of the permission granting. To get an access token, you need to set the value as `org_implicit`. (required)
+        :param grant_type: The OAuth grant type. Set the value as `org_implicit`. (required)
         :type grant_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -251,10 +252,10 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> GetToken200Response:
-        """Refresh Access Token
+    ) -> RefreshToken200Response:
+        """Refresh access token
 
-        <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the OAuth authentication method that requires an App Key.</Note> This operation allows Cobo Portal Apps to obtain a new access token with a specified App ID, grant type and a refresh token. For security purposes, access tokens expire after a certain period. Once they expire, the app need to use this operation to get a new access token and a new fresh token. 
+        <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to obtain a new access token with a specified App ID, grant type and a refresh token.   For security purposes, access tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new access token and a new refresh token. 
 
         :param refresh_token_request: The request body for refreshing an access token. (required)
         :type refresh_token_request: RefreshTokenRequest
@@ -271,7 +272,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetToken200Response",
+            '200': "RefreshToken200Response",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -297,10 +298,10 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[GetToken200Response]:
-        """Refresh Access Token
+    ) -> ApiResponse[RefreshToken200Response]:
+        """Refresh access token
 
-        <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the OAuth authentication method that requires an App Key.</Note> This operation allows Cobo Portal Apps to obtain a new access token with a specified App ID, grant type and a refresh token. For security purposes, access tokens expire after a certain period. Once they expire, the app need to use this operation to get a new access token and a new fresh token. 
+        <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to obtain a new access token with a specified App ID, grant type and a refresh token.   For security purposes, access tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new access token and a new refresh token. 
 
         :param refresh_token_request: The request body for refreshing an access token. (required)
         :type refresh_token_request: RefreshTokenRequest
@@ -317,7 +318,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetToken200Response",
+            '200': "RefreshToken200Response",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -344,9 +345,9 @@ class OAuthApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Refresh Access Token
+        """Refresh access token
 
-        <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the OAuth authentication method that requires an App Key.</Note> This operation allows Cobo Portal Apps to obtain a new access token with a specified App ID, grant type and a refresh token. For security purposes, access tokens expire after a certain period. Once they expire, the app need to use this operation to get a new access token and a new fresh token. 
+        <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to obtain a new access token with a specified App ID, grant type and a refresh token.   For security purposes, access tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new access token and a new refresh token. 
 
         :param refresh_token_request: The request body for refreshing an access token. (required)
         :type refresh_token_request: RefreshTokenRequest
@@ -363,7 +364,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetToken200Response",
+            '200': "RefreshToken200Response",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }

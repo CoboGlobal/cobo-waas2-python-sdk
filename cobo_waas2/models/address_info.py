@@ -29,7 +29,7 @@ class AddressInfo(BaseModel):
     address: StrictStr = Field(description="The wallet address.")
     chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
     memo: Optional[StrictStr] = Field(default=None, description="The memo code.")
-    path: Optional[StrictStr] = Field(default=None, description="The derivation path of the address. This property applies to MPC Wallets only.")
+    path: Optional[StrictStr] = Field(default=None, description="The derivation path of the address. This property applies to MPC Wallets only. To learn the meaning of each level in the path, see [Path levels](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#path-levels).")
     encoding: Optional[AddressEncoding] = None
     pubkey: Optional[StrictStr] = Field(default=None, description="The public key of the address. This property applies to MPC Wallets only.")
     __properties: ClassVar[List[str]] = ["address", "chain_id", "memo", "path", "encoding", "pubkey"]

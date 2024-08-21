@@ -38,7 +38,7 @@ class TestCreateSmartContractWalletParams(unittest.TestCase):
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
                 chain_id = 'ETH',
-                smart_contract_wallet_type = 'SafeWallet',
+                smart_contract_wallet_type = 'Safe{Wallet}',
                 safe_address = '0x1234567890123456789012345678901234567890',
                 signers = [
                     '0x1234567890123456789012345678901234567890'
@@ -55,7 +55,7 @@ class TestCreateSmartContractWalletParams(unittest.TestCase):
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
                 chain_id = 'ETH',
-                smart_contract_wallet_type = 'SafeWallet',
+                smart_contract_wallet_type = 'Safe{Wallet}',
         )
         """
 

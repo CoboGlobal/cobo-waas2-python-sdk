@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **wallet_id** | **str** | The wallet ID. | 
 **wallet_type** | [**WalletType**](WalletType.md) |  | 
 **wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | 
-**sub_wallet_id** | **str** | The exchange trading account or a sub-wallet ID. | [optional] 
+**trading_account_type** | **str** | The exchange trading account or a sub-wallet ID. | [optional] 
 
 ## Example
 

@@ -24,12 +24,12 @@ from typing_extensions import Self
 
 class ExchangeTransferSource(BaseModel):
     """
-    The information about the transaction source types `Main` and `Sub`.   An Exchange Wallet (Sub Account) as the transaction source can only transfer tokens to another Exchange Wallet. 
+    The information about the transaction source types `Main` and `Sub`.   Assets in an Exchange Wallet (Sub Account) can only be transferred to another Exchange Wallet. 
     """  # noqa: E501
     source_type: WalletSubtype
     wallet_id: StrictStr = Field(description="The wallet ID.")
-    sub_wallet_id: StrictStr = Field(description="The exchange trading account or the sub-wallet ID.")
-    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "sub_wallet_id"]
+    trading_account_type: StrictStr = Field(description="The trading account type.")
+    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "trading_account_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,7 +84,7 @@ class ExchangeTransferSource(BaseModel):
         _obj = cls.model_validate({
             "source_type": obj.get("source_type"),
             "wallet_id": obj.get("wallet_id"),
-            "sub_wallet_id": obj.get("sub_wallet_id")
+            "trading_account_type": obj.get("trading_account_type")
         })
         return _obj
 

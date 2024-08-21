@@ -26,14 +26,14 @@ from typing_extensions import Self
 
 class AddressTransferDestination(BaseModel):
     """
-    The information about the transaction destination type `Address`.   Specify either the `account_output` property or the `utxo_outputs` property. Only MPC Wallets as the transaction source can transfer tokens to multiple addresses by using the `utxo_outputs` property. 
+    The information about the transaction destination type `Address`.   Specify either the `account_output` property or the `utxo_outputs` property. You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. You should use the `utxo_outputs` property to specify the destination addresses. 
     """  # noqa: E501
     destination_type: TransferDestinationType
     account_output: Optional[AddressTransferDestinationAccountOutput] = None
     utxo_outputs: Optional[List[AddressTransferDestinationUtxoOutputsInner]] = None
     change_address: Optional[StrictStr] = Field(default=None, description="The address used to receive the remaining funds or change from the transaction.")
-    force_internal: Optional[StrictBool] = Field(default=None, description="Whether the transaction request must be executed as a Loop transfer. For more information about Loop, see [Loop's website](https://loop.top/).   - `true`: The transaction request must be executed as a Loop transfer.   - `false`: The transaction request may not be executed as a Loop transfer. ")
-    force_external: Optional[StrictBool] = Field(default=None, description="Whether the transaction request must not be executed as a Loop transfer. For more information about Loop, see [Loop's website](https://loop.top/).   - `true`: The transaction request must not be executed as a Loop transfer.   - `false`: The transaction request can be executed as a Loop transfer. ")
+    force_internal: Optional[StrictBool] = Field(default=None, description="Whether the transaction request must be executed as a Loop transfer. For more information about Loop, see [Loop's website](https://loop.top/).   - `true`: The transaction request must be executed as a Loop transfer.   - `false`: The transaction request may not be executed as a Loop transfer. <Note>Please do not set both `force_internal` and `force_internal` as `true`.</Note> ")
+    force_external: Optional[StrictBool] = Field(default=None, description="Whether the transaction request must not be executed as a Loop transfer. For more information about Loop, see [Loop's website](https://loop.top/).   - `true`: The transaction request must not be executed as a Loop transfer.   - `false`: The transaction request can be executed as a Loop transfer. <Note>Please do not set both `force_internal` and `force_internal` as `true`.</Note> ")
     __properties: ClassVar[List[str]] = ["destination_type", "account_output", "utxo_outputs", "change_address", "force_internal", "force_external"]
 
     model_config = ConfigDict(

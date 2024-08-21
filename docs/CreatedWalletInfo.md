@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **name** | **str** | The wallet name. | 
 **org_id** | **str** | The ID of the owning organization. | 
 **project_id** | **str** | The project ID. | [optional] 
+**project_name** | **str** | The project name. | [optional] 
 **vault_id** | **str** | The ID of the owning vault. | 
+**vault_name** | **str** | The vault name. | [optional] 
 **apikey** | **str** | The API key of your exchange account. | 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | 
 **main_wallet_id** | **str** | The wallet ID of the Main Account associated with the Sub Account. This property is returned only if you are creating or querying an Exchange Wallet (Sub Account). | [optional] 

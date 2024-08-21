@@ -30,8 +30,8 @@ class TransactionExchangeWalletSource(BaseModel):
     source_type: TransactionSourceType
     exchange_id: ExchangeId
     wallet_id: StrictStr = Field(description="The wallet ID.")
-    sub_wallet_id: Optional[StrictStr] = Field(default=None, description="The exchange trading account or a sub-wallet ID.")
-    __properties: ClassVar[List[str]] = ["source_type", "exchange_id", "wallet_id", "sub_wallet_id"]
+    trading_account_type: Optional[StrictStr] = Field(default=None, description="The exchange trading account or a sub-wallet ID.")
+    __properties: ClassVar[List[str]] = ["source_type", "exchange_id", "wallet_id", "trading_account_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +87,7 @@ class TransactionExchangeWalletSource(BaseModel):
             "source_type": obj.get("source_type"),
             "exchange_id": obj.get("exchange_id"),
             "wallet_id": obj.get("wallet_id"),
-            "sub_wallet_id": obj.get("sub_wallet_id")
+            "trading_account_type": obj.get("trading_account_type")
         })
         return _obj
 
