@@ -38,7 +38,7 @@ setup(
     description="Cobo Wallet as a Service 2.0",
     author="Cobo WaaS",
     author_email="support@cobo.com",
-    url="",
+    url="https://github.com/CoboGlobal/cobo-waas2-python-sdk",
     keywords=["OpenAPI", "OpenAPI-Generator", "Cobo Wallet as a Service 2.0"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
