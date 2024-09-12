@@ -1,6 +1,6 @@
 # ActivityAction
 
-The status of activity.
+The specific action taken within an activity. Possible values include: - `Submitted`: Submit the staking, unstaking, or withdrawal request. - `BTCConfirmation`: The Bitcoin chain confirms the request. - `BabylonConfirmation`: The Babylon protocol confirms the request. 
 
 ## Properties
 

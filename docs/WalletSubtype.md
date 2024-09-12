@@ -1,6 +1,6 @@
 # WalletSubtype
 
-The wallet subtype. Possible values include: - `Asset`: Custodial Wallets (Asset Wallets). - `Web3`: Custodial Wallets (Web3  Wallets). - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets). - `User-Controlled`: MPC Wallets (User-Controlled Wallets). - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}). - `Main`: Exchange Wallets (Main Account). - `Sub`: Exchange Wallets (Sub Account). 
+The wallet subtype of the transaction source. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type. 
 
 ## Properties
 

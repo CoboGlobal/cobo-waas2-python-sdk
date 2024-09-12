@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pool_type** | [**StakingPoolType**](StakingPoolType.md) |  | 
-**operator** | **str** | The operator address. | [optional] 
+**operator** | **str** | The operator&#39;s address. | [optional] 
 
 ## Example
 

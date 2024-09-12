@@ -1,17 +1,17 @@
 # BabylonValidator
 
-The babylon validator information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**pool_type** | [**StakingPoolType**](StakingPoolType.md) |  | 
 **icon_url** | **str** | The URL of the validator&#39;s icon. | 
-**name** | **str** | The name of validator. | 
-**priority** | **int** | The priority of validator. | [optional] 
-**public_key** | **str** | The public key of validator. | 
-**commission_rate** | **float** | The commission rate of validator. | 
-**supported_pos_chains** | **List[str]** | The list of supported pos chains. | 
+**name** | **str** | The validator&#39;s name. | 
+**priority** | **int** | This property can be ignored. | [optional] 
+**public_key** | **str** | The public key of the validator. | 
+**commission_rate** | **float** | The commission rate of the validator. | 
+**supported_pos_chains** | **List[str]** | A list of supported Proof-of-Stake (PoS) chains. | 
 
 ## Example
 

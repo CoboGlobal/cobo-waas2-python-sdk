@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **address** | **str** | The wallet address. | [optional] 
-**is_loop** | **bool** | Whether the transaction from the given source wallet to the destination address can be executed as a Loop transfer.  - &#x60;true&#x60;: The transaction can be executed as a Loop transfer. - &#x60;false&#x60;: The transaction cannot be executed as a Loop transfer.  | [optional] 
+**is_loop** | **bool** | Whether the transaction from the given source to the given destination address can be executed as a Loop transfer.  - &#x60;true&#x60;: The transaction can be executed as a Loop transfer. - &#x60;false&#x60;: The transaction cannot be executed as a Loop transfer.  | [optional] 
 
 ## Example
 

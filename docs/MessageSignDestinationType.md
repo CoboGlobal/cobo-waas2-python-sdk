@@ -1,6 +1,6 @@
 # MessageSignDestinationType
 
-The type of the signature format. Possible values include: - `EVM_EIP_191`: [EIP-191: Signed Data Standard](https://eips.ethereum.org/EIPS/eip-191). - `EVM_EIP_712`: [EIP-712: Typed structured data hashing and signing](https://eips.ethereum.org/EIPS/eip-712). 
+The type of the signature format. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type. 
 
 ## Properties
 
