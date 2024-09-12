@@ -1,16 +1,16 @@
 # StakingsValidatorInfo
 
-The validator info of the stake.
+The information about the validator.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**icon_url** | **str** |  | [optional] 
-**public_key** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**address** | **str** |  | [optional] 
-**commission_rate** | **str** |  | [optional] 
+**icon_url** | **str** | The URL of the validator&#39;s icon. | [optional] 
+**public_key** | **str** | The validator&#39;s public key. | [optional] 
+**name** | **str** | The validator&#39;s name. | [optional] 
+**address** | **str** | The wallet address of the validator. | [optional] 
+**commission_rate** | **str** | The commission rate of the validator. | [optional] 
 
 ## Example
 

@@ -2,8 +2,7 @@ import hashlib
 import time
 from urllib.parse import urlencode
 
-import ed25519
-from ed25519.keys import create_keypair
+from nacl.signing import SigningKey
 
 
 class SignHelper(object):
@@ -40,9 +39,9 @@ class SignHelper(object):
         digest = cls._build_unsigned_digest(
             method, path, timestamp, params=params, body=body
         )
-        sk = ed25519.SigningKey(sk_s=bytes.fromhex(api_secret))
-        signature = sk.sign(digest)
-        vk = sk.get_verifying_key().to_bytes()
+        sk = SigningKey(bytes.fromhex(api_secret))
+        signature = sk.sign(digest).signature
+        vk = bytes(sk.verify_key)
         return signature, vk
 
     @classmethod
@@ -72,8 +71,8 @@ class SignHelper(object):
 
     @classmethod
     def generate_api_key(cls) -> dict:
-        sk, vk = create_keypair()
+        sk = SigningKey.generate()
         return {
-            "api_key": vk.to_bytes().hex(),
-            "api_secret": sk.to_seed().hex(),
+            "api_key": bytes(sk.verify_key).hex(),
+            "api_secret": bytes(sk).hex(),
         }

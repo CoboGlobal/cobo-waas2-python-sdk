@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **activity_type** | [**ActivityType**](ActivityType.md) |  | 
 **request_id** | **str** | The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization. | [optional] 
 **source** | [**StakingSource**](StakingSource.md) |  | [optional] 
-**pool_id** | **str** | The id of the staking pool | 
-**amount** | **str** | The amount to stake | 
+**pool_id** | **str** | The ID of the staking pool. | 
+**amount** | **str** | The amount to stake. | 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
 **extra** | [**CreateStakeActivityExtra**](CreateStakeActivityExtra.md) |  | 
 

@@ -3,7 +3,9 @@ import json
 import logging
 from typing import Optional
 
-import ed25519
+from nacl.exceptions import BadSignatureError
+from nacl.signing import SigningKey, VerifyKey
+
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.responses import PlainTextResponse
 
@@ -23,7 +25,7 @@ pub_keys = {
     "PROD": "8d4a482641adb2a34b726f05827dba9a9653e5857469b8749052bf4458a86729",
 }
 
-pubkey = pub_keys["DEV"]
+pubkey = pub_keys["PROD"]
 
 
 @app.post("/api/webhook")
@@ -63,12 +65,12 @@ async def handle_callback(
 
 
 def verify_signature(public_key, signature, message):
-    vk = ed25519.VerifyingKey(bytes.fromhex(public_key))
+    vk = VerifyKey(key=bytes.fromhex(public_key))
     sha256_hash = hashlib.sha256(hashlib.sha256(message.encode()).digest()).digest()
     try:
-        vk.verify(bytes.fromhex(signature), sha256_hash)
+        vk.verify(signature=bytes.fromhex(signature), smessage=sha256_hash)
         return True
-    except ed25519.BadSignatureError:
+    except BadSignatureError:
         return False
 
 

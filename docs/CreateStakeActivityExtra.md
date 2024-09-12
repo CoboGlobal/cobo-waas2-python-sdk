@@ -6,11 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pool_type** | [**StakingPoolType**](StakingPoolType.md) |  | 
-**finality_provider_public_key** | **str** | The public key of finality provider. | 
-**stake_block_time** | **int** | The stake block time. | 
-**only_sign** | **bool** | Whether to only sign transactions. Default is &#x60;false&#x60;, if set to &#x60;true&#x60;,  the transaction will not be submitted to the blockchain automatically. You can call &#x60;Broadcast transactions&#x60; to submit the transaction to the blockchain,  Or you can find the signed raw_tx by &#x60;Get transaction information&#x60; and broadcast it yourself.  | [optional] 
-**operator** | **str** | The operator address. | [optional] 
-**fee_recipient** | **float** | The fee recipient address, if not provided the staker address will be used. | [optional] 
+**finality_provider_public_key** | **str** | The public key of the finality provider. | 
+**stake_block_time** | **int** | The number of blocks that need to be processed before the locked tokens are unlocked and become accessible. | 
+**auto_broadcast** | **bool** | Whether to automatically broadcast the transaction. The default value is &#x60;true&#x60;.  - &#x60;true&#x60;: Automatically broadcast the transaction. - &#x60;false&#x60;: The transaction will not be submitted to the blockchain automatically. You can call [Broadcast signed transactions](/v2/api-references/transactions/broadcast-signed-transactions) to broadcast the transaction to the blockchain, or retrieve the signed raw transaction data &#x60;raw_tx&#x60; by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information) and broadcast it yourself.  | [optional] 
 
 ## Example
 

@@ -1,6 +1,6 @@
 # EvmEIP712MessageSignDestination
 
-The information about the destination `EVM_EIP_712_Signature`.
+The information about the destination `EVM_EIP_712_Signature`. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
 
 ## Properties
 

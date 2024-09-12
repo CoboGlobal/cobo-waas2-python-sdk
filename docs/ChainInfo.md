@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **explorer_tx_url** | **str** | The transaction URL pattern on the blockchain explorer. You can use it to concatenate the transaction URLs. | [optional] 
 **explorer_address_url** | **str** | The address URL pattern on the blockchain explorer. You can use it to concatenate the address URLs. | [optional] 
 **require_memo** | **bool** | Whether the chain requires a memo. | [optional] 
+**confirming_threshold** | **int** | The number of confirmations required for an on-chain transaction, such as 64 for Ethereum. | [optional] 
 
 ## Example
 

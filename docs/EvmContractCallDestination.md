@@ -1,6 +1,6 @@
 # EvmContractCallDestination
 
-The information about the transaction destination.
+The information about the transaction destination. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **destination_type** | [**ContractCallDestinationType**](ContractCallDestinationType.md) |  | 
 **address** | **str** | The destination address. | 
 **value** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | [optional] 
-**calldata** | **bytearray** | The data that is used to invoke a specific function or method within the specified contract at the destination address.  | 
+**calldata** | **str** | The data that is used to invoke a specific function or method within the specified contract at the destination address.  | 
 
 ## Example
 

@@ -1,5 +1,6 @@
 # StakingPoolType
 
+The type of the staking pool.
 
 ## Properties
 

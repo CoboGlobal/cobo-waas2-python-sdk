@@ -1,6 +1,6 @@
 # ActivityStatus
 
-The status of activity.
+The status of the staking activity. Possible values include: - `Success`: The activity is successfully completed. - `Processing`: The activity is being processed. - `Failed`: The activity has failed. 
 
 ## Properties
 

@@ -1,25 +1,22 @@
 # Stakings
 
-The staking info.
+The information about a staking position.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The unique id of the stake. | 
-**wallet_id** | **str** | The unique wallet id. | 
-**address** | **str** | The staker wallet address. | 
-**amounts** | [**List[AmountDetailsInner]**](AmountDetailsInner.md) | The staking amount details. | 
-**initiator** | **str** | The initiator of the stake. | [optional] 
-**unlock_timestamp** | **int** | The unlock time. | [optional] 
-**unlock_block_height** | **int** | The unlock block height. | [optional] 
-**pool_id** | **str** | The unique pool id. | 
-**token_id** | **str** | The token id. | 
-**pos_chain** | **str** | The pos chain of the stake. | [optional] 
-**rewards_info** | **object** | The rewards info of the stake. | [optional] 
-**created_timestamp** | **int** | The time when the stake was created. | 
-**updated_timestamp** | **int** | The time when the stake was last updated. | 
+**id** | **str** | The ID of the staking position. | 
+**wallet_id** | **str** | The staker&#39;s wallet ID. | 
+**address** | **str** | The staker&#39;s wallet address. | 
+**amounts** | [**List[AmountDetailsInner]**](AmountDetailsInner.md) | The details about the staking amount. | 
+**pool_id** | **str** | The ID of the staking pool. | 
+**token_id** | **str** | The token ID. | 
+**rewards_info** | **object** | The information about the staking rewards. | [optional] 
+**created_timestamp** | **int** | The time when the staking position was created. | 
+**updated_timestamp** | **int** | The time when the staking position was last updated. | 
 **validator_info** | [**StakingsValidatorInfo**](StakingsValidatorInfo.md) |  | 
+**extra** | [**StakingsExtra**](StakingsExtra.md) |  | [optional] 
 
 ## Example
 

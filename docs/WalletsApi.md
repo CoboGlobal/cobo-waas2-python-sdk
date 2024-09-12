@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**check_address_validity**](WalletsApi.md#check_address_validity) | **GET** /wallets/check_address_validity | Check address validity
 [**check_addresses_validity**](WalletsApi.md#check_addresses_validity) | **GET** /wallets/check_addresses_validity | Check addresses validity
-[**check_loop_transfers**](WalletsApi.md#check_loop_transfers) | **GET** /wallets/check_loop_transfers | Check Loop transfers
 [**create_address**](WalletsApi.md#create_address) | **POST** /wallets/{wallet_id}/addresses | Create addresses in wallet
 [**create_wallet**](WalletsApi.md#create_wallet) | **POST** /wallets | Create wallet
 [**delete_wallet_by_id**](WalletsApi.md#delete_wallet_by_id) | **POST** /wallets/{wallet_id}/delete | Delete wallet
@@ -155,81 +154,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List[CheckAddressesValidity200ResponseInner]**](CheckAddressesValidity200ResponseInner.md)
-
-### Authorization
-
-[CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **check_loop_transfers**
-> List[CheckLoopTransfers200ResponseInner] check_loop_transfers(token_id, source_wallet_id, destination_addresses)
-
-Check Loop transfers
-
-This operation verifies if the transactions from a given source wallet to a list of destination addresses can be executed as Loop transfers.   For more information about Loop, see [Loop's website](https://loop.top/). 
-
-### Example
-
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.check_loop_transfers200_response_inner import CheckLoopTransfers200ResponseInner
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.WalletsApi(api_client)
-    token_id = 'ETH_USDT'
-    source_wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-    destination_addresses = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97'
-
-    try:
-        # Check Loop transfers
-        api_response = api_instance.check_loop_transfers(token_id, source_wallet_id, destination_addresses)
-        print("The response of WalletsApi->check_loop_transfers:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WalletsApi->check_loop_transfers: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **token_id** | **str**| The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens). | 
- **source_wallet_id** | **str**| The source wallet ID. | 
- **destination_addresses** | **str**| A list of destination wallet addresses, separated by comma. | 
-
-### Return type
-
-[**List[CheckLoopTransfers200ResponseInner]**](CheckLoopTransfers200ResponseInner.md)
 
 ### Authorization
 

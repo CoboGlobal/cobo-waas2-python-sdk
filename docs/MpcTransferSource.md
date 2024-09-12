@@ -1,6 +1,6 @@
 # MpcTransferSource
 
-The information about the transaction source types `Org-Controlled` and `User-Controlled`.   If you specify both the `address` or `included_utxos` properties, the specified included UTXOs must belong to the address. 
+The information about the transaction source types `Org-Controlled` and `User-Controlled`. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  If you specify both the `address` or `included_utxos` properties, the specified included UTXOs must belong to the address.  Switch between the tabs to display the properties for different transaction sources. 
 
 ## Properties
 

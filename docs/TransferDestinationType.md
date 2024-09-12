@@ -1,6 +1,6 @@
 # TransferDestinationType
 
-The transaction destination type. Possible values include: - `Address`: An address, including an address of Custodial Wallets, MPC Wallets, or Smart Contract Wallets (Safe{Wallet}) and an external address. - `ExchangeWallet`: An Exchange Wallet. 
+The transaction destination type. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type. 
 
 ## Properties
 

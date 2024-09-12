@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**AmountStatus**](AmountStatus.md) |  | 
 **amount** | **str** | The staking amount. | 
-**activity_id** | **str** | The related staking activity ID. | [optional] 
 
 ## Example
 
