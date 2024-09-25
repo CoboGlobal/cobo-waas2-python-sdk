@@ -31,7 +31,7 @@ class MessageSignParams(BaseModel):
     chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
     source: MessageSignSource
     destination: MessageSignDestination
-    description: Optional[StrictStr] = Field(default=None, description="The description of the message sign transaction.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the message signing transaction.")
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     __properties: ClassVar[List[str]] = ["request_id", "chain_id", "source", "destination", "description", "category_names"]
 

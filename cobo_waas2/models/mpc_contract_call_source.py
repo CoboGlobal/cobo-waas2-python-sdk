@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from cobo_waas2.models.contract_call_source_type import ContractCallSourceType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,8 +29,7 @@ class MpcContractCallSource(BaseModel):
     source_type: ContractCallSourceType
     wallet_id: StrictStr = Field(description="The wallet ID.")
     address: StrictStr = Field(description="The wallet address.")
-    nonce: Optional[StrictInt] = Field(default=None, description="The transaction nonce.")
-    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "nonce"]
+    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,8 +84,7 @@ class MpcContractCallSource(BaseModel):
         _obj = cls.model_validate({
             "source_type": obj.get("source_type"),
             "wallet_id": obj.get("wallet_id"),
-            "address": obj.get("address"),
-            "nonce": obj.get("nonce")
+            "address": obj.get("address")
         })
         return _obj
 

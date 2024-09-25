@@ -25,11 +25,11 @@ class GetToken200Response(BaseModel):
     """
     GetToken200Response
     """  # noqa: E501
-    access_token: Optional[StrictStr] = Field(default=None, description="The access token.")
+    access_token: Optional[StrictStr] = Field(default=None, description="The Org Access Token.")
     token_type: Optional[StrictStr] = Field(default=None, description="The type of the tokens, which is Bearer.")
-    scope: Optional[StrictStr] = Field(default=None, description="The scope of the access token to limit the app's access to the organization's resources.  **Note**: Currently this property value is empty. The scope of the access token is based on the permissions granted when the app user installs the app. ")
-    expires_in: Optional[StrictInt] = Field(default=None, description="The time in seconds in which the access token expires.")
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The refresh token, used to obtain a new access token when the current access token expires.")
+    scope: Optional[StrictStr] = Field(default=None, description="The scope of the Org Access Token to limit the app's access to the organization's resources.  **Note**: Currently this property value is empty. The scope of the Org Access Token is based on the permissions granted when the app user installs the app. ")
+    expires_in: Optional[StrictInt] = Field(default=None, description="The time in seconds in which the Org Access Token expires.")
+    refresh_token: Optional[StrictStr] = Field(default=None, description="The Refresh Token, used to obtain a new Org Access Token when the current Org Access Token expires. The expiration time for Refresh Tokens is currently set to 30 days and is subject to change.")
     __properties: ClassVar[List[str]] = ["access_token", "token_type", "scope", "expires_in", "refresh_token"]
 
     model_config = ConfigDict(

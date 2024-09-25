@@ -18,6 +18,7 @@ from cobo_waas2.models.activity_initiator import ActivityInitiator
 from cobo_waas2.models.activity_status import ActivityStatus
 from cobo_waas2.models.activity_timeline import ActivityTimeline
 from cobo_waas2.models.activity_type import ActivityType
+from cobo_waas2.models.address_book import AddressBook
 from cobo_waas2.models.address_encoding import AddressEncoding
 from cobo_waas2.models.address_info import AddressInfo
 from cobo_waas2.models.address_transfer_destination import AddressTransferDestination

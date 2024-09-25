@@ -26,6 +26,7 @@ cobo_waas2/models/activity_initiator.py
 cobo_waas2/models/activity_status.py
 cobo_waas2/models/activity_timeline.py
 cobo_waas2/models/activity_type.py
+cobo_waas2/models/address_book.py
 cobo_waas2/models/address_encoding.py
 cobo_waas2/models/address_info.py
 cobo_waas2/models/address_transfer_destination.py
@@ -298,6 +299,7 @@ docs/ActivityInitiator.md
 docs/ActivityStatus.md
 docs/ActivityTimeline.md
 docs/ActivityType.md
+docs/AddressBook.md
 docs/AddressEncoding.md
 docs/AddressInfo.md
 docs/AddressTransferDestination.md
@@ -581,6 +583,7 @@ test/test_activity_initiator.py
 test/test_activity_status.py
 test/test_activity_timeline.py
 test/test_activity_type.py
+test/test_address_book.py
 test/test_address_encoding.py
 test/test_address_info.py
 test/test_address_transfer_destination.py

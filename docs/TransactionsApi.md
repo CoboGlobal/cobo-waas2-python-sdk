@@ -357,7 +357,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **message_sign_params** | [**MessageSignParams**](MessageSignParams.md)| The request body to create a message sign transaction | [optional] 
+ **message_sign_params** | [**MessageSignParams**](MessageSignParams.md)| The request body to create a message signing transaction | [optional] 
 
 ### Return type
 

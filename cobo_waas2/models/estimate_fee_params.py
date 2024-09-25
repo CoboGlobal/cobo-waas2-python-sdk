@@ -94,7 +94,7 @@ class EstimateFeeParams(BaseModel):
             raise ValueError("Failed to lookup data type from the field `request_type` in the input.")
 
         # check if data type is `EstimateContractCallFeeParams`
-        if _data_type == "Call":
+        if _data_type == "ContractCall":
             instance.actual_instance = EstimateContractCallFeeParams.from_json(json_str)
             return instance
 

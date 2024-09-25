@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **source_type** | [**ContractCallSourceType**](ContractCallSourceType.md) |  | 
 **wallet_id** | **str** | The wallet ID. | 
 **address** | **str** | The wallet address. | 
-**nonce** | **int** | The transaction nonce. | [optional] 
 **delegate** | [**CoboSafeDelegate**](CoboSafeDelegate.md) |  | 
 
 ## Example

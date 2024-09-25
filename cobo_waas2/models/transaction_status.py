@@ -27,7 +27,6 @@ class TransactionStatus(str, Enum):
     SUBMITTED = 'Submitted'
     PENDINGSCREENING = 'PendingScreening'
     PENDINGAUTHORIZATION = 'PendingAuthorization'
-    QUEUED = 'Queued'
     PENDINGSIGNATURE = 'PendingSignature'
     BROADCASTING = 'Broadcasting'
     CONFIRMING = 'Confirming'
