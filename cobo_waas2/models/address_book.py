@@ -17,18 +17,24 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.transaction_result_type import TransactionResultType
+from cobo_waas2.models.wallet_type import WalletType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TransactionSignatureResult(BaseModel):
+class AddressBook(BaseModel):
     """
-    The result of a message signing transaction.
+    The data for address book entry information.
     """  # noqa: E501
-    result_type: Optional[TransactionResultType] = None
-    signature: StrictStr = Field(description="The raw data of the signature.")
-    __properties: ClassVar[List[str]] = ["result_type", "signature"]
+    org_id: StrictStr
+    entry_id: StrictStr
+    address: StrictStr = Field(description="address.")
+    memo: Optional[StrictStr] = Field(default=None, description="memo.")
+    wallet_name: Optional[StrictStr] = Field(default=None, description="wallet name.")
+    wallet_type: Optional[WalletType] = None
+    label: StrictStr = Field(description="The label to address.")
+    email: Optional[StrictStr] = Field(default=None, description="email.")
+    __properties: ClassVar[List[str]] = ["org_id", "entry_id", "address", "memo", "wallet_name", "wallet_type", "label", "email"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +54,7 @@ class TransactionSignatureResult(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TransactionSignatureResult from a JSON string"""
+        """Create an instance of AddressBook from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +79,7 @@ class TransactionSignatureResult(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TransactionSignatureResult from a dict"""
+        """Create an instance of AddressBook from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +87,14 @@ class TransactionSignatureResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "result_type": obj.get("result_type"),
-            "signature": obj.get("signature")
+            "org_id": obj.get("org_id"),
+            "entry_id": obj.get("entry_id"),
+            "address": obj.get("address"),
+            "memo": obj.get("memo"),
+            "wallet_name": obj.get("wallet_name"),
+            "wallet_type": obj.get("wallet_type"),
+            "label": obj.get("label"),
+            "email": obj.get("email")
         })
         return _obj
 

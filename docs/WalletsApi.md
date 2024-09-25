@@ -1417,7 +1417,7 @@ Name | Type | Description  | Notes
 
 List all wallets
 
-This operation retrieves the information of all wallets under your organization. You can filter the result by wallet type and subtype. For MPC Wallets, you can also filter by project ID and vault ID.  <Note>You must specify either the wallet type or subtype, or both.</Note> 
+This operation retrieves the information of all wallets under your organization. You can filter the result by wallet type and subtype. For MPC Wallets, you can also filter by project ID and vault ID. 
 
 ### Example
 

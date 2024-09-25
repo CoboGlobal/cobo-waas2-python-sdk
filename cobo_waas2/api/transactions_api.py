@@ -761,7 +761,7 @@ class TransactionsApi:
     @validate_call
     def create_message_sign_transaction(
         self,
-        message_sign_params: Annotated[Optional[MessageSignParams], Field(description="The request body to create a message sign transaction")] = None,
+        message_sign_params: Annotated[Optional[MessageSignParams], Field(description="The request body to create a message signing transaction")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -775,7 +775,7 @@ class TransactionsApi:
 
         This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
 
-        :param message_sign_params: The request body to create a message sign transaction
+        :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -807,7 +807,7 @@ class TransactionsApi:
     @validate_call
     def create_message_sign_transaction_with_http_info(
         self,
-        message_sign_params: Annotated[Optional[MessageSignParams], Field(description="The request body to create a message sign transaction")] = None,
+        message_sign_params: Annotated[Optional[MessageSignParams], Field(description="The request body to create a message signing transaction")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -821,7 +821,7 @@ class TransactionsApi:
 
         This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
 
-        :param message_sign_params: The request body to create a message sign transaction
+        :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -853,7 +853,7 @@ class TransactionsApi:
     @validate_call
     def create_message_sign_transaction_without_preload_content(
         self,
-        message_sign_params: Annotated[Optional[MessageSignParams], Field(description="The request body to create a message sign transaction")] = None,
+        message_sign_params: Annotated[Optional[MessageSignParams], Field(description="The request body to create a message signing transaction")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -867,7 +867,7 @@ class TransactionsApi:
 
         This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
 
-        :param message_sign_params: The request body to create a message sign transaction
+        :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -37,7 +37,6 @@ class TestContractCallSource(unittest.TestCase):
                 source_type = 'Org-Controlled',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-                nonce = 9,
                 delegate = None
             )
         else:

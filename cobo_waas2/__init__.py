@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.3.1"
+__version__ = "1.4.0"
 
 # import apis into sdk package
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
@@ -41,6 +41,7 @@ from cobo_waas2.models.activity_initiator import ActivityInitiator
 from cobo_waas2.models.activity_status import ActivityStatus
 from cobo_waas2.models.activity_timeline import ActivityTimeline
 from cobo_waas2.models.activity_type import ActivityType
+from cobo_waas2.models.address_book import AddressBook
 from cobo_waas2.models.address_encoding import AddressEncoding
 from cobo_waas2.models.address_info import AddressInfo
 from cobo_waas2.models.address_transfer_destination import AddressTransferDestination

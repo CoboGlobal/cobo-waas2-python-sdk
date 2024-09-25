@@ -25,9 +25,9 @@ class RefreshTokenRequest(BaseModel):
     """
     RefreshTokenRequest
     """  # noqa: E501
-    client_id: Optional[StrictStr] = Field(default=None, description="The App ID, a unique identifier to distinguish Cobo Portal Apps. You can get the App ID by retrieving the Manifest file after receiving the notification of app launch approval.")
+    client_id: Optional[StrictStr] = Field(default=None, description="The client ID, a unique identifier to distinguish Cobo Portal Apps. You can get the client ID by retrieving the manifest file after publishing the app.")
     grant_type: Optional[StrictStr] = Field(default=None, description="The OAuth grant type. Set the value as `refresh_token`.")
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The refresh token of the current access token.")
+    refresh_token: Optional[StrictStr] = Field(default=None, description="The Refresh Token of the current Org Access Token.")
     __properties: ClassVar[List[str]] = ["client_id", "grant_type", "refresh_token"]
 
     model_config = ConfigDict(

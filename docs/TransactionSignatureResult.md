@@ -1,6 +1,6 @@
 # TransactionSignatureResult
 
-The result of a message sign transaction.
+The result of a message signing transaction.
 
 ## Properties
 
