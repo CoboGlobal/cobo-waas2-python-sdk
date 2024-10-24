@@ -46,7 +46,8 @@ class TestTokenInfo(unittest.TestCase):
                 can_deposit = True,
                 can_withdraw = True,
                 dust_threshold = '0.00000546',
-                custodial_minimum_deposit_threshold = '0.0001'
+                custodial_minimum_deposit_threshold = '0.0001',
+                asset_model_type = 'Account'
             )
         else:
             return TokenInfo(

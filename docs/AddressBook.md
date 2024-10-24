@@ -1,19 +1,20 @@
 # AddressBook
 
-The data for address book entry information.
+The information of an address book entry.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**org_id** | **str** |  | 
-**entry_id** | **str** |  | 
-**address** | **str** | address. | 
-**memo** | **str** | memo. | [optional] 
-**wallet_name** | **str** | wallet name. | [optional] 
+**org_id** | **str** | The organization ID. | 
+**entry_id** | **str** | The entry ID. | 
+**address** | **str** | The wallet address. | 
+**memo** | **str** | The memo. | [optional] 
+**wallet_name** | **str** | The wallet name. | [optional] 
 **wallet_type** | [**WalletType**](WalletType.md) |  | [optional] 
-**label** | **str** | The label to address. | 
-**email** | **str** | email. | [optional] 
+**label** | **str** | The address label. | 
+**chain_ids** | **List[str]** | A list of chain IDs. | [optional] 
+**email** | **str** | The email of the address owner. | [optional] 
 
 ## Example
 

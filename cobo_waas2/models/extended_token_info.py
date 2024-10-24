@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.token_asset_model_type import TokenAssetModelType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,9 +37,10 @@ class ExtendedTokenInfo(BaseModel):
     fee_token_id: Optional[StrictStr] = Field(default=None, description="The fee token ID. A fee token is the token with which you pay transaction fees.")
     can_deposit: Optional[StrictBool] = Field(default=False, description="Whether the token can be deposited.  - `true`: The token can be deposited.  - `false`: The token cannot be deposited. ")
     can_withdraw: Optional[StrictBool] = Field(default=False, description="Whether the token can be withdrawn.  - `true`: The token can be withdrawn.  - `false`: The token cannot be withdrawn. ")
-    dust_threshold: Optional[StrictStr] = Field(default=None, description="The minimum withdrawal amount for Custodial Wallets. If your withdrawal amount is smaller than this threshold, the withdrawal request will receive an error.  Note: [Loop transfers](https://loop.top/) do not have this limitation. ")
-    custodial_minimum_deposit_threshold: Optional[StrictStr] = Field(default=None, description="The minimum deposit amount for Custodial Wallets. If the amount you deposit to a Custodial Wallet is smaller than this threshold, the deposit will not show up on Cobo Portal or trigger any webhook events.  Note: [Loop transfers](https://loop.top/) do not have this limitation. ")
-    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "asset_id", "symbol", "name", "decimal", "icon_url", "token_address", "fee_token_id", "can_deposit", "can_withdraw", "dust_threshold", "custodial_minimum_deposit_threshold"]
+    dust_threshold: Optional[StrictStr] = Field(default=None, description="The minimum withdrawal amount for Custodial Wallets. If your withdrawal amount is smaller than this threshold, the withdrawal request will receive an error.  Note: [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfers do not have this limitation. ")
+    custodial_minimum_deposit_threshold: Optional[StrictStr] = Field(default=None, description="The minimum deposit amount for Custodial Wallets. If the amount you deposit to a Custodial Wallet is smaller than this threshold, the deposit will not show up on Cobo Portal or trigger any webhook events.  Note: [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop)transfers do not have this limitation. ")
+    asset_model_type: Optional[TokenAssetModelType] = None
+    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "asset_id", "symbol", "name", "decimal", "icon_url", "token_address", "fee_token_id", "can_deposit", "can_withdraw", "dust_threshold", "custodial_minimum_deposit_threshold", "asset_model_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +105,8 @@ class ExtendedTokenInfo(BaseModel):
             "can_deposit": obj.get("can_deposit") if obj.get("can_deposit") is not None else False,
             "can_withdraw": obj.get("can_withdraw") if obj.get("can_withdraw") is not None else False,
             "dust_threshold": obj.get("dust_threshold"),
-            "custodial_minimum_deposit_threshold": obj.get("custodial_minimum_deposit_threshold")
+            "custodial_minimum_deposit_threshold": obj.get("custodial_minimum_deposit_threshold"),
+            "asset_model_type": obj.get("asset_model_type")
         })
         return _obj
 

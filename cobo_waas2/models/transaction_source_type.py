@@ -25,9 +25,9 @@ class TransactionSourceType(str, Enum):
     allowed enum values
     """
     ASSET = 'Asset'
-    ORG_MINUS_CONTROLLED = 'Org-Controlled'
-    USER_MINUS_CONTROLLED = 'User-Controlled'
-    SAFE_LEFT_CURLY_BRACKET_WALLET_RIGHT_CURLY_BRACKET = 'Safe{Wallet}'
+    ORG_CONTROLLED = 'Org-Controlled'
+    USER_CONTROLLED = 'User-Controlled'
+    SAFE_WALLET = 'Safe{Wallet}'
     MAIN = 'Main'
     SUB = 'Sub'
     DEPOSITFROMADDRESS = 'DepositFromAddress'

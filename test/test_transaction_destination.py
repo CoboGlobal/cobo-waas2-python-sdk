@@ -55,9 +55,24 @@ class TestTransactionDestination(unittest.TestCase):
                 address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
                 value = '1.5',
                 calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
+                calldata_info = cobo_waas2.models.transaction_evm_calldata_info.TransactionEvmCalldataInfo(
+                    chain_id = 'ETH', 
+                    address = '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84', 
+                    name = 'AppProxyUpgradeable', 
+                    impl_address = '0x17144556fd3424edc8fc8a4c940b2d04936d17eb', 
+                    impl_name = 'Lido', 
+                    proxy = True, 
+                    method = cobo_waas2.models.transaction_evm_contract_method.TransactionEvmContractMethod(
+                        name = 'transfer', 
+                        sig = 'transfer(address,uint256)', 
+                        type = 'Function', 
+                        payable = True, 
+                        selector = '0xa9059cbb', ), 
+                    params = '[["exactInput", "tuple", [["dstReceiver", "address", "0xbbff75515f6e924441c3d80af4714edf19911111"], ["wrappedToken", "address", "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"], ["router", "uint256", "452312848583266388373324160887510303453432363010492966520592108215996663949"], ["amount", "uint256", "10000000000000000"], ["minReturnAmount", "uint256", "369987456553029"], ["fee", "uint256", "30000000000000"], ["path", "address[]", [["[0]", "address", "0x0000000000000000000000000000000000000000"], ["[1]", "address", "0x1ae21d57afc033a556ef63daa216046321b3d391"]]], ["pool", "address[]", [["[0]", "address", "0x725522665fa5e1fa2912fed453dc0044deda5cfd"]]], ["signature", "bytes", "0x"], ["channel", "string", "android"]]], ["deadline", "uint256", "1729582030"]]', ),
                 message = 'YWFhYQ==',
                 structured_data = {"types": {"EIP712Domain": [{"name": "name", "type": "string"}, {"name": "version", "type": "string"}, {"name": "chainId", "type": "uint256"}, {"name": "verifyingContract", "type": "address"}], "Person": [{"name": "name", "type": "string"}, {"name": "wallet", "type": "address"}], "Mail": [{"name": "from", "type": "Person"}, {"name": "to", "type": "Person"}, {"name": "contents", "type": "string"}]}, "primaryType": "Mail", "domain": {"name": "Ether Mail", "version": "1", "chainId": 1, "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"}, "message": {"from": {"name": "Cow", "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"}, "to": {"name": "Bob", "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"}, "contents": "Hello, Bob!"}}
 ,
+                msg_hash = '',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
                 memo = '82840924'

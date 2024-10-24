@@ -41,6 +41,9 @@ class TestAddressBook(unittest.TestCase):
                 wallet_name = 'Example Wallet',
                 wallet_type = 'Custodial',
                 label = 'test',
+                chain_ids = [
+                    'ETH'
+                    ],
                 email = 'help@cobo.com'
             )
         else:

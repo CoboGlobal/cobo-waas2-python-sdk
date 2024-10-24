@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.wallet_balance_snapshot import WalletBalanceSnapshot
+from cobo_waas2.models.trigger_test_webhook_event201_response import TriggerTestWebhookEvent201Response
 
 
-class TestWalletBalanceSnapshot(unittest.TestCase):
-    """WalletBalanceSnapshot unit test stubs"""
+class TestTriggerTestWebhookEvent201Response(unittest.TestCase):
+    """TriggerTestWebhookEvent201Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,27 +24,25 @@ class TestWalletBalanceSnapshot(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> WalletBalanceSnapshot:
-        """Test WalletBalanceSnapshot
+    def make_instance(self, include_optional) -> TriggerTestWebhookEvent201Response:
+        """Test TriggerTestWebhookEvent201Response
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `WalletBalanceSnapshot`
+        # uncomment below to create an instance of `TriggerTestWebhookEvent201Response`
         """
-        model = WalletBalanceSnapshot()
+        model = TriggerTestWebhookEvent201Response()
         if include_optional:
-            return WalletBalanceSnapshot(
-                snapshot_id = 1704038400,
-                snapshot_name = 'Demo snapshot'
+            return TriggerTestWebhookEvent201Response(
+                triggered = True
             )
         else:
-            return WalletBalanceSnapshot(
-                snapshot_id = 1704038400,
+            return TriggerTestWebhookEvent201Response(
         )
         """
 
-    def testWalletBalanceSnapshot(self):
-        """Test WalletBalanceSnapshot"""
+    def testTriggerTestWebhookEvent201Response(self):
+        """Test TriggerTestWebhookEvent201Response"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

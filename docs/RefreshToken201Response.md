@@ -1,4 +1,4 @@
-# RefreshToken200Response
+# RefreshToken201Response
 
 
 ## Properties
@@ -14,19 +14,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cobo_waas2.models.refresh_token200_response import RefreshToken200Response
+from cobo_waas2.models.refresh_token201_response import RefreshToken201Response
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of RefreshToken200Response from a JSON string
-refresh_token200_response_instance = RefreshToken200Response.from_json(json)
+# create an instance of RefreshToken201Response from a JSON string
+refresh_token201_response_instance = RefreshToken201Response.from_json(json)
 # print the JSON string representation of the object
-print(RefreshToken200Response.to_json())
+print(RefreshToken201Response.to_json())
 
 # convert the object into a dict
-refresh_token200_response_dict = refresh_token200_response_instance.to_dict()
-# create an instance of RefreshToken200Response from a dict
-refresh_token200_response_from_dict = RefreshToken200Response.from_dict(refresh_token200_response_dict)
+refresh_token201_response_dict = refresh_token201_response_instance.to_dict()
+# create an instance of RefreshToken201Response from a dict
+refresh_token201_response_from_dict = RefreshToken201Response.from_dict(refresh_token201_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class FeeType(str, Enum):
     """
-    The fee model. Possible values include: - `Fixed`: The fixed fee model.  - `EVM_EIP_1559`: The EIP-1559 fee model. - `EVM_Legacy`: The legacy fee model. - `UTXO`: The fee model used in UTXO-based blockchains, such as Bitcoin. 
+    The fee model. Possible values include: - `Fixed`: The fixed fee model.  - `EVM_EIP_1559`: The EIP-1559 fee model. - `EVM_Legacy`: The legacy fee model. - `UTXO`: The fee model used in UTXO-based blockchains, such as Bitcoin.  Each fee model requires a different set of properties. Switch between the above tabs for details. 
     """
 
     """

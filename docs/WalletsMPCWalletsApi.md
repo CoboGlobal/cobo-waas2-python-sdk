@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully modified the TSS request. |  -  |
+**201** | Successfully modified the TSS request. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 
 Create vault
 
-This operation creates a vault. 
+This operation creates a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
 ### Example
 
@@ -617,7 +617,7 @@ Name | Type | Description  | Notes
 
 Get vault information
 
-This operation retrieves detailed information about a vault. 
+This operation retrieves detailed information about a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
 ### Example
 
@@ -984,7 +984,7 @@ Name | Type | Description  | Notes
 
 List all vaults
 
-This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`. 
+This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
 ### Example
 
@@ -1295,7 +1295,7 @@ Name | Type | Description  | Notes
 
 Update vault name
 
-This operation updates a vault's name. 
+This operation updates a vault's name.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
 ### Example
 

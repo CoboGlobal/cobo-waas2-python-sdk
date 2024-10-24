@@ -16,8 +16,9 @@ Name | Type | Description | Notes
 **fee_token_id** | **str** | The fee token ID. A fee token is the token with which you pay transaction fees. | [optional] 
 **can_deposit** | **bool** | Whether deposits are enabled for this token. | [optional] 
 **can_withdraw** | **bool** | Whether withdrawals are enabled for this token. | [optional] 
-**dust_threshold** | **str** | The minimum withdrawal amount for Custodial Wallets. If your withdrawal amount is smaller than this threshold, the withdrawal request will receive an error.  Note: [Loop transfers](https://loop.top/) do not have this limitation.  | [optional] 
-**custodial_minimum_deposit_threshold** | **str** | The minimum deposit amount for Custodial Wallets. If the amount you deposit to a Custodial Wallet is smaller than this threshold, the deposit will not show up on Cobo Portal or trigger any webhook events.  Note: [Loop transfers](https://loop.top/) do not have this limitation.  | [optional] 
+**dust_threshold** | **str** | The minimum withdrawal amount for Custodial Wallets. If your withdrawal amount is smaller than this threshold, the withdrawal request will receive an error.  Note: [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfers do not have this limitation.  | [optional] 
+**custodial_minimum_deposit_threshold** | **str** | The minimum deposit amount for Custodial Wallets. If the amount you deposit to a Custodial Wallet is smaller than this threshold, the deposit will not show up on Cobo Portal or trigger any webhook events.  Note: [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop)transfers do not have this limitation.  | [optional] 
+**asset_model_type** | [**TokenAssetModelType**](TokenAssetModelType.md) |  | [optional] 
 **amount** | **float** | Transaction value (Note that this is an absolute value. If you trade 1.5 BTC, then the value is 1.5)  | [optional] 
 **spender** | **str** | Spender address | [optional] 
 

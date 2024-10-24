@@ -29,7 +29,7 @@ class EstimatedFixedFee(BaseModel):
     fee_amount: StrictStr = Field(description="The fee that you need to pay for the transaction.")
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token ID of the transaction fee.")
-    is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction can be executed as a Loop transfer. For more information about Loop, see [Loop's website](https://loop.top/). - `true`: The transaction is a Loop transfer. - `false`: The transaction is not a Loop transfer. ")
+    is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
     __properties: ClassVar[List[str]] = ["fee_amount", "fee_type", "token_id", "is_loop"]
 
     model_config = ConfigDict(

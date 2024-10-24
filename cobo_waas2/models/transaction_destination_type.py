@@ -29,6 +29,7 @@ class TransactionDestinationType(str, Enum):
     EVM_CONTRACT = 'EVM_Contract'
     EVM_EIP_191_SIGNATURE = 'EVM_EIP_191_Signature'
     EVM_EIP_712_SIGNATURE = 'EVM_EIP_712_Signature'
+    RAW_MESSAGE_SIGNATURE = 'Raw_Message_Signature'
     DEPOSITTOADDRESS = 'DepositToAddress'
     DEPOSITTOWALLET = 'DepositToWallet'
 

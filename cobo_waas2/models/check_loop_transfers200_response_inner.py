@@ -26,7 +26,7 @@ class CheckLoopTransfers200ResponseInner(BaseModel):
     CheckLoopTransfers200ResponseInner
     """  # noqa: E501
     address: Optional[StrictStr] = Field(default=None, description="The wallet address.")
-    is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction from the given source to the given destination address can be executed as a Loop transfer.  - `true`: The transaction can be executed as a Loop transfer. - `false`: The transaction cannot be executed as a Loop transfer. ")
+    is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction from the given source to the given destination address can be executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer.  - `true`: The transaction can be executed as a Cobo Loop transfer. - `false`: The transaction cannot be executed as a Cobo Loop transfer. ")
     __properties: ClassVar[List[str]] = ["address", "is_loop"]
 
     model_config = ConfigDict(

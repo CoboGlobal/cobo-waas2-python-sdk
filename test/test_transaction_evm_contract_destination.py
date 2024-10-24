@@ -37,7 +37,21 @@ class TestTransactionEvmContractDestination(unittest.TestCase):
                 destination_type = 'Address',
                 address = '0x0406db8351aa6839169bb363f63c2c808fee8f99',
                 value = '1.5',
-                calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO'
+                calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
+                calldata_info = cobo_waas2.models.transaction_evm_calldata_info.TransactionEvmCalldataInfo(
+                    chain_id = 'ETH', 
+                    address = '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84', 
+                    name = 'AppProxyUpgradeable', 
+                    impl_address = '0x17144556fd3424edc8fc8a4c940b2d04936d17eb', 
+                    impl_name = 'Lido', 
+                    proxy = True, 
+                    method = cobo_waas2.models.transaction_evm_contract_method.TransactionEvmContractMethod(
+                        name = 'transfer', 
+                        sig = 'transfer(address,uint256)', 
+                        type = 'Function', 
+                        payable = True, 
+                        selector = '0xa9059cbb', ), 
+                    params = '[["exactInput", "tuple", [["dstReceiver", "address", "0xbbff75515f6e924441c3d80af4714edf19911111"], ["wrappedToken", "address", "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"], ["router", "uint256", "452312848583266388373324160887510303453432363010492966520592108215996663949"], ["amount", "uint256", "10000000000000000"], ["minReturnAmount", "uint256", "369987456553029"], ["fee", "uint256", "30000000000000"], ["path", "address[]", [["[0]", "address", "0x0000000000000000000000000000000000000000"], ["[1]", "address", "0x1ae21d57afc033a556ef63daa216046321b3d391"]]], ["pool", "address[]", [["[0]", "address", "0x725522665fa5e1fa2912fed453dc0044deda5cfd"]]], ["signature", "bytes", "0x"], ["channel", "string", "android"]]], ["deadline", "uint256", "1729582030"]]', )
             )
         else:
             return TransactionEvmContractDestination(

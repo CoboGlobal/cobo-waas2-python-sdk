@@ -15,21 +15,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.estimate_fee_request_type import EstimateFeeRequestType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class BookkeepingSummary(BaseModel):
+class SafeWalletDelegatesTransfer(BaseModel):
     """
-    The bookkeeping item information.
+    SafeWalletDelegatesTransfer
     """  # noqa: E501
-    total_transaction_count: StrictInt = Field(description="Total transaction count.")
-    total_inflow_value: StrictStr = Field(description="The USD value of the inflow.")
-    total_outflow_value: StrictStr = Field(description="The USD value of the outflow.")
-    total_fee_value: Optional[StrictStr] = Field(default=None, description="The USD value of the fee.")
-    __properties: ClassVar[List[str]] = ["total_transaction_count", "total_inflow_value", "total_outflow_value", "total_fee_value"]
+    request_type: EstimateFeeRequestType
+    token_id: StrictStr = Field(description="The token ID.")
+    amount: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`.")
+    address: Optional[StrictStr] = Field(default=None, description="The address of the recipient.")
+    __properties: ClassVar[List[str]] = ["request_type", "token_id", "amount", "address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +50,7 @@ class BookkeepingSummary(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of BookkeepingSummary from a JSON string"""
+        """Create an instance of SafeWalletDelegatesTransfer from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,7 +75,7 @@ class BookkeepingSummary(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of BookkeepingSummary from a dict"""
+        """Create an instance of SafeWalletDelegatesTransfer from a dict"""
         if obj is None:
             return None
 
@@ -82,10 +83,10 @@ class BookkeepingSummary(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "total_transaction_count": obj.get("total_transaction_count"),
-            "total_inflow_value": obj.get("total_inflow_value"),
-            "total_outflow_value": obj.get("total_outflow_value"),
-            "total_fee_value": obj.get("total_fee_value")
+            "request_type": obj.get("request_type"),
+            "token_id": obj.get("token_id"),
+            "amount": obj.get("amount"),
+            "address": obj.get("address")
         })
         return _obj
 

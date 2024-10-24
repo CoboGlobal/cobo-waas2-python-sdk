@@ -18,15 +18,15 @@ from typing_extensions import Self
 
 class ContractCallSourceType(str, Enum):
     """
-    The type of the source. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type. 
+    The type of the source. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Each source type requires a different set of properties. Switch between the above tabs for details. 
     """
 
     """
     allowed enum values
     """
-    ORG_MINUS_CONTROLLED = 'Org-Controlled'
-    USER_MINUS_CONTROLLED = 'User-Controlled'
-    SAFE_LEFT_CURLY_BRACKET_WALLET_RIGHT_CURLY_BRACKET = 'Safe{Wallet}'
+    ORG_CONTROLLED = 'Org-Controlled'
+    USER_CONTROLLED = 'User-Controlled'
+    SAFE_WALLET = 'Safe{Wallet}'
 
     UNKNOWN = None
 

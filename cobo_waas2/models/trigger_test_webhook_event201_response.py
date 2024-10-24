@@ -15,19 +15,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class WalletBalanceSnapshot(BaseModel):
+class TriggerTestWebhookEvent201Response(BaseModel):
     """
-    The snapshot information.
+    TriggerTestWebhookEvent201Response
     """  # noqa: E501
-    snapshot_id: StrictInt = Field(description="The snapshot ID.")
-    snapshot_name: Optional[StrictStr] = Field(default=None, description="The snapshot name.")
-    __properties: ClassVar[List[str]] = ["snapshot_id", "snapshot_name"]
+    triggered: Optional[StrictBool] = Field(default=None, description="Whether a test webhook event was successfully triggered. - `true`: The test webhook event was successfully triggered. - `false`: The test webhook event could not be triggered. ")
+    __properties: ClassVar[List[str]] = ["triggered"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +46,7 @@ class WalletBalanceSnapshot(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of WalletBalanceSnapshot from a JSON string"""
+        """Create an instance of TriggerTestWebhookEvent201Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,7 +71,7 @@ class WalletBalanceSnapshot(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of WalletBalanceSnapshot from a dict"""
+        """Create an instance of TriggerTestWebhookEvent201Response from a dict"""
         if obj is None:
             return None
 
@@ -80,8 +79,7 @@ class WalletBalanceSnapshot(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "snapshot_id": obj.get("snapshot_id"),
-            "snapshot_name": obj.get("snapshot_name")
+            "triggered": obj.get("triggered")
         })
         return _obj
 

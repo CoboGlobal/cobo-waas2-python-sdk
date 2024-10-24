@@ -20,13 +20,14 @@ from cobo_waas2.models.transaction_deposit_to_wallet_destination import Transact
 from cobo_waas2.models.transaction_evm_contract_destination import TransactionEvmContractDestination
 from cobo_waas2.models.transaction_message_sign_eip191_destination import TransactionMessageSignEIP191Destination
 from cobo_waas2.models.transaction_message_sign_eip712_destination import TransactionMessageSignEIP712Destination
+from cobo_waas2.models.transaction_raw_message_sign_destination import TransactionRawMessageSignDestination
 from cobo_waas2.models.transaction_transfer_to_address_destination import TransactionTransferToAddressDestination
 from cobo_waas2.models.transaction_transfer_to_wallet_destination import TransactionTransferToWalletDestination
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSACTIONDESTINATION_ONE_OF_SCHEMAS = ["TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination"]
+TRANSACTIONDESTINATION_ONE_OF_SCHEMAS = ["TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionRawMessageSignDestination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination"]
 
 class TransactionDestination(BaseModel):
     """
@@ -42,12 +43,14 @@ class TransactionDestination(BaseModel):
     oneof_schema_4_validator: Optional[TransactionMessageSignEIP191Destination] = None
     # data type: TransactionMessageSignEIP712Destination
     oneof_schema_5_validator: Optional[TransactionMessageSignEIP712Destination] = None
+    # data type: TransactionRawMessageSignDestination
+    oneof_schema_6_validator: Optional[TransactionRawMessageSignDestination] = None
     # data type: TransactionDepositToAddressDestination
-    oneof_schema_6_validator: Optional[TransactionDepositToAddressDestination] = None
+    oneof_schema_7_validator: Optional[TransactionDepositToAddressDestination] = None
     # data type: TransactionDepositToWalletDestination
-    oneof_schema_7_validator: Optional[TransactionDepositToWalletDestination] = None
-    actual_instance: Optional[Union[TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination]] = None
-    one_of_schemas: Set[str] = { "TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination" }
+    oneof_schema_8_validator: Optional[TransactionDepositToWalletDestination] = None
+    actual_instance: Optional[Union[TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination]] = None
+    one_of_schemas: Set[str] = { "TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionRawMessageSignDestination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -98,6 +101,11 @@ class TransactionDestination(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionMessageSignEIP712Destination`")
         else:
             match += 1
+        # validate data type: TransactionRawMessageSignDestination
+        if not isinstance(v, TransactionRawMessageSignDestination):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionRawMessageSignDestination`")
+        else:
+            match += 1
         # validate data type: TransactionDepositToAddressDestination
         if not isinstance(v, TransactionDepositToAddressDestination):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionDepositToAddressDestination`")
@@ -110,10 +118,10 @@ class TransactionDestination(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -163,6 +171,11 @@ class TransactionDestination(BaseModel):
             instance.actual_instance = TransactionMessageSignEIP712Destination.from_json(json_str)
             return instance
 
+        # check if data type is `TransactionRawMessageSignDestination`
+        if _data_type == "EVM_Raw_Message_Signature":
+            instance.actual_instance = TransactionRawMessageSignDestination.from_json(json_str)
+            return instance
+
         # check if data type is `TransactionTransferToWalletDestination`
         if _data_type == "ExchangeWallet":
             instance.actual_instance = TransactionTransferToWalletDestination.from_json(json_str)
@@ -191,6 +204,11 @@ class TransactionDestination(BaseModel):
         # check if data type is `TransactionMessageSignEIP712Destination`
         if _data_type == "TransactionMessageSignEIP712Destination":
             instance.actual_instance = TransactionMessageSignEIP712Destination.from_json(json_str)
+            return instance
+
+        # check if data type is `TransactionRawMessageSignDestination`
+        if _data_type == "TransactionRawMessageSignDestination":
+            instance.actual_instance = TransactionRawMessageSignDestination.from_json(json_str)
             return instance
 
         # check if data type is `TransactionTransferToAddressDestination`
@@ -233,6 +251,12 @@ class TransactionDestination(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TransactionRawMessageSignDestination
+        try:
+            instance.actual_instance = TransactionRawMessageSignDestination.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into TransactionDepositToAddressDestination
         try:
             instance.actual_instance = TransactionDepositToAddressDestination.from_json(json_str)
@@ -248,11 +272,11 @@ class TransactionDestination(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -266,7 +290,7 @@ class TransactionDestination(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

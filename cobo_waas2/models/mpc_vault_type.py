@@ -24,8 +24,8 @@ class MPCVaultType(str, Enum):
     """
     allowed enum values
     """
-    ORG_MINUS_CONTROLLED = 'Org-Controlled'
-    USER_MINUS_CONTROLLED = 'User-Controlled'
+    ORG_CONTROLLED = 'Org-Controlled'
+    USER_CONTROLLED = 'User-Controlled'
 
     UNKNOWN = None
 
