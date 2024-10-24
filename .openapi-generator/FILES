@@ -6,6 +6,7 @@
 README.md
 cobo_waas2/__init__.py
 cobo_waas2/api/__init__.py
+cobo_waas2/api/address_books_api.py
 cobo_waas2/api/developers_webhooks_api.py
 cobo_waas2/api/o_auth_api.py
 cobo_waas2/api/stakings_api.py
@@ -13,6 +14,7 @@ cobo_waas2/api/transactions_api.py
 cobo_waas2/api/wallets_api.py
 cobo_waas2/api/wallets_exchange_wallet_api.py
 cobo_waas2/api/wallets_mpc_wallets_api.py
+cobo_waas2/api/wallets_smart_contract_wallets_api.py
 cobo_waas2/api_client.py
 cobo_waas2/api_response.py
 cobo_waas2/configuration.py
@@ -34,6 +36,8 @@ cobo_waas2/models/address_transfer_destination_account_output.py
 cobo_waas2/models/address_transfer_destination_utxo_outputs_inner.py
 cobo_waas2/models/amount_details_inner.py
 cobo_waas2/models/amount_status.py
+cobo_waas2/models/api_log_details.py
+cobo_waas2/models/api_log_summary.py
 cobo_waas2/models/asset_balance.py
 cobo_waas2/models/asset_info.py
 cobo_waas2/models/babylon_stake_extra.py
@@ -43,8 +47,6 @@ cobo_waas2/models/base_contract_call_source.py
 cobo_waas2/models/base_estimate_staking_fee.py
 cobo_waas2/models/base_stake_extra.py
 cobo_waas2/models/base_stake_source.py
-cobo_waas2/models/bookkeeping_record.py
-cobo_waas2/models/bookkeeping_summary.py
 cobo_waas2/models/broadcast_signed_transactions201_response_inner.py
 cobo_waas2/models/broadcast_signed_transactions_request.py
 cobo_waas2/models/chain_info.py
@@ -132,6 +134,7 @@ cobo_waas2/models/key_share_holder_group_status.py
 cobo_waas2/models/key_share_holder_group_type.py
 cobo_waas2/models/key_share_holder_status.py
 cobo_waas2/models/key_share_holder_type.py
+cobo_waas2/models/list_address_books200_response.py
 cobo_waas2/models/list_addresses200_response.py
 cobo_waas2/models/list_asset_balances_for_exchange_wallet200_response.py
 cobo_waas2/models/list_exchanges200_response_inner.py
@@ -178,7 +181,7 @@ cobo_waas2/models/pool_details.py
 cobo_waas2/models/pool_details_all_of_validators_info.py
 cobo_waas2/models/pool_summary.py
 cobo_waas2/models/raw_message_sign_destination.py
-cobo_waas2/models/refresh_token200_response.py
+cobo_waas2/models/refresh_token201_response.py
 cobo_waas2/models/refresh_token_request.py
 cobo_waas2/models/replace_type.py
 cobo_waas2/models/retry_webhook_event_by_id201_response.py
@@ -186,6 +189,9 @@ cobo_waas2/models/root_pubkey.py
 cobo_waas2/models/safe_contract_call_source.py
 cobo_waas2/models/safe_transfer_source.py
 cobo_waas2/models/safe_wallet.py
+cobo_waas2/models/safe_wallet_delegates.py
+cobo_waas2/models/safe_wallet_delegates_contract_call.py
+cobo_waas2/models/safe_wallet_delegates_transfer.py
 cobo_waas2/models/smart_contract_initiator.py
 cobo_waas2/models/smart_contract_wallet_info.py
 cobo_waas2/models/smart_contract_wallet_operation_type.py
@@ -198,6 +204,7 @@ cobo_waas2/models/stakings.py
 cobo_waas2/models/stakings_extra.py
 cobo_waas2/models/stakings_validator_info.py
 cobo_waas2/models/sub_wallet_asset_balance.py
+cobo_waas2/models/token_asset_model_type.py
 cobo_waas2/models/token_balance.py
 cobo_waas2/models/token_balance_balance.py
 cobo_waas2/models/token_info.py
@@ -214,7 +221,9 @@ cobo_waas2/models/transaction_destination.py
 cobo_waas2/models/transaction_destination_type.py
 cobo_waas2/models/transaction_detail.py
 cobo_waas2/models/transaction_details.py
+cobo_waas2/models/transaction_evm_calldata_info.py
 cobo_waas2/models/transaction_evm_contract_destination.py
+cobo_waas2/models/transaction_evm_contract_method.py
 cobo_waas2/models/transaction_evm_eip1559_fee.py
 cobo_waas2/models/transaction_evm_legacy_fee.py
 cobo_waas2/models/transaction_exchange_wallet_source.py
@@ -225,6 +234,7 @@ cobo_waas2/models/transaction_initiator_type.py
 cobo_waas2/models/transaction_message_sign_eip191_destination.py
 cobo_waas2/models/transaction_message_sign_eip712_destination.py
 cobo_waas2/models/transaction_mpc_wallet_source.py
+cobo_waas2/models/transaction_raw_message_sign_destination.py
 cobo_waas2/models/transaction_raw_tx_info.py
 cobo_waas2/models/transaction_rbf.py
 cobo_waas2/models/transaction_rbf_source.py
@@ -259,6 +269,8 @@ cobo_waas2/models/transfer_destination.py
 cobo_waas2/models/transfer_destination_type.py
 cobo_waas2/models/transfer_params.py
 cobo_waas2/models/transfer_source.py
+cobo_waas2/models/trigger_test_webhook_event201_response.py
+cobo_waas2/models/trigger_test_webhook_event_request.py
 cobo_waas2/models/tss_groups.py
 cobo_waas2/models/tss_request.py
 cobo_waas2/models/tss_request_status.py
@@ -277,8 +289,6 @@ cobo_waas2/models/update_webhook_endpoint_by_id_request.py
 cobo_waas2/models/utxo.py
 cobo_waas2/models/utxo_fee_base_price.py
 cobo_waas2/models/utxo_fee_rate.py
-cobo_waas2/models/wallet_balance_snapshot.py
-cobo_waas2/models/wallet_balance_snapshot_record.py
 cobo_waas2/models/wallet_info.py
 cobo_waas2/models/wallet_subtype.py
 cobo_waas2/models/wallet_type.py
@@ -300,6 +310,7 @@ docs/ActivityStatus.md
 docs/ActivityTimeline.md
 docs/ActivityType.md
 docs/AddressBook.md
+docs/AddressBooksApi.md
 docs/AddressEncoding.md
 docs/AddressInfo.md
 docs/AddressTransferDestination.md
@@ -307,6 +318,8 @@ docs/AddressTransferDestinationAccountOutput.md
 docs/AddressTransferDestinationUtxoOutputsInner.md
 docs/AmountDetailsInner.md
 docs/AmountStatus.md
+docs/ApiLogDetails.md
+docs/ApiLogSummary.md
 docs/AssetBalance.md
 docs/AssetInfo.md
 docs/BabylonStakeExtra.md
@@ -316,8 +329,6 @@ docs/BaseContractCallSource.md
 docs/BaseEstimateStakingFee.md
 docs/BaseStakeExtra.md
 docs/BaseStakeSource.md
-docs/BookkeepingRecord.md
-docs/BookkeepingSummary.md
 docs/BroadcastSignedTransactions201ResponseInner.md
 docs/BroadcastSignedTransactionsRequest.md
 docs/ChainInfo.md
@@ -406,6 +417,7 @@ docs/KeyShareHolderGroupStatus.md
 docs/KeyShareHolderGroupType.md
 docs/KeyShareHolderStatus.md
 docs/KeyShareHolderType.md
+docs/ListAddressBooks200Response.md
 docs/ListAddresses200Response.md
 docs/ListAssetBalancesForExchangeWallet200Response.md
 docs/ListExchanges200ResponseInner.md
@@ -453,7 +465,7 @@ docs/PoolDetails.md
 docs/PoolDetailsAllOfValidatorsInfo.md
 docs/PoolSummary.md
 docs/RawMessageSignDestination.md
-docs/RefreshToken200Response.md
+docs/RefreshToken201Response.md
 docs/RefreshTokenRequest.md
 docs/ReplaceType.md
 docs/RetryWebhookEventById201Response.md
@@ -461,6 +473,9 @@ docs/RootPubkey.md
 docs/SafeContractCallSource.md
 docs/SafeTransferSource.md
 docs/SafeWallet.md
+docs/SafeWalletDelegates.md
+docs/SafeWalletDelegatesContractCall.md
+docs/SafeWalletDelegatesTransfer.md
 docs/SmartContractInitiator.md
 docs/SmartContractWalletInfo.md
 docs/SmartContractWalletOperationType.md
@@ -479,6 +494,7 @@ docs/TSSRequest.md
 docs/TSSRequestStatus.md
 docs/TSSRequestType.md
 docs/TSSRequestWebhookEventData.md
+docs/TokenAssetModelType.md
 docs/TokenBalance.md
 docs/TokenBalanceBalance.md
 docs/TokenInfo.md
@@ -495,7 +511,9 @@ docs/TransactionDestination.md
 docs/TransactionDestinationType.md
 docs/TransactionDetail.md
 docs/TransactionDetails.md
+docs/TransactionEvmCalldataInfo.md
 docs/TransactionEvmContractDestination.md
+docs/TransactionEvmContractMethod.md
 docs/TransactionEvmEip1559Fee.md
 docs/TransactionEvmLegacyFee.md
 docs/TransactionExchangeWalletSource.md
@@ -506,6 +524,7 @@ docs/TransactionInitiatorType.md
 docs/TransactionMPCWalletSource.md
 docs/TransactionMessageSignEIP191Destination.md
 docs/TransactionMessageSignEIP712Destination.md
+docs/TransactionRawMessageSignDestination.md
 docs/TransactionRawTxInfo.md
 docs/TransactionRbf.md
 docs/TransactionRbfSource.md
@@ -541,6 +560,8 @@ docs/TransferDestination.md
 docs/TransferDestinationType.md
 docs/TransferParams.md
 docs/TransferSource.md
+docs/TriggerTestWebhookEvent201Response.md
+docs/TriggerTestWebhookEventRequest.md
 docs/UTXO.md
 docs/UpdateCustodialWalletParams.md
 docs/UpdateExchangeWalletParams.md
@@ -554,14 +575,13 @@ docs/UpdateWalletParams.md
 docs/UpdateWebhookEndpointByIdRequest.md
 docs/UtxoFeeBasePrice.md
 docs/UtxoFeeRate.md
-docs/WalletBalanceSnapshot.md
-docs/WalletBalanceSnapshotRecord.md
 docs/WalletInfo.md
 docs/WalletSubtype.md
 docs/WalletType.md
 docs/WalletsApi.md
 docs/WalletsExchangeWalletApi.md
 docs/WalletsMPCWalletsApi.md
+docs/WalletsSmartContractWalletsApi.md
 docs/WebhookEndpoint.md
 docs/WebhookEndpointStatus.md
 docs/WebhookEvent.md
@@ -584,6 +604,7 @@ test/test_activity_status.py
 test/test_activity_timeline.py
 test/test_activity_type.py
 test/test_address_book.py
+test/test_address_books_api.py
 test/test_address_encoding.py
 test/test_address_info.py
 test/test_address_transfer_destination.py
@@ -591,6 +612,8 @@ test/test_address_transfer_destination_account_output.py
 test/test_address_transfer_destination_utxo_outputs_inner.py
 test/test_amount_details_inner.py
 test/test_amount_status.py
+test/test_api_log_details.py
+test/test_api_log_summary.py
 test/test_asset_balance.py
 test/test_asset_info.py
 test/test_babylon_stake_extra.py
@@ -600,8 +623,6 @@ test/test_base_contract_call_source.py
 test/test_base_estimate_staking_fee.py
 test/test_base_stake_extra.py
 test/test_base_stake_source.py
-test/test_bookkeeping_record.py
-test/test_bookkeeping_summary.py
 test/test_broadcast_signed_transactions201_response_inner.py
 test/test_broadcast_signed_transactions_request.py
 test/test_chain_info.py
@@ -690,6 +711,7 @@ test/test_key_share_holder_group_status.py
 test/test_key_share_holder_group_type.py
 test/test_key_share_holder_status.py
 test/test_key_share_holder_type.py
+test/test_list_address_books200_response.py
 test/test_list_addresses200_response.py
 test/test_list_asset_balances_for_exchange_wallet200_response.py
 test/test_list_exchanges200_response_inner.py
@@ -737,7 +759,7 @@ test/test_pool_details.py
 test/test_pool_details_all_of_validators_info.py
 test/test_pool_summary.py
 test/test_raw_message_sign_destination.py
-test/test_refresh_token200_response.py
+test/test_refresh_token201_response.py
 test/test_refresh_token_request.py
 test/test_replace_type.py
 test/test_retry_webhook_event_by_id201_response.py
@@ -745,6 +767,9 @@ test/test_root_pubkey.py
 test/test_safe_contract_call_source.py
 test/test_safe_transfer_source.py
 test/test_safe_wallet.py
+test/test_safe_wallet_delegates.py
+test/test_safe_wallet_delegates_contract_call.py
+test/test_safe_wallet_delegates_transfer.py
 test/test_smart_contract_initiator.py
 test/test_smart_contract_wallet_info.py
 test/test_smart_contract_wallet_operation_type.py
@@ -758,6 +783,7 @@ test/test_stakings_api.py
 test/test_stakings_extra.py
 test/test_stakings_validator_info.py
 test/test_sub_wallet_asset_balance.py
+test/test_token_asset_model_type.py
 test/test_token_balance.py
 test/test_token_balance_balance.py
 test/test_token_info.py
@@ -774,7 +800,9 @@ test/test_transaction_destination.py
 test/test_transaction_destination_type.py
 test/test_transaction_detail.py
 test/test_transaction_details.py
+test/test_transaction_evm_calldata_info.py
 test/test_transaction_evm_contract_destination.py
+test/test_transaction_evm_contract_method.py
 test/test_transaction_evm_eip1559_fee.py
 test/test_transaction_evm_legacy_fee.py
 test/test_transaction_exchange_wallet_source.py
@@ -785,6 +813,7 @@ test/test_transaction_initiator_type.py
 test/test_transaction_message_sign_eip191_destination.py
 test/test_transaction_message_sign_eip712_destination.py
 test/test_transaction_mpc_wallet_source.py
+test/test_transaction_raw_message_sign_destination.py
 test/test_transaction_raw_tx_info.py
 test/test_transaction_rbf.py
 test/test_transaction_rbf_source.py
@@ -820,6 +849,8 @@ test/test_transfer_destination.py
 test/test_transfer_destination_type.py
 test/test_transfer_params.py
 test/test_transfer_source.py
+test/test_trigger_test_webhook_event201_response.py
+test/test_trigger_test_webhook_event_request.py
 test/test_tss_groups.py
 test/test_tss_request.py
 test/test_tss_request_status.py
@@ -838,14 +869,13 @@ test/test_update_webhook_endpoint_by_id_request.py
 test/test_utxo.py
 test/test_utxo_fee_base_price.py
 test/test_utxo_fee_rate.py
-test/test_wallet_balance_snapshot.py
-test/test_wallet_balance_snapshot_record.py
 test/test_wallet_info.py
 test/test_wallet_subtype.py
 test/test_wallet_type.py
 test/test_wallets_api.py
 test/test_wallets_exchange_wallet_api.py
 test/test_wallets_mpc_wallets_api.py
+test/test_wallets_smart_contract_wallets_api.py
 test/test_webhook_endpoint.py
 test/test_webhook_endpoint_status.py
 test/test_webhook_event.py

@@ -449,7 +449,7 @@ class WalletsExchangeWalletApi:
     @validate_call
     def list_supported_assets_for_exchange(
         self,
-        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget ")],
+        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex ")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify `before` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`, the request will retrieve a list of data objects that end before the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`. You can set this parameter to the value of `pagination.before` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned.  - If you set `before` to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify `after` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`, the request will retrieve a list of data objects that start after the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`. You can set this parameter to the value of `pagination.after` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -466,7 +466,7 @@ class WalletsExchangeWalletApi:
 
         This operation retrieves all the assets supported by a specified exchange.
 
-        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget  (required)
+        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex  (required)
         :type exchange_id: ExchangeId
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -507,7 +507,7 @@ class WalletsExchangeWalletApi:
     @validate_call
     def list_supported_assets_for_exchange_with_http_info(
         self,
-        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget ")],
+        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex ")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify `before` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`, the request will retrieve a list of data objects that end before the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`. You can set this parameter to the value of `pagination.before` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned.  - If you set `before` to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify `after` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`, the request will retrieve a list of data objects that start after the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`. You can set this parameter to the value of `pagination.after` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -524,7 +524,7 @@ class WalletsExchangeWalletApi:
 
         This operation retrieves all the assets supported by a specified exchange.
 
-        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget  (required)
+        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex  (required)
         :type exchange_id: ExchangeId
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -565,7 +565,7 @@ class WalletsExchangeWalletApi:
     @validate_call
     def list_supported_assets_for_exchange_without_preload_content(
         self,
-        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget ")],
+        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex ")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify `before` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`, the request will retrieve a list of data objects that end before the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`. You can set this parameter to the value of `pagination.before` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned.  - If you set `before` to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify `after` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`, the request will retrieve a list of data objects that start after the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`. You can set this parameter to the value of `pagination.after` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -582,7 +582,7 @@ class WalletsExchangeWalletApi:
 
         This operation retrieves all the assets supported by a specified exchange.
 
-        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget  (required)
+        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex  (required)
         :type exchange_id: ExchangeId
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -669,7 +669,7 @@ class WalletsExchangeWalletApi:
     @validate_call
     def list_supported_chains_for_exchange(
         self,
-        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget ")],
+        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex ")],
         asset_id: Annotated[StrictStr, Field(description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. You can get the ID of the assets supported by an exchanges by calling [List supported assets](/v2/api-references/wallets--exchange-wallet/list-supported-assets).")],
         _request_timeout: Union[
             None,
@@ -684,7 +684,7 @@ class WalletsExchangeWalletApi:
 
         This operation retrieves all the chains supported by a specified exchange for a given asset.   You can use this operation to confirm whether you can transfer an asset from or to your Exchange Wallet when using a specific chain. 
 
-        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget  (required)
+        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex  (required)
         :type exchange_id: ExchangeId
         :param asset_id: (This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. You can get the ID of the assets supported by an exchanges by calling [List supported assets](/v2/api-references/wallets--exchange-wallet/list-supported-assets). (required)
         :type asset_id: str
@@ -719,7 +719,7 @@ class WalletsExchangeWalletApi:
     @validate_call
     def list_supported_chains_for_exchange_with_http_info(
         self,
-        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget ")],
+        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex ")],
         asset_id: Annotated[StrictStr, Field(description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. You can get the ID of the assets supported by an exchanges by calling [List supported assets](/v2/api-references/wallets--exchange-wallet/list-supported-assets).")],
         _request_timeout: Union[
             None,
@@ -734,7 +734,7 @@ class WalletsExchangeWalletApi:
 
         This operation retrieves all the chains supported by a specified exchange for a given asset.   You can use this operation to confirm whether you can transfer an asset from or to your Exchange Wallet when using a specific chain. 
 
-        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget  (required)
+        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex  (required)
         :type exchange_id: ExchangeId
         :param asset_id: (This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. You can get the ID of the assets supported by an exchanges by calling [List supported assets](/v2/api-references/wallets--exchange-wallet/list-supported-assets). (required)
         :type asset_id: str
@@ -769,7 +769,7 @@ class WalletsExchangeWalletApi:
     @validate_call
     def list_supported_chains_for_exchange_without_preload_content(
         self,
-        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget ")],
+        exchange_id: Annotated[ExchangeId, Field(description="The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex ")],
         asset_id: Annotated[StrictStr, Field(description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. You can get the ID of the assets supported by an exchanges by calling [List supported assets](/v2/api-references/wallets--exchange-wallet/list-supported-assets).")],
         _request_timeout: Union[
             None,
@@ -784,7 +784,7 @@ class WalletsExchangeWalletApi:
 
         This operation retrieves all the chains supported by a specified exchange for a given asset.   You can use this operation to confirm whether you can transfer an asset from or to your Exchange Wallet when using a specific chain. 
 
-        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget  (required)
+        :param exchange_id: The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex  (required)
         :type exchange_id: ExchangeId
         :param asset_id: (This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. You can get the ID of the assets supported by an exchanges by calling [List supported assets](/v2/api-references/wallets--exchange-wallet/list-supported-assets). (required)
         :type asset_id: str

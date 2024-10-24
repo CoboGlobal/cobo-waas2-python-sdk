@@ -27,8 +27,8 @@ class MPCDelegate(BaseModel):
     The information about the MPC Wallet as the Delegate.
     """  # noqa: E501
     delegate_type: CoboSafeDelegateType
-    wallet_id: StrictStr = Field(description="The wallet ID of the Delegate. This is required when initiating a transfer from Smart Contract Wallets (Safe{Wallet}).")
-    address: StrictStr = Field(description="The wallet address of the Delegate. This is required when initiating a transfer from Smart Contract Wallets (Safe{Wallet}).")
+    wallet_id: StrictStr = Field(description="The wallet ID of the Delegate. This is required when initiating a transfer or contract call from Smart Contract Wallets (Safe{Wallet}).")
+    address: StrictStr = Field(description="The wallet address of the Delegate. This is required when initiating a transfer or contract call from Smart Contract Wallets (Safe{Wallet}).")
     __properties: ClassVar[List[str]] = ["delegate_type", "wallet_id", "address"]
 
     model_config = ConfigDict(

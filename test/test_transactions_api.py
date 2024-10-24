@@ -57,7 +57,7 @@ class TestTransactionsApi(unittest.TestCase):
         """
         Test case for check_loop_transfers
 
-        Check Loop transfers
+        Check Cobo Loop transfers
         """
         """
         token_id = 'ETH_USDT'

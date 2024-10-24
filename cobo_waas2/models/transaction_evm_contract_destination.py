@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
+from cobo_waas2.models.transaction_evm_calldata_info import TransactionEvmCalldataInfo
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,8 @@ class TransactionEvmContractDestination(BaseModel):
     address: StrictStr = Field(description="The destination address.")
     value: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
     calldata: StrictStr = Field(description="The data that is used to invoke a specific function or method within the specified contract at the destination address. ")
-    __properties: ClassVar[List[str]] = ["destination_type", "address", "value", "calldata"]
+    calldata_info: Optional[TransactionEvmCalldataInfo] = None
+    __properties: ClassVar[List[str]] = ["destination_type", "address", "value", "calldata", "calldata_info"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +73,9 @@ class TransactionEvmContractDestination(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of calldata_info
+        if self.calldata_info:
+            _dict['calldata_info'] = self.calldata_info.to_dict()
         return _dict
 
     @classmethod
@@ -86,7 +91,8 @@ class TransactionEvmContractDestination(BaseModel):
             "destination_type": obj.get("destination_type"),
             "address": obj.get("address"),
             "value": obj.get("value"),
-            "calldata": obj.get("calldata")
+            "calldata": obj.get("calldata"),
+            "calldata_info": TransactionEvmCalldataInfo.from_dict(obj["calldata_info"]) if obj.get("calldata_info") is not None else None
         })
         return _obj
 

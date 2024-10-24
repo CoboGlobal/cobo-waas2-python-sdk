@@ -15,7 +15,7 @@ from typing import Dict, Tuple, Union, List, Optional
 from pydantic import Field, StrictStr
 from typing_extensions import Annotated
 from cobo_waas2.models.get_token200_response import GetToken200Response
-from cobo_waas2.models.refresh_token200_response import RefreshToken200Response
+from cobo_waas2.models.refresh_token201_response import RefreshToken201Response
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
@@ -52,7 +52,7 @@ class OAuthApi:
     ) -> GetToken200Response:
         """Get Org Access Token
 
-        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new Org Access Token and a new Refresh Token.  
+        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-org-access-token) to get a new Org Access Token and a new Refresh Token.  
 
         :param client_id: The client ID, a unique identifier to distinguish Cobo Portal Apps. You can get the client ID by retrieving the manifest file after publishing the app. (required)
         :type client_id: str
@@ -106,7 +106,7 @@ class OAuthApi:
     ) -> ApiResponse[GetToken200Response]:
         """Get Org Access Token
 
-        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new Org Access Token and a new Refresh Token.  
+        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-org-access-token) to get a new Org Access Token and a new Refresh Token.  
 
         :param client_id: The client ID, a unique identifier to distinguish Cobo Portal Apps. You can get the client ID by retrieving the manifest file after publishing the app. (required)
         :type client_id: str
@@ -160,7 +160,7 @@ class OAuthApi:
     ) -> RESTResponseType:
         """Get Org Access Token
 
-        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new Org Access Token and a new Refresh Token.  
+        <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-org-access-token) to get a new Org Access Token and a new Refresh Token.  
 
         :param client_id: The client ID, a unique identifier to distinguish Cobo Portal Apps. You can get the client ID by retrieving the manifest file after publishing the app. (required)
         :type client_id: str
@@ -252,7 +252,7 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> RefreshToken200Response:
+    ) -> RefreshToken201Response:
         """Refresh Org Access Token
 
         <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to obtain a new Org Access Token with a specified client ID, grant type and a Refresh Token.   For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Org Access Token and a new Refresh Token.  
@@ -272,7 +272,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RefreshToken200Response",
+            '201': "RefreshToken201Response",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -298,7 +298,7 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[RefreshToken200Response]:
+    ) -> ApiResponse[RefreshToken201Response]:
         """Refresh Org Access Token
 
         <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to obtain a new Org Access Token with a specified client ID, grant type and a Refresh Token.   For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Org Access Token and a new Refresh Token.  
@@ -318,7 +318,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RefreshToken200Response",
+            '201': "RefreshToken201Response",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -364,7 +364,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RefreshToken200Response",
+            '201': "RefreshToken201Response",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }

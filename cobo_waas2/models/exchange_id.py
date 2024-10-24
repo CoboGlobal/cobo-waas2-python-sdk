@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class ExchangeId(str, Enum):
     """
-    The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget 
+    The ID of the exchange. Possible values include:   - `binance`: Binance.   - `okx`: OKX.   - `deribit`: Deribit.   - `bybit`: Bybit.   - `gate`: Gate.io   - `bitget`: Bitget   - `bitmart`: BitMart   - `bitfinex`: Bitfinex 
     """
 
     """
@@ -30,6 +30,8 @@ class ExchangeId(str, Enum):
     BYBIT = 'bybit'
     GATE = 'gate'
     BITGET = 'bitget'
+    BITMART = 'bitmart'
+    BITFINEX = 'bitfinex'
 
     UNKNOWN = None
 

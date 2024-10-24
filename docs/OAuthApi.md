@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Get Org Access Token
 
-<Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-access-token) to get a new Org Access Token and a new Refresh Token.  
+<Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-org-access-token) to get a new Org Access Token and a new Refresh Token.  
 
 ### Example
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **refresh_token**
-> RefreshToken200Response refresh_token(refresh_token_request)
+> RefreshToken201Response refresh_token(refresh_token_request)
 
 Refresh Org Access Token
 
@@ -96,7 +96,7 @@ Refresh Org Access Token
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.refresh_token200_response import RefreshToken200Response
+from cobo_waas2.models.refresh_token201_response import RefreshToken201Response
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RefreshToken200Response**](RefreshToken200Response.md)
+[**RefreshToken201Response**](RefreshToken201Response.md)
 
 ### Authorization
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
+**201** | The request was successful. |  -  |
 **4XX** | Unauthorized. Please provide valid credentials. |  -  |
 **5XX** | Internal server error. |  -  |
 

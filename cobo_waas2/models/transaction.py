@@ -61,7 +61,7 @@ class Transaction(BaseModel):
     replacement: Optional[TransactionReplacement] = None
     category: Optional[List[StrictStr]] = Field(default=None, description="A custom transaction category for you to identify your transfers more easily.")
     description: Optional[StrictStr] = Field(default=None, description="The description for your transaction.")
-    is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction is a Loop transfer. For more information about Loop, see [Loop's website](https://loop.top/).  - `true`: The transaction is a Loop transfer. - `false`: The transaction is not a Loop transfer. ")
+    is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "created_timestamp", "updated_timestamp"]

@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.cobo_safe_delegate import CoboSafeDelegate
 from cobo_waas2.models.transaction_source_type import TransactionSourceType
 from typing import Optional, Set
@@ -30,7 +30,7 @@ class TransactionSmartContractSafeWalletSource(BaseModel):
     source_type: TransactionSourceType
     wallet_id: StrictStr = Field(description="The wallet ID.")
     address: StrictStr = Field(description="The wallet address.")
-    delegate: CoboSafeDelegate
+    delegate: Optional[CoboSafeDelegate] = None
     __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "delegate"]
 
     model_config = ConfigDict(

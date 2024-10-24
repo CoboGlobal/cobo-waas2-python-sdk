@@ -21,6 +21,8 @@ from cobo_waas2.models.list_webhook_event_definitions200_response_inner import L
 from cobo_waas2.models.list_webhook_event_logs200_response import ListWebhookEventLogs200Response
 from cobo_waas2.models.list_webhook_events200_response import ListWebhookEvents200Response
 from cobo_waas2.models.retry_webhook_event_by_id201_response import RetryWebhookEventById201Response
+from cobo_waas2.models.trigger_test_webhook_event201_response import TriggerTestWebhookEvent201Response
+from cobo_waas2.models.trigger_test_webhook_event_request import TriggerTestWebhookEventRequest
 from cobo_waas2.models.update_webhook_endpoint_by_id_request import UpdateWebhookEndpointByIdRequest
 from cobo_waas2.models.webhook_endpoint import WebhookEndpoint
 from cobo_waas2.models.webhook_endpoint_status import WebhookEndpointStatus
@@ -1625,6 +1627,175 @@ class DevelopersWebhooksApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/webhooks/endpoints/{endpoint_id}/events/{event_id}/retry',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def trigger_test_webhook_event(
+        self,
+        trigger_test_webhook_event_request: Annotated[Optional[TriggerTestWebhookEventRequest], Field(description="The request body used to trigger a test webhook event. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TriggerTestWebhookEvent201Response:
+        """Trigger test event
+
+        This operation tests the functionality of your webhook endpoint by triggering a test webhook event.   You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload. 
+
+        :param trigger_test_webhook_event_request: The request body used to trigger a test webhook event. 
+        :type trigger_test_webhook_event_request: TriggerTestWebhookEventRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._trigger_test_webhook_event_serialize(
+            trigger_test_webhook_event_request=trigger_test_webhook_event_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TriggerTestWebhookEvent201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def trigger_test_webhook_event_with_http_info(
+        self,
+        trigger_test_webhook_event_request: Annotated[Optional[TriggerTestWebhookEventRequest], Field(description="The request body used to trigger a test webhook event. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TriggerTestWebhookEvent201Response]:
+        """Trigger test event
+
+        This operation tests the functionality of your webhook endpoint by triggering a test webhook event.   You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload. 
+
+        :param trigger_test_webhook_event_request: The request body used to trigger a test webhook event. 
+        :type trigger_test_webhook_event_request: TriggerTestWebhookEventRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._trigger_test_webhook_event_serialize(
+            trigger_test_webhook_event_request=trigger_test_webhook_event_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TriggerTestWebhookEvent201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def trigger_test_webhook_event_without_preload_content(
+        self,
+        trigger_test_webhook_event_request: Annotated[Optional[TriggerTestWebhookEventRequest], Field(description="The request body used to trigger a test webhook event. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Trigger test event
+
+        This operation tests the functionality of your webhook endpoint by triggering a test webhook event.   You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload. 
+
+        :param trigger_test_webhook_event_request: The request body used to trigger a test webhook event. 
+        :type trigger_test_webhook_event_request: TriggerTestWebhookEventRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._trigger_test_webhook_event_serialize(
+            trigger_test_webhook_event_request=trigger_test_webhook_event_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TriggerTestWebhookEvent201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _trigger_test_webhook_event_serialize(
+        self,
+        trigger_test_webhook_event_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if trigger_test_webhook_event_request is not None:
+            _body_params = trigger_test_webhook_event_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/webhooks/events/trigger',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

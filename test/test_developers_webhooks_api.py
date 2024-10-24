@@ -139,6 +139,18 @@ class TestDevelopersWebhooksApi(unittest.TestCase):
         api_response = self.api.retry_webhook_event_by_id(event_id, endpoint_id)
         """
 
+    def test_trigger_test_webhook_event(self) -> None:
+        """
+        Test case for trigger_test_webhook_event
+
+        Trigger test event
+        """
+        """
+        trigger_test_webhook_event_request = cobo_waas2.TriggerTestWebhookEventRequest()
+
+        api_response = self.api.trigger_test_webhook_event(trigger_test_webhook_event_request=trigger_test_webhook_event_request)
+        """
+
     def test_update_webhook_endpoint_by_id(self) -> None:
         """
         Test case for update_webhook_endpoint_by_id

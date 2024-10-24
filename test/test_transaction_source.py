@@ -62,7 +62,6 @@ class TestTransactionSource(unittest.TestCase):
                 source_type = 'DepositFromAddress',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 address = '0x1234567890123456789012345678901234567890',
-                delegate = None,
                 exchange_id = 'binance',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',

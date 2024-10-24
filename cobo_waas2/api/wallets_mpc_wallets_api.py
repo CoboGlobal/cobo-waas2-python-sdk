@@ -88,7 +88,7 @@ class WalletsMPCWalletsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TSSRequest",
+            '201': "TSSRequest",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -138,7 +138,7 @@ class WalletsMPCWalletsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TSSRequest",
+            '201': "TSSRequest",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -188,7 +188,7 @@ class WalletsMPCWalletsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TSSRequest",
+            '201': "TSSRequest",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -604,7 +604,7 @@ class WalletsMPCWalletsApi:
     ) -> MPCVault:
         """Create vault
 
-        This operation creates a vault. 
+        This operation creates a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param create_mpc_vault_request: The request body to create a vault.
         :type create_mpc_vault_request: CreateMpcVaultRequest
@@ -650,7 +650,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[MPCVault]:
         """Create vault
 
-        This operation creates a vault. 
+        This operation creates a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param create_mpc_vault_request: The request body to create a vault.
         :type create_mpc_vault_request: CreateMpcVaultRequest
@@ -696,7 +696,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """Create vault
 
-        This operation creates a vault. 
+        This operation creates a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param create_mpc_vault_request: The request body to create a vault.
         :type create_mpc_vault_request: CreateMpcVaultRequest
@@ -1494,7 +1494,7 @@ class WalletsMPCWalletsApi:
     ) -> MPCVault:
         """Get vault information
 
-        This operation retrieves detailed information about a vault. 
+        This operation retrieves detailed information about a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
         :type vault_id: str
@@ -1540,7 +1540,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[MPCVault]:
         """Get vault information
 
-        This operation retrieves detailed information about a vault. 
+        This operation retrieves detailed information about a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
         :type vault_id: str
@@ -1586,7 +1586,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """Get vault information
 
-        This operation retrieves detailed information about a vault. 
+        This operation retrieves detailed information about a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
         :type vault_id: str
@@ -2447,7 +2447,7 @@ class WalletsMPCWalletsApi:
     ) -> ListMpcVaults200Response:
         """List all vaults
 
-        This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`. 
+        This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_type: The vault type. Possible values include: - `Org-Controlled`: This vault is a collection of [Organization-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction#organization-controlled-wallets).  - `User-Controlled`: This vault is a collection of [User-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction#user-controlled-wallets).  (required)
         :type vault_type: MPCVaultType
@@ -2509,7 +2509,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[ListMpcVaults200Response]:
         """List all vaults
 
-        This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`. 
+        This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_type: The vault type. Possible values include: - `Org-Controlled`: This vault is a collection of [Organization-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction#organization-controlled-wallets).  - `User-Controlled`: This vault is a collection of [User-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction#user-controlled-wallets).  (required)
         :type vault_type: MPCVaultType
@@ -2571,7 +2571,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """List all vaults
 
-        This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`. 
+        This operation retrieves a list of all vaults. You can filter the result by project ID.  **Notes for query parameters**: 1. `project_id` is required when `vault_type` is set to `User-Controlled`. 2. `project_id` must be left blank when `vault_type` is set to `Org-Controlled`.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_type: The vault type. Possible values include: - `Org-Controlled`: This vault is a collection of [Organization-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction#organization-controlled-wallets).  - `User-Controlled`: This vault is a collection of [User-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction#user-controlled-wallets).  (required)
         :type vault_type: MPCVaultType
@@ -3303,7 +3303,7 @@ class WalletsMPCWalletsApi:
     ) -> MPCVault:
         """Update vault name
 
-        This operation updates a vault's name. 
+        This operation updates a vault's name.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
         :type vault_id: str
@@ -3353,7 +3353,7 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[MPCVault]:
         """Update vault name
 
-        This operation updates a vault's name. 
+        This operation updates a vault's name.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
         :type vault_id: str
@@ -3403,7 +3403,7 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """Update vault name
 
-        This operation updates a vault's name. 
+        This operation updates a vault's name.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
         :type vault_id: str

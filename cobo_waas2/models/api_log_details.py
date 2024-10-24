@@ -16,21 +16,26 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class RefreshToken200Response(BaseModel):
+class ApiLogDetails(BaseModel):
     """
-    RefreshToken200Response
+    The information about an API log.
     """  # noqa: E501
-    access_token: Optional[StrictStr] = Field(default=None, description="The new Org Access Token.")
-    token_type: Optional[StrictStr] = Field(default=None, description="The type of the tokens, which is Bearer.")
-    scope: Optional[StrictStr] = Field(default=None, description="The scope of the Org Access Token to limit the app's access to the organization's resources. **Note**: Currently this property value is empty. The scope of the Org Access Token is based on the permissions granted when the app user installs the app. ")
-    expires_in: Optional[StrictInt] = Field(default=None, description="The time in seconds in which the new Org Access Token expires.")
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The Refresh Token, used to obtain another Org Access Token when the new Org Access Token expires. The expiration time for Refresh Tokens is currently set to 30 days and is subject to change.")
-    __properties: ClassVar[List[str]] = ["access_token", "token_type", "scope", "expires_in", "refresh_token"]
+    log_id: StrictStr = Field(description="A unique identifier for the API log, used for tracking.")
+    api_method: StrictStr = Field(description="The HTTP method used for the API request.")
+    api_endpoint: StrictStr = Field(description="The endpoint of the API request.")
+    status_code: StrictInt = Field(description="The HTTP status code returned by the API request.")
+    ip_address: StrictStr = Field(description="The client's IP address that made the API request.")
+    request_timestamp: StrictInt = Field(description="The time when the API request was created, in Unix timestamp format, measured in milliseconds.")
+    api_key: StrictStr = Field(description="The API key used to call the API. For more details, refer to [API key](/v2/guides/overview/cobo-auth#api-key).")
+    response_body: StrictStr = Field(description="The response body of the API request.")
+    var_query_params: StrictStr = Field(description="The query parameters of the API request.", alias="query_params")
+    request_body: StrictStr = Field(description="The request body of the API request.")
+    __properties: ClassVar[List[str]] = ["log_id", "api_method", "api_endpoint", "status_code", "ip_address", "request_timestamp", "api_key", "response_body", "query_params", "request_body"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +55,7 @@ class RefreshToken200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RefreshToken200Response from a JSON string"""
+        """Create an instance of ApiLogDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +80,7 @@ class RefreshToken200Response(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RefreshToken200Response from a dict"""
+        """Create an instance of ApiLogDetails from a dict"""
         if obj is None:
             return None
 
@@ -83,11 +88,16 @@ class RefreshToken200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "access_token": obj.get("access_token"),
-            "token_type": obj.get("token_type"),
-            "scope": obj.get("scope"),
-            "expires_in": obj.get("expires_in"),
-            "refresh_token": obj.get("refresh_token")
+            "log_id": obj.get("log_id"),
+            "api_method": obj.get("api_method"),
+            "api_endpoint": obj.get("api_endpoint"),
+            "status_code": obj.get("status_code"),
+            "ip_address": obj.get("ip_address"),
+            "request_timestamp": obj.get("request_timestamp"),
+            "api_key": obj.get("api_key"),
+            "response_body": obj.get("response_body"),
+            "query_params": obj.get("query_params"),
+            "request_body": obj.get("request_body")
         })
         return _obj
 

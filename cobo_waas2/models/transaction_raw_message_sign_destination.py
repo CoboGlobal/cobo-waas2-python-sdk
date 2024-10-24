@@ -17,21 +17,18 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.wallet_type import WalletType
+from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class WalletBalanceSnapshotRecord(BaseModel):
+class TransactionRawMessageSignDestination(BaseModel):
     """
-    The token snapshot detail information.
+    The information about the destination `Raw_Message_Signature`. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Switch between the tabs to display the properties for different transaction destinations. 
     """  # noqa: E501
-    wallet_id: StrictStr = Field(description="The wallet ID.")
-    wallet_type: Optional[WalletType] = None
-    wallet_name: Optional[StrictStr] = Field(default=None, description="The wallet name.")
-    token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens).")
-    balance: StrictStr = Field(description="The balance of the token.")
-    __properties: ClassVar[List[str]] = ["wallet_id", "wallet_type", "wallet_name", "token_id", "balance"]
+    destination_type: TransactionDestinationType
+    msg_hash: Optional[StrictStr] = Field(default=None, description="Message hash to be signed, in hexadecimal format.")
+    __properties: ClassVar[List[str]] = ["destination_type", "msg_hash"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +48,7 @@ class WalletBalanceSnapshotRecord(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of WalletBalanceSnapshotRecord from a JSON string"""
+        """Create an instance of TransactionRawMessageSignDestination from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -76,7 +73,7 @@ class WalletBalanceSnapshotRecord(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of WalletBalanceSnapshotRecord from a dict"""
+        """Create an instance of TransactionRawMessageSignDestination from a dict"""
         if obj is None:
             return None
 
@@ -84,11 +81,8 @@ class WalletBalanceSnapshotRecord(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "wallet_id": obj.get("wallet_id"),
-            "wallet_type": obj.get("wallet_type"),
-            "wallet_name": obj.get("wallet_name"),
-            "token_id": obj.get("token_id"),
-            "balance": obj.get("balance")
+            "destination_type": obj.get("destination_type"),
+            "msg_hash": obj.get("msg_hash")
         })
         return _obj
 

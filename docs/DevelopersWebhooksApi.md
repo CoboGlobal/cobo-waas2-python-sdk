@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**list_webhook_event_logs**](DevelopersWebhooksApi.md#list_webhook_event_logs) | **GET** /webhooks/endpoints/{endpoint_id}/events/{event_id}/logs | List webhook event logs
 [**list_webhook_events**](DevelopersWebhooksApi.md#list_webhook_events) | **GET** /webhooks/endpoints/{endpoint_id}/events | List all webhook events
 [**retry_webhook_event_by_id**](DevelopersWebhooksApi.md#retry_webhook_event_by_id) | **POST** /webhooks/endpoints/{endpoint_id}/events/{event_id}/retry | Retry event
+[**trigger_test_webhook_event**](DevelopersWebhooksApi.md#trigger_test_webhook_event) | **POST** /webhooks/events/trigger | Trigger test event
 [**update_webhook_endpoint_by_id**](DevelopersWebhooksApi.md#update_webhook_endpoint_by_id) | **PUT** /webhooks/endpoints/{endpoint_id} | Update webhook endpoint
 
 
@@ -600,6 +601,78 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **trigger_test_webhook_event**
+> TriggerTestWebhookEvent201Response trigger_test_webhook_event(trigger_test_webhook_event_request=trigger_test_webhook_event_request)
+
+Trigger test event
+
+This operation tests the functionality of your webhook endpoint by triggering a test webhook event.   You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.trigger_test_webhook_event201_response import TriggerTestWebhookEvent201Response
+from cobo_waas2.models.trigger_test_webhook_event_request import TriggerTestWebhookEventRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.DevelopersWebhooksApi(api_client)
+    trigger_test_webhook_event_request = cobo_waas2.TriggerTestWebhookEventRequest()
+
+    try:
+        # Trigger test event
+        api_response = api_instance.trigger_test_webhook_event(trigger_test_webhook_event_request=trigger_test_webhook_event_request)
+        print("The response of DevelopersWebhooksApi->trigger_test_webhook_event:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DevelopersWebhooksApi->trigger_test_webhook_event: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trigger_test_webhook_event_request** | [**TriggerTestWebhookEventRequest**](TriggerTestWebhookEventRequest.md)| The request body used to trigger a test webhook event.  | [optional] 
+
+### Return type
+
+[**TriggerTestWebhookEvent201Response**](TriggerTestWebhookEvent201Response.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 

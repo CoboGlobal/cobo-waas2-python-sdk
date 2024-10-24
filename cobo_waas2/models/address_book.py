@@ -24,17 +24,18 @@ from typing_extensions import Self
 
 class AddressBook(BaseModel):
     """
-    The data for address book entry information.
+    The information of an address book entry.
     """  # noqa: E501
-    org_id: StrictStr
-    entry_id: StrictStr
-    address: StrictStr = Field(description="address.")
-    memo: Optional[StrictStr] = Field(default=None, description="memo.")
-    wallet_name: Optional[StrictStr] = Field(default=None, description="wallet name.")
+    org_id: StrictStr = Field(description="The organization ID.")
+    entry_id: StrictStr = Field(description="The entry ID.")
+    address: StrictStr = Field(description="The wallet address.")
+    memo: Optional[StrictStr] = Field(default=None, description="The memo.")
+    wallet_name: Optional[StrictStr] = Field(default=None, description="The wallet name.")
     wallet_type: Optional[WalletType] = None
-    label: StrictStr = Field(description="The label to address.")
-    email: Optional[StrictStr] = Field(default=None, description="email.")
-    __properties: ClassVar[List[str]] = ["org_id", "entry_id", "address", "memo", "wallet_name", "wallet_type", "label", "email"]
+    label: StrictStr = Field(description="The address label.")
+    chain_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of chain IDs.")
+    email: Optional[StrictStr] = Field(default=None, description="The email of the address owner.")
+    __properties: ClassVar[List[str]] = ["org_id", "entry_id", "address", "memo", "wallet_name", "wallet_type", "label", "chain_ids", "email"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,7 @@ class AddressBook(BaseModel):
             "wallet_name": obj.get("wallet_name"),
             "wallet_type": obj.get("wallet_type"),
             "label": obj.get("label"),
+            "chain_ids": obj.get("chain_ids"),
             "email": obj.get("email")
         })
         return _obj

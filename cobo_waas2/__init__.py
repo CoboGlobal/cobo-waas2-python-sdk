@@ -12,9 +12,10 @@
 """  # noqa: E501
 
 
-__version__ = "1.4.0"
+__version__ = "1.5.0"
 
 # import apis into sdk package
+from cobo_waas2.api.address_books_api import AddressBooksApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.o_auth_api import OAuthApi
 from cobo_waas2.api.stakings_api import StakingsApi
@@ -22,6 +23,7 @@ from cobo_waas2.api.transactions_api import TransactionsApi
 from cobo_waas2.api.wallets_api import WalletsApi
 from cobo_waas2.api.wallets_exchange_wallet_api import WalletsExchangeWalletApi
 from cobo_waas2.api.wallets_mpc_wallets_api import WalletsMPCWalletsApi
+from cobo_waas2.api.wallets_smart_contract_wallets_api import WalletsSmartContractWalletsApi
 
 # import ApiClient
 from cobo_waas2.api_response import ApiResponse
@@ -49,6 +51,8 @@ from cobo_waas2.models.address_transfer_destination_account_output import Addres
 from cobo_waas2.models.address_transfer_destination_utxo_outputs_inner import AddressTransferDestinationUtxoOutputsInner
 from cobo_waas2.models.amount_details_inner import AmountDetailsInner
 from cobo_waas2.models.amount_status import AmountStatus
+from cobo_waas2.models.api_log_details import ApiLogDetails
+from cobo_waas2.models.api_log_summary import ApiLogSummary
 from cobo_waas2.models.asset_balance import AssetBalance
 from cobo_waas2.models.asset_info import AssetInfo
 from cobo_waas2.models.babylon_stake_extra import BabylonStakeExtra
@@ -58,8 +62,6 @@ from cobo_waas2.models.base_contract_call_source import BaseContractCallSource
 from cobo_waas2.models.base_estimate_staking_fee import BaseEstimateStakingFee
 from cobo_waas2.models.base_stake_extra import BaseStakeExtra
 from cobo_waas2.models.base_stake_source import BaseStakeSource
-from cobo_waas2.models.bookkeeping_record import BookkeepingRecord
-from cobo_waas2.models.bookkeeping_summary import BookkeepingSummary
 from cobo_waas2.models.broadcast_signed_transactions201_response_inner import BroadcastSignedTransactions201ResponseInner
 from cobo_waas2.models.broadcast_signed_transactions_request import BroadcastSignedTransactionsRequest
 from cobo_waas2.models.chain_info import ChainInfo
@@ -147,6 +149,7 @@ from cobo_waas2.models.key_share_holder_group_status import KeyShareHolderGroupS
 from cobo_waas2.models.key_share_holder_group_type import KeyShareHolderGroupType
 from cobo_waas2.models.key_share_holder_status import KeyShareHolderStatus
 from cobo_waas2.models.key_share_holder_type import KeyShareHolderType
+from cobo_waas2.models.list_address_books200_response import ListAddressBooks200Response
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
 from cobo_waas2.models.list_asset_balances_for_exchange_wallet200_response import ListAssetBalancesForExchangeWallet200Response
 from cobo_waas2.models.list_exchanges200_response_inner import ListExchanges200ResponseInner
@@ -193,7 +196,7 @@ from cobo_waas2.models.pool_details import PoolDetails
 from cobo_waas2.models.pool_details_all_of_validators_info import PoolDetailsAllOfValidatorsInfo
 from cobo_waas2.models.pool_summary import PoolSummary
 from cobo_waas2.models.raw_message_sign_destination import RawMessageSignDestination
-from cobo_waas2.models.refresh_token200_response import RefreshToken200Response
+from cobo_waas2.models.refresh_token201_response import RefreshToken201Response
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 from cobo_waas2.models.replace_type import ReplaceType
 from cobo_waas2.models.retry_webhook_event_by_id201_response import RetryWebhookEventById201Response
@@ -201,6 +204,9 @@ from cobo_waas2.models.root_pubkey import RootPubkey
 from cobo_waas2.models.safe_contract_call_source import SafeContractCallSource
 from cobo_waas2.models.safe_transfer_source import SafeTransferSource
 from cobo_waas2.models.safe_wallet import SafeWallet
+from cobo_waas2.models.safe_wallet_delegates import SafeWalletDelegates
+from cobo_waas2.models.safe_wallet_delegates_contract_call import SafeWalletDelegatesContractCall
+from cobo_waas2.models.safe_wallet_delegates_transfer import SafeWalletDelegatesTransfer
 from cobo_waas2.models.smart_contract_initiator import SmartContractInitiator
 from cobo_waas2.models.smart_contract_wallet_info import SmartContractWalletInfo
 from cobo_waas2.models.smart_contract_wallet_operation_type import SmartContractWalletOperationType
@@ -218,6 +224,7 @@ from cobo_waas2.models.tss_request import TSSRequest
 from cobo_waas2.models.tss_request_status import TSSRequestStatus
 from cobo_waas2.models.tss_request_type import TSSRequestType
 from cobo_waas2.models.tss_request_webhook_event_data import TSSRequestWebhookEventData
+from cobo_waas2.models.token_asset_model_type import TokenAssetModelType
 from cobo_waas2.models.token_balance import TokenBalance
 from cobo_waas2.models.token_balance_balance import TokenBalanceBalance
 from cobo_waas2.models.token_info import TokenInfo
@@ -234,7 +241,9 @@ from cobo_waas2.models.transaction_destination import TransactionDestination
 from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
 from cobo_waas2.models.transaction_detail import TransactionDetail
 from cobo_waas2.models.transaction_details import TransactionDetails
+from cobo_waas2.models.transaction_evm_calldata_info import TransactionEvmCalldataInfo
 from cobo_waas2.models.transaction_evm_contract_destination import TransactionEvmContractDestination
+from cobo_waas2.models.transaction_evm_contract_method import TransactionEvmContractMethod
 from cobo_waas2.models.transaction_evm_eip1559_fee import TransactionEvmEip1559Fee
 from cobo_waas2.models.transaction_evm_legacy_fee import TransactionEvmLegacyFee
 from cobo_waas2.models.transaction_exchange_wallet_source import TransactionExchangeWalletSource
@@ -245,6 +254,7 @@ from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorTyp
 from cobo_waas2.models.transaction_mpc_wallet_source import TransactionMPCWalletSource
 from cobo_waas2.models.transaction_message_sign_eip191_destination import TransactionMessageSignEIP191Destination
 from cobo_waas2.models.transaction_message_sign_eip712_destination import TransactionMessageSignEIP712Destination
+from cobo_waas2.models.transaction_raw_message_sign_destination import TransactionRawMessageSignDestination
 from cobo_waas2.models.transaction_raw_tx_info import TransactionRawTxInfo
 from cobo_waas2.models.transaction_rbf import TransactionRbf
 from cobo_waas2.models.transaction_rbf_source import TransactionRbfSource
@@ -279,6 +289,8 @@ from cobo_waas2.models.transfer_destination import TransferDestination
 from cobo_waas2.models.transfer_destination_type import TransferDestinationType
 from cobo_waas2.models.transfer_params import TransferParams
 from cobo_waas2.models.transfer_source import TransferSource
+from cobo_waas2.models.trigger_test_webhook_event201_response import TriggerTestWebhookEvent201Response
+from cobo_waas2.models.trigger_test_webhook_event_request import TriggerTestWebhookEventRequest
 from cobo_waas2.models.utxo import UTXO
 from cobo_waas2.models.update_custodial_wallet_params import UpdateCustodialWalletParams
 from cobo_waas2.models.update_exchange_wallet_params import UpdateExchangeWalletParams
@@ -292,8 +304,6 @@ from cobo_waas2.models.update_wallet_params import UpdateWalletParams
 from cobo_waas2.models.update_webhook_endpoint_by_id_request import UpdateWebhookEndpointByIdRequest
 from cobo_waas2.models.utxo_fee_base_price import UtxoFeeBasePrice
 from cobo_waas2.models.utxo_fee_rate import UtxoFeeRate
-from cobo_waas2.models.wallet_balance_snapshot import WalletBalanceSnapshot
-from cobo_waas2.models.wallet_balance_snapshot_record import WalletBalanceSnapshotRecord
 from cobo_waas2.models.wallet_info import WalletInfo
 from cobo_waas2.models.wallet_subtype import WalletSubtype
 from cobo_waas2.models.wallet_type import WalletType
