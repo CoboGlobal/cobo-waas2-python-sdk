@@ -38,6 +38,7 @@ class TestCreateUnstakeActivityRequest(unittest.TestCase):
                 staking_id = '0011039d-27fb-49ba-b172-6e0aa80e37ec',
                 amount = '100.00',
                 fee = None,
+                extra = None,
                 app_initiator = 'steve@example.com'
             )
         else:

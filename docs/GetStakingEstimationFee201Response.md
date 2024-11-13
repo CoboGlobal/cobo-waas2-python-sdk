@@ -5,6 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**pool_type** | [**StakingPoolType**](StakingPoolType.md) |  | [optional] 
+**fee** | [**EstimatedFee**](EstimatedFee.md) |  | [optional] 
+**validator_pubkeys** | **List[str]** | A list of public keys associated with the Ethereum validators for this staking operation. | [optional] 
 **fee_type** | [**FeeType**](FeeType.md) |  | [optional] 
 **fee_amount** | **str** | The amount of the estimated fee. | [optional] 
 **token_id** | **str** | The token ID of the staking fee. | [optional] 

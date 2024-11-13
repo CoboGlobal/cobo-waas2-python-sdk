@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_token**
-> GetToken200Response get_token(client_id, org_id, grant_type)
+> GetToken2XXResponse get_token(client_id, org_id, grant_type)
 
 Get Org Access Token
 
@@ -21,7 +21,7 @@ Get Org Access Token
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.get_token200_response import GetToken200Response
+from cobo_waas2.models.get_token2_xx_response import GetToken2XXResponse
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetToken200Response**](GetToken200Response.md)
+[**GetToken2XXResponse**](GetToken2XXResponse.md)
 
 ### Authorization
 
@@ -77,14 +77,14 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
+**2XX** | The request was successful. |  -  |
 **4XX** | Unauthorized. Please provide valid credentials. |  -  |
 **5XX** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **refresh_token**
-> RefreshToken201Response refresh_token(refresh_token_request)
+> RefreshToken2XXResponse refresh_token(refresh_token_request)
 
 Refresh Org Access Token
 
@@ -96,7 +96,7 @@ Refresh Org Access Token
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.refresh_token201_response import RefreshToken201Response
+from cobo_waas2.models.refresh_token2_xx_response import RefreshToken2XXResponse
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RefreshToken201Response**](RefreshToken201Response.md)
+[**RefreshToken2XXResponse**](RefreshToken2XXResponse.md)
 
 ### Authorization
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The request was successful. |  -  |
+**2XX** | The request was successful. |  -  |
 **4XX** | Unauthorized. Please provide valid credentials. |  -  |
 **5XX** | Internal server error. |  -  |
 

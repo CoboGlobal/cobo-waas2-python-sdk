@@ -83,7 +83,7 @@ class EstimatedEvmEip1559FeeSlow(BaseModel):
         _obj = cls.model_validate({
             "max_fee_per_gas": obj.get("max_fee_per_gas"),
             "max_priority_fee_per_gas": obj.get("max_priority_fee_per_gas"),
-            "gas_limit": obj.get("gas_limit") if obj.get("gas_limit") is not None else '21000'
+            "gas_limit": obj.get("gas_limit")
         })
         return _obj
 

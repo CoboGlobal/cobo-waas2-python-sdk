@@ -2,7 +2,8 @@ import hashlib
 import time
 from urllib.parse import urlencode
 
-from nacl.signing import SigningKey
+from nacl.signing import SigningKey, VerifyKey
+from nacl.exceptions import BadSignatureError
 
 
 class SignHelper(object):
@@ -76,3 +77,26 @@ class SignHelper(object):
             "api_key": bytes(sk.verify_key).hex(),
             "api_secret": bytes(sk).hex(),
         }
+
+    @classmethod
+    def verify(
+        cls,
+        pub_key: str,
+        signature: str,
+        content: str
+    ) -> bool:
+        try:
+            content_hash = hashlib.sha256(
+                hashlib.sha256(content.encode()).digest()
+            ).digest()
+
+            # Convert the public key (api_key) and signature from hex to bytes
+            verify_key = VerifyKey(bytes.fromhex(pub_key))
+            signature_bytes = bytes.fromhex(signature)
+
+            # Verify the signature
+            verify_key.verify(signature=signature_bytes, smessage=content_hash)
+            return True
+
+        except BadSignatureError as e:
+            return False

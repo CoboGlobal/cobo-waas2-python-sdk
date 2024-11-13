@@ -34,9 +34,12 @@ class TestGetStakingEstimationFee201Response(unittest.TestCase):
         model = GetStakingEstimationFee201Response()
         if include_optional:
             return GetStakingEstimationFee201Response(
+                pool_type = 'Babylon',
+                fee = None,
+                validator_pubkeys = ["0x1234567890987654321012345678909876543210"],
                 fee_type = 'EVM_EIP_1559',
                 fee_amount = '0.02',
-                token_id = 'ETH'
+                token_id = 'BTC'
             )
         else:
             return GetStakingEstimationFee201Response(

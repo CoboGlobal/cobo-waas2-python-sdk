@@ -9,13 +9,14 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, StrictFloat
-from typing import Dict, Tuple, Union, List, Optional
+from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
+from typing import Any, Dict, List, Optional, Tuple, Union
+from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
 from typing_extensions import Annotated
-from cobo_waas2.models.get_token200_response import GetToken200Response
-from cobo_waas2.models.refresh_token201_response import RefreshToken201Response
+from cobo_waas2.models.get_token2_xx_response import GetToken2XXResponse
+from cobo_waas2.models.refresh_token2_xx_response import RefreshToken2XXResponse
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
@@ -49,7 +50,7 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> GetToken200Response:
+    ) -> GetToken2XXResponse:
         """Get Org Access Token
 
         <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-org-access-token) to get a new Org Access Token and a new Refresh Token.  
@@ -75,7 +76,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetToken200Response",
+            '2XX': "GetToken2XXResponse",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -103,7 +104,7 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[GetToken200Response]:
+    ) -> ApiResponse[GetToken2XXResponse]:
         """Get Org Access Token
 
         <Note>This operation is only applicable to Cobo Portal App developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to get an Org Access Token and a Refresh Token with a specified client ID, organization ID, and grant type.   Access tokens allow the app to signal to the WaaS service that it has received permission to access specific resources of the app user's [organization](https://manuals.cobo.com/en/portal/organization/introduction). Once the app has been granted permission by the organization's admin, it can use this operation to obtain both an Org Access Token and a Refresh Token.  For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call [Refresh token](/v2/api-references/oauth/refresh-org-access-token) to get a new Org Access Token and a new Refresh Token.  
@@ -129,7 +130,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetToken200Response",
+            '2XX': "GetToken2XXResponse",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -183,7 +184,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetToken200Response",
+            '2XX': "GetToken2XXResponse",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -252,7 +253,7 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> RefreshToken201Response:
+    ) -> RefreshToken2XXResponse:
         """Refresh Org Access Token
 
         <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to obtain a new Org Access Token with a specified client ID, grant type and a Refresh Token.   For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Org Access Token and a new Refresh Token.  
@@ -272,7 +273,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "RefreshToken201Response",
+            '2XX': "RefreshToken2XXResponse",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -298,7 +299,7 @@ class OAuthApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[RefreshToken201Response]:
+    ) -> ApiResponse[RefreshToken2XXResponse]:
         """Refresh Org Access Token
 
         <Note>This operation is only applicable to Cobo Portal Apps developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an app key.</Note> This operation allows Cobo Portal Apps to obtain a new Org Access Token with a specified client ID, grant type and a Refresh Token.   For security purposes, Org Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Org Access Token and a new Refresh Token.  
@@ -318,7 +319,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "RefreshToken201Response",
+            '2XX': "RefreshToken2XXResponse",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }
@@ -364,7 +365,7 @@ class OAuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "RefreshToken201Response",
+            '2XX': "RefreshToken2XXResponse",
             '4XX': "GetToken4XXResponse",
             '5XX': "ErrorResponse",
         }

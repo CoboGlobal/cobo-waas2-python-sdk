@@ -86,7 +86,7 @@ class SmartContractWalletInfo(BaseModel):
             raise ValueError("Failed to lookup data type from the field `smart_contract_wallet_type` in the input.")
 
         # check if data type is `SafeWallet`
-        if _data_type == "Safe":
+        if _data_type == "Safe{Wallet}":
             instance.actual_instance = SafeWallet.from_json(json_str)
             return instance
 

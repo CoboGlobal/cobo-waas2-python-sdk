@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.get_token200_response import GetToken200Response
+from cobo_waas2.models.refresh_token2_xx_response import RefreshToken2XXResponse
 
 
-class TestGetToken200Response(unittest.TestCase):
-    """GetToken200Response unit test stubs"""
+class TestRefreshToken2XXResponse(unittest.TestCase):
+    """RefreshToken2XXResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,16 +24,16 @@ class TestGetToken200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetToken200Response:
-        """Test GetToken200Response
+    def make_instance(self, include_optional) -> RefreshToken2XXResponse:
+        """Test RefreshToken2XXResponse
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `GetToken200Response`
+        # uncomment below to create an instance of `RefreshToken2XXResponse`
         """
-        model = GetToken200Response()
+        model = RefreshToken2XXResponse()
         if include_optional:
-            return GetToken200Response(
+            return RefreshToken2XXResponse(
                 access_token = 'AnCEPEp5Q8qjAOA1Lb6kVd2OlkCyJnMTeMPdLbPOM8cz176Eb5y7EJoUjJJ0vkzz',
                 token_type = 'Bearer',
                 scope = '',
@@ -41,12 +41,12 @@ class TestGetToken200Response(unittest.TestCase):
                 refresh_token = 'rK49jI0zt49gsttzscscik15Asmlpu1TdcxqguJJS8B9f6ilJEC0y3PbVqwsEAw5'
             )
         else:
-            return GetToken200Response(
+            return RefreshToken2XXResponse(
         )
         """
 
-    def testGetToken200Response(self):
-        """Test GetToken200Response"""
+    def testRefreshToken2XXResponse(self):
+        """Test RefreshToken2XXResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -35,11 +35,12 @@ class TestGetToken4XXResponse(unittest.TestCase):
         if include_optional:
             return GetToken4XXResponse(
                 error = '',
-                error_message = ''
+                error_description = ''
             )
         else:
             return GetToken4XXResponse(
                 error = '',
+                error_description = '',
         )
         """
 

@@ -25,6 +25,7 @@ class StakingPoolType(str, Enum):
     allowed enum values
     """
     BABYLON = 'Babylon'
+    ETHBEACON = 'ETHBeacon'
 
     UNKNOWN = None
 

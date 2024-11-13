@@ -68,7 +68,7 @@ class ApiClient:
         self.rest_client = rest.RESTClientObject(configuration)
         self.default_headers = {}
         # Set default User-Agent.
-        self.user_agent = 'cobo-waas2-python-sdk/1.5.0'
+        self.user_agent = 'cobo-waas2-python-sdk/1.6.0'
 
     def __enter__(self):
         return self
@@ -247,6 +247,18 @@ class ApiClient:
         :param response_types_map: dict of response types.
         :return: ApiResponse
         """
+        headers = response_data.getheaders()
+        sig = headers.get('biz-resp-signature')
+        timestamp = headers.get('biz-timestamp')
+        if not sig or not timestamp:
+            raise ApiException("Missing resp signature or timestamp")
+        verified = SignHelper.verify(
+            pub_key=self.configuration.resp_pubkey,
+            signature=sig,
+            content=f"{response_data.data.decode()}|{timestamp}"
+        )
+        if not verified:
+            raise ApiException("Invalid resp signature")
 
         msg = "RESTResponse.read() must be called before passing it to response_deserialize()"
         assert response_data.data is not None, msg

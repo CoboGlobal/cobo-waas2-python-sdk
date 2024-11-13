@@ -7,6 +7,7 @@ README.md
 cobo_waas2/__init__.py
 cobo_waas2/api/__init__.py
 cobo_waas2/api/address_books_api.py
+cobo_waas2/api/developers_api.py
 cobo_waas2/api/developers_webhooks_api.py
 cobo_waas2/api/o_auth_api.py
 cobo_waas2/api/stakings_api.py
@@ -40,6 +41,7 @@ cobo_waas2/models/api_log_details.py
 cobo_waas2/models/api_log_summary.py
 cobo_waas2/models/asset_balance.py
 cobo_waas2/models/asset_info.py
+cobo_waas2/models/babylon_stake_estimated_fee.py
 cobo_waas2/models/babylon_stake_extra.py
 cobo_waas2/models/babylon_staking_extra.py
 cobo_waas2/models/babylon_validator.py
@@ -50,6 +52,7 @@ cobo_waas2/models/base_stake_source.py
 cobo_waas2/models/broadcast_signed_transactions201_response_inner.py
 cobo_waas2/models/broadcast_signed_transactions_request.py
 cobo_waas2/models/chain_info.py
+cobo_waas2/models/check_address_chains_validity200_response_inner.py
 cobo_waas2/models/check_address_validity200_response.py
 cobo_waas2/models/check_addresses_validity200_response_inner.py
 cobo_waas2/models/check_loop_transfers200_response_inner.py
@@ -77,6 +80,7 @@ cobo_waas2/models/create_stake_activity_request.py
 cobo_waas2/models/create_transfer_transaction201_response.py
 cobo_waas2/models/create_tss_request_request.py
 cobo_waas2/models/create_unstake_activity.py
+cobo_waas2/models/create_unstake_activity_extra.py
 cobo_waas2/models/create_unstake_activity_request.py
 cobo_waas2/models/create_wallet_params.py
 cobo_waas2/models/create_webhook_endpoint_request.py
@@ -107,6 +111,10 @@ cobo_waas2/models/estimated_fee.py
 cobo_waas2/models/estimated_fixed_fee.py
 cobo_waas2/models/estimated_utxo_fee.py
 cobo_waas2/models/estimated_utxo_fee_slow.py
+cobo_waas2/models/eth_stake_estimated_fee.py
+cobo_waas2/models/eth_stake_extra.py
+cobo_waas2/models/eth_staking_extra.py
+cobo_waas2/models/eth_unstake_extra.py
 cobo_waas2/models/evm_contract_call_destination.py
 cobo_waas2/models/evm_eip1559_fee_base_price.py
 cobo_waas2/models/evm_eip1559_fee_rate.py
@@ -124,9 +132,10 @@ cobo_waas2/models/fee_gas_limit.py
 cobo_waas2/models/fee_rate.py
 cobo_waas2/models/fee_type.py
 cobo_waas2/models/fixed_fee_rate.py
+cobo_waas2/models/get_api_key_info200_response.py
 cobo_waas2/models/get_staking_estimation_fee201_response.py
 cobo_waas2/models/get_staking_estimation_fee_request.py
-cobo_waas2/models/get_token200_response.py
+cobo_waas2/models/get_token2_xx_response.py
 cobo_waas2/models/get_token4_xx_response.py
 cobo_waas2/models/key_share_holder.py
 cobo_waas2/models/key_share_holder_group.py
@@ -181,10 +190,11 @@ cobo_waas2/models/pool_details.py
 cobo_waas2/models/pool_details_all_of_validators_info.py
 cobo_waas2/models/pool_summary.py
 cobo_waas2/models/raw_message_sign_destination.py
-cobo_waas2/models/refresh_token201_response.py
+cobo_waas2/models/refresh_token2_xx_response.py
 cobo_waas2/models/refresh_token_request.py
 cobo_waas2/models/replace_type.py
 cobo_waas2/models/retry_webhook_event_by_id201_response.py
+cobo_waas2/models/role_scopes.py
 cobo_waas2/models/root_pubkey.py
 cobo_waas2/models/safe_contract_call_source.py
 cobo_waas2/models/safe_transfer_source.py
@@ -192,6 +202,7 @@ cobo_waas2/models/safe_wallet.py
 cobo_waas2/models/safe_wallet_delegates.py
 cobo_waas2/models/safe_wallet_delegates_contract_call.py
 cobo_waas2/models/safe_wallet_delegates_transfer.py
+cobo_waas2/models/scopes.py
 cobo_waas2/models/smart_contract_initiator.py
 cobo_waas2/models/smart_contract_wallet_info.py
 cobo_waas2/models/smart_contract_wallet_operation_type.py
@@ -322,6 +333,7 @@ docs/ApiLogDetails.md
 docs/ApiLogSummary.md
 docs/AssetBalance.md
 docs/AssetInfo.md
+docs/BabylonStakeEstimatedFee.md
 docs/BabylonStakeExtra.md
 docs/BabylonStakingExtra.md
 docs/BabylonValidator.md
@@ -332,6 +344,7 @@ docs/BaseStakeSource.md
 docs/BroadcastSignedTransactions201ResponseInner.md
 docs/BroadcastSignedTransactionsRequest.md
 docs/ChainInfo.md
+docs/CheckAddressChainsValidity200ResponseInner.md
 docs/CheckAddressValidity200Response.md
 docs/CheckAddressesValidity200ResponseInner.md
 docs/CheckLoopTransfers200ResponseInner.md
@@ -359,6 +372,7 @@ docs/CreateStakeActivityRequest.md
 docs/CreateTransferTransaction201Response.md
 docs/CreateTssRequestRequest.md
 docs/CreateUnstakeActivity.md
+docs/CreateUnstakeActivityExtra.md
 docs/CreateUnstakeActivityRequest.md
 docs/CreateWalletParams.md
 docs/CreateWebhookEndpointRequest.md
@@ -370,6 +384,7 @@ docs/CustodialTransferSource.md
 docs/CustodialWalletInfo.md
 docs/DeleteKeyShareHolderGroupById201Response.md
 docs/DeleteWalletById201Response.md
+docs/DevelopersApi.md
 docs/DevelopersWebhooksApi.md
 docs/EigenLayerLstStakeExtra.md
 docs/EigenLayerNativeStakeExtra.md
@@ -390,6 +405,10 @@ docs/EstimatedFee.md
 docs/EstimatedFixedFee.md
 docs/EstimatedUtxoFee.md
 docs/EstimatedUtxoFeeSlow.md
+docs/EthStakeEstimatedFee.md
+docs/EthStakeExtra.md
+docs/EthStakingExtra.md
+docs/EthUnstakeExtra.md
 docs/EvmContractCallDestination.md
 docs/EvmEIP191MessageSignDestination.md
 docs/EvmEIP712MessageSignDestination.md
@@ -407,9 +426,10 @@ docs/FeeGasLimit.md
 docs/FeeRate.md
 docs/FeeType.md
 docs/FixedFeeRate.md
+docs/GetApiKeyInfo200Response.md
 docs/GetStakingEstimationFee201Response.md
 docs/GetStakingEstimationFeeRequest.md
-docs/GetToken200Response.md
+docs/GetToken2XXResponse.md
 docs/GetToken4XXResponse.md
 docs/KeyShareHolder.md
 docs/KeyShareHolderGroup.md
@@ -465,10 +485,11 @@ docs/PoolDetails.md
 docs/PoolDetailsAllOfValidatorsInfo.md
 docs/PoolSummary.md
 docs/RawMessageSignDestination.md
-docs/RefreshToken201Response.md
+docs/RefreshToken2XXResponse.md
 docs/RefreshTokenRequest.md
 docs/ReplaceType.md
 docs/RetryWebhookEventById201Response.md
+docs/RoleScopes.md
 docs/RootPubkey.md
 docs/SafeContractCallSource.md
 docs/SafeTransferSource.md
@@ -476,6 +497,7 @@ docs/SafeWallet.md
 docs/SafeWalletDelegates.md
 docs/SafeWalletDelegatesContractCall.md
 docs/SafeWalletDelegatesTransfer.md
+docs/Scopes.md
 docs/SmartContractInitiator.md
 docs/SmartContractWalletInfo.md
 docs/SmartContractWalletOperationType.md
@@ -616,6 +638,7 @@ test/test_api_log_details.py
 test/test_api_log_summary.py
 test/test_asset_balance.py
 test/test_asset_info.py
+test/test_babylon_stake_estimated_fee.py
 test/test_babylon_stake_extra.py
 test/test_babylon_staking_extra.py
 test/test_babylon_validator.py
@@ -626,6 +649,7 @@ test/test_base_stake_source.py
 test/test_broadcast_signed_transactions201_response_inner.py
 test/test_broadcast_signed_transactions_request.py
 test/test_chain_info.py
+test/test_check_address_chains_validity200_response_inner.py
 test/test_check_address_validity200_response.py
 test/test_check_addresses_validity200_response_inner.py
 test/test_check_loop_transfers200_response_inner.py
@@ -653,6 +677,7 @@ test/test_create_stake_activity_request.py
 test/test_create_transfer_transaction201_response.py
 test/test_create_tss_request_request.py
 test/test_create_unstake_activity.py
+test/test_create_unstake_activity_extra.py
 test/test_create_unstake_activity_request.py
 test/test_create_wallet_params.py
 test/test_create_webhook_endpoint_request.py
@@ -664,6 +689,7 @@ test/test_custodial_transfer_source.py
 test/test_custodial_wallet_info.py
 test/test_delete_key_share_holder_group_by_id201_response.py
 test/test_delete_wallet_by_id201_response.py
+test/test_developers_api.py
 test/test_developers_webhooks_api.py
 test/test_eigen_layer_lst_stake_extra.py
 test/test_eigen_layer_native_stake_extra.py
@@ -684,6 +710,10 @@ test/test_estimated_fee.py
 test/test_estimated_fixed_fee.py
 test/test_estimated_utxo_fee.py
 test/test_estimated_utxo_fee_slow.py
+test/test_eth_stake_estimated_fee.py
+test/test_eth_stake_extra.py
+test/test_eth_staking_extra.py
+test/test_eth_unstake_extra.py
 test/test_evm_contract_call_destination.py
 test/test_evm_eip1559_fee_base_price.py
 test/test_evm_eip1559_fee_rate.py
@@ -701,9 +731,10 @@ test/test_fee_gas_limit.py
 test/test_fee_rate.py
 test/test_fee_type.py
 test/test_fixed_fee_rate.py
+test/test_get_api_key_info200_response.py
 test/test_get_staking_estimation_fee201_response.py
 test/test_get_staking_estimation_fee_request.py
-test/test_get_token200_response.py
+test/test_get_token2_xx_response.py
 test/test_get_token4_xx_response.py
 test/test_key_share_holder.py
 test/test_key_share_holder_group.py
@@ -759,10 +790,11 @@ test/test_pool_details.py
 test/test_pool_details_all_of_validators_info.py
 test/test_pool_summary.py
 test/test_raw_message_sign_destination.py
-test/test_refresh_token201_response.py
+test/test_refresh_token2_xx_response.py
 test/test_refresh_token_request.py
 test/test_replace_type.py
 test/test_retry_webhook_event_by_id201_response.py
+test/test_role_scopes.py
 test/test_root_pubkey.py
 test/test_safe_contract_call_source.py
 test/test_safe_transfer_source.py
@@ -770,6 +802,7 @@ test/test_safe_wallet.py
 test/test_safe_wallet_delegates.py
 test/test_safe_wallet_delegates_contract_call.py
 test/test_safe_wallet_delegates_transfer.py
+test/test_scopes.py
 test/test_smart_contract_initiator.py
 test/test_smart_contract_wallet_info.py
 test/test_smart_contract_wallet_operation_type.py

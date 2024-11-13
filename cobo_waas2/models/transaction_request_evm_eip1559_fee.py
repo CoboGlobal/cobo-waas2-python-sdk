@@ -30,7 +30,7 @@ class TransactionRequestEvmEip1559Fee(BaseModel):
     max_priority_fee_per_gas: StrictStr = Field(description="The maximum priority fee per gas unit used, in wei. The maximum priority fee represents the highest amount of miner tips that you are willing to pay for your transaction.")
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token ID of the transaction fee.")
-    gas_limit: Optional[StrictStr] = Field(default='21000', description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
+    gas_limit: Optional[StrictStr] = Field(default=None, description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
     __properties: ClassVar[List[str]] = ["max_fee_per_gas", "max_priority_fee_per_gas", "fee_type", "token_id", "gas_limit"]
 
     model_config = ConfigDict(
@@ -88,7 +88,7 @@ class TransactionRequestEvmEip1559Fee(BaseModel):
             "max_priority_fee_per_gas": obj.get("max_priority_fee_per_gas"),
             "fee_type": obj.get("fee_type"),
             "token_id": obj.get("token_id"),
-            "gas_limit": obj.get("gas_limit") if obj.get("gas_limit") is not None else '21000'
+            "gas_limit": obj.get("gas_limit")
         })
         return _obj
 
