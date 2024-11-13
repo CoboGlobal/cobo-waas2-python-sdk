@@ -7,7 +7,7 @@ The response of a failed request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | **str** | The error name. | 
-**error_message** | **str** | The error description. | [optional] 
+**error_description** | **str** | The error description. | 
 
 ## Example
 

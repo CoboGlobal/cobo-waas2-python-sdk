@@ -4,12 +4,12 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**check_address_chains_validity**](WalletsApi.md#check_address_chains_validity) | **GET** /wallets/check_address_chains_validity | Check address validity across chains
 [**check_address_validity**](WalletsApi.md#check_address_validity) | **GET** /wallets/check_address_validity | Check address validity
 [**check_addresses_validity**](WalletsApi.md#check_addresses_validity) | **GET** /wallets/check_addresses_validity | Check addresses validity
 [**create_address**](WalletsApi.md#create_address) | **POST** /wallets/{wallet_id}/addresses | Create addresses in wallet
 [**create_wallet**](WalletsApi.md#create_wallet) | **POST** /wallets | Create wallet
 [**delete_wallet_by_id**](WalletsApi.md#delete_wallet_by_id) | **POST** /wallets/{wallet_id}/delete | Delete wallet
-[**get_address**](WalletsApi.md#get_address) | **GET** /wallets/{wallet_id}/addresses/{address} | Get address information
 [**get_chain_by_id**](WalletsApi.md#get_chain_by_id) | **GET** /wallets/chains/{chain_id} | Get chain information
 [**get_max_transferable_value**](WalletsApi.md#get_max_transferable_value) | **GET** /wallets/{wallet_id}/max_transferable_value | Get maximum transferable value
 [**get_token_by_id**](WalletsApi.md#get_token_by_id) | **GET** /wallets/tokens/{token_id} | Get token information
@@ -27,6 +27,79 @@ Method | HTTP request | Description
 [**unlock_utxos**](WalletsApi.md#unlock_utxos) | **POST** /wallets/{wallet_id}/utxos/unlock | Unlock UTXOs
 [**update_wallet_by_id**](WalletsApi.md#update_wallet_by_id) | **PUT** /wallets/{wallet_id} | Update wallet
 
+
+# **check_address_chains_validity**
+> List[CheckAddressChainsValidity200ResponseInner] check_address_chains_validity(address, chain_ids)
+
+Check address validity across chains
+
+This operation verifies if a given address is valid for a list of chains. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.check_address_chains_validity200_response_inner import CheckAddressChainsValidity200ResponseInner
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.WalletsApi(api_client)
+    address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+    chain_ids = 'BTC,ETH'
+
+    try:
+        # Check address validity across chains
+        api_response = api_instance.check_address_chains_validity(address, chain_ids)
+        print("The response of WalletsApi->check_address_chains_validity:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WalletsApi->check_address_chains_validity: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **address** | **str**| The wallet address. | 
+ **chain_ids** | **str**| A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains). | 
+
+### Return type
+
+[**List[CheckAddressChainsValidity200ResponseInner]**](CheckAddressChainsValidity200ResponseInner.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **check_address_validity**
 > CheckAddressValidity200Response check_address_validity(chain_id, address)
@@ -393,79 +466,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_address**
-> List[AddressInfo] get_address(wallet_id, address)
-
-Get address information
-
-This operation retrieves the detailed information about a specified address within a wallet. 
-
-### Example
-
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.address_info import AddressInfo
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.WalletsApi(api_client)
-    wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-    address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
-
-    try:
-        # Get address information
-        api_response = api_instance.get_address(wallet_id, address)
-        print("The response of WalletsApi->get_address:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WalletsApi->get_address: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **wallet_id** | **str**| The wallet ID. | 
- **address** | **str**| The wallet address. | 
-
-### Return type
-
-[**List[AddressInfo]**](AddressInfo.md)
-
-### Authorization
-
-[CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successfully listed address information |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_chain_by_id**
 > ChainInfo get_chain_by_id(chain_id)
 
@@ -811,7 +811,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **wallet_id** | **str**| The wallet ID. | 
  **chain_ids** | **str**| A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains). | [optional] 
- **addresses** | **str**| A list of wallet addresses, separated by comma. | [optional] 
+ **addresses** | **str**| A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the &#39;|&#39; separator (e.g., \&quot;address|memo\&quot;). | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
  **before** | **str**| An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify &#x60;before&#x60; as &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1&#x60;, the request will retrieve a list of data objects that end before the object with the object ID &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1&#x60;. You can set this parameter to the value of &#x60;pagination.before&#x60; in the response of the previous request.  - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur.  - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  - If you set &#x60;before&#x60; to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **after** | **str**| An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify &#x60;after&#x60; as &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;, the request will retrieve a list of data objects that start after the object with the object ID &#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;. You can set this parameter to the value of &#x60;pagination.after&#x60; in the response of the previous request.  - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur.  - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 

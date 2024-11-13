@@ -25,7 +25,7 @@ class FeeGasLimit(BaseModel):
     """
     FeeGasLimit
     """  # noqa: E501
-    gas_limit: Optional[StrictStr] = Field(default='21000', description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
+    gas_limit: Optional[StrictStr] = Field(default=None, description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
     __properties: ClassVar[List[str]] = ["gas_limit"]
 
     model_config = ConfigDict(
@@ -79,7 +79,7 @@ class FeeGasLimit(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "gas_limit": obj.get("gas_limit") if obj.get("gas_limit") is not None else '21000'
+            "gas_limit": obj.get("gas_limit")
         })
         return _obj
 

@@ -27,8 +27,7 @@ class TransactionTransferToAddressDestinationUtxoOutputsInner(BaseModel):
     """  # noqa: E501
     address: Optional[StrictStr] = Field(default=None, description="The destination address.")
     amount: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 BTC, then the value is `1.5`. ")
-    script: Optional[StrictStr] = Field(default=None, description="The script of the output. It is a programmable code fragment that defines the conditions under which the UTXO can be spent.")
-    __properties: ClassVar[List[str]] = ["address", "amount", "script"]
+    __properties: ClassVar[List[str]] = ["address", "amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +81,7 @@ class TransactionTransferToAddressDestinationUtxoOutputsInner(BaseModel):
 
         _obj = cls.model_validate({
             "address": obj.get("address"),
-            "amount": obj.get("amount"),
-            "script": obj.get("script")
+            "amount": obj.get("amount")
         })
         return _obj
 

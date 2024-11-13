@@ -27,7 +27,7 @@ class TransactionEvmLegacyFee(BaseModel):
     The transaction fee actually charged by the chain that uses the legacy fee model.   The transaction fee is calculated by multiplying the gas price by the used gas. This can be expressed as: Transaction fee = gas price * used gas units.  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
     gas_price: Optional[StrictStr] = Field(default=None, description="The gas price, in wei. The gas price represents the amount of ETH that must be paid to validators for processing transactions per gas unit used.")
-    gas_limit: Optional[StrictStr] = Field(default='21000', description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
+    gas_limit: Optional[StrictStr] = Field(default=None, description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
     fee_type: FeeType
     token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
     fee_used: Optional[StrictStr] = Field(default=None, description="The transaction fee.")
@@ -86,7 +86,7 @@ class TransactionEvmLegacyFee(BaseModel):
 
         _obj = cls.model_validate({
             "gas_price": obj.get("gas_price"),
-            "gas_limit": obj.get("gas_limit") if obj.get("gas_limit") is not None else '21000',
+            "gas_limit": obj.get("gas_limit"),
             "fee_type": obj.get("fee_type"),
             "token_id": obj.get("token_id"),
             "fee_used": obj.get("fee_used"),

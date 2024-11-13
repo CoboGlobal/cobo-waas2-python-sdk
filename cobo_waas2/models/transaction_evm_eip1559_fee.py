@@ -28,7 +28,7 @@ class TransactionEvmEip1559Fee(BaseModel):
     """  # noqa: E501
     max_fee_per_gas: Optional[StrictStr] = Field(default=None, description="The maximum gas fee per gas unit used on the chain, in wei.")
     max_priority_fee_per_gas: Optional[StrictStr] = Field(default=None, description="The maximum priority fee per gas unit used, in wei. The maximum priority fee represents the highest amount of miner tips that you are willing to pay for your transaction.")
-    gas_limit: Optional[StrictStr] = Field(default='21000', description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
+    gas_limit: Optional[StrictStr] = Field(default=None, description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
     fee_type: FeeType
     token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
     effective_gas_price: Optional[StrictStr] = Field(default=None, description="The gas price (gas fee per gas unit) on the chain, in wei. The gas price represents the amount of ETH that must be paid to validators for processing transactions.")
@@ -89,7 +89,7 @@ class TransactionEvmEip1559Fee(BaseModel):
         _obj = cls.model_validate({
             "max_fee_per_gas": obj.get("max_fee_per_gas"),
             "max_priority_fee_per_gas": obj.get("max_priority_fee_per_gas"),
-            "gas_limit": obj.get("gas_limit") if obj.get("gas_limit") is not None else '21000',
+            "gas_limit": obj.get("gas_limit"),
             "fee_type": obj.get("fee_type"),
             "token_id": obj.get("token_id"),
             "effective_gas_price": obj.get("effective_gas_price"),

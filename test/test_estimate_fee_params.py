@@ -44,7 +44,6 @@ class TestEstimateFeeParams(unittest.TestCase):
             )
         else:
             return EstimateFeeParams(
-                request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 request_type = 'Transfer',
                 source = None,
                 token_id = 'ETH_USDT',

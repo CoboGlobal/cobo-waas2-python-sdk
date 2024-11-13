@@ -1,6 +1,6 @@
 # MPCDelegate
 
-The information about the MPC Wallet as the Delegate.
+The information about the MPC Wallet as the Delegate. You can call the [List Delegates](/v2/api-references/wallets--smart-contract-wallets/list-delegates) operation to retrieve the applicable Delegates.
 
 ## Properties
 

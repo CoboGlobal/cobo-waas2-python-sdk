@@ -81,7 +81,7 @@ class EstimatedEvmLegacyFeeSlow(BaseModel):
 
         _obj = cls.model_validate({
             "gas_price": obj.get("gas_price"),
-            "gas_limit": obj.get("gas_limit") if obj.get("gas_limit") is not None else '21000'
+            "gas_limit": obj.get("gas_limit")
         })
         return _obj
 

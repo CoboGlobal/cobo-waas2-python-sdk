@@ -346,3 +346,26 @@ class Configuration:
         """Fix base path."""
         self._base_path = value
         self.server_index = None
+
+    @property
+    def env(self):
+        env = None
+        if self.host == "https://api.sandbox.cobo.com/v2":
+            env = "sandbox"
+        elif self.host == "https://api.cobo.com/v2":
+            env = "prod"
+        elif self.host == "https://api.dev.cobo.com/v2":
+            env = "dev"
+        assert env is not None
+        return env
+
+    @property
+    def resp_pubkey(self):
+        env = self.env
+        pub_key = {
+            "sandbox": "893d8a6112ae22429a7453599256391d7928e16870ecab888ee3ce65febada08",
+            "dev": "a04ea1d5fa8da71f1dcfccf972b9c4eba0a2d8aba1f6da26f49977b08a0d2718",
+            "prod": "8d4a482641adb2a34b726f05827dba9a9653e5857469b8749052bf4458a86729",
+        }.get(env, None)
+        assert pub_key is not None
+        return pub_key

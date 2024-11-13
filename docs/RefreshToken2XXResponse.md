@@ -1,4 +1,4 @@
-# RefreshToken201Response
+# RefreshToken2XXResponse
 
 
 ## Properties
@@ -14,19 +14,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cobo_waas2.models.refresh_token201_response import RefreshToken201Response
+from cobo_waas2.models.refresh_token2_xx_response import RefreshToken2XXResponse
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of RefreshToken201Response from a JSON string
-refresh_token201_response_instance = RefreshToken201Response.from_json(json)
+# create an instance of RefreshToken2XXResponse from a JSON string
+refresh_token2_xx_response_instance = RefreshToken2XXResponse.from_json(json)
 # print the JSON string representation of the object
-print(RefreshToken201Response.to_json())
+print(RefreshToken2XXResponse.to_json())
 
 # convert the object into a dict
-refresh_token201_response_dict = refresh_token201_response_instance.to_dict()
-# create an instance of RefreshToken201Response from a dict
-refresh_token201_response_from_dict = RefreshToken201Response.from_dict(refresh_token201_response_dict)
+refresh_token2_xx_response_dict = refresh_token2_xx_response_instance.to_dict()
+# create an instance of RefreshToken2XXResponse from a dict
+refresh_token2_xx_response_from_dict = RefreshToken2XXResponse.from_dict(refresh_token2_xx_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -39,8 +39,8 @@ class BabylonValidator(BaseModel):
     def supported_pos_chains_validate_enum(cls, value):
         """Validates the enum"""
         for i in value:
-            if i not in set(['Babylon', 'Cosmos']):
-                raise ValueError("each list item must be one of ('Babylon', 'Cosmos')")
+            if i not in set(['Babylon', 'Cosmos', 'Ethereum']):
+                raise ValueError("each list item must be one of ('Babylon', 'Cosmos', 'Ethereum')")
         return value
 
     model_config = ConfigDict(

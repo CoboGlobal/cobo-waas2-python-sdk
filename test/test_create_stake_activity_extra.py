@@ -37,13 +37,15 @@ class TestCreateStakeActivityExtra(unittest.TestCase):
                 pool_type = 'Babylon',
                 finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
                 stake_block_time = 2000,
-                auto_broadcast = False
+                auto_broadcast = False,
+                provider_name = 'Stakefish'
             )
         else:
             return CreateStakeActivityExtra(
                 pool_type = 'Babylon',
                 finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
                 stake_block_time = 2000,
+                provider_name = 'Stakefish',
         )
         """
 

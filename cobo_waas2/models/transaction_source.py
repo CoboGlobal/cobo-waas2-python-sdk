@@ -164,7 +164,7 @@ class TransactionSource(BaseModel):
             return instance
 
         # check if data type is `TransactionSmartContractSafeWalletSource`
-        if _data_type == "SafeWallet":
+        if _data_type == "Safe{Wallet}":
             instance.actual_instance = TransactionSmartContractSafeWalletSource.from_json(json_str)
             return instance
 

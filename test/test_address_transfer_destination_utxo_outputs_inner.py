@@ -35,12 +35,12 @@ class TestAddressTransferDestinationUtxoOutputsInner(unittest.TestCase):
         if include_optional:
             return AddressTransferDestinationUtxoOutputsInner(
                 address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sDEMO',
-                amount = '1.5',
-                script = '76a914fb37342f6275b13936799def06f2DEMO'
+                amount = '1.5'
             )
         else:
             return AddressTransferDestinationUtxoOutputsInner(
                 address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sDEMO',
+                amount = '1.5',
         )
         """
 

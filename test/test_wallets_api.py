@@ -29,6 +29,19 @@ class TestWalletsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_check_address_chains_validity(self) -> None:
+        """
+        Test case for check_address_chains_validity
+
+        Check address validity across chains
+        """
+        """
+        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+        chain_ids = 'BTC,ETH'
+
+        api_response = self.api.check_address_chains_validity(address, chain_ids)
+        """
+
     def test_check_address_validity(self) -> None:
         """
         Test case for check_address_validity
@@ -90,19 +103,6 @@ class TestWalletsApi(unittest.TestCase):
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
         api_response = self.api.delete_wallet_by_id(wallet_id)
-        """
-
-    def test_get_address(self) -> None:
-        """
-        Test case for get_address
-
-        Get address information
-        """
-        """
-        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
-
-        api_response = self.api.get_address(wallet_id, address)
         """
 
     def test_get_chain_by_id(self) -> None:

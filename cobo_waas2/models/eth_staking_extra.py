@@ -15,22 +15,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
+from cobo_waas2.models.staking_pool_type import StakingPoolType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetToken200Response(BaseModel):
+class EthStakingExtra(BaseModel):
     """
-    GetToken200Response
+    EthStakingExtra
     """  # noqa: E501
-    access_token: Optional[StrictStr] = Field(default=None, description="The Org Access Token.")
-    token_type: Optional[StrictStr] = Field(default=None, description="The type of the tokens, which is Bearer.")
-    scope: Optional[StrictStr] = Field(default=None, description="The scope of the Org Access Token to limit the app's access to the organization's resources.  **Note**: Currently this property value is empty. The scope of the Org Access Token is based on the permissions granted when the app user installs the app. ")
-    expires_in: Optional[StrictInt] = Field(default=None, description="The time in seconds in which the Org Access Token expires.")
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The Refresh Token, used to obtain a new Org Access Token when the current Org Access Token expires. The expiration time for Refresh Tokens is currently set to 30 days and is subject to change.")
-    __properties: ClassVar[List[str]] = ["access_token", "token_type", "scope", "expires_in", "refresh_token"]
+    pool_type: StakingPoolType
+    pos_chain: StrictStr = Field(description="The Proof-of-Stake (PoS) chain.")
+    __properties: ClassVar[List[str]] = ["pool_type", "pos_chain"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +48,7 @@ class GetToken200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetToken200Response from a JSON string"""
+        """Create an instance of EthStakingExtra from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +73,7 @@ class GetToken200Response(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetToken200Response from a dict"""
+        """Create an instance of EthStakingExtra from a dict"""
         if obj is None:
             return None
 
@@ -83,11 +81,8 @@ class GetToken200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "access_token": obj.get("access_token"),
-            "token_type": obj.get("token_type"),
-            "scope": obj.get("scope"),
-            "expires_in": obj.get("expires_in"),
-            "refresh_token": obj.get("refresh_token")
+            "pool_type": obj.get("pool_type"),
+            "pos_chain": obj.get("pos_chain")
         })
         return _obj
 

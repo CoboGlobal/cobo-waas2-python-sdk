@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **staking_id** | **str** | The ID of the corresponding staking position. | 
 **amount** | **str** | The amount to unstake. For the Babylon protocol, this property is ignored. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
+**extra** | [**CreateUnstakeActivityExtra**](CreateUnstakeActivityExtra.md) |  | [optional] 
 **app_initiator** | **str** | The initiator of the staking activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator. | [optional] 
 
 ## Example

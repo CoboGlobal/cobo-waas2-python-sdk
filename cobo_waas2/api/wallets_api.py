@@ -9,14 +9,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, StrictFloat
-from typing import Dict, Tuple, Union, List, Optional
+from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
+from typing import Any, Dict, List, Optional, Tuple, Union
+from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.address_info import AddressInfo
 from cobo_waas2.models.chain_info import ChainInfo
+from cobo_waas2.models.check_address_chains_validity200_response_inner import CheckAddressChainsValidity200ResponseInner
 from cobo_waas2.models.check_address_validity200_response import CheckAddressValidity200Response
 from cobo_waas2.models.check_addresses_validity200_response_inner import CheckAddressesValidity200ResponseInner
 from cobo_waas2.models.create_address_request import CreateAddressRequest
@@ -54,6 +56,194 @@ class WalletsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def check_address_chains_validity(
+        self,
+        address: Annotated[StrictStr, Field(description="The wallet address.")],
+        chain_ids: Annotated[StrictStr, Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> List[CheckAddressChainsValidity200ResponseInner]:
+        """Check address validity across chains
+
+        This operation verifies if a given address is valid for a list of chains. 
+
+        :param address: The wallet address. (required)
+        :type address: str
+        :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains). (required)
+        :type chain_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._check_address_chains_validity_serialize(
+            address=address,
+            chain_ids=chain_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[CheckAddressChainsValidity200ResponseInner]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def check_address_chains_validity_with_http_info(
+        self,
+        address: Annotated[StrictStr, Field(description="The wallet address.")],
+        chain_ids: Annotated[StrictStr, Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[List[CheckAddressChainsValidity200ResponseInner]]:
+        """Check address validity across chains
+
+        This operation verifies if a given address is valid for a list of chains. 
+
+        :param address: The wallet address. (required)
+        :type address: str
+        :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains). (required)
+        :type chain_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._check_address_chains_validity_serialize(
+            address=address,
+            chain_ids=chain_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[CheckAddressChainsValidity200ResponseInner]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def check_address_chains_validity_without_preload_content(
+        self,
+        address: Annotated[StrictStr, Field(description="The wallet address.")],
+        chain_ids: Annotated[StrictStr, Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Check address validity across chains
+
+        This operation verifies if a given address is valid for a list of chains. 
+
+        :param address: The wallet address. (required)
+        :type address: str
+        :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains). (required)
+        :type chain_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._check_address_chains_validity_serialize(
+            address=address,
+            chain_ids=chain_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[CheckAddressChainsValidity200ResponseInner]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _check_address_chains_validity_serialize(
+        self,
+        address,
+        chain_ids,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if address is not None:
+            
+            _query_params.append(('address', address))
+            
+        if chain_ids is not None:
+            
+            _query_params.append(('chain_ids', chain_ids))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/wallets/check_address_chains_validity',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
 
     @validate_call
     def check_address_validity(
@@ -954,190 +1144,6 @@ class WalletsApi:
         )
 
     @validate_call
-    def get_address(
-        self,
-        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        address: Annotated[StrictStr, Field(description="The wallet address.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> List[AddressInfo]:
-        """Get address information
-
-        This operation retrieves the detailed information about a specified address within a wallet. 
-
-        :param wallet_id: The wallet ID. (required)
-        :type wallet_id: str
-        :param address: The wallet address. (required)
-        :type address: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_address_serialize(
-            wallet_id=wallet_id,
-            address=address,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AddressInfo]",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_address_with_http_info(
-        self,
-        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        address: Annotated[StrictStr, Field(description="The wallet address.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ApiResponse[List[AddressInfo]]:
-        """Get address information
-
-        This operation retrieves the detailed information about a specified address within a wallet. 
-
-        :param wallet_id: The wallet ID. (required)
-        :type wallet_id: str
-        :param address: The wallet address. (required)
-        :type address: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_address_serialize(
-            wallet_id=wallet_id,
-            address=address,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AddressInfo]",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_address_without_preload_content(
-        self,
-        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        address: Annotated[StrictStr, Field(description="The wallet address.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> RESTResponseType:
-        """Get address information
-
-        This operation retrieves the detailed information about a specified address within a wallet. 
-
-        :param wallet_id: The wallet ID. (required)
-        :type wallet_id: str
-        :param address: The wallet address. (required)
-        :type address: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_address_serialize(
-            wallet_id=wallet_id,
-            address=address,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AddressInfo]",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_address_serialize(
-        self,
-        wallet_id,
-        address,
-    ) -> RequestSerialized:
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if wallet_id is not None:
-            _path_params['wallet_id'] = wallet_id
-        if address is not None:
-            _path_params['address'] = address
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/wallets/{wallet_id}/addresses/{address}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-        )
-
-    @validate_call
     def get_chain_by_id(
         self,
         chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")],
@@ -1886,7 +1892,7 @@ class WalletsApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")] = None,
-        addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma.")] = None,
+        addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify `before` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`, the request will retrieve a list of data objects that end before the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`. You can set this parameter to the value of `pagination.before` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned.  - If you set `before` to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify `after` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`, the request will retrieve a list of data objects that start after the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`. You can set this parameter to the value of `pagination.after` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -1907,7 +1913,7 @@ class WalletsApi:
         :type wallet_id: str
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
-        :param addresses: A list of wallet addresses, separated by comma.
+        :param addresses: A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").
         :type addresses: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -1952,7 +1958,7 @@ class WalletsApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")] = None,
-        addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma.")] = None,
+        addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify `before` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`, the request will retrieve a list of data objects that end before the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`. You can set this parameter to the value of `pagination.before` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned.  - If you set `before` to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify `after` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`, the request will retrieve a list of data objects that start after the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`. You can set this parameter to the value of `pagination.after` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -1973,7 +1979,7 @@ class WalletsApi:
         :type wallet_id: str
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
-        :param addresses: A list of wallet addresses, separated by comma.
+        :param addresses: A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").
         :type addresses: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2018,7 +2024,7 @@ class WalletsApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")] = None,
-        addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma.")] = None,
+        addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="An object ID that serves as a starting point for retrieving data in reverse chronological order. For example, if you specify `before` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`, the request will retrieve a list of data objects that end before the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1`. You can set this parameter to the value of `pagination.before` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned.  - If you set `before` to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="An object ID that acts as a starting point for retrieving data in chronological order. For example, if you specify `after` as `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`, the request will retrieve a list of data objects that start after the object with the object ID `RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`. You can set this parameter to the value of `pagination.after` in the response of the previous request.  - If you set both `after` and `before`, an error will occur.  - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -2039,7 +2045,7 @@ class WalletsApi:
         :type wallet_id: str
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
-        :param addresses: A list of wallet addresses, separated by comma.
+        :param addresses: A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").
         :type addresses: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int

@@ -35,7 +35,7 @@ class TestStakingsExtra(unittest.TestCase):
         if include_optional:
             return StakingsExtra(
                 pool_type = 'Babylon',
-                pos_chain = 'Babylon Chain',
+                pos_chain = 'Ethereum',
                 unlock_timestamp = 1640995200000,
                 unlock_block_height = 871234,
                 stake_address = 'tb1pgmpawe2rkrzuuflu8yw564lerfalhw8td36dha49yz4l99xvm3psteh393',
@@ -44,7 +44,7 @@ class TestStakingsExtra(unittest.TestCase):
         else:
             return StakingsExtra(
                 pool_type = 'Babylon',
-                pos_chain = 'Babylon Chain',
+                pos_chain = 'Ethereum',
         )
         """
 

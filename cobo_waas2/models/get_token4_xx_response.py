@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,8 +26,8 @@ class GetToken4XXResponse(BaseModel):
     The response of a failed request.
     """  # noqa: E501
     error: StrictStr = Field(description="The error name.")
-    error_message: Optional[StrictStr] = Field(default=None, description="The error description.")
-    __properties: ClassVar[List[str]] = ["error", "error_message"]
+    error_description: StrictStr = Field(description="The error description.")
+    __properties: ClassVar[List[str]] = ["error", "error_description"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +81,7 @@ class GetToken4XXResponse(BaseModel):
 
         _obj = cls.model_validate({
             "error": obj.get("error"),
-            "error_message": obj.get("error_message")
+            "error_description": obj.get("error_description")
         })
         return _obj
 
