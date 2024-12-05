@@ -8,12 +8,11 @@ Name | Type | Description | Notes
 **activity_type** | [**ActivityType**](ActivityType.md) |  | 
 **request_id** | **str** | The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization. | [optional] 
 **source** | [**StakingSource**](StakingSource.md) |  | [optional] 
-**pool_id** | **str** | The ID of the staking pool. | 
+**pool_id** | [**StakingPoolId**](StakingPoolId.md) |  | 
 **amount** | **str** | The amount to withdraw. | 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
 **extra** | [**CreateUnstakeActivityExtra**](CreateUnstakeActivityExtra.md) |  | 
-**staking_id** | **str** | The ID of the corresponding staking position. | 
-**address** | **str** | The withdrawal address. | 
+**staking_id** | **str** | The staking ID of the staking. | 
 
 ## Example
 

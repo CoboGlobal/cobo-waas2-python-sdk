@@ -10,12 +10,12 @@ Name | Type | Description | Notes
 **wallet_id** | **str** | The staker&#39;s wallet ID. | 
 **address** | **str** | The staker&#39;s wallet address. | 
 **amounts** | [**List[AmountDetailsInner]**](AmountDetailsInner.md) | The details about the staking amount. | 
-**pool_id** | **str** | The ID of the staking pool. | 
+**pool_id** | [**StakingPoolId**](StakingPoolId.md) |  | 
 **token_id** | **str** | The token ID. | 
 **rewards_info** | **object** | The information about the staking rewards. | [optional] 
 **created_timestamp** | **int** | The time when the staking position was created. | 
 **updated_timestamp** | **int** | The time when the staking position was last updated. | 
-**validator_info** | [**StakingsValidatorInfo**](StakingsValidatorInfo.md) |  | 
+**validator_info** | [**BabylonValidator**](BabylonValidator.md) |  | 
 **extra** | [**StakingsExtra**](StakingsExtra.md) |  | [optional] 
 
 ## Example

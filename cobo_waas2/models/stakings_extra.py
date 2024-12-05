@@ -16,12 +16,13 @@ import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from cobo_waas2.models.babylon_staking_extra import BabylonStakingExtra
+from cobo_waas2.models.core_staking_extra import CoreStakingExtra
 from cobo_waas2.models.eth_staking_extra import EthStakingExtra
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-STAKINGSEXTRA_ONE_OF_SCHEMAS = ["BabylonStakingExtra", "EthStakingExtra"]
+STAKINGSEXTRA_ONE_OF_SCHEMAS = ["BabylonStakingExtra", "CoreStakingExtra", "EthStakingExtra"]
 
 class StakingsExtra(BaseModel):
     """
@@ -31,8 +32,10 @@ class StakingsExtra(BaseModel):
     oneof_schema_1_validator: Optional[BabylonStakingExtra] = None
     # data type: EthStakingExtra
     oneof_schema_2_validator: Optional[EthStakingExtra] = None
-    actual_instance: Optional[Union[BabylonStakingExtra, EthStakingExtra]] = None
-    one_of_schemas: Set[str] = { "BabylonStakingExtra", "EthStakingExtra" }
+    # data type: CoreStakingExtra
+    oneof_schema_3_validator: Optional[CoreStakingExtra] = None
+    actual_instance: Optional[Union[BabylonStakingExtra, CoreStakingExtra, EthStakingExtra]] = None
+    one_of_schemas: Set[str] = { "BabylonStakingExtra", "CoreStakingExtra", "EthStakingExtra" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -68,12 +71,17 @@ class StakingsExtra(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `EthStakingExtra`")
         else:
             match += 1
+        # validate data type: CoreStakingExtra
+        if not isinstance(v, CoreStakingExtra):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CoreStakingExtra`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in StakingsExtra with oneOf schemas: BabylonStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in StakingsExtra with oneOf schemas: BabylonStakingExtra, CoreStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in StakingsExtra with oneOf schemas: BabylonStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in StakingsExtra with oneOf schemas: BabylonStakingExtra, CoreStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -98,6 +106,11 @@ class StakingsExtra(BaseModel):
             instance.actual_instance = BabylonStakingExtra.from_json(json_str)
             return instance
 
+        # check if data type is `CoreStakingExtra`
+        if _data_type == "CoreBTC":
+            instance.actual_instance = CoreStakingExtra.from_json(json_str)
+            return instance
+
         # check if data type is `EthStakingExtra`
         if _data_type == "ETHBeacon":
             instance.actual_instance = EthStakingExtra.from_json(json_str)
@@ -106,6 +119,11 @@ class StakingsExtra(BaseModel):
         # check if data type is `BabylonStakingExtra`
         if _data_type == "BabylonStakingExtra":
             instance.actual_instance = BabylonStakingExtra.from_json(json_str)
+            return instance
+
+        # check if data type is `CoreStakingExtra`
+        if _data_type == "CoreStakingExtra":
+            instance.actual_instance = CoreStakingExtra.from_json(json_str)
             return instance
 
         # check if data type is `EthStakingExtra`
@@ -125,14 +143,20 @@ class StakingsExtra(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CoreStakingExtra
+        try:
+            instance.actual_instance = CoreStakingExtra.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into StakingsExtra with oneOf schemas: BabylonStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into StakingsExtra with oneOf schemas: BabylonStakingExtra, CoreStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into StakingsExtra with oneOf schemas: BabylonStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into StakingsExtra with oneOf schemas: BabylonStakingExtra, CoreStakingExtra, EthStakingExtra. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -146,7 +170,7 @@ class StakingsExtra(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], BabylonStakingExtra, EthStakingExtra]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], BabylonStakingExtra, CoreStakingExtra, EthStakingExtra]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

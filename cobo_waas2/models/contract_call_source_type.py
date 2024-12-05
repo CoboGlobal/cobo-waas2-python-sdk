@@ -24,9 +24,9 @@ class ContractCallSourceType(str, Enum):
     """
     allowed enum values
     """
-    ORG_CONTROLLED = 'Org-Controlled'
-    USER_CONTROLLED = 'User-Controlled'
-    SAFE_WALLET = 'Safe{Wallet}'
+    ORG_MINUS_CONTROLLED = 'Org-Controlled'
+    USER_MINUS_CONTROLLED = 'User-Controlled'
+    SAFE_LEFT_CURLY_BRACKET_WALLET_RIGHT_CURLY_BRACKET = 'Safe{Wallet}'
 
     UNKNOWN = None
 

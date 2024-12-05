@@ -19,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.activity_type import ActivityType
 from cobo_waas2.models.create_stake_activity_extra import CreateStakeActivityExtra
+from cobo_waas2.models.staking_pool_id import StakingPoolId
 from cobo_waas2.models.staking_source import StakingSource
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
@@ -32,7 +33,7 @@ class EstimateStakeFee(BaseModel):
     activity_type: ActivityType
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization.")
     source: Optional[StakingSource] = None
-    pool_id: StrictStr = Field(description="The ID of the staking pool.")
+    pool_id: StakingPoolId
     amount: StrictStr = Field(description="The amount to stake.")
     fee: TransactionRequestFee
     extra: CreateStakeActivityExtra

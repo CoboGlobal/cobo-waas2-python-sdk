@@ -1,9 +1,9 @@
 import hashlib
 import time
 from urllib.parse import urlencode
-
-from nacl.signing import SigningKey, VerifyKey
+from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
+from cobo_waas2.crypto.signer import Signer
 
 
 class SignHelper(object):
@@ -30,7 +30,7 @@ class SignHelper(object):
     @classmethod
     def sign(
         cls,
-        api_secret: str,
+        signer: Signer,
         method: str,
         path: str,
         timestamp: str,
@@ -40,15 +40,13 @@ class SignHelper(object):
         digest = cls._build_unsigned_digest(
             method, path, timestamp, params=params, body=body
         )
-        sk = SigningKey(bytes.fromhex(api_secret))
-        signature = sk.sign(digest).signature
-        vk = bytes(sk.verify_key)
-        return signature, vk
+        signature = signer.sign(digest)
+        return signature, signer.get_public_key()
 
     @classmethod
     def generate_headers(
         cls,
-        api_secret: str,
+        signer: Signer,
         body: bytes,
         method: str,
         params: dict,
@@ -56,7 +54,7 @@ class SignHelper(object):
     ):
         timestamp = str(int(time.time() * 1000))
         signature, api_key = cls.sign(
-            api_secret,
+            signer,
             method,
             path,
             timestamp,
@@ -64,19 +62,11 @@ class SignHelper(object):
             body=body,
         )
         headers = {
-            "Biz-Api-Key": api_key.hex(),
+            "Biz-Api-Key": api_key,
             "Biz-Api-Nonce": timestamp,
-            "Biz-Api-Signature": signature.hex(),
+            "Biz-Api-Signature": signature,
         }
         return headers
-
-    @classmethod
-    def generate_api_key(cls) -> dict:
-        sk = SigningKey.generate()
-        return {
-            "api_key": bytes(sk.verify_key).hex(),
-            "api_secret": bytes(sk).hex(),
-        }
 
     @classmethod
     def verify(

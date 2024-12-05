@@ -52,7 +52,11 @@ from cobo_waas2.models.contract_call_destination_type import ContractCallDestina
 from cobo_waas2.models.contract_call_params import ContractCallParams
 from cobo_waas2.models.contract_call_source import ContractCallSource
 from cobo_waas2.models.contract_call_source_type import ContractCallSourceType
+from cobo_waas2.models.core_stake_extra import CoreStakeExtra
+from cobo_waas2.models.core_staking_extra import CoreStakingExtra
 from cobo_waas2.models.create_address_request import CreateAddressRequest
+from cobo_waas2.models.create_claim_activity import CreateClaimActivity
+from cobo_waas2.models.create_claim_activity_request import CreateClaimActivityRequest
 from cobo_waas2.models.create_custodial_wallet_params import CreateCustodialWalletParams
 from cobo_waas2.models.create_exchange_wallet_params import CreateExchangeWalletParams
 from cobo_waas2.models.create_key_share_holder import CreateKeyShareHolder
@@ -85,6 +89,7 @@ from cobo_waas2.models.eigen_layer_lst_stake_extra import EigenLayerLstStakeExtr
 from cobo_waas2.models.eigen_layer_native_stake_extra import EigenLayerNativeStakeExtra
 from cobo_waas2.models.eigenlayer_validator import EigenlayerValidator
 from cobo_waas2.models.error_response import ErrorResponse
+from cobo_waas2.models.estimate_claim_fee import EstimateClaimFee
 from cobo_waas2.models.estimate_contract_call_fee_params import EstimateContractCallFeeParams
 from cobo_waas2.models.estimate_fee_params import EstimateFeeParams
 from cobo_waas2.models.estimate_fee_request_type import EstimateFeeRequestType
@@ -103,6 +108,7 @@ from cobo_waas2.models.estimated_utxo_fee_slow import EstimatedUtxoFeeSlow
 from cobo_waas2.models.eth_stake_estimated_fee import EthStakeEstimatedFee
 from cobo_waas2.models.eth_stake_extra import EthStakeExtra
 from cobo_waas2.models.eth_staking_extra import EthStakingExtra
+from cobo_waas2.models.eth_staking_extra_all_of_beacon_validators import EthStakingExtraAllOfBeaconValidators
 from cobo_waas2.models.eth_unstake_extra import EthUnstakeExtra
 from cobo_waas2.models.evm_contract_call_destination import EvmContractCallDestination
 from cobo_waas2.models.evm_eip191_message_sign_destination import EvmEIP191MessageSignDestination
@@ -198,11 +204,11 @@ from cobo_waas2.models.smart_contract_wallet_operation_type import SmartContract
 from cobo_waas2.models.smart_contract_wallet_type import SmartContractWalletType
 from cobo_waas2.models.source_group import SourceGroup
 from cobo_waas2.models.stake_source_type import StakeSourceType
+from cobo_waas2.models.staking_pool_id import StakingPoolId
 from cobo_waas2.models.staking_pool_type import StakingPoolType
 from cobo_waas2.models.staking_source import StakingSource
 from cobo_waas2.models.stakings import Stakings
 from cobo_waas2.models.stakings_extra import StakingsExtra
-from cobo_waas2.models.stakings_validator_info import StakingsValidatorInfo
 from cobo_waas2.models.sub_wallet_asset_balance import SubWalletAssetBalance
 from cobo_waas2.models.tss_groups import TSSGroups
 from cobo_waas2.models.tss_request import TSSRequest

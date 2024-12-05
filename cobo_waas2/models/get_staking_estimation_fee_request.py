@@ -15,6 +15,7 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from cobo_waas2.models.estimate_claim_fee import EstimateClaimFee
 from cobo_waas2.models.estimate_stake_fee import EstimateStakeFee
 from cobo_waas2.models.estimate_unstake_fee import EstimateUnstakeFee
 from cobo_waas2.models.estimate_withdraw_fee import EstimateWithdrawFee
@@ -22,7 +23,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-GETSTAKINGESTIMATIONFEEREQUEST_ONE_OF_SCHEMAS = ["EstimateStakeFee", "EstimateUnstakeFee", "EstimateWithdrawFee"]
+GETSTAKINGESTIMATIONFEEREQUEST_ONE_OF_SCHEMAS = ["EstimateClaimFee", "EstimateStakeFee", "EstimateUnstakeFee", "EstimateWithdrawFee"]
 
 class GetStakingEstimationFeeRequest(BaseModel):
     """
@@ -34,8 +35,10 @@ class GetStakingEstimationFeeRequest(BaseModel):
     oneof_schema_2_validator: Optional[EstimateUnstakeFee] = None
     # data type: EstimateWithdrawFee
     oneof_schema_3_validator: Optional[EstimateWithdrawFee] = None
-    actual_instance: Optional[Union[EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee]] = None
-    one_of_schemas: Set[str] = { "EstimateStakeFee", "EstimateUnstakeFee", "EstimateWithdrawFee" }
+    # data type: EstimateClaimFee
+    oneof_schema_4_validator: Optional[EstimateClaimFee] = None
+    actual_instance: Optional[Union[EstimateClaimFee, EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee]] = None
+    one_of_schemas: Set[str] = { "EstimateClaimFee", "EstimateStakeFee", "EstimateUnstakeFee", "EstimateWithdrawFee" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -76,12 +79,17 @@ class GetStakingEstimationFeeRequest(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `EstimateWithdrawFee`")
         else:
             match += 1
+        # validate data type: EstimateClaimFee
+        if not isinstance(v, EstimateClaimFee):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `EstimateClaimFee`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in GetStakingEstimationFeeRequest with oneOf schemas: EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in GetStakingEstimationFeeRequest with oneOf schemas: EstimateClaimFee, EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in GetStakingEstimationFeeRequest with oneOf schemas: EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in GetStakingEstimationFeeRequest with oneOf schemas: EstimateClaimFee, EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -101,6 +109,11 @@ class GetStakingEstimationFeeRequest(BaseModel):
         if not _data_type:
             raise ValueError("Failed to lookup data type from the field `activity_type` in the input.")
 
+        # check if data type is `EstimateClaimFee`
+        if _data_type == "Claim":
+            instance.actual_instance = EstimateClaimFee.from_json(json_str)
+            return instance
+
         # check if data type is `EstimateStakeFee`
         if _data_type == "Stake":
             instance.actual_instance = EstimateStakeFee.from_json(json_str)
@@ -114,6 +127,11 @@ class GetStakingEstimationFeeRequest(BaseModel):
         # check if data type is `EstimateWithdrawFee`
         if _data_type == "Withdraw":
             instance.actual_instance = EstimateWithdrawFee.from_json(json_str)
+            return instance
+
+        # check if data type is `EstimateClaimFee`
+        if _data_type == "EstimateClaimFee":
+            instance.actual_instance = EstimateClaimFee.from_json(json_str)
             return instance
 
         # check if data type is `EstimateStakeFee`
@@ -149,14 +167,20 @@ class GetStakingEstimationFeeRequest(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into EstimateClaimFee
+        try:
+            instance.actual_instance = EstimateClaimFee.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into GetStakingEstimationFeeRequest with oneOf schemas: EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into GetStakingEstimationFeeRequest with oneOf schemas: EstimateClaimFee, EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into GetStakingEstimationFeeRequest with oneOf schemas: EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into GetStakingEstimationFeeRequest with oneOf schemas: EstimateClaimFee, EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -170,7 +194,7 @@ class GetStakingEstimationFeeRequest(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], EstimateClaimFee, EstimateStakeFee, EstimateUnstakeFee, EstimateWithdrawFee]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

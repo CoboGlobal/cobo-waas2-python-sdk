@@ -24,8 +24,8 @@ class MessageSignSourceType(str, Enum):
     """
     allowed enum values
     """
-    ORG_CONTROLLED = 'Org-Controlled'
-    USER_CONTROLLED = 'User-Controlled'
+    ORG_MINUS_CONTROLLED = 'Org-Controlled'
+    USER_MINUS_CONTROLLED = 'User-Controlled'
 
     UNKNOWN = None
 

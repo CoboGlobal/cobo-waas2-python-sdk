@@ -91,12 +91,14 @@ Class | Method | HTTP request | Description
 *DevelopersWebhooksApi* | [**update_webhook_endpoint_by_id**](docs/DevelopersWebhooksApi.md#update_webhook_endpoint_by_id) | **PUT** /webhooks/endpoints/{endpoint_id} | Update webhook endpoint
 *OAuthApi* | [**get_token**](docs/OAuthApi.md#get_token) | **GET** /oauth/token | Get Org Access Token
 *OAuthApi* | [**refresh_token**](docs/OAuthApi.md#refresh_token) | **POST** /oauth/token | Refresh Org Access Token
+*StakingsApi* | [**create_claim_activity**](docs/StakingsApi.md#create_claim_activity) | **POST** /stakings/activities/claim | Create claim activity
 *StakingsApi* | [**create_stake_activity**](docs/StakingsApi.md#create_stake_activity) | **POST** /stakings/activities/stake | Create stake activity
 *StakingsApi* | [**create_unstake_activity**](docs/StakingsApi.md#create_unstake_activity) | **POST** /stakings/activities/unstake | Create unstake activity
 *StakingsApi* | [**create_withdraw_activity**](docs/StakingsApi.md#create_withdraw_activity) | **POST** /stakings/activities/withdraw | Create withdraw activity
 *StakingsApi* | [**get_staking_activity_by_id**](docs/StakingsApi.md#get_staking_activity_by_id) | **GET** /stakings/activities/{activity_id} | Get staking activity details
 *StakingsApi* | [**get_staking_by_id**](docs/StakingsApi.md#get_staking_by_id) | **GET** /stakings/{staking_id} | Get staking position details
 *StakingsApi* | [**get_staking_estimation_fee**](docs/StakingsApi.md#get_staking_estimation_fee) | **POST** /stakings/estimate_fee | Estimate staking fees
+*StakingsApi* | [**get_staking_estimation_fee_v2**](docs/StakingsApi.md#get_staking_estimation_fee_v2) | **POST** /stakings/estimate_fee_v2 | Estimate staking fees
 *StakingsApi* | [**get_staking_pool_by_id**](docs/StakingsApi.md#get_staking_pool_by_id) | **GET** /stakings/pools/{pool_id} | Get staking pool details
 *StakingsApi* | [**list_staking_activities**](docs/StakingsApi.md#list_staking_activities) | **GET** /stakings/activities | List staking activities
 *StakingsApi* | [**list_staking_pools**](docs/StakingsApi.md#list_staking_pools) | **GET** /stakings/pools | List staking pools
@@ -202,7 +204,11 @@ Class | Method | HTTP request | Description
  - [ContractCallParams](docs/ContractCallParams.md)
  - [ContractCallSource](docs/ContractCallSource.md)
  - [ContractCallSourceType](docs/ContractCallSourceType.md)
+ - [CoreStakeExtra](docs/CoreStakeExtra.md)
+ - [CoreStakingExtra](docs/CoreStakingExtra.md)
  - [CreateAddressRequest](docs/CreateAddressRequest.md)
+ - [CreateClaimActivity](docs/CreateClaimActivity.md)
+ - [CreateClaimActivityRequest](docs/CreateClaimActivityRequest.md)
  - [CreateCustodialWalletParams](docs/CreateCustodialWalletParams.md)
  - [CreateExchangeWalletParams](docs/CreateExchangeWalletParams.md)
  - [CreateKeyShareHolder](docs/CreateKeyShareHolder.md)
@@ -235,6 +241,7 @@ Class | Method | HTTP request | Description
  - [EigenLayerNativeStakeExtra](docs/EigenLayerNativeStakeExtra.md)
  - [EigenlayerValidator](docs/EigenlayerValidator.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [EstimateClaimFee](docs/EstimateClaimFee.md)
  - [EstimateContractCallFeeParams](docs/EstimateContractCallFeeParams.md)
  - [EstimateFeeParams](docs/EstimateFeeParams.md)
  - [EstimateFeeRequestType](docs/EstimateFeeRequestType.md)
@@ -253,6 +260,7 @@ Class | Method | HTTP request | Description
  - [EthStakeEstimatedFee](docs/EthStakeEstimatedFee.md)
  - [EthStakeExtra](docs/EthStakeExtra.md)
  - [EthStakingExtra](docs/EthStakingExtra.md)
+ - [EthStakingExtraAllOfBeaconValidators](docs/EthStakingExtraAllOfBeaconValidators.md)
  - [EthUnstakeExtra](docs/EthUnstakeExtra.md)
  - [EvmContractCallDestination](docs/EvmContractCallDestination.md)
  - [EvmEIP191MessageSignDestination](docs/EvmEIP191MessageSignDestination.md)
@@ -348,11 +356,11 @@ Class | Method | HTTP request | Description
  - [SmartContractWalletType](docs/SmartContractWalletType.md)
  - [SourceGroup](docs/SourceGroup.md)
  - [StakeSourceType](docs/StakeSourceType.md)
+ - [StakingPoolId](docs/StakingPoolId.md)
  - [StakingPoolType](docs/StakingPoolType.md)
  - [StakingSource](docs/StakingSource.md)
  - [Stakings](docs/Stakings.md)
  - [StakingsExtra](docs/StakingsExtra.md)
- - [StakingsValidatorInfo](docs/StakingsValidatorInfo.md)
  - [SubWalletAssetBalance](docs/SubWalletAssetBalance.md)
  - [TSSGroups](docs/TSSGroups.md)
  - [TSSRequest](docs/TSSRequest.md)
