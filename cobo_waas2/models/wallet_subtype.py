@@ -26,9 +26,9 @@ class WalletSubtype(str, Enum):
     """
     ASSET = 'Asset'
     WEB3 = 'Web3'
-    ORG_CONTROLLED = 'Org-Controlled'
-    USER_CONTROLLED = 'User-Controlled'
-    SAFE_WALLET = 'Safe{Wallet}'
+    ORG_MINUS_CONTROLLED = 'Org-Controlled'
+    USER_MINUS_CONTROLLED = 'User-Controlled'
+    SAFE_LEFT_CURLY_BRACKET_WALLET_RIGHT_CURLY_BRACKET = 'Safe{Wallet}'
     MAIN = 'Main'
     SUB = 'Sub'
 

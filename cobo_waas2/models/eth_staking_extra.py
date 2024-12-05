@@ -16,7 +16,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.eth_staking_extra_all_of_beacon_validators import EthStakingExtraAllOfBeaconValidators
 from cobo_waas2.models.staking_pool_type import StakingPoolType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,8 @@ class EthStakingExtra(BaseModel):
     """  # noqa: E501
     pool_type: StakingPoolType
     pos_chain: StrictStr = Field(description="The Proof-of-Stake (PoS) chain.")
-    __properties: ClassVar[List[str]] = ["pool_type", "pos_chain"]
+    beacon_validators: Optional[List[EthStakingExtraAllOfBeaconValidators]] = Field(default=None, description="The list of validator information.")
+    __properties: ClassVar[List[str]] = ["pool_type", "pos_chain", "beacon_validators"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +71,13 @@ class EthStakingExtra(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in beacon_validators (list)
+        _items = []
+        if self.beacon_validators:
+            for _item in self.beacon_validators:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['beacon_validators'] = _items
         return _dict
 
     @classmethod
@@ -82,7 +91,8 @@ class EthStakingExtra(BaseModel):
 
         _obj = cls.model_validate({
             "pool_type": obj.get("pool_type"),
-            "pos_chain": obj.get("pos_chain")
+            "pos_chain": obj.get("pos_chain"),
+            "beacon_validators": [EthStakingExtraAllOfBeaconValidators.from_dict(_item) for _item in obj["beacon_validators"]] if obj.get("beacon_validators") is not None else None
         })
         return _obj
 

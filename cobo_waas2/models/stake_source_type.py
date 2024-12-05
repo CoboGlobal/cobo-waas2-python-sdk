@@ -24,7 +24,7 @@ class StakeSourceType(str, Enum):
     """
     allowed enum values
     """
-    ORG_CONTROLLED = 'Org-Controlled'
+    ORG_MINUS_CONTROLLED = 'Org-Controlled'
 
     UNKNOWN = None
 

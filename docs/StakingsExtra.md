@@ -11,6 +11,11 @@ Name | Type | Description | Notes
 **unlock_block_height** | **int** | The block height at which the bitcoins will be unlocked. | [optional] 
 **stake_address** | **str** | The address receiving the staked bitcoins. | [optional] 
 **unbond_address** | **str** | The address receiving the unlocked bitcoins. | [optional] 
+**beacon_validators** | [**List[EthStakingExtraAllOfBeaconValidators]**](EthStakingExtraAllOfBeaconValidators.md) | The list of validator information. | [optional] 
+**staker_address** | **str** | The staker bitcoin address. | 
+**validator_address** | **str** | The validator evm address. | 
+**reward_address** | **str** | The reward evm address. | 
+**timelock** | **int** | The Unix timestamp (in seconds) when the staking position will be unlocked and available for withdrawal. | 
 
 ## Example
 
