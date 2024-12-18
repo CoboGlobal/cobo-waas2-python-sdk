@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.auto_fuel_type import AutoFuelType
 from cobo_waas2.models.transaction_rbf_source import TransactionRbfSource
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
@@ -32,7 +33,8 @@ class TransactionRbf(BaseModel):
     source: Optional[TransactionRbfSource] = None
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     description: Optional[StrictStr] = Field(default=None, description="The description of the RBF transaction.")
-    __properties: ClassVar[List[str]] = ["request_id", "fee", "source", "category_names", "description"]
+    auto_fuel: Optional[AutoFuelType] = None
+    __properties: ClassVar[List[str]] = ["request_id", "fee", "source", "category_names", "description", "auto_fuel"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +97,8 @@ class TransactionRbf(BaseModel):
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
             "source": TransactionRbfSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "category_names": obj.get("category_names"),
-            "description": obj.get("description")
+            "description": obj.get("description"),
+            "auto_fuel": obj.get("auto_fuel")
         })
         return _obj
 

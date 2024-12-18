@@ -27,17 +27,20 @@ class BabylonValidator(BaseModel):
     BabylonValidator
     """  # noqa: E501
     pool_type: StakingPoolType
-    icon_url: StrictStr = Field(description="The URL of the validator's icon.")
+    icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the validator's icon.")
     name: StrictStr = Field(description="The validator's name.")
     priority: Optional[StrictInt] = Field(default=None, description="This property can be ignored.")
-    public_key: StrictStr = Field(description="The public key of the validator.")
-    commission_rate: Union[StrictFloat, StrictInt] = Field(description="The commission rate of the validator.")
-    supported_pos_chains: List[StrictStr] = Field(description="A list of supported Proof-of-Stake (PoS) chains.")
+    public_key: Optional[StrictStr] = Field(default=None, description="The public key of the validator.")
+    commission_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The commission rate of the validator.")
+    supported_pos_chains: Optional[List[StrictStr]] = Field(default=None, description="A list of supported Proof-of-Stake (PoS) chains.")
     __properties: ClassVar[List[str]] = ["pool_type", "icon_url", "name", "priority", "public_key", "commission_rate", "supported_pos_chains"]
 
     @field_validator('supported_pos_chains')
     def supported_pos_chains_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         for i in value:
             if i not in set(['Babylon', 'Cosmos', 'Ethereum']):
                 raise ValueError("each list item must be one of ('Babylon', 'Cosmos', 'Ethereum')")

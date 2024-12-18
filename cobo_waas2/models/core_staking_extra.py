@@ -15,22 +15,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List
+from cobo_waas2.models.staking_pool_type import StakingPoolType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class StakingsValidatorInfo(BaseModel):
+class CoreStakingExtra(BaseModel):
     """
-    The information about the validator.
+    CoreStakingExtra
     """  # noqa: E501
-    icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the validator's icon.")
-    public_key: Optional[StrictStr] = Field(default=None, description="The validator's public key.")
-    name: Optional[StrictStr] = Field(default=None, description="The validator's name.")
-    address: Optional[StrictStr] = Field(default=None, description="The wallet address of the validator.")
-    commission_rate: Optional[StrictStr] = Field(default=None, description="The commission rate of the validator.")
-    __properties: ClassVar[List[str]] = ["icon_url", "public_key", "name", "address", "commission_rate"]
+    pool_type: StakingPoolType
+    pos_chain: StrictStr = Field(description="The Proof-of-Stake (PoS) chain.")
+    staker_address: StrictStr = Field(description="The staker's Bitcoin address.")
+    validator_address: StrictStr = Field(description="The validator's EVM address.")
+    reward_address: StrictStr = Field(description="The EVM address to receive staking rewards.")
+    timelock: StrictInt = Field(description="The Unix timestamp (in seconds) when the staking position will be unlocked and available for withdrawal.")
+    __properties: ClassVar[List[str]] = ["pool_type", "pos_chain", "staker_address", "validator_address", "reward_address", "timelock"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +52,7 @@ class StakingsValidatorInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of StakingsValidatorInfo from a JSON string"""
+        """Create an instance of CoreStakingExtra from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +77,7 @@ class StakingsValidatorInfo(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of StakingsValidatorInfo from a dict"""
+        """Create an instance of CoreStakingExtra from a dict"""
         if obj is None:
             return None
 
@@ -83,11 +85,12 @@ class StakingsValidatorInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "icon_url": obj.get("icon_url"),
-            "public_key": obj.get("public_key"),
-            "name": obj.get("name"),
-            "address": obj.get("address"),
-            "commission_rate": obj.get("commission_rate")
+            "pool_type": obj.get("pool_type"),
+            "pos_chain": obj.get("pos_chain"),
+            "staker_address": obj.get("staker_address"),
+            "validator_address": obj.get("validator_address"),
+            "reward_address": obj.get("reward_address"),
+            "timelock": obj.get("timelock")
         })
         return _obj
 

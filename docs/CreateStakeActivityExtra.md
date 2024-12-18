@@ -10,6 +10,10 @@ Name | Type | Description | Notes
 **stake_block_time** | **int** | The number of blocks that need to be processed before the locked tokens are unlocked and become accessible. | 
 **auto_broadcast** | **bool** | Whether to automatically broadcast the transaction. The default value is &#x60;true&#x60;.  - &#x60;true&#x60;: Automatically broadcast the transaction. - &#x60;false&#x60;: The transaction will not be submitted to the blockchain automatically. You can call [Broadcast signed transactions](/v2/api-references/transactions/broadcast-signed-transactions) to broadcast the transaction to the blockchain, or retrieve the signed raw transaction data &#x60;raw_tx&#x60; by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information) and broadcast it yourself.  | [optional] 
 **provider_name** | **str** | The name of the provider. | 
+**timelock** | **int** | The Unix timestamp (in seconds) when the staking position will be unlocked and available for withdrawal. | 
+**change_address** | **str** | The change address on the Bitcoin chain. If not provided, the source wallet&#39;s address will be used as the change address. | [optional] 
+**validator_address** | **str** | The validator&#39;s EVM address. | 
+**reward_address** | **str** | The EVM address to receive staking rewards. | 
 
 ## Example
 

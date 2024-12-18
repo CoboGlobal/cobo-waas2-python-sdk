@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **source** | [**TransactionRbfSource**](TransactionRbfSource.md) |  | [optional] 
 **category_names** | **List[str]** | The custom category for you to identify your transactions. | [optional] 
 **description** | **str** | The description of the RBF transaction. | [optional] 
+**auto_fuel** | [**AutoFuelType**](AutoFuelType.md) |  | [optional] 
 
 ## Example
 

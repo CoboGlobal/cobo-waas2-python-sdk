@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **request_id** | **str** | The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization. | [optional] 
 **staking_id** | **str** | The ID of the corresponding staking position. | 
 **amount** | **str** | The amount to withdraw. | [optional] 
-**address** | **str** | The withdrawal address. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
 **app_initiator** | **str** | The initiator of the staking activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator. | [optional] 
 

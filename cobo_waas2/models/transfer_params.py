@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.auto_fuel_type import AutoFuelType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from cobo_waas2.models.transfer_destination import TransferDestination
 from cobo_waas2.models.transfer_source import TransferSource
@@ -35,7 +36,8 @@ class TransferParams(BaseModel):
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     description: Optional[StrictStr] = Field(default=None, description="The description of the transfer.")
     fee: Optional[TransactionRequestFee] = None
-    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee"]
+    auto_fuel: Optional[AutoFuelType] = None
+    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee", "auto_fuel"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +105,8 @@ class TransferParams(BaseModel):
             "destination": TransferDestination.from_dict(obj["destination"]) if obj.get("destination") is not None else None,
             "category_names": obj.get("category_names"),
             "description": obj.get("description"),
-            "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None
+            "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
+            "auto_fuel": obj.get("auto_fuel")
         })
         return _obj
 

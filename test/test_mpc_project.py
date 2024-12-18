@@ -39,7 +39,7 @@ class TestMPCProject(unittest.TestCase):
                 name = 'Project name',
                 participants = 3,
                 threshold = 2,
-                create_timestamp = 1718619403933
+                created_timestamp = 1718619403933
             )
         else:
             return MPCProject(
