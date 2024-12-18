@@ -4,17 +4,92 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_claim_activity**](StakingsApi.md#create_claim_activity) | **POST** /stakings/activities/claim | Create claim activity
 [**create_stake_activity**](StakingsApi.md#create_stake_activity) | **POST** /stakings/activities/stake | Create stake activity
 [**create_unstake_activity**](StakingsApi.md#create_unstake_activity) | **POST** /stakings/activities/unstake | Create unstake activity
 [**create_withdraw_activity**](StakingsApi.md#create_withdraw_activity) | **POST** /stakings/activities/withdraw | Create withdraw activity
 [**get_staking_activity_by_id**](StakingsApi.md#get_staking_activity_by_id) | **GET** /stakings/activities/{activity_id} | Get staking activity details
 [**get_staking_by_id**](StakingsApi.md#get_staking_by_id) | **GET** /stakings/{staking_id} | Get staking position details
 [**get_staking_estimation_fee**](StakingsApi.md#get_staking_estimation_fee) | **POST** /stakings/estimate_fee | Estimate staking fees
+[**get_staking_estimation_fee_v2**](StakingsApi.md#get_staking_estimation_fee_v2) | **POST** /stakings/estimate_fee_v2 | Estimate staking fees
 [**get_staking_pool_by_id**](StakingsApi.md#get_staking_pool_by_id) | **GET** /stakings/pools/{pool_id} | Get staking pool details
 [**list_staking_activities**](StakingsApi.md#list_staking_activities) | **GET** /stakings/activities | List staking activities
 [**list_staking_pools**](StakingsApi.md#list_staking_pools) | **GET** /stakings/pools | List staking pools
 [**list_stakings**](StakingsApi.md#list_stakings) | **GET** /stakings | List staking positions
 
+
+# **create_claim_activity**
+> CreateStakeActivity201Response create_claim_activity(create_claim_activity_request=create_claim_activity_request)
+
+Create claim activity
+
+This operation creates a claim request.  <Note>Currently, only the Ethereum Beacon protocol supports this operation.</Note>  For some protocols, you can use the `fee` property in the request body to specify the maximum fee you are willing to pay. The transaction will fail if the actual fee exceeds the specified maximum fee.  
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_claim_activity_request import CreateClaimActivityRequest
+from cobo_waas2.models.create_stake_activity201_response import CreateStakeActivity201Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.StakingsApi(api_client)
+    create_claim_activity_request = cobo_waas2.CreateClaimActivityRequest()
+
+    try:
+        # Create claim activity
+        api_response = api_instance.create_claim_activity(create_claim_activity_request=create_claim_activity_request)
+        print("The response of StakingsApi->create_claim_activity:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StakingsApi->create_claim_activity: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_claim_activity_request** | [**CreateClaimActivityRequest**](CreateClaimActivityRequest.md)| The request body to create a staking request. | [optional] 
+
+### Return type
+
+[**CreateStakeActivity201Response**](CreateStakeActivity201Response.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successfully created a staking activity. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**401** | Unauthorized. Please provide valid credentials. |  -  |
+**403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_stake_activity**
 > CreateStakeActivity201Response create_stake_activity(create_stake_activity_request=create_stake_activity_request)
@@ -354,7 +429,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **staking_id** | **str**| The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-all-stakings). | 
+ **staking_id** | **str**| The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions). | 
 
 ### Return type
 
@@ -386,7 +461,7 @@ Name | Type | Description  | Notes
 
 Estimate staking fees
 
-This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+<Note>This operation is deprecated. Please use the [updated version](/v2/api-references/stakings/estimate-staking-fees-1) instead.</Note>  This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
 
 ### Example
 
@@ -433,6 +508,77 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetStakingEstimationFee201Response**](GetStakingEstimationFee201Response.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_staking_estimation_fee_v2**
+> EthStakeEstimatedFee get_staking_estimation_fee_v2(get_staking_estimation_fee_request=get_staking_estimation_fee_request)
+
+Estimate staking fees
+
+This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.eth_stake_estimated_fee import EthStakeEstimatedFee
+from cobo_waas2.models.get_staking_estimation_fee_request import GetStakingEstimationFeeRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.StakingsApi(api_client)
+    get_staking_estimation_fee_request = cobo_waas2.GetStakingEstimationFeeRequest()
+
+    try:
+        # Estimate staking fees
+        api_response = api_instance.get_staking_estimation_fee_v2(get_staking_estimation_fee_request=get_staking_estimation_fee_request)
+        print("The response of StakingsApi->get_staking_estimation_fee_v2:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StakingsApi->get_staking_estimation_fee_v2: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **get_staking_estimation_fee_request** | [**GetStakingEstimationFeeRequest**](GetStakingEstimationFeeRequest.md)| The request body to get the estimated fee of a staking activity. | [optional] 
+
+### Return type
+
+[**EthStakeEstimatedFee**](EthStakeEstimatedFee.md)
 
 ### Authorization
 

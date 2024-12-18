@@ -1,6 +1,6 @@
 # ActivityType
 
-The type of the staking activity. Possible values include: - `Stake`: Stake tokens. - `Unstake`: Unstake tokens. Unstaked tokens are still in the staking protocol. - `Withdraw`: Withdraw tokens from the staking protocol to your wallet. 
+The type of the staking activity. Possible values include: - `Stake`: Stake tokens. - `Unstake`: Unstake tokens. Unstaked tokens are still in the staking protocol. - `Withdraw`: Withdraw tokens from the staking protocol to your wallet. - `Claim`: Claim rewards from the staking protocol. 
 
 ## Properties
 

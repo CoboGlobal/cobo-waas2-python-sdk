@@ -42,17 +42,12 @@ class TestStakings(unittest.TestCase):
                         status = 'Active', 
                         amount = '100.00', )
                     ],
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 token_id = 'BTC',
                 rewards_info = {},
                 created_timestamp = 1640995200000,
                 updated_timestamp = 1640995200000,
-                validator_info = cobo_waas2.models.stakings_validator_info.Stakings_validator_info(
-                    icon_url = 'https://example.com/logo.png', 
-                    public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0', 
-                    name = 'Cobo', 
-                    address = '0xAbCdE123456789aBcDeF123456789aBcDeF12345', 
-                    commission_rate = '0.1', ),
+                validator_info = None,
                 extra = None
             )
         else:
@@ -65,16 +60,11 @@ class TestStakings(unittest.TestCase):
                         status = 'Active', 
                         amount = '100.00', )
                     ],
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 token_id = 'BTC',
                 created_timestamp = 1640995200000,
                 updated_timestamp = 1640995200000,
-                validator_info = cobo_waas2.models.stakings_validator_info.Stakings_validator_info(
-                    icon_url = 'https://example.com/logo.png', 
-                    public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0', 
-                    name = 'Cobo', 
-                    address = '0xAbCdE123456789aBcDeF123456789aBcDeF12345', 
-                    commission_rate = '0.1', ),
+                validator_info = None,
         )
         """
 

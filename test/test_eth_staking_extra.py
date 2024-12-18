@@ -35,7 +35,16 @@ class TestEthStakingExtra(unittest.TestCase):
         if include_optional:
             return EthStakingExtra(
                 pool_type = 'Babylon',
-                pos_chain = 'Ethereum'
+                pos_chain = 'Ethereum',
+                beacon_validators = [
+                    cobo_waas2.models.eth_staking_extra_all_of_beacon_validators.EthStakingExtra_allOf_beacon_validators(
+                        pubkey = '0x123456789abcdef', 
+                        status = 'Active', 
+                        apy = 0.02, 
+                        staked_amount = '100.00', 
+                        rewards_received = '10.00', 
+                        updated_timestamp = 1640995200000, )
+                    ]
             )
         else:
             return EthStakingExtra(

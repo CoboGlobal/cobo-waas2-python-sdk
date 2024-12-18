@@ -6,7 +6,7 @@ The transaction fee that you need to pay based on the fixed fee model for some b
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fee_amount** | **str** | The fee that you need to pay for the transaction. | [optional] 
+**fee_amount** | **str** | The transaction fee that you need to pay for the transaction. | [optional] 
 **fee_type** | [**FeeType**](FeeType.md) |  | 
 **token_id** | **str** | The token ID of the transaction fee. | 
 

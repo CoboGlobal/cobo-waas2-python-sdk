@@ -68,7 +68,7 @@ class ApiClient:
         self.rest_client = rest.RESTClientObject(configuration)
         self.default_headers = {}
         # Set default User-Agent.
-        self.user_agent = 'cobo-waas2-python-sdk/1.6.0'
+        self.user_agent = 'cobo-waas2-python-sdk/1.7.0'
 
     def __enter__(self):
         return self
@@ -217,7 +217,7 @@ class ApiClient:
             url_parts = url_parts._replace(query=urlencode(query_params))
             cleaned_url = urlunparse(url_parts)
             auth_headers = SignHelper.generate_headers(
-                api_secret=self.configuration.api_private_key,
+                signer=self.configuration.signer,
                 body=json.dumps(body).encode('utf-8') if body else b"",
                 method=method,
                 params=query_params,

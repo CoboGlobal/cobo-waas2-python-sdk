@@ -30,8 +30,8 @@ class MPCProject(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="The project name.")
     participants: Optional[StrictInt] = Field(default=None, description="The number of key share holders in the project.")
     threshold: Optional[StrictInt] = Field(default=None, description="The number of key share holders required to sign an operation in the project.")
-    create_timestamp: Optional[StrictInt] = Field(default=None, description="The project's creation time in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["project_id", "org_id", "name", "participants", "threshold", "create_timestamp"]
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The project's creation time in Unix timestamp format, measured in milliseconds.")
+    __properties: ClassVar[List[str]] = ["project_id", "org_id", "name", "participants", "threshold", "created_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +89,7 @@ class MPCProject(BaseModel):
             "name": obj.get("name"),
             "participants": obj.get("participants"),
             "threshold": obj.get("threshold"),
-            "create_timestamp": obj.get("create_timestamp")
+            "created_timestamp": obj.get("created_timestamp")
         })
         return _obj
 

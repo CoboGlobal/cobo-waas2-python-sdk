@@ -25,7 +25,7 @@ class FeeAmount(BaseModel):
     """
     The transaction fee.
     """  # noqa: E501
-    fee_amount: Optional[StrictStr] = Field(default=None, description="The fee that you need to pay for the transaction.")
+    fee_amount: Optional[StrictStr] = Field(default=None, description="The transaction fee that you need to pay for the transaction.")
     __properties: ClassVar[List[str]] = ["fee_amount"]
 
     model_config = ConfigDict(

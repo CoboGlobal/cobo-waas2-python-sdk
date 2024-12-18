@@ -29,10 +29,9 @@ class CreateWithdrawActivityRequest(BaseModel):
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization.")
     staking_id: StrictStr = Field(description="The ID of the corresponding staking position.")
     amount: Optional[StrictStr] = Field(default=None, description="The amount to withdraw.")
-    address: Optional[StrictStr] = Field(default=None, description="The withdrawal address.")
     fee: TransactionRequestFee
     app_initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the staking activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator.")
-    __properties: ClassVar[List[str]] = ["request_id", "staking_id", "amount", "address", "fee", "app_initiator"]
+    __properties: ClassVar[List[str]] = ["request_id", "staking_id", "amount", "fee", "app_initiator"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +90,6 @@ class CreateWithdrawActivityRequest(BaseModel):
             "request_id": obj.get("request_id"),
             "staking_id": obj.get("staking_id"),
             "amount": obj.get("amount"),
-            "address": obj.get("address"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
             "app_initiator": obj.get("app_initiator")
         })

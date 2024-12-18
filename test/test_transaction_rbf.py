@@ -40,7 +40,8 @@ class TestTransactionRbf(unittest.TestCase):
                 category_names = [
                     'Trading'
                     ],
-                description = 'Speedup transaction'
+                description = 'Speedup transaction',
+                auto_fuel = 'PassiveAutoFuel'
             )
         else:
             return TransactionRbf(

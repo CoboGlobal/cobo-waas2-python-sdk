@@ -40,7 +40,7 @@ class TestActivity(unittest.TestCase):
                 type = 'Stake',
                 wallet_id = '0111039d-27fb-49ba-b172-6e0aa80e37ec',
                 address = '0xAbCdE123456789aBcDeF123456789aBcDeF12345',
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 token_id = 'BTC',
                 staking_id = '0011039d-27fb-49ba-b172-6e0aa80e37ec',
                 amount = '100.00',
@@ -61,7 +61,7 @@ class TestActivity(unittest.TestCase):
             )
         else:
             return Activity(
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 token_id = 'BTC',
                 amount = '100.00',
                 status = 'Success',

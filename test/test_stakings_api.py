@@ -29,6 +29,18 @@ class TestStakingsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_claim_activity(self) -> None:
+        """
+        Test case for create_claim_activity
+
+        Create claim activity
+        """
+        """
+        create_claim_activity_request = cobo_waas2.CreateClaimActivityRequest()
+
+        api_response = self.api.create_claim_activity(create_claim_activity_request=create_claim_activity_request)
+        """
+
     def test_create_stake_activity(self) -> None:
         """
         Test case for create_stake_activity
@@ -99,6 +111,18 @@ class TestStakingsApi(unittest.TestCase):
         get_staking_estimation_fee_request = cobo_waas2.GetStakingEstimationFeeRequest()
 
         api_response = self.api.get_staking_estimation_fee(get_staking_estimation_fee_request=get_staking_estimation_fee_request)
+        """
+
+    def test_get_staking_estimation_fee_v2(self) -> None:
+        """
+        Test case for get_staking_estimation_fee_v2
+
+        Estimate staking fees
+        """
+        """
+        get_staking_estimation_fee_request = cobo_waas2.GetStakingEstimationFeeRequest()
+
+        api_response = self.api.get_staking_estimation_fee_v2(get_staking_estimation_fee_request=get_staking_estimation_fee_request)
         """
 
     def test_get_staking_pool_by_id(self) -> None:

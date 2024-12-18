@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **request_id** | **str** | The request ID that is used to track a request. The request ID is provided by you and must be unique within your organization. | [optional] 
 **staking_id** | **str** | The ID of the corresponding staking position. | 
 **amount** | **str** | The amount to withdraw. | [optional] 
-**address** | **str** | The withdrawal address. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
 
 ## Example
