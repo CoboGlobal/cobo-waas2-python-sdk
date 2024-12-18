@@ -217,7 +217,7 @@ class ApiClient:
             url_parts = url_parts._replace(query=urlencode(query_params))
             cleaned_url = urlunparse(url_parts)
             auth_headers = SignHelper.generate_headers(
-                api_secret=self.configuration.api_private_key,
+                signer=self.configuration.signer,
                 body=json.dumps(body).encode('utf-8') if body else b"",
                 method=method,
                 params=query_params,

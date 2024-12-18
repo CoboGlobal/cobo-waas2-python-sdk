@@ -20,6 +20,9 @@ cobo_waas2/api_client.py
 cobo_waas2/api_response.py
 cobo_waas2/configuration.py
 cobo_waas2/crypto/__init__.py
+cobo_waas2/crypto/local_ed25519_signer.py
+cobo_waas2/crypto/local_secp256k1_signer.py
+cobo_waas2/crypto/signer.py
 cobo_waas2/crypto/signing_helper.py
 cobo_waas2/exceptions.py
 cobo_waas2/models/__init__.py

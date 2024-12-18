@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fee_rate** | **str** | The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain. | 
-**fee_amount** | **str** | The fee that you need to pay for the transaction. | 
+**fee_amount** | **str** | The transaction fee that you need to pay for the transaction. | 
 
 ## Example
 

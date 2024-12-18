@@ -26,7 +26,7 @@ class FixedFeeRate(BaseModel):
     """
     The transaction fee that you need to pay based on the fixed fee model for some blockchains. The fee can vary between different chains.
     """  # noqa: E501
-    fee_amount: Optional[StrictStr] = Field(default=None, description="The fee that you need to pay for the transaction.")
+    fee_amount: Optional[StrictStr] = Field(default=None, description="The transaction fee that you need to pay for the transaction.")
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token ID of the transaction fee.")
     __properties: ClassVar[List[str]] = ["fee_amount", "fee_type", "token_id"]

@@ -31,7 +31,7 @@ class EstimateContractCallFeeParams(BaseModel):
     """  # noqa: E501
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. It is recommended to use the same request ID as the transaction for which you want to estimate the transaction fee.")
     request_type: EstimateFeeRequestType
-    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
+    chain_id: StrictStr = Field(description="The chain ID of the chain on which the smart contract is deployed. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
     source: ContractCallSource
     destination: ContractCallDestination
     fee_type: Optional[FeeType] = None

@@ -26,7 +26,7 @@ class EstimatedUtxoFeeSlow(BaseModel):
     EstimatedUtxoFeeSlow
     """  # noqa: E501
     fee_rate: StrictStr = Field(description="The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain.")
-    fee_amount: StrictStr = Field(description="The fee that you need to pay for the transaction.")
+    fee_amount: StrictStr = Field(description="The transaction fee that you need to pay for the transaction.")
     __properties: ClassVar[List[str]] = ["fee_rate", "fee_amount"]
 
     model_config = ConfigDict(
