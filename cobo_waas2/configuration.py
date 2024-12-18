@@ -18,6 +18,10 @@ from typing import Optional
 
 import http.client as httplib
 
+from cobo_waas2.crypto.local_ed25519_signer import LocalEd25519Signer
+from cobo_waas2.crypto.local_secp256k1_signer import LocalSecp256k1Signer
+from cobo_waas2.crypto.signer import Signer
+
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'multipleOf', 'maximum', 'exclusiveMaximum',
@@ -49,10 +53,21 @@ class Configuration:
                  server_index=None,
                  server_variables=None,
                  ssl_ca_cert=None,
+                 signer: Signer=None,
+                 curve_type: str = None,
                  ) -> None:
         """Constructor
         """
-        self.api_private_key = api_private_key
+        if signer:
+            self.signer = signer
+        else:
+            if curve_type:
+                assert curve_type in ("SECP256K1", "ED25519")
+            if api_private_key:
+                if curve_type is None or curve_type == "ED25519":
+                    self.signer = LocalEd25519Signer(api_private_key)
+                else:
+                    self.signer = LocalSecp256k1Signer(api_private_key)
         self._base_path = "https://api.dev.cobo.com/v2" if host is None else host
         """Default Base url
         """

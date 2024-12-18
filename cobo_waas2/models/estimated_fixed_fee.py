@@ -24,9 +24,9 @@ from typing_extensions import Self
 
 class EstimatedFixedFee(BaseModel):
     """
-    In the fixed fee model, the transaction fee is a fixed amount within a certain amount of period regardless of the transaction size or network congestion, which can vary between different chains.
+    The estimated transaction fee based on the fixed fee model.
     """  # noqa: E501
-    fee_amount: StrictStr = Field(description="The fee that you need to pay for the transaction.")
+    fee_amount: StrictStr = Field(description="The transaction fee that you need to pay for the transaction.")
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token ID of the transaction fee.")
     is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
