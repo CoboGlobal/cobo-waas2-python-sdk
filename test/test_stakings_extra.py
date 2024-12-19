@@ -39,12 +39,29 @@ class TestStakingsExtra(unittest.TestCase):
                 unlock_timestamp = 1640995200000,
                 unlock_block_height = 871234,
                 stake_address = 'tb1pgmpawe2rkrzuuflu8yw564lerfalhw8td36dha49yz4l99xvm3psteh393',
-                unbond_address = 'tb1pzcn4hmsfq32vyfnckvrtyjhdh0cf2hsm2nr6m8034x4lnrx3ry4q2nyzqv'
+                unbond_address = 'tb1pzcn4hmsfq32vyfnckvrtyjhdh0cf2hsm2nr6m8034x4lnrx3ry4q2nyzqv',
+                beacon_validators = [
+                    cobo_waas2.models.eth_staking_extra_all_of_beacon_validators.EthStakingExtra_allOf_beacon_validators(
+                        pubkey = '0x123456789abcdef', 
+                        status = 'Active', 
+                        apy = 0.02, 
+                        staked_amount = '100.00', 
+                        rewards_received = '10.00', 
+                        updated_timestamp = 1640995200000, )
+                    ],
+                staker_address = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+                validator_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                reward_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                timelock = 1704067200
             )
         else:
             return StakingsExtra(
                 pool_type = 'Babylon',
                 pos_chain = 'Ethereum',
+                staker_address = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+                validator_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                reward_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                timelock = 1704067200,
         )
         """
 

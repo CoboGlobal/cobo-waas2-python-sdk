@@ -36,7 +36,7 @@ class TestCreateStakeActivityRequest(unittest.TestCase):
             return CreateStakeActivityRequest(
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 source = None,
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
                 extra = None,
@@ -44,7 +44,7 @@ class TestCreateStakeActivityRequest(unittest.TestCase):
             )
         else:
             return CreateStakeActivityRequest(
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
                 extra = None,

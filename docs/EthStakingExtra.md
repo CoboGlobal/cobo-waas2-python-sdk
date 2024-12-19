@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pool_type** | [**StakingPoolType**](StakingPoolType.md) |  | 
 **pos_chain** | **str** | The Proof-of-Stake (PoS) chain. | 
+**beacon_validators** | [**List[EthStakingExtraAllOfBeaconValidators]**](EthStakingExtraAllOfBeaconValidators.md) | The list of validator information. | [optional] 
 
 ## Example
 

@@ -38,7 +38,6 @@ class TestEstimateWithdrawFee(unittest.TestCase):
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 staking_id = '0011039d-27fb-49ba-b172-6e0aa80e37ec',
                 amount = '100.00',
-                address = '0xdAC17F958D2ee523a2206206994597C13D831ec7',
                 fee = None
             )
         else:

@@ -37,7 +37,7 @@ class TestEstimateStakeFee(unittest.TestCase):
                 activity_type = 'Stake',
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 source = None,
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
                 extra = None
@@ -45,7 +45,7 @@ class TestEstimateStakeFee(unittest.TestCase):
         else:
             return EstimateStakeFee(
                 activity_type = 'Stake',
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
                 extra = None,

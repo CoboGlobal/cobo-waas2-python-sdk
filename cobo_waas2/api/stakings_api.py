@@ -19,10 +19,12 @@ from typing_extensions import Annotated
 from cobo_waas2.models.activity import Activity
 from cobo_waas2.models.activity_status import ActivityStatus
 from cobo_waas2.models.activity_type import ActivityType
+from cobo_waas2.models.create_claim_activity_request import CreateClaimActivityRequest
 from cobo_waas2.models.create_stake_activity201_response import CreateStakeActivity201Response
 from cobo_waas2.models.create_stake_activity_request import CreateStakeActivityRequest
 from cobo_waas2.models.create_unstake_activity_request import CreateUnstakeActivityRequest
 from cobo_waas2.models.create_withdraw_activity_request import CreateWithdrawActivityRequest
+from cobo_waas2.models.eth_stake_estimated_fee import EthStakeEstimatedFee
 from cobo_waas2.models.get_staking_estimation_fee201_response import GetStakingEstimationFee201Response
 from cobo_waas2.models.get_staking_estimation_fee_request import GetStakingEstimationFeeRequest
 from cobo_waas2.models.list_staking_activities200_response import ListStakingActivities200Response
@@ -47,6 +49,178 @@ class StakingsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def create_claim_activity(
+        self,
+        create_claim_activity_request: Annotated[Optional[CreateClaimActivityRequest], Field(description="The request body to create a staking request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CreateStakeActivity201Response:
+        """Create claim activity
+
+        This operation creates a claim request.  <Note>Currently, only the Ethereum Beacon protocol supports this operation.</Note>  For some protocols, you can use the `fee` property in the request body to specify the maximum fee you are willing to pay. The transaction will fail if the actual fee exceeds the specified maximum fee.  
+
+        :param create_claim_activity_request: The request body to create a staking request.
+        :type create_claim_activity_request: CreateClaimActivityRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_claim_activity_serialize(
+            create_claim_activity_request=create_claim_activity_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateStakeActivity201Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_claim_activity_with_http_info(
+        self,
+        create_claim_activity_request: Annotated[Optional[CreateClaimActivityRequest], Field(description="The request body to create a staking request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CreateStakeActivity201Response]:
+        """Create claim activity
+
+        This operation creates a claim request.  <Note>Currently, only the Ethereum Beacon protocol supports this operation.</Note>  For some protocols, you can use the `fee` property in the request body to specify the maximum fee you are willing to pay. The transaction will fail if the actual fee exceeds the specified maximum fee.  
+
+        :param create_claim_activity_request: The request body to create a staking request.
+        :type create_claim_activity_request: CreateClaimActivityRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_claim_activity_serialize(
+            create_claim_activity_request=create_claim_activity_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateStakeActivity201Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_claim_activity_without_preload_content(
+        self,
+        create_claim_activity_request: Annotated[Optional[CreateClaimActivityRequest], Field(description="The request body to create a staking request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create claim activity
+
+        This operation creates a claim request.  <Note>Currently, only the Ethereum Beacon protocol supports this operation.</Note>  For some protocols, you can use the `fee` property in the request body to specify the maximum fee you are willing to pay. The transaction will fail if the actual fee exceeds the specified maximum fee.  
+
+        :param create_claim_activity_request: The request body to create a staking request.
+        :type create_claim_activity_request: CreateClaimActivityRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_claim_activity_serialize(
+            create_claim_activity_request=create_claim_activity_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateStakeActivity201Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_claim_activity_serialize(
+        self,
+        create_claim_activity_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_claim_activity_request is not None:
+            _body_params = create_claim_activity_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/stakings/activities/claim',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
 
     @validate_call
     def create_stake_activity(
@@ -742,7 +916,7 @@ class StakingsApi:
     @validate_call
     def get_staking_by_id(
         self,
-        staking_id: Annotated[StrictStr, Field(description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-all-stakings).")],
+        staking_id: Annotated[StrictStr, Field(description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -756,7 +930,7 @@ class StakingsApi:
 
         This operation retrieves the detailed information about a specified staking position. 
 
-        :param staking_id: The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-all-stakings). (required)
+        :param staking_id: The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions). (required)
         :type staking_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -790,7 +964,7 @@ class StakingsApi:
     @validate_call
     def get_staking_by_id_with_http_info(
         self,
-        staking_id: Annotated[StrictStr, Field(description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-all-stakings).")],
+        staking_id: Annotated[StrictStr, Field(description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -804,7 +978,7 @@ class StakingsApi:
 
         This operation retrieves the detailed information about a specified staking position. 
 
-        :param staking_id: The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-all-stakings). (required)
+        :param staking_id: The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions). (required)
         :type staking_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -838,7 +1012,7 @@ class StakingsApi:
     @validate_call
     def get_staking_by_id_without_preload_content(
         self,
-        staking_id: Annotated[StrictStr, Field(description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-all-stakings).")],
+        staking_id: Annotated[StrictStr, Field(description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -852,7 +1026,7 @@ class StakingsApi:
 
         This operation retrieves the detailed information about a specified staking position. 
 
-        :param staking_id: The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-all-stakings). (required)
+        :param staking_id: The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions). (required)
         :type staking_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -929,7 +1103,7 @@ class StakingsApi:
     ) -> GetStakingEstimationFee201Response:
         """Estimate staking fees
 
-        This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+        <Note>This operation is deprecated. Please use the [updated version](/v2/api-references/stakings/estimate-staking-fees-1) instead.</Note>  This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
 
         :param get_staking_estimation_fee_request: The request body to get the estimated fee of a staking activity.
         :type get_staking_estimation_fee_request: GetStakingEstimationFeeRequest
@@ -974,7 +1148,7 @@ class StakingsApi:
     ) -> ApiResponse[GetStakingEstimationFee201Response]:
         """Estimate staking fees
 
-        This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+        <Note>This operation is deprecated. Please use the [updated version](/v2/api-references/stakings/estimate-staking-fees-1) instead.</Note>  This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
 
         :param get_staking_estimation_fee_request: The request body to get the estimated fee of a staking activity.
         :type get_staking_estimation_fee_request: GetStakingEstimationFeeRequest
@@ -1019,7 +1193,7 @@ class StakingsApi:
     ) -> RESTResponseType:
         """Estimate staking fees
 
-        This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+        <Note>This operation is deprecated. Please use the [updated version](/v2/api-references/stakings/estimate-staking-fees-1) instead.</Note>  This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  For some protocols, you can use the `fee.fee_rate` property in the request body to specify the fee rate you are willing to pay.  The `fee.max_fee_amount` property in the request body will be ignored.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
 
         :param get_staking_estimation_fee_request: The request body to get the estimated fee of a staking activity.
         :type get_staking_estimation_fee_request: GetStakingEstimationFeeRequest
@@ -1072,6 +1246,172 @@ class StakingsApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/stakings/estimate_fee',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_staking_estimation_fee_v2(
+        self,
+        get_staking_estimation_fee_request: Annotated[Optional[GetStakingEstimationFeeRequest], Field(description="The request body to get the estimated fee of a staking activity.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> EthStakeEstimatedFee:
+        """Estimate staking fees
+
+        This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+
+        :param get_staking_estimation_fee_request: The request body to get the estimated fee of a staking activity.
+        :type get_staking_estimation_fee_request: GetStakingEstimationFeeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_staking_estimation_fee_v2_serialize(
+            get_staking_estimation_fee_request=get_staking_estimation_fee_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EthStakeEstimatedFee",
+            '400': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_staking_estimation_fee_v2_with_http_info(
+        self,
+        get_staking_estimation_fee_request: Annotated[Optional[GetStakingEstimationFeeRequest], Field(description="The request body to get the estimated fee of a staking activity.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[EthStakeEstimatedFee]:
+        """Estimate staking fees
+
+        This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+
+        :param get_staking_estimation_fee_request: The request body to get the estimated fee of a staking activity.
+        :type get_staking_estimation_fee_request: GetStakingEstimationFeeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_staking_estimation_fee_v2_serialize(
+            get_staking_estimation_fee_request=get_staking_estimation_fee_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EthStakeEstimatedFee",
+            '400': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_staking_estimation_fee_v2_without_preload_content(
+        self,
+        get_staking_estimation_fee_request: Annotated[Optional[GetStakingEstimationFeeRequest], Field(description="The request body to get the estimated fee of a staking activity.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Estimate staking fees
+
+        This operation calculates the fee required for a staking activity based on factors such as network congestion and transaction complexity.  <Note>For the Babylon protocol, you can only select UTXO as the fee model.</Note> 
+
+        :param get_staking_estimation_fee_request: The request body to get the estimated fee of a staking activity.
+        :type get_staking_estimation_fee_request: GetStakingEstimationFeeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_staking_estimation_fee_v2_serialize(
+            get_staking_estimation_fee_request=get_staking_estimation_fee_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EthStakeEstimatedFee",
+            '400': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_staking_estimation_fee_v2_serialize(
+        self,
+        get_staking_estimation_fee_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if get_staking_estimation_fee_request is not None:
+            _body_params = get_staking_estimation_fee_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/stakings/estimate_fee_v2',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

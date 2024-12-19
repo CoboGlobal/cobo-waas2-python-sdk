@@ -18,8 +18,9 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.amount_details_inner import AmountDetailsInner
+from cobo_waas2.models.babylon_validator import BabylonValidator
+from cobo_waas2.models.staking_pool_id import StakingPoolId
 from cobo_waas2.models.stakings_extra import StakingsExtra
-from cobo_waas2.models.stakings_validator_info import StakingsValidatorInfo
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,12 +33,12 @@ class Stakings(BaseModel):
     wallet_id: StrictStr = Field(description="The staker's wallet ID.")
     address: StrictStr = Field(description="The staker's wallet address.")
     amounts: List[AmountDetailsInner] = Field(description="The details about the staking amount.")
-    pool_id: StrictStr = Field(description="The ID of the staking pool.")
+    pool_id: StakingPoolId
     token_id: StrictStr = Field(description="The token ID.")
     rewards_info: Optional[Dict[str, Any]] = Field(default=None, description="The information about the staking rewards.")
     created_timestamp: StrictInt = Field(description="The time when the staking position was created.")
     updated_timestamp: StrictInt = Field(description="The time when the staking position was last updated.")
-    validator_info: StakingsValidatorInfo
+    validator_info: BabylonValidator
     extra: Optional[StakingsExtra] = None
     __properties: ClassVar[List[str]] = ["id", "wallet_id", "address", "amounts", "pool_id", "token_id", "rewards_info", "created_timestamp", "updated_timestamp", "validator_info", "extra"]
 
@@ -114,7 +115,7 @@ class Stakings(BaseModel):
             "rewards_info": obj.get("rewards_info"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
-            "validator_info": StakingsValidatorInfo.from_dict(obj["validator_info"]) if obj.get("validator_info") is not None else None,
+            "validator_info": BabylonValidator.from_dict(obj["validator_info"]) if obj.get("validator_info") is not None else None,
             "extra": StakingsExtra.from_dict(obj["extra"]) if obj.get("extra") is not None else None
         })
         return _obj

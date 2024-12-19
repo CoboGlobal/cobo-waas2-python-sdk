@@ -41,7 +41,7 @@ class TestListMpcProjects200Response(unittest.TestCase):
                         name = 'Project name', 
                         participants = 3, 
                         threshold = 2, 
-                        create_timestamp = 1718619403933, )
+                        created_timestamp = 1718619403933, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 
