@@ -20,6 +20,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.activity_status import ActivityStatus
 from cobo_waas2.models.activity_timeline import ActivityTimeline
 from cobo_waas2.models.activity_type import ActivityType
+from cobo_waas2.models.staking_pool_id import StakingPoolId
 from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
@@ -36,7 +37,7 @@ class Activity(BaseModel):
     type: Optional[ActivityType] = None
     wallet_id: Optional[StrictStr] = Field(default=None, description="The staker's wallet ID.")
     address: Optional[StrictStr] = Field(default=None, description="The staker's wallet address.")
-    pool_id: StrictStr = Field(description="The ID of the staking pool.")
+    pool_id: StakingPoolId
     token_id: StrictStr = Field(description="The token ID.")
     staking_id: Optional[StrictStr] = Field(default=None, description="The ID of the corresponding staking position.")
     amount: StrictStr = Field(description="The staking amount.")

@@ -45,11 +45,7 @@ class TestBabylonValidator(unittest.TestCase):
         else:
             return BabylonValidator(
                 pool_type = 'Babylon',
-                icon_url = 'https://example.com/icon.png',
                 name = 'Cobo',
-                public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
-                commission_rate = 0.1,
-                supported_pos_chains = ["Babylon","Cosmos","Ethereum"],
         )
         """
 

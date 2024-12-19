@@ -44,6 +44,7 @@ cobo_waas2/models/api_log_details.py
 cobo_waas2/models/api_log_summary.py
 cobo_waas2/models/asset_balance.py
 cobo_waas2/models/asset_info.py
+cobo_waas2/models/auto_fuel_type.py
 cobo_waas2/models/babylon_stake_estimated_fee.py
 cobo_waas2/models/babylon_stake_extra.py
 cobo_waas2/models/babylon_staking_extra.py
@@ -66,7 +67,11 @@ cobo_waas2/models/contract_call_destination_type.py
 cobo_waas2/models/contract_call_params.py
 cobo_waas2/models/contract_call_source.py
 cobo_waas2/models/contract_call_source_type.py
+cobo_waas2/models/core_stake_extra.py
+cobo_waas2/models/core_staking_extra.py
 cobo_waas2/models/create_address_request.py
+cobo_waas2/models/create_claim_activity.py
+cobo_waas2/models/create_claim_activity_request.py
 cobo_waas2/models/create_custodial_wallet_params.py
 cobo_waas2/models/create_exchange_wallet_params.py
 cobo_waas2/models/create_key_share_holder.py
@@ -99,6 +104,7 @@ cobo_waas2/models/eigen_layer_lst_stake_extra.py
 cobo_waas2/models/eigen_layer_native_stake_extra.py
 cobo_waas2/models/eigenlayer_validator.py
 cobo_waas2/models/error_response.py
+cobo_waas2/models/estimate_claim_fee.py
 cobo_waas2/models/estimate_contract_call_fee_params.py
 cobo_waas2/models/estimate_fee_params.py
 cobo_waas2/models/estimate_fee_request_type.py
@@ -117,6 +123,7 @@ cobo_waas2/models/estimated_utxo_fee_slow.py
 cobo_waas2/models/eth_stake_estimated_fee.py
 cobo_waas2/models/eth_stake_extra.py
 cobo_waas2/models/eth_staking_extra.py
+cobo_waas2/models/eth_staking_extra_all_of_beacon_validators.py
 cobo_waas2/models/eth_unstake_extra.py
 cobo_waas2/models/evm_contract_call_destination.py
 cobo_waas2/models/evm_eip1559_fee_base_price.py
@@ -212,11 +219,11 @@ cobo_waas2/models/smart_contract_wallet_operation_type.py
 cobo_waas2/models/smart_contract_wallet_type.py
 cobo_waas2/models/source_group.py
 cobo_waas2/models/stake_source_type.py
+cobo_waas2/models/staking_pool_id.py
 cobo_waas2/models/staking_pool_type.py
 cobo_waas2/models/staking_source.py
 cobo_waas2/models/stakings.py
 cobo_waas2/models/stakings_extra.py
-cobo_waas2/models/stakings_validator_info.py
 cobo_waas2/models/sub_wallet_asset_balance.py
 cobo_waas2/models/token_asset_model_type.py
 cobo_waas2/models/token_balance.py
@@ -336,6 +343,7 @@ docs/ApiLogDetails.md
 docs/ApiLogSummary.md
 docs/AssetBalance.md
 docs/AssetInfo.md
+docs/AutoFuelType.md
 docs/BabylonStakeEstimatedFee.md
 docs/BabylonStakeExtra.md
 docs/BabylonStakingExtra.md
@@ -358,7 +366,11 @@ docs/ContractCallDestinationType.md
 docs/ContractCallParams.md
 docs/ContractCallSource.md
 docs/ContractCallSourceType.md
+docs/CoreStakeExtra.md
+docs/CoreStakingExtra.md
 docs/CreateAddressRequest.md
+docs/CreateClaimActivity.md
+docs/CreateClaimActivityRequest.md
 docs/CreateCustodialWalletParams.md
 docs/CreateExchangeWalletParams.md
 docs/CreateKeyShareHolder.md
@@ -393,6 +405,7 @@ docs/EigenLayerLstStakeExtra.md
 docs/EigenLayerNativeStakeExtra.md
 docs/EigenlayerValidator.md
 docs/ErrorResponse.md
+docs/EstimateClaimFee.md
 docs/EstimateContractCallFeeParams.md
 docs/EstimateFeeParams.md
 docs/EstimateFeeRequestType.md
@@ -411,6 +424,7 @@ docs/EstimatedUtxoFeeSlow.md
 docs/EthStakeEstimatedFee.md
 docs/EthStakeExtra.md
 docs/EthStakingExtra.md
+docs/EthStakingExtraAllOfBeaconValidators.md
 docs/EthUnstakeExtra.md
 docs/EvmContractCallDestination.md
 docs/EvmEIP191MessageSignDestination.md
@@ -507,12 +521,12 @@ docs/SmartContractWalletOperationType.md
 docs/SmartContractWalletType.md
 docs/SourceGroup.md
 docs/StakeSourceType.md
+docs/StakingPoolId.md
 docs/StakingPoolType.md
 docs/StakingSource.md
 docs/Stakings.md
 docs/StakingsApi.md
 docs/StakingsExtra.md
-docs/StakingsValidatorInfo.md
 docs/SubWalletAssetBalance.md
 docs/TSSGroups.md
 docs/TSSRequest.md
@@ -641,6 +655,7 @@ test/test_api_log_details.py
 test/test_api_log_summary.py
 test/test_asset_balance.py
 test/test_asset_info.py
+test/test_auto_fuel_type.py
 test/test_babylon_stake_estimated_fee.py
 test/test_babylon_stake_extra.py
 test/test_babylon_staking_extra.py
@@ -663,7 +678,11 @@ test/test_contract_call_destination_type.py
 test/test_contract_call_params.py
 test/test_contract_call_source.py
 test/test_contract_call_source_type.py
+test/test_core_stake_extra.py
+test/test_core_staking_extra.py
 test/test_create_address_request.py
+test/test_create_claim_activity.py
+test/test_create_claim_activity_request.py
 test/test_create_custodial_wallet_params.py
 test/test_create_exchange_wallet_params.py
 test/test_create_key_share_holder.py
@@ -698,6 +717,7 @@ test/test_eigen_layer_lst_stake_extra.py
 test/test_eigen_layer_native_stake_extra.py
 test/test_eigenlayer_validator.py
 test/test_error_response.py
+test/test_estimate_claim_fee.py
 test/test_estimate_contract_call_fee_params.py
 test/test_estimate_fee_params.py
 test/test_estimate_fee_request_type.py
@@ -716,6 +736,7 @@ test/test_estimated_utxo_fee_slow.py
 test/test_eth_stake_estimated_fee.py
 test/test_eth_stake_extra.py
 test/test_eth_staking_extra.py
+test/test_eth_staking_extra_all_of_beacon_validators.py
 test/test_eth_unstake_extra.py
 test/test_evm_contract_call_destination.py
 test/test_evm_eip1559_fee_base_price.py
@@ -812,12 +833,12 @@ test/test_smart_contract_wallet_operation_type.py
 test/test_smart_contract_wallet_type.py
 test/test_source_group.py
 test/test_stake_source_type.py
+test/test_staking_pool_id.py
 test/test_staking_pool_type.py
 test/test_staking_source.py
 test/test_stakings.py
 test/test_stakings_api.py
 test/test_stakings_extra.py
-test/test_stakings_validator_info.py
 test/test_sub_wallet_asset_balance.py
 test/test_token_asset_model_type.py
 test/test_token_balance.py

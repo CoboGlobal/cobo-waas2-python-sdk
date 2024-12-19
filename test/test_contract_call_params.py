@@ -42,7 +42,8 @@ class TestContractCallParams(unittest.TestCase):
                 category_names = [
                     'Trading'
                     ],
-                fee = None
+                fee = None,
+                auto_fuel = 'PassiveAutoFuel'
             )
         else:
             return ContractCallParams(

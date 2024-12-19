@@ -38,7 +38,11 @@ class TestCreateStakeActivityExtra(unittest.TestCase):
                 finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
                 stake_block_time = 2000,
                 auto_broadcast = False,
-                provider_name = 'Stakefish'
+                provider_name = 'Stakefish',
+                timelock = 1704067200,
+                change_address = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+                validator_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                reward_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
             )
         else:
             return CreateStakeActivityExtra(
@@ -46,6 +50,9 @@ class TestCreateStakeActivityExtra(unittest.TestCase):
                 finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
                 stake_block_time = 2000,
                 provider_name = 'Stakefish',
+                timelock = 1704067200,
+                validator_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                reward_address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
         )
         """
 

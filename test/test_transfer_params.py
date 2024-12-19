@@ -42,7 +42,8 @@ class TestTransferParams(unittest.TestCase):
                     'Trading'
                     ],
                 description = 'Transfer from wallet',
-                fee = None
+                fee = None,
+                auto_fuel = 'PassiveAutoFuel'
             )
         else:
             return TransferParams(

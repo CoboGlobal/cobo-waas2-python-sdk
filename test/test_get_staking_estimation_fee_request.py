@@ -37,22 +37,20 @@ class TestGetStakingEstimationFeeRequest(unittest.TestCase):
                 activity_type = 'Stake',
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 source = None,
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
                 extra = None,
-                staking_id = '0011039d-27fb-49ba-b172-6e0aa80e37ec',
-                address = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
+                staking_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
             )
         else:
             return GetStakingEstimationFeeRequest(
                 activity_type = 'Stake',
-                pool_id = 'babylon_btc',
+                pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
                 extra = None,
-                staking_id = '0011039d-27fb-49ba-b172-6e0aa80e37ec',
-                address = '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+                staking_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
         )
         """
 
