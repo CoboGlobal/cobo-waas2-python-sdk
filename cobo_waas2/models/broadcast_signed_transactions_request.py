@@ -25,7 +25,7 @@ class BroadcastSignedTransactionsRequest(BaseModel):
     """
     BroadcastSignedTransactionsRequest
     """  # noqa: E501
-    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The transaction IDs of the signed transactions to be broadcast. You can retrieve the transactions corresponding to a staking activity by calling [Get staking activity details](/v2/api-references/stakings/get-staking-activity-details).")
+    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The transaction IDs of the signed transactions to be broadcast. You can retrieve the transactions corresponding to a staking activity by calling [Get staking activity details](https://www.cobo.com/developers/v2/api-references/stakings/get-staking-activity-details).")
     __properties: ClassVar[List[str]] = ["transaction_ids"]
 
     model_config = ConfigDict(

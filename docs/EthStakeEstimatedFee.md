@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **pool_type** | [**StakingPoolType**](StakingPoolType.md) |  | [optional] 
 **fee** | [**EstimatedFee**](EstimatedFee.md) |  | [optional] 
 **validator_pubkeys** | **List[str]** | A list of public keys associated with the Ethereum validators for this staking operation. | [optional] 
+**core_btc_staking_address** | **str** | P2WSH address generated for this staking operation(If the estimated fee is for core BTC staking). | [optional] 
 
 ## Example
 

@@ -37,10 +37,11 @@ class TestAddressInfo(unittest.TestCase):
                 address = '0x0000000000000000000000000000000000000000',
                 chain_id = 'ETH',
                 memo = '82840924',
-                path = 'm/44'/60'/0'/0',
+                path = 'm/44/0/2/0/0',
                 encoding = 'ENCODING_P2PKH',
-                pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq',
+                pubkey = 'xpub6HFaEKt4XdwgEQrQmWr8AEAZ7XBSGh7QYFspwdE86sJn6PjkqsPwVQc2poriBdizqXnTB3UWurJJAZpFnD2DAp9vFTmM2gQ264AArYtFWLH',
                 x_only_pubkey = '0x165ed2f04462ec0d3d44dc8690fa9000903b5a96f14ad7f233c21ff748a17b54',
+                root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq',
                 taproot_script_tree_hash = '0x138fdd0f6c3803d45553e730c25924baf7be741b8a72a4e6fdbd9d44cb19f85b',
                 taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC'
             )

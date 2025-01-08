@@ -6,7 +6,7 @@ The response of a failed request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error_code** | **int** | The error code. Refer to [Error codes and status codes](/v2/api-references/error-codes) for more details. | 
+**error_code** | **int** | The error code. Refer to [Error codes and status codes](https://www.cobo.com/developers/v2/api-references/error-codes) for more details. | 
 **error_message** | **str** | The error description. | 
 **error_id** | **str** | The error log ID. You can provide the error ID when submitting a ticket to help Cobo to locate the issue. | 
 

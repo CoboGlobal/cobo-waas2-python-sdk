@@ -36,7 +36,7 @@ class TransactionWebhookEventData(BaseModel):
     """
     TransactionWebhookEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data.")
     transaction_id: StrictStr = Field(description="The transaction ID.")
     cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
@@ -45,8 +45,8 @@ class TransactionWebhookEventData(BaseModel):
     status: TransactionStatus
     sub_status: Optional[TransactionSubStatus] = None
     failed_reason: Optional[StrictStr] = Field(default=None, description="(This property is applicable to approval failures and signature failures only) The reason why the transaction failed.")
-    chain_id: Optional[StrictStr] = Field(default=None, description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
-    token_id: Optional[StrictStr] = Field(default=None, description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens).")
+    chain_id: Optional[StrictStr] = Field(default=None, description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     asset_id: Optional[StrictStr] = Field(default=None, description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
     source: TransactionSource
     destination: TransactionDestination
@@ -70,8 +70,8 @@ class TransactionWebhookEventData(BaseModel):
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault')")
         return value
 
     model_config = ConfigDict(

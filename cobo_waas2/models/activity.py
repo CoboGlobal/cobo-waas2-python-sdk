@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.activity_extra import ActivityExtra
 from cobo_waas2.models.activity_status import ActivityStatus
 from cobo_waas2.models.activity_timeline import ActivityTimeline
 from cobo_waas2.models.activity_type import ActivityType
@@ -40,14 +41,16 @@ class Activity(BaseModel):
     pool_id: StakingPoolId
     token_id: StrictStr = Field(description="The token ID.")
     staking_id: Optional[StrictStr] = Field(default=None, description="The ID of the corresponding staking position.")
+    request_ids: Optional[List[StrictStr]] = Field(default=None, description="The request IDs of the corresponding transactions of the activity.")
     amount: StrictStr = Field(description="The staking amount.")
     transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The IDs of the corresponding transactions of the activity.")
     timeline: Optional[List[ActivityTimeline]] = Field(default=None, description="The timeline of the activity.")
     fee: Optional[TransactionRequestFee] = None
     status: ActivityStatus
+    extra: Optional[ActivityExtra] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the activity was created.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the activity was last updated.")
-    __properties: ClassVar[List[str]] = ["id", "initiator", "initiator_type", "type", "wallet_id", "address", "pool_id", "token_id", "staking_id", "amount", "transaction_ids", "timeline", "fee", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["id", "initiator", "initiator_type", "type", "wallet_id", "address", "pool_id", "token_id", "staking_id", "request_ids", "amount", "transaction_ids", "timeline", "fee", "status", "extra", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +101,9 @@ class Activity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fee
         if self.fee:
             _dict['fee'] = self.fee.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of extra
+        if self.extra:
+            _dict['extra'] = self.extra.to_dict()
         return _dict
 
     @classmethod
@@ -119,11 +125,13 @@ class Activity(BaseModel):
             "pool_id": obj.get("pool_id"),
             "token_id": obj.get("token_id"),
             "staking_id": obj.get("staking_id"),
+            "request_ids": obj.get("request_ids"),
             "amount": obj.get("amount"),
             "transaction_ids": obj.get("transaction_ids"),
             "timeline": [ActivityTimeline.from_dict(_item) for _item in obj["timeline"]] if obj.get("timeline") is not None else None,
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
             "status": obj.get("status"),
+            "extra": ActivityExtra.from_dict(obj["extra"]) if obj.get("extra") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

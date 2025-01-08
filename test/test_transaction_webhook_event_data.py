@@ -62,9 +62,11 @@ class TestTransactionWebhookEventData(unittest.TestCase):
                 raw_tx_info = cobo_waas2.models.transaction_raw_tx_info.TransactionRawTxInfo(
                     used_nonce = 9, 
                     selected_utxos = [
-                        cobo_waas2.models.transaction_utxo.TransactionUtxo(
+                        cobo_waas2.models.transaction_selected_utxo.TransactionSelectedUtxo(
                             tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
-                            vout_n = 0, )
+                            vout_n = 0, 
+                            address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
+                            value = '0.5', )
                         ], 
                     raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', ),
                 replacement = cobo_waas2.models.transaction_replacement.Transaction_replacement(

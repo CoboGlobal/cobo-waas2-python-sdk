@@ -34,7 +34,7 @@ class CreateStakeActivityRequest(BaseModel):
     pool_id: StakingPoolId
     amount: StrictStr = Field(description="The amount to stake.")
     fee: TransactionRequestFee
-    extra: CreateStakeActivityExtra
+    extra: Optional[CreateStakeActivityExtra] = None
     app_initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the staking activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator.")
     __properties: ClassVar[List[str]] = ["request_id", "source", "pool_id", "amount", "fee", "extra", "app_initiator"]
 

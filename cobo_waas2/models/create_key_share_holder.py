@@ -28,7 +28,7 @@ class CreateKeyShareHolder(BaseModel):
     """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="Key share holder's name.")
     type: Optional[KeyShareHolderType] = None
-    tss_node_id: Optional[StrictStr] = Field(default=None, description="Key share holder's TSS Node ID. You can obtain the TSS Node ID using either mobile co-signer or API co-signer. See the \"Primary Purposes\" row on the table in [Create a Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#create-a-main-group).")
+    tss_node_id: Optional[StrictStr] = Field(default=None, description="Key share holder's TSS Node ID. You can obtain the TSS Node ID using either mobile co-signer or server co-signer. See the \"Primary Purposes\" row on the table in [Create a Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#create-a-main-group).")
     signer: Optional[StrictBool] = Field(default=None, description="Whether the key share holder has been selected as the designated transaction signer. For example, in a 2-3 [Threshold Signature Scheme (TSS)](https://manuals.cobo.com/en/portal/mpc-wallets/introduction#threshold-signature-scheme-tss), Cobo will serve as one signer, and you can choose one of the other two key share holders to act as the second transaction signer. - `true`: The key share holder is a designated transaction signer.  - `false`: The key share holder is not a designated transaction signer. ")
     __properties: ClassVar[List[str]] = ["name", "type", "tss_node_id", "signer"]
 

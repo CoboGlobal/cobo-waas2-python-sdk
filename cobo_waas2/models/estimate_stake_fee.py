@@ -36,7 +36,7 @@ class EstimateStakeFee(BaseModel):
     pool_id: StakingPoolId
     amount: StrictStr = Field(description="The amount to stake.")
     fee: TransactionRequestFee
-    extra: CreateStakeActivityExtra
+    extra: Optional[CreateStakeActivityExtra] = None
     __properties: ClassVar[List[str]] = ["activity_type", "request_id", "source", "pool_id", "amount", "fee", "extra"]
 
     model_config = ConfigDict(

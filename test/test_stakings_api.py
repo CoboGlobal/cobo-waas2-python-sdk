@@ -117,7 +117,7 @@ class TestStakingsApi(unittest.TestCase):
         """
         Test case for get_staking_estimation_fee_v2
 
-        Estimate staking fees
+        Estimate staking fees v2
         """
         """
         get_staking_estimation_fee_request = cobo_waas2.GetStakingEstimationFeeRequest()
@@ -151,11 +151,12 @@ class TestStakingsApi(unittest.TestCase):
         min_modified_timestamp = 1635744000000
         max_modified_timestamp = 1635744000000
         initiator = 'steve@example.com'
+        request_id = 'web_send_by_user_327_1610444045047'
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
-        api_response = self.api.list_staking_activities(pool_id=pool_id, staking_id=staking_id, activity_type=activity_type, activity_status=activity_status, min_modified_timestamp=min_modified_timestamp, max_modified_timestamp=max_modified_timestamp, initiator=initiator, limit=limit, before=before, after=after)
+        api_response = self.api.list_staking_activities(pool_id=pool_id, staking_id=staking_id, activity_type=activity_type, activity_status=activity_status, min_modified_timestamp=min_modified_timestamp, max_modified_timestamp=max_modified_timestamp, initiator=initiator, request_id=request_id, limit=limit, before=before, after=after)
         """
 
     def test_list_staking_pools(self) -> None:

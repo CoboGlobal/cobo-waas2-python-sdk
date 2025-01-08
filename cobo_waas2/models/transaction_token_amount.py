@@ -25,7 +25,7 @@ class TransactionTokenAmount(BaseModel):
     """
     The data for transaction asset information.
     """  # noqa: E501
-    token_id: Optional[StrictStr] = Field(default=None, description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens).")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     asset_id: StrictStr = Field(description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
     amount: StrictStr = Field(description="Transaction value (Note that this is an absolute value. If you trade 1.5 BTC, then the value is 1.5) ")
     __properties: ClassVar[List[str]] = ["token_id", "asset_id", "amount"]

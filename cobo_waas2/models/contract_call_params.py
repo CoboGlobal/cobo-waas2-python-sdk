@@ -30,7 +30,7 @@ class ContractCallParams(BaseModel):
     The information about a transaction that interacts with a smart contract
     """  # noqa: E501
     request_id: StrictStr = Field(description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
-    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
+    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
     source: ContractCallSource
     destination: ContractCallDestination
     description: Optional[StrictStr] = Field(default=None, description="The description of the contract call transaction.")

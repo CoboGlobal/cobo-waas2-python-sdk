@@ -26,7 +26,7 @@ class TokenBalance(BaseModel):
     """
     The balance information.
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens).")
+    token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     balance: TokenBalanceBalance
     __properties: ClassVar[List[str]] = ["token_id", "balance"]
 

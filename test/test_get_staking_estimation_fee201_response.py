@@ -37,6 +37,7 @@ class TestGetStakingEstimationFee201Response(unittest.TestCase):
                 pool_type = 'Babylon',
                 fee = None,
                 validator_pubkeys = ["0x1234567890987654321012345678909876543210"],
+                core_btc_staking_address = 'bc1qcqj9k34vrvgmmvt85ym2ua79k2d22vcfxmuratakfm78chdqksnq5agezk',
                 fee_type = 'EVM_EIP_1559',
                 fee_amount = '0.02',
                 token_id = 'BTC'

@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **pool_id** | [**StakingPoolId**](StakingPoolId.md) |  | 
 **amount** | **str** | The amount to withdraw. | 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
-**extra** | [**CreateUnstakeActivityExtra**](CreateUnstakeActivityExtra.md) |  | 
-**staking_id** | **str** | The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions). | 
+**extra** | [**CreateUnstakeActivityExtra**](CreateUnstakeActivityExtra.md) |  | [optional] 
+**staking_id** | **str** | The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-positions). | 
 
 ## Example
 

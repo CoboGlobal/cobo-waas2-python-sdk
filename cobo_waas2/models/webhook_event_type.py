@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class WebhookEventType(str, Enum):
     """
-    The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](/v2/guides/webhooks-callbacks/webhook-event-type).
+    The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type).
     """
 
     """
@@ -32,6 +32,9 @@ class WebhookEventType(str, Enum):
     WALLETS_DOT_MPC_DOT_TSS_REQUEST_DOT_UPDATED = 'wallets.mpc.tss_request.updated'
     WALLETS_DOT_MPC_DOT_TSS_REQUEST_DOT_FAILED = 'wallets.mpc.tss_request.failed'
     WALLETS_DOT_MPC_DOT_TSS_REQUEST_DOT_SUCCEEDED = 'wallets.mpc.tss_request.succeeded'
+    WALLETS_DOT_ADDRESSES_DOT_CREATED = 'wallets.addresses.created'
+    WALLETS_DOT_CREATED = 'wallets.created'
+    MPC_VAULTS_DOT_CREATED = 'mpc_vaults.created'
 
     UNKNOWN = None
 

@@ -15,11 +15,13 @@ Name | Type | Description | Notes
 **pool_id** | [**StakingPoolId**](StakingPoolId.md) |  | 
 **token_id** | **str** | The token ID. | 
 **staking_id** | **str** | The ID of the corresponding staking position. | [optional] 
+**request_ids** | **List[str]** | The request IDs of the corresponding transactions of the activity. | [optional] 
 **amount** | **str** | The staking amount. | 
 **transaction_ids** | **List[str]** | The IDs of the corresponding transactions of the activity. | [optional] 
 **timeline** | [**List[ActivityTimeline]**](ActivityTimeline.md) | The timeline of the activity. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
 **status** | [**ActivityStatus**](ActivityStatus.md) |  | 
+**extra** | [**ActivityExtra**](ActivityExtra.md) |  | [optional] 
 **created_timestamp** | **int** | The time when the activity was created. | [optional] 
 **updated_timestamp** | **int** | The time when the activity was last updated. | [optional] 
 

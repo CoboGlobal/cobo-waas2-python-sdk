@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **pool_id** | [**StakingPoolId**](StakingPoolId.md) |  | 
 **amount** | **str** | The amount to stake. | 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
-**extra** | [**CreateStakeActivityExtra**](CreateStakeActivityExtra.md) |  | 
+**extra** | [**CreateStakeActivityExtra**](CreateStakeActivityExtra.md) |  | [optional] 
 **app_initiator** | **str** | The initiator of the staking activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator. | [optional] 
 
 ## Example

@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class MessageSignDestinationType(str, Enum):
     """
-    The type of the signature format. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Each signature format type requires a different set of properties. Switch between the above tabs for details. 
+    The type of the signature format. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Each signature format type requires a different set of properties. Switch between the above tabs for details. 
     """
 
     """

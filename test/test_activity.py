@@ -43,6 +43,9 @@ class TestActivity(unittest.TestCase):
                 pool_id = 'babylon_btc_signet',
                 token_id = 'BTC',
                 staking_id = '0011039d-27fb-49ba-b172-6e0aa80e37ec',
+                request_ids = [
+                    'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+                    ],
                 amount = '100.00',
                 transaction_ids = [
                     '0011039d-27fb-49ba-b172-6e0aa80e37ec'
@@ -56,6 +59,7 @@ class TestActivity(unittest.TestCase):
                     ],
                 fee = None,
                 status = 'Success',
+                extra = None,
                 created_timestamp = 1640995200000,
                 updated_timestamp = 1640995200000
             )

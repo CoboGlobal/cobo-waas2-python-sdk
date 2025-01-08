@@ -13,7 +13,12 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import Field, StrictInt, StrictStr, field_validator
+from typing import Optional
+from typing_extensions import Annotated
 from cobo_waas2.models.get_api_key_info200_response import GetApiKeyInfo200Response
+from cobo_waas2.models.list_callback_messages200_response import ListCallbackMessages200Response
+from cobo_waas2.models.retry_callback_message201_response import RetryCallbackMessage201Response
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
 from cobo_waas2.api_response import ApiResponse
@@ -178,6 +183,465 @@ class DevelopersApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/developers/api_key_info',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_callback_messages(
+        self,
+        callback_message_ids: Annotated[Optional[StrictStr], Field(description="A list of callback message IDs, separated by commas.")] = None,
+        request_ids: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by commas. The request ID is provided by you and must be unique within your organization.")] = None,
+        transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by commas.")] = None,
+        wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs, separated by commas.")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="The callback message status. Possible values include `Approved`, `Denied`, and `Failed`.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListCallbackMessages200Response:
+        """List all callback messages
+
+        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+
+        :param callback_message_ids: A list of callback message IDs, separated by commas.
+        :type callback_message_ids: str
+        :param request_ids: A list of request IDs, separated by commas. The request ID is provided by you and must be unique within your organization.
+        :type request_ids: str
+        :param transaction_ids: A list of transaction IDs, separated by commas.
+        :type transaction_ids: str
+        :param wallet_ids: A list of wallet IDs, separated by commas.
+        :type wallet_ids: str
+        :param status: The callback message status. Possible values include `Approved`, `Denied`, and `Failed`.
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_callback_messages_serialize(
+            callback_message_ids=callback_message_ids,
+            request_ids=request_ids,
+            transaction_ids=transaction_ids,
+            wallet_ids=wallet_ids,
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCallbackMessages200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_callback_messages_with_http_info(
+        self,
+        callback_message_ids: Annotated[Optional[StrictStr], Field(description="A list of callback message IDs, separated by commas.")] = None,
+        request_ids: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by commas. The request ID is provided by you and must be unique within your organization.")] = None,
+        transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by commas.")] = None,
+        wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs, separated by commas.")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="The callback message status. Possible values include `Approved`, `Denied`, and `Failed`.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListCallbackMessages200Response]:
+        """List all callback messages
+
+        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+
+        :param callback_message_ids: A list of callback message IDs, separated by commas.
+        :type callback_message_ids: str
+        :param request_ids: A list of request IDs, separated by commas. The request ID is provided by you and must be unique within your organization.
+        :type request_ids: str
+        :param transaction_ids: A list of transaction IDs, separated by commas.
+        :type transaction_ids: str
+        :param wallet_ids: A list of wallet IDs, separated by commas.
+        :type wallet_ids: str
+        :param status: The callback message status. Possible values include `Approved`, `Denied`, and `Failed`.
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_callback_messages_serialize(
+            callback_message_ids=callback_message_ids,
+            request_ids=request_ids,
+            transaction_ids=transaction_ids,
+            wallet_ids=wallet_ids,
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCallbackMessages200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_callback_messages_without_preload_content(
+        self,
+        callback_message_ids: Annotated[Optional[StrictStr], Field(description="A list of callback message IDs, separated by commas.")] = None,
+        request_ids: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by commas. The request ID is provided by you and must be unique within your organization.")] = None,
+        transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by commas.")] = None,
+        wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs, separated by commas.")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="The callback message status. Possible values include `Approved`, `Denied`, and `Failed`.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List all callback messages
+
+        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+
+        :param callback_message_ids: A list of callback message IDs, separated by commas.
+        :type callback_message_ids: str
+        :param request_ids: A list of request IDs, separated by commas. The request ID is provided by you and must be unique within your organization.
+        :type request_ids: str
+        :param transaction_ids: A list of transaction IDs, separated by commas.
+        :type transaction_ids: str
+        :param wallet_ids: A list of wallet IDs, separated by commas.
+        :type wallet_ids: str
+        :param status: The callback message status. Possible values include `Approved`, `Denied`, and `Failed`.
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_callback_messages_serialize(
+            callback_message_ids=callback_message_ids,
+            request_ids=request_ids,
+            transaction_ids=transaction_ids,
+            wallet_ids=wallet_ids,
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCallbackMessages200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_callback_messages_serialize(
+        self,
+        callback_message_ids,
+        request_ids,
+        transaction_ids,
+        wallet_ids,
+        status,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if callback_message_ids is not None:
+            
+            _query_params.append(('callback_message_ids', callback_message_ids))
+            
+        if request_ids is not None:
+            
+            _query_params.append(('request_ids', request_ids))
+            
+        if transaction_ids is not None:
+            
+            _query_params.append(('transaction_ids', transaction_ids))
+            
+        if wallet_ids is not None:
+            
+            _query_params.append(('wallet_ids', wallet_ids))
+            
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/developers/callback_messages',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def retry_callback_message(
+        self,
+        message_id: Annotated[StrictStr, Field(description="The callback message ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RetryCallbackMessage201Response:
+        """Retry callback message
+
+        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+
+        :param message_id: The callback message ID. (required)
+        :type message_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._retry_callback_message_serialize(
+            message_id=message_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "RetryCallbackMessage201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def retry_callback_message_with_http_info(
+        self,
+        message_id: Annotated[StrictStr, Field(description="The callback message ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[RetryCallbackMessage201Response]:
+        """Retry callback message
+
+        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+
+        :param message_id: The callback message ID. (required)
+        :type message_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._retry_callback_message_serialize(
+            message_id=message_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "RetryCallbackMessage201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def retry_callback_message_without_preload_content(
+        self,
+        message_id: Annotated[StrictStr, Field(description="The callback message ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Retry callback message
+
+        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+
+        :param message_id: The callback message ID. (required)
+        :type message_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._retry_callback_message_serialize(
+            message_id=message_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "RetryCallbackMessage201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _retry_callback_message_serialize(
+        self,
+        message_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if message_id is not None:
+            _path_params['message_id'] = message_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/developers/callback_messages/{message_id}/retry',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
