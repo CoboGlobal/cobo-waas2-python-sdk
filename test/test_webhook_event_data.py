@@ -39,7 +39,7 @@ class TestWebhookEventData(unittest.TestCase):
                 cobo_id = '20231213122855000000000000000000',
                 request_id = 'web_send_by_user_327_1610444045047',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                type = 'Recovery',
+                type = 'Org-Controlled',
                 status = 'Success',
                 sub_status = 'PendingDoubleCheck',
                 failed_reason = 'Rejected by signer Cobo TSS',
@@ -62,9 +62,11 @@ class TestWebhookEventData(unittest.TestCase):
                 raw_tx_info = cobo_waas2.models.transaction_raw_tx_info.TransactionRawTxInfo(
                     used_nonce = 9, 
                     selected_utxos = [
-                        cobo_waas2.models.transaction_utxo.TransactionUtxo(
+                        cobo_waas2.models.transaction_selected_utxo.TransactionSelectedUtxo(
                             tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
-                            vout_n = 0, )
+                            vout_n = 0, 
+                            address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
+                            value = '0.5', )
                         ], 
                     raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', ),
                 replacement = cobo_waas2.models.transaction_replacement.Transaction_replacement(
@@ -79,7 +81,7 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 description = 'This is a request to create key shares using the Recovery Group for a key share holder in the Main Group if their key share has been lost (e.g. by losing their phone).',
                 is_loop = False,
-                created_timestamp = 1701396866000,
+                created_timestamp = 1718619403933,
                 updated_timestamp = 1610445878970,
                 tss_request_id = '20240711114129000132315000003970',
                 source_key_share_holder_group = cobo_waas2.models.source_group.SourceGroup(
@@ -87,7 +89,29 @@ class TestWebhookEventData(unittest.TestCase):
                     tss_node_ids = [
                         'cobo5yb7BNEBwwp5XXedbhnzQfvQtp132W4dH4Jz4x4eDp4KA'
                         ], ),
-                target_key_share_holder_group_id = 'fd9519ae-507b-4605-b108-04d4e5ffcdd3'
+                target_key_share_holder_group_id = 'fd9519ae-507b-4605-b108-04d4e5ffcdd3',
+                addresses = [
+                    cobo_waas2.models.address_info.AddressInfo(
+                        address = '0x0000000000000000000000000000000000000000', 
+                        chain_id = 'ETH', 
+                        memo = '82840924', 
+                        path = 'm/44/0/2/0/0', 
+                        encoding = 'ENCODING_P2PKH', 
+                        pubkey = 'xpub6HFaEKt4XdwgEQrQmWr8AEAZ7XBSGh7QYFspwdE86sJn6PjkqsPwVQc2poriBdizqXnTB3UWurJJAZpFnD2DAp9vFTmM2gQ264AArYtFWLH', 
+                        x_only_pubkey = '0x165ed2f04462ec0d3d44dc8690fa9000903b5a96f14ad7f233c21ff748a17b54', 
+                        root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq', 
+                        taproot_script_tree_hash = '0x138fdd0f6c3803d45553e730c25924baf7be741b8a72a4e6fdbd9d44cb19f85b', 
+                        taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC', )
+                    ],
+                wallet = None,
+                vault_id = 'YPdbyVaVGqXXjkUsohHw',
+                project_id = '0111039d-27fb-49ba-b172-6e0aa80e37ec',
+                name = 'Vault name',
+                root_pubkeys = [
+                    cobo_waas2.models.root_pubkey.RootPubkey(
+                        root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq', 
+                        curve = 'SECP256K1', )
+                    ]
             )
         else:
             return WebhookEventData(

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **status_code** | **int** | The HTTP status code returned by the API request. | 
 **ip_address** | **str** | The client&#39;s IP address that made the API request. | 
 **request_timestamp** | **int** | The time when the API request was created, in Unix timestamp format, measured in milliseconds. | 
-**api_key** | **str** | The API key used to call the API. For more details, refer to [API key](/v2/guides/overview/cobo-auth#api-key). | 
+**api_key** | **str** | The API key used to call the API. For more details, refer to [API key](https://www.cobo.com/developers/v2/guides/overview/cobo-auth#api-key). | 
 **response_body** | **str** | The response body of the API request. | 
 **var_query_params** | **str** | The query parameters of the API request. | 
 **request_body** | **str** | The request body of the API request. | 

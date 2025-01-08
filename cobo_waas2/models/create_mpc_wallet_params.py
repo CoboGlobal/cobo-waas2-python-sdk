@@ -30,7 +30,7 @@ class CreateMpcWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    vault_id: StrictStr = Field(description="The ID of the owning vault. You can call [List all vaults](/v2/api-references/wallets--mpc-wallets/list-all-vaults) to retrieve all vault IDs under your organization.")
+    vault_id: StrictStr = Field(description="The ID of the owning vault. You can call [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults) to retrieve all vault IDs under your organization.")
     __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "vault_id"]
 
     model_config = ConfigDict(

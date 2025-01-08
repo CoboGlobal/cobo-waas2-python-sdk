@@ -1,0 +1,30 @@
+# WalletInfoEventData
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. | 
+**wallet** | [**WalletInfo**](WalletInfo.md) |  | [optional] 
+
+## Example
+
+```python
+from cobo_waas2.models.wallet_info_event_data import WalletInfoEventData
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of WalletInfoEventData from a JSON string
+wallet_info_event_data_instance = WalletInfoEventData.from_json(json)
+# print the JSON string representation of the object
+print(WalletInfoEventData.to_json())
+
+# convert the object into a dict
+wallet_info_event_data_dict = wallet_info_event_data_instance.to_dict()
+# create an instance of WalletInfoEventData from a dict
+wallet_info_event_data_from_dict = WalletInfoEventData.from_dict(wallet_info_event_data_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

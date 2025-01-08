@@ -30,6 +30,7 @@ class StakingPoolId(str, Enum):
     BEACON_ETH_HOLESKY = 'beacon_eth_holesky'
     CORE_BTC = 'core_btc'
     CORE_XTN = 'core_xtn'
+    SKY_FARM_ETH_USDC = 'sky_farm_eth_usdc'
 
     UNKNOWN = None
 

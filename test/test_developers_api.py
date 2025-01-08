@@ -40,6 +40,37 @@ class TestDevelopersApi(unittest.TestCase):
         api_response = self.api.get_api_key_info()
         """
 
+    def test_list_callback_messages(self) -> None:
+        """
+        Test case for list_callback_messages
+
+        List all callback messages
+        """
+        """
+        callback_message_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        request_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        wallet_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        status = 'Approved'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_callback_messages(callback_message_ids=callback_message_ids, request_ids=request_ids, transaction_ids=transaction_ids, wallet_ids=wallet_ids, status=status, limit=limit, before=before, after=after)
+        """
+
+    def test_retry_callback_message(self) -> None:
+        """
+        Test case for retry_callback_message
+
+        Retry callback message
+        """
+        """
+        message_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.retry_callback_message(message_id)
+        """
+
 
 if __name__ == '__main__':
     unittest.main()

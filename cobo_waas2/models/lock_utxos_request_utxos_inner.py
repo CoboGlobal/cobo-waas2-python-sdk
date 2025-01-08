@@ -25,7 +25,7 @@ class LockUtxosRequestUtxosInner(BaseModel):
     """
     LockUtxosRequestUtxosInner
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens).")
+    token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     tx_hash: StrictStr = Field(description="The transaction hash.")
     vout_n: StrictInt = Field(description="The output index of the UTXO.")
     __properties: ClassVar[List[str]] = ["token_id", "tx_hash", "vout_n"]

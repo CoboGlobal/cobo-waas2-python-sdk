@@ -28,7 +28,7 @@ class TSSRequestWebhookEventData(BaseModel):
     """
     TSSRequestWebhookEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data.")
     tss_request_id: Optional[StrictStr] = Field(default=None, description="The TSS request ID.")
     source_key_share_holder_group: Optional[SourceGroup] = None
     target_key_share_holder_group_id: Optional[StrictStr] = Field(default=None, description="The target key share holder group ID.")
@@ -41,8 +41,8 @@ class TSSRequestWebhookEventData(BaseModel):
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault')")
         return value
 
     model_config = ConfigDict(

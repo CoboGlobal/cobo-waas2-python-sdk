@@ -128,6 +128,18 @@ class TestTransactionsApi(unittest.TestCase):
         api_response = self.api.estimate_fee(estimate_fee_params=estimate_fee_params)
         """
 
+    def test_get_transaction_approval_detail(self) -> None:
+        """
+        Test case for get_transaction_approval_detail
+
+        Get transaction approval information
+        """
+        """
+        transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.get_transaction_approval_detail(transaction_id)
+        """
+
     def test_get_transaction_by_id(self) -> None:
         """
         Test case for get_transaction_by_id

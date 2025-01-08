@@ -49,7 +49,6 @@ class TestGetStakingEstimationFeeRequest(unittest.TestCase):
                 pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
-                extra = None,
                 staking_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
         )
         """

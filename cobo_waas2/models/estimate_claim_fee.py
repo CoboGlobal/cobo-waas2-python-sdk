@@ -28,7 +28,7 @@ class EstimateClaimFee(BaseModel):
     EstimateClaimFee
     """  # noqa: E501
     activity_type: ActivityType
-    staking_id: Optional[StrictStr] = Field(default=None, description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](/v2/api-references/stakings/list-staking-positions).")
+    staking_id: Optional[StrictStr] = Field(default=None, description="The ID of the staking position. You can retrieve a list of staking positions by calling [List staking positions](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-positions).")
     fee: Optional[TransactionRequestFee] = None
     __properties: ClassVar[List[str]] = ["activity_type", "staking_id", "fee"]
 

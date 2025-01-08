@@ -26,7 +26,7 @@ class MaxTransferableValue(BaseModel):
     """
     The maximum amount you can transfer from the wallet or the specified wallet address, along with the corresponding transaction fee.
     """  # noqa: E501
-    token_id: Optional[StrictStr] = Field(default=None, description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](/v2/api-references/wallets/list-enabled-tokens).")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     max_transferable_value: Optional[StrictStr] = Field(default=None, description="The maximum amount you can transfer from the wallet or the specified wallet address.")
     fee: Optional[TransactionRequestFee] = None
     __properties: ClassVar[List[str]] = ["token_id", "max_transferable_value", "fee"]

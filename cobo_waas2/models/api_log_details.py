@@ -31,7 +31,7 @@ class ApiLogDetails(BaseModel):
     status_code: StrictInt = Field(description="The HTTP status code returned by the API request.")
     ip_address: StrictStr = Field(description="The client's IP address that made the API request.")
     request_timestamp: StrictInt = Field(description="The time when the API request was created, in Unix timestamp format, measured in milliseconds.")
-    api_key: StrictStr = Field(description="The API key used to call the API. For more details, refer to [API key](/v2/guides/overview/cobo-auth#api-key).")
+    api_key: StrictStr = Field(description="The API key used to call the API. For more details, refer to [API key](https://www.cobo.com/developers/v2/guides/overview/cobo-auth#api-key).")
     response_body: StrictStr = Field(description="The response body of the API request.")
     var_query_params: StrictStr = Field(description="The query parameters of the API request.", alias="query_params")
     request_body: StrictStr = Field(description="The request body of the API request.")

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** | The wallet name. | 
 **wallet_type** | [**WalletType**](WalletType.md) |  | 
 **wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | 
-**vault_id** | **str** | The ID of the owning vault. You can call [List all vaults](/v2/api-references/wallets--mpc-wallets/list-all-vaults) to retrieve all vault IDs under your organization. | 
+**vault_id** | **str** | The ID of the owning vault. You can call [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults) to retrieve all vault IDs under your organization. | 
 
 ## Example
 

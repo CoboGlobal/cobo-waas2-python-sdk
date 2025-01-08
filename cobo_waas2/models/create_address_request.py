@@ -27,7 +27,7 @@ class CreateAddressRequest(BaseModel):
     """
     CreateAddressRequest
     """  # noqa: E501
-    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
+    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
     count: Annotated[int, Field(le=50, strict=True, ge=1)] = Field(description="The number of addresses to create.")
     encoding: Optional[AddressEncoding] = None
     __properties: ClassVar[List[str]] = ["chain_id", "count", "encoding"]

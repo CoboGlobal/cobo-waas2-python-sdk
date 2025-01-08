@@ -36,7 +36,8 @@ class TestEthStakeEstimatedFee(unittest.TestCase):
             return EthStakeEstimatedFee(
                 pool_type = 'Babylon',
                 fee = None,
-                validator_pubkeys = ["0x1234567890987654321012345678909876543210"]
+                validator_pubkeys = ["0x1234567890987654321012345678909876543210"],
+                core_btc_staking_address = 'bc1qcqj9k34vrvgmmvt85ym2ua79k2d22vcfxmuratakfm78chdqksnq5agezk'
             )
         else:
             return EthStakeEstimatedFee(

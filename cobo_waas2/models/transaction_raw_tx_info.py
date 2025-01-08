@@ -17,7 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.transaction_utxo import TransactionUtxo
+from cobo_waas2.models.transaction_selected_utxo import TransactionSelectedUtxo
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class TransactionRawTxInfo(BaseModel):
     The raw transaction information.
     """  # noqa: E501
     used_nonce: Optional[StrictInt] = Field(default=None, description="The transaction nonce.")
-    selected_utxos: Optional[List[TransactionUtxo]] = Field(default=None, description="The selected UTXOs to be consumed in the transaction.")
+    selected_utxos: Optional[List[TransactionSelectedUtxo]] = Field(default=None, description="The selected UTXOs to be consumed in the transaction.")
     raw_tx: Optional[StrictStr] = Field(default=None, description="The raw transaction data.")
     __properties: ClassVar[List[str]] = ["used_nonce", "selected_utxos", "raw_tx"]
 
@@ -90,7 +90,7 @@ class TransactionRawTxInfo(BaseModel):
 
         _obj = cls.model_validate({
             "used_nonce": obj.get("used_nonce"),
-            "selected_utxos": [TransactionUtxo.from_dict(_item) for _item in obj["selected_utxos"]] if obj.get("selected_utxos") is not None else None,
+            "selected_utxos": [TransactionSelectedUtxo.from_dict(_item) for _item in obj["selected_utxos"]] if obj.get("selected_utxos") is not None else None,
             "raw_tx": obj.get("raw_tx")
         })
         return _obj

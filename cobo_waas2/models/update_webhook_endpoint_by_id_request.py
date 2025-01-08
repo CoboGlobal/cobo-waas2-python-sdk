@@ -26,7 +26,7 @@ class UpdateWebhookEndpointByIdRequest(BaseModel):
     """
     UpdateWebhookEndpointByIdRequest
     """  # noqa: E501
-    subscribed_events: Optional[List[WebhookEventType]] = Field(default=None, description="The new event types you want to subscribe to for this webhook endpoint. You can call [Get webhook event types](/v2/api-references/developers--webhooks/get-webhook-event-types) to retrieve all available event types.")
+    subscribed_events: Optional[List[WebhookEventType]] = Field(default=None, description="The new event types you want to subscribe to for this webhook endpoint. You can call [Get webhook event types](https://www.cobo.com/developers/v2/api-references/developers--webhooks/get-webhook-event-types) to retrieve all available event types.")
     status: Optional[StrictStr] = Field(default=None, description="The new status you want to set the webhook endpoint to. If you set `status` to `STATUS_INACTIVE`, the endpoint will be revoked, meaning it will no longer receive any webhook events.")
     description: Optional[StrictStr] = Field(default=None, description="The webhook endpoint description.")
     __properties: ClassVar[List[str]] = ["subscribed_events", "status", "description"]

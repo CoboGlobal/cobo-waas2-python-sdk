@@ -27,15 +27,16 @@ class AddressInfo(BaseModel):
     The address information.
     """  # noqa: E501
     address: StrictStr = Field(description="The wallet address.")
-    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
+    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
     memo: Optional[StrictStr] = Field(default=None, description="The memo code.")
     path: Optional[StrictStr] = Field(default=None, description="The derivation path of the address. This property applies to MPC Wallets only. To learn the meaning of each level in the path, see [Path levels](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#path-levels).")
     encoding: Optional[AddressEncoding] = None
     pubkey: Optional[StrictStr] = Field(default=None, description="The public key of the address. This property applies to MPC Wallets only.")
     x_only_pubkey: Optional[StrictStr] = Field(default=None, description="The 32-byte x-only public key in hexadecimal format after tweaking.")
+    root_pubkey: Optional[StrictStr] = Field(default=None, description="The root public key of the address. This property applies to MPC Wallets only.")
     taproot_script_tree_hash: Optional[StrictStr] = Field(default=None, description="The information about the new address.")
     taproot_internal_address: Optional[StrictStr] = Field(default=None, description="The Taproot address before tweaking.")
-    __properties: ClassVar[List[str]] = ["address", "chain_id", "memo", "path", "encoding", "pubkey", "x_only_pubkey", "taproot_script_tree_hash", "taproot_internal_address"]
+    __properties: ClassVar[List[str]] = ["address", "chain_id", "memo", "path", "encoding", "pubkey", "x_only_pubkey", "root_pubkey", "taproot_script_tree_hash", "taproot_internal_address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,7 @@ class AddressInfo(BaseModel):
             "encoding": obj.get("encoding"),
             "pubkey": obj.get("pubkey"),
             "x_only_pubkey": obj.get("x_only_pubkey"),
+            "root_pubkey": obj.get("root_pubkey"),
             "taproot_script_tree_hash": obj.get("taproot_script_tree_hash"),
             "taproot_internal_address": obj.get("taproot_internal_address")
         })

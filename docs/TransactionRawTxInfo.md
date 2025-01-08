@@ -7,7 +7,7 @@ The raw transaction information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **used_nonce** | **int** | The transaction nonce. | [optional] 
-**selected_utxos** | [**List[TransactionUtxo]**](TransactionUtxo.md) | The selected UTXOs to be consumed in the transaction. | [optional] 
+**selected_utxos** | [**List[TransactionSelectedUtxo]**](TransactionSelectedUtxo.md) | The selected UTXOs to be consumed in the transaction. | [optional] 
 **raw_tx** | **str** | The raw transaction data. | [optional] 
 
 ## Example

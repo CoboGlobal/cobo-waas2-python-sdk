@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **pool_id** | [**StakingPoolId**](StakingPoolId.md) |  | 
 **amount** | **str** | The amount to stake. | 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
-**extra** | [**CreateStakeActivityExtra**](CreateStakeActivityExtra.md) |  | 
+**extra** | [**CreateStakeActivityExtra**](CreateStakeActivityExtra.md) |  | [optional] 
 
 ## Example
 

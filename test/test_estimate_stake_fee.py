@@ -48,7 +48,6 @@ class TestEstimateStakeFee(unittest.TestCase):
                 pool_id = 'babylon_btc_signet',
                 amount = '100.00',
                 fee = None,
-                extra = None,
         )
         """
 
