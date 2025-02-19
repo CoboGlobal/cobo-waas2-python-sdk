@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**create_mpc_vault**](WalletsMPCWalletsApi.md#create_mpc_vault) | **POST** /wallets/mpc/vaults | Create vault
 [**create_tss_request**](WalletsMPCWalletsApi.md#create_tss_request) | **POST** /wallets/mpc/vaults/{vault_id}/tss_requests | Create TSS request
 [**delete_key_share_holder_group_by_id**](WalletsMPCWalletsApi.md#delete_key_share_holder_group_by_id) | **POST** /wallets/mpc/vaults/{vault_id}/key_share_holder_groups/{key_share_holder_group_id}/delete | Delete key share holder group
-[**get_key_share_holder_by_tss_node_id**](WalletsMPCWalletsApi.md#get_key_share_holder_by_tss_node_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holders/{tss_node_id} | Get key share holder by tss node id
+[**get_key_share_holder_by_tss_node_id**](WalletsMPCWalletsApi.md#get_key_share_holder_by_tss_node_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holders/{tss_node_id} | Get key share holder information
 [**get_key_share_holder_group_by_id**](WalletsMPCWalletsApi.md#get_key_share_holder_group_by_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holder_groups/{key_share_holder_group_id} | Get key share holder group information
 [**get_mpc_project_by_id**](WalletsMPCWalletsApi.md#get_mpc_project_by_id) | **GET** /wallets/mpc/projects/{project_id} | Get project information
 [**get_mpc_vault_by_id**](WalletsMPCWalletsApi.md#get_mpc_vault_by_id) | **GET** /wallets/mpc/vaults/{vault_id} | Get vault information
@@ -467,9 +467,9 @@ Name | Type | Description  | Notes
 # **get_key_share_holder_by_tss_node_id**
 > KeyShareHolder get_key_share_holder_by_tss_node_id(vault_id, tss_node_id)
 
-Get key share holder by tss node id
+Get key share holder information
 
-This operation retrieves detailed information about a specified key holder. 
+This operation retrieves detailed information about a specified key share holder. 
 
 ### Example
 
@@ -496,7 +496,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tss_node_id = 'coboBTGDvjJG99pABegvPYmavrcTU3SkjTLHVdsko8dWBga4w'
 
     try:
-        # Get key share holder by tss node id
+        # Get key share holder information
         api_response = api_instance.get_key_share_holder_by_tss_node_id(vault_id, tss_node_id)
         print("The response of WalletsMPCWalletsApi->get_key_share_holder_by_tss_node_id:\n")
         pprint(api_response)
@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully get key share holder |  -  |
+**200** | Successfully retrieved key share holder information |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -977,7 +977,7 @@ Name | Type | Description  | Notes
 
 List all key share holders
 
-This operation retrieves all key share holders under a specified vault. You can filter the result by key share holder group id. 
+This operation retrieves a list of all key share holders under a specified vault. You can filter the result by key share holder group ID. 
 
 ### Example
 
@@ -1023,7 +1023,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **vault_id** | **str**| The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). | 
- **key_share_holder_group_ids** | **str**| A list of key_share_holder_group_ids, separated by comma. | [optional] 
+ **key_share_holder_group_ids** | **str**| A list of key share holder group IDs, separated by comma. You can retrieve the IDs of all the key share holder groups by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups). | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
  **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
@@ -1045,7 +1045,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully listed key share holders. |  -  |
+**200** | Successfully retrieved key share holder list |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

@@ -6,11 +6,11 @@ The user approval data for transaction.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**pubkey** | **str** | The gaurd pubkey of the user who audited the message. | [optional] 
+**pubkey** | **str** | The Cobo Guard public key of the user who audited this message. | [optional] 
 **result** | [**TransactionApprovalResult**](TransactionApprovalResult.md) |  | [optional] 
-**signature** | **str** | Signature of the audited message. | [optional] 
+**signature** | **str** | The signature of the audited message. | [optional] 
 **language** | **str** | The language of the audited message. | [optional] 
-**message_version** | **str** | Version of the audited message. | [optional] 
+**message_version** | **str** | The version of the audited message. | [optional] 
 **message** | **str** | The audited message. | [optional] 
 **extra_message** | **str** | The extra audited message. | [optional] 
 

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**create_transfer_transaction**](TransactionsApi.md#create_transfer_transaction) | **POST** /transactions/transfer | Transfer token
 [**drop_transaction_by_id**](TransactionsApi.md#drop_transaction_by_id) | **POST** /transactions/{transaction_id}/drop | Drop transaction
 [**estimate_fee**](TransactionsApi.md#estimate_fee) | **POST** /transactions/estimate_fee | Estimate transaction fee
-[**get_transaction_approval_detail**](TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval information
+[**get_transaction_approval_detail**](TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval details
 [**get_transaction_by_id**](TransactionsApi.md#get_transaction_by_id) | **GET** /transactions/{transaction_id} | Get transaction information
 [**list_transactions**](TransactionsApi.md#list_transactions) | **GET** /transactions | List all transactions
 [**resend_transaction_by_id**](TransactionsApi.md#resend_transaction_by_id) | **POST** /transactions/{transaction_id}/resend | Resend transaction
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 # **get_transaction_approval_detail**
 > TransactionApprovalDetail get_transaction_approval_detail(transaction_id)
 
-Get transaction approval information
+Get transaction approval details
 
 This operation retrieves approval detailed information about a specified transaction. 
 
@@ -631,7 +631,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # Get transaction approval information
+        # Get transaction approval details
         api_response = api_instance.get_transaction_approval_detail(transaction_id)
         print("The response of TransactionsApi->get_transaction_approval_detail:\n")
         pprint(api_response)
@@ -924,7 +924,7 @@ Name | Type | Description  | Notes
 
 Sign and broadcast transaction
 
-This operation sign and broadcast a specified transaction. 
+This operation signs and broadcasts a specified transaction.  To call this operation, the following conditions must be met: - The `transaction_process_type` of the transaction must be set to `BuildOnly` when you call the [Transfer token](https://www.cobo.com/developers/v2/api-references/transactions/transfer-token) or [Call smart contract](https://www.cobo.com/developers/v2/api-references/transactions/call-smart-contract) operation.   - The transaction status must be `Built`. 
 
 ### Example
 

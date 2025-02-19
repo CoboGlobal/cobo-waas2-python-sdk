@@ -132,7 +132,7 @@ class TestTransactionsApi(unittest.TestCase):
         """
         Test case for get_transaction_approval_detail
 
-        Get transaction approval information
+        Get transaction approval details
         """
         """
         transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'

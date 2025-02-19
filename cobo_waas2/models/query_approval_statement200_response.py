@@ -26,9 +26,9 @@ class QueryApprovalStatement200Response(BaseModel):
     """
     QueryApprovalStatement200Response
     """  # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="approval statement id.")
-    user_id: Optional[StrictStr] = Field(default=None, description="approver user id.")
-    pubkey: Optional[StrictStr] = Field(default=None, description="approver user pubkey.")
+    id: Optional[StrictStr] = Field(default=None, description="The approval statement ID.")
+    user_id: Optional[StrictStr] = Field(default=None, description="The user ID of the approver.")
+    pubkey: Optional[StrictStr] = Field(default=None, description="The Cobo Guard public key of the approver.")
     status: Optional[ApprovalStatementStatus] = None
     __properties: ClassVar[List[str]] = ["id", "user_id", "pubkey", "status"]
 

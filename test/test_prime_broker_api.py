@@ -33,7 +33,7 @@ class TestPrimeBrokerApi(unittest.TestCase):
         """
         Test case for change_guard_pubkey
 
-        change a user guard pubkey
+        Change Guard pubkey binding
         """
         """
         user_id = '168108513539918'
@@ -45,7 +45,7 @@ class TestPrimeBrokerApi(unittest.TestCase):
         """
         Test case for create_guard_pubkey
 
-        create a guard pubkey binding
+        Create Guard pubkey binding
         """
         """
         user_id = '168108513539918'
@@ -57,7 +57,7 @@ class TestPrimeBrokerApi(unittest.TestCase):
         """
         Test case for create_prime_broker_address
 
-        bind addresses to a broker user
+        Bind addresses to a broker user
         """
         """
         user_id = '168108513539918'
@@ -70,7 +70,7 @@ class TestPrimeBrokerApi(unittest.TestCase):
         """
         Test case for delete_guard_pubkey
 
-        delete a user guard pubkey
+        Delete Guard pubkey binding
         """
         """
         user_id = '168108513539918'
@@ -82,7 +82,7 @@ class TestPrimeBrokerApi(unittest.TestCase):
         """
         Test case for query_approval_statement
 
-        query a approval statement
+        Query approval statement
         """
         """
         statement_id = '168108513539918'
@@ -94,7 +94,7 @@ class TestPrimeBrokerApi(unittest.TestCase):
         """
         Test case for query_guard_pubkey
 
-        query a user guard pubkey
+        Query a Guard pubkey
         """
         """
         user_id = '168108513539918'

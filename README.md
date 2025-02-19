@@ -93,12 +93,12 @@ Class | Method | HTTP request | Description
 *DevelopersWebhooksApi* | [**update_webhook_endpoint_by_id**](docs/DevelopersWebhooksApi.md#update_webhook_endpoint_by_id) | **PUT** /webhooks/endpoints/{endpoint_id} | Update webhook endpoint
 *OAuthApi* | [**get_token**](docs/OAuthApi.md#get_token) | **GET** /oauth/token | Get Org Access Token
 *OAuthApi* | [**refresh_token**](docs/OAuthApi.md#refresh_token) | **POST** /oauth/token | Refresh Org Access Token
-*PrimeBrokerApi* | [**change_guard_pubkey**](docs/PrimeBrokerApi.md#change_guard_pubkey) | **PUT** /prime_broker/user/{user_id}/guard_pubkey | change a user guard pubkey
-*PrimeBrokerApi* | [**create_guard_pubkey**](docs/PrimeBrokerApi.md#create_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey | create a guard pubkey binding
-*PrimeBrokerApi* | [**create_prime_broker_address**](docs/PrimeBrokerApi.md#create_prime_broker_address) | **POST** /prime_broker/user/{user_id}/addresses | bind addresses to a broker user
-*PrimeBrokerApi* | [**delete_guard_pubkey**](docs/PrimeBrokerApi.md#delete_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey/delete | delete a user guard pubkey
-*PrimeBrokerApi* | [**query_approval_statement**](docs/PrimeBrokerApi.md#query_approval_statement) | **GET** /prime_broker/approval_statement/{statement_id} | query a approval statement
-*PrimeBrokerApi* | [**query_guard_pubkey**](docs/PrimeBrokerApi.md#query_guard_pubkey) | **GET** /prime_broker/user/{user_id}/guard_pubkey | query a user guard pubkey
+*PrimeBrokerApi* | [**change_guard_pubkey**](docs/PrimeBrokerApi.md#change_guard_pubkey) | **PUT** /prime_broker/user/{user_id}/guard_pubkey | Change Guard pubkey binding
+*PrimeBrokerApi* | [**create_guard_pubkey**](docs/PrimeBrokerApi.md#create_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey | Create Guard pubkey binding
+*PrimeBrokerApi* | [**create_prime_broker_address**](docs/PrimeBrokerApi.md#create_prime_broker_address) | **POST** /prime_broker/user/{user_id}/addresses | Bind addresses to a broker user
+*PrimeBrokerApi* | [**delete_guard_pubkey**](docs/PrimeBrokerApi.md#delete_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey/delete | Delete Guard pubkey binding
+*PrimeBrokerApi* | [**query_approval_statement**](docs/PrimeBrokerApi.md#query_approval_statement) | **GET** /prime_broker/approval_statement/{statement_id} | Query approval statement
+*PrimeBrokerApi* | [**query_guard_pubkey**](docs/PrimeBrokerApi.md#query_guard_pubkey) | **GET** /prime_broker/user/{user_id}/guard_pubkey | Query a Guard pubkey
 *StakingsApi* | [**create_claim_activity**](docs/StakingsApi.md#create_claim_activity) | **POST** /stakings/activities/claim | Create claim activity
 *StakingsApi* | [**create_stake_activity**](docs/StakingsApi.md#create_stake_activity) | **POST** /stakings/activities/stake | Create stake activity
 *StakingsApi* | [**create_unstake_activity**](docs/StakingsApi.md#create_unstake_activity) | **POST** /stakings/activities/unstake | Create unstake activity
@@ -119,7 +119,7 @@ Class | Method | HTTP request | Description
 *TransactionsApi* | [**create_transfer_transaction**](docs/TransactionsApi.md#create_transfer_transaction) | **POST** /transactions/transfer | Transfer token
 *TransactionsApi* | [**drop_transaction_by_id**](docs/TransactionsApi.md#drop_transaction_by_id) | **POST** /transactions/{transaction_id}/drop | Drop transaction
 *TransactionsApi* | [**estimate_fee**](docs/TransactionsApi.md#estimate_fee) | **POST** /transactions/estimate_fee | Estimate transaction fee
-*TransactionsApi* | [**get_transaction_approval_detail**](docs/TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval information
+*TransactionsApi* | [**get_transaction_approval_detail**](docs/TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval details
 *TransactionsApi* | [**get_transaction_by_id**](docs/TransactionsApi.md#get_transaction_by_id) | **GET** /transactions/{transaction_id} | Get transaction information
 *TransactionsApi* | [**list_transactions**](docs/TransactionsApi.md#list_transactions) | **GET** /transactions | List all transactions
 *TransactionsApi* | [**resend_transaction_by_id**](docs/TransactionsApi.md#resend_transaction_by_id) | **POST** /transactions/{transaction_id}/resend | Resend transaction
@@ -139,7 +139,7 @@ Class | Method | HTTP request | Description
 *WalletsApi* | [**get_max_transferable_value**](docs/WalletsApi.md#get_max_transferable_value) | **GET** /wallets/{wallet_id}/max_transferable_value | Get maximum transferable value
 *WalletsApi* | [**get_token_by_id**](docs/WalletsApi.md#get_token_by_id) | **GET** /wallets/tokens/{token_id} | Get token information
 *WalletsApi* | [**get_wallet_by_id**](docs/WalletsApi.md#get_wallet_by_id) | **GET** /wallets/{wallet_id} | Get wallet information
-*WalletsApi* | [**list_address_balances_for_token**](docs/WalletsApi.md#list_address_balances_for_token) | **GET** /wallets/{wallet_id}/tokens/{token_id} | List address balances for token
+*WalletsApi* | [**list_address_balances_by_token**](docs/WalletsApi.md#list_address_balances_by_token) | **GET** /wallets/{wallet_id}/tokens/{token_id} | List address balances by token
 *WalletsApi* | [**list_addresses**](docs/WalletsApi.md#list_addresses) | **GET** /wallets/{wallet_id}/addresses | List wallet addresses
 *WalletsApi* | [**list_enabled_chains**](docs/WalletsApi.md#list_enabled_chains) | **GET** /wallets/enabled_chains | List enabled chains
 *WalletsApi* | [**list_enabled_tokens**](docs/WalletsApi.md#list_enabled_tokens) | **GET** /wallets/enabled_tokens | List enabled tokens
@@ -162,7 +162,7 @@ Class | Method | HTTP request | Description
 *WalletsMPCWalletsApi* | [**create_mpc_vault**](docs/WalletsMPCWalletsApi.md#create_mpc_vault) | **POST** /wallets/mpc/vaults | Create vault
 *WalletsMPCWalletsApi* | [**create_tss_request**](docs/WalletsMPCWalletsApi.md#create_tss_request) | **POST** /wallets/mpc/vaults/{vault_id}/tss_requests | Create TSS request
 *WalletsMPCWalletsApi* | [**delete_key_share_holder_group_by_id**](docs/WalletsMPCWalletsApi.md#delete_key_share_holder_group_by_id) | **POST** /wallets/mpc/vaults/{vault_id}/key_share_holder_groups/{key_share_holder_group_id}/delete | Delete key share holder group
-*WalletsMPCWalletsApi* | [**get_key_share_holder_by_tss_node_id**](docs/WalletsMPCWalletsApi.md#get_key_share_holder_by_tss_node_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holders/{tss_node_id} | Get key share holder by tss node id
+*WalletsMPCWalletsApi* | [**get_key_share_holder_by_tss_node_id**](docs/WalletsMPCWalletsApi.md#get_key_share_holder_by_tss_node_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holders/{tss_node_id} | Get key share holder information
 *WalletsMPCWalletsApi* | [**get_key_share_holder_group_by_id**](docs/WalletsMPCWalletsApi.md#get_key_share_holder_group_by_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holder_groups/{key_share_holder_group_id} | Get key share holder group information
 *WalletsMPCWalletsApi* | [**get_mpc_project_by_id**](docs/WalletsMPCWalletsApi.md#get_mpc_project_by_id) | **GET** /wallets/mpc/projects/{project_id} | Get project information
 *WalletsMPCWalletsApi* | [**get_mpc_vault_by_id**](docs/WalletsMPCWalletsApi.md#get_mpc_vault_by_id) | **GET** /wallets/mpc/vaults/{vault_id} | Get vault information
@@ -325,7 +325,7 @@ Class | Method | HTTP request | Description
  - [KeyShareHolderGroupType](docs/KeyShareHolderGroupType.md)
  - [KeyShareHolderStatus](docs/KeyShareHolderStatus.md)
  - [KeyShareHolderType](docs/KeyShareHolderType.md)
- - [ListAddressBalancesForToken200Response](docs/ListAddressBalancesForToken200Response.md)
+ - [ListAddressBalancesByToken200Response](docs/ListAddressBalancesByToken200Response.md)
  - [ListAddressBooks200Response](docs/ListAddressBooks200Response.md)
  - [ListAddresses200Response](docs/ListAddresses200Response.md)
  - [ListAssetBalancesForExchangeWallet200Response](docs/ListAssetBalancesForExchangeWallet200Response.md)
@@ -564,26 +564,26 @@ Authentication schemes defined for the API:
 - **Authorization URL**: https://auth.cobo.com/authorize
 - **Scopes**: 
  - **address_book.read**: Read address book
- - **api_key.read**: Read API key info
+ - **api_key.read**: Read API key information
  - **callback.read**: Read callback message
  - **callback.resend**: Resend callback message
  - **wallet.create**: Create wallet
- - **wallet.read**: Read wallet info
- - **wallet.update**: Update wallet info
- - **wallet.delete**: Delete wallet info
+ - **wallet.read**: Read wallet information
+ - **wallet.update**: Update wallet information
+ - **wallet.delete**: Delete wallet information
  - **wallet.create_address**: Create wallet address
  - **wallet.manage_utxo**: Manage UTXO
  - **mpc_project.create**: Create MPC project
- - **mpc_project.read**: Read MPC project info
- - **mpc_project.update**: Update MPC project info
- - **mpc_vault.create**: Create MPC vault
- - **mpc_vault.read**: Read MPC vault info
- - **mpc_vault.update**: Update MPC vault info
+ - **mpc_project.read**: Read MPC project information
+ - **mpc_project.update**: Update MPC project information
+ - **mpc_vault.create**: Create MPC Vault
+ - **mpc_vault.read**: Read MPC Vault information
+ - **mpc_vault.update**: Update MPC Vault information
  - **mpc_key_group.create**: Create MPC key group
- - **mpc_key_group.read**: Read MPC key group info
- - **mpc_key_group.update**: Update MPC key group info
- - **mpc_key_group.delete**: Delete MPC key group info
- - **transaction.read**: Read transaction info
+ - **mpc_key_group.read**: Read MPC key group information
+ - **mpc_key_group.update**: Update MPC key group information
+ - **mpc_key_group.delete**: Delete MPC key group information
+ - **transaction.read**: Read transaction information
  - **transaction.withdraw**: Make withdrawals
  - **transaction.estimate_fee**: Estimate transaction fee
  - **transaction.contract_call**: Initiate contract calls
@@ -593,8 +593,8 @@ Authentication schemes defined for the API:
  - **transaction.unstake_withdraw**: Withdraw unstaked assets
  - **transaction.manage**: Manage ongoing transactions
  - **transaction.update**: Update transaction notes
- - **travel_rule.read**: Read travel rule info
- - **travel_rule.edit**: Edit travel rule info
+ - **travel_rule.read**: Read travel rule information
+ - **travel_rule.edit**: Edit travel rule information
  - **webhook.read**: Read webhook URLs/events
  - **webhook.edit**: Edit webhook URLs
  - **webhook.resend**: Resend webhook events

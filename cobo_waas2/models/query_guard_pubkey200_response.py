@@ -27,7 +27,7 @@ class QueryGuardPubkey200Response(BaseModel):
     """
     QueryGuardPubkey200Response
     """  # noqa: E501
-    pubkey: Optional[StrictStr] = Field(default=None, description="guard's pubkey.")
+    pubkey: Optional[StrictStr] = Field(default=None, description="The Cobo Guard's public key.")
     status: Optional[GuardPubkeyStatus] = None
     addresses: Optional[List[QueryGuardPubkey200ResponseAddressesInner]] = None
     __properties: ClassVar[List[str]] = ["pubkey", "status", "addresses"]

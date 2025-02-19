@@ -109,7 +109,7 @@ class TestWalletsMPCWalletsApi(unittest.TestCase):
         """
         Test case for get_key_share_holder_by_tss_node_id
 
-        Get key share holder by tss node id
+        Get key share holder information
         """
         """
         vault_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'

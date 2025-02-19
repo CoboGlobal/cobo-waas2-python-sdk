@@ -157,11 +157,11 @@ class TestWalletsApi(unittest.TestCase):
         api_response = self.api.get_wallet_by_id(wallet_id)
         """
 
-    def test_list_address_balances_for_token(self) -> None:
+    def test_list_address_balances_by_token(self) -> None:
         """
-        Test case for list_address_balances_for_token
+        Test case for list_address_balances_by_token
 
-        List address balances for token
+        List address balances by token
         """
         """
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -171,7 +171,7 @@ class TestWalletsApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
-        api_response = self.api.list_address_balances_for_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
+        api_response = self.api.list_address_balances_by_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
         """
 
     def test_list_addresses(self) -> None:

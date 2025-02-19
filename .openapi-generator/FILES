@@ -172,7 +172,7 @@ cobo_waas2/models/key_share_holder_group_status.py
 cobo_waas2/models/key_share_holder_group_type.py
 cobo_waas2/models/key_share_holder_status.py
 cobo_waas2/models/key_share_holder_type.py
-cobo_waas2/models/list_address_balances_for_token200_response.py
+cobo_waas2/models/list_address_balances_by_token200_response.py
 cobo_waas2/models/list_address_books200_response.py
 cobo_waas2/models/list_addresses200_response.py
 cobo_waas2/models/list_asset_balances_for_exchange_wallet200_response.py
@@ -525,7 +525,7 @@ docs/KeyShareHolderGroupStatus.md
 docs/KeyShareHolderGroupType.md
 docs/KeyShareHolderStatus.md
 docs/KeyShareHolderType.md
-docs/ListAddressBalancesForToken200Response.md
+docs/ListAddressBalancesByToken200Response.md
 docs/ListAddressBooks200Response.md
 docs/ListAddresses200Response.md
 docs/ListAssetBalancesForExchangeWallet200Response.md
@@ -891,7 +891,7 @@ test/test_key_share_holder_group_status.py
 test/test_key_share_holder_group_type.py
 test/test_key_share_holder_status.py
 test/test_key_share_holder_type.py
-test/test_list_address_balances_for_token200_response.py
+test/test_list_address_balances_by_token200_response.py
 test/test_list_address_books200_response.py
 test/test_list_addresses200_response.py
 test/test_list_asset_balances_for_exchange_wallet200_response.py

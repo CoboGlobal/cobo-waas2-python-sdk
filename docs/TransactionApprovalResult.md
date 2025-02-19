@@ -1,6 +1,6 @@
 # TransactionApprovalResult
 
-The transaction approval result. Possible values include:    - `Approved`: The transaction is approved.   - `Rejected`: The transaction is rejected.    - `Pending`: The transaction is pending approvals. 
+The transaction approval result. Possible values include:    - `Approved`: The transaction is approved.   - `Rejected`: The transaction is rejected.    - `Pending`: The transaction is pending approval. 
 
 ## Properties
 

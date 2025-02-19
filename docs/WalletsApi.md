@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**get_max_transferable_value**](WalletsApi.md#get_max_transferable_value) | **GET** /wallets/{wallet_id}/max_transferable_value | Get maximum transferable value
 [**get_token_by_id**](WalletsApi.md#get_token_by_id) | **GET** /wallets/tokens/{token_id} | Get token information
 [**get_wallet_by_id**](WalletsApi.md#get_wallet_by_id) | **GET** /wallets/{wallet_id} | Get wallet information
-[**list_address_balances_for_token**](WalletsApi.md#list_address_balances_for_token) | **GET** /wallets/{wallet_id}/tokens/{token_id} | List address balances for token
+[**list_address_balances_by_token**](WalletsApi.md#list_address_balances_by_token) | **GET** /wallets/{wallet_id}/tokens/{token_id} | List address balances by token
 [**list_addresses**](WalletsApi.md#list_addresses) | **GET** /wallets/{wallet_id}/addresses | List wallet addresses
 [**list_enabled_chains**](WalletsApi.md#list_enabled_chains) | **GET** /wallets/enabled_chains | List enabled chains
 [**list_enabled_tokens**](WalletsApi.md#list_enabled_tokens) | **GET** /wallets/enabled_tokens | List enabled tokens
@@ -757,12 +757,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_address_balances_for_token**
-> ListAddressBalancesForToken200Response list_address_balances_for_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
+# **list_address_balances_by_token**
+> ListAddressBalancesByToken200Response list_address_balances_by_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
 
-List address balances for token
+List address balances by token
 
-The operation retrieves a list of address balances for a specified token within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
+This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
 ### Example
 
@@ -770,7 +770,7 @@ The operation retrieves a list of address balances for a specified token within 
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.list_address_balances_for_token200_response import ListAddressBalancesForToken200Response
+from cobo_waas2.models.list_address_balances_by_token200_response import ListAddressBalancesByToken200Response
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -793,12 +793,12 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
-        # List address balances for token
-        api_response = api_instance.list_address_balances_for_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
-        print("The response of WalletsApi->list_address_balances_for_token:\n")
+        # List address balances by token
+        api_response = api_instance.list_address_balances_by_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
+        print("The response of WalletsApi->list_address_balances_by_token:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WalletsApi->list_address_balances_for_token: %s\n" % e)
+        print("Exception when calling WalletsApi->list_address_balances_by_token: %s\n" % e)
 ```
 
 
@@ -817,7 +817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListAddressBalancesForToken200Response**](ListAddressBalancesForToken200Response.md)
+[**ListAddressBalancesByToken200Response**](ListAddressBalancesByToken200Response.md)
 
 ### Authorization
 

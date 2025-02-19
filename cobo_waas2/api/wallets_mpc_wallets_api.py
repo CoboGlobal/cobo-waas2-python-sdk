@@ -1142,9 +1142,9 @@ class WalletsMPCWalletsApi:
             ]
         ] = None,
     ) -> KeyShareHolder:
-        """Get key share holder by tss node id
+        """Get key share holder information
 
-        This operation retrieves detailed information about a specified key holder. 
+        This operation retrieves detailed information about a specified key share holder. 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
@@ -1192,9 +1192,9 @@ class WalletsMPCWalletsApi:
             ]
         ] = None,
     ) -> ApiResponse[KeyShareHolder]:
-        """Get key share holder by tss node id
+        """Get key share holder information
 
-        This operation retrieves detailed information about a specified key holder. 
+        This operation retrieves detailed information about a specified key share holder. 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
@@ -1242,9 +1242,9 @@ class WalletsMPCWalletsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get key share holder by tss node id
+        """Get key share holder information
 
-        This operation retrieves detailed information about a specified key holder. 
+        This operation retrieves detailed information about a specified key share holder. 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
@@ -2413,7 +2413,7 @@ class WalletsMPCWalletsApi:
     def list_key_share_holders(
         self,
         vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
-        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key_share_holder_group_ids, separated by comma.")] = None,
+        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key share holder group IDs, separated by comma. You can retrieve the IDs of all the key share holder groups by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -2428,11 +2428,11 @@ class WalletsMPCWalletsApi:
     ) -> ListKeyShareHolders200Response:
         """List all key share holders
 
-        This operation retrieves all key share holders under a specified vault. You can filter the result by key share holder group id. 
+        This operation retrieves a list of all key share holders under a specified vault. You can filter the result by key share holder group ID. 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
-        :param key_share_holder_group_ids: A list of key_share_holder_group_ids, separated by comma.
+        :param key_share_holder_group_ids: A list of key share holder group IDs, separated by comma. You can retrieve the IDs of all the key share holder groups by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).
         :type key_share_holder_group_ids: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2475,7 +2475,7 @@ class WalletsMPCWalletsApi:
     def list_key_share_holders_with_http_info(
         self,
         vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
-        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key_share_holder_group_ids, separated by comma.")] = None,
+        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key share holder group IDs, separated by comma. You can retrieve the IDs of all the key share holder groups by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -2490,11 +2490,11 @@ class WalletsMPCWalletsApi:
     ) -> ApiResponse[ListKeyShareHolders200Response]:
         """List all key share holders
 
-        This operation retrieves all key share holders under a specified vault. You can filter the result by key share holder group id. 
+        This operation retrieves a list of all key share holders under a specified vault. You can filter the result by key share holder group ID. 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
-        :param key_share_holder_group_ids: A list of key_share_holder_group_ids, separated by comma.
+        :param key_share_holder_group_ids: A list of key share holder group IDs, separated by comma. You can retrieve the IDs of all the key share holder groups by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).
         :type key_share_holder_group_ids: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2537,7 +2537,7 @@ class WalletsMPCWalletsApi:
     def list_key_share_holders_without_preload_content(
         self,
         vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
-        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key_share_holder_group_ids, separated by comma.")] = None,
+        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key share holder group IDs, separated by comma. You can retrieve the IDs of all the key share holder groups by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -2552,11 +2552,11 @@ class WalletsMPCWalletsApi:
     ) -> RESTResponseType:
         """List all key share holders
 
-        This operation retrieves all key share holders under a specified vault. You can filter the result by key share holder group id. 
+        This operation retrieves a list of all key share holders under a specified vault. You can filter the result by key share holder group ID. 
 
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
-        :param key_share_holder_group_ids: A list of key_share_holder_group_ids, separated by comma.
+        :param key_share_holder_group_ids: A list of key share holder group IDs, separated by comma. You can retrieve the IDs of all the key share holder groups by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).
         :type key_share_holder_group_ids: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int

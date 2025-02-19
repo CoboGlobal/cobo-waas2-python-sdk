@@ -43,7 +43,7 @@ class PrimeBrokerApi:
     @validate_call
     def change_guard_pubkey(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -53,11 +53,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ChangeGuardPubkey200Response:
-        """change a user guard pubkey
+        """Change Guard pubkey binding
 
-        This operation change a user guard pubkey. 
+        This operation updates an existing binding to associate a broker user ID with a new Cobo Guard public key. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -90,7 +90,7 @@ class PrimeBrokerApi:
     @validate_call
     def change_guard_pubkey_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -100,11 +100,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ApiResponse[ChangeGuardPubkey200Response]:
-        """change a user guard pubkey
+        """Change Guard pubkey binding
 
-        This operation change a user guard pubkey. 
+        This operation updates an existing binding to associate a broker user ID with a new Cobo Guard public key. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -137,7 +137,7 @@ class PrimeBrokerApi:
     @validate_call
     def change_guard_pubkey_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,11 +147,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """change a user guard pubkey
+        """Change Guard pubkey binding
 
-        This operation change a user guard pubkey. 
+        This operation updates an existing binding to associate a broker user ID with a new Cobo Guard public key. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -215,7 +215,7 @@ class PrimeBrokerApi:
     @validate_call
     def create_guard_pubkey(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -225,11 +225,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ChangeGuardPubkey200Response:
-        """create a guard pubkey binding
+        """Create Guard pubkey binding
 
-        This operation create a guard pubkey binding. 
+        This operation creates a binding between a broker user ID and a Cobo Guard public key.  
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -262,7 +262,7 @@ class PrimeBrokerApi:
     @validate_call
     def create_guard_pubkey_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -272,11 +272,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ApiResponse[ChangeGuardPubkey200Response]:
-        """create a guard pubkey binding
+        """Create Guard pubkey binding
 
-        This operation create a guard pubkey binding. 
+        This operation creates a binding between a broker user ID and a Cobo Guard public key.  
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -309,7 +309,7 @@ class PrimeBrokerApi:
     @validate_call
     def create_guard_pubkey_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -319,11 +319,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """create a guard pubkey binding
+        """Create Guard pubkey binding
 
-        This operation create a guard pubkey binding. 
+        This operation creates a binding between a broker user ID and a Cobo Guard public key.  
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -387,8 +387,8 @@ class PrimeBrokerApi:
     @validate_call
     def create_prime_broker_address(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
-        create_prime_broker_address_request: Annotated[Optional[CreatePrimeBrokerAddressRequest], Field(description="The request body to binding addresses to a broker user.")] = None,
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
+        create_prime_broker_address_request: Annotated[Optional[CreatePrimeBrokerAddressRequest], Field(description="The request body to bind addresses to a broker user.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -398,13 +398,13 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> CreatePrimeBrokerAddress201Response:
-        """bind addresses to a broker user
+        """Bind addresses to a broker user
 
-        This operation bind addresses to a broker user. 
+        This operation binds addresses to a broker user. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
-        :param create_prime_broker_address_request: The request body to binding addresses to a broker user.
+        :param create_prime_broker_address_request: The request body to bind addresses to a broker user.
         :type create_prime_broker_address_request: CreatePrimeBrokerAddressRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -438,8 +438,8 @@ class PrimeBrokerApi:
     @validate_call
     def create_prime_broker_address_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
-        create_prime_broker_address_request: Annotated[Optional[CreatePrimeBrokerAddressRequest], Field(description="The request body to binding addresses to a broker user.")] = None,
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
+        create_prime_broker_address_request: Annotated[Optional[CreatePrimeBrokerAddressRequest], Field(description="The request body to bind addresses to a broker user.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -449,13 +449,13 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ApiResponse[CreatePrimeBrokerAddress201Response]:
-        """bind addresses to a broker user
+        """Bind addresses to a broker user
 
-        This operation bind addresses to a broker user. 
+        This operation binds addresses to a broker user. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
-        :param create_prime_broker_address_request: The request body to binding addresses to a broker user.
+        :param create_prime_broker_address_request: The request body to bind addresses to a broker user.
         :type create_prime_broker_address_request: CreatePrimeBrokerAddressRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -489,8 +489,8 @@ class PrimeBrokerApi:
     @validate_call
     def create_prime_broker_address_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
-        create_prime_broker_address_request: Annotated[Optional[CreatePrimeBrokerAddressRequest], Field(description="The request body to binding addresses to a broker user.")] = None,
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
+        create_prime_broker_address_request: Annotated[Optional[CreatePrimeBrokerAddressRequest], Field(description="The request body to bind addresses to a broker user.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -500,13 +500,13 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """bind addresses to a broker user
+        """Bind addresses to a broker user
 
-        This operation bind addresses to a broker user. 
+        This operation binds addresses to a broker user. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
-        :param create_prime_broker_address_request: The request body to binding addresses to a broker user.
+        :param create_prime_broker_address_request: The request body to bind addresses to a broker user.
         :type create_prime_broker_address_request: CreatePrimeBrokerAddressRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -574,7 +574,7 @@ class PrimeBrokerApi:
     @validate_call
     def delete_guard_pubkey(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -584,11 +584,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> DeleteGuardPubkey201Response:
-        """delete a user guard pubkey
+        """Delete Guard pubkey binding
 
-        This operation delete a user guard pubkey. 
+        This operation deletes a binding between a broker user ID and a Cobo Guard public key. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -621,7 +621,7 @@ class PrimeBrokerApi:
     @validate_call
     def delete_guard_pubkey_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -631,11 +631,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ApiResponse[DeleteGuardPubkey201Response]:
-        """delete a user guard pubkey
+        """Delete Guard pubkey binding
 
-        This operation delete a user guard pubkey. 
+        This operation deletes a binding between a broker user ID and a Cobo Guard public key. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -668,7 +668,7 @@ class PrimeBrokerApi:
     @validate_call
     def delete_guard_pubkey_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -678,11 +678,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """delete a user guard pubkey
+        """Delete Guard pubkey binding
 
-        This operation delete a user guard pubkey. 
+        This operation deletes a binding between a broker user ID and a Cobo Guard public key. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -746,7 +746,7 @@ class PrimeBrokerApi:
     @validate_call
     def query_approval_statement(
         self,
-        statement_id: Annotated[StrictStr, Field(description="approval statement id.")],
+        statement_id: Annotated[StrictStr, Field(description="The approval statement ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -756,11 +756,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> QueryApprovalStatement200Response:
-        """query a approval statement
+        """Query approval statement
 
-        This operation query a approval statement. 
+        This operation queries an approval statement. 
 
-        :param statement_id: approval statement id. (required)
+        :param statement_id: The approval statement ID. (required)
         :type statement_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -793,7 +793,7 @@ class PrimeBrokerApi:
     @validate_call
     def query_approval_statement_with_http_info(
         self,
-        statement_id: Annotated[StrictStr, Field(description="approval statement id.")],
+        statement_id: Annotated[StrictStr, Field(description="The approval statement ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -803,11 +803,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ApiResponse[QueryApprovalStatement200Response]:
-        """query a approval statement
+        """Query approval statement
 
-        This operation query a approval statement. 
+        This operation queries an approval statement. 
 
-        :param statement_id: approval statement id. (required)
+        :param statement_id: The approval statement ID. (required)
         :type statement_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -840,7 +840,7 @@ class PrimeBrokerApi:
     @validate_call
     def query_approval_statement_without_preload_content(
         self,
-        statement_id: Annotated[StrictStr, Field(description="approval statement id.")],
+        statement_id: Annotated[StrictStr, Field(description="The approval statement ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -850,11 +850,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """query a approval statement
+        """Query approval statement
 
-        This operation query a approval statement. 
+        This operation queries an approval statement. 
 
-        :param statement_id: approval statement id. (required)
+        :param statement_id: The approval statement ID. (required)
         :type statement_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -918,7 +918,7 @@ class PrimeBrokerApi:
     @validate_call
     def query_guard_pubkey(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -928,11 +928,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> QueryGuardPubkey200Response:
-        """query a user guard pubkey
+        """Query a Guard pubkey
 
-        This operation query a user guard pubkey 
+        This operation retrieves the current Cobo Guard public key binding details for a broker user. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -965,7 +965,7 @@ class PrimeBrokerApi:
     @validate_call
     def query_guard_pubkey_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -975,11 +975,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> ApiResponse[QueryGuardPubkey200Response]:
-        """query a user guard pubkey
+        """Query a Guard pubkey
 
-        This operation query a user guard pubkey 
+        This operation retrieves the current Cobo Guard public key binding details for a broker user. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1012,7 +1012,7 @@ class PrimeBrokerApi:
     @validate_call
     def query_guard_pubkey_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="user id.")],
+        user_id: Annotated[StrictStr, Field(description="The user ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1022,11 +1022,11 @@ class PrimeBrokerApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """query a user guard pubkey
+        """Query a Guard pubkey
 
-        This operation query a user guard pubkey 
+        This operation retrieves the current Cobo Guard public key binding details for a broker user. 
 
-        :param user_id: user id. (required)
+        :param user_id: The user ID. (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -26,7 +26,7 @@ from cobo_waas2.models.create_wallet_params import CreateWalletParams
 from cobo_waas2.models.created_wallet_info import CreatedWalletInfo
 from cobo_waas2.models.delete_wallet_by_id201_response import DeleteWalletById201Response
 from cobo_waas2.models.extended_token_info import ExtendedTokenInfo
-from cobo_waas2.models.list_address_balances_for_token200_response import ListAddressBalancesForToken200Response
+from cobo_waas2.models.list_address_balances_by_token200_response import ListAddressBalancesByToken200Response
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
 from cobo_waas2.models.list_supported_chains200_response import ListSupportedChains200Response
 from cobo_waas2.models.list_supported_tokens200_response import ListSupportedTokens200Response
@@ -1889,7 +1889,7 @@ class WalletsApi:
         )
 
     @validate_call
-    def list_address_balances_for_token(
+    def list_address_balances_by_token(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
@@ -1905,10 +1905,10 @@ class WalletsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ListAddressBalancesForToken200Response:
-        """List address balances for token
+    ) -> ListAddressBalancesByToken200Response:
+        """List address balances by token
 
-        The operation retrieves a list of address balances for a specified token within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
+        This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -1930,7 +1930,7 @@ class WalletsApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._list_address_balances_for_token_serialize(
+        _param = self._list_address_balances_by_token_serialize(
             wallet_id=wallet_id,
             token_id=token_id,
             addresses=addresses,
@@ -1940,7 +1940,7 @@ class WalletsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListAddressBalancesForToken200Response",
+            '200': "ListAddressBalancesByToken200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -1955,7 +1955,7 @@ class WalletsApi:
         ).data
 
     @validate_call
-    def list_address_balances_for_token_with_http_info(
+    def list_address_balances_by_token_with_http_info(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
@@ -1971,10 +1971,10 @@ class WalletsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[ListAddressBalancesForToken200Response]:
-        """List address balances for token
+    ) -> ApiResponse[ListAddressBalancesByToken200Response]:
+        """List address balances by token
 
-        The operation retrieves a list of address balances for a specified token within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
+        This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -1996,7 +1996,7 @@ class WalletsApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._list_address_balances_for_token_serialize(
+        _param = self._list_address_balances_by_token_serialize(
             wallet_id=wallet_id,
             token_id=token_id,
             addresses=addresses,
@@ -2006,7 +2006,7 @@ class WalletsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListAddressBalancesForToken200Response",
+            '200': "ListAddressBalancesByToken200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -2021,7 +2021,7 @@ class WalletsApi:
         )
 
     @validate_call
-    def list_address_balances_for_token_without_preload_content(
+    def list_address_balances_by_token_without_preload_content(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
@@ -2038,9 +2038,9 @@ class WalletsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List address balances for token
+        """List address balances by token
 
-        The operation retrieves a list of address balances for a specified token within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
+        This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -2062,7 +2062,7 @@ class WalletsApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._list_address_balances_for_token_serialize(
+        _param = self._list_address_balances_by_token_serialize(
             wallet_id=wallet_id,
             token_id=token_id,
             addresses=addresses,
@@ -2072,7 +2072,7 @@ class WalletsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListAddressBalancesForToken200Response",
+            '200': "ListAddressBalancesByToken200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -2082,7 +2082,7 @@ class WalletsApi:
         )
         return response_data.response
 
-    def _list_address_balances_for_token_serialize(
+    def _list_address_balances_by_token_serialize(
         self,
         wallet_id,
         token_id,
