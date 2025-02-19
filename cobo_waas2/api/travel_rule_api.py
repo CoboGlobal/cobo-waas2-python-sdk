@@ -43,7 +43,7 @@ class TravelRuleApi:
     def get_transaction_limitation(
         self,
         transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
-        transaction_id: Annotated[StrictStr, Field(description="The transaction ID")],
+        transaction_id: Annotated[StrictStr, Field(description="The transaction ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -55,11 +55,11 @@ class TravelRuleApi:
     ) -> GetTransactionLimitation200Response:
         """Retrieve transaction limitations
 
-        This endpoint retrieves transaction-related limitations based on the provided `transaction_type` and `transaction_id`.  The response includes the following information: - **`vasp_list`**: A list of Virtual Asset Service Providers (VASPs) associated with the transaction token. - **`is_threshold_reached`**: Indicates whether the transaction amount has exceeded the predefined threshold.    - If `true`: Additional Travel Rule information may be required for processing. - **`self_custody_wallet_challenge`**: A challenge string for verifying ownership of self-custody wallets. - **`connect_wallet_list`**: A list of supported wallet integrations for the transaction, such as MetaMask or WalletConnect.  Use this endpoint to ensure compliance with Travel Rule requirements and to retrieve supported options for completing the transaction. 
+        This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
 
         :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
         :type transaction_type: str
-        :param transaction_id: The transaction ID (required)
+        :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -93,7 +93,7 @@ class TravelRuleApi:
     def get_transaction_limitation_with_http_info(
         self,
         transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
-        transaction_id: Annotated[StrictStr, Field(description="The transaction ID")],
+        transaction_id: Annotated[StrictStr, Field(description="The transaction ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -105,11 +105,11 @@ class TravelRuleApi:
     ) -> ApiResponse[GetTransactionLimitation200Response]:
         """Retrieve transaction limitations
 
-        This endpoint retrieves transaction-related limitations based on the provided `transaction_type` and `transaction_id`.  The response includes the following information: - **`vasp_list`**: A list of Virtual Asset Service Providers (VASPs) associated with the transaction token. - **`is_threshold_reached`**: Indicates whether the transaction amount has exceeded the predefined threshold.    - If `true`: Additional Travel Rule information may be required for processing. - **`self_custody_wallet_challenge`**: A challenge string for verifying ownership of self-custody wallets. - **`connect_wallet_list`**: A list of supported wallet integrations for the transaction, such as MetaMask or WalletConnect.  Use this endpoint to ensure compliance with Travel Rule requirements and to retrieve supported options for completing the transaction. 
+        This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
 
         :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
         :type transaction_type: str
-        :param transaction_id: The transaction ID (required)
+        :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -143,7 +143,7 @@ class TravelRuleApi:
     def get_transaction_limitation_without_preload_content(
         self,
         transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
-        transaction_id: Annotated[StrictStr, Field(description="The transaction ID")],
+        transaction_id: Annotated[StrictStr, Field(description="The transaction ID.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -155,11 +155,11 @@ class TravelRuleApi:
     ) -> RESTResponseType:
         """Retrieve transaction limitations
 
-        This endpoint retrieves transaction-related limitations based on the provided `transaction_type` and `transaction_id`.  The response includes the following information: - **`vasp_list`**: A list of Virtual Asset Service Providers (VASPs) associated with the transaction token. - **`is_threshold_reached`**: Indicates whether the transaction amount has exceeded the predefined threshold.    - If `true`: Additional Travel Rule information may be required for processing. - **`self_custody_wallet_challenge`**: A challenge string for verifying ownership of self-custody wallets. - **`connect_wallet_list`**: A list of supported wallet integrations for the transaction, such as MetaMask or WalletConnect.  Use this endpoint to ensure compliance with Travel Rule requirements and to retrieve supported options for completing the transaction. 
+        This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
 
         :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
         :type transaction_type: str
-        :param transaction_id: The transaction ID (required)
+        :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -241,7 +241,7 @@ class TravelRuleApi:
     ) -> List[ListSupportedCountries200ResponseInner]:
         """List supported countries
 
-        This operation retrieves all countries supported.
+        This operation retrieves a list of supported countries that can be used when submitting Travel Rule information.  Use this endpoint to obtain valid country values for:   - Place of incorporation of a legal entity   - Place of birth of a natural person 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -283,7 +283,7 @@ class TravelRuleApi:
     ) -> ApiResponse[List[ListSupportedCountries200ResponseInner]]:
         """List supported countries
 
-        This operation retrieves all countries supported.
+        This operation retrieves a list of supported countries that can be used when submitting Travel Rule information.  Use this endpoint to obtain valid country values for:   - Place of incorporation of a legal entity   - Place of birth of a natural person 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -325,7 +325,7 @@ class TravelRuleApi:
     ) -> RESTResponseType:
         """List supported countries
 
-        This operation retrieves all countries supported.
+        This operation retrieves a list of supported countries that can be used when submitting Travel Rule information.  Use this endpoint to obtain valid country values for:   - Place of incorporation of a legal entity   - Place of birth of a natural person 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -394,9 +394,9 @@ class TravelRuleApi:
             ]
         ] = None,
     ) -> SubmitDepositTravelRuleInfo201Response:
-        """Submit Deposit Transaction Travel Rule information
+        """Submit Travel Rule information for deposits
 
-        This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`, `date_of_incorporation`, and `place_of_incorporation`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+        This operation submits Travel Rule information for a deposit transaction. 
 
         :param travel_rule_deposit_request:
         :type travel_rule_deposit_request: TravelRuleDepositRequest
@@ -440,9 +440,9 @@ class TravelRuleApi:
             ]
         ] = None,
     ) -> ApiResponse[SubmitDepositTravelRuleInfo201Response]:
-        """Submit Deposit Transaction Travel Rule information
+        """Submit Travel Rule information for deposits
 
-        This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`, `date_of_incorporation`, and `place_of_incorporation`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+        This operation submits Travel Rule information for a deposit transaction. 
 
         :param travel_rule_deposit_request:
         :type travel_rule_deposit_request: TravelRuleDepositRequest
@@ -486,9 +486,9 @@ class TravelRuleApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Submit Deposit Transaction Travel Rule information
+        """Submit Travel Rule information for deposits
 
-        This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`, `date_of_incorporation`, and `place_of_incorporation`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+        This operation submits Travel Rule information for a deposit transaction. 
 
         :param travel_rule_deposit_request:
         :type travel_rule_deposit_request: TravelRuleDepositRequest
@@ -563,9 +563,9 @@ class TravelRuleApi:
             ]
         ] = None,
     ) -> SubmitDepositTravelRuleInfo201Response:
-        """Submit Withdraw Transaction Travel Rule information
+        """Submit Travel Rule information for withdrawals
 
-        This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+        This operation submits Travel Rule information for a withdrawal transaction. 
 
         :param travel_rule_withdraw_request:
         :type travel_rule_withdraw_request: TravelRuleWithdrawRequest
@@ -609,9 +609,9 @@ class TravelRuleApi:
             ]
         ] = None,
     ) -> ApiResponse[SubmitDepositTravelRuleInfo201Response]:
-        """Submit Withdraw Transaction Travel Rule information
+        """Submit Travel Rule information for withdrawals
 
-        This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+        This operation submits Travel Rule information for a withdrawal transaction. 
 
         :param travel_rule_withdraw_request:
         :type travel_rule_withdraw_request: TravelRuleWithdrawRequest
@@ -655,9 +655,9 @@ class TravelRuleApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Submit Withdraw Transaction Travel Rule information
+        """Submit Travel Rule information for withdrawals
 
-        This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+        This operation submits Travel Rule information for a withdrawal transaction. 
 
         :param travel_rule_withdraw_request:
         :type travel_rule_withdraw_request: TravelRuleWithdrawRequest

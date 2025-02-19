@@ -37,7 +37,7 @@ class TestTravelRuleDepositRequestTravelRuleInfo(unittest.TestCase):
                 destination_wallet_type = 'EXCHANGES_OR_VASP',
                 vendor_code = 'NB',
                 vendor_vasp_id = 'did:ethr:0x45fca8109a8d2ce93e37f79f0acbb16f4a91f4c5',
-                vendor_vasp_name = 'Others vendor',
+                vendor_vasp_name = 'Vendor A',
                 entity_info = None,
                 self_custody_wallet_challenge = 'challenge_token_abc123',
                 self_custody_wallet_address = '0x1234567890abcdef1234567890abcdef12345678',

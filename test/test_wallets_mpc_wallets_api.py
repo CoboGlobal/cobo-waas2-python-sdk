@@ -105,6 +105,19 @@ class TestWalletsMPCWalletsApi(unittest.TestCase):
         api_response = self.api.delete_key_share_holder_group_by_id(vault_id, key_share_holder_group_id)
         """
 
+    def test_get_key_share_holder_by_tss_node_id(self) -> None:
+        """
+        Test case for get_key_share_holder_by_tss_node_id
+
+        Get key share holder information
+        """
+        """
+        vault_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        tss_node_id = 'coboBTGDvjJG99pABegvPYmavrcTU3SkjTLHVdsko8dWBga4w'
+
+        api_response = self.api.get_key_share_holder_by_tss_node_id(vault_id, tss_node_id)
+        """
+
     def test_get_key_share_holder_group_by_id(self) -> None:
         """
         Test case for get_key_share_holder_group_by_id
@@ -180,6 +193,22 @@ class TestWalletsMPCWalletsApi(unittest.TestCase):
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
         api_response = self.api.list_key_share_holder_groups(vault_id, key_share_holder_group_type=key_share_holder_group_type, limit=limit, before=before, after=after)
+        """
+
+    def test_list_key_share_holders(self) -> None:
+        """
+        Test case for list_key_share_holders
+
+        List all key share holders
+        """
+        """
+        vault_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        key_share_holder_group_ids = 'dc0cac48-9add-4243-9c7a-b8badac8a198,5558bd1b-d221-4e2b-8c29-f6c97d9e6aca'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_key_share_holders(vault_id, key_share_holder_group_ids=key_share_holder_group_ids, limit=limit, before=before, after=after)
         """
 
     def test_list_mpc_projects(self) -> None:

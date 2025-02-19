@@ -6,8 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_transaction_limitation**](TravelRuleApi.md#get_transaction_limitation) | **GET** /travel_rule/transaction/limitation | Retrieve transaction limitations
 [**list_supported_countries**](TravelRuleApi.md#list_supported_countries) | **GET** /travel_rule/transaction/countries | List supported countries
-[**submit_deposit_travel_rule_info**](TravelRuleApi.md#submit_deposit_travel_rule_info) | **POST** /travel_rule/transaction/deposit/travel_rule_info | Submit Deposit Transaction Travel Rule information
-[**submit_withdraw_travel_rule_info**](TravelRuleApi.md#submit_withdraw_travel_rule_info) | **POST** /travel_rule/transaction/withdraw/travel_rule_info | Submit Withdraw Transaction Travel Rule information
+[**submit_deposit_travel_rule_info**](TravelRuleApi.md#submit_deposit_travel_rule_info) | **POST** /travel_rule/transaction/deposit/travel_rule_info | Submit Travel Rule information for deposits
+[**submit_withdraw_travel_rule_info**](TravelRuleApi.md#submit_withdraw_travel_rule_info) | **POST** /travel_rule/transaction/withdraw/travel_rule_info | Submit Travel Rule information for withdrawals
 
 
 # **get_transaction_limitation**
@@ -15,12 +15,11 @@ Method | HTTP request | Description
 
 Retrieve transaction limitations
 
-This endpoint retrieves transaction-related limitations based on the provided `transaction_type` and `transaction_id`.  The response includes the following information: - **`vasp_list`**: A list of Virtual Asset Service Providers (VASPs) associated with the transaction token. - **`is_threshold_reached`**: Indicates whether the transaction amount has exceeded the predefined threshold.    - If `true`: Additional Travel Rule information may be required for processing. - **`self_custody_wallet_challenge`**: A challenge string for verifying ownership of self-custody wallets. - **`connect_wallet_list`**: A list of supported wallet integrations for the transaction, such as MetaMask or WalletConnect.  Use this endpoint to ensure compliance with Travel Rule requirements and to retrieve supported options for completing the transaction. 
+This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
 
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -59,7 +58,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transaction_type** | **str**| The transaction type. Possible values include:    - &#x60;DEPOSIT&#x60;: A deposit transaction.   - &#x60;WITHDRAW&#x60;: A withdrawal transaction.  | 
- **transaction_id** | **str**| The transaction ID | 
+ **transaction_id** | **str**| The transaction ID. | 
 
 ### Return type
 
@@ -67,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -89,12 +88,11 @@ Name | Type | Description  | Notes
 
 List supported countries
 
-This operation retrieves all countries supported.
+This operation retrieves a list of supported countries that can be used when submitting Travel Rule information.  Use this endpoint to obtain valid country values for:   - Place of incorporation of a legal entity   - Place of birth of a natural person 
 
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -135,7 +133,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -155,14 +153,13 @@ This endpoint does not need any parameter.
 # **submit_deposit_travel_rule_info**
 > SubmitDepositTravelRuleInfo201Response submit_deposit_travel_rule_info(travel_rule_deposit_request=travel_rule_deposit_request)
 
-Submit Deposit Transaction Travel Rule information
+Submit Travel Rule information for deposits
 
-This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`, `date_of_incorporation`, and `place_of_incorporation`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+This operation submits Travel Rule information for a deposit transaction. 
 
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -185,7 +182,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     travel_rule_deposit_request = cobo_waas2.TravelRuleDepositRequest()
 
     try:
-        # Submit Deposit Transaction Travel Rule information
+        # Submit Travel Rule information for deposits
         api_response = api_instance.submit_deposit_travel_rule_info(travel_rule_deposit_request=travel_rule_deposit_request)
         print("The response of TravelRuleApi->submit_deposit_travel_rule_info:\n")
         pprint(api_response)
@@ -208,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -219,7 +216,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Successfully submitted Travel Rule information. |  -  |
+**201** | Successfully submitted the Travel Rule information. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -228,14 +225,13 @@ Name | Type | Description  | Notes
 # **submit_withdraw_travel_rule_info**
 > SubmitDepositTravelRuleInfo201Response submit_withdraw_travel_rule_info(travel_rule_withdraw_request=travel_rule_withdraw_request)
 
-Submit Withdraw Transaction Travel Rule information
+Submit Travel Rule information for withdrawals
 
-This operation allows you to submit the required Travel Rule information based on the transaction details. It supports both self-custody wallets and exchanges/VASPs, ensuring compliance with Travel Rule requirements.   - **Destination Wallet Type (`destination_wallet_type`)**:   - `SELF_CUSTODY_WALLET`: A self-custodial wallet (e.g., plugin wallet). Requires `self_custody_wallet_sign`, `self_custody_wallet_address`, and `self_custody_wallet_challenge`.   - `EXCHANGES_OR_VASP`: A wallet associated with an exchange or VASP. Requires `vendor_vasp_id` and information depending on `selected_entity_type`.  - **Entity Types (`selected_entity_type`)**:   - `LEGAL`: For legal entities, provide `legal_name`.   - `NATURAL`: For natural persons, provide `date_of_birth`, `place_of_birth`, `first_name`, and `last_name`. 
+This operation submits Travel Rule information for a withdrawal transaction. 
 
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -258,7 +254,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     travel_rule_withdraw_request = cobo_waas2.TravelRuleWithdrawRequest()
 
     try:
-        # Submit Withdraw Transaction Travel Rule information
+        # Submit Travel Rule information for withdrawals
         api_response = api_instance.submit_withdraw_travel_rule_info(travel_rule_withdraw_request=travel_rule_withdraw_request)
         print("The response of TravelRuleApi->submit_withdraw_travel_rule_info:\n")
         pprint(api_response)
@@ -281,7 +277,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -292,7 +288,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Successfully submitted Travel Rule information. |  -  |
+**201** | Successfully submitted the Travel Rule information. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

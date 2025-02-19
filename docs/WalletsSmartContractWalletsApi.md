@@ -16,7 +16,7 @@ This operation retrieves all available Delegates of a Safe\\{Wallet\\} for a giv
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

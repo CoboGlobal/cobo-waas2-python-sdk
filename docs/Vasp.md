@@ -1,14 +1,14 @@
 # Vasp
 
-The information of an vasp.
+The information of a virtual asset service provider (VASP).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the vasp. | 
-**vendor_code** | **str** | The symbol. | 
-**vendor_vasp_id** | **str** | The vasp str id. | 
+**name** | **str** | The VASP name. | 
+**vendor_code** | **str** | The vendor code of the VASP. | 
+**vendor_vasp_id** | **str** | The VASP ID. | 
 
 ## Example
 

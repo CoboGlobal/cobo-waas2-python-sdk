@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.transaction_deposit_to_address_destination_tx_info import TransactionDepositToAddressDestinationTxInfo
 from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
 from cobo_waas2.models.wallet_subtype import WalletSubtype
 from cobo_waas2.models.wallet_type import WalletType
@@ -35,7 +36,8 @@ class TransactionDepositToAddressDestination(BaseModel):
     address: StrictStr = Field(description="The destination address.")
     memo: Optional[StrictStr] = Field(default=None, description="The memo that identifies a transaction in order to credit the correct account. For transfers out of Cobo Portal, it is highly recommended to include a memo for the chains such as XRP, EOS, XLM, IOST, BNB_BNB, ATOM, LUNA, and TON.")
     amount: StrictStr = Field(description="The transfer amount. For example, if you trade 1.5 BTC, then the value is `1.5`. ")
-    __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "wallet_type", "wallet_subtype", "address", "memo", "amount"]
+    tx_info: Optional[TransactionDepositToAddressDestinationTxInfo] = None
+    __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "wallet_type", "wallet_subtype", "address", "memo", "amount", "tx_info"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +78,9 @@ class TransactionDepositToAddressDestination(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of tx_info
+        if self.tx_info:
+            _dict['tx_info'] = self.tx_info.to_dict()
         return _dict
 
     @classmethod
@@ -94,7 +99,8 @@ class TransactionDepositToAddressDestination(BaseModel):
             "wallet_subtype": obj.get("wallet_subtype"),
             "address": obj.get("address"),
             "memo": obj.get("memo"),
-            "amount": obj.get("amount")
+            "amount": obj.get("amount"),
+            "tx_info": TransactionDepositToAddressDestinationTxInfo.from_dict(obj["tx_info"]) if obj.get("tx_info") is not None else None
         })
         return _obj
 

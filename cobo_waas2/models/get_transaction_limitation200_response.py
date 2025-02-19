@@ -26,10 +26,10 @@ class GetTransactionLimitation200Response(BaseModel):
     """
     GetTransactionLimitation200Response
     """  # noqa: E501
-    vasp_list: Optional[List[Vasp]] = Field(default=None, description="A list of VASPs (Virtual Asset Service Providers) associated with the token.")
-    is_threshold_reached: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction amount exceeds a predefined threshold. - **If `true`**: Additional information is required when filling Travel Rule details:   - For deposits: `date_of_incorporation` and `place_of_incorporation`. - **If `false`**: No extra fields are required. ")
-    self_custody_wallet_challenge: Optional[StrictStr] = Field(default=None, description="A human-readable, time-sensitive message to be signed by the wallet owner.  The message contains key details including the wallet address, a unique nonce, and a timestamp. Signing this message confirms ownership of the wallet and allows the operation to proceed. ")
-    connect_wallet_list: Optional[List[StrictStr]] = Field(default=None, description="A list of wallets connected to the system for transactions.")
+    vasp_list: Optional[List[Vasp]] = Field(default=None, description="A list of virtual asset service providers (VASP) you can select as the transaction source or destination.")
+    is_threshold_reached: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction amount exceeds a predefined threshold. If exceeded, additional information is required when filling Travel Rule details. - `true`: Threshold exceeded. - `false`: Threshold not exceeded. ")
+    self_custody_wallet_challenge: Optional[StrictStr] = Field(default=None, description="A human-readable, time-sensitive message to be signed by the wallet owner. The message contains key information including the wallet address, a unique nonce, and a timestamp. Signing this message confirms ownership of the wallet and allows the operation to proceed. ")
+    connect_wallet_list: Optional[List[StrictStr]] = Field(default=None, description="A list of self-custody wallet providers you can select as the transaction source or destination.")
     __properties: ClassVar[List[str]] = ["vasp_list", "is_threshold_reached", "self_custody_wallet_challenge", "connect_wallet_list"]
 
     model_config = ConfigDict(

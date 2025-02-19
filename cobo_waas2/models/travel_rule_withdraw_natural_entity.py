@@ -25,13 +25,13 @@ from typing_extensions import Self
 
 class TravelRuleWithdrawNaturalEntity(BaseModel):
     """
-    Required fields for NATURAL entities.
+    The required information of a natural person.
     """  # noqa: E501
     selected_entity_type: SelectedEntityType
-    first_name: StrictStr = Field(description="The first name of the user.")
-    last_name: StrictStr = Field(description="The last name of the user.")
-    date_of_birth: Optional[date] = Field(default=None, description="The date of birth of the user.")
-    place_of_birth: Optional[StrictStr] = Field(default=None, description="The place of birth of the user.")
+    first_name: StrictStr = Field(description="The first name of the natural person.")
+    last_name: StrictStr = Field(description="The last name of the natural person.")
+    date_of_birth: Optional[date] = Field(default=None, description="The date of birth of the natural person.")
+    place_of_birth: Optional[StrictStr] = Field(default=None, description="The place of birth of the natural person.")
     __properties: ClassVar[List[str]] = ["selected_entity_type", "first_name", "last_name", "date_of_birth", "place_of_birth"]
 
     model_config = ConfigDict(

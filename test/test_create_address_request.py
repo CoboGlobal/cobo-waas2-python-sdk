@@ -36,6 +36,10 @@ class TestCreateAddressRequest(unittest.TestCase):
             return CreateAddressRequest(
                 chain_id = 'ETH',
                 count = 1,
+                taproot_script_tree_hashes = [
+                    '0x138fdd0f6c3803d45553e730c25924baf7be741b8a72a4e6fdbd9d44cb19f85b'
+                    ],
+                taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC',
                 encoding = 'ENCODING_P2PKH'
             )
         else:

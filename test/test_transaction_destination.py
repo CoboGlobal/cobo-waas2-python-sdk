@@ -74,7 +74,9 @@ class TestTransactionDestination(unittest.TestCase):
                 msg_hash = '',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
-                memo = '82840924'
+                memo = '82840924',
+                tx_info = cobo_waas2.models.transaction_deposit_to_address_destination_tx_info.TransactionDepositToAddressDestination_tx_info(
+                    vout_n = 0, )
             )
         else:
             return TransactionDestination(

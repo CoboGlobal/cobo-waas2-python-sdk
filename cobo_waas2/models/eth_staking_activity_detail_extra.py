@@ -28,7 +28,7 @@ class EthStakingActivityDetailExtra(BaseModel):
     """  # noqa: E501
     pool_type: StakingPoolType
     provider_name: Optional[StrictStr] = Field(default=None, description="The name of the provider.")
-    validator_pubkeys: Optional[List[StrictStr]] = Field(default=None, description="A list of public keys identifying the validators to unstake from the Ethereum Beacon Chain.")
+    validator_pubkeys: Optional[List[StrictStr]] = Field(default=None, description="A list of public keys associated with the Ethereum validators for this unstaking operation.")
     __properties: ClassVar[List[str]] = ["pool_type", "provider_name", "validator_pubkeys"]
 
     model_config = ConfigDict(

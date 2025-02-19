@@ -40,7 +40,9 @@ class TestTransactionDepositToAddressDestination(unittest.TestCase):
                 wallet_subtype = 'Asset',
                 address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
                 memo = '82840924',
-                amount = '1.5'
+                amount = '1.5',
+                tx_info = cobo_waas2.models.transaction_deposit_to_address_destination_tx_info.TransactionDepositToAddressDestination_tx_info(
+                    vout_n = 0, )
             )
         else:
             return TransactionDepositToAddressDestination(

@@ -1,16 +1,16 @@
 # TravelRuleWithdrawNaturalEntity
 
-Required fields for NATURAL entities.
+The required information of a natural person.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **selected_entity_type** | [**SelectedEntityType**](SelectedEntityType.md) |  | 
-**first_name** | **str** | The first name of the user. | 
-**last_name** | **str** | The last name of the user. | 
-**date_of_birth** | **date** | The date of birth of the user. | [optional] 
-**place_of_birth** | **str** | The place of birth of the user. | [optional] 
+**first_name** | **str** | The first name of the natural person. | 
+**last_name** | **str** | The last name of the natural person. | 
+**date_of_birth** | **date** | The date of birth of the natural person. | [optional] 
+**place_of_birth** | **str** | The place of birth of the natural person. | [optional] 
 
 ## Example
 

@@ -132,7 +132,7 @@ class TestTransactionsApi(unittest.TestCase):
         """
         Test case for get_transaction_approval_detail
 
-        Get transaction approval information
+        Get transaction approval details
         """
         """
         transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -191,6 +191,18 @@ class TestTransactionsApi(unittest.TestCase):
         transaction_resend = cobo_waas2.TransactionResend()
 
         api_response = self.api.resend_transaction_by_id(transaction_id, transaction_resend=transaction_resend)
+        """
+
+    def test_sign_and_broadcast_transaction_by_id(self) -> None:
+        """
+        Test case for sign_and_broadcast_transaction_by_id
+
+        Sign and broadcast transaction
+        """
+        """
+        transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.sign_and_broadcast_transaction_by_id(transaction_id)
         """
 
     def test_speedup_transaction_by_id(self) -> None:

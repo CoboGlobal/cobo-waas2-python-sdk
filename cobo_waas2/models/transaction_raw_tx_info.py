@@ -29,7 +29,8 @@ class TransactionRawTxInfo(BaseModel):
     used_nonce: Optional[StrictInt] = Field(default=None, description="The transaction nonce.")
     selected_utxos: Optional[List[TransactionSelectedUtxo]] = Field(default=None, description="The selected UTXOs to be consumed in the transaction.")
     raw_tx: Optional[StrictStr] = Field(default=None, description="The raw transaction data.")
-    __properties: ClassVar[List[str]] = ["used_nonce", "selected_utxos", "raw_tx"]
+    unsigned_raw_tx: Optional[StrictStr] = Field(default=None, description="The unsigned raw transaction data.")
+    __properties: ClassVar[List[str]] = ["used_nonce", "selected_utxos", "raw_tx", "unsigned_raw_tx"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +92,8 @@ class TransactionRawTxInfo(BaseModel):
         _obj = cls.model_validate({
             "used_nonce": obj.get("used_nonce"),
             "selected_utxos": [TransactionSelectedUtxo.from_dict(_item) for _item in obj["selected_utxos"]] if obj.get("selected_utxos") is not None else None,
-            "raw_tx": obj.get("raw_tx")
+            "raw_tx": obj.get("raw_tx"),
+            "unsigned_raw_tx": obj.get("unsigned_raw_tx")
         })
         return _obj
 

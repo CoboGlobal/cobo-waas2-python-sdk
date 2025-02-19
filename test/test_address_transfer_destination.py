@@ -45,6 +45,7 @@ class TestAddressTransferDestination(unittest.TestCase):
                         amount = '1.5', )
                     ],
                 change_address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sDEMO',
+                change_output_type = 'First',
                 force_internal = False,
                 force_external = False
             )

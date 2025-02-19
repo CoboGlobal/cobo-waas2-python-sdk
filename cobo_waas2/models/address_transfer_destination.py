@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.address_transfer_destination_account_output import AddressTransferDestinationAccountOutput
 from cobo_waas2.models.address_transfer_destination_utxo_outputs_inner import AddressTransferDestinationUtxoOutputsInner
@@ -32,9 +32,20 @@ class AddressTransferDestination(BaseModel):
     account_output: Optional[AddressTransferDestinationAccountOutput] = None
     utxo_outputs: Optional[List[AddressTransferDestinationUtxoOutputsInner]] = None
     change_address: Optional[StrictStr] = Field(default=None, description="The address used to receive the remaining funds or change from the transaction.")
+    change_output_type: Optional[StrictStr] = Field(default=None, description="The position of the change output in the transaction's outputs. Possible values are: - `Last`: The change output is placed at the end of the transaction's outputs.   - `First`: The change output is placed at the beginning of the transaction's outputs. ")
     force_internal: Optional[StrictBool] = Field(default=None, description="Whether the transaction request must be executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer.   - `true`: The transaction request must be executed as a Cobo Loop transfer.   - `false`: The transaction request may not be executed as a Cobo Loop transfer.    Please do not set both `force_internal` and `force_external` as `true`. ")
     force_external: Optional[StrictBool] = Field(default=None, description="Whether the transaction request must not be executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer.   - `true`: The transaction request must not be executed as a Cobo Loop transfer.   - `false`: The transaction request can be executed as a Cobo Loop transfer.  Please do not set both `force_internal` and `force_external` as `true`. ")
-    __properties: ClassVar[List[str]] = ["destination_type", "account_output", "utxo_outputs", "change_address", "force_internal", "force_external"]
+    __properties: ClassVar[List[str]] = ["destination_type", "account_output", "utxo_outputs", "change_address", "change_output_type", "force_internal", "force_external"]
+
+    @field_validator('change_output_type')
+    def change_output_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Last', 'First']):
+            raise ValueError("must be one of enum values ('Last', 'First')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +112,7 @@ class AddressTransferDestination(BaseModel):
             "account_output": AddressTransferDestinationAccountOutput.from_dict(obj["account_output"]) if obj.get("account_output") is not None else None,
             "utxo_outputs": [AddressTransferDestinationUtxoOutputsInner.from_dict(_item) for _item in obj["utxo_outputs"]] if obj.get("utxo_outputs") is not None else None,
             "change_address": obj.get("change_address"),
+            "change_output_type": obj.get("change_output_type"),
             "force_internal": obj.get("force_internal"),
             "force_external": obj.get("force_external")
         })

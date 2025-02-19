@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **category_names** | **List[str]** | The custom category for you to identify your transactions. | [optional] 
 **description** | **str** | The description of the transfer. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
+**transaction_process_type** | **str** | Transaction processing type. Possible values are: - &#x60;AutoProcess&#x60; (default): After the transaction is constructed, it will be automatically signed and broadcast.   - &#x60;BuildOnly&#x60;: Set to this value if you want to build the transaction first without automatically signing and broadcasting it. You can manually call the [Sign and broadcast transaction](https://www.cobo.com/developers/v2/api-references/transactions/sign-and-broadcast-transaction) operation to complete the signing and broadcasting process.  | [optional] 
 **auto_fuel** | [**AutoFuelType**](AutoFuelType.md) |  | [optional] 
 
 ## Example

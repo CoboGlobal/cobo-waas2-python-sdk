@@ -8,15 +8,15 @@ Name | Type | Description | Notes
 **pool_type** | [**StakingPoolType**](StakingPoolType.md) |  | 
 **finality_provider_public_key** | **str** | The public key of the finality provider. | [optional] 
 **stake_block_time** | **int** | The number of blocks that need to be processed before the locked tokens are unlocked and become accessible. | [optional] 
-**auto_broadcast** | **bool** | Whether to automatically broadcast the transaction.  - &#x60;true&#x60;: Automatically broadcast the transaction. - &#x60;false&#x60;: The transaction will not be submitted to the blockchain automatically. You can call [Broadcast signed transactions](/v2/api-references/transactions/broadcast-signed-transactions) to broadcast the transaction to the blockchain, or retrieve the signed raw transaction data &#x60;raw_tx&#x60; by calling [Get transaction information](/v2/api-references/transactions/get-transaction-information) and broadcast it yourself.  | [optional] 
+**auto_broadcast** | **bool** | Whether to automatically broadcast the transaction.  - &#x60;true&#x60;: Automatically broadcast the transaction. - &#x60;false&#x60;: The transaction will not be submitted to the blockchain automatically. You can call [Broadcast signed transactions](https://www.cobo.com/developers/v2/api-references/transactions/broadcast-signed-transactions) to broadcast the transaction to the blockchain, or retrieve the signed raw transaction data &#x60;raw_tx&#x60; by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information) and broadcast it yourself.  | [optional] 
 **param_version** | **int** | The version of babylon global parameters. | [optional] 
 **withdraw_from_type** | [**ActivityType**](ActivityType.md) |  | [optional] 
 **provider_name** | **str** | The name of the provider. | [optional] 
-**validator_pubkeys** | **List[str]** | A list of public keys identifying the validators to unstake from the Ethereum Beacon Chain. | [optional] 
+**validator_pubkeys** | **List[str]** | A list of public keys associated with the Ethereum validators for this unstaking operation. | [optional] 
 **timelock** | **int** | The Unix timestamp (in seconds) when the staking position will be unlocked and available for withdrawal. | [optional] 
-**change_address** | **str** | The change bitcoin address. If not provided, the source wallet&#39;s address will be used as the change address. | [optional] 
-**validator_address** | **str** | The validator evm address. | [optional] 
-**reward_address** | **str** | The reward evm address. | [optional] 
+**change_address** | **str** | The change address on the Bitcoin chain. If not provided, the source wallet&#39;s address will be used as the change address. | [optional] 
+**validator_address** | **str** | The validator&#39;s EVM address. | [optional] 
+**reward_address** | **str** | The EVM address to receive staking rewards. | [optional] 
 
 ## Example
 

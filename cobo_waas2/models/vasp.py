@@ -23,11 +23,11 @@ from typing_extensions import Self
 
 class Vasp(BaseModel):
     """
-    The information of an vasp.
+    The information of a virtual asset service provider (VASP).
     """  # noqa: E501
-    name: StrictStr = Field(description="The name of the vasp.")
-    vendor_code: StrictStr = Field(description="The symbol.")
-    vendor_vasp_id: StrictStr = Field(description="The vasp str id.")
+    name: StrictStr = Field(description="The VASP name.")
+    vendor_code: StrictStr = Field(description="The vendor code of the VASP.")
+    vendor_vasp_id: StrictStr = Field(description="The VASP ID.")
     __properties: ClassVar[List[str]] = ["name", "vendor_code", "vendor_vasp_id"]
 
     model_config = ConfigDict(

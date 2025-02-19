@@ -1,15 +1,15 @@
 # TravelRuleDepositExchangesOrVASP
 
-Required fields for `EXCHANGES_OR_VASP`.
+Required information when depositing from an exchange or other virtual asset service providers (VASP).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_wallet_type** | [**DestinationWalletType**](DestinationWalletType.md) |  | 
-**vendor_code** | **str** | The vendor code for exchanges or VASPs. | 
+**vendor_code** | **str** | The vendor code of the VASP. | 
 **vendor_vasp_id** | **str** | The unique identifier of the VASP. | 
-**vendor_vasp_name** | **str** | The vendor name to be provided when selecting \&quot;Others\&quot; as the VASP case. This field allows customers to specify the name of a vendor not listed. | [optional] 
+**vendor_vasp_name** | **str** | The vendor name. Use this field to specify the name of a vendor not listed. | [optional] 
 **entity_info** | [**TravelRuleDepositExchangesOrVASPEntityInfo**](TravelRuleDepositExchangesOrVASPEntityInfo.md) |  | 
 
 ## Example

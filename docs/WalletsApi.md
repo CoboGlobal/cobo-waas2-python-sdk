@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**get_max_transferable_value**](WalletsApi.md#get_max_transferable_value) | **GET** /wallets/{wallet_id}/max_transferable_value | Get maximum transferable value
 [**get_token_by_id**](WalletsApi.md#get_token_by_id) | **GET** /wallets/tokens/{token_id} | Get token information
 [**get_wallet_by_id**](WalletsApi.md#get_wallet_by_id) | **GET** /wallets/{wallet_id} | Get wallet information
+[**list_address_balances_by_token**](WalletsApi.md#list_address_balances_by_token) | **GET** /wallets/{wallet_id}/tokens/{token_id} | List address balances by token
 [**list_addresses**](WalletsApi.md#list_addresses) | **GET** /wallets/{wallet_id}/addresses | List wallet addresses
 [**list_enabled_chains**](WalletsApi.md#list_enabled_chains) | **GET** /wallets/enabled_chains | List enabled chains
 [**list_enabled_tokens**](WalletsApi.md#list_enabled_tokens) | **GET** /wallets/enabled_tokens | List enabled tokens
@@ -257,7 +258,6 @@ This operation generates one or more addresses within a specified wallet.  <Note
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -332,7 +332,6 @@ This operation creates a wallet with the provided information.  <Note>This opera
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -378,7 +377,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -404,7 +403,7 @@ This operation deletes a specified wallet.  <Note>This operation is applicable t
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -449,7 +448,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -546,7 +545,7 @@ This operation retrieves the maximum amount that you can transfer from a wallet 
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -599,7 +598,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -696,7 +695,7 @@ This operation retrieves the detailed information about a specified wallet.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -741,7 +740,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -758,6 +757,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_address_balances_by_token**
+> ListAddressBalancesByToken200Response list_address_balances_by_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
+
+List address balances by token
+
+This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_address_balances_by_token200_response import ListAddressBalancesByToken200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.WalletsApi(api_client)
+    wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    token_id = 'ETH_USDT'
+    addresses = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97'
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+    try:
+        # List address balances by token
+        api_response = api_instance.list_address_balances_by_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
+        print("The response of WalletsApi->list_address_balances_by_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WalletsApi->list_address_balances_by_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **wallet_id** | **str**| The wallet ID. | 
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
+ **addresses** | **str**| A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the &#39;|&#39; separator (e.g., \&quot;address|memo\&quot;). | [optional] 
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+
+### Return type
+
+[**ListAddressBalancesByToken200Response**](ListAddressBalancesByToken200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_addresses**
 > ListAddresses200Response list_addresses(wallet_id, chain_ids=chain_ids, addresses=addresses, limit=limit, before=before, after=after)
 
@@ -767,7 +847,7 @@ This operation retrieves a list of addresses within a specified wallet.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -822,7 +902,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -1180,7 +1260,7 @@ The operation retrieves a list of token balances for a specified address within 
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -1235,7 +1315,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -1261,7 +1341,7 @@ The operation retrieves a list of token balances within a specified wallet.  <No
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -1314,7 +1394,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -1332,7 +1412,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_utxos**
-> ListUtxos200Response list_utxos(wallet_id, token_id, address=address, limit=limit, before=before, after=after)
+> ListUtxos200Response list_utxos(wallet_id, token_id, address=address, tx_hash=tx_hash, limit=limit, before=before, after=after)
 
 List UTXOs
 
@@ -1340,7 +1420,7 @@ The operation retrieves a list of unspent transaction outputs (UTXOs) for a spec
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -1362,13 +1442,14 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
     token_id = 'ETH_USDT'
     address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+    tx_hash = 'dd7e1cecf6bbde1844ee1815b780711a1e306a718bcd23cd64401b48ef88eb83'
     limit = 10
     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
         # List UTXOs
-        api_response = api_instance.list_utxos(wallet_id, token_id, address=address, limit=limit, before=before, after=after)
+        api_response = api_instance.list_utxos(wallet_id, token_id, address=address, tx_hash=tx_hash, limit=limit, before=before, after=after)
         print("The response of WalletsApi->list_utxos:\n")
         pprint(api_response)
     except Exception as e:
@@ -1385,6 +1466,7 @@ Name | Type | Description  | Notes
  **wallet_id** | **str**| The wallet ID. | 
  **token_id** | **str**| The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
  **address** | **str**| The wallet address. | [optional] 
+ **tx_hash** | **str**|  | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
  **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
@@ -1395,7 +1477,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -1421,7 +1503,7 @@ This operation retrieves the information of all wallets under your organization.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -1480,7 +1562,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -1507,7 +1589,6 @@ This operation locks the UTXOs with specified transaction hashes. Locked UTXOs c
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1555,7 +1636,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -1582,7 +1663,6 @@ This operation unlocks the UTXOs with specified transaction hashes. Locked UTXOs
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1630,7 +1710,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -1657,7 +1737,6 @@ This operation updates the information of a specified wallet.  For Exchange Wall
 ### Example
 
 * OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1705,7 +1784,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

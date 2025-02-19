@@ -19,7 +19,7 @@ This operation retrieves the asset balances in a specified Exchange Wallet. You 
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

@@ -36,7 +36,7 @@ class TestSubWalletAssetBalance(unittest.TestCase):
             return SubWalletAssetBalance(
                 trading_account_type = 'Spot',
                 asset_id = 'USDT',
-                balance = cobo_waas2.models.token_balance_balance.TokenBalance_balance(
+                balance = cobo_waas2.models.balance.Balance(
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
@@ -45,7 +45,7 @@ class TestSubWalletAssetBalance(unittest.TestCase):
         else:
             return SubWalletAssetBalance(
                 asset_id = 'USDT',
-                balance = cobo_waas2.models.token_balance_balance.TokenBalance_balance(
+                balance = cobo_waas2.models.balance.Balance(
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 

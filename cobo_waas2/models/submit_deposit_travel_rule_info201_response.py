@@ -25,7 +25,7 @@ class SubmitDepositTravelRuleInfo201Response(BaseModel):
     """
     SubmitDepositTravelRuleInfo201Response
     """  # noqa: E501
-    submitted: Optional[StrictBool] = Field(default=None, description="Whether the submitted Travel Rule info has been successfully executed. - `true`: The operation has been successfully executed. - `false`: The operation has not been executed. ")
+    submitted: Optional[StrictBool] = Field(default=None, description="Whether the Travel Rule information has been successfully submitted. - `true`: The information has been successfully submitted. - `false`: The information has not been submitted. ")
     __properties: ClassVar[List[str]] = ["submitted"]
 
     model_config = ConfigDict(

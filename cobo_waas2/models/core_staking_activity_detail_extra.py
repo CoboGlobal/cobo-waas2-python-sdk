@@ -28,9 +28,9 @@ class CoreStakingActivityDetailExtra(BaseModel):
     """  # noqa: E501
     pool_type: StakingPoolType
     timelock: Optional[StrictInt] = Field(default=None, description="The Unix timestamp (in seconds) when the staking position will be unlocked and available for withdrawal.")
-    change_address: Optional[StrictStr] = Field(default=None, description="The change bitcoin address. If not provided, the source wallet's address will be used as the change address.")
-    validator_address: Optional[StrictStr] = Field(default=None, description="The validator evm address.")
-    reward_address: Optional[StrictStr] = Field(default=None, description="The reward evm address.")
+    change_address: Optional[StrictStr] = Field(default=None, description="The change address on the Bitcoin chain. If not provided, the source wallet's address will be used as the change address.")
+    validator_address: Optional[StrictStr] = Field(default=None, description="The validator's EVM address.")
+    reward_address: Optional[StrictStr] = Field(default=None, description="The EVM address to receive staking rewards.")
     __properties: ClassVar[List[str]] = ["pool_type", "timelock", "change_address", "validator_address", "reward_address"]
 
     model_config = ConfigDict(

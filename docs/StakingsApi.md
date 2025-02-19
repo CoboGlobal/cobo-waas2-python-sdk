@@ -27,7 +27,7 @@ This operation creates a claim request.  <Note>Currently, only the Ethereum Beac
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -100,7 +100,7 @@ This operation creates a staking request.  For some protocols, you can use the `
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -173,7 +173,7 @@ This operation creates an unstaking request. Your staked tokens will be automati
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -246,7 +246,7 @@ This operation creates a withdrawal request.   For some protocols, you can use t
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -319,7 +319,7 @@ This operation retrieves the details of a specified staking activity.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -392,7 +392,7 @@ This operation retrieves the detailed information about a specified staking posi
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -437,7 +437,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -465,7 +465,7 @@ Estimate staking fees
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -511,7 +511,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -536,7 +536,7 @@ This operation calculates the fee required for a staking activity based on facto
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -582,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -607,7 +607,7 @@ This operation retrieves the detailed information about a specified staking pool
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -652,7 +652,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -680,7 +680,7 @@ This operation retrieves a list of staking activities.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -747,7 +747,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -774,7 +774,7 @@ This operation retrieves a list of staking pools currently supported.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -827,7 +827,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -854,7 +854,7 @@ This operation retrieves a list of staking positions.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -911,7 +911,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

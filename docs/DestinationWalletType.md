@@ -1,6 +1,6 @@
 # DestinationWalletType
 
-The type of the destination wallet.
+The wallet type. Possible values include:   - `EXCHANGES_OR_VASP`: Exchanges or other virtual asset service providers (VASP)   - `SELF_CUSTODY_WALLET`: Self-custody wallets 
 
 ## Properties
 

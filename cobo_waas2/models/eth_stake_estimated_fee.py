@@ -30,7 +30,7 @@ class EthStakeEstimatedFee(BaseModel):
     pool_type: Optional[StakingPoolType] = None
     fee: Optional[EstimatedFee] = None
     validator_pubkeys: Optional[List[StrictStr]] = Field(default=None, description="A list of public keys associated with the Ethereum validators for this staking operation.")
-    core_btc_staking_address: Optional[StrictStr] = Field(default=None, description="P2WSH address generated for this staking operation(If the estimated fee is for core BTC staking).")
+    core_btc_staking_address: Optional[StrictStr] = Field(default=None, description="The P2WSH address generated for this staking operation (only applicable if the estimated fee is for CORE staking).")
     __properties: ClassVar[List[str]] = ["pool_type", "fee", "validator_pubkeys", "core_btc_staking_address"]
 
     model_config = ConfigDict(

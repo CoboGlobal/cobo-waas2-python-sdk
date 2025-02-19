@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class TravelRuleWithdrawLegalEntity(BaseModel):
     """
-    Required fields for LEGAL entities.
+    The required information of a legal entity.
     """  # noqa: E501
     selected_entity_type: SelectedEntityType
     legal_name: StrictStr = Field(description="The legal name of the entity.")
-    date_of_incorporation: Optional[date] = Field(default=None, description="The incorporation date of the entity.")
+    date_of_incorporation: Optional[date] = Field(default=None, description="The date of incorporation of the entity.")
     place_of_incorporation: Optional[StrictStr] = Field(default=None, description="The place of incorporation of the entity.")
     __properties: ClassVar[List[str]] = ["selected_entity_type", "legal_name", "date_of_incorporation", "place_of_incorporation"]
 

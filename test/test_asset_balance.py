@@ -35,7 +35,7 @@ class TestAssetBalance(unittest.TestCase):
         if include_optional:
             return AssetBalance(
                 asset_id = 'USDT',
-                balance = cobo_waas2.models.token_balance_balance.TokenBalance_balance(
+                balance = cobo_waas2.models.balance.Balance(
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
@@ -44,7 +44,7 @@ class TestAssetBalance(unittest.TestCase):
         else:
             return AssetBalance(
                 asset_id = 'USDT',
-                balance = cobo_waas2.models.token_balance_balance.TokenBalance_balance(
+                balance = cobo_waas2.models.balance.Balance(
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 

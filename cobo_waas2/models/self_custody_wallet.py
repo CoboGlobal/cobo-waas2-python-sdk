@@ -24,12 +24,12 @@ from typing_extensions import Self
 
 class SelfCustodyWallet(BaseModel):
     """
-    Required fields for `SELF_CUSTODY_WALLET`.
+    Required information when depositing from or withdrawing to a self-custody wallet.
     """  # noqa: E501
     destination_wallet_type: DestinationWalletType
-    self_custody_wallet_challenge: StrictStr = Field(description="The challenge obtained from a previous operation.")
-    self_custody_wallet_address: StrictStr = Field(description="The address of the self-custodial wallet.")
-    self_custody_wallet_sign: StrictStr = Field(description="The signed message from the self-custodial wallet.")
+    self_custody_wallet_challenge: StrictStr = Field(description="The message obtained from the `Retrieve transaction limitations` operation. This message is used to verify wallet ownership through signing.")
+    self_custody_wallet_address: StrictStr = Field(description="The address of the self-custody wallet.")
+    self_custody_wallet_sign: StrictStr = Field(description="The signature created by signing the challenge message with the wallet's private key.")
     __properties: ClassVar[List[str]] = ["destination_wallet_type", "self_custody_wallet_challenge", "self_custody_wallet_address", "self_custody_wallet_sign"]
 
     model_config = ConfigDict(

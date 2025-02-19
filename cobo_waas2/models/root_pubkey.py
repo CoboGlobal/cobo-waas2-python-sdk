@@ -26,7 +26,7 @@ class RootPubkey(BaseModel):
     """
     The data for MPC Root Extended Public Key information.
     """  # noqa: E501
-    root_pubkey: Optional[StrictStr] = Field(default=None, description="The vault's [root extended public key](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/tss-node-deployment#tss-node-on-cobo-portal-and-mpc-root-extended-public-key).")
+    root_pubkey: Optional[StrictStr] = Field(default=None, description="The vault's [root extended public key](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#root-extended-public-keys).")
     curve: Optional[CurveType] = None
     __properties: ClassVar[List[str]] = ["root_pubkey", "curve"]
 

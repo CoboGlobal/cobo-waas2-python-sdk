@@ -1,13 +1,13 @@
 # TravelRuleWithdrawExchangesOrVASP
 
-Required fields for `EXCHANGES_OR_VASP`.
+Required information when withdrawing tokens to an exchange or other virtual asset service providers (VASP).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_wallet_type** | [**DestinationWalletType**](DestinationWalletType.md) |  | 
-**vendor_code** | **str** | The vendor code for exchanges or VASPs. | 
+**vendor_code** | **str** | The vendor code of the exchange or virtual asset service provider (VASP). | 
 **vendor_vasp_id** | **str** | The unique identifier of the VASP. | 
 **entity_info** | [**TravelRuleWithdrawExchangesOrVASPEntityInfo**](TravelRuleWithdrawExchangesOrVASPEntityInfo.md) |  | 
 

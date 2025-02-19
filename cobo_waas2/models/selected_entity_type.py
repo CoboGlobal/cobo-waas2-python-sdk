@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class SelectedEntityType(str, Enum):
     """
-    Specifies the type of entity. This must be `LEGAL`.
+    Specifies the entity type. This must be `LEGAL`.   - `LEGAL`: Legal entity.   - `NATURAL`: Natural person. 
     """
 
     """

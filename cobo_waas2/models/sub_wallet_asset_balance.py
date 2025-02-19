@@ -17,7 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.token_balance_balance import TokenBalanceBalance
+from cobo_waas2.models.balance import Balance
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class SubWalletAssetBalance(BaseModel):
     """  # noqa: E501
     trading_account_type: Optional[StrictStr] = Field(default=None, description="The trading account type.")
     asset_id: StrictStr = Field(description="The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
-    balance: TokenBalanceBalance
+    balance: Balance
     __properties: ClassVar[List[str]] = ["trading_account_type", "asset_id", "balance"]
 
     model_config = ConfigDict(
@@ -87,7 +87,7 @@ class SubWalletAssetBalance(BaseModel):
         _obj = cls.model_validate({
             "trading_account_type": obj.get("trading_account_type"),
             "asset_id": obj.get("asset_id"),
-            "balance": TokenBalanceBalance.from_dict(obj["balance"]) if obj.get("balance") is not None else None
+            "balance": Balance.from_dict(obj["balance"]) if obj.get("balance") is not None else None
         })
         return _obj
 
