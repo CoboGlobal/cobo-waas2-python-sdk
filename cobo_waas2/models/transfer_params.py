@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.auto_fuel_type import AutoFuelType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
@@ -36,8 +36,19 @@ class TransferParams(BaseModel):
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     description: Optional[StrictStr] = Field(default=None, description="The description of the transfer.")
     fee: Optional[TransactionRequestFee] = None
+    transaction_process_type: Optional[StrictStr] = Field(default=None, description="Transaction processing type: **AutoProcess** means that after the transaction is constructed, it will be automatically signed and broadcasted. **AutoProcess** is the default vault. **BuildOnly** means that after the transaction is constructed, you need to manually call an interface to sign and broadcast it. ")
     auto_fuel: Optional[AutoFuelType] = None
-    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee", "auto_fuel"]
+    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee", "transaction_process_type", "auto_fuel"]
+
+    @field_validator('transaction_process_type')
+    def transaction_process_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['AutoProcess', 'BuildOnly']):
+            raise ValueError("must be one of enum values ('AutoProcess', 'BuildOnly')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,6 +117,7 @@ class TransferParams(BaseModel):
             "category_names": obj.get("category_names"),
             "description": obj.get("description"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
+            "transaction_process_type": obj.get("transaction_process_type"),
             "auto_fuel": obj.get("auto_fuel")
         })
         return _obj

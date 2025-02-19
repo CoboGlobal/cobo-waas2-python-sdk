@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tss_key_share_group_id** | **str** | The TSS key share group ID. | [optional] 
 **curve** | [**CurveType**](CurveType.md) |  | [optional] 
-**root_pubkey** | **str** | The vault&#39;s [root extended public key](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/tss-node-deployment#tss-node-on-cobo-portal-and-mpc-root-extended-public-key). | [optional] 
+**root_pubkey** | **str** | The vault&#39;s [root extended public key](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#root-extended-public-keys). | [optional] 
 
 ## Example
 

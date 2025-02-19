@@ -24,12 +24,12 @@ from typing_extensions import Self
 
 class TravelRuleDepositLegalEntity(BaseModel):
     """
-    Required fields for LEGAL entities.
+    The required information of a legal entity.
     """  # noqa: E501
-    selected_entity_type: StrictStr = Field(description="Specifies the type of entity associated with the transaction.")
+    selected_entity_type: StrictStr = Field(description="The entity type. Possible values include: - `LEGAL`: Legal entity. - `NATURAL`: Natural person. ")
     legal_name: StrictStr = Field(description="The legal name of the entity.")
-    date_of_incorporation: Optional[date] = Field(default=None, description="The incorporation date of the entity. This field is required when: - **Calling**: `travel_rule/transaction/limitation` API returns `is_threshold_reached = true`. - **Entity Type**: LEGAL. Otherwise, this field can be omitted. ")
-    place_of_incorporation: Optional[StrictStr] = Field(default=None, description="The place of incorporation of the entity. This field is required when: - **Calling**: `travel_rule/transaction/limitation` API returns `is_threshold_reached = true`. - **Entity Type**: LEGAL. Otherwise, this field can be omitted. ")
+    date_of_incorporation: Optional[date] = Field(default=None, description="The date of incorporation of the entity. This field is required when either of the following conditions is met: - `is_threshold_reached` is `true` in the response of the [Retrieve transaction limitations](https://www.cobo.com/developers/v2/api-references/travelrule/retrieve-transaction-limitations) operation. - `selected_entity_type` is `LEGAL`. ")
+    place_of_incorporation: Optional[StrictStr] = Field(default=None, description="The place of incorporation of the entity. This field is required when either of the following conditions is met: - `is_threshold_reached` is `true` in the response of the [Retrieve transaction limitations](https://www.cobo.com/developers/v2/api-references/travelrule/retrieve-transaction-limitations) operation. - `selected_entity_type` is `LEGAL`. ")
     __properties: ClassVar[List[str]] = ["selected_entity_type", "legal_name", "date_of_incorporation", "place_of_incorporation"]
 
     @field_validator('selected_entity_type')

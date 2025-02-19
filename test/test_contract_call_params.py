@@ -43,6 +43,7 @@ class TestContractCallParams(unittest.TestCase):
                     'Trading'
                     ],
                 fee = None,
+                transaction_process_type = 'AutoProcess',
                 auto_fuel = 'PassiveAutoFuel'
             )
         else:

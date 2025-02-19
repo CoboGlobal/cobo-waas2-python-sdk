@@ -43,6 +43,7 @@ class TestTransferParams(unittest.TestCase):
                     ],
                 description = 'Transfer from wallet',
                 fee = None,
+                transaction_process_type = 'AutoProcess',
                 auto_fuel = 'PassiveAutoFuel'
             )
         else:

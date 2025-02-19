@@ -38,7 +38,11 @@ class TestListAssetBalancesForExchangeWallet200Response(unittest.TestCase):
                     cobo_waas2.models.sub_wallet_asset_balance.SubWalletAssetBalance(
                         trading_account_type = 'Spot', 
                         asset_id = 'USDT', 
-                        balance = None, )
+                        balance = cobo_waas2.models.balance.Balance(
+                            total = '100.0', 
+                            available = '80.5', 
+                            pending = '0', 
+                            locked = '0', ), )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

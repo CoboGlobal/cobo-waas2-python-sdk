@@ -37,7 +37,7 @@ class TestTravelRuleDepositExchangesOrVASP(unittest.TestCase):
                 destination_wallet_type = 'EXCHANGES_OR_VASP',
                 vendor_code = 'NB',
                 vendor_vasp_id = 'did:ethr:0x45fca8109a8d2ce93e37f79f0acbb16f4a91f4c5',
-                vendor_vasp_name = 'Others vendor',
+                vendor_vasp_name = 'Vendor A',
                 entity_info = None
             )
         else:

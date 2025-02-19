@@ -157,6 +157,23 @@ class TestWalletsApi(unittest.TestCase):
         api_response = self.api.get_wallet_by_id(wallet_id)
         """
 
+    def test_list_address_balances_for_token(self) -> None:
+        """
+        Test case for list_address_balances_for_token
+
+        List address balances for token
+        """
+        """
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        token_id = 'ETH_USDT'
+        addresses = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_address_balances_for_token(wallet_id, token_id, addresses=addresses, limit=limit, before=before, after=after)
+        """
+
     def test_list_addresses(self) -> None:
         """
         Test case for list_addresses
@@ -285,11 +302,12 @@ class TestWalletsApi(unittest.TestCase):
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
         token_id = 'ETH_USDT'
         address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+        tx_hash = 'dd7e1cecf6bbde1844ee1815b780711a1e306a718bcd23cd64401b48ef88eb83'
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
-        api_response = self.api.list_utxos(wallet_id, token_id, address=address, limit=limit, before=before, after=after)
+        api_response = self.api.list_utxos(wallet_id, token_id, address=address, tx_hash=tx_hash, limit=limit, before=before, after=after)
         """
 
     def test_list_wallets(self) -> None:

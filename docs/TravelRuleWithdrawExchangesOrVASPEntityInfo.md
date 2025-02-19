@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **selected_entity_type** | [**SelectedEntityType**](SelectedEntityType.md) |  | 
 **legal_name** | **str** | The legal name of the entity. | 
-**date_of_incorporation** | **date** | The incorporation date of the entity. | [optional] 
+**date_of_incorporation** | **date** | The date of incorporation of the entity. | [optional] 
 **place_of_incorporation** | **str** | The place of incorporation of the entity. | [optional] 
-**first_name** | **str** | The first name of the user. | 
-**last_name** | **str** | The last name of the user. | 
-**date_of_birth** | **date** | The date of birth of the user. | [optional] 
-**place_of_birth** | **str** | The place of birth of the user. | [optional] 
+**first_name** | **str** | The first name of the natural person. | 
+**last_name** | **str** | The last name of the natural person. | 
+**date_of_birth** | **date** | The date of birth of the natural person. | [optional] 
+**place_of_birth** | **str** | The place of birth of the natural person. | [optional] 
 
 ## Example
 

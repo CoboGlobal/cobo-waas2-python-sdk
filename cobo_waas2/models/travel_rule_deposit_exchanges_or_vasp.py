@@ -25,12 +25,12 @@ from typing_extensions import Self
 
 class TravelRuleDepositExchangesOrVASP(BaseModel):
     """
-    Required fields for `EXCHANGES_OR_VASP`.
+    Required information when depositing from an exchange or other virtual asset service providers (VASP).
     """  # noqa: E501
     destination_wallet_type: DestinationWalletType
-    vendor_code: StrictStr = Field(description="The vendor code for exchanges or VASPs.")
+    vendor_code: StrictStr = Field(description="The vendor code of the VASP.")
     vendor_vasp_id: StrictStr = Field(description="The unique identifier of the VASP.")
-    vendor_vasp_name: Optional[StrictStr] = Field(default=None, description="The vendor name to be provided when selecting \"Others\" as the VASP case. This field allows customers to specify the name of a vendor not listed.")
+    vendor_vasp_name: Optional[StrictStr] = Field(default=None, description="The vendor name. Use this field to specify the name of a vendor not listed.")
     entity_info: TravelRuleDepositExchangesOrVASPEntityInfo
     __properties: ClassVar[List[str]] = ["destination_wallet_type", "vendor_code", "vendor_vasp_id", "vendor_vasp_name", "entity_info"]
 

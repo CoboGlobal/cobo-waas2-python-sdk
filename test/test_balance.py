@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.token_balance_balance import TokenBalanceBalance
+from cobo_waas2.models.balance import Balance
 
 
-class TestTokenBalanceBalance(unittest.TestCase):
-    """TokenBalanceBalance unit test stubs"""
+class TestBalance(unittest.TestCase):
+    """Balance unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,30 +24,30 @@ class TestTokenBalanceBalance(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> TokenBalanceBalance:
-        """Test TokenBalanceBalance
+    def make_instance(self, include_optional) -> Balance:
+        """Test Balance
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `TokenBalanceBalance`
+        # uncomment below to create an instance of `Balance`
         """
-        model = TokenBalanceBalance()
+        model = Balance()
         if include_optional:
-            return TokenBalanceBalance(
+            return Balance(
                 total = '100.0',
                 available = '80.5',
                 pending = '0',
                 locked = '0'
             )
         else:
-            return TokenBalanceBalance(
+            return Balance(
                 total = '100.0',
                 available = '80.5',
         )
         """
 
-    def testTokenBalanceBalance(self):
-        """Test TokenBalanceBalance"""
+    def testBalance(self):
+        """Test Balance"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

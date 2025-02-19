@@ -17,7 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.token_balance_balance import TokenBalanceBalance
+from cobo_waas2.models.balance import Balance
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class TokenBalance(BaseModel):
     The balance information.
     """  # noqa: E501
     token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
-    balance: TokenBalanceBalance
+    balance: Balance
     __properties: ClassVar[List[str]] = ["token_id", "balance"]
 
     model_config = ConfigDict(
@@ -85,7 +85,7 @@ class TokenBalance(BaseModel):
 
         _obj = cls.model_validate({
             "token_id": obj.get("token_id"),
-            "balance": TokenBalanceBalance.from_dict(obj["balance"]) if obj.get("balance") is not None else None
+            "balance": Balance.from_dict(obj["balance"]) if obj.get("balance") is not None else None
         })
         return _obj
 

@@ -1,6 +1,6 @@
 # TravelRuleWithdrawLegalEntity
 
-Required fields for LEGAL entities.
+The required information of a legal entity.
 
 ## Properties
 
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **selected_entity_type** | [**SelectedEntityType**](SelectedEntityType.md) |  | 
 **legal_name** | **str** | The legal name of the entity. | 
-**date_of_incorporation** | **date** | The incorporation date of the entity. | [optional] 
+**date_of_incorporation** | **date** | The date of incorporation of the entity. | [optional] 
 **place_of_incorporation** | **str** | The place of incorporation of the entity. | [optional] 
 
 ## Example

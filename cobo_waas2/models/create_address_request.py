@@ -28,9 +28,11 @@ class CreateAddressRequest(BaseModel):
     CreateAddressRequest
     """  # noqa: E501
     chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
-    count: Annotated[int, Field(le=50, strict=True, ge=1)] = Field(description="The number of addresses to create.")
+    count: Annotated[int, Field(le=50, strict=True, ge=1)] = Field(description="The number of addresses to create. This property will be ignored if you are tweaking Taproot address(es).")
+    taproot_script_tree_hashes: Optional[List[StrictStr]] = Field(default=None, description="The information about the new address. This parameter is required only if you want to generate a tweaked address.")
+    taproot_internal_address: Optional[StrictStr] = Field(default=None, description="The address you want to tweak. This parameter is required only if you want to generate a tweaked address.")
     encoding: Optional[AddressEncoding] = None
-    __properties: ClassVar[List[str]] = ["chain_id", "count", "encoding"]
+    __properties: ClassVar[List[str]] = ["chain_id", "count", "taproot_script_tree_hashes", "taproot_internal_address", "encoding"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +87,8 @@ class CreateAddressRequest(BaseModel):
         _obj = cls.model_validate({
             "chain_id": obj.get("chain_id"),
             "count": obj.get("count") if obj.get("count") is not None else 1,
+            "taproot_script_tree_hashes": obj.get("taproot_script_tree_hashes"),
+            "taproot_internal_address": obj.get("taproot_internal_address"),
             "encoding": obj.get("encoding")
         })
         return _obj

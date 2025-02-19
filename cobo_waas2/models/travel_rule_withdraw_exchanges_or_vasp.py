@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class TravelRuleWithdrawExchangesOrVASP(BaseModel):
     """
-    Required fields for `EXCHANGES_OR_VASP`.
+    Required information when withdrawing tokens to an exchange or other virtual asset service providers (VASP).
     """  # noqa: E501
     destination_wallet_type: DestinationWalletType
-    vendor_code: StrictStr = Field(description="The vendor code for exchanges or VASPs.")
+    vendor_code: StrictStr = Field(description="The vendor code of the exchange or virtual asset service provider (VASP).")
     vendor_vasp_id: StrictStr = Field(description="The unique identifier of the VASP.")
     entity_info: TravelRuleWithdrawExchangesOrVASPEntityInfo
     __properties: ClassVar[List[str]] = ["destination_wallet_type", "vendor_code", "vendor_vasp_id", "entity_info"]

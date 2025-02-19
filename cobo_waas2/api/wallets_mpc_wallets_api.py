@@ -25,6 +25,7 @@ from cobo_waas2.models.key_share_holder import KeyShareHolder
 from cobo_waas2.models.key_share_holder_group import KeyShareHolderGroup
 from cobo_waas2.models.key_share_holder_group_type import KeyShareHolderGroupType
 from cobo_waas2.models.list_key_share_holder_groups200_response import ListKeyShareHolderGroups200Response
+from cobo_waas2.models.list_key_share_holders200_response import ListKeyShareHolders200Response
 from cobo_waas2.models.list_mpc_projects200_response import ListMpcProjects200Response
 from cobo_waas2.models.list_mpc_vaults200_response import ListMpcVaults200Response
 from cobo_waas2.models.list_tss_requests200_response import ListTssRequests200Response
@@ -56,7 +57,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def cancel_tss_request_by_id(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         tss_request_id: Annotated[StrictStr, Field(description="The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests).")],
         _request_timeout: Union[
             None,
@@ -71,7 +72,7 @@ class WalletsMPCWalletsApi:
 
         This operation cancels a TSS request. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param tss_request_id: The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests). (required)
         :type tss_request_id: str
@@ -106,7 +107,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def cancel_tss_request_by_id_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         tss_request_id: Annotated[StrictStr, Field(description="The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests).")],
         _request_timeout: Union[
             None,
@@ -121,7 +122,7 @@ class WalletsMPCWalletsApi:
 
         This operation cancels a TSS request. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param tss_request_id: The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests). (required)
         :type tss_request_id: str
@@ -156,7 +157,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def cancel_tss_request_by_id_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         tss_request_id: Annotated[StrictStr, Field(description="The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests).")],
         _request_timeout: Union[
             None,
@@ -171,7 +172,7 @@ class WalletsMPCWalletsApi:
 
         This operation cancels a TSS request. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param tss_request_id: The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests). (required)
         :type tss_request_id: str
@@ -240,7 +241,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def create_key_share_holder_group(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         create_key_share_holder_group_request: Annotated[Optional[CreateKeyShareHolderGroupRequest], Field(description="The request body to create a key share holder group.")] = None,
         _request_timeout: Union[
             None,
@@ -255,7 +256,7 @@ class WalletsMPCWalletsApi:
 
         This operation creates a key share holder group for a specified vault. <Note>This operation will not return the `tss_key_share_groups` property until key shares have been created using the [Create TSS request](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/create-tss-request) operation. Creating a wallet with the [Create wallet](https://www.cobo.com/developers/v2/api-references/wallets/create-wallet) operation is only possible after you've completed the previous actions.</Note> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param create_key_share_holder_group_request: The request body to create a key share holder group.
         :type create_key_share_holder_group_request: CreateKeyShareHolderGroupRequest
@@ -290,7 +291,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def create_key_share_holder_group_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         create_key_share_holder_group_request: Annotated[Optional[CreateKeyShareHolderGroupRequest], Field(description="The request body to create a key share holder group.")] = None,
         _request_timeout: Union[
             None,
@@ -305,7 +306,7 @@ class WalletsMPCWalletsApi:
 
         This operation creates a key share holder group for a specified vault. <Note>This operation will not return the `tss_key_share_groups` property until key shares have been created using the [Create TSS request](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/create-tss-request) operation. Creating a wallet with the [Create wallet](https://www.cobo.com/developers/v2/api-references/wallets/create-wallet) operation is only possible after you've completed the previous actions.</Note> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param create_key_share_holder_group_request: The request body to create a key share holder group.
         :type create_key_share_holder_group_request: CreateKeyShareHolderGroupRequest
@@ -340,7 +341,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def create_key_share_holder_group_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         create_key_share_holder_group_request: Annotated[Optional[CreateKeyShareHolderGroupRequest], Field(description="The request body to create a key share holder group.")] = None,
         _request_timeout: Union[
             None,
@@ -355,7 +356,7 @@ class WalletsMPCWalletsApi:
 
         This operation creates a key share holder group for a specified vault. <Note>This operation will not return the `tss_key_share_groups` property until key shares have been created using the [Create TSS request](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/create-tss-request) operation. Creating a wallet with the [Create wallet](https://www.cobo.com/developers/v2/api-references/wallets/create-wallet) operation is only possible after you've completed the previous actions.</Note> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param create_key_share_holder_group_request: The request body to create a key share holder group.
         :type create_key_share_holder_group_request: CreateKeyShareHolderGroupRequest
@@ -762,7 +763,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def create_tss_request(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         create_tss_request_request: Annotated[Optional[CreateTssRequestRequest], Field(description="The request body to create a TSS request.")] = None,
         _request_timeout: Union[
             None,
@@ -777,7 +778,7 @@ class WalletsMPCWalletsApi:
 
         This operation creates a TSS request under a specified vault. You can use this operation to perform actions such as key generation and recovery. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param create_tss_request_request: The request body to create a TSS request.
         :type create_tss_request_request: CreateTssRequestRequest
@@ -812,7 +813,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def create_tss_request_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         create_tss_request_request: Annotated[Optional[CreateTssRequestRequest], Field(description="The request body to create a TSS request.")] = None,
         _request_timeout: Union[
             None,
@@ -827,7 +828,7 @@ class WalletsMPCWalletsApi:
 
         This operation creates a TSS request under a specified vault. You can use this operation to perform actions such as key generation and recovery. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param create_tss_request_request: The request body to create a TSS request.
         :type create_tss_request_request: CreateTssRequestRequest
@@ -862,7 +863,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def create_tss_request_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         create_tss_request_request: Annotated[Optional[CreateTssRequestRequest], Field(description="The request body to create a TSS request.")] = None,
         _request_timeout: Union[
             None,
@@ -877,7 +878,7 @@ class WalletsMPCWalletsApi:
 
         This operation creates a TSS request under a specified vault. You can use this operation to perform actions such as key generation and recovery. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param create_tss_request_request: The request body to create a TSS request.
         :type create_tss_request_request: CreateTssRequestRequest
@@ -946,7 +947,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def delete_key_share_holder_group_by_id(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         _request_timeout: Union[
             None,
@@ -961,7 +962,7 @@ class WalletsMPCWalletsApi:
 
         This operation deletes a specified key share holder group.
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -996,7 +997,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def delete_key_share_holder_group_by_id_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         _request_timeout: Union[
             None,
@@ -1011,7 +1012,7 @@ class WalletsMPCWalletsApi:
 
         This operation deletes a specified key share holder group.
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -1046,7 +1047,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def delete_key_share_holder_group_by_id_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         _request_timeout: Union[
             None,
@@ -1061,7 +1062,7 @@ class WalletsMPCWalletsApi:
 
         This operation deletes a specified key share holder group.
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -1128,9 +1129,193 @@ class WalletsMPCWalletsApi:
         )
 
     @validate_call
+    def get_key_share_holder_by_tss_node_id(
+        self,
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
+        tss_node_id: Annotated[StrictStr, Field(description="The TSS Node ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> KeyShareHolder:
+        """Get key share holder by tss node id
+
+        This operation retrieves detailed information about a specified key holder. 
+
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
+        :type vault_id: str
+        :param tss_node_id: The TSS Node ID. (required)
+        :type tss_node_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_key_share_holder_by_tss_node_id_serialize(
+            vault_id=vault_id,
+            tss_node_id=tss_node_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "KeyShareHolder",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_key_share_holder_by_tss_node_id_with_http_info(
+        self,
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
+        tss_node_id: Annotated[StrictStr, Field(description="The TSS Node ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[KeyShareHolder]:
+        """Get key share holder by tss node id
+
+        This operation retrieves detailed information about a specified key holder. 
+
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
+        :type vault_id: str
+        :param tss_node_id: The TSS Node ID. (required)
+        :type tss_node_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_key_share_holder_by_tss_node_id_serialize(
+            vault_id=vault_id,
+            tss_node_id=tss_node_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "KeyShareHolder",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_key_share_holder_by_tss_node_id_without_preload_content(
+        self,
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
+        tss_node_id: Annotated[StrictStr, Field(description="The TSS Node ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get key share holder by tss node id
+
+        This operation retrieves detailed information about a specified key holder. 
+
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
+        :type vault_id: str
+        :param tss_node_id: The TSS Node ID. (required)
+        :type tss_node_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_key_share_holder_by_tss_node_id_serialize(
+            vault_id=vault_id,
+            tss_node_id=tss_node_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "KeyShareHolder",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_key_share_holder_by_tss_node_id_serialize(
+        self,
+        vault_id,
+        tss_node_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if vault_id is not None:
+            _path_params['vault_id'] = vault_id
+        if tss_node_id is not None:
+            _path_params['tss_node_id'] = tss_node_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/wallets/mpc/vaults/{vault_id}/key_share_holders/{tss_node_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def get_key_share_holder_group_by_id(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         _request_timeout: Union[
             None,
@@ -1145,7 +1330,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a specified key share holder group. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -1180,7 +1365,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_key_share_holder_group_by_id_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         _request_timeout: Union[
             None,
@@ -1195,7 +1380,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a specified key share holder group. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -1230,7 +1415,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_key_share_holder_group_by_id_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         _request_timeout: Union[
             None,
@@ -1245,7 +1430,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a specified key share holder group. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -1483,7 +1668,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_mpc_vault_by_id(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1497,7 +1682,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1529,7 +1714,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_mpc_vault_by_id_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1543,7 +1728,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1575,7 +1760,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_mpc_vault_by_id_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1589,7 +1774,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a vault.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1652,7 +1837,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_tss_request_by_id(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         tss_request_id: Annotated[StrictStr, Field(description="The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests).")],
         _request_timeout: Union[
             None,
@@ -1667,7 +1852,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a TSS request. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param tss_request_id: The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests). (required)
         :type tss_request_id: str
@@ -1702,7 +1887,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_tss_request_by_id_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         tss_request_id: Annotated[StrictStr, Field(description="The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests).")],
         _request_timeout: Union[
             None,
@@ -1717,7 +1902,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a TSS request. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param tss_request_id: The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests). (required)
         :type tss_request_id: str
@@ -1752,7 +1937,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def get_tss_request_by_id_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         tss_request_id: Annotated[StrictStr, Field(description="The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests).")],
         _request_timeout: Union[
             None,
@@ -1767,7 +1952,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves detailed information about a TSS request. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param tss_request_id: The TSS request ID, which you can retrieve by calling [List TSS requests](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-tss-requests). (required)
         :type tss_request_id: str
@@ -1990,7 +2175,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def list_key_share_holder_groups(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_type: Annotated[Optional[KeyShareHolderGroupType], Field(description="The key share holder group type. Possible values include: - `MainGroup`: The [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#main-group).  - `SigningGroup`: The [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#signing-group).  - `RecoveryGroup`: The [Recovery Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#recovery-group).  **Note**: If this parameter is left empty, all key share holder group types will be retrieved. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2008,7 +2193,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves all key share holder groups under a specified vault. You can filter the result by group type. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_type: The key share holder group type. Possible values include: - `MainGroup`: The [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#main-group).  - `SigningGroup`: The [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#signing-group).  - `RecoveryGroup`: The [Recovery Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#recovery-group).  **Note**: If this parameter is left empty, all key share holder group types will be retrieved. 
         :type key_share_holder_group_type: KeyShareHolderGroupType
@@ -2052,7 +2237,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def list_key_share_holder_groups_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_type: Annotated[Optional[KeyShareHolderGroupType], Field(description="The key share holder group type. Possible values include: - `MainGroup`: The [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#main-group).  - `SigningGroup`: The [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#signing-group).  - `RecoveryGroup`: The [Recovery Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#recovery-group).  **Note**: If this parameter is left empty, all key share holder group types will be retrieved. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2070,7 +2255,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves all key share holder groups under a specified vault. You can filter the result by group type. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_type: The key share holder group type. Possible values include: - `MainGroup`: The [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#main-group).  - `SigningGroup`: The [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#signing-group).  - `RecoveryGroup`: The [Recovery Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#recovery-group).  **Note**: If this parameter is left empty, all key share holder group types will be retrieved. 
         :type key_share_holder_group_type: KeyShareHolderGroupType
@@ -2114,7 +2299,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def list_key_share_holder_groups_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_type: Annotated[Optional[KeyShareHolderGroupType], Field(description="The key share holder group type. Possible values include: - `MainGroup`: The [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#main-group).  - `SigningGroup`: The [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#signing-group).  - `RecoveryGroup`: The [Recovery Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#recovery-group).  **Note**: If this parameter is left empty, all key share holder group types will be retrieved. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2132,7 +2317,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves all key share holder groups under a specified vault. You can filter the result by group type. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_type: The key share holder group type. Possible values include: - `MainGroup`: The [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#main-group).  - `SigningGroup`: The [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#signing-group).  - `RecoveryGroup`: The [Recovery Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups#recovery-group).  **Note**: If this parameter is left empty, all key share holder group types will be retrieved. 
         :type key_share_holder_group_type: KeyShareHolderGroupType
@@ -2216,6 +2401,243 @@ class WalletsMPCWalletsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/wallets/mpc/vaults/{vault_id}/key_share_holder_groups',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_key_share_holders(
+        self,
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
+        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key_share_holder_group_ids, separated by comma.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListKeyShareHolders200Response:
+        """List all key share holders
+
+        This operation retrieves all key share holders under a specified vault. You can filter the result by key share holder group id. 
+
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
+        :type vault_id: str
+        :param key_share_holder_group_ids: A list of key_share_holder_group_ids, separated by comma.
+        :type key_share_holder_group_ids: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_key_share_holders_serialize(
+            vault_id=vault_id,
+            key_share_holder_group_ids=key_share_holder_group_ids,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListKeyShareHolders200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_key_share_holders_with_http_info(
+        self,
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
+        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key_share_holder_group_ids, separated by comma.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListKeyShareHolders200Response]:
+        """List all key share holders
+
+        This operation retrieves all key share holders under a specified vault. You can filter the result by key share holder group id. 
+
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
+        :type vault_id: str
+        :param key_share_holder_group_ids: A list of key_share_holder_group_ids, separated by comma.
+        :type key_share_holder_group_ids: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_key_share_holders_serialize(
+            vault_id=vault_id,
+            key_share_holder_group_ids=key_share_holder_group_ids,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListKeyShareHolders200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_key_share_holders_without_preload_content(
+        self,
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
+        key_share_holder_group_ids: Annotated[Optional[StrictStr], Field(description="A list of key_share_holder_group_ids, separated by comma.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List all key share holders
+
+        This operation retrieves all key share holders under a specified vault. You can filter the result by key share holder group id. 
+
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
+        :type vault_id: str
+        :param key_share_holder_group_ids: A list of key_share_holder_group_ids, separated by comma.
+        :type key_share_holder_group_ids: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_key_share_holders_serialize(
+            vault_id=vault_id,
+            key_share_holder_group_ids=key_share_holder_group_ids,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListKeyShareHolders200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_key_share_holders_serialize(
+        self,
+        vault_id,
+        key_share_holder_group_ids,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if vault_id is not None:
+            _path_params['vault_id'] = vault_id
+        # process the query parameters
+        if key_share_holder_group_ids is not None:
+            
+            _query_params.append(('key_share_holder_group_ids', key_share_holder_group_ids))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/wallets/mpc/vaults/{vault_id}/key_share_holders',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2671,7 +3093,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def list_tss_requests(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID of the TSS request, which you can retrieve by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2689,7 +3111,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves a list of TSS requests and their details. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID of the TSS request, which you can retrieve by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups). (required)
         :type key_share_holder_group_id: str
@@ -2733,7 +3155,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def list_tss_requests_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID of the TSS request, which you can retrieve by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2751,7 +3173,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves a list of TSS requests and their details. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID of the TSS request, which you can retrieve by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups). (required)
         :type key_share_holder_group_id: str
@@ -2795,7 +3217,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def list_tss_requests_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID of the TSS request, which you can retrieve by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups).")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2813,7 +3235,7 @@ class WalletsMPCWalletsApi:
 
         This operation retrieves a list of TSS requests and their details. 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID of the TSS request, which you can retrieve by calling [List all key share holder groups](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-key-share-holder-groups). (required)
         :type key_share_holder_group_id: str
@@ -2908,7 +3330,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def update_key_share_holder_group_by_id(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         update_key_share_holder_group_by_id_request: Optional[UpdateKeyShareHolderGroupByIdRequest] = None,
         _request_timeout: Union[
@@ -2924,7 +3346,7 @@ class WalletsMPCWalletsApi:
 
         This operation updates a specified active [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups). For example, you can use this operation to upgrade a Signing Group to the [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups). 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -2962,7 +3384,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def update_key_share_holder_group_by_id_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         update_key_share_holder_group_by_id_request: Optional[UpdateKeyShareHolderGroupByIdRequest] = None,
         _request_timeout: Union[
@@ -2978,7 +3400,7 @@ class WalletsMPCWalletsApi:
 
         This operation updates a specified active [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups). For example, you can use this operation to upgrade a Signing Group to the [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups). 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -3016,7 +3438,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def update_key_share_holder_group_by_id_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         key_share_holder_group_id: Annotated[StrictStr, Field(description="The key share holder group ID.")],
         update_key_share_holder_group_by_id_request: Optional[UpdateKeyShareHolderGroupByIdRequest] = None,
         _request_timeout: Union[
@@ -3032,7 +3454,7 @@ class WalletsMPCWalletsApi:
 
         This operation updates a specified active [Signing Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups). For example, you can use this operation to upgrade a Signing Group to the [Main Group](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/create-key-share-groups). 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param key_share_holder_group_id: The key share holder group ID. (required)
         :type key_share_holder_group_id: str
@@ -3291,7 +3713,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def update_mpc_vault_by_id(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         update_mpc_vault_by_id_request: Annotated[Optional[UpdateMpcVaultByIdRequest], Field(description="The request body to update a vault's name.")] = None,
         _request_timeout: Union[
             None,
@@ -3306,7 +3728,7 @@ class WalletsMPCWalletsApi:
 
         This operation updates a vault's name.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param update_mpc_vault_by_id_request: The request body to update a vault's name.
         :type update_mpc_vault_by_id_request: UpdateMpcVaultByIdRequest
@@ -3341,7 +3763,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def update_mpc_vault_by_id_with_http_info(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         update_mpc_vault_by_id_request: Annotated[Optional[UpdateMpcVaultByIdRequest], Field(description="The request body to update a vault's name.")] = None,
         _request_timeout: Union[
             None,
@@ -3356,7 +3778,7 @@ class WalletsMPCWalletsApi:
 
         This operation updates a vault's name.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param update_mpc_vault_by_id_request: The request body to update a vault's name.
         :type update_mpc_vault_by_id_request: UpdateMpcVaultByIdRequest
@@ -3391,7 +3813,7 @@ class WalletsMPCWalletsApi:
     @validate_call
     def update_mpc_vault_by_id_without_preload_content(
         self,
-        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults).")],
+        vault_id: Annotated[StrictStr, Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")],
         update_mpc_vault_by_id_request: Annotated[Optional[UpdateMpcVaultByIdRequest], Field(description="The request body to update a vault's name.")] = None,
         _request_timeout: Union[
             None,
@@ -3406,7 +3828,7 @@ class WalletsMPCWalletsApi:
 
         This operation updates a vault's name.  <Info>To learn what a vault is and how it relates to MPC Wallets, see [Get started with MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/get-started-ocw#technical-architecture).</Info> 
 
-        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallet/list-all-mpc-vaults). (required)
+        :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). (required)
         :type vault_id: str
         :param update_mpc_vault_by_id_request: The request body to update a vault's name.
         :type update_mpc_vault_by_id_request: UpdateMpcVaultByIdRequest

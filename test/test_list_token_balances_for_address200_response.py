@@ -37,7 +37,7 @@ class TestListTokenBalancesForAddress200Response(unittest.TestCase):
                 data = [
                     cobo_waas2.models.token_balance.TokenBalance(
                         token_id = 'BTC', 
-                        balance = cobo_waas2.models.token_balance_balance.TokenBalance_balance(
+                        balance = cobo_waas2.models.balance.Balance(
                             total = '100.0', 
                             available = '80.5', 
                             pending = '0', 

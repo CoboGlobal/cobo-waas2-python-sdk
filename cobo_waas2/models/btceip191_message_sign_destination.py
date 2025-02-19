@@ -16,20 +16,19 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
+from cobo_waas2.models.message_sign_destination_type import MessageSignDestinationType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TokenBalanceBalance(BaseModel):
+class BTCEIP191MessageSignDestination(BaseModel):
     """
-    The balance details.
+    The information about the destination `BTC_EIP_191_Signature`. Refer to [Transaction sources and destinations](/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
     """  # noqa: E501
-    total: StrictStr = Field(description="The current amount of tokens in an address, which is retrieved directly from the network. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
-    available: StrictStr = Field(description="The amount of tokens ready to be spent. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
-    pending: Optional[StrictStr] = Field(default='0', description="The total amount being sent in a transaction, which is calculated as the withdrawal amount plus the transaction fee. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
-    locked: Optional[StrictStr] = Field(default='0', description="For UTXO chains, this is the combined value of the selected UTXOs for the transaction. For other chains, it is equal to the Pending amount. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
-    __properties: ClassVar[List[str]] = ["total", "available", "pending", "locked"]
+    destination_type: MessageSignDestinationType
+    message: StrictStr = Field(description="The raw data of the message to be signed, encoded in Base64 format.")
+    __properties: ClassVar[List[str]] = ["destination_type", "message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +48,7 @@ class TokenBalanceBalance(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TokenBalanceBalance from a JSON string"""
+        """Create an instance of BTCEIP191MessageSignDestination from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,7 +73,7 @@ class TokenBalanceBalance(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TokenBalanceBalance from a dict"""
+        """Create an instance of BTCEIP191MessageSignDestination from a dict"""
         if obj is None:
             return None
 
@@ -82,10 +81,8 @@ class TokenBalanceBalance(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "total": obj.get("total"),
-            "available": obj.get("available"),
-            "pending": obj.get("pending") if obj.get("pending") is not None else '0',
-            "locked": obj.get("locked") if obj.get("locked") is not None else '0'
+            "destination_type": obj.get("destination_type"),
+            "message": obj.get("message")
         })
         return _obj
 

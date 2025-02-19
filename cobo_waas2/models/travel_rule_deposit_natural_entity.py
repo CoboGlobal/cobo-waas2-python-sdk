@@ -24,13 +24,13 @@ from typing_extensions import Self
 
 class TravelRuleDepositNaturalEntity(BaseModel):
     """
-    Required fields for NATURAL entities.
+    The required information of a natural person.
     """  # noqa: E501
-    selected_entity_type: StrictStr = Field(description="Specifies the type of entity associated with the transaction.")
-    first_name: StrictStr = Field(description="The first name of the user.")
-    last_name: StrictStr = Field(description="The last name of the user.")
-    date_of_birth: Optional[date] = Field(default=None, description="The date of birth of the user. This field is required when: - **Calling**: `travel_rule/transaction/limitation` API returns `is_threshold_reached = true`. - **Entity Type**: NATURAL. Otherwise, this field can be omitted. ")
-    place_of_birth: Optional[StrictStr] = Field(default=None, description="The place of birth of the user. This field is required when: - **Calling**: `travel_rule/transaction/limitation` API returns `is_threshold_reached = true`. - **Entity Type**: NATURAL. Otherwise, this field can be omitted. ")
+    selected_entity_type: StrictStr = Field(description="Specifies the type of entity associated with the transaction. - `LEGAL`: Legal entity. - `NATURAL`: Natural person. ")
+    first_name: StrictStr = Field(description="The first name of the natural person.")
+    last_name: StrictStr = Field(description="The last name of the natural person.")
+    date_of_birth: Optional[date] = Field(default=None, description="The date of birth of the natural person. This field is required when either of the following conditions is met: - `is_threshold_reached` is `true` in the response of the [Retrieve transaction limitations](https://www.cobo.com/developers/v2/api-references/travelrule/retrieve-transaction-limitations) operation. - `selected_entity_type` is `NATURAL`. ")
+    place_of_birth: Optional[StrictStr] = Field(default=None, description="The place of birth of the natural person. This field is required when either of the following conditions is met: - `is_threshold_reached` is `true` in the response of the [Retrieve transaction limitations](https://www.cobo.com/developers/v2/api-references/travelrule/retrieve-transaction-limitations) operation. - `selected_entity_type` is `NATURAL`. ")
     __properties: ClassVar[List[str]] = ["selected_entity_type", "first_name", "last_name", "date_of_birth", "place_of_birth"]
 
     @field_validator('selected_entity_type')

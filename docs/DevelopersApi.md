@@ -18,7 +18,7 @@ This operation retrieves the details of the API key that you are using.
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -59,7 +59,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -85,7 +85,7 @@ This operation retrieves all the callback messages in your organization.  For mo
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -170,7 +170,7 @@ This operation resends a callback message that failed previously.  If your callb
 
 ### Example
 
-* Api Key Authentication (CoboAuth):
+* OAuth Authentication (OAuth2):
 
 ```python
 import cobo_waas2
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

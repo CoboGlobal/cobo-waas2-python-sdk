@@ -23,9 +23,9 @@ from typing_extensions import Self
 
 class OrgInfo(BaseModel):
     """
-    [organization](https://manuals.cobo.com/en/portal/organization/introduction). 
+    The information of an organization. To learn more about organizations, see [Introduction to Organization](https://manuals.cobo.com/en/portal/organization/introduction). 
     """  # noqa: E501
-    org_id: StrictStr = Field(description="The ID of the owning organization.")
+    org_id: StrictStr = Field(description="The organization ID.")
     name: Optional[StrictStr] = Field(default=None, description="The organization name.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The organization's creation time in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["org_id", "name", "created_timestamp"]

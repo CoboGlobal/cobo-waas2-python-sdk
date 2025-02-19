@@ -57,7 +57,7 @@ class TestTravelRuleApi(unittest.TestCase):
         """
         Test case for submit_deposit_travel_rule_info
 
-        Submit Deposit Transaction Travel Rule information
+        Submit Travel Rule information for deposits
         """
         """
         travel_rule_deposit_request = cobo_waas2.TravelRuleDepositRequest()
@@ -69,7 +69,7 @@ class TestTravelRuleApi(unittest.TestCase):
         """
         Test case for submit_withdraw_travel_rule_info
 
-        Submit Withdraw Transaction Travel Rule information
+        Submit Travel Rule information for withdrawals
         """
         """
         travel_rule_withdraw_request = cobo_waas2.TravelRuleWithdrawRequest()
