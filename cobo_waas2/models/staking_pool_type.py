@@ -28,6 +28,9 @@ class StakingPoolType(str, Enum):
     ETHBEACON = 'ETHBeacon'
     COREBTC = 'CoreBTC'
     SKYFARM = 'SkyFarm'
+    BITHIVE = 'BitHive'
+    BERABEACON = 'BERABeacon'
+    BERACHAINBGT = 'BeraChainBGT'
 
     UNKNOWN = None
 

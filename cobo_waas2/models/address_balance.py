@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class AddressBalance(BaseModel):
     """
-    The token balance for a specific wallet address.
+    The balances of a specific token under address.
     """  # noqa: E501
     address: StrictStr = Field(description="The wallet address.")
     balance: Balance

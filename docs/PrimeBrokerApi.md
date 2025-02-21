@@ -4,20 +4,20 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**change_guard_pubkey**](PrimeBrokerApi.md#change_guard_pubkey) | **PUT** /prime_broker/user/{user_id}/guard_pubkey | Change Guard pubkey binding
-[**create_guard_pubkey**](PrimeBrokerApi.md#create_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey | Create Guard pubkey binding
-[**create_prime_broker_address**](PrimeBrokerApi.md#create_prime_broker_address) | **POST** /prime_broker/user/{user_id}/addresses | Bind addresses to a broker user
-[**delete_guard_pubkey**](PrimeBrokerApi.md#delete_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey/delete | Delete Guard pubkey binding
-[**query_approval_statement**](PrimeBrokerApi.md#query_approval_statement) | **GET** /prime_broker/approval_statement/{statement_id} | Query approval statement
-[**query_guard_pubkey**](PrimeBrokerApi.md#query_guard_pubkey) | **GET** /prime_broker/user/{user_id}/guard_pubkey | Query a Guard pubkey
+[**change_guard_pubkey**](PrimeBrokerApi.md#change_guard_pubkey) | **PUT** /prime_broker/user/{user_id}/guard_pubkey | change a user guard pubkey
+[**create_guard_pubkey**](PrimeBrokerApi.md#create_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey | create a guard pubkey binding
+[**create_prime_broker_address**](PrimeBrokerApi.md#create_prime_broker_address) | **POST** /prime_broker/user/{user_id}/addresses | bind addresses to a broker user
+[**delete_guard_pubkey**](PrimeBrokerApi.md#delete_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey/delete | delete a user guard pubkey
+[**query_approval_statement**](PrimeBrokerApi.md#query_approval_statement) | **GET** /prime_broker/approval_statement/{statement_id} | query a approval statement
+[**query_guard_pubkey**](PrimeBrokerApi.md#query_guard_pubkey) | **GET** /prime_broker/user/{user_id}/guard_pubkey | query a user guard pubkey
 
 
 # **change_guard_pubkey**
 > ChangeGuardPubkey200Response change_guard_pubkey(user_id)
 
-Change Guard pubkey binding
+change a user guard pubkey
 
-This operation updates an existing binding to associate a broker user ID with a new Cobo Guard public key. 
+This operation change a user guard pubkey. 
 
 ### Example
 
@@ -43,7 +43,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     user_id = '168108513539918'
 
     try:
-        # Change Guard pubkey binding
+        # change a user guard pubkey
         api_response = api_instance.change_guard_pubkey(user_id)
         print("The response of PrimeBrokerApi->change_guard_pubkey:\n")
         pprint(api_response)
@@ -58,7 +58,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user ID. | 
+ **user_id** | **str**| user id. | 
 
 ### Return type
 
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
+**200** | Successfully created a guard binding. |  -  |
 **400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **401** | Unauthorized. Please provide valid credentials. |  -  |
 **403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
@@ -87,9 +87,9 @@ Name | Type | Description  | Notes
 # **create_guard_pubkey**
 > ChangeGuardPubkey200Response create_guard_pubkey(user_id)
 
-Create Guard pubkey binding
+create a guard pubkey binding
 
-This operation creates a binding between a broker user ID and a Cobo Guard public key.  
+This operation create a guard pubkey binding. 
 
 ### Example
 
@@ -115,7 +115,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     user_id = '168108513539918'
 
     try:
-        # Create Guard pubkey binding
+        # create a guard pubkey binding
         api_response = api_instance.create_guard_pubkey(user_id)
         print("The response of PrimeBrokerApi->create_guard_pubkey:\n")
         pprint(api_response)
@@ -130,7 +130,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user ID. | 
+ **user_id** | **str**| user id. | 
 
 ### Return type
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The request was successful. |  -  |
+**201** | Successfully created a guard binding. |  -  |
 **400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **401** | Unauthorized. Please provide valid credentials. |  -  |
 **403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
@@ -159,9 +159,9 @@ Name | Type | Description  | Notes
 # **create_prime_broker_address**
 > CreatePrimeBrokerAddress201Response create_prime_broker_address(user_id, create_prime_broker_address_request=create_prime_broker_address_request)
 
-Bind addresses to a broker user
+bind addresses to a broker user
 
-This operation binds addresses to a broker user. 
+This operation bind addresses to a broker user. 
 
 ### Example
 
@@ -189,7 +189,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     create_prime_broker_address_request = cobo_waas2.CreatePrimeBrokerAddressRequest()
 
     try:
-        # Bind addresses to a broker user
+        # bind addresses to a broker user
         api_response = api_instance.create_prime_broker_address(user_id, create_prime_broker_address_request=create_prime_broker_address_request)
         print("The response of PrimeBrokerApi->create_prime_broker_address:\n")
         pprint(api_response)
@@ -204,8 +204,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user ID. | 
- **create_prime_broker_address_request** | [**CreatePrimeBrokerAddressRequest**](CreatePrimeBrokerAddressRequest.md)| The request body to bind addresses to a broker user. | [optional] 
+ **user_id** | **str**| user id. | 
+ **create_prime_broker_address_request** | [**CreatePrimeBrokerAddressRequest**](CreatePrimeBrokerAddressRequest.md)| The request body to binding addresses to a broker user. | [optional] 
 
 ### Return type
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The request was successful. |  -  |
+**201** | Successfully created a address binding. |  -  |
 **400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **401** | Unauthorized. Please provide valid credentials. |  -  |
 **403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
@@ -234,9 +234,9 @@ Name | Type | Description  | Notes
 # **delete_guard_pubkey**
 > DeleteGuardPubkey201Response delete_guard_pubkey(user_id)
 
-Delete Guard pubkey binding
+delete a user guard pubkey
 
-This operation deletes a binding between a broker user ID and a Cobo Guard public key. 
+This operation delete a user guard pubkey. 
 
 ### Example
 
@@ -262,7 +262,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     user_id = '168108513539918'
 
     try:
-        # Delete Guard pubkey binding
+        # delete a user guard pubkey
         api_response = api_instance.delete_guard_pubkey(user_id)
         print("The response of PrimeBrokerApi->delete_guard_pubkey:\n")
         pprint(api_response)
@@ -277,7 +277,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user ID. | 
+ **user_id** | **str**| user id. | 
 
 ### Return type
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The request was successful. |  -  |
+**201** | Successfully created a guard binding. |  -  |
 **400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **401** | Unauthorized. Please provide valid credentials. |  -  |
 **403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
@@ -306,9 +306,9 @@ Name | Type | Description  | Notes
 # **query_approval_statement**
 > QueryApprovalStatement200Response query_approval_statement(statement_id)
 
-Query approval statement
+query a approval statement
 
-This operation queries an approval statement. 
+This operation query a approval statement. 
 
 ### Example
 
@@ -334,7 +334,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     statement_id = '168108513539918'
 
     try:
-        # Query approval statement
+        # query a approval statement
         api_response = api_instance.query_approval_statement(statement_id)
         print("The response of PrimeBrokerApi->query_approval_statement:\n")
         pprint(api_response)
@@ -349,7 +349,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **statement_id** | **str**| The approval statement ID. | 
+ **statement_id** | **str**| approval statement id. | 
 
 ### Return type
 
@@ -368,7 +368,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
+**200** | The information about a approval statement. |  -  |
 **400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **401** | Unauthorized. Please provide valid credentials. |  -  |
 **403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
@@ -378,9 +378,9 @@ Name | Type | Description  | Notes
 # **query_guard_pubkey**
 > QueryGuardPubkey200Response query_guard_pubkey(user_id)
 
-Query a Guard pubkey
+query a user guard pubkey
 
-This operation retrieves the current Cobo Guard public key binding details for a broker user. 
+This operation query a user guard pubkey 
 
 ### Example
 
@@ -406,7 +406,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     user_id = '168108513539918'
 
     try:
-        # Query a Guard pubkey
+        # query a user guard pubkey
         api_response = api_instance.query_guard_pubkey(user_id)
         print("The response of PrimeBrokerApi->query_guard_pubkey:\n")
         pprint(api_response)
@@ -421,7 +421,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user ID. | 
+ **user_id** | **str**| user id. | 
 
 ### Return type
 
@@ -440,7 +440,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
+**200** | The information about an user guard pubkey. |  -  |
 **400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **401** | Unauthorized. Please provide valid credentials. |  -  |
 **403** | Forbidden. You do not have the permission to access the requested resource. |  -  |

@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.swap_summary import SwapSummary
+from cobo_waas2.models.transaction_utxo_change import TransactionUtxoChange
 
 
-class TestSwapSummary(unittest.TestCase):
-    """SwapSummary unit test stubs"""
+class TestTransactionUtxoChange(unittest.TestCase):
+    """TransactionUtxoChange unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,28 +24,26 @@ class TestSwapSummary(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> SwapSummary:
-        """Test SwapSummary
+    def make_instance(self, include_optional) -> TransactionUtxoChange:
+        """Test TransactionUtxoChange
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `SwapSummary`
+        # uncomment below to create an instance of `TransactionUtxoChange`
         """
-        model = SwapSummary()
+        model = TransactionUtxoChange()
         if include_optional:
-            return SwapSummary(
-                total_usd_value = '12345.67',
-                activity_count = 100
+            return TransactionUtxoChange(
+                address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE',
+                value = '0.5'
             )
         else:
-            return SwapSummary(
-                total_usd_value = '12345.67',
-                activity_count = 100,
+            return TransactionUtxoChange(
         )
         """
 
-    def testSwapSummary(self):
-        """Test SwapSummary"""
+    def testTransactionUtxoChange(self):
+        """Test TransactionUtxoChange"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

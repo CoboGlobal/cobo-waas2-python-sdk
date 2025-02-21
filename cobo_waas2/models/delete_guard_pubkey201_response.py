@@ -25,7 +25,7 @@ class DeleteGuardPubkey201Response(BaseModel):
     """
     DeleteGuardPubkey201Response
     """  # noqa: E501
-    statement_id: StrictStr = Field(description="The deleted Cobo Guard binding statement ID.")
+    statement_id: StrictStr = Field(description="The delete guard binding statement ID.")
     __properties: ClassVar[List[str]] = ["statement_id"]
 
     model_config = ConfigDict(

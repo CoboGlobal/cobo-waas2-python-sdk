@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**pubkey** | **str** | The Cobo Guard&#39;s public key. | 
+**pubkey** | **str** | guard&#39;s pubkey. | 
 **addresses** | [**List[QueryGuardPubkey200ResponseAddressesInner]**](QueryGuardPubkey200ResponseAddressesInner.md) |  | [optional] 
 
 ## Example

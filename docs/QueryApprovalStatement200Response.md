@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The approval statement ID. | [optional] 
-**user_id** | **str** | The user ID of the approver. | [optional] 
-**pubkey** | **str** | The Cobo Guard public key of the approver. | [optional] 
+**id** | **str** | approval statement id. | [optional] 
+**user_id** | **str** | approver user id. | [optional] 
+**pubkey** | **str** | approver user pubkey. | [optional] 
 **status** | [**ApprovalStatementStatus**](ApprovalStatementStatus.md) |  | [optional] 
 
 ## Example

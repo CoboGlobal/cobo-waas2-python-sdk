@@ -34,8 +34,8 @@ class TestSwapTokenPair(unittest.TestCase):
         model = SwapTokenPair()
         if include_optional:
             return SwapTokenPair(
-                pay_token_id = 'ETH',
-                receive_token_id = 'USDT'
+                pay_token_id = 'BTC',
+                receive_token_id = 'ETH_WBTC'
             )
         else:
             return SwapTokenPair(

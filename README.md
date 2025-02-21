@@ -1,7 +1,7 @@
 # cobo-waas2-python-sdk
-The Cobo Wallet-as-a-Service (WaaS) 2.0 API is the latest version of Cobo’s WaaS API offering. It enables you to access Cobo’s full suite of crypto wallet technologies with powerful and flexible access controls. By encapsulating complex security protocols and streamlining blockchain interactions, this API allows you to concentrate on your core business activities without worrying about the safety of your assets. The WaaS 2.0 API presents the following key features:
+The Cobo Wallet-as-a-Service (WaaS) 2.0 API is the latest version of Cobo's WaaS API offering. It enables you to access Cobo's full suite of crypto wallet technologies with powerful and flexible access controls. By encapsulating complex security protocols and streamlining blockchain interactions, this API allows you to concentrate on your core business activities without worrying about the safety of your assets. The WaaS 2.0 API presents the following key features:
 
-- A unified API for Cobo’s [all four wallet types](https://manuals.cobo.com/en/portal/introduction#an-all-in-one-wallet-platform)
+- A unified API for Cobo's [all four wallet types](https://manuals.cobo.com/en/portal/introduction#an-all-in-one-wallet-platform)
 - Support for 80+ chains and 3000+ tokens
 - A comprehensive selection of webhook events
 - Flexible usage models for MPC Wallets, including [Organization-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/ocw/introduction) and [User-Controlled Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/ucw/introduction)
@@ -93,24 +93,38 @@ Class | Method | HTTP request | Description
 *DevelopersWebhooksApi* | [**update_webhook_endpoint_by_id**](docs/DevelopersWebhooksApi.md#update_webhook_endpoint_by_id) | **PUT** /webhooks/endpoints/{endpoint_id} | Update webhook endpoint
 *OAuthApi* | [**get_token**](docs/OAuthApi.md#get_token) | **GET** /oauth/token | Get Org Access Token
 *OAuthApi* | [**refresh_token**](docs/OAuthApi.md#refresh_token) | **POST** /oauth/token | Refresh Org Access Token
-*PrimeBrokerApi* | [**change_guard_pubkey**](docs/PrimeBrokerApi.md#change_guard_pubkey) | **PUT** /prime_broker/user/{user_id}/guard_pubkey | Change Guard pubkey binding
-*PrimeBrokerApi* | [**create_guard_pubkey**](docs/PrimeBrokerApi.md#create_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey | Create Guard pubkey binding
-*PrimeBrokerApi* | [**create_prime_broker_address**](docs/PrimeBrokerApi.md#create_prime_broker_address) | **POST** /prime_broker/user/{user_id}/addresses | Bind addresses to a broker user
-*PrimeBrokerApi* | [**delete_guard_pubkey**](docs/PrimeBrokerApi.md#delete_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey/delete | Delete Guard pubkey binding
-*PrimeBrokerApi* | [**query_approval_statement**](docs/PrimeBrokerApi.md#query_approval_statement) | **GET** /prime_broker/approval_statement/{statement_id} | Query approval statement
-*PrimeBrokerApi* | [**query_guard_pubkey**](docs/PrimeBrokerApi.md#query_guard_pubkey) | **GET** /prime_broker/user/{user_id}/guard_pubkey | Query a Guard pubkey
+*PrimeBrokerApi* | [**change_guard_pubkey**](docs/PrimeBrokerApi.md#change_guard_pubkey) | **PUT** /prime_broker/user/{user_id}/guard_pubkey | change a user guard pubkey
+*PrimeBrokerApi* | [**create_guard_pubkey**](docs/PrimeBrokerApi.md#create_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey | create a guard pubkey binding
+*PrimeBrokerApi* | [**create_prime_broker_address**](docs/PrimeBrokerApi.md#create_prime_broker_address) | **POST** /prime_broker/user/{user_id}/addresses | bind addresses to a broker user
+*PrimeBrokerApi* | [**delete_guard_pubkey**](docs/PrimeBrokerApi.md#delete_guard_pubkey) | **POST** /prime_broker/user/{user_id}/guard_pubkey/delete | delete a user guard pubkey
+*PrimeBrokerApi* | [**query_approval_statement**](docs/PrimeBrokerApi.md#query_approval_statement) | **GET** /prime_broker/approval_statement/{statement_id} | query a approval statement
+*PrimeBrokerApi* | [**query_guard_pubkey**](docs/PrimeBrokerApi.md#query_guard_pubkey) | **GET** /prime_broker/user/{user_id}/guard_pubkey | query a user guard pubkey
+*StakingsApi* | [**create_babylon_airdrop_registration**](docs/StakingsApi.md#create_babylon_airdrop_registration) | **POST** /stakings/protocols/babylon/airdrops/registrations | Create Babylon airdrop registration
+*StakingsApi* | [**create_babylon_staking_registration**](docs/StakingsApi.md#create_babylon_staking_registration) | **POST** /stakings/protocols/babylon/stakings/registrations | Create Babylon staking registration request
 *StakingsApi* | [**create_claim_activity**](docs/StakingsApi.md#create_claim_activity) | **POST** /stakings/activities/claim | Create claim activity
 *StakingsApi* | [**create_stake_activity**](docs/StakingsApi.md#create_stake_activity) | **POST** /stakings/activities/stake | Create stake activity
 *StakingsApi* | [**create_unstake_activity**](docs/StakingsApi.md#create_unstake_activity) | **POST** /stakings/activities/unstake | Create unstake activity
 *StakingsApi* | [**create_withdraw_activity**](docs/StakingsApi.md#create_withdraw_activity) | **POST** /stakings/activities/withdraw | Create withdraw activity
+*StakingsApi* | [**get_babylon_airdrop_registration_by_id**](docs/StakingsApi.md#get_babylon_airdrop_registration_by_id) | **GET** /stakings/protocols/babylon/airdrops/registrations/{registration_id} | Get Babylon airdrop registration details
+*StakingsApi* | [**get_babylon_staking_registration_by_id**](docs/StakingsApi.md#get_babylon_staking_registration_by_id) | **GET** /stakings/protocols/babylon/stakings/registrations/{registration_id} | Get post staking registration operation status
 *StakingsApi* | [**get_staking_activity_by_id**](docs/StakingsApi.md#get_staking_activity_by_id) | **GET** /stakings/activities/{activity_id} | Get staking activity details
 *StakingsApi* | [**get_staking_by_id**](docs/StakingsApi.md#get_staking_by_id) | **GET** /stakings/{staking_id} | Get staking position details
 *StakingsApi* | [**get_staking_estimation_fee**](docs/StakingsApi.md#get_staking_estimation_fee) | **POST** /stakings/estimate_fee | Estimate staking fees
 *StakingsApi* | [**get_staking_estimation_fee_v2**](docs/StakingsApi.md#get_staking_estimation_fee_v2) | **POST** /stakings/estimate_fee_v2 | Estimate staking fees v2
 *StakingsApi* | [**get_staking_pool_by_id**](docs/StakingsApi.md#get_staking_pool_by_id) | **GET** /stakings/pools/{pool_id} | Get staking pool details
+*StakingsApi* | [**list_babylon_airdrop_registrations**](docs/StakingsApi.md#list_babylon_airdrop_registrations) | **GET** /stakings/protocols/babylon/airdrops/registrations | List Babylon airdrop registrations
+*StakingsApi* | [**list_babylon_eligible_airdrops**](docs/StakingsApi.md#list_babylon_eligible_airdrops) | **GET** /stakings/protocols/babylon/airdrops/eligibles | List wallets eligible for Babylon airdrop
+*StakingsApi* | [**list_babylon_eligible_stakings**](docs/StakingsApi.md#list_babylon_eligible_stakings) | **GET** /stakings/protocols/babylon/stakings/eligibles | List stakings eligible for post staking registration
+*StakingsApi* | [**list_babylon_staking_registrations**](docs/StakingsApi.md#list_babylon_staking_registrations) | **GET** /stakings/protocols/babylon/stakings/registrations | List Babylon phase 2 staking registration requests
 *StakingsApi* | [**list_staking_activities**](docs/StakingsApi.md#list_staking_activities) | **GET** /stakings/activities | List staking activities
 *StakingsApi* | [**list_staking_pools**](docs/StakingsApi.md#list_staking_pools) | **GET** /stakings/pools | List staking pools
 *StakingsApi* | [**list_stakings**](docs/StakingsApi.md#list_stakings) | **GET** /stakings | List staking positions
+*SwapsApi* | [**create_swap_activity**](docs/SwapsApi.md#create_swap_activity) | **POST** /swaps/swap | Create Swap Activity
+*SwapsApi* | [**create_swap_quote**](docs/SwapsApi.md#create_swap_quote) | **POST** /swaps/quote | Create Swap Quote
+*SwapsApi* | [**get_swap_activity**](docs/SwapsApi.md#get_swap_activity) | **GET** /swaps/activities/{activity_id} | Get Swap Activity Details
+*SwapsApi* | [**get_swap_quote**](docs/SwapsApi.md#get_swap_quote) | **GET** /swaps/quote | Get Current Swap Rate
+*SwapsApi* | [**list_enable_token_pairs**](docs/SwapsApi.md#list_enable_token_pairs) | **GET** /swaps/enabled_pairs | List Supported Token Pairs
+*SwapsApi* | [**list_swap_activities**](docs/SwapsApi.md#list_swap_activities) | **GET** /swaps/activities | List Swap Activities
 *TransactionsApi* | [**broadcast_signed_transactions**](docs/TransactionsApi.md#broadcast_signed_transactions) | **POST** /transactions/broadcast | Broadcast signed transactions
 *TransactionsApi* | [**cancel_transaction_by_id**](docs/TransactionsApi.md#cancel_transaction_by_id) | **POST** /transactions/{transaction_id}/cancel | Cancel transaction
 *TransactionsApi* | [**check_loop_transfers**](docs/TransactionsApi.md#check_loop_transfers) | **GET** /transactions/check_loop_transfers | Check Cobo Loop transfers
@@ -119,7 +133,7 @@ Class | Method | HTTP request | Description
 *TransactionsApi* | [**create_transfer_transaction**](docs/TransactionsApi.md#create_transfer_transaction) | **POST** /transactions/transfer | Transfer token
 *TransactionsApi* | [**drop_transaction_by_id**](docs/TransactionsApi.md#drop_transaction_by_id) | **POST** /transactions/{transaction_id}/drop | Drop transaction
 *TransactionsApi* | [**estimate_fee**](docs/TransactionsApi.md#estimate_fee) | **POST** /transactions/estimate_fee | Estimate transaction fee
-*TransactionsApi* | [**get_transaction_approval_detail**](docs/TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval details
+*TransactionsApi* | [**get_transaction_approval_detail**](docs/TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval information
 *TransactionsApi* | [**get_transaction_by_id**](docs/TransactionsApi.md#get_transaction_by_id) | **GET** /transactions/{transaction_id} | Get transaction information
 *TransactionsApi* | [**list_transactions**](docs/TransactionsApi.md#list_transactions) | **GET** /transactions | List all transactions
 *TransactionsApi* | [**resend_transaction_by_id**](docs/TransactionsApi.md#resend_transaction_by_id) | **POST** /transactions/{transaction_id}/resend | Resend transaction
@@ -162,7 +176,7 @@ Class | Method | HTTP request | Description
 *WalletsMPCWalletsApi* | [**create_mpc_vault**](docs/WalletsMPCWalletsApi.md#create_mpc_vault) | **POST** /wallets/mpc/vaults | Create vault
 *WalletsMPCWalletsApi* | [**create_tss_request**](docs/WalletsMPCWalletsApi.md#create_tss_request) | **POST** /wallets/mpc/vaults/{vault_id}/tss_requests | Create TSS request
 *WalletsMPCWalletsApi* | [**delete_key_share_holder_group_by_id**](docs/WalletsMPCWalletsApi.md#delete_key_share_holder_group_by_id) | **POST** /wallets/mpc/vaults/{vault_id}/key_share_holder_groups/{key_share_holder_group_id}/delete | Delete key share holder group
-*WalletsMPCWalletsApi* | [**get_key_share_holder_by_tss_node_id**](docs/WalletsMPCWalletsApi.md#get_key_share_holder_by_tss_node_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holders/{tss_node_id} | Get key share holder information
+*WalletsMPCWalletsApi* | [**get_key_share_holder_by_tss_node_id**](docs/WalletsMPCWalletsApi.md#get_key_share_holder_by_tss_node_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holders/{tss_node_id} | Get key share holder by tss node id
 *WalletsMPCWalletsApi* | [**get_key_share_holder_group_by_id**](docs/WalletsMPCWalletsApi.md#get_key_share_holder_group_by_id) | **GET** /wallets/mpc/vaults/{vault_id}/key_share_holder_groups/{key_share_holder_group_id} | Get key share holder group information
 *WalletsMPCWalletsApi* | [**get_mpc_project_by_id**](docs/WalletsMPCWalletsApi.md#get_mpc_project_by_id) | **GET** /wallets/mpc/projects/{project_id} | Get project information
 *WalletsMPCWalletsApi* | [**get_mpc_vault_by_id**](docs/WalletsMPCWalletsApi.md#get_mpc_vault_by_id) | **GET** /wallets/mpc/vaults/{vault_id} | Get vault information
@@ -205,10 +219,16 @@ Class | Method | HTTP request | Description
  - [AssetInfo](docs/AssetInfo.md)
  - [AutoFuelType](docs/AutoFuelType.md)
  - [BTCEIP191MessageSignDestination](docs/BTCEIP191MessageSignDestination.md)
+ - [BabylonAirdropPop](docs/BabylonAirdropPop.md)
+ - [BabylonAirdropRegistration](docs/BabylonAirdropRegistration.md)
+ - [BabylonEligibleAirdrop](docs/BabylonEligibleAirdrop.md)
+ - [BabylonRegistrationRequestStatus](docs/BabylonRegistrationRequestStatus.md)
+ - [BabylonRegistrationStatus](docs/BabylonRegistrationStatus.md)
  - [BabylonStakeEstimatedFee](docs/BabylonStakeEstimatedFee.md)
  - [BabylonStakeExtra](docs/BabylonStakeExtra.md)
  - [BabylonStakingActivityDetailExtra](docs/BabylonStakingActivityDetailExtra.md)
  - [BabylonStakingExtra](docs/BabylonStakingExtra.md)
+ - [BabylonStakingRegistration](docs/BabylonStakingRegistration.md)
  - [BabylonValidator](docs/BabylonValidator.md)
  - [Balance](docs/Balance.md)
  - [BaseContractCallSource](docs/BaseContractCallSource.md)
@@ -235,6 +255,10 @@ Class | Method | HTTP request | Description
  - [CoreStakingActivityDetailExtra](docs/CoreStakingActivityDetailExtra.md)
  - [CoreStakingExtra](docs/CoreStakingExtra.md)
  - [CreateAddressRequest](docs/CreateAddressRequest.md)
+ - [CreateBabylonAirdropRegistration201Response](docs/CreateBabylonAirdropRegistration201Response.md)
+ - [CreateBabylonAirdropRegistrationRequest](docs/CreateBabylonAirdropRegistrationRequest.md)
+ - [CreateBabylonStakingRegistration201Response](docs/CreateBabylonStakingRegistration201Response.md)
+ - [CreateBabylonStakingRegistrationRequest](docs/CreateBabylonStakingRegistrationRequest.md)
  - [CreateClaimActivity](docs/CreateClaimActivity.md)
  - [CreateClaimActivityRequest](docs/CreateClaimActivityRequest.md)
  - [CreateCustodialWalletParams](docs/CreateCustodialWalletParams.md)
@@ -252,6 +276,9 @@ Class | Method | HTTP request | Description
  - [CreateStakeActivity201Response](docs/CreateStakeActivity201Response.md)
  - [CreateStakeActivityExtra](docs/CreateStakeActivityExtra.md)
  - [CreateStakeActivityRequest](docs/CreateStakeActivityRequest.md)
+ - [CreateSwapActivityRequest](docs/CreateSwapActivityRequest.md)
+ - [CreateSwapQuote201Response](docs/CreateSwapQuote201Response.md)
+ - [CreateSwapQuoteRequest](docs/CreateSwapQuoteRequest.md)
  - [CreateTransferTransaction201Response](docs/CreateTransferTransaction201Response.md)
  - [CreateTssRequestRequest](docs/CreateTssRequestRequest.md)
  - [CreateUnstakeActivity](docs/CreateUnstakeActivity.md)
@@ -329,7 +356,13 @@ Class | Method | HTTP request | Description
  - [ListAddressBooks200Response](docs/ListAddressBooks200Response.md)
  - [ListAddresses200Response](docs/ListAddresses200Response.md)
  - [ListAssetBalancesForExchangeWallet200Response](docs/ListAssetBalancesForExchangeWallet200Response.md)
+ - [ListBabylonAirdropRegistrations200Response](docs/ListBabylonAirdropRegistrations200Response.md)
+ - [ListBabylonEligibleAirdrops200Response](docs/ListBabylonEligibleAirdrops200Response.md)
+ - [ListBabylonEligibleStakings200Response](docs/ListBabylonEligibleStakings200Response.md)
+ - [ListBabylonEligibleStakings200ResponseDataInner](docs/ListBabylonEligibleStakings200ResponseDataInner.md)
+ - [ListBabylonStakingRegistrations200Response](docs/ListBabylonStakingRegistrations200Response.md)
  - [ListCallbackMessages200Response](docs/ListCallbackMessages200Response.md)
+ - [ListEnableTokenPairs200Response](docs/ListEnableTokenPairs200Response.md)
  - [ListExchanges200ResponseInner](docs/ListExchanges200ResponseInner.md)
  - [ListKeyShareHolderGroups200Response](docs/ListKeyShareHolderGroups200Response.md)
  - [ListKeyShareHolders200Response](docs/ListKeyShareHolders200Response.md)
@@ -342,6 +375,7 @@ Class | Method | HTTP request | Description
  - [ListSupportedChains200Response](docs/ListSupportedChains200Response.md)
  - [ListSupportedCountries200ResponseInner](docs/ListSupportedCountries200ResponseInner.md)
  - [ListSupportedTokens200Response](docs/ListSupportedTokens200Response.md)
+ - [ListSwapActivities200Response](docs/ListSwapActivities200Response.md)
  - [ListTokenBalancesForAddress200Response](docs/ListTokenBalancesForAddress200Response.md)
  - [ListTransactions200Response](docs/ListTransactions200Response.md)
  - [ListTssRequests200Response](docs/ListTssRequests200Response.md)
@@ -401,6 +435,9 @@ Class | Method | HTTP request | Description
  - [SmartContractWalletInfo](docs/SmartContractWalletInfo.md)
  - [SmartContractWalletOperationType](docs/SmartContractWalletOperationType.md)
  - [SmartContractWalletType](docs/SmartContractWalletType.md)
+ - [SolContractCallAccount](docs/SolContractCallAccount.md)
+ - [SolContractCallDestination](docs/SolContractCallDestination.md)
+ - [SolContractCallInstruction](docs/SolContractCallInstruction.md)
  - [SourceGroup](docs/SourceGroup.md)
  - [StakeSourceType](docs/StakeSourceType.md)
  - [StakingPoolId](docs/StakingPoolId.md)
@@ -411,7 +448,7 @@ Class | Method | HTTP request | Description
  - [SubWalletAssetBalance](docs/SubWalletAssetBalance.md)
  - [SubmitDepositTravelRuleInfo201Response](docs/SubmitDepositTravelRuleInfo201Response.md)
  - [SwapActivity](docs/SwapActivity.md)
- - [SwapSummary](docs/SwapSummary.md)
+ - [SwapQuote](docs/SwapQuote.md)
  - [SwapTokenPair](docs/SwapTokenPair.md)
  - [TSSGroups](docs/TSSGroups.md)
  - [TSSRequest](docs/TSSRequest.md)
@@ -468,6 +505,9 @@ Class | Method | HTTP request | Description
  - [TransactionSignatureResult](docs/TransactionSignatureResult.md)
  - [TransactionSigner](docs/TransactionSigner.md)
  - [TransactionSmartContractSafeWalletSource](docs/TransactionSmartContractSafeWalletSource.md)
+ - [TransactionSolContractAccount](docs/TransactionSolContractAccount.md)
+ - [TransactionSolContractDestination](docs/TransactionSolContractDestination.md)
+ - [TransactionSolContractInstruction](docs/TransactionSolContractInstruction.md)
  - [TransactionSource](docs/TransactionSource.md)
  - [TransactionSourceType](docs/TransactionSourceType.md)
  - [TransactionStatus](docs/TransactionStatus.md)
@@ -482,6 +522,7 @@ Class | Method | HTTP request | Description
  - [TransactionType](docs/TransactionType.md)
  - [TransactionUserApprovalDetail](docs/TransactionUserApprovalDetail.md)
  - [TransactionUtxo](docs/TransactionUtxo.md)
+ - [TransactionUtxoChange](docs/TransactionUtxoChange.md)
  - [TransactionUtxoFee](docs/TransactionUtxoFee.md)
  - [TransactionWebhookEventData](docs/TransactionWebhookEventData.md)
  - [TransferDestination](docs/TransferDestination.md)
@@ -564,26 +605,26 @@ Authentication schemes defined for the API:
 - **Authorization URL**: https://auth.cobo.com/authorize
 - **Scopes**: 
  - **address_book.read**: Read address book
- - **api_key.read**: Read API key information
+ - **api_key.read**: Read API key info
  - **callback.read**: Read callback message
  - **callback.resend**: Resend callback message
  - **wallet.create**: Create wallet
- - **wallet.read**: Read wallet information
- - **wallet.update**: Update wallet information
- - **wallet.delete**: Delete wallet information
+ - **wallet.read**: Read wallet info
+ - **wallet.update**: Update wallet info
+ - **wallet.delete**: Delete wallet info
  - **wallet.create_address**: Create wallet address
  - **wallet.manage_utxo**: Manage UTXO
  - **mpc_project.create**: Create MPC project
- - **mpc_project.read**: Read MPC project information
- - **mpc_project.update**: Update MPC project information
- - **mpc_vault.create**: Create MPC Vault
- - **mpc_vault.read**: Read MPC Vault information
- - **mpc_vault.update**: Update MPC Vault information
+ - **mpc_project.read**: Read MPC project info
+ - **mpc_project.update**: Update MPC project info
+ - **mpc_vault.create**: Create MPC vault
+ - **mpc_vault.read**: Read MPC vault info
+ - **mpc_vault.update**: Update MPC vault info
  - **mpc_key_group.create**: Create MPC key group
- - **mpc_key_group.read**: Read MPC key group information
- - **mpc_key_group.update**: Update MPC key group information
- - **mpc_key_group.delete**: Delete MPC key group information
- - **transaction.read**: Read transaction information
+ - **mpc_key_group.read**: Read MPC key group info
+ - **mpc_key_group.update**: Update MPC key group info
+ - **mpc_key_group.delete**: Delete MPC key group info
+ - **transaction.read**: Read transaction info
  - **transaction.withdraw**: Make withdrawals
  - **transaction.estimate_fee**: Estimate transaction fee
  - **transaction.contract_call**: Initiate contract calls
@@ -593,8 +634,8 @@ Authentication schemes defined for the API:
  - **transaction.unstake_withdraw**: Withdraw unstaked assets
  - **transaction.manage**: Manage ongoing transactions
  - **transaction.update**: Update transaction notes
- - **travel_rule.read**: Read travel rule information
- - **travel_rule.edit**: Edit travel rule information
+ - **travel_rule.read**: Read travel rule info
+ - **travel_rule.edit**: Edit travel rule info
  - **webhook.read**: Read webhook URLs/events
  - **webhook.edit**: Edit webhook URLs
  - **webhook.resend**: Resend webhook events
