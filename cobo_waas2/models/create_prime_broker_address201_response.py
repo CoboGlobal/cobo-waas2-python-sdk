@@ -26,7 +26,7 @@ class CreatePrimeBrokerAddress201Response(BaseModel):
     """
     CreatePrimeBrokerAddress201Response
     """  # noqa: E501
-    pubkey: StrictStr = Field(description="The Cobo Guard's public key.")
+    pubkey: StrictStr = Field(description="guard's pubkey.")
     addresses: Optional[List[QueryGuardPubkey200ResponseAddressesInner]] = None
     __properties: ClassVar[List[str]] = ["pubkey", "addresses"]
 

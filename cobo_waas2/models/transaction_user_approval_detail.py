@@ -26,11 +26,11 @@ class TransactionUserApprovalDetail(BaseModel):
     """
     The user approval data for transaction.
     """  # noqa: E501
-    pubkey: Optional[StrictStr] = Field(default=None, description="The Cobo Guard public key of the user who audited this message.")
+    pubkey: Optional[StrictStr] = Field(default=None, description="The gaurd pubkey of the user who audited the message.")
     result: Optional[TransactionApprovalResult] = None
-    signature: Optional[StrictStr] = Field(default=None, description="The signature of the audited message.")
+    signature: Optional[StrictStr] = Field(default=None, description="Signature of the audited message.")
     language: Optional[StrictStr] = Field(default=None, description="The language of the audited message.")
-    message_version: Optional[StrictStr] = Field(default=None, description="The version of the audited message.")
+    message_version: Optional[StrictStr] = Field(default=None, description="Version of the audited message.")
     message: Optional[StrictStr] = Field(default=None, description="The audited message.")
     extra_message: Optional[StrictStr] = Field(default=None, description="The extra audited message.")
     __properties: ClassVar[List[str]] = ["pubkey", "result", "signature", "language", "message_version", "message", "extra_message"]

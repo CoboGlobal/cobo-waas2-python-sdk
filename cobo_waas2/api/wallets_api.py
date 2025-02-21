@@ -1908,7 +1908,7 @@ class WalletsApi:
     ) -> ListAddressBalancesByToken200Response:
         """List address balances by token
 
-        This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+        The operation retrieves a list of address balances for a specified token within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -1974,7 +1974,7 @@ class WalletsApi:
     ) -> ApiResponse[ListAddressBalancesByToken200Response]:
         """List address balances by token
 
-        This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+        The operation retrieves a list of address balances for a specified token within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -2040,7 +2040,7 @@ class WalletsApi:
     ) -> RESTResponseType:
         """List address balances by token
 
-        This operation retrieves a list of address balances for a specified token within a wallet.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+        The operation retrieves a list of address balances for a specified token within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str

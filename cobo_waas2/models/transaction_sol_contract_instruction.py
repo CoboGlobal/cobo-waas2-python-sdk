@@ -15,19 +15,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.transaction_sol_contract_account import TransactionSolContractAccount
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class SwapSummary(BaseModel):
+class TransactionSolContractInstruction(BaseModel):
     """
-    SwapSummary
+    sol contract instruction
     """  # noqa: E501
-    total_usd_value: StrictStr = Field(description="The total USD value of the swap activities, represented as a string.")
-    activity_count: StrictInt = Field(description="The total number of swap activities.")
-    __properties: ClassVar[List[str]] = ["total_usd_value", "activity_count"]
+    accounts: Optional[List[TransactionSolContractAccount]] = None
+    data: Optional[StrictStr] = Field(default=None, description="data used for calling Solana contract.. ")
+    program_id: Optional[StrictStr] = Field(default=None, description="contract address. when calling a Solana contract, the to_address parameter needs to match the program_id parameter. If multiple contracts are being called, then the to_address parameter should match the program_id parameter of the first instruction. ")
+    __properties: ClassVar[List[str]] = ["accounts", "data", "program_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +49,7 @@ class SwapSummary(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SwapSummary from a JSON string"""
+        """Create an instance of TransactionSolContractInstruction from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,11 +70,18 @@ class SwapSummary(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in accounts (list)
+        _items = []
+        if self.accounts:
+            for _item in self.accounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['accounts'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SwapSummary from a dict"""
+        """Create an instance of TransactionSolContractInstruction from a dict"""
         if obj is None:
             return None
 
@@ -80,8 +89,9 @@ class SwapSummary(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "total_usd_value": obj.get("total_usd_value"),
-            "activity_count": obj.get("activity_count")
+            "accounts": [TransactionSolContractAccount.from_dict(_item) for _item in obj["accounts"]] if obj.get("accounts") is not None else None,
+            "data": obj.get("data"),
+            "program_id": obj.get("program_id")
         })
         return _obj
 

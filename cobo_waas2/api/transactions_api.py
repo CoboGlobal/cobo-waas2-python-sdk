@@ -1464,7 +1464,7 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> TransactionApprovalDetail:
-        """Get transaction approval details
+        """Get transaction approval information
 
         This operation retrieves approval detailed information about a specified transaction. 
 
@@ -1510,7 +1510,7 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> ApiResponse[TransactionApprovalDetail]:
-        """Get transaction approval details
+        """Get transaction approval information
 
         This operation retrieves approval detailed information about a specified transaction. 
 
@@ -1556,7 +1556,7 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get transaction approval details
+        """Get transaction approval information
 
         This operation retrieves approval detailed information about a specified transaction. 
 
@@ -2431,7 +2431,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Sign and broadcast transaction
 
-        This operation signs and broadcasts a specified transaction.  To call this operation, the following conditions must be met: - The `transaction_process_type` of the transaction must be set to `BuildOnly` when you call the [Transfer token](https://www.cobo.com/developers/v2/api-references/transactions/transfer-token) or [Call smart contract](https://www.cobo.com/developers/v2/api-references/transactions/call-smart-contract) operation.   - The transaction status must be `Built`. 
+        This operation sign and broadcast a specified transaction. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -2477,7 +2477,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Sign and broadcast transaction
 
-        This operation signs and broadcasts a specified transaction.  To call this operation, the following conditions must be met: - The `transaction_process_type` of the transaction must be set to `BuildOnly` when you call the [Transfer token](https://www.cobo.com/developers/v2/api-references/transactions/transfer-token) or [Call smart contract](https://www.cobo.com/developers/v2/api-references/transactions/call-smart-contract) operation.   - The transaction status must be `Built`. 
+        This operation sign and broadcast a specified transaction. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -2523,7 +2523,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Sign and broadcast transaction
 
-        This operation signs and broadcasts a specified transaction.  To call this operation, the following conditions must be met: - The `transaction_process_type` of the transaction must be set to `BuildOnly` when you call the [Transfer token](https://www.cobo.com/developers/v2/api-references/transactions/transfer-token) or [Call smart contract](https://www.cobo.com/developers/v2/api-references/transactions/call-smart-contract) operation.   - The transaction status must be `Built`. 
+        This operation sign and broadcast a specified transaction. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str

@@ -43,7 +43,10 @@ class TestTransactionRawTxInfo(unittest.TestCase):
                         value = '0.5', )
                     ],
                 raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
-                unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO'
+                unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
+                utxo_change = cobo_waas2.models.transaction_utxo_change.TransactionUtxoChange(
+                    address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
+                    value = '0.5', )
             )
         else:
             return TransactionRawTxInfo(
