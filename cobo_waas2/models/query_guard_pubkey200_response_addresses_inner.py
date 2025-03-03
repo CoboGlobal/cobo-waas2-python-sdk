@@ -26,7 +26,7 @@ class QueryGuardPubkey200ResponseAddressesInner(BaseModel):
     QueryGuardPubkey200ResponseAddressesInner
     """  # noqa: E501
     address: StrictStr = Field(description="The wallet address.")
-    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](/v2/api-references/wallets/list-enabled-chains).")
+    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
     __properties: ClassVar[List[str]] = ["address", "chain_id"]
 
     model_config = ConfigDict(

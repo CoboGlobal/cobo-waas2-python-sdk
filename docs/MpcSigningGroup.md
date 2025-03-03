@@ -6,7 +6,7 @@ The information about the Signing Group of an MPC Wallet.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**used_key_share_holder_group_id** | **str** | The ID of the Signing Group. | [optional] 
+**used_key_share_holder_group_id** | **str** | The ID of the Signing Group. | 
 **used_tss_node_ids** | **List[str]** | The ID of the TSS Nodes that are required to participate in the signature. | [optional] 
 
 ## Example

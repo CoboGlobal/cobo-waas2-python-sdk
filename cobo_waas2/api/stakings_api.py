@@ -13,12 +13,18 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.activity import Activity
 from cobo_waas2.models.activity_status import ActivityStatus
 from cobo_waas2.models.activity_type import ActivityType
+from cobo_waas2.models.babylon_airdrop_registration import BabylonAirdropRegistration
+from cobo_waas2.models.babylon_staking_registration import BabylonStakingRegistration
+from cobo_waas2.models.create_babylon_airdrop_registration201_response import CreateBabylonAirdropRegistration201Response
+from cobo_waas2.models.create_babylon_airdrop_registration_request import CreateBabylonAirdropRegistrationRequest
+from cobo_waas2.models.create_babylon_staking_registration201_response import CreateBabylonStakingRegistration201Response
+from cobo_waas2.models.create_babylon_staking_registration_request import CreateBabylonStakingRegistrationRequest
 from cobo_waas2.models.create_claim_activity_request import CreateClaimActivityRequest
 from cobo_waas2.models.create_stake_activity201_response import CreateStakeActivity201Response
 from cobo_waas2.models.create_stake_activity_request import CreateStakeActivityRequest
@@ -27,6 +33,10 @@ from cobo_waas2.models.create_withdraw_activity_request import CreateWithdrawAct
 from cobo_waas2.models.eth_stake_estimated_fee import EthStakeEstimatedFee
 from cobo_waas2.models.get_staking_estimation_fee201_response import GetStakingEstimationFee201Response
 from cobo_waas2.models.get_staking_estimation_fee_request import GetStakingEstimationFeeRequest
+from cobo_waas2.models.list_babylon_airdrop_registrations200_response import ListBabylonAirdropRegistrations200Response
+from cobo_waas2.models.list_babylon_eligible_airdrops200_response import ListBabylonEligibleAirdrops200Response
+from cobo_waas2.models.list_babylon_eligible_stakings200_response import ListBabylonEligibleStakings200Response
+from cobo_waas2.models.list_babylon_staking_registrations200_response import ListBabylonStakingRegistrations200Response
 from cobo_waas2.models.list_staking_activities200_response import ListStakingActivities200Response
 from cobo_waas2.models.list_staking_pools200_response import ListStakingPools200Response
 from cobo_waas2.models.list_stakings200_response import ListStakings200Response
@@ -49,6 +59,344 @@ class StakingsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def create_babylon_airdrop_registration(
+        self,
+        create_babylon_airdrop_registration_request: Annotated[Optional[CreateBabylonAirdropRegistrationRequest], Field(description="The request body to register for the Babylon airdrop.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CreateBabylonAirdropRegistration201Response:
+        """Register for Babylon airdrop
+
+        This operation initiates a Babylon airdrop registration request.   Before calling this operation, please ensure the following: - The Bitcoin (BTC) address is eligible for the Babylon airdrop and has not been registered. You can call the [List wallets eligible for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/list-wallets-eligible-for-babylon-airdrop) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for the Babylon airdrop. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon airdrop registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-airdrop-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param create_babylon_airdrop_registration_request: The request body to register for the Babylon airdrop.
+        :type create_babylon_airdrop_registration_request: CreateBabylonAirdropRegistrationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_airdrop_registration_serialize(
+            create_babylon_airdrop_registration_request=create_babylon_airdrop_registration_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateBabylonAirdropRegistration201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_babylon_airdrop_registration_with_http_info(
+        self,
+        create_babylon_airdrop_registration_request: Annotated[Optional[CreateBabylonAirdropRegistrationRequest], Field(description="The request body to register for the Babylon airdrop.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CreateBabylonAirdropRegistration201Response]:
+        """Register for Babylon airdrop
+
+        This operation initiates a Babylon airdrop registration request.   Before calling this operation, please ensure the following: - The Bitcoin (BTC) address is eligible for the Babylon airdrop and has not been registered. You can call the [List wallets eligible for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/list-wallets-eligible-for-babylon-airdrop) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for the Babylon airdrop. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon airdrop registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-airdrop-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param create_babylon_airdrop_registration_request: The request body to register for the Babylon airdrop.
+        :type create_babylon_airdrop_registration_request: CreateBabylonAirdropRegistrationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_airdrop_registration_serialize(
+            create_babylon_airdrop_registration_request=create_babylon_airdrop_registration_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateBabylonAirdropRegistration201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_babylon_airdrop_registration_without_preload_content(
+        self,
+        create_babylon_airdrop_registration_request: Annotated[Optional[CreateBabylonAirdropRegistrationRequest], Field(description="The request body to register for the Babylon airdrop.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Register for Babylon airdrop
+
+        This operation initiates a Babylon airdrop registration request.   Before calling this operation, please ensure the following: - The Bitcoin (BTC) address is eligible for the Babylon airdrop and has not been registered. You can call the [List wallets eligible for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/list-wallets-eligible-for-babylon-airdrop) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for the Babylon airdrop. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon airdrop registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-airdrop-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param create_babylon_airdrop_registration_request: The request body to register for the Babylon airdrop.
+        :type create_babylon_airdrop_registration_request: CreateBabylonAirdropRegistrationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_airdrop_registration_serialize(
+            create_babylon_airdrop_registration_request=create_babylon_airdrop_registration_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateBabylonAirdropRegistration201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_babylon_airdrop_registration_serialize(
+        self,
+        create_babylon_airdrop_registration_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_babylon_airdrop_registration_request is not None:
+            _body_params = create_babylon_airdrop_registration_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/stakings/protocols/babylon/airdrops/registrations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_babylon_staking_registration(
+        self,
+        create_babylon_staking_registration_request: Annotated[Optional[CreateBabylonStakingRegistrationRequest], Field(description="The request body to transit Babylon BTC staking to phase 2")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CreateBabylonStakingRegistration201Response:
+        """Register for Babylon Phase-2
+
+        This operation initiates a Babylon Phase-2 registration request.   Before calling this operation, please ensure the following: - The staking position is eligible for the Babylon Phase-2 and has not been registered. You can call the [List staking positions eligible for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/list-eligible-staking-positions-for-babylon-phase-2) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for Phase-2. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon Phase-2 registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-phase-2-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param create_babylon_staking_registration_request: The request body to transit Babylon BTC staking to phase 2
+        :type create_babylon_staking_registration_request: CreateBabylonStakingRegistrationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_staking_registration_serialize(
+            create_babylon_staking_registration_request=create_babylon_staking_registration_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateBabylonStakingRegistration201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_babylon_staking_registration_with_http_info(
+        self,
+        create_babylon_staking_registration_request: Annotated[Optional[CreateBabylonStakingRegistrationRequest], Field(description="The request body to transit Babylon BTC staking to phase 2")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CreateBabylonStakingRegistration201Response]:
+        """Register for Babylon Phase-2
+
+        This operation initiates a Babylon Phase-2 registration request.   Before calling this operation, please ensure the following: - The staking position is eligible for the Babylon Phase-2 and has not been registered. You can call the [List staking positions eligible for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/list-eligible-staking-positions-for-babylon-phase-2) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for Phase-2. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon Phase-2 registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-phase-2-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param create_babylon_staking_registration_request: The request body to transit Babylon BTC staking to phase 2
+        :type create_babylon_staking_registration_request: CreateBabylonStakingRegistrationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_staking_registration_serialize(
+            create_babylon_staking_registration_request=create_babylon_staking_registration_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateBabylonStakingRegistration201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_babylon_staking_registration_without_preload_content(
+        self,
+        create_babylon_staking_registration_request: Annotated[Optional[CreateBabylonStakingRegistrationRequest], Field(description="The request body to transit Babylon BTC staking to phase 2")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Register for Babylon Phase-2
+
+        This operation initiates a Babylon Phase-2 registration request.   Before calling this operation, please ensure the following: - The staking position is eligible for the Babylon Phase-2 and has not been registered. You can call the [List staking positions eligible for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/list-eligible-staking-positions-for-babylon-phase-2) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for Phase-2. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon Phase-2 registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-phase-2-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param create_babylon_staking_registration_request: The request body to transit Babylon BTC staking to phase 2
+        :type create_babylon_staking_registration_request: CreateBabylonStakingRegistrationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_staking_registration_serialize(
+            create_babylon_staking_registration_request=create_babylon_staking_registration_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateBabylonStakingRegistration201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_babylon_staking_registration_serialize(
+        self,
+        create_babylon_staking_registration_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_babylon_staking_registration_request is not None:
+            _body_params = create_babylon_staking_registration_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/stakings/protocols/babylon/stakings/registrations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
 
     @validate_call
     def create_claim_activity(
@@ -83,9 +431,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -130,9 +477,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -177,9 +523,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -255,9 +600,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -302,9 +646,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -349,9 +692,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -427,9 +769,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -474,9 +815,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -521,9 +861,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -599,9 +938,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -646,9 +984,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -693,9 +1030,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateStakeActivity201Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -739,6 +1075,344 @@ class StakingsApi:
         )
 
     @validate_call
+    def get_babylon_airdrop_registration_by_id(
+        self,
+        registration_id: Annotated[StrictStr, Field(description="The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> BabylonAirdropRegistration:
+        """Get Babylon airdrop registration details
+
+        This operation returns the details of a specific Babylon airdrop registration, including registration status, Bitcoin (BTC) and Babylon addresses, airdrop amount, and error messages (if any).  Please note that registration is an asynchronous process and may take several minutes to complete. It is recommended to call this operation at regular intervals to track the status.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param registration_id: The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information. (required)
+        :type registration_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_babylon_airdrop_registration_by_id_serialize(
+            registration_id=registration_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BabylonAirdropRegistration",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_babylon_airdrop_registration_by_id_with_http_info(
+        self,
+        registration_id: Annotated[StrictStr, Field(description="The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[BabylonAirdropRegistration]:
+        """Get Babylon airdrop registration details
+
+        This operation returns the details of a specific Babylon airdrop registration, including registration status, Bitcoin (BTC) and Babylon addresses, airdrop amount, and error messages (if any).  Please note that registration is an asynchronous process and may take several minutes to complete. It is recommended to call this operation at regular intervals to track the status.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param registration_id: The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information. (required)
+        :type registration_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_babylon_airdrop_registration_by_id_serialize(
+            registration_id=registration_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BabylonAirdropRegistration",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_babylon_airdrop_registration_by_id_without_preload_content(
+        self,
+        registration_id: Annotated[StrictStr, Field(description="The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get Babylon airdrop registration details
+
+        This operation returns the details of a specific Babylon airdrop registration, including registration status, Bitcoin (BTC) and Babylon addresses, airdrop amount, and error messages (if any).  Please note that registration is an asynchronous process and may take several minutes to complete. It is recommended to call this operation at regular intervals to track the status.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param registration_id: The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information. (required)
+        :type registration_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_babylon_airdrop_registration_by_id_serialize(
+            registration_id=registration_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BabylonAirdropRegistration",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_babylon_airdrop_registration_by_id_serialize(
+        self,
+        registration_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if registration_id is not None:
+            _path_params['registration_id'] = registration_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/stakings/protocols/babylon/airdrops/registrations/{registration_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_babylon_staking_registration_by_id(
+        self,
+        registration_id: Annotated[StrictStr, Field(description="The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> BabylonStakingRegistration:
+        """Get Babylon Phase-2 registration details
+
+        This operation returns the details of a specific Babylon Phase-2 registration, including registration status, Bitcoin (BTC) and Babylon addresses, staked amount, and error messages (if any).  Please note that registration is an asynchronous process and may take several minutes to complete. It is recommended to call this operation at regular intervals to track the status.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param registration_id: The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information. (required)
+        :type registration_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_babylon_staking_registration_by_id_serialize(
+            registration_id=registration_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BabylonStakingRegistration",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_babylon_staking_registration_by_id_with_http_info(
+        self,
+        registration_id: Annotated[StrictStr, Field(description="The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[BabylonStakingRegistration]:
+        """Get Babylon Phase-2 registration details
+
+        This operation returns the details of a specific Babylon Phase-2 registration, including registration status, Bitcoin (BTC) and Babylon addresses, staked amount, and error messages (if any).  Please note that registration is an asynchronous process and may take several minutes to complete. It is recommended to call this operation at regular intervals to track the status.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param registration_id: The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information. (required)
+        :type registration_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_babylon_staking_registration_by_id_serialize(
+            registration_id=registration_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BabylonStakingRegistration",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_babylon_staking_registration_by_id_without_preload_content(
+        self,
+        registration_id: Annotated[StrictStr, Field(description="The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get Babylon Phase-2 registration details
+
+        This operation returns the details of a specific Babylon Phase-2 registration, including registration status, Bitcoin (BTC) and Babylon addresses, staked amount, and error messages (if any).  Please note that registration is an asynchronous process and may take several minutes to complete. It is recommended to call this operation at regular intervals to track the status.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param registration_id: The Babylon airdrop or Babylon Phase-2 registration ID. You can use the [Register for Babylon airdrop](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-airdrop) or the [Register for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/register-for-babylon-phase-2) operation to get this information. (required)
+        :type registration_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_babylon_staking_registration_by_id_serialize(
+            registration_id=registration_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BabylonStakingRegistration",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_babylon_staking_registration_by_id_serialize(
+        self,
+        registration_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if registration_id is not None:
+            _path_params['registration_id'] = registration_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/stakings/protocols/babylon/stakings/registrations/{registration_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def get_staking_activity_by_id(
         self,
         activity_id: Annotated[StrictStr, Field(description="The activity ID.")],
@@ -771,10 +1445,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Activity",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -819,10 +1491,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Activity",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -867,10 +1537,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Activity",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -946,10 +1614,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Stakings",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -994,10 +1660,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Stakings",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1042,10 +1706,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Stakings",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1121,7 +1783,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "GetStakingEstimationFee201Response",
-            '400': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1166,7 +1829,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "GetStakingEstimationFee201Response",
-            '400': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1211,7 +1875,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "GetStakingEstimationFee201Response",
-            '400': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1287,7 +1952,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "EthStakeEstimatedFee",
-            '400': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1332,7 +1998,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "EthStakeEstimatedFee",
-            '400': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1377,7 +2044,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "EthStakeEstimatedFee",
-            '400': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1453,10 +2121,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PoolDetails",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1501,10 +2167,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PoolDetails",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1549,10 +2213,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PoolDetails",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1596,10 +2258,932 @@ class StakingsApi:
         )
 
     @validate_call
+    def list_babylon_airdrop_registrations(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The registration request status.")] = None,
+        btc_address: Annotated[Optional[StrictStr], Field(description="The Bitcoin (BTC) address used for staking.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListBabylonAirdropRegistrations200Response:
+        """List Babylon airdrop registrations
+
+        This operation lists all Babylon airdrop registration records within your organization. You can filter the results by request status and Bitcoin (BTC) address.  The registration is processed asynchronously and may take some time to complete. It is recommended to implement automatic monitoring and handle the registration on time.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The registration request status.
+        :type status: str
+        :param btc_address: The Bitcoin (BTC) address used for staking.
+        :type btc_address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_airdrop_registrations_serialize(
+            status=status,
+            btc_address=btc_address,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonAirdropRegistrations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_babylon_airdrop_registrations_with_http_info(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The registration request status.")] = None,
+        btc_address: Annotated[Optional[StrictStr], Field(description="The Bitcoin (BTC) address used for staking.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListBabylonAirdropRegistrations200Response]:
+        """List Babylon airdrop registrations
+
+        This operation lists all Babylon airdrop registration records within your organization. You can filter the results by request status and Bitcoin (BTC) address.  The registration is processed asynchronously and may take some time to complete. It is recommended to implement automatic monitoring and handle the registration on time.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The registration request status.
+        :type status: str
+        :param btc_address: The Bitcoin (BTC) address used for staking.
+        :type btc_address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_airdrop_registrations_serialize(
+            status=status,
+            btc_address=btc_address,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonAirdropRegistrations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_babylon_airdrop_registrations_without_preload_content(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The registration request status.")] = None,
+        btc_address: Annotated[Optional[StrictStr], Field(description="The Bitcoin (BTC) address used for staking.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List Babylon airdrop registrations
+
+        This operation lists all Babylon airdrop registration records within your organization. You can filter the results by request status and Bitcoin (BTC) address.  The registration is processed asynchronously and may take some time to complete. It is recommended to implement automatic monitoring and handle the registration on time.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The registration request status.
+        :type status: str
+        :param btc_address: The Bitcoin (BTC) address used for staking.
+        :type btc_address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_airdrop_registrations_serialize(
+            status=status,
+            btc_address=btc_address,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonAirdropRegistrations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_babylon_airdrop_registrations_serialize(
+        self,
+        status,
+        btc_address,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if btc_address is not None:
+            
+            _query_params.append(('btc_address', btc_address))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/stakings/protocols/babylon/airdrops/registrations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_babylon_eligible_airdrops(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. ")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListBabylonEligibleAirdrops200Response:
+        """List wallets eligible for Babylon airdrop
+
+        This operation lists all wallets that are eligible for the Babylon airdrop. If an eligible wallet's status is `Unregistered`, you can initiate an airdrop registration for it. You can filter the results by airdrop registration status.  You can use this operation to: - Check which wallets are eligible for airdrop registrations - Estimate airdrop amounts before claiming - Monitor available airdrop  As registration is an asynchronous process and might take some time to complete, it is recommended that you regularly call this operation to check wallet eligibility and register eligible wallets on time.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. 
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_eligible_airdrops_serialize(
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonEligibleAirdrops200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_babylon_eligible_airdrops_with_http_info(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. ")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListBabylonEligibleAirdrops200Response]:
+        """List wallets eligible for Babylon airdrop
+
+        This operation lists all wallets that are eligible for the Babylon airdrop. If an eligible wallet's status is `Unregistered`, you can initiate an airdrop registration for it. You can filter the results by airdrop registration status.  You can use this operation to: - Check which wallets are eligible for airdrop registrations - Estimate airdrop amounts before claiming - Monitor available airdrop  As registration is an asynchronous process and might take some time to complete, it is recommended that you regularly call this operation to check wallet eligibility and register eligible wallets on time.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. 
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_eligible_airdrops_serialize(
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonEligibleAirdrops200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_babylon_eligible_airdrops_without_preload_content(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. ")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List wallets eligible for Babylon airdrop
+
+        This operation lists all wallets that are eligible for the Babylon airdrop. If an eligible wallet's status is `Unregistered`, you can initiate an airdrop registration for it. You can filter the results by airdrop registration status.  You can use this operation to: - Check which wallets are eligible for airdrop registrations - Estimate airdrop amounts before claiming - Monitor available airdrop  As registration is an asynchronous process and might take some time to complete, it is recommended that you regularly call this operation to check wallet eligibility and register eligible wallets on time.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. 
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_eligible_airdrops_serialize(
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonEligibleAirdrops200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_babylon_eligible_airdrops_serialize(
+        self,
+        status,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/stakings/protocols/babylon/airdrops/eligibles',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_babylon_eligible_stakings(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. ")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListBabylonEligibleStakings200Response:
+        """List staking positions eligible for Babylon Phase-2
+
+        This operation lists all staking positions that are eligible for Babylon Phase-2. If an eligible staking position's status is `Unregistered`, you can initiate a registration for it. You can filter the results by registration status.  You can use this operation to: - Check which staking positions can be registered - Get staking details before initiating registration - Monitor available positions for registration  As registration is an asynchronous process and might take some time to complete, it is recommended that you regularly call this operation to check staking position eligibility and register eligible positions on time.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. 
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_eligible_stakings_serialize(
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonEligibleStakings200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_babylon_eligible_stakings_with_http_info(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. ")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListBabylonEligibleStakings200Response]:
+        """List staking positions eligible for Babylon Phase-2
+
+        This operation lists all staking positions that are eligible for Babylon Phase-2. If an eligible staking position's status is `Unregistered`, you can initiate a registration for it. You can filter the results by registration status.  You can use this operation to: - Check which staking positions can be registered - Get staking details before initiating registration - Monitor available positions for registration  As registration is an asynchronous process and might take some time to complete, it is recommended that you regularly call this operation to check staking position eligibility and register eligible positions on time.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. 
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_eligible_stakings_serialize(
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonEligibleStakings200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_babylon_eligible_stakings_without_preload_content(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. ")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List staking positions eligible for Babylon Phase-2
+
+        This operation lists all staking positions that are eligible for Babylon Phase-2. If an eligible staking position's status is `Unregistered`, you can initiate a registration for it. You can filter the results by registration status.  You can use this operation to: - Check which staking positions can be registered - Get staking details before initiating registration - Monitor available positions for registration  As registration is an asynchronous process and might take some time to complete, it is recommended that you regularly call this operation to check staking position eligibility and register eligible positions on time.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The status of Babylon airdrop or Phase-2 registration. Possible values are: - `Registered`: Registered for Babylon airdrop or Phase-2. - `Unregistered`: Not registered for any Babylon airdrop or Phase-2. - `Registering`: The Babylon airdrop or Phase-2 registration is in progress but not yet completed. 
+        :type status: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_eligible_stakings_serialize(
+            status=status,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonEligibleStakings200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_babylon_eligible_stakings_serialize(
+        self,
+        status,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/stakings/protocols/babylon/stakings/eligibles',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_babylon_staking_registrations(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The registration request status.")] = None,
+        staking_id: Annotated[Optional[StrictStr], Field(description="The ID of the Phase-1 BTC staking position.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListBabylonStakingRegistrations200Response:
+        """List Babylon Phase-2 registrations
+
+        This operation lists all Babylon Phase-2 registration records within your organization. You can filter the results by request status and staking position ID.  The registration is processed asynchronously and may take some time to complete. It is recommended to implement automatic monitoring and handle the registration on time.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The registration request status.
+        :type status: str
+        :param staking_id: The ID of the Phase-1 BTC staking position.
+        :type staking_id: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_staking_registrations_serialize(
+            status=status,
+            staking_id=staking_id,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonStakingRegistrations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_babylon_staking_registrations_with_http_info(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The registration request status.")] = None,
+        staking_id: Annotated[Optional[StrictStr], Field(description="The ID of the Phase-1 BTC staking position.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListBabylonStakingRegistrations200Response]:
+        """List Babylon Phase-2 registrations
+
+        This operation lists all Babylon Phase-2 registration records within your organization. You can filter the results by request status and staking position ID.  The registration is processed asynchronously and may take some time to complete. It is recommended to implement automatic monitoring and handle the registration on time.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The registration request status.
+        :type status: str
+        :param staking_id: The ID of the Phase-1 BTC staking position.
+        :type staking_id: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_staking_registrations_serialize(
+            status=status,
+            staking_id=staking_id,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonStakingRegistrations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_babylon_staking_registrations_without_preload_content(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="The registration request status.")] = None,
+        staking_id: Annotated[Optional[StrictStr], Field(description="The ID of the Phase-1 BTC staking position.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List Babylon Phase-2 registrations
+
+        This operation lists all Babylon Phase-2 registration records within your organization. You can filter the results by request status and staking position ID.  The registration is processed asynchronously and may take some time to complete. It is recommended to implement automatic monitoring and handle the registration on time.  If the registration request fails, please check the error message and resolve the issues before resubmitting the registration request.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param status: The registration request status.
+        :type status: str
+        :param staking_id: The ID of the Phase-1 BTC staking position.
+        :type staking_id: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_babylon_staking_registrations_serialize(
+            status=status,
+            staking_id=staking_id,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBabylonStakingRegistrations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_babylon_staking_registrations_serialize(
+        self,
+        status,
+        staking_id,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if staking_id is not None:
+            
+            _query_params.append(('staking_id', staking_id))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/stakings/protocols/babylon/stakings/registrations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_staking_activities(
         self,
         pool_id: Annotated[Optional[StrictStr], Field(description="The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. You can call [List staking pools](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-pools) to retrieve a list of staking pools.")] = None,
-        staking_id: Annotated[Optional[StrictStr], Field(description="The position ID.")] = None,
+        staking_id: Annotated[Optional[StrictStr], Field(description="The ID of the Phase-1 BTC staking position.")] = None,
         activity_type: Optional[ActivityType] = None,
         activity_status: Optional[ActivityStatus] = None,
         min_modified_timestamp: Annotated[Optional[StrictInt], Field(description="The start time of the query. All staking activities updated after the specified time will be retrieved. The time is in Unix timestamp format, measured in milliseconds.")] = None,
@@ -1624,7 +3208,7 @@ class StakingsApi:
 
         :param pool_id: The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. You can call [List staking pools](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-pools) to retrieve a list of staking pools.
         :type pool_id: str
-        :param staking_id: The position ID.
+        :param staking_id: The ID of the Phase-1 BTC staking position.
         :type staking_id: str
         :param activity_type:
         :type activity_type: ActivityType
@@ -1668,9 +3252,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakingActivities200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1686,7 +3269,7 @@ class StakingsApi:
     def list_staking_activities_with_http_info(
         self,
         pool_id: Annotated[Optional[StrictStr], Field(description="The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. You can call [List staking pools](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-pools) to retrieve a list of staking pools.")] = None,
-        staking_id: Annotated[Optional[StrictStr], Field(description="The position ID.")] = None,
+        staking_id: Annotated[Optional[StrictStr], Field(description="The ID of the Phase-1 BTC staking position.")] = None,
         activity_type: Optional[ActivityType] = None,
         activity_status: Optional[ActivityStatus] = None,
         min_modified_timestamp: Annotated[Optional[StrictInt], Field(description="The start time of the query. All staking activities updated after the specified time will be retrieved. The time is in Unix timestamp format, measured in milliseconds.")] = None,
@@ -1711,7 +3294,7 @@ class StakingsApi:
 
         :param pool_id: The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. You can call [List staking pools](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-pools) to retrieve a list of staking pools.
         :type pool_id: str
-        :param staking_id: The position ID.
+        :param staking_id: The ID of the Phase-1 BTC staking position.
         :type staking_id: str
         :param activity_type:
         :type activity_type: ActivityType
@@ -1755,9 +3338,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakingActivities200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1773,7 +3355,7 @@ class StakingsApi:
     def list_staking_activities_without_preload_content(
         self,
         pool_id: Annotated[Optional[StrictStr], Field(description="The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. You can call [List staking pools](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-pools) to retrieve a list of staking pools.")] = None,
-        staking_id: Annotated[Optional[StrictStr], Field(description="The position ID.")] = None,
+        staking_id: Annotated[Optional[StrictStr], Field(description="The ID of the Phase-1 BTC staking position.")] = None,
         activity_type: Optional[ActivityType] = None,
         activity_status: Optional[ActivityStatus] = None,
         min_modified_timestamp: Annotated[Optional[StrictInt], Field(description="The start time of the query. All staking activities updated after the specified time will be retrieved. The time is in Unix timestamp format, measured in milliseconds.")] = None,
@@ -1798,7 +3380,7 @@ class StakingsApi:
 
         :param pool_id: The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. You can call [List staking pools](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-pools) to retrieve a list of staking pools.
         :type pool_id: str
-        :param staking_id: The position ID.
+        :param staking_id: The ID of the Phase-1 BTC staking position.
         :type staking_id: str
         :param activity_type:
         :type activity_type: ActivityType
@@ -1842,9 +3424,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakingActivities200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1988,9 +3569,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakingPools200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2051,9 +3631,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakingPools200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2114,9 +3693,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakingPools200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2238,9 +3816,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakings200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2309,9 +3886,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakings200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2380,9 +3956,8 @@ class StakingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListStakings200Response",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

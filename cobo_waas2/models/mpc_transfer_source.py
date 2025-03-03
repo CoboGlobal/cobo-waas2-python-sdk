@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.mpc_signing_group import MpcSigningGroup
 from cobo_waas2.models.transaction_utxo import TransactionUtxo
 from cobo_waas2.models.wallet_subtype import WalletSubtype
 from typing import Optional, Set
@@ -32,7 +33,8 @@ class MpcTransferSource(BaseModel):
     address: Optional[StrictStr] = Field(default=None, description="The wallet address. If you want to specify the UTXOs to be used, please provide the `included_utxos` property. If you specify both the `address` and `included_utxos` properties, the specified included UTXOs must belong to the address. It is recommended to specify no more than 100 included UTXOs to ensure optimal transaction processing.  You need to provide either the `address` or `included_utxos` property. If neither property is provided, the transfer will fail. ")
     included_utxos: Optional[List[TransactionUtxo]] = None
     excluded_utxos: Optional[List[TransactionUtxo]] = None
-    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "included_utxos", "excluded_utxos"]
+    mpc_used_key_share_holder_group: Optional[MpcSigningGroup] = None
+    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "included_utxos", "excluded_utxos", "mpc_used_key_share_holder_group"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +89,9 @@ class MpcTransferSource(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['excluded_utxos'] = _items
+        # override the default output from pydantic by calling `to_dict()` of mpc_used_key_share_holder_group
+        if self.mpc_used_key_share_holder_group:
+            _dict['mpc_used_key_share_holder_group'] = self.mpc_used_key_share_holder_group.to_dict()
         return _dict
 
     @classmethod
@@ -103,7 +108,8 @@ class MpcTransferSource(BaseModel):
             "wallet_id": obj.get("wallet_id"),
             "address": obj.get("address"),
             "included_utxos": [TransactionUtxo.from_dict(_item) for _item in obj["included_utxos"]] if obj.get("included_utxos") is not None else None,
-            "excluded_utxos": [TransactionUtxo.from_dict(_item) for _item in obj["excluded_utxos"]] if obj.get("excluded_utxos") is not None else None
+            "excluded_utxos": [TransactionUtxo.from_dict(_item) for _item in obj["excluded_utxos"]] if obj.get("excluded_utxos") is not None else None,
+            "mpc_used_key_share_holder_group": MpcSigningGroup.from_dict(obj["mpc_used_key_share_holder_group"]) if obj.get("mpc_used_key_share_holder_group") is not None else None
         })
         return _obj
 

@@ -17,7 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.address_info import AddressInfo
+from cobo_waas2.models.addresses_event_data_all_of_addresses import AddressesEventDataAllOfAddresses
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class AddressesEventData(BaseModel):
     AddressesEventData
     """  # noqa: E501
     data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data.")
-    addresses: Optional[List[AddressInfo]] = Field(default=None, description="A list of addresses.")
+    addresses: Optional[List[AddressesEventDataAllOfAddresses]] = Field(default=None, description="A list of addresses.")
     __properties: ClassVar[List[str]] = ["data_type", "addresses"]
 
     @field_validator('data_type')
@@ -96,7 +96,7 @@ class AddressesEventData(BaseModel):
 
         _obj = cls.model_validate({
             "data_type": obj.get("data_type"),
-            "addresses": [AddressInfo.from_dict(_item) for _item in obj["addresses"]] if obj.get("addresses") is not None else None
+            "addresses": [AddressesEventDataAllOfAddresses.from_dict(_item) for _item in obj["addresses"]] if obj.get("addresses") is not None else None
         })
         return _obj
 

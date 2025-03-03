@@ -171,14 +171,14 @@ class TransactionDestination(BaseModel):
             instance.actual_instance = TransactionMessageSignEIP712Destination.from_json(json_str)
             return instance
 
-        # check if data type is `TransactionRawMessageSignDestination`
-        if _data_type == "EVM_Raw_Message_Signature":
-            instance.actual_instance = TransactionRawMessageSignDestination.from_json(json_str)
-            return instance
-
         # check if data type is `TransactionTransferToWalletDestination`
         if _data_type == "ExchangeWallet":
             instance.actual_instance = TransactionTransferToWalletDestination.from_json(json_str)
+            return instance
+
+        # check if data type is `TransactionRawMessageSignDestination`
+        if _data_type == "Raw_Message_Signature":
+            instance.actual_instance = TransactionRawMessageSignDestination.from_json(json_str)
             return instance
 
         # check if data type is `TransactionDepositToAddressDestination`

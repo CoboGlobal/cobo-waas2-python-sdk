@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class StakingPoolId(str, Enum):
     """
-    The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. Currently, only `babylon_btc_signet` and `babylon_btc` are supported.
+    The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. Currently, `berachain_bgt` and `erachain_bgt_testnet` are not supported.
     """
 
     """
@@ -31,6 +31,12 @@ class StakingPoolId(str, Enum):
     CORE_BTC = 'core_btc'
     CORE_XTN = 'core_xtn'
     SKY_FARM_ETH_USDC = 'sky_farm_eth_usdc'
+    BITHIVE_SIGNET = 'bithive_signet'
+    BITHIVE = 'bithive'
+    BEACON_BERA = 'beacon_bera'
+    BEACON_BERA_TESTNET = 'beacon_bera_testnet'
+    BERACHAIN_BGT = 'berachain_bgt'
+    BERACHAIN_BGT_TESTNET = 'berachain_bgt_testnet'
 
     UNKNOWN = None
 

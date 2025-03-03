@@ -37,6 +37,11 @@ class TestContractCallSource(unittest.TestCase):
                 source_type = 'Org-Controlled',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+                mpc_used_key_share_holder_group = cobo_waas2.models.mpc_signing_group.MpcSigningGroup(
+                    used_key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
+                    used_tss_node_ids = [
+                        'cobo5yb7BNEBwwp5XXedbhnzQfvQtp132W4dH4Jz4x4eDp4KA'
+                        ], ),
                 delegate = None
             )
         else:

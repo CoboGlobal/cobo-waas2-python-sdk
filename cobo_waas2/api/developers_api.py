@@ -213,7 +213,7 @@ class DevelopersApi:
     ) -> ListCallbackMessages200Response:
         """List all callback messages
 
-        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
         :param callback_message_ids: A list of callback message IDs, separated by commas.
         :type callback_message_ids: str
@@ -287,7 +287,7 @@ class DevelopersApi:
     ) -> ApiResponse[ListCallbackMessages200Response]:
         """List all callback messages
 
-        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
         :param callback_message_ids: A list of callback message IDs, separated by commas.
         :type callback_message_ids: str
@@ -361,7 +361,7 @@ class DevelopersApi:
     ) -> RESTResponseType:
         """List all callback messages
 
-        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+        This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
         :param callback_message_ids: A list of callback message IDs, separated by commas.
         :type callback_message_ids: str
@@ -496,7 +496,7 @@ class DevelopersApi:
     ) -> RetryCallbackMessage201Response:
         """Retry callback message
 
-        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
         :param message_id: The callback message ID. (required)
         :type message_id: str
@@ -542,7 +542,7 @@ class DevelopersApi:
     ) -> ApiResponse[RetryCallbackMessage201Response]:
         """Retry callback message
 
-        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
         :param message_id: The callback message ID. (required)
         :type message_id: str
@@ -588,7 +588,7 @@ class DevelopersApi:
     ) -> RESTResponseType:
         """Retry callback message
 
-        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+        This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
         :param message_id: The callback message ID. (required)
         :type message_id: str

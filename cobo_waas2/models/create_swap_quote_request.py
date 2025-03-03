@@ -15,19 +15,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class SwapSummary(BaseModel):
+class CreateSwapQuoteRequest(BaseModel):
     """
-    SwapSummary
+    CreateSwapQuoteRequest
     """  # noqa: E501
-    total_usd_value: StrictStr = Field(description="The total USD value of the swap activities, represented as a string.")
-    activity_count: StrictInt = Field(description="The total number of swap activities.")
-    __properties: ClassVar[List[str]] = ["total_usd_value", "activity_count"]
+    wallet_id: StrictStr = Field(description="The unique identifier of the wallet.")
+    pay_token_id: StrictStr = Field(description="Unique id of the token to pay.")
+    receive_token_id: StrictStr = Field(description="Unique id of the token to receive.")
+    pay_amount: Optional[StrictStr] = Field(default=None, description="Amount of tokens to pay. For example \"0.5 BTC\". Note: Either pay_amount or receive_amount must be provided, but not both. ")
+    receive_amount: Optional[StrictStr] = Field(default=None, description="Amount of tokens to receive. For example \"0.5 ETH_WBTC\". Note: Either pay_amount or receive_amount must be provided, but not both. ")
+    __properties: ClassVar[List[str]] = ["wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +50,7 @@ class SwapSummary(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SwapSummary from a JSON string"""
+        """Create an instance of CreateSwapQuoteRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,7 +75,7 @@ class SwapSummary(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SwapSummary from a dict"""
+        """Create an instance of CreateSwapQuoteRequest from a dict"""
         if obj is None:
             return None
 
@@ -80,8 +83,11 @@ class SwapSummary(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "total_usd_value": obj.get("total_usd_value"),
-            "activity_count": obj.get("activity_count")
+            "wallet_id": obj.get("wallet_id"),
+            "pay_token_id": obj.get("pay_token_id"),
+            "receive_token_id": obj.get("receive_token_id"),
+            "pay_amount": obj.get("pay_amount"),
+            "receive_amount": obj.get("receive_amount")
         })
         return _obj
 

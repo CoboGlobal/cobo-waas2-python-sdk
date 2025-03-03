@@ -36,7 +36,12 @@ class TestMessageSignSource(unittest.TestCase):
             return MessageSignSource(
                 source_type = 'Org-Controlled',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku'
+                address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
+                mpc_used_key_share_holder_group = cobo_waas2.models.mpc_signing_group.MpcSigningGroup(
+                    used_key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
+                    used_tss_node_ids = [
+                        'cobo5yb7BNEBwwp5XXedbhnzQfvQtp132W4dH4Jz4x4eDp4KA'
+                        ], )
             )
         else:
             return MessageSignSource(

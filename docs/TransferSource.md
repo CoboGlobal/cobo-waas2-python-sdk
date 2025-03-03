@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **address** | **str** | The wallet address. | 
 **included_utxos** | [**List[TransactionUtxo]**](TransactionUtxo.md) |  | [optional] 
 **excluded_utxos** | [**List[TransactionUtxo]**](TransactionUtxo.md) |  | [optional] 
+**mpc_used_key_share_holder_group** | [**MpcSigningGroup**](MpcSigningGroup.md) |  | [optional] 
 **delegate** | [**CoboSafeDelegate**](CoboSafeDelegate.md) |  | 
 **trading_account_type** | **str** | The trading account type. | 
 
