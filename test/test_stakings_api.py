@@ -29,6 +29,30 @@ class TestStakingsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_babylon_airdrop_registration(self) -> None:
+        """
+        Test case for create_babylon_airdrop_registration
+
+        Register for Babylon airdrop
+        """
+        """
+        create_babylon_airdrop_registration_request = cobo_waas2.CreateBabylonAirdropRegistrationRequest()
+
+        api_response = self.api.create_babylon_airdrop_registration(create_babylon_airdrop_registration_request=create_babylon_airdrop_registration_request)
+        """
+
+    def test_create_babylon_staking_registration(self) -> None:
+        """
+        Test case for create_babylon_staking_registration
+
+        Register for Babylon Phase-2
+        """
+        """
+        create_babylon_staking_registration_request = cobo_waas2.CreateBabylonStakingRegistrationRequest()
+
+        api_response = self.api.create_babylon_staking_registration(create_babylon_staking_registration_request=create_babylon_staking_registration_request)
+        """
+
     def test_create_claim_activity(self) -> None:
         """
         Test case for create_claim_activity
@@ -75,6 +99,30 @@ class TestStakingsApi(unittest.TestCase):
         create_withdraw_activity_request = cobo_waas2.CreateWithdrawActivityRequest()
 
         api_response = self.api.create_withdraw_activity(create_withdraw_activity_request=create_withdraw_activity_request)
+        """
+
+    def test_get_babylon_airdrop_registration_by_id(self) -> None:
+        """
+        Test case for get_babylon_airdrop_registration_by_id
+
+        Get Babylon airdrop registration details
+        """
+        """
+        registration_id = 'registration_id_example'
+
+        api_response = self.api.get_babylon_airdrop_registration_by_id(registration_id)
+        """
+
+    def test_get_babylon_staking_registration_by_id(self) -> None:
+        """
+        Test case for get_babylon_staking_registration_by_id
+
+        Get Babylon Phase-2 registration details
+        """
+        """
+        registration_id = 'registration_id_example'
+
+        api_response = self.api.get_babylon_staking_registration_by_id(registration_id)
         """
 
     def test_get_staking_activity_by_id(self) -> None:
@@ -135,6 +183,68 @@ class TestStakingsApi(unittest.TestCase):
         pool_id = 'babylon_btc'
 
         api_response = self.api.get_staking_pool_by_id(pool_id)
+        """
+
+    def test_list_babylon_airdrop_registrations(self) -> None:
+        """
+        Test case for list_babylon_airdrop_registrations
+
+        List Babylon airdrop registrations
+        """
+        """
+        status = 'Processing'
+        btc_address = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_babylon_airdrop_registrations(status=status, btc_address=btc_address, limit=limit, before=before, after=after)
+        """
+
+    def test_list_babylon_eligible_airdrops(self) -> None:
+        """
+        Test case for list_babylon_eligible_airdrops
+
+        List wallets eligible for Babylon airdrop
+        """
+        """
+        status = 'Registered'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_babylon_eligible_airdrops(status=status, limit=limit, before=before, after=after)
+        """
+
+    def test_list_babylon_eligible_stakings(self) -> None:
+        """
+        Test case for list_babylon_eligible_stakings
+
+        List staking positions eligible for Babylon Phase-2
+        """
+        """
+        status = 'Registered'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_babylon_eligible_stakings(status=status, limit=limit, before=before, after=after)
+        """
+
+    def test_list_babylon_staking_registrations(self) -> None:
+        """
+        Test case for list_babylon_staking_registrations
+
+        List Babylon Phase-2 registrations
+        """
+        """
+        status = 'Processing'
+        staking_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_babylon_staking_registrations(status=status, staking_id=staking_id, limit=limit, before=before, after=after)
         """
 
     def test_list_staking_activities(self) -> None:

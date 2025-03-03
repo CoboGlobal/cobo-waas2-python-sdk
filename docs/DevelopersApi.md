@@ -81,7 +81,7 @@ This endpoint does not need any parameter.
 
 List all callback messages
 
-This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+This operation retrieves all the callback messages in your organization.  For more details about how to respond to callback messages, refer to [Callback messages](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
 ### Example
 
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 Retry callback message
 
-This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
+This operation resends a callback message that failed previously.  If your callback endpoint doesn't respond as expected, the WaaS service will retry sending the callback message up to 30 times. After that, the callback message status will be `Failed`. Use this operation to resend the message. For more details, refer to [Webhooks and Callbacks](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/set-up-endpoint#callback-messages). 
 
 ### Example
 

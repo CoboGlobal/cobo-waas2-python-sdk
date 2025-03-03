@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class StakingPoolType(str, Enum):
     """
-    The type of the staking pool.
+    The type of the staking pool. Possible values are: - `Babylon`: Babylon staking pool - `ETHBeacon`: Ethereum Beacon Chain staking pool - `CoreBTC`: Core BTC staking pool - `SkyFarm`: SKY farm staking pool - `BitHive`: BitHive staking pool - `BERABeacon`: BERA Beacon Chain staking pool - `BeraChainBGT`: Bera Chain BGT staking pool 
     """
 
     """
@@ -28,6 +28,9 @@ class StakingPoolType(str, Enum):
     ETHBEACON = 'ETHBeacon'
     COREBTC = 'CoreBTC'
     SKYFARM = 'SkyFarm'
+    BITHIVE = 'BitHive'
+    BERABEACON = 'BERABeacon'
+    BERACHAINBGT = 'BeraChainBGT'
 
     UNKNOWN = None
 

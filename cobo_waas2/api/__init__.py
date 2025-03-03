@@ -7,6 +7,7 @@ from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.o_auth_api import OAuthApi
 from cobo_waas2.api.prime_broker_api import PrimeBrokerApi
 from cobo_waas2.api.stakings_api import StakingsApi
+from cobo_waas2.api.swaps_api import SwapsApi
 from cobo_waas2.api.transactions_api import TransactionsApi
 from cobo_waas2.api.travel_rule_api import TravelRuleApi
 from cobo_waas2.api.wallets_api import WalletsApi

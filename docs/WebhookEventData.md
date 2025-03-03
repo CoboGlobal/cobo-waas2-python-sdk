@@ -37,7 +37,7 @@ Name | Type | Description | Notes
 **tss_request_id** | **str** | The TSS request ID. | [optional] 
 **source_key_share_holder_group** | [**SourceGroup**](SourceGroup.md) |  | [optional] 
 **target_key_share_holder_group_id** | **str** | The target key share holder group ID. | [optional] 
-**addresses** | [**List[AddressInfo]**](AddressInfo.md) | A list of addresses. | [optional] 
+**addresses** | [**List[AddressesEventDataAllOfAddresses]**](AddressesEventDataAllOfAddresses.md) | A list of addresses. | [optional] 
 **wallet** | [**WalletInfo**](WalletInfo.md) |  | [optional] 
 **vault_id** | **str** | The vault ID. | [optional] 
 **project_id** | **str** | The project ID. | [optional] 

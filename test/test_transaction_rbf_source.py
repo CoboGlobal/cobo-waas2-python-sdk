@@ -46,7 +46,12 @@ class TestTransactionRbfSource(unittest.TestCase):
                     cobo_waas2.models.transaction_utxo.TransactionUtxo(
                         tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
                         vout_n = 0, )
-                    ]
+                    ],
+                mpc_used_key_share_holder_group = cobo_waas2.models.mpc_signing_group.MpcSigningGroup(
+                    used_key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
+                    used_tss_node_ids = [
+                        'cobo5yb7BNEBwwp5XXedbhnzQfvQtp132W4dH4Jz4x4eDp4KA'
+                        ], )
             )
         else:
             return TransactionRbfSource(

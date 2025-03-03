@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.transaction_selected_utxo import TransactionSelectedUtxo
+from cobo_waas2.models.transaction_utxo_change import TransactionUtxoChange
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,8 @@ class TransactionRawTxInfo(BaseModel):
     selected_utxos: Optional[List[TransactionSelectedUtxo]] = Field(default=None, description="The selected UTXOs to be consumed in the transaction.")
     raw_tx: Optional[StrictStr] = Field(default=None, description="The raw transaction data.")
     unsigned_raw_tx: Optional[StrictStr] = Field(default=None, description="The unsigned raw transaction data.")
-    __properties: ClassVar[List[str]] = ["used_nonce", "selected_utxos", "raw_tx", "unsigned_raw_tx"]
+    utxo_change: Optional[TransactionUtxoChange] = None
+    __properties: ClassVar[List[str]] = ["used_nonce", "selected_utxos", "raw_tx", "unsigned_raw_tx", "utxo_change"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,9 @@ class TransactionRawTxInfo(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['selected_utxos'] = _items
+        # override the default output from pydantic by calling `to_dict()` of utxo_change
+        if self.utxo_change:
+            _dict['utxo_change'] = self.utxo_change.to_dict()
         return _dict
 
     @classmethod
@@ -93,7 +98,8 @@ class TransactionRawTxInfo(BaseModel):
             "used_nonce": obj.get("used_nonce"),
             "selected_utxos": [TransactionSelectedUtxo.from_dict(_item) for _item in obj["selected_utxos"]] if obj.get("selected_utxos") is not None else None,
             "raw_tx": obj.get("raw_tx"),
-            "unsigned_raw_tx": obj.get("unsigned_raw_tx")
+            "unsigned_raw_tx": obj.get("unsigned_raw_tx"),
+            "utxo_change": TransactionUtxoChange.from_dict(obj["utxo_change"]) if obj.get("utxo_change") is not None else None
         })
         return _obj
 

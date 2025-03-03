@@ -25,7 +25,7 @@ class MpcSigningGroup(BaseModel):
     """
     The information about the Signing Group of an MPC Wallet.
     """  # noqa: E501
-    used_key_share_holder_group_id: Optional[StrictStr] = Field(default=None, description="The ID of the Signing Group.")
+    used_key_share_holder_group_id: StrictStr = Field(description="The ID of the Signing Group.")
     used_tss_node_ids: Optional[List[StrictStr]] = Field(default=None, description="The ID of the TSS Nodes that are required to participate in the signature.")
     __properties: ClassVar[List[str]] = ["used_key_share_holder_group_id", "used_tss_node_ids"]
 

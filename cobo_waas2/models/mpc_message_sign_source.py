@@ -16,8 +16,9 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.message_sign_source_type import MessageSignSourceType
+from cobo_waas2.models.mpc_signing_group import MpcSigningGroup
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,8 @@ class MpcMessageSignSource(BaseModel):
     source_type: MessageSignSourceType
     wallet_id: StrictStr = Field(description="The wallet ID.")
     address: StrictStr = Field(description="The wallet address.")
-    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address"]
+    mpc_used_key_share_holder_group: Optional[MpcSigningGroup] = None
+    __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "mpc_used_key_share_holder_group"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,6 +72,9 @@ class MpcMessageSignSource(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of mpc_used_key_share_holder_group
+        if self.mpc_used_key_share_holder_group:
+            _dict['mpc_used_key_share_holder_group'] = self.mpc_used_key_share_holder_group.to_dict()
         return _dict
 
     @classmethod
@@ -84,7 +89,8 @@ class MpcMessageSignSource(BaseModel):
         _obj = cls.model_validate({
             "source_type": obj.get("source_type"),
             "wallet_id": obj.get("wallet_id"),
-            "address": obj.get("address")
+            "address": obj.get("address"),
+            "mpc_used_key_share_holder_group": MpcSigningGroup.from_dict(obj["mpc_used_key_share_holder_group"]) if obj.get("mpc_used_key_share_holder_group") is not None else None
         })
         return _obj
 

@@ -69,7 +69,10 @@ class TestWebhookEventData(unittest.TestCase):
                             value = '0.5', )
                         ], 
                     raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
-                    unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', ),
+                    unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
+                    utxo_change = cobo_waas2.models.transaction_utxo_change.TransactionUtxoChange(
+                        address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
+                        value = '0.5', ), ),
                 replacement = cobo_waas2.models.transaction_replacement.Transaction_replacement(
                     replaced_by_type = 'Resend', 
                     replaced_by_transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
@@ -92,17 +95,7 @@ class TestWebhookEventData(unittest.TestCase):
                         ], ),
                 target_key_share_holder_group_id = 'fd9519ae-507b-4605-b108-04d4e5ffcdd3',
                 addresses = [
-                    cobo_waas2.models.address_info.AddressInfo(
-                        address = '0x0000000000000000000000000000000000000000', 
-                        chain_id = 'ETH', 
-                        memo = '82840924', 
-                        path = 'm/44/0/2/0/0', 
-                        encoding = 'ENCODING_P2PKH', 
-                        pubkey = 'xpub6HFaEKt4XdwgEQrQmWr8AEAZ7XBSGh7QYFspwdE86sJn6PjkqsPwVQc2poriBdizqXnTB3UWurJJAZpFnD2DAp9vFTmM2gQ264AArYtFWLH', 
-                        x_only_pubkey = '0x165ed2f04462ec0d3d44dc8690fa9000903b5a96f14ad7f233c21ff748a17b54', 
-                        root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq', 
-                        taproot_script_tree_hash = '0x138fdd0f6c3803d45553e730c25924baf7be741b8a72a4e6fdbd9d44cb19f85b', 
-                        taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC', )
+                    null
                     ],
                 wallet = None,
                 vault_id = 'YPdbyVaVGqXXjkUsohHw',
