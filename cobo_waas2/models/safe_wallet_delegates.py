@@ -113,6 +113,7 @@ class SafeWalletDelegates(BaseModel):
             instance.actual_instance = SafeWalletDelegatesTransfer.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into SafeWalletDelegatesContractCall
         try:
             instance.actual_instance = SafeWalletDelegatesContractCall.from_json(json_str)

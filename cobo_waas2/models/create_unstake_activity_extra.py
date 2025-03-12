@@ -95,6 +95,7 @@ class CreateUnstakeActivityExtra(BaseModel):
             instance.actual_instance = EthUnstakeExtra.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into EthUnstakeExtra
         try:
             instance.actual_instance = EthUnstakeExtra.from_json(json_str)

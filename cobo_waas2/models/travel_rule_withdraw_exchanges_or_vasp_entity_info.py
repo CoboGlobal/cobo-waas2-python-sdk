@@ -113,6 +113,7 @@ class TravelRuleWithdrawExchangesOrVASPEntityInfo(BaseModel):
             instance.actual_instance = TravelRuleWithdrawNaturalEntity.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into TravelRuleWithdrawLegalEntity
         try:
             instance.actual_instance = TravelRuleWithdrawLegalEntity.from_json(json_str)

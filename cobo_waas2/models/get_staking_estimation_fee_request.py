@@ -149,6 +149,7 @@ class GetStakingEstimationFeeRequest(BaseModel):
             instance.actual_instance = EstimateWithdrawFee.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into EstimateStakeFee
         try:
             instance.actual_instance = EstimateStakeFee.from_json(json_str)

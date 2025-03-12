@@ -118,6 +118,7 @@ class ContractCallSource(BaseModel):
             instance.actual_instance = SafeContractCallSource.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into MpcContractCallSource
         try:
             instance.actual_instance = MpcContractCallSource.from_json(json_str)

@@ -131,6 +131,7 @@ class CreateWalletParams(BaseModel):
             instance.actual_instance = CreateMpcWalletParams.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into CreateCustodialWalletParams
         try:
             instance.actual_instance = CreateCustodialWalletParams.from_json(json_str)

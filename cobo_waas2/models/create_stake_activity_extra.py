@@ -131,6 +131,7 @@ class CreateStakeActivityExtra(BaseModel):
             instance.actual_instance = EthStakeExtra.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into BabylonStakeExtra
         try:
             instance.actual_instance = BabylonStakeExtra.from_json(json_str)

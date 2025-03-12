@@ -1147,7 +1147,7 @@ class WalletsApi:
     @validate_call
     def get_chain_by_id(
         self,
-        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")],
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1161,7 +1161,7 @@ class WalletsApi:
 
         This operation retrieves the detailed information about a specified chain. 
 
-        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). (required)
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. (required)
         :type chain_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1193,7 +1193,7 @@ class WalletsApi:
     @validate_call
     def get_chain_by_id_with_http_info(
         self,
-        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")],
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1207,7 +1207,7 @@ class WalletsApi:
 
         This operation retrieves the detailed information about a specified chain. 
 
-        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). (required)
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. (required)
         :type chain_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1239,7 +1239,7 @@ class WalletsApi:
     @validate_call
     def get_chain_by_id_without_preload_content(
         self,
-        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")],
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1253,7 +1253,7 @@ class WalletsApi:
 
         This operation retrieves the detailed information about a specified chain. 
 
-        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). (required)
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. (required)
         :type chain_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1553,7 +1553,7 @@ class WalletsApi:
     @validate_call
     def get_token_by_id(
         self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1567,7 +1567,7 @@ class WalletsApi:
 
         This operation retrieves the detailed information about a specified token. 
 
-        :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). (required)
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1599,7 +1599,7 @@ class WalletsApi:
     @validate_call
     def get_token_by_id_with_http_info(
         self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1613,7 +1613,7 @@ class WalletsApi:
 
         This operation retrieves the detailed information about a specified token. 
 
-        :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). (required)
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1645,7 +1645,7 @@ class WalletsApi:
     @validate_call
     def get_token_by_id_without_preload_content(
         self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1659,7 +1659,7 @@ class WalletsApi:
 
         This operation retrieves the detailed information about a specified token. 
 
-        :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). (required)
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1892,7 +1892,7 @@ class WalletsApi:
     def list_address_balances_by_token(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
         addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -1912,7 +1912,7 @@ class WalletsApi:
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
-        :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). (required)
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
         :param addresses: A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").
         :type addresses: str
@@ -1958,7 +1958,7 @@ class WalletsApi:
     def list_address_balances_by_token_with_http_info(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
         addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -1978,7 +1978,7 @@ class WalletsApi:
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
-        :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). (required)
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
         :param addresses: A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").
         :type addresses: str
@@ -2024,7 +2024,7 @@ class WalletsApi:
     def list_address_balances_by_token_without_preload_content(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
         addresses: Annotated[Optional[StrictStr], Field(description="A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2044,7 +2044,7 @@ class WalletsApi:
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
-        :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). (required)
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
         :param addresses: A list of wallet addresses, separated by comma. For addresses requiring a memo, append the memo after the address using the '|' separator (e.g., \"address|memo\").
         :type addresses: str

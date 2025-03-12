@@ -36,6 +36,7 @@ This operation cancels a TSS request.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -82,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -109,6 +110,7 @@ This operation creates a key share holder group for a specified vault. <Note>Thi
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -156,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -183,6 +185,7 @@ This operation creates a project.  <Note>This operation applies to MPC Wallets (
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -228,7 +231,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -255,6 +258,7 @@ This operation creates a vault.  <Info>To learn what a vault is and how it relat
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -300,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -327,6 +331,7 @@ This operation creates a TSS request under a specified vault. You can use this o
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -374,7 +379,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -401,6 +406,7 @@ This operation deletes a specified key share holder group.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -447,7 +453,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -473,6 +479,7 @@ This operation retrieves detailed information about a specified key share holder
 
 ### Example
 
+* OAuth Authentication (OAuth2):
 * Api Key Authentication (CoboAuth):
 
 ```python
@@ -520,7 +527,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -547,6 +554,7 @@ This operation retrieves detailed information about a specified key share holder
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -593,7 +601,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -620,6 +628,7 @@ This operation retrieves detailed information about a project. <Note>This operat
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -664,7 +673,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -691,6 +700,7 @@ This operation retrieves detailed information about a vault.  <Info>To learn wha
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -735,7 +745,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -762,6 +772,7 @@ This operation retrieves detailed information about a TSS request.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -808,7 +819,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -902,6 +913,7 @@ This operation retrieves all key share holder groups under a specified vault. Yo
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -955,7 +967,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -981,6 +993,7 @@ This operation retrieves a list of all key share holders under a specified vault
 
 ### Example
 
+* OAuth Authentication (OAuth2):
 * Api Key Authentication (CoboAuth):
 
 ```python
@@ -1034,7 +1047,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[CoboAuth](../README.md#CoboAuth)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1061,6 +1074,7 @@ This operation retrieves a list of all projects.  <Note>This operation applies t
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1109,7 +1123,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1136,6 +1150,7 @@ This operation retrieves a list of all vaults. You can filter the result by proj
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1189,7 +1204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1216,6 +1231,7 @@ This operation retrieves a list of TSS requests and their details.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1268,7 +1284,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1295,6 +1311,7 @@ This operation updates a specified active [Signing Group](https://manuals.cobo.c
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1344,7 +1361,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1371,6 +1388,7 @@ This operation updates a project's name.  <Note>This operation applies to MPC Wa
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1418,7 +1436,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1445,6 +1463,7 @@ This operation updates a vault's name.  <Info>To learn what a vault is and how i
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1492,7 +1511,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 

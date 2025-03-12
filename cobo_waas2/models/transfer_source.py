@@ -159,6 +159,7 @@ class TransferSource(BaseModel):
             instance.actual_instance = SafeTransferSource.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into CustodialTransferSource
         try:
             instance.actual_instance = CustodialTransferSource.from_json(json_str)

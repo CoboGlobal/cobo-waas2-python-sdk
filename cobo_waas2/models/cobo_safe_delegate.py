@@ -100,6 +100,7 @@ class CoboSafeDelegate(BaseModel):
             instance.actual_instance = MPCDelegate.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into MPCDelegate
         try:
             instance.actual_instance = MPCDelegate.from_json(json_str)

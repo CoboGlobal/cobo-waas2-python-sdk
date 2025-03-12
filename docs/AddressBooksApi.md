@@ -17,6 +17,7 @@ This operation retrieves a list of addresses from your address book.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -71,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 

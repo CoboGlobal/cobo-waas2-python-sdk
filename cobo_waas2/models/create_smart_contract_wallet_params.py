@@ -95,6 +95,7 @@ class CreateSmartContractWalletParams(BaseModel):
             instance.actual_instance = CreateSafeWalletParams.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into CreateSafeWalletParams
         try:
             instance.actual_instance = CreateSafeWalletParams.from_json(json_str)

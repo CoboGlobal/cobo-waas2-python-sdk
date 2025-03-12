@@ -155,6 +155,7 @@ from cobo_waas2.models.extended_token_info import ExtendedTokenInfo
 from cobo_waas2.models.fee_amount import FeeAmount
 from cobo_waas2.models.fee_gas_limit import FeeGasLimit
 from cobo_waas2.models.fee_rate import FeeRate
+from cobo_waas2.models.fee_reserved import FeeReserved
 from cobo_waas2.models.fee_type import FeeType
 from cobo_waas2.models.fixed_fee_rate import FixedFeeRate
 from cobo_waas2.models.get_api_key_info200_response import GetApiKeyInfo200Response
@@ -253,6 +254,9 @@ from cobo_waas2.models.smart_contract_initiator import SmartContractInitiator
 from cobo_waas2.models.smart_contract_wallet_info import SmartContractWalletInfo
 from cobo_waas2.models.smart_contract_wallet_operation_type import SmartContractWalletOperationType
 from cobo_waas2.models.smart_contract_wallet_type import SmartContractWalletType
+from cobo_waas2.models.sol_contract_call_account import SolContractCallAccount
+from cobo_waas2.models.sol_contract_call_destination import SolContractCallDestination
+from cobo_waas2.models.sol_contract_call_instruction import SolContractCallInstruction
 from cobo_waas2.models.source_group import SourceGroup
 from cobo_waas2.models.stake_source_type import StakeSourceType
 from cobo_waas2.models.staking_pool_id import StakingPoolId
@@ -320,6 +324,9 @@ from cobo_waas2.models.transaction_selected_utxo import TransactionSelectedUtxo
 from cobo_waas2.models.transaction_signature_result import TransactionSignatureResult
 from cobo_waas2.models.transaction_signer import TransactionSigner
 from cobo_waas2.models.transaction_smart_contract_safe_wallet_source import TransactionSmartContractSafeWalletSource
+from cobo_waas2.models.transaction_sol_contract_account import TransactionSolContractAccount
+from cobo_waas2.models.transaction_sol_contract_destination import TransactionSolContractDestination
+from cobo_waas2.models.transaction_sol_contract_instruction import TransactionSolContractInstruction
 from cobo_waas2.models.transaction_source import TransactionSource
 from cobo_waas2.models.transaction_source_type import TransactionSourceType
 from cobo_waas2.models.transaction_status import TransactionStatus

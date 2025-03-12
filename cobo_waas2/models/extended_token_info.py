@@ -26,7 +26,7 @@ class ExtendedTokenInfo(BaseModel):
     """
     The token information, including whether the token can be deposited or withdrawn.
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
+    token_id: StrictStr = Field(description="The token ID, which is the unique identifier of a token.")
     chain_id: StrictStr = Field(description="The ID of the chain on which the token operates.")
     asset_id: Optional[StrictStr] = Field(default=None, description="(This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account.")
     symbol: Optional[StrictStr] = Field(default=None, description="The token symbol, which is the abbreviated name of a token.")

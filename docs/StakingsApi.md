@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 Register for Babylon Phase-2
 
-This operation initiates a Babylon Phase-2 registration request.   Before calling this operation, please ensure the following: - The staking position is eligible for the Babylon Phase-2 and has not been registered. You can call the [List staking positions eligible for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/list-eligible-staking-positions-for-babylon-phase-2) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for Phase-2. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon Phase-2 registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-phase-2-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+This operation initiates a Babylon Phase-2 registration request.   Before calling this operation, please ensure the following: - The staking position is eligible for the Babylon Phase-2 and has not been registered. You can call the [List staking positions eligible for Babylon Phase-2](https://www.cobo.com/developers/v2/api-references/stakings/list-staking-positions-eligible-for-babylon-phase-2) operation to check the registration status. - The Babylon address has enough asset to pay for the registration fee. - The Babylon address must be a Babylon address in an MPC Wallet in your organization.  The system first checks whether the provided address is eligible for Phase-2. If eligible, it creates a unique registration ID, which can be used to track the status.   The registration is processed asynchronously and may take some time to complete. It is recommended that you regularly call the [Get Babylon Phase-2 registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-phase-2-registration-details) operation to check the status and handle registration accordingly.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
 
 ### Example
 
@@ -180,6 +180,7 @@ This operation creates a claim request.  <Note>Currently, only the Ethereum Beac
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -225,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -252,6 +253,7 @@ This operation creates a staking request.  For some protocols, you can use the `
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -297,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -324,6 +326,7 @@ This operation creates an unstaking request. Your staked tokens will be automati
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -369,7 +372,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -396,6 +399,7 @@ This operation creates a withdrawal request.   For some protocols, you can use t
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -441,7 +445,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -610,6 +614,7 @@ This operation retrieves the details of a specified staking activity.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -654,7 +659,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -681,6 +686,7 @@ This operation retrieves the detailed information about a specified staking posi
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -725,7 +731,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -752,6 +758,7 @@ Estimate staking fees
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -797,7 +804,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -824,6 +831,7 @@ This operation calculates the fee required for a staking activity based on facto
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -869,7 +877,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -896,6 +904,7 @@ This operation retrieves the detailed information about a specified staking pool
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -940,7 +949,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1279,6 +1288,7 @@ This operation retrieves a list of staking activities.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1345,7 +1355,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1372,6 +1382,7 @@ This operation retrieves a list of staking pools currently supported.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1424,7 +1435,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -1451,6 +1462,7 @@ This operation retrieves a list of staking positions.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -1507,7 +1519,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 

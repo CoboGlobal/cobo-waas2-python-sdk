@@ -113,6 +113,7 @@ class TransferDestination(BaseModel):
             instance.actual_instance = ExchangeTransferDestination.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into AddressTransferDestination
         try:
             instance.actual_instance = AddressTransferDestination.from_json(json_str)

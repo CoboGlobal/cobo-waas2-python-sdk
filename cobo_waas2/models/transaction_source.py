@@ -213,6 +213,7 @@ class TransactionSource(BaseModel):
             instance.actual_instance = TransactionSmartContractSafeWalletSource.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into TransactionCustodialAssetWalletSource
         try:
             instance.actual_instance = TransactionCustodialAssetWalletSource.from_json(json_str)

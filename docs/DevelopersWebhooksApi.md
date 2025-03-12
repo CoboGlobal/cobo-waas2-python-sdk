@@ -26,6 +26,7 @@ This operation registers a new webhook endpoint for your organization.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -71,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -98,6 +99,7 @@ This operation retrieves the information of a specified webhook endpoint.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -142,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -169,6 +171,7 @@ This operation retrieves the information of a webhook event by the event ID.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -215,7 +218,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -242,6 +245,7 @@ This operation retrieves the information of all webhook endpoints registered und
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -296,7 +300,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -390,6 +394,7 @@ This operation retrieves a list of webhook event logs by event ID. Each retry wi
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -442,7 +447,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -469,6 +474,7 @@ This operation retrieves a list of webhook events that have occurred within the 
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -525,7 +531,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -552,6 +558,7 @@ This operation retries delivering a webhook event with the specified event ID. Y
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -598,7 +605,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 
@@ -697,6 +704,7 @@ This operation updates the information of a specified webhook endpoint.
 ### Example
 
 * OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
 
 ```python
 import cobo_waas2
@@ -744,7 +752,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2](../README.md#OAuth2)
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 

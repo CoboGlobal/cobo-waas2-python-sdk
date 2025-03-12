@@ -113,6 +113,7 @@ class EstimateFeeParams(BaseModel):
             instance.actual_instance = EstimateTransferFeeParams.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into EstimateTransferFeeParams
         try:
             instance.actual_instance = EstimateTransferFeeParams.from_json(json_str)

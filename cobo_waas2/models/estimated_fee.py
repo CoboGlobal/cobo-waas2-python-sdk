@@ -149,6 +149,7 @@ class EstimatedFee(BaseModel):
             instance.actual_instance = EstimatedUtxoFee.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into EstimatedFixedFee
         try:
             instance.actual_instance = EstimatedFixedFee.from_json(json_str)

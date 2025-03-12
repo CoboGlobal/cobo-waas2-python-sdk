@@ -149,6 +149,7 @@ class TransactionFee(BaseModel):
             instance.actual_instance = TransactionUtxoFee.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into TransactionEvmEip1559Fee
         try:
             instance.actual_instance = TransactionEvmEip1559Fee.from_json(json_str)

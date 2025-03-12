@@ -149,6 +149,7 @@ class MessageSignDestination(BaseModel):
             instance.actual_instance = RawMessageSignDestination.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into EvmEIP191MessageSignDestination
         try:
             instance.actual_instance = EvmEIP191MessageSignDestination.from_json(json_str)

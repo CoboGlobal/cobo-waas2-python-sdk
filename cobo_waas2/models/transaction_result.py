@@ -95,6 +95,7 @@ class TransactionResult(BaseModel):
             instance.actual_instance = TransactionSignatureResult.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into TransactionSignatureResult
         try:
             instance.actual_instance = TransactionSignatureResult.from_json(json_str)

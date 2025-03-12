@@ -25,7 +25,7 @@ class CreateBabylonAirdropRegistration201Response(BaseModel):
     """
     CreateBabylonAirdropRegistration201Response
     """  # noqa: E501
-    registration_id: Optional[StrictStr] = Field(default=None, description="The registration ID, a unique identifier for tracking the airdrop registration request. You can check the registration status with the [Get Babylon airdrop registration details](https://www.cobo.com/developers/v2/api-references/stakings/get_babylon_airdrop_registration_details) operation.")
+    registration_id: Optional[StrictStr] = Field(default=None, description="The registration ID, a unique identifier for tracking the airdrop registration request. You can check the registration status with the [Get Babylon airdrop registration details](https://www.cobo.com/developers/v2/api-references/stakings/get-babylon-airdrop-registration-details) operation.")
     __properties: ClassVar[List[str]] = ["registration_id"]
 
     model_config = ConfigDict(

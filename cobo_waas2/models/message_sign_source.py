@@ -100,6 +100,7 @@ class MessageSignSource(BaseModel):
             instance.actual_instance = MpcMessageSignSource.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into MpcMessageSignSource
         try:
             instance.actual_instance = MpcMessageSignSource.from_json(json_str)

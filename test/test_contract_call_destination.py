@@ -37,13 +37,35 @@ class TestContractCallDestination(unittest.TestCase):
                 destination_type = 'EVM_Contract',
                 address = '0x0406db8351aa6839169bb363f63c2c808fee8f99',
                 value = '1.5',
-                calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO'
+                calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
+                instructions = [
+                    cobo_waas2.models.sol_instruction.SOL Instruction(
+                        accounts = [
+                            cobo_waas2.models.sol_instruction_account.SOL Instruction Account(
+                                pubkey = 'E4MhQWiqCLER3fFZNf8LyQFpLWW3BRxtsR5eps3c3vNS', 
+                                is_signer = True, 
+                                is_writable = True, )
+                            ], 
+                        data = '37u9WtQpcm6ULa3WRQHmj49EPs4if7o9f1jSRVZpm2dvihR9C8jY4NqEwXUbLwx15HBSNcP1', 
+                        program_id = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', )
+                    ]
             )
         else:
             return ContractCallDestination(
                 destination_type = 'EVM_Contract',
                 address = '0x0406db8351aa6839169bb363f63c2c808fee8f99',
                 calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
+                instructions = [
+                    cobo_waas2.models.sol_instruction.SOL Instruction(
+                        accounts = [
+                            cobo_waas2.models.sol_instruction_account.SOL Instruction Account(
+                                pubkey = 'E4MhQWiqCLER3fFZNf8LyQFpLWW3BRxtsR5eps3c3vNS', 
+                                is_signer = True, 
+                                is_writable = True, )
+                            ], 
+                        data = '37u9WtQpcm6ULa3WRQHmj49EPs4if7o9f1jSRVZpm2dvihR9C8jY4NqEwXUbLwx15HBSNcP1', 
+                        program_id = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', )
+                    ],
         )
         """
 
