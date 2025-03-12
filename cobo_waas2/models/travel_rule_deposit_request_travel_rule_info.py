@@ -113,6 +113,7 @@ class TravelRuleDepositRequestTravelRuleInfo(BaseModel):
             instance.actual_instance = TravelRuleDepositExchangesOrVASP.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into TravelRuleDepositExchangesOrVASP
         try:
             instance.actual_instance = TravelRuleDepositExchangesOrVASP.from_json(json_str)

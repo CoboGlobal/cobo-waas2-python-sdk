@@ -131,6 +131,7 @@ class CreatedWalletInfo(BaseModel):
             instance.actual_instance = MPCWalletInfo.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into CustodialWalletInfo
         try:
             instance.actual_instance = CustodialWalletInfo.from_json(json_str)

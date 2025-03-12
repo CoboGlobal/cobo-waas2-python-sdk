@@ -36,7 +36,8 @@ class TestEstimatedEvmEip1559FeeSlow(unittest.TestCase):
             return EstimatedEvmEip1559FeeSlow(
                 max_fee_per_gas = '9000000000000',
                 max_priority_fee_per_gas = '1000000000000',
-                gas_limit = '21000'
+                gas_limit = '21000',
+                reserved_fee = '1000000000000'
             )
         else:
             return EstimatedEvmEip1559FeeSlow(

@@ -100,6 +100,7 @@ class TransactionRbfSource(BaseModel):
             instance.actual_instance = MpcTransferSource.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into MpcTransferSource
         try:
             instance.actual_instance = MpcTransferSource.from_json(json_str)

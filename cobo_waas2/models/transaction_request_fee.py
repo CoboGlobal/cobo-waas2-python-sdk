@@ -149,6 +149,7 @@ class TransactionRequestFee(BaseModel):
             instance.actual_instance = TransactionRequestUtxoFee.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into TransactionRequestFixedFee
         try:
             instance.actual_instance = TransactionRequestFixedFee.from_json(json_str)

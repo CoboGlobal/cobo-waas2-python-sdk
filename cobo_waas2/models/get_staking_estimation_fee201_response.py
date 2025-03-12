@@ -113,6 +113,7 @@ class GetStakingEstimationFee201Response(BaseModel):
             instance.actual_instance = EthStakeEstimatedFee.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into EthStakeEstimatedFee
         try:
             instance.actual_instance = EthStakeEstimatedFee.from_json(json_str)

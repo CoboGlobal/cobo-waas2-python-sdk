@@ -95,6 +95,7 @@ class SmartContractWalletInfo(BaseModel):
             instance.actual_instance = SafeWallet.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into SafeWallet
         try:
             instance.actual_instance = SafeWallet.from_json(json_str)

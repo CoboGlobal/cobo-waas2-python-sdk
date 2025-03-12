@@ -113,6 +113,7 @@ class TravelRuleWithdrawRequestTravelRuleInfo(BaseModel):
             instance.actual_instance = TravelRuleWithdrawExchangesOrVASP.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into SelfCustodyWallet
         try:
             instance.actual_instance = SelfCustodyWallet.from_json(json_str)

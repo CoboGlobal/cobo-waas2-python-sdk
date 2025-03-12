@@ -95,6 +95,7 @@ class StakingSource(BaseModel):
             instance.actual_instance = MpcStakeSource.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into MpcStakeSource
         try:
             instance.actual_instance = MpcStakeSource.from_json(json_str)

@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,8 @@ class EstimatedEvmLegacyFeeSlow(BaseModel):
     """  # noqa: E501
     gas_price: StrictStr = Field(description="The gas price, in wei. The gas price represents the amount of ETH that must be paid to validators for processing transactions per gas unit used.")
     gas_limit: StrictStr = Field(description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
-    __properties: ClassVar[List[str]] = ["gas_price", "gas_limit"]
+    reserved_fee: Optional[StrictStr] = Field(default=None, description="The estimated fee required for submitting the transaction data to L1 (Layer 1), measured in wei.")
+    __properties: ClassVar[List[str]] = ["gas_price", "gas_limit", "reserved_fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +82,8 @@ class EstimatedEvmLegacyFeeSlow(BaseModel):
 
         _obj = cls.model_validate({
             "gas_price": obj.get("gas_price"),
-            "gas_limit": obj.get("gas_limit")
+            "gas_limit": obj.get("gas_limit"),
+            "reserved_fee": obj.get("reserved_fee")
         })
         return _obj
 

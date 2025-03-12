@@ -149,6 +149,7 @@ class UpdateWalletParams(BaseModel):
             instance.actual_instance = UpdateSmartContractWalletParams.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into UpdateCustodialWalletParams
         try:
             instance.actual_instance = UpdateCustodialWalletParams.from_json(json_str)

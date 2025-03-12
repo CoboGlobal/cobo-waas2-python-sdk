@@ -113,6 +113,7 @@ class TravelRuleDepositExchangesOrVASPEntityInfo(BaseModel):
             instance.actual_instance = TravelRuleDepositNaturalEntity.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into TravelRuleDepositLegalEntity
         try:
             instance.actual_instance = TravelRuleDepositLegalEntity.from_json(json_str)

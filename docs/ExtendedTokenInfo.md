@@ -6,7 +6,7 @@ The token information, including whether the token can be deposited or withdrawn
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token_id** | **str** | The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
+**token_id** | **str** | The token ID, which is the unique identifier of a token. | 
 **chain_id** | **str** | The ID of the chain on which the token operates. | 
 **asset_id** | **str** | (This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. | [optional] 
 **symbol** | **str** | The token symbol, which is the abbreviated name of a token. | [optional] 

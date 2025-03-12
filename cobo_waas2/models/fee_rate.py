@@ -149,6 +149,7 @@ class FeeRate(BaseModel):
             instance.actual_instance = UtxoFeeRate.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into FixedFeeRate
         try:
             instance.actual_instance = FixedFeeRate.from_json(json_str)

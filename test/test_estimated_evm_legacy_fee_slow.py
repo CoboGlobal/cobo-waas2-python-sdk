@@ -35,7 +35,8 @@ class TestEstimatedEvmLegacyFeeSlow(unittest.TestCase):
         if include_optional:
             return EstimatedEvmLegacyFeeSlow(
                 gas_price = '100000000',
-                gas_limit = '21000'
+                gas_limit = '21000',
+                reserved_fee = '1000000000000'
             )
         else:
             return EstimatedEvmLegacyFeeSlow(

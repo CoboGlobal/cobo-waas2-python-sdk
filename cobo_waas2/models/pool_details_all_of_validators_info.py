@@ -95,6 +95,7 @@ class PoolDetailsAllOfValidatorsInfo(BaseModel):
             instance.actual_instance = BabylonValidator.from_json(json_str)
             return instance
 
+        return instance
         # deserialize data into BabylonValidator
         try:
             instance.actual_instance = BabylonValidator.from_json(json_str)
