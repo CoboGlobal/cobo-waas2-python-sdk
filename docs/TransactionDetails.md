@@ -31,6 +31,8 @@ Name | Type | Description | Notes
 **category** | **List[str]** | A custom transaction category for you to identify your transfers more easily. | [optional] 
 **description** | **str** | The description for your transaction. | [optional] 
 **is_loop** | **bool** | Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - &#x60;true&#x60;: The transaction was executed as a Cobo Loop transfer. - &#x60;false&#x60;: The transaction was not executed as a Cobo Loop transfer.  | [optional] 
+**cobo_category** | **List[str]** | A transaction category for cobo to identify your transactions. | [optional] 
+**fueling_info** | [**TransactionFuelingInfo**](TransactionFuelingInfo.md) |  | [optional] 
 **created_timestamp** | **int** | The time when the transaction was created, in Unix timestamp format, measured in milliseconds. | [optional] 
 **updated_timestamp** | **int** | The time when the transaction was updated, in Unix timestamp format, measured in milliseconds. | [optional] 
 **approvers** | [**List[TransactionApprover]**](TransactionApprover.md) |  | [optional] 

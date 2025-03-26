@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.transaction_role_approval_detail import TransactionRoleApprovalDetail
 from typing import Optional, Set
@@ -26,10 +26,13 @@ class TransactionApprovalDetail(BaseModel):
     """
     The approval detail data for transaction.
     """  # noqa: E501
+    transaction_id: Optional[StrictStr] = Field(default=None, description="The transaction ID.")
+    cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
     spender: Optional[TransactionRoleApprovalDetail] = None
     approver: Optional[TransactionRoleApprovalDetail] = None
     address_owner: Optional[TransactionRoleApprovalDetail] = None
-    __properties: ClassVar[List[str]] = ["spender", "approver", "address_owner"]
+    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "spender", "approver", "address_owner"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +94,9 @@ class TransactionApprovalDetail(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "transaction_id": obj.get("transaction_id"),
+            "cobo_id": obj.get("cobo_id"),
+            "request_id": obj.get("request_id"),
             "spender": TransactionRoleApprovalDetail.from_dict(obj["spender"]) if obj.get("spender") is not None else None,
             "approver": TransactionRoleApprovalDetail.from_dict(obj["approver"]) if obj.get("approver") is not None else None,
             "address_owner": TransactionRoleApprovalDetail.from_dict(obj["address_owner"]) if obj.get("address_owner") is not None else None

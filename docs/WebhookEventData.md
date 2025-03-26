@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. | 
+**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The Chain enabled event data. - &#x60;Tokens&#x60;: The Token enabled event data. | 
 **transaction_id** | **str** | The transaction ID. | 
 **cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
 **request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | [optional] 
@@ -32,6 +32,8 @@ Name | Type | Description | Notes
 **category** | **List[str]** | A custom transaction category for you to identify your transfers more easily. | [optional] 
 **description** | **str** | The description of the TSS request. | [optional] 
 **is_loop** | **bool** | Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - &#x60;true&#x60;: The transaction was executed as a Cobo Loop transfer. - &#x60;false&#x60;: The transaction was not executed as a Cobo Loop transfer.  | [optional] 
+**cobo_category** | **List[str]** | A transaction category for cobo to identify your transactions. | [optional] 
+**fueling_info** | [**TransactionFuelingInfo**](TransactionFuelingInfo.md) |  | [optional] 
 **created_timestamp** | **int** | The vault&#39;s creation time in Unix timestamp format, measured in milliseconds. | [optional] 
 **updated_timestamp** | **int** | The time when the transaction was updated, in Unix timestamp format, measured in milliseconds. | [optional] 
 **tss_request_id** | **str** | The TSS request ID. | [optional] 
@@ -43,6 +45,8 @@ Name | Type | Description | Notes
 **project_id** | **str** | The project ID. | [optional] 
 **name** | **str** | The vault name. | [optional] 
 **root_pubkeys** | [**List[RootPubkey]**](RootPubkey.md) |  | [optional] 
+**chains** | [**List[ChainInfo]**](ChainInfo.md) | The chains. | 
+**tokens** | [**List[TokenInfo]**](TokenInfo.md) | The tokens. | 
 
 ## Example
 

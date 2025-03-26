@@ -40,6 +40,8 @@ class TestActivityExtra(unittest.TestCase):
                 auto_broadcast = False,
                 param_version = 2,
                 withdraw_from_type = 'Stake',
+                slash_from_type = 'Stake',
+                stake_amount = '100.00',
                 provider_name = 'Stakefish',
                 validator_pubkeys = ["0x1234567890987654321012345678909876543210","0x1234567890987654321012345678909876543210"],
                 timelock = 1704067200,

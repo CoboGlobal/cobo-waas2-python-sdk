@@ -35,8 +35,46 @@ class TestTransactionMessageSignEIP712Destination(unittest.TestCase):
         if include_optional:
             return TransactionMessageSignEIP712Destination(
                 destination_type = 'Address',
+                raw_structured_data = '',
                 structured_data = {"types": {"EIP712Domain": [{"name": "name", "type": "string"}, {"name": "version", "type": "string"}, {"name": "chainId", "type": "uint256"}, {"name": "verifyingContract", "type": "address"}], "Person": [{"name": "name", "type": "string"}, {"name": "wallet", "type": "address"}], "Mail": [{"name": "from", "type": "Person"}, {"name": "to", "type": "Person"}, {"name": "contents", "type": "string"}]}, "primaryType": "Mail", "domain": {"name": "Ether Mail", "version": "1", "chainId": 1, "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"}, "message": {"from": {"name": "Cow", "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"}, "to": {"name": "Bob", "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"}, "contents": "Hello, Bob!"}}
-
+,
+                safe_tx_extra_data = cobo_waas2.models.safe_tx_extra_data.SafeTxExtraData(
+                    to = '0x1234567890abcdef1234567890abcdef12345678', 
+                    value = '1 ETH', 
+                    data = '0xabcdef...', 
+                    domain_hash = '0xabcdef123456...', 
+                    message_hash = '0xabcdef123456...', 
+                    safe_address = '0xabcdefabcdefabcdefabcdefabcdefabcdef', 
+                    safe_tx_hash = '0x123456abcdef...', 
+                    safe_nonce = 42, 
+                    operation = 'Call', 
+                    gas_token_addr = '0xabcdefabcdef...', 
+                    safe_tx_gas = 21000, 
+                    base_gas = 5000, 
+                    gas_price = '100', 
+                    refund_receiver = '0xabcdefabcdef...', 
+                    to_contract_name = 'UniswapV2Router', 
+                    decoded_data = cobo_waas2.models.safe_tx_decoded_data.SafeTxDecodedData(
+                        method = 'transfer', 
+                        parameters = [
+                            cobo_waas2.models.safe_tx_decoded_data_parameters.SafeTxDecodedDataParameters(
+                                name = 'recipient', 
+                                type = 'address', 
+                                value = '0x1234567890abcdef1234567890abcdef12345678', 
+                                value_decoded = [
+                                    cobo_waas2.models.safe_tx_sub_transaction.SafeTxSubTransaction(
+                                        operation = 'Call', 
+                                        to = '0xabcdefabcdefabcdefabcdefabcdefabcdef', 
+                                        value = '1 ETH', 
+                                        wei = '1000000000000000000', 
+                                        data = '0xabcdef...', 
+                                        data_decoded = cobo_waas2.models.safe_tx_decoded_data.SafeTxDecodedData(
+                                            method = 'transfer', ), 
+                                        to_contract_name = 'UniswapV2Router', )
+                                    ], )
+                            ], ), 
+                    signature = '0xabcdef123456...', 
+                    wei = '1000000000000000000', )
             )
         else:
             return TransactionMessageSignEIP712Destination(

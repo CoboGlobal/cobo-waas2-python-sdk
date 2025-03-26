@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.activity_type import ActivityType
@@ -34,7 +34,9 @@ class BabylonStakingActivityDetailExtra(BaseModel):
     auto_broadcast: Optional[StrictBool] = Field(default=None, description="Whether to automatically broadcast the transaction.  - `true`: Automatically broadcast the transaction. - `false`: The transaction will not be submitted to the blockchain automatically. You can call [Broadcast signed transactions](https://www.cobo.com/developers/v2/api-references/transactions/broadcast-signed-transactions) to broadcast the transaction to the blockchain, or retrieve the signed raw transaction data `raw_tx` by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information) and broadcast it yourself. ")
     param_version: Optional[StrictInt] = Field(default=None, description="The version of babylon global parameters.")
     withdraw_from_type: Optional[ActivityType] = None
-    __properties: ClassVar[List[str]] = ["pool_type", "finality_provider_public_key", "stake_block_time", "auto_broadcast", "param_version", "withdraw_from_type"]
+    slash_from_type: Optional[ActivityType] = None
+    stake_amount: Optional[StrictStr] = Field(default=None, description="The origin staking amount.")
+    __properties: ClassVar[List[str]] = ["pool_type", "finality_provider_public_key", "stake_block_time", "auto_broadcast", "param_version", "withdraw_from_type", "slash_from_type", "stake_amount"]
 
     @field_validator('finality_provider_public_key')
     def finality_provider_public_key_validate_regular_expression(cls, value):
@@ -102,7 +104,9 @@ class BabylonStakingActivityDetailExtra(BaseModel):
             "stake_block_time": obj.get("stake_block_time"),
             "auto_broadcast": obj.get("auto_broadcast"),
             "param_version": obj.get("param_version"),
-            "withdraw_from_type": obj.get("withdraw_from_type")
+            "withdraw_from_type": obj.get("withdraw_from_type"),
+            "slash_from_type": obj.get("slash_from_type"),
+            "stake_amount": obj.get("stake_amount")
         })
         return _obj
 

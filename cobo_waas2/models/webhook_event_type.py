@@ -35,6 +35,12 @@ class WebhookEventType(str, Enum):
     WALLETS_DOT_ADDRESSES_DOT_CREATED = 'wallets.addresses.created'
     WALLETS_DOT_CREATED = 'wallets.created'
     MPC_VAULTS_DOT_CREATED = 'mpc_vaults.created'
+    FEE_STATION_DOT_TRANSACTION_DOT_CREATED = 'fee_station.transaction.created'
+    FEE_STATION_DOT_TRANSACTION_DOT_UPDATED = 'fee_station.transaction.updated'
+    FEE_STATION_DOT_TRANSACTION_DOT_FAILED = 'fee_station.transaction.failed'
+    FEE_STATION_DOT_TRANSACTION_DOT_SUCCEEDED = 'fee_station.transaction.succeeded'
+    WALLET_DOT_TOKEN_DOT_ENABLED = 'wallet.token.enabled'
+    WALLET_DOT_CHAIN_DOT_ENABLED = 'wallet.chain.enabled'
 
     UNKNOWN = None
 

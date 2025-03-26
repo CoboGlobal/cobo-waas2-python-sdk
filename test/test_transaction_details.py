@@ -36,7 +36,7 @@ class TestTransactionDetails(unittest.TestCase):
             return TransactionDetails(
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 cobo_id = '20231213122855000000000000000000',
-                request_id = 'web_send_by_user_327_1610444045047',
+                request_id = '760a1955-e212-4dfb-a8d0-e66312a1a051',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 type = 'Deposit',
                 status = 'Submitted',
@@ -65,7 +65,9 @@ class TestTransactionDetails(unittest.TestCase):
                             tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
                             vout_n = 0, 
                             address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
-                            value = '0.5', )
+                            value = '0.5', 
+                            redeem_script = '0x1cc56cbbac4622082221a8768d1d0901', 
+                            revealed_script = '0x1cc56cbbac4622082221a8768d1d0901', )
                         ], 
                     raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
                     unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
@@ -84,6 +86,12 @@ class TestTransactionDetails(unittest.TestCase):
                     ],
                 description = 'withdrawal to exchange trading account',
                 is_loop = False,
+                cobo_category = [
+                    'AutoFueling'
+                    ],
+                fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
+                    request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
+                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
                 created_timestamp = 1610445878970,
                 updated_timestamp = 1610445878970,
                 approvers = [

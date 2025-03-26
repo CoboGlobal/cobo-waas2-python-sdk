@@ -41,7 +41,6 @@ class TestTransactionRequestUtxoFee(unittest.TestCase):
             )
         else:
             return TransactionRequestUtxoFee(
-                fee_rate = '50',
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'BTC',
         )

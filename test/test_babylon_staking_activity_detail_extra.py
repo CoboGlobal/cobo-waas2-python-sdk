@@ -39,7 +39,9 @@ class TestBabylonStakingActivityDetailExtra(unittest.TestCase):
                 stake_block_time = 2000,
                 auto_broadcast = False,
                 param_version = 2,
-                withdraw_from_type = 'Stake'
+                withdraw_from_type = 'Stake',
+                slash_from_type = 'Stake',
+                stake_amount = '100.00'
             )
         else:
             return BabylonStakingActivityDetailExtra(

@@ -7,7 +7,9 @@ Information about the transaction destination type `EVM_EIP_712_Signature`. Refe
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_type** | [**TransactionDestinationType**](TransactionDestinationType.md) |  | 
+**raw_structured_data** | **str** | The raw structured data to be signed, formatted as a JSON string. | [optional] 
 **structured_data** | **Dict[str, object]** | The structured data to be signed, formatted as a JSON object according to the EIP-712 standard. | 
+**safe_tx_extra_data** | [**SafeTxExtraData**](SafeTxExtraData.md) |  | [optional] 
 
 ## Example
 

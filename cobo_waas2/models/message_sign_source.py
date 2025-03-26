@@ -15,12 +15,13 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from cobo_waas2.models.custodial_web3_message_sign_source import CustodialWeb3MessageSignSource
 from cobo_waas2.models.mpc_message_sign_source import MpcMessageSignSource
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-MESSAGESIGNSOURCE_ONE_OF_SCHEMAS = ["MpcMessageSignSource"]
+MESSAGESIGNSOURCE_ONE_OF_SCHEMAS = ["CustodialWeb3MessageSignSource", "MpcMessageSignSource"]
 
 class MessageSignSource(BaseModel):
     """
@@ -28,8 +29,10 @@ class MessageSignSource(BaseModel):
     """
     # data type: MpcMessageSignSource
     oneof_schema_1_validator: Optional[MpcMessageSignSource] = None
-    actual_instance: Optional[Union[MpcMessageSignSource]] = None
-    one_of_schemas: Set[str] = { "MpcMessageSignSource" }
+    # data type: CustodialWeb3MessageSignSource
+    oneof_schema_2_validator: Optional[CustodialWeb3MessageSignSource] = None
+    actual_instance: Optional[Union[CustodialWeb3MessageSignSource, MpcMessageSignSource]] = None
+    one_of_schemas: Set[str] = { "CustodialWeb3MessageSignSource", "MpcMessageSignSource" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,12 +63,17 @@ class MessageSignSource(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `MpcMessageSignSource`")
         else:
             match += 1
+        # validate data type: CustodialWeb3MessageSignSource
+        if not isinstance(v, CustodialWeb3MessageSignSource):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CustodialWeb3MessageSignSource`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in MessageSignSource with oneOf schemas: MpcMessageSignSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in MessageSignSource with oneOf schemas: CustodialWeb3MessageSignSource, MpcMessageSignSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in MessageSignSource with oneOf schemas: MpcMessageSignSource. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in MessageSignSource with oneOf schemas: CustodialWeb3MessageSignSource, MpcMessageSignSource. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -95,6 +103,16 @@ class MessageSignSource(BaseModel):
             instance.actual_instance = MpcMessageSignSource.from_json(json_str)
             return instance
 
+        # check if data type is `CustodialWeb3MessageSignSource`
+        if _data_type == "Web3":
+            instance.actual_instance = CustodialWeb3MessageSignSource.from_json(json_str)
+            return instance
+
+        # check if data type is `CustodialWeb3MessageSignSource`
+        if _data_type == "CustodialWeb3MessageSignSource":
+            instance.actual_instance = CustodialWeb3MessageSignSource.from_json(json_str)
+            return instance
+
         # check if data type is `MpcMessageSignSource`
         if _data_type == "MpcMessageSignSource":
             instance.actual_instance = MpcMessageSignSource.from_json(json_str)
@@ -107,14 +125,20 @@ class MessageSignSource(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CustodialWeb3MessageSignSource
+        try:
+            instance.actual_instance = CustodialWeb3MessageSignSource.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into MessageSignSource with oneOf schemas: MpcMessageSignSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into MessageSignSource with oneOf schemas: CustodialWeb3MessageSignSource, MpcMessageSignSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into MessageSignSource with oneOf schemas: MpcMessageSignSource. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into MessageSignSource with oneOf schemas: CustodialWeb3MessageSignSource, MpcMessageSignSource. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -128,7 +152,7 @@ class MessageSignSource(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], MpcMessageSignSource]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CustodialWeb3MessageSignSource, MpcMessageSignSource]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

@@ -50,7 +50,6 @@ class TestTransactionRequestFee(unittest.TestCase):
                 max_fee_per_gas = '9000000000000',
                 max_priority_fee_per_gas = '1000000000000',
                 gas_price = '100000000',
-                fee_rate = '50',
         )
         """
 
