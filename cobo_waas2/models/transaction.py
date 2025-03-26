@@ -20,6 +20,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.transaction_block_info import TransactionBlockInfo
 from cobo_waas2.models.transaction_destination import TransactionDestination
 from cobo_waas2.models.transaction_fee import TransactionFee
+from cobo_waas2.models.transaction_fueling_info import TransactionFuelingInfo
 from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorType
 from cobo_waas2.models.transaction_raw_tx_info import TransactionRawTxInfo
 from cobo_waas2.models.transaction_replacement import TransactionReplacement
@@ -62,9 +63,11 @@ class Transaction(BaseModel):
     category: Optional[List[StrictStr]] = Field(default=None, description="A custom transaction category for you to identify your transfers more easily.")
     description: Optional[StrictStr] = Field(default=None, description="The description for your transaction.")
     is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
+    cobo_category: Optional[List[StrictStr]] = Field(default=None, description="A transaction category for cobo to identify your transactions.")
+    fueling_info: Optional[TransactionFuelingInfo] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "fueling_info", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -126,6 +129,9 @@ class Transaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of replacement
         if self.replacement:
             _dict['replacement'] = self.replacement.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fueling_info
+        if self.fueling_info:
+            _dict['fueling_info'] = self.fueling_info.to_dict()
         return _dict
 
     @classmethod
@@ -164,6 +170,8 @@ class Transaction(BaseModel):
             "category": obj.get("category"),
             "description": obj.get("description"),
             "is_loop": obj.get("is_loop"),
+            "cobo_category": obj.get("cobo_category"),
+            "fueling_info": TransactionFuelingInfo.from_dict(obj["fueling_info"]) if obj.get("fueling_info") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

@@ -15,13 +15,14 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from cobo_waas2.models.custodial_web3_contract_call_source import CustodialWeb3ContractCallSource
 from cobo_waas2.models.mpc_contract_call_source import MpcContractCallSource
 from cobo_waas2.models.safe_contract_call_source import SafeContractCallSource
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-CONTRACTCALLSOURCE_ONE_OF_SCHEMAS = ["MpcContractCallSource", "SafeContractCallSource"]
+CONTRACTCALLSOURCE_ONE_OF_SCHEMAS = ["CustodialWeb3ContractCallSource", "MpcContractCallSource", "SafeContractCallSource"]
 
 class ContractCallSource(BaseModel):
     """
@@ -31,8 +32,10 @@ class ContractCallSource(BaseModel):
     oneof_schema_1_validator: Optional[MpcContractCallSource] = None
     # data type: SafeContractCallSource
     oneof_schema_2_validator: Optional[SafeContractCallSource] = None
-    actual_instance: Optional[Union[MpcContractCallSource, SafeContractCallSource]] = None
-    one_of_schemas: Set[str] = { "MpcContractCallSource", "SafeContractCallSource" }
+    # data type: CustodialWeb3ContractCallSource
+    oneof_schema_3_validator: Optional[CustodialWeb3ContractCallSource] = None
+    actual_instance: Optional[Union[CustodialWeb3ContractCallSource, MpcContractCallSource, SafeContractCallSource]] = None
+    one_of_schemas: Set[str] = { "CustodialWeb3ContractCallSource", "MpcContractCallSource", "SafeContractCallSource" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -68,12 +71,17 @@ class ContractCallSource(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `SafeContractCallSource`")
         else:
             match += 1
+        # validate data type: CustodialWeb3ContractCallSource
+        if not isinstance(v, CustodialWeb3ContractCallSource):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CustodialWeb3ContractCallSource`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ContractCallSource with oneOf schemas: MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ContractCallSource with oneOf schemas: CustodialWeb3ContractCallSource, MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ContractCallSource with oneOf schemas: MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ContractCallSource with oneOf schemas: CustodialWeb3ContractCallSource, MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -108,6 +116,16 @@ class ContractCallSource(BaseModel):
             instance.actual_instance = MpcContractCallSource.from_json(json_str)
             return instance
 
+        # check if data type is `CustodialWeb3ContractCallSource`
+        if _data_type == "Web3":
+            instance.actual_instance = CustodialWeb3ContractCallSource.from_json(json_str)
+            return instance
+
+        # check if data type is `CustodialWeb3ContractCallSource`
+        if _data_type == "CustodialWeb3ContractCallSource":
+            instance.actual_instance = CustodialWeb3ContractCallSource.from_json(json_str)
+            return instance
+
         # check if data type is `MpcContractCallSource`
         if _data_type == "MpcContractCallSource":
             instance.actual_instance = MpcContractCallSource.from_json(json_str)
@@ -131,14 +149,20 @@ class ContractCallSource(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CustodialWeb3ContractCallSource
+        try:
+            instance.actual_instance = CustodialWeb3ContractCallSource.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ContractCallSource with oneOf schemas: MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ContractCallSource with oneOf schemas: CustodialWeb3ContractCallSource, MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into ContractCallSource with oneOf schemas: MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into ContractCallSource with oneOf schemas: CustodialWeb3ContractCallSource, MpcContractCallSource, SafeContractCallSource. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -152,7 +176,7 @@ class ContractCallSource(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], MpcContractCallSource, SafeContractCallSource]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CustodialWeb3ContractCallSource, MpcContractCallSource, SafeContractCallSource]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

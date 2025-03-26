@@ -16,6 +16,7 @@ import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from cobo_waas2.models.custodial_transfer_source import CustodialTransferSource
+from cobo_waas2.models.custodial_web3_transfer_source import CustodialWeb3TransferSource
 from cobo_waas2.models.exchange_transfer_source import ExchangeTransferSource
 from cobo_waas2.models.mpc_transfer_source import MpcTransferSource
 from cobo_waas2.models.safe_transfer_source import SafeTransferSource
@@ -23,7 +24,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSFERSOURCE_ONE_OF_SCHEMAS = ["CustodialTransferSource", "ExchangeTransferSource", "MpcTransferSource", "SafeTransferSource"]
+TRANSFERSOURCE_ONE_OF_SCHEMAS = ["CustodialTransferSource", "CustodialWeb3TransferSource", "ExchangeTransferSource", "MpcTransferSource", "SafeTransferSource"]
 
 class TransferSource(BaseModel):
     """
@@ -31,14 +32,16 @@ class TransferSource(BaseModel):
     """
     # data type: CustodialTransferSource
     oneof_schema_1_validator: Optional[CustodialTransferSource] = None
+    # data type: CustodialWeb3TransferSource
+    oneof_schema_2_validator: Optional[CustodialWeb3TransferSource] = None
     # data type: MpcTransferSource
-    oneof_schema_2_validator: Optional[MpcTransferSource] = None
+    oneof_schema_3_validator: Optional[MpcTransferSource] = None
     # data type: SafeTransferSource
-    oneof_schema_3_validator: Optional[SafeTransferSource] = None
+    oneof_schema_4_validator: Optional[SafeTransferSource] = None
     # data type: ExchangeTransferSource
-    oneof_schema_4_validator: Optional[ExchangeTransferSource] = None
-    actual_instance: Optional[Union[CustodialTransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource]] = None
-    one_of_schemas: Set[str] = { "CustodialTransferSource", "ExchangeTransferSource", "MpcTransferSource", "SafeTransferSource" }
+    oneof_schema_5_validator: Optional[ExchangeTransferSource] = None
+    actual_instance: Optional[Union[CustodialTransferSource, CustodialWeb3TransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource]] = None
+    one_of_schemas: Set[str] = { "CustodialTransferSource", "CustodialWeb3TransferSource", "ExchangeTransferSource", "MpcTransferSource", "SafeTransferSource" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -69,6 +72,11 @@ class TransferSource(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `CustodialTransferSource`")
         else:
             match += 1
+        # validate data type: CustodialWeb3TransferSource
+        if not isinstance(v, CustodialWeb3TransferSource):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CustodialWeb3TransferSource`")
+        else:
+            match += 1
         # validate data type: MpcTransferSource
         if not isinstance(v, MpcTransferSource):
             error_messages.append(f"Error! Input type `{type(v)}` is not `MpcTransferSource`")
@@ -86,10 +94,10 @@ class TransferSource(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransferSource with oneOf schemas: CustodialTransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransferSource with oneOf schemas: CustodialTransferSource, CustodialWeb3TransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransferSource with oneOf schemas: CustodialTransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransferSource with oneOf schemas: CustodialTransferSource, CustodialWeb3TransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -139,9 +147,19 @@ class TransferSource(BaseModel):
             instance.actual_instance = MpcTransferSource.from_json(json_str)
             return instance
 
+        # check if data type is `CustodialWeb3TransferSource`
+        if _data_type == "Web3":
+            instance.actual_instance = CustodialWeb3TransferSource.from_json(json_str)
+            return instance
+
         # check if data type is `CustodialTransferSource`
         if _data_type == "CustodialTransferSource":
             instance.actual_instance = CustodialTransferSource.from_json(json_str)
+            return instance
+
+        # check if data type is `CustodialWeb3TransferSource`
+        if _data_type == "CustodialWeb3TransferSource":
+            instance.actual_instance = CustodialWeb3TransferSource.from_json(json_str)
             return instance
 
         # check if data type is `ExchangeTransferSource`
@@ -166,6 +184,12 @@ class TransferSource(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CustodialWeb3TransferSource
+        try:
+            instance.actual_instance = CustodialWeb3TransferSource.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into MpcTransferSource
         try:
             instance.actual_instance = MpcTransferSource.from_json(json_str)
@@ -187,11 +211,11 @@ class TransferSource(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransferSource with oneOf schemas: CustodialTransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransferSource with oneOf schemas: CustodialTransferSource, CustodialWeb3TransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransferSource with oneOf schemas: CustodialTransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransferSource with oneOf schemas: CustodialTransferSource, CustodialWeb3TransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -205,7 +229,7 @@ class TransferSource(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], CustodialTransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CustodialTransferSource, CustodialWeb3TransferSource, ExchangeTransferSource, MpcTransferSource, SafeTransferSource]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

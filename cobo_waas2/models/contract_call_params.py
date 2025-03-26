@@ -15,11 +15,12 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.auto_fuel_type import AutoFuelType
 from cobo_waas2.models.contract_call_destination import ContractCallDestination
 from cobo_waas2.models.contract_call_source import ContractCallSource
+from cobo_waas2.models.transaction_process_type import TransactionProcessType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,19 +37,9 @@ class ContractCallParams(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="The description of the contract call transaction.")
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     fee: Optional[TransactionRequestFee] = None
-    transaction_process_type: Optional[StrictStr] = Field(default=None, description="Transaction processing type. Possible values are: - `AutoProcess` (default): After the transaction is constructed, it will be automatically signed and broadcast.   - `BuildOnly`: Set to this value if you want to build the transaction first without automatically signing and broadcasting it. You can manually call the [Sign and broadcast transaction](https://www.cobo.com/developers/v2/api-references/transactions/sign-and-broadcast-transaction) operation to complete the signing and broadcasting process. ")
+    transaction_process_type: Optional[TransactionProcessType] = None
     auto_fuel: Optional[AutoFuelType] = None
     __properties: ClassVar[List[str]] = ["request_id", "chain_id", "source", "destination", "description", "category_names", "fee", "transaction_process_type", "auto_fuel"]
-
-    @field_validator('transaction_process_type')
-    def transaction_process_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['AutoProcess', 'BuildOnly']):
-            raise ValueError("must be one of enum values ('AutoProcess', 'BuildOnly')")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

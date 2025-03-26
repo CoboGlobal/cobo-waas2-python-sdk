@@ -37,7 +37,9 @@ class TestTransactionSelectedUtxo(unittest.TestCase):
                 tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo',
                 vout_n = 0,
                 address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE',
-                value = '0.5'
+                value = '0.5',
+                redeem_script = '0x1cc56cbbac4622082221a8768d1d0901',
+                revealed_script = '0x1cc56cbbac4622082221a8768d1d0901'
             )
         else:
             return TransactionSelectedUtxo(

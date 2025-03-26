@@ -4,6 +4,7 @@
 from cobo_waas2.api.address_books_api import AddressBooksApi
 from cobo_waas2.api.developers_api import DevelopersApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
+from cobo_waas2.api.fee_station_api import FeeStationApi
 from cobo_waas2.api.o_auth_api import OAuthApi
 from cobo_waas2.api.prime_broker_api import PrimeBrokerApi
 from cobo_waas2.api.stakings_api import StakingsApi

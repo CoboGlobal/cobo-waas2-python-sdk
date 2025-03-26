@@ -24,6 +24,7 @@ class MessageSignSourceType(str, Enum):
     """
     allowed enum values
     """
+    WEB3 = 'Web3'
     ORG_CONTROLLED = 'Org-Controlled'
     USER_CONTROLLED = 'User-Controlled'
 

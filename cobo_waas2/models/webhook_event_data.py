@@ -16,7 +16,9 @@ import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from cobo_waas2.models.addresses_event_data import AddressesEventData
+from cobo_waas2.models.chains_event_data import ChainsEventData
 from cobo_waas2.models.mpc_vault_event_data import MPCVaultEventData
+from cobo_waas2.models.tokens_event_data import TokensEventData
 from cobo_waas2.models.transaction_webhook_event_data import TransactionWebhookEventData
 from cobo_waas2.models.tss_request_webhook_event_data import TSSRequestWebhookEventData
 from cobo_waas2.models.wallet_info_event_data import WalletInfoEventData
@@ -24,7 +26,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-WEBHOOKEVENTDATA_ONE_OF_SCHEMAS = ["AddressesEventData", "MPCVaultEventData", "TSSRequestWebhookEventData", "TransactionWebhookEventData", "WalletInfoEventData"]
+WEBHOOKEVENTDATA_ONE_OF_SCHEMAS = ["AddressesEventData", "ChainsEventData", "MPCVaultEventData", "TSSRequestWebhookEventData", "TokensEventData", "TransactionWebhookEventData", "WalletInfoEventData"]
 
 class WebhookEventData(BaseModel):
     """
@@ -40,8 +42,12 @@ class WebhookEventData(BaseModel):
     oneof_schema_4_validator: Optional[WalletInfoEventData] = None
     # data type: MPCVaultEventData
     oneof_schema_5_validator: Optional[MPCVaultEventData] = None
-    actual_instance: Optional[Union[AddressesEventData, MPCVaultEventData, TSSRequestWebhookEventData, TransactionWebhookEventData, WalletInfoEventData]] = None
-    one_of_schemas: Set[str] = { "AddressesEventData", "MPCVaultEventData", "TSSRequestWebhookEventData", "TransactionWebhookEventData", "WalletInfoEventData" }
+    # data type: ChainsEventData
+    oneof_schema_6_validator: Optional[ChainsEventData] = None
+    # data type: TokensEventData
+    oneof_schema_7_validator: Optional[TokensEventData] = None
+    actual_instance: Optional[Union[AddressesEventData, ChainsEventData, MPCVaultEventData, TSSRequestWebhookEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData]] = None
+    one_of_schemas: Set[str] = { "AddressesEventData", "ChainsEventData", "MPCVaultEventData", "TSSRequestWebhookEventData", "TokensEventData", "TransactionWebhookEventData", "WalletInfoEventData" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -92,12 +98,22 @@ class WebhookEventData(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `MPCVaultEventData`")
         else:
             match += 1
+        # validate data type: ChainsEventData
+        if not isinstance(v, ChainsEventData):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ChainsEventData`")
+        else:
+            match += 1
+        # validate data type: TokensEventData
+        if not isinstance(v, TokensEventData):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TokensEventData`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, MPCVaultEventData, TSSRequestWebhookEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, ChainsEventData, MPCVaultEventData, TSSRequestWebhookEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, MPCVaultEventData, TSSRequestWebhookEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, ChainsEventData, MPCVaultEventData, TSSRequestWebhookEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -122,6 +138,11 @@ class WebhookEventData(BaseModel):
             instance.actual_instance = AddressesEventData.from_json(json_str)
             return instance
 
+        # check if data type is `ChainsEventData`
+        if _data_type == "Chains":
+            instance.actual_instance = ChainsEventData.from_json(json_str)
+            return instance
+
         # check if data type is `MPCVaultEventData`
         if _data_type == "MPCVault":
             instance.actual_instance = MPCVaultEventData.from_json(json_str)
@@ -130,6 +151,11 @@ class WebhookEventData(BaseModel):
         # check if data type is `TSSRequestWebhookEventData`
         if _data_type == "TSSRequest":
             instance.actual_instance = TSSRequestWebhookEventData.from_json(json_str)
+            return instance
+
+        # check if data type is `TokensEventData`
+        if _data_type == "Tokens":
+            instance.actual_instance = TokensEventData.from_json(json_str)
             return instance
 
         # check if data type is `TransactionWebhookEventData`
@@ -147,6 +173,11 @@ class WebhookEventData(BaseModel):
             instance.actual_instance = AddressesEventData.from_json(json_str)
             return instance
 
+        # check if data type is `ChainsEventData`
+        if _data_type == "ChainsEventData":
+            instance.actual_instance = ChainsEventData.from_json(json_str)
+            return instance
+
         # check if data type is `MPCVaultEventData`
         if _data_type == "MPCVaultEventData":
             instance.actual_instance = MPCVaultEventData.from_json(json_str)
@@ -155,6 +186,11 @@ class WebhookEventData(BaseModel):
         # check if data type is `TSSRequestWebhookEventData`
         if _data_type == "TSSRequestWebhookEventData":
             instance.actual_instance = TSSRequestWebhookEventData.from_json(json_str)
+            return instance
+
+        # check if data type is `TokensEventData`
+        if _data_type == "TokensEventData":
+            instance.actual_instance = TokensEventData.from_json(json_str)
             return instance
 
         # check if data type is `TransactionWebhookEventData`
@@ -198,14 +234,26 @@ class WebhookEventData(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into ChainsEventData
+        try:
+            instance.actual_instance = ChainsEventData.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into TokensEventData
+        try:
+            instance.actual_instance = TokensEventData.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, MPCVaultEventData, TSSRequestWebhookEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, ChainsEventData, MPCVaultEventData, TSSRequestWebhookEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, MPCVaultEventData, TSSRequestWebhookEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, ChainsEventData, MPCVaultEventData, TSSRequestWebhookEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -219,7 +267,7 @@ class WebhookEventData(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], AddressesEventData, MPCVaultEventData, TSSRequestWebhookEventData, TransactionWebhookEventData, WalletInfoEventData]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], AddressesEventData, ChainsEventData, MPCVaultEventData, TSSRequestWebhookEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

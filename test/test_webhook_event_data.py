@@ -37,7 +37,7 @@ class TestWebhookEventData(unittest.TestCase):
                 data_type = 'Transaction',
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 cobo_id = '20231213122855000000000000000000',
-                request_id = 'web_send_by_user_327_1610444045047',
+                request_id = '760a1955-e212-4dfb-a8d0-e66312a1a051',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 type = 'Org-Controlled',
                 status = 'Success',
@@ -66,7 +66,9 @@ class TestWebhookEventData(unittest.TestCase):
                             tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
                             vout_n = 0, 
                             address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
-                            value = '0.5', )
+                            value = '0.5', 
+                            redeem_script = '0x1cc56cbbac4622082221a8768d1d0901', 
+                            revealed_script = '0x1cc56cbbac4622082221a8768d1d0901', )
                         ], 
                     raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
                     unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
@@ -85,6 +87,12 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 description = 'This is a request to create key shares using the Recovery Group for a key share holder in the Main Group if their key share has been lost (e.g. by losing their phone).',
                 is_loop = False,
+                cobo_category = [
+                    'AutoFueling'
+                    ],
+                fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
+                    request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
+                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
                 created_timestamp = 1718619403933,
                 updated_timestamp = 1610445878970,
                 tss_request_id = '20240711114129000132315000003970',
@@ -105,6 +113,33 @@ class TestWebhookEventData(unittest.TestCase):
                     cobo_waas2.models.root_pubkey.RootPubkey(
                         root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq', 
                         curve = 'SECP256K1', )
+                    ],
+                chains = [
+                    cobo_waas2.models.chain_info.ChainInfo(
+                        chain_id = 'ETH', 
+                        symbol = 'ETH', 
+                        icon_url = 'https://d.cobo.com/public/logos/ETH.png', 
+                        explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
+                        explorer_address_url = 'https://etherscan.io/address/{address}', 
+                        require_memo = False, 
+                        confirming_threshold = 15, )
+                    ],
+                tokens = [
+                    cobo_waas2.models.token_info.TokenInfo(
+                        token_id = 'ETH_USDT', 
+                        chain_id = 'ETH', 
+                        asset_id = 'USDT', 
+                        symbol = 'USDT', 
+                        name = 'Tether USDT', 
+                        decimal = 18, 
+                        icon_url = 'https://d.cobo.com/public/logos/USDT.png', 
+                        token_address = '0xdAC17F958D2ee523a2206206994597C13D831ec7', 
+                        fee_token_id = 'ETH', 
+                        can_deposit = True, 
+                        can_withdraw = True, 
+                        dust_threshold = '0.00000546', 
+                        custodial_minimum_deposit_threshold = '0.0001', 
+                        asset_model_type = 'Account', )
                     ]
             )
         else:
@@ -116,6 +151,33 @@ class TestWebhookEventData(unittest.TestCase):
                 source = None,
                 destination = None,
                 initiator_type = 'API',
+                chains = [
+                    cobo_waas2.models.chain_info.ChainInfo(
+                        chain_id = 'ETH', 
+                        symbol = 'ETH', 
+                        icon_url = 'https://d.cobo.com/public/logos/ETH.png', 
+                        explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
+                        explorer_address_url = 'https://etherscan.io/address/{address}', 
+                        require_memo = False, 
+                        confirming_threshold = 15, )
+                    ],
+                tokens = [
+                    cobo_waas2.models.token_info.TokenInfo(
+                        token_id = 'ETH_USDT', 
+                        chain_id = 'ETH', 
+                        asset_id = 'USDT', 
+                        symbol = 'USDT', 
+                        name = 'Tether USDT', 
+                        decimal = 18, 
+                        icon_url = 'https://d.cobo.com/public/logos/USDT.png', 
+                        token_address = '0xdAC17F958D2ee523a2206206994597C13D831ec7', 
+                        fee_token_id = 'ETH', 
+                        can_deposit = True, 
+                        can_withdraw = True, 
+                        dust_threshold = '0.00000546', 
+                        custodial_minimum_deposit_threshold = '0.0001', 
+                        asset_model_type = 'Account', )
+                    ],
         )
         """
 

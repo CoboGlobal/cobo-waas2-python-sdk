@@ -34,7 +34,7 @@ class TestTransactionSignatureResult(unittest.TestCase):
         model = TransactionSignatureResult()
         if include_optional:
             return TransactionSignatureResult(
-                result_type = 'Address',
+                result_type = 'Signature',
                 signature = '0x6a8d82c2b080c18e7c1d187a95b3d9b0b9b20454d5e1d784b8a4625d16772d3f'
             )
         else:

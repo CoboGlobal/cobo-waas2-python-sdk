@@ -34,6 +34,8 @@ class TestTransactionUserApprovalDetail(unittest.TestCase):
         model = TransactionUserApprovalDetail()
         if include_optional:
             return TransactionUserApprovalDetail(
+                name = 'tom',
+                email = 'tom@gmail.com',
                 pubkey = '96db1b3c68c3a3497bffb7e257a3900b0e86575c968a346a6696d1676fa8c5a6431b46c867134bd5fb8a9b5f787fa0c534d7c7664f1e52c432ce64326cc4cc1d',
                 result = 'Approved',
                 signature = '',

@@ -26,7 +26,7 @@ class TransactionRequestUtxoFee(BaseModel):
     """
     The preset properties to limit transaction fee.  In the UTXO fee model, the transaction fee is calculated by multiplying the fee rate by the transaction size. This can be expressed as: Transaction fee = fee rate * transaction size. For more information about the UTXO fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  You can specify the maximum fee amount to limit the transaction fee. The transaction will fail if the transaction fee exceeds the specified maximum fee amount.  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
-    fee_rate: StrictStr = Field(description="The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain.")
+    fee_rate: Optional[StrictStr] = Field(default=None, description="The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain.")
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token ID of the transaction fee.")
     max_fee_amount: Optional[StrictStr] = Field(default=None, description="The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee.")
