@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**list_utxos**](WalletsApi.md#list_utxos) | **GET** /wallets/{wallet_id}/utxos | List UTXOs
 [**list_wallets**](WalletsApi.md#list_wallets) | **GET** /wallets | List all wallets
 [**lock_utxos**](WalletsApi.md#lock_utxos) | **POST** /wallets/{wallet_id}/utxos/lock | Lock UTXOs
+[**refresh_address_balances_by_token**](WalletsApi.md#refresh_address_balances_by_token) | **PUT** /wallets/{wallet_id}/tokens/{token_id}/refresh_address_balances | refresh address balances by token
 [**unlock_utxos**](WalletsApi.md#unlock_utxos) | **POST** /wallets/{wallet_id}/utxos/unlock | Unlock UTXOs
 [**update_wallet_by_id**](WalletsApi.md#update_wallet_by_id) | **PUT** /wallets/{wallet_id} | Update wallet
 
@@ -1660,6 +1661,83 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **refresh_address_balances_by_token**
+> RefreshAddressBalancesByToken200Response refresh_address_balances_by_token(wallet_id, token_id, refresh_address_balances_by_token_request=refresh_address_balances_by_token_request)
+
+refresh address balances by token
+
+The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.refresh_address_balances_by_token200_response import RefreshAddressBalancesByToken200Response
+from cobo_waas2.models.refresh_address_balances_by_token_request import RefreshAddressBalancesByTokenRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.WalletsApi(api_client)
+    wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    token_id = 'ETH_USDT'
+    refresh_address_balances_by_token_request = cobo_waas2.RefreshAddressBalancesByTokenRequest()
+
+    try:
+        # refresh address balances by token
+        api_response = api_instance.refresh_address_balances_by_token(wallet_id, token_id, refresh_address_balances_by_token_request=refresh_address_balances_by_token_request)
+        print("The response of WalletsApi->refresh_address_balances_by_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WalletsApi->refresh_address_balances_by_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **wallet_id** | **str**| The wallet ID. | 
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **refresh_address_balances_by_token_request** | [**RefreshAddressBalancesByTokenRequest**](RefreshAddressBalancesByTokenRequest.md)| The request body to refresh the addresses balance by  specified token within a specified wallet | [optional] 
+
+### Return type
+
+[**RefreshAddressBalancesByToken200Response**](RefreshAddressBalancesByToken200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

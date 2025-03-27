@@ -6,13 +6,13 @@ The information about the sub-transaction.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**operation** | **str** | Type of operation in the sub-transaction | [optional] 
-**to** | **str** | Address the transaction is sent to | [optional] 
-**value** | **str** | Readable transaction value (e.g., 1 ETH) | [optional] 
-**wei** | **str** | Transaction amount in Wei | [optional] 
+**operation** | **str** | The type of operation in the sub-transaction. | [optional] 
+**to** | **str** | The destination address of the sub-transaction. | [optional] 
+**value** | **str** | The human-readable transaction value, for example, &#x60;1 ETH&#x60;. | [optional] 
+**wei** | **str** | The transaction amount in Wei | [optional] 
 **data** | **str** | Encoded transaction data | [optional] 
 **data_decoded** | [**SafeTxDecodedData**](SafeTxDecodedData.md) |  | [optional] 
-**to_contract_name** | **str** | Name of the recipient contract (if available) | [optional] 
+**to_contract_name** | **str** | The name of the recipient contract (if available). | [optional] 
 
 ## Example
 

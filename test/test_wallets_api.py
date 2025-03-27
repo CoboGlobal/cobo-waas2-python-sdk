@@ -341,6 +341,20 @@ class TestWalletsApi(unittest.TestCase):
         api_response = self.api.lock_utxos(wallet_id, lock_utxos_request=lock_utxos_request)
         """
 
+    def test_refresh_address_balances_by_token(self) -> None:
+        """
+        Test case for refresh_address_balances_by_token
+
+        refresh address balances by token
+        """
+        """
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        token_id = 'ETH_USDT'
+        refresh_address_balances_by_token_request = cobo_waas2.RefreshAddressBalancesByTokenRequest()
+
+        api_response = self.api.refresh_address_balances_by_token(wallet_id, token_id, refresh_address_balances_by_token_request=refresh_address_balances_by_token_request)
+        """
+
     def test_unlock_utxos(self) -> None:
         """
         Test case for unlock_utxos

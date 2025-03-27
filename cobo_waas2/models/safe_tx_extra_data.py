@@ -24,26 +24,26 @@ from typing_extensions import Self
 
 class SafeTxExtraData(BaseModel):
     """
-    The information about the extra data of the Safe{Wallet} tx message transaction.
+    The information used to construct and sign Safe{Wallet} transactions using the EIP-712 standard.
     """  # noqa: E501
-    to: StrictStr = Field(description="The recipient address of the transaction")
-    value: StrictStr = Field(description="Readable transaction value (e.g., 1 ETH)")
-    data: StrictStr = Field(description="The transaction data")
-    domain_hash: StrictStr = Field(description="EIP712 structured data domain hash")
-    message_hash: StrictStr = Field(description="Hash of the structured message")
-    safe_address: StrictStr = Field(description="Address of the Safe contract")
-    safe_tx_hash: StrictStr = Field(description="Hash of the Safe transaction")
-    safe_nonce: StrictInt = Field(description="Safe transaction nonce")
-    operation: StrictStr = Field(description="Type of operation performed in the transaction")
-    gas_token_addr: Optional[StrictStr] = Field(default=None, description="Address of the gas token")
-    safe_tx_gas: Optional[StrictInt] = Field(default=None, description="Gas used for the Safe transaction")
-    base_gas: Optional[StrictInt] = Field(default=None, description="Base gas for the transaction")
-    gas_price: Optional[StrictStr] = Field(default=None, description="Gas price used in the transaction")
-    refund_receiver: Optional[StrictStr] = Field(default=None, description="Address to receive the gas refund")
-    to_contract_name: Optional[StrictStr] = Field(default=None, description="Name of the recipient contract (if available)")
+    to: StrictStr = Field(description="The recipient address of the transaction.")
+    value: StrictStr = Field(description="The human-readable transaction value, for example, `1 ETH`.")
+    data: StrictStr = Field(description="The transaction call data.")
+    domain_hash: StrictStr = Field(description="The EIP-712 domain separator hash.")
+    message_hash: StrictStr = Field(description="The hash of the structured message to be signed.")
+    safe_address: StrictStr = Field(description="The address of the Safe contract.")
+    safe_tx_hash: StrictStr = Field(description="The hash of the transaction.")
+    safe_nonce: StrictInt = Field(description="The nonce of the transaction.")
+    operation: StrictStr = Field(description="The operation type for the transaction.")
+    gas_token_addr: Optional[StrictStr] = Field(default=None, description="The address of the token used to pay gas.")
+    safe_tx_gas: Optional[StrictInt] = Field(default=None, description="The gas limit used for the transaction.")
+    base_gas: Optional[StrictInt] = Field(default=None, description="The base gas for the transaction.")
+    gas_price: Optional[StrictStr] = Field(default=None, description="The gas price used in the transaction.")
+    refund_receiver: Optional[StrictStr] = Field(default=None, description="The address used to receive the gas refund.")
+    to_contract_name: Optional[StrictStr] = Field(default=None, description="The name of the recipient contract (if available).")
     decoded_data: Optional[SafeTxDecodedData] = None
-    signature: Optional[StrictStr] = Field(default=None, description="Signature of the transaction (if signed by Cobo Signer)")
-    wei: Optional[StrictStr] = Field(default=None, description="Transaction amount in Wei")
+    signature: Optional[StrictStr] = Field(default=None, description="The signature of the transaction (if signed by Cobo Signer).")
+    wei: Optional[StrictStr] = Field(default=None, description="The transaction amount in Wei.")
     __properties: ClassVar[List[str]] = ["to", "value", "data", "domain_hash", "message_hash", "safe_address", "safe_tx_hash", "safe_nonce", "operation", "gas_token_addr", "safe_tx_gas", "base_gas", "gas_price", "refund_receiver", "to_contract_name", "decoded_data", "signature", "wei"]
 
     model_config = ConfigDict(

@@ -26,8 +26,8 @@ class TransactionUserApprovalDetail(BaseModel):
     """
     The user approval data for transaction.
     """  # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name the user who audited this message.")
-    email: Optional[StrictStr] = Field(default=None, description="The email the user who audited this message.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the user who audited this message.")
+    email: Optional[StrictStr] = Field(default=None, description="The email of the user who audited this message.")
     pubkey: Optional[StrictStr] = Field(default=None, description="The Cobo Guard public key of the user who audited this message.")
     result: Optional[TransactionApprovalResult] = None
     signature: Optional[StrictStr] = Field(default=None, description="The signature of the audited message.")

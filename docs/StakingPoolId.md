@@ -1,6 +1,6 @@
 # StakingPoolId
 
-The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. Currently, `berachain_bgt` and `erachain_bgt_testnet` are not supported.
+The ID of the staking pool. A staking pool is a pairing of a staking protocol and a specific type of token. Currently, `berachain_bgt` and `berachain_bgt_testnet` are not supported.
 
 ## Properties
 

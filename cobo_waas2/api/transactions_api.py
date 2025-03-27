@@ -1467,7 +1467,7 @@ class TransactionsApi:
     ) -> TransactionApprovalDetail:
         """Get transaction approval details
 
-        This operation retrieves approval detailed information about a specified transaction. 
+        This operation retrieves detailed approval information about a specified transaction. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1513,7 +1513,7 @@ class TransactionsApi:
     ) -> ApiResponse[TransactionApprovalDetail]:
         """Get transaction approval details
 
-        This operation retrieves approval detailed information about a specified transaction. 
+        This operation retrieves detailed approval information about a specified transaction. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1559,7 +1559,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Get transaction approval details
 
-        This operation retrieves approval detailed information about a specified transaction. 
+        This operation retrieves detailed approval information about a specified transaction. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1806,7 +1806,7 @@ class TransactionsApi:
     ) -> ListTransactionApprovalDetails200Response:
         """List transaction approval details
 
-        This operation retrieves approval detailed information about multi specified transaction. 
+        This operation retrieves detailed approval information for all transactions. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -1856,7 +1856,7 @@ class TransactionsApi:
     ) -> ApiResponse[ListTransactionApprovalDetails200Response]:
         """List transaction approval details
 
-        This operation retrieves approval detailed information about multi specified transaction. 
+        This operation retrieves detailed approval information for all transactions. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -1906,7 +1906,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """List transaction approval details
 
-        This operation retrieves approval detailed information about multi specified transaction. 
+        This operation retrieves detailed approval information for all transactions. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str

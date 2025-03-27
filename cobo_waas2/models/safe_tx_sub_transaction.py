@@ -25,13 +25,13 @@ class SafeTxSubTransaction(BaseModel):
     """
     The information about the sub-transaction.
     """  # noqa: E501
-    operation: Optional[StrictStr] = Field(default=None, description="Type of operation in the sub-transaction")
-    to: Optional[StrictStr] = Field(default=None, description="Address the transaction is sent to")
-    value: Optional[StrictStr] = Field(default=None, description="Readable transaction value (e.g., 1 ETH)")
-    wei: Optional[StrictStr] = Field(default=None, description="Transaction amount in Wei")
+    operation: Optional[StrictStr] = Field(default=None, description="The type of operation in the sub-transaction.")
+    to: Optional[StrictStr] = Field(default=None, description="The destination address of the sub-transaction.")
+    value: Optional[StrictStr] = Field(default=None, description="The human-readable transaction value, for example, `1 ETH`.")
+    wei: Optional[StrictStr] = Field(default=None, description="The transaction amount in Wei")
     data: Optional[StrictStr] = Field(default=None, description="Encoded transaction data")
     data_decoded: Optional[SafeTxDecodedData] = None
-    to_contract_name: Optional[StrictStr] = Field(default=None, description="Name of the recipient contract (if available)")
+    to_contract_name: Optional[StrictStr] = Field(default=None, description="The name of the recipient contract (if available).")
     __properties: ClassVar[List[str]] = ["operation", "to", "value", "wei", "data", "data_decoded", "to_contract_name"]
 
     model_config = ConfigDict(

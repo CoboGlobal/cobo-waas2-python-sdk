@@ -36,6 +36,8 @@ from cobo_waas2.models.list_wallets200_response import ListWallets200Response
 from cobo_waas2.models.lock_utxos201_response import LockUtxos201Response
 from cobo_waas2.models.lock_utxos_request import LockUtxosRequest
 from cobo_waas2.models.max_transferable_value import MaxTransferableValue
+from cobo_waas2.models.refresh_address_balances_by_token200_response import RefreshAddressBalancesByToken200Response
+from cobo_waas2.models.refresh_address_balances_by_token_request import RefreshAddressBalancesByTokenRequest
 from cobo_waas2.models.update_wallet_params import UpdateWalletParams
 from cobo_waas2.models.wallet_info import WalletInfo
 from cobo_waas2.models.wallet_subtype import WalletSubtype
@@ -4627,6 +4629,205 @@ class WalletsApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/wallets/{wallet_id}/utxos/lock',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def refresh_address_balances_by_token(
+        self,
+        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh the addresses balance by  specified token within a specified wallet")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RefreshAddressBalancesByToken200Response:
+        """refresh address balances by token
+
+        The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+
+        :param wallet_id: The wallet ID. (required)
+        :type wallet_id: str
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param refresh_address_balances_by_token_request: The request body to refresh the addresses balance by  specified token within a specified wallet
+        :type refresh_address_balances_by_token_request: RefreshAddressBalancesByTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._refresh_address_balances_by_token_serialize(
+            wallet_id=wallet_id,
+            token_id=token_id,
+            refresh_address_balances_by_token_request=refresh_address_balances_by_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RefreshAddressBalancesByToken200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def refresh_address_balances_by_token_with_http_info(
+        self,
+        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh the addresses balance by  specified token within a specified wallet")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[RefreshAddressBalancesByToken200Response]:
+        """refresh address balances by token
+
+        The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+
+        :param wallet_id: The wallet ID. (required)
+        :type wallet_id: str
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param refresh_address_balances_by_token_request: The request body to refresh the addresses balance by  specified token within a specified wallet
+        :type refresh_address_balances_by_token_request: RefreshAddressBalancesByTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._refresh_address_balances_by_token_serialize(
+            wallet_id=wallet_id,
+            token_id=token_id,
+            refresh_address_balances_by_token_request=refresh_address_balances_by_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RefreshAddressBalancesByToken200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def refresh_address_balances_by_token_without_preload_content(
+        self,
+        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh the addresses balance by  specified token within a specified wallet")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """refresh address balances by token
+
+        The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+
+        :param wallet_id: The wallet ID. (required)
+        :type wallet_id: str
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param refresh_address_balances_by_token_request: The request body to refresh the addresses balance by  specified token within a specified wallet
+        :type refresh_address_balances_by_token_request: RefreshAddressBalancesByTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._refresh_address_balances_by_token_serialize(
+            wallet_id=wallet_id,
+            token_id=token_id,
+            refresh_address_balances_by_token_request=refresh_address_balances_by_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RefreshAddressBalancesByToken200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _refresh_address_balances_by_token_serialize(
+        self,
+        wallet_id,
+        token_id,
+        refresh_address_balances_by_token_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if wallet_id is not None:
+            _path_params['wallet_id'] = wallet_id
+        if token_id is not None:
+            _path_params['token_id'] = token_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if refresh_address_balances_by_token_request is not None:
+            _body_params = refresh_address_balances_by_token_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/wallets/{wallet_id}/tokens/{token_id}/refresh_address_balances',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -6,10 +6,10 @@ The information about the decoded parameters of the transaction.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name of the parameter | [optional] 
-**type** | **str** | Type of the parameter | [optional] 
-**value** | **str** | Value of the parameter | [optional] 
-**value_decoded** | [**List[SafeTxSubTransaction]**](SafeTxSubTransaction.md) | Decoded value if applicable | [optional] 
+**name** | **str** | The name of the parameter. | [optional] 
+**type** | **str** | The data type of the parameter. | [optional] 
+**value** | **str** | The value of the parameter. | [optional] 
+**value_decoded** | [**List[SafeTxSubTransaction]**](SafeTxSubTransaction.md) | The decoded value of the parameter (if applicable). | [optional] 
 
 ## Example
 
