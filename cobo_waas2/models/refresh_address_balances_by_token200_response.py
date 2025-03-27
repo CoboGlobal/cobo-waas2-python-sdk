@@ -15,21 +15,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class SafeTxDecodedDataParameters(BaseModel):
+class RefreshAddressBalancesByToken200Response(BaseModel):
     """
-    The information about the decoded parameters of the transaction.
+    RefreshAddressBalancesByToken200Response
     """  # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the parameter.")
-    type: Optional[StrictStr] = Field(default=None, description="The data type of the parameter.")
-    value: Optional[StrictStr] = Field(default=None, description="The value of the parameter.")
-    value_decoded: Optional[List[SafeTxSubTransaction]] = Field(default=None, description="The decoded value of the parameter (if applicable).")
-    __properties: ClassVar[List[str]] = ["name", "type", "value", "value_decoded"]
+    submitted: StrictBool = Field(description="Whether the request to refresh address balances has been successfully submitted. - `true`: The request to refresh address balances has been successfully submitted. - `false`: The request to  refresh address balances has not been submitted. ")
+    __properties: ClassVar[List[str]] = ["submitted"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +46,7 @@ class SafeTxDecodedDataParameters(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SafeTxDecodedDataParameters from a JSON string"""
+        """Create an instance of RefreshAddressBalancesByToken200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +67,11 @@ class SafeTxDecodedDataParameters(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in value_decoded (list)
-        _items = []
-        if self.value_decoded:
-            for _item in self.value_decoded:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['value_decoded'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SafeTxDecodedDataParameters from a dict"""
+        """Create an instance of RefreshAddressBalancesByToken200Response from a dict"""
         if obj is None:
             return None
 
@@ -89,14 +79,8 @@ class SafeTxDecodedDataParameters(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "type": obj.get("type"),
-            "value": obj.get("value"),
-            "value_decoded": [SafeTxSubTransaction.from_dict(_item) for _item in obj["value_decoded"]] if obj.get("value_decoded") is not None else None
+            "submitted": obj.get("submitted")
         })
         return _obj
 
-from cobo_waas2.models.safe_tx_sub_transaction import SafeTxSubTransaction
-# TODO: Rewrite to not use raise_errors
-SafeTxDecodedDataParameters.model_rebuild(raise_errors=False)
 

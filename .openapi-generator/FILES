@@ -258,6 +258,8 @@ cobo_waas2/models/query_approval_statement200_response.py
 cobo_waas2/models/query_guard_pubkey200_response.py
 cobo_waas2/models/query_guard_pubkey200_response_addresses_inner.py
 cobo_waas2/models/raw_message_sign_destination.py
+cobo_waas2/models/refresh_address_balances_by_token200_response.py
+cobo_waas2/models/refresh_address_balances_by_token_request.py
 cobo_waas2/models/refresh_token2_xx_response.py
 cobo_waas2/models/refresh_token_request.py
 cobo_waas2/models/replace_type.py
@@ -658,6 +660,8 @@ docs/QueryApprovalStatement200Response.md
 docs/QueryGuardPubkey200Response.md
 docs/QueryGuardPubkey200ResponseAddressesInner.md
 docs/RawMessageSignDestination.md
+docs/RefreshAddressBalancesByToken200Response.md
+docs/RefreshAddressBalancesByTokenRequest.md
 docs/RefreshToken2XXResponse.md
 docs/RefreshTokenRequest.md
 docs/ReplaceType.md
@@ -1070,6 +1074,8 @@ test/test_query_approval_statement200_response.py
 test/test_query_guard_pubkey200_response.py
 test/test_query_guard_pubkey200_response_addresses_inner.py
 test/test_raw_message_sign_destination.py
+test/test_refresh_address_balances_by_token200_response.py
+test/test_refresh_address_balances_by_token_request.py
 test/test_refresh_token2_xx_response.py
 test/test_refresh_token_request.py
 test/test_replace_type.py

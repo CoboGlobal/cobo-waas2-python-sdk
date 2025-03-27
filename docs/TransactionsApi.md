@@ -614,7 +614,7 @@ Name | Type | Description  | Notes
 
 Get transaction approval details
 
-This operation retrieves approval detailed information about a specified transaction. 
+This operation retrieves detailed approval information about a specified transaction. 
 
 ### Example
 
@@ -758,7 +758,7 @@ Name | Type | Description  | Notes
 
 List transaction approval details
 
-This operation retrieves approval detailed information about multi specified transaction. 
+This operation retrieves detailed approval information for all transactions. 
 
 ### Example
 

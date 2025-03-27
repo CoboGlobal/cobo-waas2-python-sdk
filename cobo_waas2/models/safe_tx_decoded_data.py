@@ -25,8 +25,8 @@ class SafeTxDecodedData(BaseModel):
     """
     The information about the decoded data of the transaction.
     """  # noqa: E501
-    method: Optional[StrictStr] = Field(default=None, description="Name of the decoded method")
-    parameters: Optional[List[SafeTxDecodedDataParameters]] = Field(default=None, description="List of method parameters")
+    method: Optional[StrictStr] = Field(default=None, description="The name of the method decoded from the transaction data.")
+    parameters: Optional[List[SafeTxDecodedDataParameters]] = Field(default=None, description="The list of parameters decoded from the transaction data.")
     __properties: ClassVar[List[str]] = ["method", "parameters"]
 
     model_config = ConfigDict(

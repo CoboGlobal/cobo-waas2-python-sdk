@@ -6,8 +6,8 @@ The information about the decoded data of the transaction.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**method** | **str** | Name of the decoded method | [optional] 
-**parameters** | [**List[SafeTxDecodedDataParameters]**](SafeTxDecodedDataParameters.md) | List of method parameters | [optional] 
+**method** | **str** | The name of the method decoded from the transaction data. | [optional] 
+**parameters** | [**List[SafeTxDecodedDataParameters]**](SafeTxDecodedDataParameters.md) | The list of parameters decoded from the transaction data. | [optional] 
 
 ## Example
 
