@@ -23,10 +23,10 @@ from typing_extensions import Self
 
 class TransactionFuelingInfo(BaseModel):
     """
-    The fuel transaction data.
+    Details of the auto-fueling transaction that provides gas for the current transaction.
     """  # noqa: E501
-    request_id: Optional[StrictStr] = Field(default=None, description="The fuel transaction request ID.")
-    transaction_id: Optional[StrictStr] = Field(default=None, description="The fuel transaction ID.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID of the transaction.")
+    transaction_id: Optional[StrictStr] = Field(default=None, description="The transaction ID.")
     __properties: ClassVar[List[str]] = ["request_id", "transaction_id"]
 
     model_config = ConfigDict(

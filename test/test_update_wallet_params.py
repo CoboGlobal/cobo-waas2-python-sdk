@@ -40,6 +40,7 @@ class TestUpdateWalletParams(unittest.TestCase):
         else:
             return UpdateWalletParams(
                 wallet_type = 'Custodial',
+                name = 'Example Wallet',
         )
         """
 

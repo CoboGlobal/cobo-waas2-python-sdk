@@ -37,7 +37,7 @@ class TransactionWebhookEventData(BaseModel):
     """
     TransactionWebhookEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.")
     transaction_id: StrictStr = Field(description="The transaction ID.")
     cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
@@ -64,17 +64,18 @@ class TransactionWebhookEventData(BaseModel):
     category: Optional[List[StrictStr]] = Field(default=None, description="A custom transaction category for you to identify your transfers more easily.")
     description: Optional[StrictStr] = Field(default=None, description="The description for your transaction.")
     is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
-    cobo_category: Optional[List[StrictStr]] = Field(default=None, description="A transaction category for cobo to identify your transactions.")
+    cobo_category: Optional[List[StrictStr]] = Field(default=None, description="The transaction category defined by Cobo. Possible values include:  - `AutoSweep`: An auto-sweep transaction. - `AutoFueling`: A transaction where Fee Station pays transaction fees to an address within your wallet. - `AutoFuelingRefund`: A refund for an auto-fueling transaction. - `SafeTxMessage`: A message signing transaction to authorize a Smart Contract Wallet (Safe\\{Wallet\\}) transaction. - `BillPayment`: A transaction to pay Cobo bills through Fee Station. - `BillRefund`: A refund for a previously made bill payment. - `CommissionFeeCharge`: A transaction to charge commission fees via Fee Station. - `CommissionFeeRefund`: A refund of previously charged commission fees. ")
+    extra: Optional[List[StrictStr]] = Field(default=None, description="The transaction extra information.")
     fueling_info: Optional[TransactionFuelingInfo] = None
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["data_type", "transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "fueling_info", "created_timestamp", "updated_timestamp"]
+    created_timestamp: StrictInt = Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
+    updated_timestamp: StrictInt = Field(description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
+    __properties: ClassVar[List[str]] = ["data_type", "transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "extra", "fueling_info", "created_timestamp", "updated_timestamp"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing')")
         return value
 
     model_config = ConfigDict(
@@ -180,6 +181,7 @@ class TransactionWebhookEventData(BaseModel):
             "description": obj.get("description"),
             "is_loop": obj.get("is_loop"),
             "cobo_category": obj.get("cobo_category"),
+            "extra": obj.get("extra"),
             "fueling_info": TransactionFuelingInfo.from_dict(obj["fueling_info"]) if obj.get("fueling_info") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")

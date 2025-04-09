@@ -40,6 +40,7 @@ class TestUpdateSmartContractWalletParams(unittest.TestCase):
         else:
             return UpdateSmartContractWalletParams(
                 wallet_type = 'Custodial',
+                name = 'My WaaS 2.0 Wallet',
         )
         """
 

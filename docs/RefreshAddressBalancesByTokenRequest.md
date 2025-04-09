@@ -1,12 +1,11 @@
 # RefreshAddressBalancesByTokenRequest
 
-The request body to refresh the addresses balance by  specified token within a specified wallet.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**addresses** | **List[str]** | A list of  address. | 
+**addresses** | **List[str]** | A list of addresses. | 
 
 ## Example
 

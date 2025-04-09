@@ -64,12 +64,13 @@ class TransactionDetail(BaseModel):
     category: Optional[List[StrictStr]] = Field(default=None, description="A custom transaction category for you to identify your transfers more easily.")
     description: Optional[StrictStr] = Field(default=None, description="The description for your transaction.")
     is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
-    cobo_category: Optional[List[StrictStr]] = Field(default=None, description="A transaction category for cobo to identify your transactions.")
+    cobo_category: Optional[List[StrictStr]] = Field(default=None, description="The transaction category defined by Cobo. Possible values include:  - `AutoSweep`: An auto-sweep transaction. - `AutoFueling`: A transaction where Fee Station pays transaction fees to an address within your wallet. - `AutoFuelingRefund`: A refund for an auto-fueling transaction. - `SafeTxMessage`: A message signing transaction to authorize a Smart Contract Wallet (Safe\\{Wallet\\}) transaction. - `BillPayment`: A transaction to pay Cobo bills through Fee Station. - `BillRefund`: A refund for a previously made bill payment. - `CommissionFeeCharge`: A transaction to charge commission fees via Fee Station. - `CommissionFeeRefund`: A refund of previously charged commission fees. ")
+    extra: Optional[List[StrictStr]] = Field(default=None, description="The transaction extra information.")
     fueling_info: Optional[TransactionFuelingInfo] = None
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
+    created_timestamp: StrictInt = Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
+    updated_timestamp: StrictInt = Field(description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
     timeline: Optional[List[TransactionTimeline]] = None
-    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "fueling_info", "created_timestamp", "updated_timestamp", "timeline"]
+    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "extra", "fueling_info", "created_timestamp", "updated_timestamp", "timeline"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -180,6 +181,7 @@ class TransactionDetail(BaseModel):
             "description": obj.get("description"),
             "is_loop": obj.get("is_loop"),
             "cobo_category": obj.get("cobo_category"),
+            "extra": obj.get("extra"),
             "fueling_info": TransactionFuelingInfo.from_dict(obj["fueling_info"]) if obj.get("fueling_info") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),

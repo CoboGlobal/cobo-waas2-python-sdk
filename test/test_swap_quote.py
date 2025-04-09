@@ -34,13 +34,12 @@ class TestSwapQuote(unittest.TestCase):
         model = SwapQuote()
         if include_optional:
             return SwapQuote(
+                quote_id = '2ec094034044ffa50f4294d48363fef31eb5755fc783ba3837a03c91b4904659',
                 pay_amount = '100',
                 receive_amount = '100',
                 fee_amount = '0.3',
-                min_pay_amount = '0',
-                max_pay_amount = '10000',
                 min_receive_amount = '0',
-                max_receive_amount = '10000',
+                max_pay_amount = '10000',
                 quote_expired_timestamp = 1677587393000
             )
         else:

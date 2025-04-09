@@ -25,7 +25,7 @@ Method | HTTP request | Description
 [**list_utxos**](WalletsApi.md#list_utxos) | **GET** /wallets/{wallet_id}/utxos | List UTXOs
 [**list_wallets**](WalletsApi.md#list_wallets) | **GET** /wallets | List all wallets
 [**lock_utxos**](WalletsApi.md#lock_utxos) | **POST** /wallets/{wallet_id}/utxos/lock | Lock UTXOs
-[**refresh_address_balances_by_token**](WalletsApi.md#refresh_address_balances_by_token) | **PUT** /wallets/{wallet_id}/tokens/{token_id}/refresh_address_balances | refresh address balances by token
+[**refresh_address_balances_by_token**](WalletsApi.md#refresh_address_balances_by_token) | **PUT** /wallets/{wallet_id}/tokens/{token_id}/refresh_address_balances | Refresh address balances by token
 [**unlock_utxos**](WalletsApi.md#unlock_utxos) | **POST** /wallets/{wallet_id}/utxos/unlock | Unlock UTXOs
 [**update_wallet_by_id**](WalletsApi.md#update_wallet_by_id) | **PUT** /wallets/{wallet_id} | Update wallet
 
@@ -1669,9 +1669,9 @@ Name | Type | Description  | Notes
 # **refresh_address_balances_by_token**
 > RefreshAddressBalancesByToken200Response refresh_address_balances_by_token(wallet_id, token_id, refresh_address_balances_by_token_request=refresh_address_balances_by_token_request)
 
-refresh address balances by token
+Refresh address balances by token
 
-The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+This operation refreshes the balances of specified addresses for a given token within a wallet.  The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
 ### Example
 
@@ -1701,7 +1701,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     refresh_address_balances_by_token_request = cobo_waas2.RefreshAddressBalancesByTokenRequest()
 
     try:
-        # refresh address balances by token
+        # Refresh address balances by token
         api_response = api_instance.refresh_address_balances_by_token(wallet_id, token_id, refresh_address_balances_by_token_request=refresh_address_balances_by_token_request)
         print("The response of WalletsApi->refresh_address_balances_by_token:\n")
         pprint(api_response)
@@ -1718,7 +1718,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **wallet_id** | **str**| The wallet ID. | 
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **refresh_address_balances_by_token_request** | [**RefreshAddressBalancesByTokenRequest**](RefreshAddressBalancesByTokenRequest.md)| The request body to refresh the addresses balance by  specified token within a specified wallet | [optional] 
+ **refresh_address_balances_by_token_request** | [**RefreshAddressBalancesByTokenRequest**](RefreshAddressBalancesByTokenRequest.md)| The request body to refresh addresses balances. | [optional] 
 
 ### Return type
 
@@ -1823,7 +1823,7 @@ Name | Type | Description  | Notes
 
 Update wallet
 
-This operation updates the information of a specified wallet.  For Exchange Wallets, you can update the API key, API secret, and other information about your exchange accounts with this operation. For other wallet types, you can only update the wallet name. 
+This operation updates the information of a specified wallet. 
 
 ### Example
 

@@ -29,8 +29,8 @@ class TransactionSelectedUtxo(BaseModel):
     vout_n: Optional[StrictInt] = Field(default=None, description="The output index of the UTXO.")
     address: Optional[StrictStr] = Field(default=None, description="The address of the UTXO.")
     value: Optional[StrictStr] = Field(default=None, description="The value of the UTXO.")
-    redeem_script: Optional[StrictStr] = Field(default=None, description="Redeem script is used in P2SH and P2WSH transactions.")
-    revealed_script: Optional[StrictStr] = Field(default=None, description="Revealed script is used for script path spending in Taproot transactions.")
+    redeem_script: Optional[StrictStr] = Field(default=None, description="The redeem script used in P2SH and P2WSH transactions.")
+    revealed_script: Optional[StrictStr] = Field(default=None, description="The revealed script used for Taproot script-path spend transaction.")
     __properties: ClassVar[List[str]] = ["tx_hash", "vout_n", "address", "value", "redeem_script", "revealed_script"]
 
     model_config = ConfigDict(

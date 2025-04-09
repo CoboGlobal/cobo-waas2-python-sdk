@@ -1,13 +1,13 @@
 # TransactionFuelingInfo
 
-The fuel transaction data.
+Details of the auto-fueling transaction that provides gas for the current transaction.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_id** | **str** | The fuel transaction request ID. | [optional] 
-**transaction_id** | **str** | The fuel transaction ID. | [optional] 
+**request_id** | **str** | The request ID of the transaction. | [optional] 
+**transaction_id** | **str** | The transaction ID. | [optional] 
 
 ## Example
 

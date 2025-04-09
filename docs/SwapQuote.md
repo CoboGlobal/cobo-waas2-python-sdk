@@ -5,13 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**quote_id** | **str** | The unique id of quote. | [optional] 
 **pay_amount** | **str** | The amount of tokens to pay. | 
 **receive_amount** | **str** | The amount of tokens to receive. | 
 **fee_amount** | **str** | The amount of tokens to pay for fee. | 
-**min_pay_amount** | **str** | The minimum amount of tokens to pay. | [optional] 
-**max_pay_amount** | **str** | The maximum amount of tokens to pay. | [optional] 
-**min_receive_amount** | **str** | The minimum amount of tokens to receive. | [optional] 
-**max_receive_amount** | **str** | The maximum amount of tokens to receive. | [optional] 
+**min_receive_amount** | **str** | The minimum amount of tokens to receive if the pay amount is specified. | [optional] 
+**max_pay_amount** | **str** | The maximum amount of tokens to pay if the receive amount is specified. | [optional] 
 **quote_expired_timestamp** | **int** | The time when the quote will expire, in Unix timestamp format, measured in milliseconds. | 
 
 ## Example

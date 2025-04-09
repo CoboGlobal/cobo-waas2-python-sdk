@@ -345,7 +345,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for refresh_address_balances_by_token
 
-        refresh address balances by token
+        Refresh address balances by token
         """
         """
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'

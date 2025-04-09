@@ -23,9 +23,9 @@ from typing_extensions import Self
 
 class RefreshAddressBalancesByTokenRequest(BaseModel):
     """
-    The request body to refresh the addresses balance by  specified token within a specified wallet.
+    RefreshAddressBalancesByTokenRequest
     """  # noqa: E501
-    addresses: List[StrictStr] = Field(description="A list of  address.")
+    addresses: List[StrictStr] = Field(description="A list of addresses.")
     __properties: ClassVar[List[str]] = ["addresses"]
 
     model_config = ConfigDict(

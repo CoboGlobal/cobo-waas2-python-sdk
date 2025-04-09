@@ -51,9 +51,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> TransactionDetail:
-        """Get fee station transaction information
+        """Get Fee Station transaction information
 
-        This operation retrieves detailed information about a specified transaction, such as the transaction status, source address, destination address, and timestamp. 
+        This operation retrieves detailed information about a specified Fee Station transaction, such as the transaction status, source address, destination address, and timestamp. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -97,9 +97,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[TransactionDetail]:
-        """Get fee station transaction information
+        """Get Fee Station transaction information
 
-        This operation retrieves detailed information about a specified transaction, such as the transaction status, source address, destination address, and timestamp. 
+        This operation retrieves detailed information about a specified Fee Station transaction, such as the transaction status, source address, destination address, and timestamp. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -143,9 +143,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get fee station transaction information
+        """Get Fee Station transaction information
 
-        This operation retrieves detailed information about a specified transaction, such as the transaction status, source address, destination address, and timestamp. 
+        This operation retrieves detailed information about a specified Fee Station transaction, such as the transaction status, source address, destination address, and timestamp. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -224,9 +224,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ListAddresses200Response:
-        """List fee station addresses
+        """List Fee Station addresses
 
-        This operation retrieves a list of addresses within a specified wallet. 
+        This operation retrieves a list of addresses within your Fee Station. 
 
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -286,9 +286,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListAddresses200Response]:
-        """List fee station addresses
+        """List Fee Station addresses
 
-        This operation retrieves a list of addresses within a specified wallet. 
+        This operation retrieves a list of addresses within your Fee Station. 
 
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -348,9 +348,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List fee station addresses
+        """List Fee Station addresses
 
-        This operation retrieves a list of addresses within a specified wallet. 
+        This operation retrieves a list of addresses within your Fee Station. 
 
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -453,7 +453,7 @@ class FeeStationApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
@@ -473,9 +473,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ListTransactions200Response:
-        """List all fee station transactions
+        """List all Fee Station transactions
 
-        This operation retrieves all the transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamps. You can also paginate and sort your query results. 
+        This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
         :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
         :type request_id: str
@@ -485,7 +485,7 @@ class FeeStationApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
+        :param types: A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -555,7 +555,7 @@ class FeeStationApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
@@ -575,9 +575,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListTransactions200Response]:
-        """List all fee station transactions
+        """List all Fee Station transactions
 
-        This operation retrieves all the transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamps. You can also paginate and sort your query results. 
+        This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
         :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
         :type request_id: str
@@ -587,7 +587,7 @@ class FeeStationApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
+        :param types: A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -657,7 +657,7 @@ class FeeStationApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
@@ -677,9 +677,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List all fee station transactions
+        """List all Fee Station transactions
 
-        This operation retrieves all the transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamps. You can also paginate and sort your query results. 
+        This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
         :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
         :type request_id: str
@@ -689,7 +689,7 @@ class FeeStationApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
+        :param types: A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -871,9 +871,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ListTokenBalancesForAddress200Response:
-        """List token balances by fee station
+        """List Fee Station token balances
 
-        The operation retrieves a list of token balances within a specified wallet.  <Note>This operation is not applicable to Exchange Wallets.</Note> 
+        The operation retrieves a list of token balances within your Fee Station. 
 
         :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_ids: str
@@ -929,9 +929,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListTokenBalancesForAddress200Response]:
-        """List token balances by fee station
+        """List Fee Station token balances
 
-        The operation retrieves a list of token balances within a specified wallet.  <Note>This operation is not applicable to Exchange Wallets.</Note> 
+        The operation retrieves a list of token balances within your Fee Station. 
 
         :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_ids: str
@@ -987,9 +987,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List token balances by fee station
+        """List Fee Station token balances
 
-        The operation retrieves a list of token balances within a specified wallet.  <Note>This operation is not applicable to Exchange Wallets.</Note> 
+        The operation retrieves a list of token balances within your Fee Station. 
 
         :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_ids: str

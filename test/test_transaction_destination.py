@@ -79,6 +79,11 @@ class TestTransactionDestination(unittest.TestCase):
                         data = 'Canary TX 4, slot: 219858117', 
                         program_id = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', )
                     ],
+                cosmos_messages = [
+                    cobo_waas2.models.cosmos_message.Cosmos Message(
+                        type_url = '/babylon.btcstaking.v1.MsgCreateBTCDelegation', 
+                        message = 'eyJ0eXBlIjoiYmFiY29zZS5idGNzdGFnaW5nLnYxLk1zZ0NyZWF0ZUJUQ0RlbGVnYXRpb24iLCJtZXNzYWdlIjp7ImNvbW1hbmRfaWQiOiJjb21tYW5kX2lkIiwibWVzc2FnZV92YWx1ZSI6Im1lc3NhZ2VfdmFsdWUiLCJtZXNzYWdlX3R5cGUiOiJtZXNzYWdlX3R5cGUifX0=', )
+                    ],
                 message = 'YWFhYQ==',
                 raw_structured_data = '',
                 structured_data = {"types": {"EIP712Domain": [{"name": "name", "type": "string"}, {"name": "version", "type": "string"}, {"name": "chainId", "type": "uint256"}, {"name": "verifyingContract", "type": "address"}], "Person": [{"name": "name", "type": "string"}, {"name": "wallet", "type": "address"}], "Mail": [{"name": "from", "type": "Person"}, {"name": "to", "type": "Person"}, {"name": "contents", "type": "string"}]}, "primaryType": "Mail", "domain": {"name": "Ether Mail", "version": "1", "chainId": 1, "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"}, "message": {"from": {"name": "Cow", "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"}, "to": {"name": "Bob", "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"}, "contents": "Hello, Bob!"}}
@@ -125,7 +130,10 @@ class TestTransactionDestination(unittest.TestCase):
                 wallet_subtype = 'Asset',
                 memo = '82840924',
                 tx_info = cobo_waas2.models.transaction_deposit_to_address_destination_tx_info.TransactionDepositToAddressDestination_tx_info(
-                    vout_n = 0, )
+                    vout_n = 0, ),
+                message_bip137 = '',
+                message_bip322 = '',
+                message_cosmos_adr36 = ''
             )
         else:
             return TransactionDestination(
@@ -134,11 +142,19 @@ class TestTransactionDestination(unittest.TestCase):
                 amount = '1.5',
                 address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
                 calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
+                cosmos_messages = [
+                    cobo_waas2.models.cosmos_message.Cosmos Message(
+                        type_url = '/babylon.btcstaking.v1.MsgCreateBTCDelegation', 
+                        message = 'eyJ0eXBlIjoiYmFiY29zZS5idGNzdGFnaW5nLnYxLk1zZ0NyZWF0ZUJUQ0RlbGVnYXRpb24iLCJtZXNzYWdlIjp7ImNvbW1hbmRfaWQiOiJjb21tYW5kX2lkIiwibWVzc2FnZV92YWx1ZSI6Im1lc3NhZ2VfdmFsdWUiLCJtZXNzYWdlX3R5cGUiOiJtZXNzYWdlX3R5cGUifX0=', )
+                    ],
                 message = 'YWFhYQ==',
                 structured_data = {"types": {"EIP712Domain": [{"name": "name", "type": "string"}, {"name": "version", "type": "string"}, {"name": "chainId", "type": "uint256"}, {"name": "verifyingContract", "type": "address"}], "Person": [{"name": "name", "type": "string"}, {"name": "wallet", "type": "address"}], "Mail": [{"name": "from", "type": "Person"}, {"name": "to", "type": "Person"}, {"name": "contents", "type": "string"}]}, "primaryType": "Mail", "domain": {"name": "Ether Mail", "version": "1", "chainId": 1, "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"}, "message": {"from": {"name": "Cow", "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"}, "to": {"name": "Bob", "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"}, "contents": "Hello, Bob!"}}
 ,
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
+                message_bip137 = '',
+                message_bip322 = '',
+                message_cosmos_adr36 = '',
         )
         """
 
