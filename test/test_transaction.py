@@ -89,6 +89,10 @@ class TestTransaction(unittest.TestCase):
                 cobo_category = [
                     'AutoFueling'
                     ],
+                extra = [
+                    '{"extra_type":"BabylonBusinessInfo","btc_address_info":{"address":"tb1p8k9f36798z5wkfd3mlq00cjm82c7sp5hudlqaxkdvfw4xaywvw4qzzv2xz","chain_id":"SIGNET_BTC","memo":"","path":"44/1/5/0/4","encoding":"ENCODING_P2TR","pubkey":"xpub6FkyaGRDyh4hayxmbY4YX7q9fuuxt14dNoYv5TphsKLnChVXSaTxY7DPwdeN8Yys5FLhfuajG8pshdXWk9cTzBFUy5rVA4Lx9kwmFUqhZcC","x_only_pubkey":"","root_pubkey":"xpub661MyMwAqRbcGFdLxNuuQvnPTLFs1xHpFQz5iumoDnw4NPofkE8SSrtwUmoy3E52HtcxCH9wXCfhztuuiuusvB3kAb4nt9rT4bkXxujubKm","taproot_script_tree_hash":"","taproot_internal_address":""}}
+'
+                    ],
                 fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
                     transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
@@ -103,6 +107,8 @@ class TestTransaction(unittest.TestCase):
                 source = None,
                 destination = None,
                 initiator_type = 'API',
+                created_timestamp = 1610445878970,
+                updated_timestamp = 1610445878970,
         )
         """
 

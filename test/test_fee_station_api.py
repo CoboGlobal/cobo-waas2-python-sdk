@@ -33,7 +33,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for get_fee_station_transaction_by_id
 
-        Get fee station transaction information
+        Get Fee Station transaction information
         """
         """
         transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -45,7 +45,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for list_fee_station_addresses
 
-        List fee station addresses
+        List Fee Station addresses
         """
         """
         chain_ids = 'BTC,ETH'
@@ -61,7 +61,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for list_fee_station_transactions
 
-        List all fee station transactions
+        List all Fee Station transactions
         """
         """
         request_id = 'web_send_by_user_327_1610444045047'
@@ -87,7 +87,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for list_token_balances_for_fee_station
 
-        List token balances by fee station
+        List Fee Station token balances
         """
         """
         token_ids = 'ETH_USDT,ETH_USDC'

@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 Cancel transaction
 
-This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature`  
+This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (excluding the `SystemProcessingOngoing` and `SignatureVerificationSuccess` sub-statuses) 
 
 ### Example
 

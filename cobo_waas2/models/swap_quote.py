@@ -25,15 +25,14 @@ class SwapQuote(BaseModel):
     """
     SwapQuote
     """  # noqa: E501
+    quote_id: Optional[StrictStr] = Field(default=None, description="The unique id of quote.")
     pay_amount: StrictStr = Field(description="The amount of tokens to pay.")
     receive_amount: StrictStr = Field(description="The amount of tokens to receive.")
     fee_amount: StrictStr = Field(description="The amount of tokens to pay for fee.")
-    min_pay_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount of tokens to pay.")
-    max_pay_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount of tokens to pay.")
-    min_receive_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount of tokens to receive.")
-    max_receive_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount of tokens to receive.")
+    min_receive_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount of tokens to receive if the pay amount is specified.")
+    max_pay_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount of tokens to pay if the receive amount is specified.")
     quote_expired_timestamp: StrictInt = Field(description="The time when the quote will expire, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["pay_amount", "receive_amount", "fee_amount", "min_pay_amount", "max_pay_amount", "min_receive_amount", "max_receive_amount", "quote_expired_timestamp"]
+    __properties: ClassVar[List[str]] = ["quote_id", "pay_amount", "receive_amount", "fee_amount", "min_receive_amount", "max_pay_amount", "quote_expired_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,13 +85,12 @@ class SwapQuote(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "quote_id": obj.get("quote_id"),
             "pay_amount": obj.get("pay_amount"),
             "receive_amount": obj.get("receive_amount"),
             "fee_amount": obj.get("fee_amount"),
-            "min_pay_amount": obj.get("min_pay_amount"),
-            "max_pay_amount": obj.get("max_pay_amount"),
             "min_receive_amount": obj.get("min_receive_amount"),
-            "max_receive_amount": obj.get("max_receive_amount"),
+            "max_pay_amount": obj.get("max_pay_amount"),
             "quote_expired_timestamp": obj.get("quote_expired_timestamp")
         })
         return _obj

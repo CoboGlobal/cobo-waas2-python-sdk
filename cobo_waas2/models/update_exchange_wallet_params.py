@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from cobo_waas2.models.wallet_type import WalletType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class UpdateExchangeWalletParams(BaseModel):
     The information of Exchange Wallets.
     """  # noqa: E501
     wallet_type: WalletType
-    name: Optional[StrictStr] = Field(default=None, description="The wallet name.")
+    name: StrictStr = Field(description="The wallet name.")
     __properties: ClassVar[List[str]] = ["wallet_type", "name"]
 
     model_config = ConfigDict(

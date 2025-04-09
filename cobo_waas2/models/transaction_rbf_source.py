@@ -15,12 +15,13 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from cobo_waas2.models.custodial_web3_transfer_source import CustodialWeb3TransferSource
 from cobo_waas2.models.mpc_transfer_source import MpcTransferSource
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSACTIONRBFSOURCE_ONE_OF_SCHEMAS = ["MpcTransferSource"]
+TRANSACTIONRBFSOURCE_ONE_OF_SCHEMAS = ["CustodialWeb3TransferSource", "MpcTransferSource"]
 
 class TransactionRbfSource(BaseModel):
     """
@@ -28,8 +29,10 @@ class TransactionRbfSource(BaseModel):
     """
     # data type: MpcTransferSource
     oneof_schema_1_validator: Optional[MpcTransferSource] = None
-    actual_instance: Optional[Union[MpcTransferSource]] = None
-    one_of_schemas: Set[str] = { "MpcTransferSource" }
+    # data type: CustodialWeb3TransferSource
+    oneof_schema_2_validator: Optional[CustodialWeb3TransferSource] = None
+    actual_instance: Optional[Union[CustodialWeb3TransferSource, MpcTransferSource]] = None
+    one_of_schemas: Set[str] = { "CustodialWeb3TransferSource", "MpcTransferSource" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,12 +63,17 @@ class TransactionRbfSource(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `MpcTransferSource`")
         else:
             match += 1
+        # validate data type: CustodialWeb3TransferSource
+        if not isinstance(v, CustodialWeb3TransferSource):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CustodialWeb3TransferSource`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionRbfSource with oneOf schemas: MpcTransferSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionRbfSource with oneOf schemas: CustodialWeb3TransferSource, MpcTransferSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionRbfSource with oneOf schemas: MpcTransferSource. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionRbfSource with oneOf schemas: CustodialWeb3TransferSource, MpcTransferSource. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -95,6 +103,16 @@ class TransactionRbfSource(BaseModel):
             instance.actual_instance = MpcTransferSource.from_json(json_str)
             return instance
 
+        # check if data type is `CustodialWeb3TransferSource`
+        if _data_type == "Web3":
+            instance.actual_instance = CustodialWeb3TransferSource.from_json(json_str)
+            return instance
+
+        # check if data type is `CustodialWeb3TransferSource`
+        if _data_type == "CustodialWeb3TransferSource":
+            instance.actual_instance = CustodialWeb3TransferSource.from_json(json_str)
+            return instance
+
         # check if data type is `MpcTransferSource`
         if _data_type == "MpcTransferSource":
             instance.actual_instance = MpcTransferSource.from_json(json_str)
@@ -107,14 +125,20 @@ class TransactionRbfSource(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CustodialWeb3TransferSource
+        try:
+            instance.actual_instance = CustodialWeb3TransferSource.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionRbfSource with oneOf schemas: MpcTransferSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionRbfSource with oneOf schemas: CustodialWeb3TransferSource, MpcTransferSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransactionRbfSource with oneOf schemas: MpcTransferSource. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransactionRbfSource with oneOf schemas: CustodialWeb3TransferSource, MpcTransferSource. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -128,7 +152,7 @@ class TransactionRbfSource(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], MpcTransferSource]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CustodialWeb3TransferSource, MpcTransferSource]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

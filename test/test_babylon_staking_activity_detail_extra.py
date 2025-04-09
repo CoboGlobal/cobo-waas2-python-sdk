@@ -37,11 +37,7 @@ class TestBabylonStakingActivityDetailExtra(unittest.TestCase):
                 pool_type = 'Babylon',
                 finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
                 stake_block_time = 2000,
-                auto_broadcast = False,
-                param_version = 2,
-                withdraw_from_type = 'Stake',
-                slash_from_type = 'Stake',
-                stake_amount = '100.00'
+                auto_broadcast = False
             )
         else:
             return BabylonStakingActivityDetailExtra(

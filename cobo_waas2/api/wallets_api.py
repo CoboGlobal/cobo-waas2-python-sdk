@@ -4642,7 +4642,7 @@ class WalletsApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh the addresses balance by  specified token within a specified wallet")] = None,
+        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh addresses balances.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4652,15 +4652,15 @@ class WalletsApi:
             ]
         ] = None,
     ) -> RefreshAddressBalancesByToken200Response:
-        """refresh address balances by token
+        """Refresh address balances by token
 
-        The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+        This operation refreshes the balances of specified addresses for a given token within a wallet.  The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param refresh_address_balances_by_token_request: The request body to refresh the addresses balance by  specified token within a specified wallet
+        :param refresh_address_balances_by_token_request: The request body to refresh addresses balances.
         :type refresh_address_balances_by_token_request: RefreshAddressBalancesByTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4696,7 +4696,7 @@ class WalletsApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh the addresses balance by  specified token within a specified wallet")] = None,
+        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh addresses balances.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4706,15 +4706,15 @@ class WalletsApi:
             ]
         ] = None,
     ) -> ApiResponse[RefreshAddressBalancesByToken200Response]:
-        """refresh address balances by token
+        """Refresh address balances by token
 
-        The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+        This operation refreshes the balances of specified addresses for a given token within a wallet.  The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param refresh_address_balances_by_token_request: The request body to refresh the addresses balance by  specified token within a specified wallet
+        :param refresh_address_balances_by_token_request: The request body to refresh addresses balances.
         :type refresh_address_balances_by_token_request: RefreshAddressBalancesByTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4750,7 +4750,7 @@ class WalletsApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh the addresses balance by  specified token within a specified wallet")] = None,
+        refresh_address_balances_by_token_request: Annotated[Optional[RefreshAddressBalancesByTokenRequest], Field(description="The request body to refresh addresses balances.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4760,15 +4760,15 @@ class WalletsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """refresh address balances by token
+        """Refresh address balances by token
 
-        The operation refresh the balance of the given address list for a specified token within a wallet. The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
+        This operation refreshes the balances of specified addresses for a given token within a wallet.  The successful return of the request only means that the refresh request has been submitted.  <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param refresh_address_balances_by_token_request: The request body to refresh the addresses balance by  specified token within a specified wallet
+        :param refresh_address_balances_by_token_request: The request body to refresh addresses balances.
         :type refresh_address_balances_by_token_request: RefreshAddressBalancesByTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5036,7 +5036,7 @@ class WalletsApi:
     ) -> WalletInfo:
         """Update wallet
 
-        This operation updates the information of a specified wallet.  For Exchange Wallets, you can update the API key, API secret, and other information about your exchange accounts with this operation. For other wallet types, you can only update the wallet name. 
+        This operation updates the information of a specified wallet. 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -5086,7 +5086,7 @@ class WalletsApi:
     ) -> ApiResponse[WalletInfo]:
         """Update wallet
 
-        This operation updates the information of a specified wallet.  For Exchange Wallets, you can update the API key, API secret, and other information about your exchange accounts with this operation. For other wallet types, you can only update the wallet name. 
+        This operation updates the information of a specified wallet. 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -5136,7 +5136,7 @@ class WalletsApi:
     ) -> RESTResponseType:
         """Update wallet
 
-        This operation updates the information of a specified wallet.  For Exchange Wallets, you can update the API key, API secret, and other information about your exchange accounts with this operation. For other wallet types, you can only update the wallet name. 
+        This operation updates the information of a specified wallet. 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str

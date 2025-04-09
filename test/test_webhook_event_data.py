@@ -37,16 +37,16 @@ class TestWebhookEventData(unittest.TestCase):
                 data_type = 'Transaction',
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 cobo_id = '20231213122855000000000000000000',
-                request_id = '760a1955-e212-4dfb-a8d0-e66312a1a051',
+                request_id = '123e4567-e89b-12d3-a456-426614174000',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 type = 'Org-Controlled',
-                status = 'Success',
+                status = 'Submitted',
                 sub_status = 'PendingDoubleCheck',
                 failed_reason = 'Rejected by signer Cobo TSS',
                 chain_id = 'ETH',
                 token_id = 'ETH_USDT',
                 asset_id = 'USDT',
-                source = None,
+                source = 'API',
                 destination = None,
                 result = None,
                 fee = None,
@@ -90,11 +90,15 @@ class TestWebhookEventData(unittest.TestCase):
                 cobo_category = [
                     'AutoFueling'
                     ],
+                extra = [
+                    '{"extra_type":"BabylonBusinessInfo","btc_address_info":{"address":"tb1p8k9f36798z5wkfd3mlq00cjm82c7sp5hudlqaxkdvfw4xaywvw4qzzv2xz","chain_id":"SIGNET_BTC","memo":"","path":"44/1/5/0/4","encoding":"ENCODING_P2TR","pubkey":"xpub6FkyaGRDyh4hayxmbY4YX7q9fuuxt14dNoYv5TphsKLnChVXSaTxY7DPwdeN8Yys5FLhfuajG8pshdXWk9cTzBFUy5rVA4Lx9kwmFUqhZcC","x_only_pubkey":"","root_pubkey":"xpub661MyMwAqRbcGFdLxNuuQvnPTLFs1xHpFQz5iumoDnw4NPofkE8SSrtwUmoy3E52HtcxCH9wXCfhztuuiuusvB3kAb4nt9rT4bkXxujubKm","taproot_script_tree_hash":"","taproot_internal_address":""}}
+'
+                    ],
                 fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
                     transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
-                created_timestamp = 1718619403933,
-                updated_timestamp = 1610445878970,
+                created_timestamp = 1625097600000,
+                updated_timestamp = 1625184000000,
                 tss_request_id = '20240711114129000132315000003970',
                 source_key_share_holder_group = cobo_waas2.models.source_group.SourceGroup(
                     key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
@@ -140,17 +144,40 @@ class TestWebhookEventData(unittest.TestCase):
                         dust_threshold = '0.00000546', 
                         custodial_minimum_deposit_threshold = '0.0001', 
                         asset_model_type = 'Account', )
-                    ]
+                    ],
+                contract_address = '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+                wallet_type = 'Custodial',
+                wallet_subtype = 'Asset',
+                token = cobo_waas2.models.token_info.TokenInfo(
+                    token_id = 'ETH_USDT', 
+                    chain_id = 'ETH', 
+                    asset_id = 'USDT', 
+                    symbol = 'USDT', 
+                    name = 'Tether USDT', 
+                    decimal = 18, 
+                    icon_url = 'https://d.cobo.com/public/logos/USDT.png', 
+                    token_address = '0xdAC17F958D2ee523a2206206994597C13D831ec7', 
+                    fee_token_id = 'ETH', 
+                    can_deposit = True, 
+                    can_withdraw = True, 
+                    dust_threshold = '0.00000546', 
+                    custodial_minimum_deposit_threshold = '0.0001', 
+                    asset_model_type = 'Account', ),
+                feedback = 'Token has been added to the system'
             )
         else:
             return WebhookEventData(
                 data_type = 'Transaction',
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
+                request_id = '123e4567-e89b-12d3-a456-426614174000',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                status = 'Success',
-                source = None,
+                status = 'Submitted',
+                chain_id = 'ETH',
+                source = 'API',
                 destination = None,
                 initiator_type = 'API',
+                created_timestamp = 1625097600000,
+                updated_timestamp = 1625184000000,
                 chains = [
                     cobo_waas2.models.chain_info.ChainInfo(
                         chain_id = 'ETH', 
@@ -178,6 +205,9 @@ class TestWebhookEventData(unittest.TestCase):
                         custodial_minimum_deposit_threshold = '0.0001', 
                         asset_model_type = 'Account', )
                     ],
+                contract_address = '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+                wallet_type = 'Custodial',
+                wallet_subtype = 'Asset',
         )
         """
 

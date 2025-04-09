@@ -4,18 +4,18 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_fee_station_transaction_by_id**](FeeStationApi.md#get_fee_station_transaction_by_id) | **GET** /fee_station/transactions/{transaction_id} | Get fee station transaction information
-[**list_fee_station_addresses**](FeeStationApi.md#list_fee_station_addresses) | **GET** /fee_station/addresses | List fee station addresses
-[**list_fee_station_transactions**](FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all fee station transactions
-[**list_token_balances_for_fee_station**](FeeStationApi.md#list_token_balances_for_fee_station) | **GET** /fee_station/tokens | List token balances by fee station
+[**get_fee_station_transaction_by_id**](FeeStationApi.md#get_fee_station_transaction_by_id) | **GET** /fee_station/transactions/{transaction_id} | Get Fee Station transaction information
+[**list_fee_station_addresses**](FeeStationApi.md#list_fee_station_addresses) | **GET** /fee_station/addresses | List Fee Station addresses
+[**list_fee_station_transactions**](FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all Fee Station transactions
+[**list_token_balances_for_fee_station**](FeeStationApi.md#list_token_balances_for_fee_station) | **GET** /fee_station/tokens | List Fee Station token balances
 
 
 # **get_fee_station_transaction_by_id**
 > TransactionDetail get_fee_station_transaction_by_id(transaction_id)
 
-Get fee station transaction information
+Get Fee Station transaction information
 
-This operation retrieves detailed information about a specified transaction, such as the transaction status, source address, destination address, and timestamp. 
+This operation retrieves detailed information about a specified Fee Station transaction, such as the transaction status, source address, destination address, and timestamp. 
 
 ### Example
 
@@ -42,7 +42,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # Get fee station transaction information
+        # Get Fee Station transaction information
         api_response = api_instance.get_fee_station_transaction_by_id(transaction_id)
         print("The response of FeeStationApi->get_fee_station_transaction_by_id:\n")
         pprint(api_response)
@@ -85,9 +85,9 @@ Name | Type | Description  | Notes
 # **list_fee_station_addresses**
 > ListAddresses200Response list_fee_station_addresses(chain_ids=chain_ids, addresses=addresses, limit=limit, before=before, after=after)
 
-List fee station addresses
+List Fee Station addresses
 
-This operation retrieves a list of addresses within a specified wallet. 
+This operation retrieves a list of addresses within your Fee Station. 
 
 ### Example
 
@@ -118,7 +118,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
-        # List fee station addresses
+        # List Fee Station addresses
         api_response = api_instance.list_fee_station_addresses(chain_ids=chain_ids, addresses=addresses, limit=limit, before=before, after=after)
         print("The response of FeeStationApi->list_fee_station_addresses:\n")
         pprint(api_response)
@@ -165,9 +165,9 @@ Name | Type | Description  | Notes
 # **list_fee_station_transactions**
 > ListTransactions200Response list_fee_station_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
 
-List all fee station transactions
+List all Fee Station transactions
 
-This operation retrieves all the transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamps. You can also paginate and sort your query results. 
+This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
 ### Example
 
@@ -208,7 +208,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     direction = ''
 
     try:
-        # List all fee station transactions
+        # List all Fee Station transactions
         api_response = api_instance.list_fee_station_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         print("The response of FeeStationApi->list_fee_station_transactions:\n")
         pprint(api_response)
@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
  **cobo_ids** | **str**| A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction. | [optional] 
  **transaction_ids** | **str**| A list of transaction IDs, separated by comma. | [optional] 
  **transaction_hashes** | **str**| A list of transaction hashes, separated by comma. | [optional] 
- **types** | **str**| A list of transaction types, separated by comma. Possible values include:    - &#x60;Deposit&#x60;: A deposit transaction.   - &#x60;Withdrawal&#x60;: A withdrawal transaction.  | [optional] 
+ **types** | **str**| A list of transaction types for Fee Station, separated by comma. Possible values include:    - &#x60;Deposit&#x60;: A deposit transaction.   - &#x60;Withdrawal&#x60;: A withdrawal transaction.  | [optional] 
  **statuses** | **str**| A list of transaction statuses, separated by comma. Possible values include:    - &#x60;Submitted&#x60;: The transaction is submitted.   - &#x60;PendingScreening&#x60;: The transaction is pending screening by Risk Control.    - &#x60;PendingAuthorization&#x60;: The transaction is pending approvals.   - &#x60;PendingSignature&#x60;: The transaction is pending signature.    - &#x60;Broadcasting&#x60;: The transaction is being broadcast.   - &#x60;Confirming&#x60;: The transaction is waiting for the required number of confirmations.   - &#x60;Completed&#x60;: The transaction is completed.   - &#x60;Failed&#x60;: The transaction failed.   - &#x60;Rejected&#x60;: The transaction is rejected.   - &#x60;Pending&#x60;: The transaction is waiting to be included in the next block of the blockchain.  | [optional] 
  **chain_ids** | **str**| A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | [optional] 
  **token_ids** | **str**| A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | [optional] 
@@ -265,9 +265,9 @@ Name | Type | Description  | Notes
 # **list_token_balances_for_fee_station**
 > ListTokenBalancesForAddress200Response list_token_balances_for_fee_station(token_ids=token_ids, limit=limit, before=before, after=after)
 
-List token balances by fee station
+List Fee Station token balances
 
-The operation retrieves a list of token balances within a specified wallet.  <Note>This operation is not applicable to Exchange Wallets.</Note> 
+The operation retrieves a list of token balances within your Fee Station. 
 
 ### Example
 
@@ -297,7 +297,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
-        # List token balances by fee station
+        # List Fee Station token balances
         api_response = api_instance.list_token_balances_for_fee_station(token_ids=token_ids, limit=limit, before=before, after=after)
         print("The response of FeeStationApi->list_token_balances_for_fee_station:\n")
         pprint(api_response)
