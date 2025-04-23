@@ -31,8 +31,9 @@ class TransactionEvmLegacyFee(BaseModel):
     fee_type: FeeType
     token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
     fee_used: Optional[StrictStr] = Field(default=None, description="The transaction fee.")
+    estimated_fee_used: Optional[StrictStr] = Field(default=None, description="The estimated transaction fee.")
     gas_used: Optional[StrictStr] = Field(default=None, description="The gas units used in the transaction.")
-    __properties: ClassVar[List[str]] = ["gas_price", "gas_limit", "fee_type", "token_id", "fee_used", "gas_used"]
+    __properties: ClassVar[List[str]] = ["gas_price", "gas_limit", "fee_type", "token_id", "fee_used", "estimated_fee_used", "gas_used"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +91,7 @@ class TransactionEvmLegacyFee(BaseModel):
             "fee_type": obj.get("fee_type"),
             "token_id": obj.get("token_id"),
             "fee_used": obj.get("fee_used"),
+            "estimated_fee_used": obj.get("estimated_fee_used"),
             "gas_used": obj.get("gas_used")
         })
         return _obj

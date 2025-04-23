@@ -16,7 +16,7 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class SwapActivityType(str, Enum):
+class SwapType(str, Enum):
     """
     The type of the swap activity. Possible values include: - `Bridge`: The activity is a bridge activity. - `Exchange`: The activity is an exchange activity. 
     """
@@ -31,7 +31,7 @@ class SwapActivityType(str, Enum):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of SwapActivityType from a JSON string"""
+        """Create an instance of SwapType from a JSON string"""
         return cls(json.loads(json_str))
 
     @classmethod

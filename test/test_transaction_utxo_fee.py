@@ -38,6 +38,7 @@ class TestTransactionUtxoFee(unittest.TestCase):
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'BTC',
                 fee_used = '0.1',
+                estimated_fee_used = '0.1',
                 max_fee_amount = '0.1'
             )
         else:

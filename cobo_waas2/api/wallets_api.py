@@ -22,6 +22,8 @@ from cobo_waas2.models.check_address_chains_validity200_response_inner import Ch
 from cobo_waas2.models.check_address_validity200_response import CheckAddressValidity200Response
 from cobo_waas2.models.check_addresses_validity200_response_inner import CheckAddressesValidity200ResponseInner
 from cobo_waas2.models.create_address_request import CreateAddressRequest
+from cobo_waas2.models.create_token_listing_request201_response import CreateTokenListingRequest201Response
+from cobo_waas2.models.create_token_listing_request_request import CreateTokenListingRequestRequest
 from cobo_waas2.models.create_wallet_params import CreateWalletParams
 from cobo_waas2.models.created_wallet_info import CreatedWalletInfo
 from cobo_waas2.models.delete_wallet_by_id201_response import DeleteWalletById201Response
@@ -31,6 +33,7 @@ from cobo_waas2.models.list_addresses200_response import ListAddresses200Respons
 from cobo_waas2.models.list_supported_chains200_response import ListSupportedChains200Response
 from cobo_waas2.models.list_supported_tokens200_response import ListSupportedTokens200Response
 from cobo_waas2.models.list_token_balances_for_address200_response import ListTokenBalancesForAddress200Response
+from cobo_waas2.models.list_token_listing_requests200_response import ListTokenListingRequests200Response
 from cobo_waas2.models.list_utxos200_response import ListUtxos200Response
 from cobo_waas2.models.list_wallets200_response import ListWallets200Response
 from cobo_waas2.models.lock_utxos201_response import LockUtxos201Response
@@ -38,6 +41,8 @@ from cobo_waas2.models.lock_utxos_request import LockUtxosRequest
 from cobo_waas2.models.max_transferable_value import MaxTransferableValue
 from cobo_waas2.models.refresh_address_balances_by_token200_response import RefreshAddressBalancesByToken200Response
 from cobo_waas2.models.refresh_address_balances_by_token_request import RefreshAddressBalancesByTokenRequest
+from cobo_waas2.models.token_listing import TokenListing
+from cobo_waas2.models.token_listing_request_status import TokenListingRequestStatus
 from cobo_waas2.models.update_wallet_params import UpdateWalletParams
 from cobo_waas2.models.wallet_info import WalletInfo
 from cobo_waas2.models.wallet_subtype import WalletSubtype
@@ -800,6 +805,175 @@ class WalletsApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/wallets/{wallet_id}/addresses',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_token_listing_request(
+        self,
+        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note> ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CreateTokenListingRequest201Response:
+        """Submit token listing request
+
+        Submit a request to add a non-listed token. The token must exist on the specified blockchain with a valid contract address. 
+
+        :param create_token_listing_request_request: Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note>  (required)
+        :type create_token_listing_request_request: CreateTokenListingRequestRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_token_listing_request_serialize(
+            create_token_listing_request_request=create_token_listing_request_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateTokenListingRequest201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_token_listing_request_with_http_info(
+        self,
+        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note> ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CreateTokenListingRequest201Response]:
+        """Submit token listing request
+
+        Submit a request to add a non-listed token. The token must exist on the specified blockchain with a valid contract address. 
+
+        :param create_token_listing_request_request: Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note>  (required)
+        :type create_token_listing_request_request: CreateTokenListingRequestRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_token_listing_request_serialize(
+            create_token_listing_request_request=create_token_listing_request_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateTokenListingRequest201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_token_listing_request_without_preload_content(
+        self,
+        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note> ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Submit token listing request
+
+        Submit a request to add a non-listed token. The token must exist on the specified blockchain with a valid contract address. 
+
+        :param create_token_listing_request_request: Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note>  (required)
+        :type create_token_listing_request_request: CreateTokenListingRequestRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_token_listing_request_serialize(
+            create_token_listing_request_request=create_token_listing_request_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateTokenListingRequest201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_token_listing_request_serialize(
+        self,
+        create_token_listing_request_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_token_listing_request_request is not None:
+            _body_params = create_token_listing_request_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/wallets/tokens/listing_requests',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1713,6 +1887,175 @@ class WalletsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/wallets/tokens/{token_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_token_listing_request_by_request_id(
+        self,
+        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TokenListing:
+        """Get token listing request details
+
+        Retrieve detailed information about a specific token listing request including its current status and any admin feedback. 
+
+        :param request_id: The unique identifier of the token listing request (required)
+        :type request_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_token_listing_request_by_request_id_serialize(
+            request_id=request_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TokenListing",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_token_listing_request_by_request_id_with_http_info(
+        self,
+        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TokenListing]:
+        """Get token listing request details
+
+        Retrieve detailed information about a specific token listing request including its current status and any admin feedback. 
+
+        :param request_id: The unique identifier of the token listing request (required)
+        :type request_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_token_listing_request_by_request_id_serialize(
+            request_id=request_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TokenListing",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_token_listing_request_by_request_id_without_preload_content(
+        self,
+        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get token listing request details
+
+        Retrieve detailed information about a specific token listing request including its current status and any admin feedback. 
+
+        :param request_id: The unique identifier of the token listing request (required)
+        :type request_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_token_listing_request_by_request_id_serialize(
+            request_id=request_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TokenListing",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_token_listing_request_by_request_id_serialize(
+        self,
+        request_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if request_id is not None:
+            _path_params['request_id'] = request_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/wallets/tokens/listing_requests/{request_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3901,6 +4244,228 @@ class WalletsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/wallets/{wallet_id}/tokens',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_token_listing_requests(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        status: Annotated[Optional[TokenListingRequestStatus], Field(description="Filter by request status")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListTokenListingRequests200Response:
+        """Get all token listing requests
+
+        Retrieve a list of all token listing requests. Results can be filtered and paginated. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param status: Filter by request status
+        :type status: TokenListingRequestStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_token_listing_requests_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            status=status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListTokenListingRequests200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_token_listing_requests_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        status: Annotated[Optional[TokenListingRequestStatus], Field(description="Filter by request status")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListTokenListingRequests200Response]:
+        """Get all token listing requests
+
+        Retrieve a list of all token listing requests. Results can be filtered and paginated. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param status: Filter by request status
+        :type status: TokenListingRequestStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_token_listing_requests_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            status=status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListTokenListingRequests200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_token_listing_requests_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        status: Annotated[Optional[TokenListingRequestStatus], Field(description="Filter by request status")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get all token listing requests
+
+        Retrieve a list of all token listing requests. Results can be filtered and paginated. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param status: Filter by request status
+        :type status: TokenListingRequestStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_token_listing_requests_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            status=status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListTokenListingRequests200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_token_listing_requests_serialize(
+        self,
+        limit,
+        before,
+        after,
+        status,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if status is not None:
+            
+            _query_params.append(('status', status.value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/wallets/tokens/listing_requests',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

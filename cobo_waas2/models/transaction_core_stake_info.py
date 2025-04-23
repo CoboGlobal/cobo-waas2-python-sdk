@@ -24,14 +24,14 @@ from typing_extensions import Self
 
 class TransactionCoreStakeInfo(BaseModel):
     """
-    The core stake information.
+    The extra information related to core staking operations.
     """  # noqa: E501
     extra_type: TransactionExtraType
-    stake_amount: Optional[StrictStr] = Field(default=None, description="The origin staking amount.")
+    stake_amount: Optional[StrictStr] = Field(default=None, description="The original staking amount.")
     timelock: Optional[StrictInt] = Field(default=None, description="The Unix timestamp (in seconds) when the staking position will be unlocked and available for withdrawal.")
     change_address: Optional[StrictStr] = Field(default=None, description="The change address on the Bitcoin chain. If not provided, the source wallet's address will be used as the change address.")
     validator_address: Optional[StrictStr] = Field(default=None, description="The validator's EVM address.")
-    reward_address: Optional[StrictStr] = Field(default=None, description="The EVM address to receive staking rewards.")
+    reward_address: Optional[StrictStr] = Field(default=None, description="The EVM address used to receive staking rewards.")
     __properties: ClassVar[List[str]] = ["extra_type", "stake_amount", "timelock", "change_address", "validator_address", "reward_address"]
 
     model_config = ConfigDict(

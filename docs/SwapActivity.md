@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **activity_id** | **str** | The unique identifier of the swap activity. | [optional] 
-**activity_type** | [**SwapActivityType**](SwapActivityType.md) |  | [optional] 
+**swap_type** | [**SwapType**](SwapType.md) |  | [optional] 
 **status** | [**SwapActivityStatus**](SwapActivityStatus.md) |  | [optional] 
 **request_id** | **str** | The request id of the swap activity. | [optional] 
 **wallet_id** | **str** | The unique identifier of the wallet. | [optional] 
@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **receive_token_id** | **str** | The token symbol to swap to. | [optional] 
 **pay_amount** | **str** | The amount of tokens to bridge. | [optional] 
 **receive_amount** | **str** | The amount of tokens to receive. | [optional] 
+**fee_token_id** | **str** | The fee token symbol. | [optional] 
 **fee_amount** | **str** | The amount of fee. | [optional] 
 **initiator** | **str** | The initiator of the swap activity. | [optional] 
 **initiator_type** | [**TransactionInitiatorType**](TransactionInitiatorType.md) |  | [optional] 

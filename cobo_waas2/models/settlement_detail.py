@@ -28,13 +28,13 @@ class SettlementDetail(BaseModel):
     """
     SettlementDetail
     """  # noqa: E501
-    currency: Optional[StrictStr] = Field(default=None, description="The currency for the settlement.")
-    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency token settled.")
+    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the settlement.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency settled.")
     chain_id: Optional[StrictStr] = Field(default=None, description="The ID of the blockchain network on which the settlement occurred.")
-    amount: Optional[StrictStr] = Field(default=None, description="The settled amount. - If `token_id` is specified, this represents the settlement amount in the specified cryptocurrency token. - If `token_id` is not specified, this represents the settlement amount in the specified currency. ")
+    amount: Optional[StrictStr] = Field(default=None, description="The settlement amount.  - If `token_id` is specified, this represents the settlement amount in the specified cryptocurrency.  - If `token_id` is not specified, this represents the settlement amount in the specified fiat currency. ")
     status: Optional[SettleStatus] = None
     bank_account: Optional[BankAccount] = None
-    transactions: Optional[List[PaymentTransaction]] = None
+    transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this settlement request. Each transaction represents a separate blockchain operation related to the settlement process.")
     __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "amount", "status", "bank_account", "transactions"]
 
     model_config = ConfigDict(

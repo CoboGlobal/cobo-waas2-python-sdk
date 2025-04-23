@@ -27,15 +27,15 @@ class Refund(BaseModel):
     """
     Refund
     """  # noqa: E501
-    request_id: Optional[StrictStr] = Field(default=None, description="The request id.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID provided by you when creating the refund request.")
     refund_id: StrictStr = Field(description="The refund order ID.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency token used for refund.")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for refund.")
     chain_id: StrictStr = Field(description="The ID of the blockchain network on which the refund transaction occurs.")
     amount: StrictStr = Field(description="The amount in cryptocurrency to be returned for this refund order.")
     to_address: StrictStr = Field(description="The recipient's wallet address where the refund will be sent.")
     status: RefundStatus
-    transactions: Optional[List[PaymentTransaction]] = None
+    transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process.")
     __properties: ClassVar[List[str]] = ["request_id", "refund_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "transactions"]
 
     model_config = ConfigDict(

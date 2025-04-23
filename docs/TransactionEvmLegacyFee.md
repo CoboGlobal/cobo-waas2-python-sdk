@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **fee_type** | [**FeeType**](FeeType.md) |  | 
 **token_id** | **str** | The token ID of the transaction fee. | [optional] 
 **fee_used** | **str** | The transaction fee. | [optional] 
+**estimated_fee_used** | **str** | The estimated transaction fee. | [optional] 
 **gas_used** | **str** | The gas units used in the transaction. | [optional] 
 
 ## Example

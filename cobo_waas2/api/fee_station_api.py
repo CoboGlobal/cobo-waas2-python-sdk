@@ -16,8 +16,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
+from cobo_waas2.models.estimated_fixed_fee import EstimatedFixedFee
+from cobo_waas2.models.fee_station_transfer import FeeStationTransfer
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
-from cobo_waas2.models.list_token_balances_for_address200_response import ListTokenBalancesForAddress200Response
+from cobo_waas2.models.list_token_balances_for_fee_station200_response import ListTokenBalancesForFeeStation200Response
 from cobo_waas2.models.list_transactions200_response import ListTransactions200Response
 from cobo_waas2.models.transaction_detail import TransactionDetail
 
@@ -37,6 +39,175 @@ class FeeStationApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def estimate_fee_station_fee(
+        self,
+        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a token transfer.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> EstimatedFixedFee:
+        """Estimate transaction fee
+
+        This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+
+        :param fee_station_transfer: The information about a token transfer.
+        :type fee_station_transfer: FeeStationTransfer
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._estimate_fee_station_fee_serialize(
+            fee_station_transfer=fee_station_transfer,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EstimatedFixedFee",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def estimate_fee_station_fee_with_http_info(
+        self,
+        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a token transfer.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[EstimatedFixedFee]:
+        """Estimate transaction fee
+
+        This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+
+        :param fee_station_transfer: The information about a token transfer.
+        :type fee_station_transfer: FeeStationTransfer
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._estimate_fee_station_fee_serialize(
+            fee_station_transfer=fee_station_transfer,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EstimatedFixedFee",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def estimate_fee_station_fee_without_preload_content(
+        self,
+        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a token transfer.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Estimate transaction fee
+
+        This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+
+        :param fee_station_transfer: The information about a token transfer.
+        :type fee_station_transfer: FeeStationTransfer
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._estimate_fee_station_fee_serialize(
+            fee_station_transfer=fee_station_transfer,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EstimatedFixedFee",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _estimate_fee_station_fee_serialize(
+        self,
+        fee_station_transfer,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if fee_station_transfer is not None:
+            _body_params = fee_station_transfer
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/fee_station/transactions/estimate_fee',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
 
     @validate_call
     def get_fee_station_transaction_by_id(
@@ -870,7 +1041,7 @@ class FeeStationApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ListTokenBalancesForAddress200Response:
+    ) -> ListTokenBalancesForFeeStation200Response:
         """List Fee Station token balances
 
         The operation retrieves a list of token balances within your Fee Station. 
@@ -899,7 +1070,7 @@ class FeeStationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTokenBalancesForAddress200Response",
+            '200': "ListTokenBalancesForFeeStation200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -928,7 +1099,7 @@ class FeeStationApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[ListTokenBalancesForAddress200Response]:
+    ) -> ApiResponse[ListTokenBalancesForFeeStation200Response]:
         """List Fee Station token balances
 
         The operation retrieves a list of token balances within your Fee Station. 
@@ -957,7 +1128,7 @@ class FeeStationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTokenBalancesForAddress200Response",
+            '200': "ListTokenBalancesForFeeStation200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -1015,7 +1186,7 @@ class FeeStationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTokenBalancesForAddress200Response",
+            '200': "ListTokenBalancesForFeeStation200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }

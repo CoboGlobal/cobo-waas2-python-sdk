@@ -37,7 +37,8 @@ class TestTransactionFixedFee(unittest.TestCase):
                 max_fee_amount = '0.1',
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'TRON',
-                fee_used = '0.1'
+                fee_used = '0.1',
+                estimated_fee_used = '0.1'
             )
         else:
             return TransactionFixedFee(

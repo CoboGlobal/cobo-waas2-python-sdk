@@ -25,12 +25,12 @@ class SettlementInfo(BaseModel):
     """
     SettlementInfo
     """  # noqa: E501
-    merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID. For payment gateway balance, this field will be empty.")
-    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency token.")
-    available_amount: StrictStr = Field(description="The amount available for settlement in the specified cryptocurrency token.")
-    available_currency_balance: Optional[StrictStr] = Field(default=None, description="The available currency balance.")
-    pending_amount: Optional[StrictStr] = Field(default=None, description="The pending amount.")
-    pending_currency_balance: Optional[StrictStr] = Field(default=None, description="The pending currency balance.")
+    merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID. For developer balance, this field will be empty.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency.")
+    available_amount: StrictStr = Field(description="The amount available for settlement or refund, in the specified cryptocurrency.")
+    available_currency_balance: Optional[StrictStr] = Field(default=None, description="The amount available for settlement or refund, in the specified fiat currency.")
+    pending_amount: Optional[StrictStr] = Field(default=None, description="The amount unavailable for settlement or refund, in the specified cryptocurrency.")
+    pending_currency_balance: Optional[StrictStr] = Field(default=None, description="The amount unavailable for settlement or refund, in the specified fiat currency.")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "available_amount", "available_currency_balance", "pending_amount", "pending_currency_balance"]
 
     model_config = ConfigDict(

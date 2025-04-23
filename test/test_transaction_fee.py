@@ -38,6 +38,7 @@ class TestTransactionFee(unittest.TestCase):
                 token_id = 'TRON',
                 effective_gas_price = '100000000',
                 fee_used = '0.1',
+                estimated_fee_used = '0.1',
                 gas_used = '100000000',
                 max_fee_per_gas = '9000000000000',
                 max_priority_fee_per_gas = '1000000000000',

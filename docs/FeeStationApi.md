@@ -4,11 +4,85 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**estimate_fee_station_fee**](FeeStationApi.md#estimate_fee_station_fee) | **POST** /fee_station/transactions/estimate_fee | Estimate transaction fee
 [**get_fee_station_transaction_by_id**](FeeStationApi.md#get_fee_station_transaction_by_id) | **GET** /fee_station/transactions/{transaction_id} | Get Fee Station transaction information
 [**list_fee_station_addresses**](FeeStationApi.md#list_fee_station_addresses) | **GET** /fee_station/addresses | List Fee Station addresses
 [**list_fee_station_transactions**](FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all Fee Station transactions
 [**list_token_balances_for_fee_station**](FeeStationApi.md#list_token_balances_for_fee_station) | **GET** /fee_station/tokens | List Fee Station token balances
 
+
+# **estimate_fee_station_fee**
+> EstimatedFixedFee estimate_fee_station_fee(fee_station_transfer=fee_station_transfer)
+
+Estimate transaction fee
+
+This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.estimated_fixed_fee import EstimatedFixedFee
+from cobo_waas2.models.fee_station_transfer import FeeStationTransfer
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.FeeStationApi(api_client)
+    fee_station_transfer = cobo_waas2.FeeStationTransfer()
+
+    try:
+        # Estimate transaction fee
+        api_response = api_instance.estimate_fee_station_fee(fee_station_transfer=fee_station_transfer)
+        print("The response of FeeStationApi->estimate_fee_station_fee:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FeeStationApi->estimate_fee_station_fee: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fee_station_transfer** | [**FeeStationTransfer**](FeeStationTransfer.md)| The information about a token transfer. | [optional] 
+
+### Return type
+
+[**EstimatedFixedFee**](EstimatedFixedFee.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_fee_station_transaction_by_id**
 > TransactionDetail get_fee_station_transaction_by_id(transaction_id)
@@ -263,7 +337,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_token_balances_for_fee_station**
-> ListTokenBalancesForAddress200Response list_token_balances_for_fee_station(token_ids=token_ids, limit=limit, before=before, after=after)
+> ListTokenBalancesForFeeStation200Response list_token_balances_for_fee_station(token_ids=token_ids, limit=limit, before=before, after=after)
 
 List Fee Station token balances
 
@@ -276,7 +350,7 @@ The operation retrieves a list of token balances within your Fee Station.
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.list_token_balances_for_address200_response import ListTokenBalancesForAddress200Response
+from cobo_waas2.models.list_token_balances_for_fee_station200_response import ListTokenBalancesForFeeStation200Response
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -319,7 +393,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListTokenBalancesForAddress200Response**](ListTokenBalancesForAddress200Response.md)
+[**ListTokenBalancesForFeeStation200Response**](ListTokenBalancesForFeeStation200Response.md)
 
 ### Authorization
 

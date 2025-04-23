@@ -16,8 +16,10 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.chain_info import ChainInfo
+from cobo_waas2.models.wallet_subtype import WalletSubtype
+from cobo_waas2.models.wallet_type import WalletType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,15 +28,17 @@ class ChainsEventData(BaseModel):
     """
     ChainsEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data.")
     chains: List[ChainInfo] = Field(description="The enabled chains.")
-    __properties: ClassVar[List[str]] = ["data_type", "chains"]
+    wallet_type: Optional[WalletType] = None
+    wallet_subtypes: Optional[List[WalletSubtype]] = None
+    __properties: ClassVar[List[str]] = ["data_type", "chains", "wallet_type", "wallet_subtypes"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement')")
         return value
 
     model_config = ConfigDict(
@@ -96,7 +100,9 @@ class ChainsEventData(BaseModel):
 
         _obj = cls.model_validate({
             "data_type": obj.get("data_type"),
-            "chains": [ChainInfo.from_dict(_item) for _item in obj["chains"]] if obj.get("chains") is not None else None
+            "chains": [ChainInfo.from_dict(_item) for _item in obj["chains"]] if obj.get("chains") is not None else None,
+            "wallet_type": obj.get("wallet_type"),
+            "wallet_subtypes": obj.get("wallet_subtypes")
         })
         return _obj
 

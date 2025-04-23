@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.swap_activity_type import SwapActivityType
+from cobo_waas2.models.swap_type import SwapType
 
 
-class TestSwapActivityType(unittest.TestCase):
-    """SwapActivityType unit test stubs"""
+class TestSwapType(unittest.TestCase):
+    """SwapType unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,9 +24,9 @@ class TestSwapActivityType(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSwapActivityType(self):
-        """Test SwapActivityType"""
-        # inst = SwapActivityType()
+    def testSwapType(self):
+        """Test SwapType"""
+        # inst = SwapType()
 
 
 if __name__ == '__main__':

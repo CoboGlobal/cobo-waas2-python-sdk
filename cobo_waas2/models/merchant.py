@@ -27,7 +27,7 @@ class Merchant(BaseModel):
     """  # noqa: E501
     merchant_id: StrictStr = Field(description="The merchant ID.")
     name: StrictStr = Field(description="The merchant name.")
-    wallet_id: StrictStr = Field(description="The ID of the associated wallet.")
+    wallet_id: StrictStr = Field(description="The ID of the linked wallet.")
     __properties: ClassVar[List[str]] = ["merchant_id", "name", "wallet_id"]
 
     model_config = ConfigDict(
