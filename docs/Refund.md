@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_id** | **str** | The request id. | [optional] 
+**request_id** | **str** | The request ID provided by you when creating the refund request. | [optional] 
 **refund_id** | **str** | The refund order ID. | 
 **merchant_id** | **str** | The merchant ID. | [optional] 
-**token_id** | **str** | The ID of the cryptocurrency token used for refund. | 
+**token_id** | **str** | The ID of the cryptocurrency used for refund. | 
 **chain_id** | **str** | The ID of the blockchain network on which the refund transaction occurs. | 
 **amount** | **str** | The amount in cryptocurrency to be returned for this refund order. | 
 **to_address** | **str** | The recipient&#39;s wallet address where the refund will be sent. | 
 **status** | [**RefundStatus**](RefundStatus.md) |  | 
-**transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) |  | [optional] 
+**transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process. | [optional] 
 
 ## Example
 

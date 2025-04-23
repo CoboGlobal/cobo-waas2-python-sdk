@@ -35,7 +35,7 @@ class TestSwapActivity(unittest.TestCase):
         if include_optional:
             return SwapActivity(
                 activity_id = '123e4567-e89b-12d3-a456-426614174000',
-                activity_type = 'Bridge',
+                swap_type = 'Bridge',
                 status = 'Success',
                 request_id = '123e4567-e89b-12d3-a456-426614174000',
                 wallet_id = '123e4567-e89b-12d3-a456-426614174001',
@@ -43,6 +43,7 @@ class TestSwapActivity(unittest.TestCase):
                 receive_token_id = 'ETH_WBTC',
                 pay_amount = '100',
                 receive_amount = '100',
+                fee_token_id = 'BTC',
                 fee_amount = '0.3',
                 initiator = 'John Doe',
                 initiator_type = 'API',

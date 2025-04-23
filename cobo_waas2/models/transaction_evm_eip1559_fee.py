@@ -33,8 +33,9 @@ class TransactionEvmEip1559Fee(BaseModel):
     token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
     effective_gas_price: Optional[StrictStr] = Field(default=None, description="The gas price (gas fee per gas unit) on the chain, in wei. The gas price represents the amount of ETH that must be paid to validators for processing transactions.")
     fee_used: Optional[StrictStr] = Field(default=None, description="The transaction fee.")
+    estimated_fee_used: Optional[StrictStr] = Field(default=None, description="The estimated transaction fee.")
     gas_used: Optional[StrictStr] = Field(default=None, description="The number of gas units used in the transaction.")
-    __properties: ClassVar[List[str]] = ["max_fee_per_gas", "max_priority_fee_per_gas", "gas_limit", "fee_type", "token_id", "effective_gas_price", "fee_used", "gas_used"]
+    __properties: ClassVar[List[str]] = ["max_fee_per_gas", "max_priority_fee_per_gas", "gas_limit", "fee_type", "token_id", "effective_gas_price", "fee_used", "estimated_fee_used", "gas_used"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,7 @@ class TransactionEvmEip1559Fee(BaseModel):
             "token_id": obj.get("token_id"),
             "effective_gas_price": obj.get("effective_gas_price"),
             "fee_used": obj.get("fee_used"),
+            "estimated_fee_used": obj.get("estimated_fee_used"),
             "gas_used": obj.get("gas_used")
         })
         return _obj

@@ -41,6 +41,7 @@ class TestTransactionEvmEip1559Fee(unittest.TestCase):
                 token_id = 'ETH',
                 effective_gas_price = '100000000',
                 fee_used = '0.1',
+                estimated_fee_used = '0.1',
                 gas_used = '100000000'
             )
         else:

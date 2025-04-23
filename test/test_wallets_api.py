@@ -81,6 +81,18 @@ class TestWalletsApi(unittest.TestCase):
         api_response = self.api.create_address(wallet_id, create_address_request=create_address_request)
         """
 
+    def test_create_token_listing_request(self) -> None:
+        """
+        Test case for create_token_listing_request
+
+        Submit token listing request
+        """
+        """
+        create_token_listing_request_request = cobo_waas2.CreateTokenListingRequestRequest()
+
+        api_response = self.api.create_token_listing_request(create_token_listing_request_request)
+        """
+
     def test_create_wallet(self) -> None:
         """
         Test case for create_wallet
@@ -143,6 +155,18 @@ class TestWalletsApi(unittest.TestCase):
         token_id = 'ETH_USDT'
 
         api_response = self.api.get_token_by_id(token_id)
+        """
+
+    def test_get_token_listing_request_by_request_id(self) -> None:
+        """
+        Test case for get_token_listing_request_by_request_id
+
+        Get token listing request details
+        """
+        """
+        request_id = '123e4567e89b12d3a456426614174000'
+
+        api_response = self.api.get_token_listing_request_by_request_id(request_id)
         """
 
     def test_get_wallet_by_id(self) -> None:
@@ -290,6 +314,21 @@ class TestWalletsApi(unittest.TestCase):
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
         api_response = self.api.list_token_balances_for_wallet(wallet_id, token_ids=token_ids, limit=limit, before=before, after=after)
+        """
+
+    def test_list_token_listing_requests(self) -> None:
+        """
+        Test case for list_token_listing_requests
+
+        Get all token listing requests
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        status = cobo_waas2.TokenListingRequestStatus()
+
+        api_response = self.api.list_token_listing_requests(limit=limit, before=before, after=after, status=status)
         """
 
     def test_list_utxos(self) -> None:

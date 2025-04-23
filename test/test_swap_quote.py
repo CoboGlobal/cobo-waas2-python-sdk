@@ -44,6 +44,7 @@ class TestSwapQuote(unittest.TestCase):
             )
         else:
             return SwapQuote(
+                quote_id = '2ec094034044ffa50f4294d48363fef31eb5755fc783ba3837a03c91b4904659',
                 pay_amount = '100',
                 receive_amount = '100',
                 fee_amount = '0.3',

@@ -18,7 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.swap_activity_status import SwapActivityStatus
-from cobo_waas2.models.swap_activity_type import SwapActivityType
+from cobo_waas2.models.swap_type import SwapType
 from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,7 @@ class SwapActivity(BaseModel):
     SwapActivity
     """  # noqa: E501
     activity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the swap activity.")
-    activity_type: Optional[SwapActivityType] = None
+    swap_type: Optional[SwapType] = None
     status: Optional[SwapActivityStatus] = None
     request_id: Optional[StrictStr] = Field(default=None, description="The request id of the swap activity.")
     wallet_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the wallet.")
@@ -37,13 +37,14 @@ class SwapActivity(BaseModel):
     receive_token_id: Optional[StrictStr] = Field(default=None, description="The token symbol to swap to.")
     pay_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to bridge.")
     receive_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to receive.")
+    fee_token_id: Optional[StrictStr] = Field(default=None, description="The fee token symbol.")
     fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of fee.")
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the swap activity.")
     initiator_type: Optional[TransactionInitiatorType] = None
     description: Optional[StrictStr] = Field(default=None, description="The description of the swap activity.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was last updated, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["activity_id", "activity_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,7 +103,7 @@ class SwapActivity(BaseModel):
 
         _obj = cls.model_validate({
             "activity_id": obj.get("activity_id"),
-            "activity_type": obj.get("activity_type"),
+            "swap_type": obj.get("swap_type"),
             "status": obj.get("status"),
             "request_id": obj.get("request_id"),
             "wallet_id": obj.get("wallet_id"),
@@ -110,6 +111,7 @@ class SwapActivity(BaseModel):
             "receive_token_id": obj.get("receive_token_id"),
             "pay_amount": obj.get("pay_amount"),
             "receive_amount": obj.get("receive_amount"),
+            "fee_token_id": obj.get("fee_token_id"),
             "fee_amount": obj.get("fee_amount"),
             "initiator": obj.get("initiator"),
             "initiator_type": obj.get("initiator_type"),

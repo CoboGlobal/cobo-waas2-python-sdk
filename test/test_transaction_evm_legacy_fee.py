@@ -39,6 +39,7 @@ class TestTransactionEvmLegacyFee(unittest.TestCase):
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'ETH',
                 fee_used = '0.1',
+                estimated_fee_used = '0.1',
                 gas_used = '100000000'
             )
         else:

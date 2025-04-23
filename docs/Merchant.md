@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **merchant_id** | **str** | The merchant ID. | 
 **name** | **str** | The merchant name. | 
-**wallet_id** | **str** | The ID of the associated wallet. | 
+**wallet_id** | **str** | The ID of the linked wallet. | 
 
 ## Example
 

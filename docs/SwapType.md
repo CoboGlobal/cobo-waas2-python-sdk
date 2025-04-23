@@ -1,4 +1,4 @@
-# SwapActivityType
+# SwapType
 
 The type of the swap activity. Possible values include: - `Bridge`: The activity is a bridge activity. - `Exchange`: The activity is an exchange activity. 
 

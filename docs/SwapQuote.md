@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quote_id** | **str** | The unique id of quote. | [optional] 
+**quote_id** | **str** | The unique id of quote. | 
 **pay_amount** | **str** | The amount of tokens to pay. | 
 **receive_amount** | **str** | The amount of tokens to receive. | 
 **fee_amount** | **str** | The amount of tokens to pay for fee. | 

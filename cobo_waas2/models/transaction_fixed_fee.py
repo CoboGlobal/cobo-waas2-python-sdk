@@ -30,7 +30,8 @@ class TransactionFixedFee(BaseModel):
     fee_type: FeeType
     token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
     fee_used: Optional[StrictStr] = Field(default=None, description="The transaction fee.")
-    __properties: ClassVar[List[str]] = ["max_fee_amount", "fee_type", "token_id", "fee_used"]
+    estimated_fee_used: Optional[StrictStr] = Field(default=None, description="The estimated transaction fee.")
+    __properties: ClassVar[List[str]] = ["max_fee_amount", "fee_type", "token_id", "fee_used", "estimated_fee_used"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,7 +87,8 @@ class TransactionFixedFee(BaseModel):
             "max_fee_amount": obj.get("max_fee_amount"),
             "fee_type": obj.get("fee_type"),
             "token_id": obj.get("token_id"),
-            "fee_used": obj.get("fee_used")
+            "fee_used": obj.get("fee_used"),
+            "estimated_fee_used": obj.get("estimated_fee_used")
         })
         return _obj
 

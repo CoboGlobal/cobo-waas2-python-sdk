@@ -1,6 +1,6 @@
 # SettlementType
 
-Specifies the source of funds for the settlement: - `Merchant`: The settlement amount will be deducted from the merchant balance. - `Psp`: The settlement amount will be deducted from the payment gateway balance. 
+Specifies the source of funds for the settlement: - `Merchant`: The settlement amount will be deducted from the merchant balance. - `Psp`: The settlement amount will be deducted from the developer balance. 
 
 ## Properties
 

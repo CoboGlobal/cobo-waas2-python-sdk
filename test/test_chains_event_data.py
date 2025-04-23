@@ -44,6 +44,10 @@ class TestChainsEventData(unittest.TestCase):
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
                         confirming_threshold = 15, )
+                    ],
+                wallet_type = 'Custodial',
+                wallet_subtypes = [
+                    'Asset'
                     ]
             )
         else:

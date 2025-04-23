@@ -51,6 +51,10 @@ class TestTokensEventData(unittest.TestCase):
                         dust_threshold = '0.00000546', 
                         custodial_minimum_deposit_threshold = '0.0001', 
                         asset_model_type = 'Account', )
+                    ],
+                wallet_type = 'Custodial',
+                wallet_subtypes = [
+                    'Asset'
                     ]
             )
         else:

@@ -25,7 +25,7 @@ class SwapQuote(BaseModel):
     """
     SwapQuote
     """  # noqa: E501
-    quote_id: Optional[StrictStr] = Field(default=None, description="The unique id of quote.")
+    quote_id: StrictStr = Field(description="The unique id of quote.")
     pay_amount: StrictStr = Field(description="The amount of tokens to pay.")
     receive_amount: StrictStr = Field(description="The amount of tokens to receive.")
     fee_amount: StrictStr = Field(description="The amount of tokens to pay for fee.")

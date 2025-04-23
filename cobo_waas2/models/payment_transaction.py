@@ -26,10 +26,10 @@ class PaymentTransaction(BaseModel):
     """
     PaymentTransaction
     """  # noqa: E501
-    tx_id: StrictStr = Field(description="Unique identifier for the transaction.")
-    tx_hash: Optional[StrictStr] = Field(default=None, description="The blockchain transaction hash, may be initially null and populated after submission.")
-    from_address: StrictStr = Field(description="Source cryptocurrency address for the transaction.")
-    to_address: StrictStr = Field(description="Destination cryptocurrency address for the transaction.")
+    tx_id: StrictStr = Field(description="The transaction ID.")
+    tx_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash.")
+    from_address: StrictStr = Field(description="The source address of the transaction.")
+    to_address: StrictStr = Field(description="The destination address of the transaction.")
     amount: StrictStr = Field(description="The amount of cryptocurrency transferred, as a decimal string.")
     status: TransactionStatus
     created_timestamp: StrictInt = Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")

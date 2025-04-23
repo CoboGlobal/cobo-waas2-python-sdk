@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tx_id** | **str** | Unique identifier for the transaction. | 
-**tx_hash** | **str** | The blockchain transaction hash, may be initially null and populated after submission. | [optional] 
-**from_address** | **str** | Source cryptocurrency address for the transaction. | 
-**to_address** | **str** | Destination cryptocurrency address for the transaction. | 
+**tx_id** | **str** | The transaction ID. | 
+**tx_hash** | **str** | The transaction hash. | [optional] 
+**from_address** | **str** | The source address of the transaction. | 
+**to_address** | **str** | The destination address of the transaction. | 
 **amount** | **str** | The amount of cryptocurrency transferred, as a decimal string. | 
 **status** | [**TransactionStatus**](TransactionStatus.md) |  | 
 **created_timestamp** | **int** | The time when the transaction was created, in Unix timestamp format, measured in milliseconds. | 

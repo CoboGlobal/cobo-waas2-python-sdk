@@ -35,7 +35,7 @@ class TestTokenListingEventData(unittest.TestCase):
         if include_optional:
             return TokenListingEventData(
                 data_type = 'Transaction',
-                request_id = '123e4567-e89b-12d3-a456-426614174000',
+                request_id = '123e4567e89b12d3a456426614174000',
                 chain_id = 'ETH',
                 contract_address = '0x6B175474E89094C44Da98b954EedeAC495271d0F',
                 wallet_type = 'Custodial',
@@ -64,7 +64,7 @@ class TestTokenListingEventData(unittest.TestCase):
         else:
             return TokenListingEventData(
                 data_type = 'Transaction',
-                request_id = '123e4567-e89b-12d3-a456-426614174000',
+                request_id = '123e4567e89b12d3a456426614174000',
                 chain_id = 'ETH',
                 contract_address = '0x6B175474E89094C44Da98b954EedeAC495271d0F',
                 wallet_type = 'Custodial',
