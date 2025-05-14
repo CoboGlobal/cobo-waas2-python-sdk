@@ -33,11 +33,11 @@ class SwapActivity(BaseModel):
     status: Optional[SwapActivityStatus] = None
     request_id: Optional[StrictStr] = Field(default=None, description="The request id of the swap activity.")
     wallet_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the wallet.")
-    pay_token_id: Optional[StrictStr] = Field(default=None, description="The token symbol to swap from.")
-    receive_token_id: Optional[StrictStr] = Field(default=None, description="The token symbol to swap to.")
+    pay_token_id: Optional[StrictStr] = Field(default=None, description="The token ID to pay.")
+    receive_token_id: Optional[StrictStr] = Field(default=None, description="The token ID to receive.")
     pay_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to bridge.")
     receive_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to receive.")
-    fee_token_id: Optional[StrictStr] = Field(default=None, description="The fee token symbol.")
+    fee_token_id: Optional[StrictStr] = Field(default=None, description="The fee token ID.")
     fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of fee.")
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the swap activity.")
     initiator_type: Optional[TransactionInitiatorType] = None

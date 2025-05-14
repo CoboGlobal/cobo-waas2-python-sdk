@@ -81,7 +81,7 @@ class WalletsApi:
     ) -> List[CheckAddressChainsValidity200ResponseInner]:
         """Check address validity across chains
 
-        This operation verifies if a given address is valid for a list of chains. 
+        This operation verifies if a given address is valid for a list of chains.  <Note>You can specify up to 20 chain IDs in a single request.</Note> 
 
         :param address: The wallet address. (required)
         :type address: str
@@ -131,7 +131,7 @@ class WalletsApi:
     ) -> ApiResponse[List[CheckAddressChainsValidity200ResponseInner]]:
         """Check address validity across chains
 
-        This operation verifies if a given address is valid for a list of chains. 
+        This operation verifies if a given address is valid for a list of chains.  <Note>You can specify up to 20 chain IDs in a single request.</Note> 
 
         :param address: The wallet address. (required)
         :type address: str
@@ -181,7 +181,7 @@ class WalletsApi:
     ) -> RESTResponseType:
         """Check address validity across chains
 
-        This operation verifies if a given address is valid for a list of chains. 
+        This operation verifies if a given address is valid for a list of chains.  <Note>You can specify up to 20 chain IDs in a single request.</Note> 
 
         :param address: The wallet address. (required)
         :type address: str
@@ -816,7 +816,7 @@ class WalletsApi:
     @validate_call
     def create_token_listing_request(
         self,
-        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note> ")],
+        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. ")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -826,11 +826,11 @@ class WalletsApi:
             ]
         ] = None,
     ) -> CreateTokenListingRequest201Response:
-        """Submit token listing request
+        """Create token listing request
 
-        Submit a request to add a non-listed token. The token must exist on the specified blockchain with a valid contract address. 
+        This operation creates a token listing request. The token to be listed must already be deployed on the specified blockchain and have a valid contract address.  <note>Currently, tokens listed through this operation are only supported in wallets of type `Custodial` or `MPC`, and subtype `Asset`, `Web3`, or `Org-Controlled`.</note> 
 
-        :param create_token_listing_request_request: Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note>  (required)
+        :param create_token_listing_request_request: Request body for submitting a token listing request.  (required)
         :type create_token_listing_request_request: CreateTokenListingRequestRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -862,7 +862,7 @@ class WalletsApi:
     @validate_call
     def create_token_listing_request_with_http_info(
         self,
-        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note> ")],
+        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. ")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -872,11 +872,11 @@ class WalletsApi:
             ]
         ] = None,
     ) -> ApiResponse[CreateTokenListingRequest201Response]:
-        """Submit token listing request
+        """Create token listing request
 
-        Submit a request to add a non-listed token. The token must exist on the specified blockchain with a valid contract address. 
+        This operation creates a token listing request. The token to be listed must already be deployed on the specified blockchain and have a valid contract address.  <note>Currently, tokens listed through this operation are only supported in wallets of type `Custodial` or `MPC`, and subtype `Asset`, `Web3`, or `Org-Controlled`.</note> 
 
-        :param create_token_listing_request_request: Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note>  (required)
+        :param create_token_listing_request_request: Request body for submitting a token listing request.  (required)
         :type create_token_listing_request_request: CreateTokenListingRequestRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -908,7 +908,7 @@ class WalletsApi:
     @validate_call
     def create_token_listing_request_without_preload_content(
         self,
-        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note> ")],
+        create_token_listing_request_request: Annotated[CreateTokenListingRequestRequest, Field(description="Request body for submitting a token listing request. ")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -918,11 +918,11 @@ class WalletsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Submit token listing request
+        """Create token listing request
 
-        Submit a request to add a non-listed token. The token must exist on the specified blockchain with a valid contract address. 
+        This operation creates a token listing request. The token to be listed must already be deployed on the specified blockchain and have a valid contract address.  <note>Currently, tokens listed through this operation are only supported in wallets of type `Custodial` or `MPC`, and subtype `Asset`, `Web3`, or `Org-Controlled`.</note> 
 
-        :param create_token_listing_request_request: Request body for submitting a token listing request. <note>   wallet_type only supports `Custodial` and `MPC`.   wallet_subtype only supports `Asset`, `Web3`, and `Org-Controlled`. </note>  (required)
+        :param create_token_listing_request_request: Request body for submitting a token listing request.  (required)
         :type create_token_listing_request_request: CreateTokenListingRequestRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1898,7 +1898,7 @@ class WalletsApi:
     @validate_call
     def get_token_listing_request_by_request_id(
         self,
-        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request")],
+        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1908,11 +1908,11 @@ class WalletsApi:
             ]
         ] = None,
     ) -> TokenListing:
-        """Get token listing request details
+        """Get token listing request
 
-        Retrieve detailed information about a specific token listing request including its current status and any admin feedback. 
+        This operation retrieves detailed information about a specific token listing request, including its current status. 
 
-        :param request_id: The unique identifier of the token listing request (required)
+        :param request_id: The unique identifier of the token listing request. (required)
         :type request_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1944,7 +1944,7 @@ class WalletsApi:
     @validate_call
     def get_token_listing_request_by_request_id_with_http_info(
         self,
-        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request")],
+        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1954,11 +1954,11 @@ class WalletsApi:
             ]
         ] = None,
     ) -> ApiResponse[TokenListing]:
-        """Get token listing request details
+        """Get token listing request
 
-        Retrieve detailed information about a specific token listing request including its current status and any admin feedback. 
+        This operation retrieves detailed information about a specific token listing request, including its current status. 
 
-        :param request_id: The unique identifier of the token listing request (required)
+        :param request_id: The unique identifier of the token listing request. (required)
         :type request_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1990,7 +1990,7 @@ class WalletsApi:
     @validate_call
     def get_token_listing_request_by_request_id_without_preload_content(
         self,
-        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request")],
+        request_id: Annotated[StrictStr, Field(description="The unique identifier of the token listing request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2000,11 +2000,11 @@ class WalletsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get token listing request details
+        """Get token listing request
 
-        Retrieve detailed information about a specific token listing request including its current status and any admin feedback. 
+        This operation retrieves detailed information about a specific token listing request, including its current status. 
 
-        :param request_id: The unique identifier of the token listing request (required)
+        :param request_id: The unique identifier of the token listing request. (required)
         :type request_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4258,7 +4258,7 @@ class WalletsApi:
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
-        status: Annotated[Optional[TokenListingRequestStatus], Field(description="Filter by request status")] = None,
+        status: Annotated[Optional[TokenListingRequestStatus], Field(description="The current status of the token listing request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4268,9 +4268,9 @@ class WalletsApi:
             ]
         ] = None,
     ) -> ListTokenListingRequests200Response:
-        """Get all token listing requests
+        """List token listing requests
 
-        Retrieve a list of all token listing requests. Results can be filtered and paginated. 
+        This operation lists all token listing requests in your organization. You can filter the results by request status. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -4278,7 +4278,7 @@ class WalletsApi:
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
-        :param status: Filter by request status
+        :param status: The current status of the token listing request.
         :type status: TokenListingRequestStatus
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4316,7 +4316,7 @@ class WalletsApi:
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
-        status: Annotated[Optional[TokenListingRequestStatus], Field(description="Filter by request status")] = None,
+        status: Annotated[Optional[TokenListingRequestStatus], Field(description="The current status of the token listing request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4326,9 +4326,9 @@ class WalletsApi:
             ]
         ] = None,
     ) -> ApiResponse[ListTokenListingRequests200Response]:
-        """Get all token listing requests
+        """List token listing requests
 
-        Retrieve a list of all token listing requests. Results can be filtered and paginated. 
+        This operation lists all token listing requests in your organization. You can filter the results by request status. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -4336,7 +4336,7 @@ class WalletsApi:
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
-        :param status: Filter by request status
+        :param status: The current status of the token listing request.
         :type status: TokenListingRequestStatus
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4374,7 +4374,7 @@ class WalletsApi:
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
-        status: Annotated[Optional[TokenListingRequestStatus], Field(description="Filter by request status")] = None,
+        status: Annotated[Optional[TokenListingRequestStatus], Field(description="The current status of the token listing request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4384,9 +4384,9 @@ class WalletsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get all token listing requests
+        """List token listing requests
 
-        Retrieve a list of all token listing requests. Results can be filtered and paginated. 
+        This operation lists all token listing requests in your organization. You can filter the results by request status. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -4394,7 +4394,7 @@ class WalletsApi:
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
-        :param status: Filter by request status
+        :param status: The current status of the token listing request.
         :type status: TokenListingRequestStatus
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

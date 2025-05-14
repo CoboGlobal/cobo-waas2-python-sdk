@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**create_refund**](PaymentApi.md#create_refund) | **POST** /payments/refunds | Create refund order
 [**create_settlement_request**](PaymentApi.md#create_settlement_request) | **POST** /payments/settlement_requests | Create settlement request
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
+[**get_payment_order_address_info**](PaymentApi.md#get_payment_order_address_info) | **GET** /payments/orders/address_info | Get pay-in order&#39;s receiving address info
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
 [**get_refund_detail_by_id**](PaymentApi.md#get_refund_detail_by_id) | **GET** /payments/refunds/{refund_id} | Get refund order information
 [**get_refunds**](PaymentApi.md#get_refunds) | **GET** /payments/refunds | List all refund orders
@@ -446,6 +447,80 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_payment_order_address_info**
+> OrderAddressInfo get_payment_order_address_info(token_id=token_id, address=address)
+
+Get pay-in order's receiving address info
+
+This operation retrieves the detailed information about a specific pay-in address. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.order_address_info import OrderAddressInfo
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    token_id = 'ETH_USDT'
+    address = '0x9876543210abcdef1234567890abcdef12345678'
+
+    try:
+        # Get pay-in order's receiving address info
+        api_response = api_instance.get_payment_order_address_info(token_id=token_id, address=address)
+        print("The response of PaymentApi->get_payment_order_address_info:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_payment_order_address_info: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which identifies the cryptocurrency. Supported values:    - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDC&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | [optional] 
+ **address** | **str**| The receiving address.  | [optional] 
+
+### Return type
+
+[**OrderAddressInfo**](OrderAddressInfo.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 

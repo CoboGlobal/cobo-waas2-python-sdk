@@ -183,6 +183,8 @@ class TestTransactionsApi(unittest.TestCase):
         token_ids = 'ETH_USDT,ETH_USDC'
         asset_ids = 'USDT,USDC'
         vault_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        wallet_type = cobo_waas2.WalletType()
+        wallet_subtype = cobo_waas2.WalletSubtype()
         project_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
         min_created_timestamp = 1635744000000
         max_created_timestamp = 1635744000000
@@ -191,7 +193,7 @@ class TestTransactionsApi(unittest.TestCase):
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         direction = ''
 
-        api_response = self.api.list_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, wallet_ids=wallet_ids, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, vault_id=vault_id, project_id=project_id, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
+        api_response = self.api.list_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, wallet_ids=wallet_ids, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, vault_id=vault_id, wallet_type=wallet_type, wallet_subtype=wallet_subtype, project_id=project_id, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         """
 
     def test_resend_transaction_by_id(self) -> None:

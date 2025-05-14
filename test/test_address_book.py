@@ -40,11 +40,13 @@ class TestAddressBook(unittest.TestCase):
                 memo = '9d4773eb',
                 wallet_name = 'Example Wallet',
                 wallet_type = 'Custodial',
+                wallet_subtype = 'Asset',
                 label = 'test',
                 chain_ids = [
                     'ETH'
                     ],
-                email = 'help@cobo.com'
+                email = 'help@cobo.com',
+                encoding = 'ENCODING_P2PKH'
             )
         else:
             return AddressBook(

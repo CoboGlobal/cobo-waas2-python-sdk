@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class TokenListingRequestSource(str, Enum):
     """
-    Source of the token listing request
+    The source of the token listing request. - `API`: The request was created via the WaaS 2.0 API. - `Admin`: The request was created on Cobo Portal. 
     """
 
     """

@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.settle_request_status import SettleRequestStatus
 from cobo_waas2.models.settlement_detail import SettlementDetail
 from typing import Optional, Set
@@ -32,7 +32,10 @@ class PaymentSettlementEvent(BaseModel):
     request_id: StrictStr = Field(description="The request ID provided by you when creating the settlement request.")
     status: SettleRequestStatus
     settlements: List[SettlementDetail]
-    __properties: ClassVar[List[str]] = ["data_type", "settlement_request_id", "request_id", "status", "settlements"]
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the settlement request, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement request, represented as a UNIX timestamp in seconds.")
+    initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this settlement request, usually the user's API key.")
+    __properties: ClassVar[List[str]] = ["data_type", "settlement_request_id", "request_id", "status", "settlements", "created_timestamp", "updated_timestamp", "initiator"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
@@ -103,7 +106,10 @@ class PaymentSettlementEvent(BaseModel):
             "settlement_request_id": obj.get("settlement_request_id"),
             "request_id": obj.get("request_id"),
             "status": obj.get("status"),
-            "settlements": [SettlementDetail.from_dict(_item) for _item in obj["settlements"]] if obj.get("settlements") is not None else None
+            "settlements": [SettlementDetail.from_dict(_item) for _item in obj["settlements"]] if obj.get("settlements") is not None else None,
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "initiator": obj.get("initiator")
         })
         return _obj
 

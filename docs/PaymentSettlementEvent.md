@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **request_id** | **str** | The request ID provided by you when creating the settlement request. | 
 **status** | [**SettleRequestStatus**](SettleRequestStatus.md) |  | 
 **settlements** | [**List[SettlementDetail]**](SettlementDetail.md) |  | 
+**created_timestamp** | **int** | The created time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
+**updated_timestamp** | **int** | The updated time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
+**initiator** | **str** | The initiator of this settlement request, usually the user&#39;s API key. | [optional] 
 
 ## Example
 

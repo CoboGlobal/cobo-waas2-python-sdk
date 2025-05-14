@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.14.0"
+__version__ = "1.15.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -283,6 +283,7 @@ from cobo_waas2.models.mpc_signing_group import MpcSigningGroup
 from cobo_waas2.models.mpc_stake_source import MpcStakeSource
 from cobo_waas2.models.mpc_transfer_source import MpcTransferSource
 from cobo_waas2.models.order import Order
+from cobo_waas2.models.order_address_info import OrderAddressInfo
 from cobo_waas2.models.order_status import OrderStatus
 from cobo_waas2.models.org_info import OrgInfo
 from cobo_waas2.models.pagination import Pagination
@@ -351,11 +352,46 @@ from cobo_waas2.models.swap_activity_timeline import SwapActivityTimeline
 from cobo_waas2.models.swap_quote import SwapQuote
 from cobo_waas2.models.swap_token import SwapToken
 from cobo_waas2.models.swap_type import SwapType
+from cobo_waas2.models.tss_base_request_event_data import TSSBaseRequestEventData
+from cobo_waas2.models.tss_callback_action_type import TSSCallbackActionType
+from cobo_waas2.models.tss_callback_request import TSSCallbackRequest
+from cobo_waas2.models.tss_callback_request_type import TSSCallbackRequestType
+from cobo_waas2.models.tss_callback_response import TSSCallbackResponse
+from cobo_waas2.models.tss_curve import TSSCurve
+from cobo_waas2.models.tss_curve_type import TSSCurveType
+from cobo_waas2.models.tss_event import TSSEvent
+from cobo_waas2.models.tss_event_data import TSSEventData
+from cobo_waas2.models.tss_event_data_type import TSSEventDataType
+from cobo_waas2.models.tss_event_type import TSSEventType
+from cobo_waas2.models.tss_group import TSSGroup
+from cobo_waas2.models.tss_group_type import TSSGroupType
 from cobo_waas2.models.tss_groups import TSSGroups
+from cobo_waas2.models.tss_key_gen_event_data import TSSKeyGenEventData
+from cobo_waas2.models.tss_key_gen_extra import TSSKeyGenExtra
+from cobo_waas2.models.tss_key_gen_request import TSSKeyGenRequest
+from cobo_waas2.models.tss_key_reshare_event_data import TSSKeyReshareEventData
+from cobo_waas2.models.tss_key_reshare_extra import TSSKeyReshareExtra
+from cobo_waas2.models.tss_key_reshare_request import TSSKeyReshareRequest
+from cobo_waas2.models.tss_key_share_sign_detail import TSSKeyShareSignDetail
+from cobo_waas2.models.tss_key_share_sign_event_data import TSSKeyShareSignEventData
+from cobo_waas2.models.tss_key_share_sign_extra import TSSKeyShareSignExtra
+from cobo_waas2.models.tss_key_share_sign_request import TSSKeyShareSignRequest
+from cobo_waas2.models.tss_key_share_sign_signature import TSSKeyShareSignSignature
+from cobo_waas2.models.tss_key_share_sign_signatures import TSSKeyShareSignSignatures
+from cobo_waas2.models.tss_key_sign_event_data import TSSKeySignEventData
+from cobo_waas2.models.tss_key_sign_extra import TSSKeySignExtra
+from cobo_waas2.models.tss_key_sign_request import TSSKeySignRequest
+from cobo_waas2.models.tss_participant import TSSParticipant
+from cobo_waas2.models.tss_protocol import TSSProtocol
 from cobo_waas2.models.tss_request import TSSRequest
 from cobo_waas2.models.tss_request_status import TSSRequestStatus
 from cobo_waas2.models.tss_request_type import TSSRequestType
+from cobo_waas2.models.tss_request_type_eenum import TSSRequestTypeEenum
 from cobo_waas2.models.tss_request_webhook_event_data import TSSRequestWebhookEventData
+from cobo_waas2.models.tss_signature import TSSSignature
+from cobo_waas2.models.tss_signature_type import TSSSignatureType
+from cobo_waas2.models.tss_signatures import TSSSignatures
+from cobo_waas2.models.tss_status import TSSStatus
 from cobo_waas2.models.token_asset_model_type import TokenAssetModelType
 from cobo_waas2.models.token_balance import TokenBalance
 from cobo_waas2.models.token_info import TokenInfo

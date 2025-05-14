@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,9 @@ class BankAccount(BaseModel):
     """  # noqa: E501
     bank_account_id: StrictStr = Field(description="The bank account ID.")
     info: Dict[str, Any] = Field(description="JSON-formatted bank account details.")
-    __properties: ClassVar[List[str]] = ["bank_account_id", "info"]
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the bank account, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the bank account, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["bank_account_id", "info", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +83,9 @@ class BankAccount(BaseModel):
 
         _obj = cls.model_validate({
             "bank_account_id": obj.get("bank_account_id"),
-            "info": obj.get("info")
+            "info": obj.get("info"),
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj
 

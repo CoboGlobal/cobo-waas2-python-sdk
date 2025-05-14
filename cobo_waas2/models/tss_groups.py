@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class TSSGroups(BaseModel):
     """
-    The data for the TSS key share group ID.
+    The data for the TSS key share group.
     """  # noqa: E501
     tss_key_share_group_id: Optional[StrictStr] = Field(default=None, description="The TSS key share group ID.")
     curve: Optional[CurveType] = None

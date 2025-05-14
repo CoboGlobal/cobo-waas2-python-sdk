@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wallet_type** | [**WalletType**](WalletType.md) |  | 
 **wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | 
-**chain_id** | **str** | ID of the blockchain where the token exists | 
-**contract_address** | **str** | Contract address of the token | 
+**chain_id** | **str** | The ID of the blockchain where the token is deployed. | 
+**contract_address** | **str** | The token&#39;s contract address on the specified blockchain. | 
 
 ## Example
 

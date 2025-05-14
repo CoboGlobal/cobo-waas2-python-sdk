@@ -50,7 +50,7 @@ class TestWebhookEventData(unittest.TestCase):
                 destination = None,
                 result = None,
                 fee = None,
-                initiator = 'API Prod Key #1',
+                initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
                 initiator_type = 'API',
                 confirmed_num = 12,
                 confirming_threshold = 15,
@@ -97,8 +97,8 @@ class TestWebhookEventData(unittest.TestCase):
                 fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
                     transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
-                created_timestamp = 1625097600000,
-                updated_timestamp = 1625184000000,
+                created_timestamp = 1744689600,
+                updated_timestamp = 1744689600,
                 tss_request_id = '20240711114129000132315000003970',
                 source_key_share_holder_group = cobo_waas2.models.source_group.SourceGroup(
                     key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
@@ -167,7 +167,7 @@ class TestWebhookEventData(unittest.TestCase):
                     custodial_minimum_deposit_threshold = '0.0001', 
                     asset_model_type = 'Account', ),
                 feedback = 'Token has been added to the system',
-                order_id = '5001',
+                order_id = 'O20250304-M1001-1001',
                 merchant_id = 'M1001',
                 payable_amount = '103.03',
                 receive_address = '0x1234567890abcdef1234567890abcdef12345678',
@@ -179,13 +179,11 @@ class TestWebhookEventData(unittest.TestCase):
                 merchant_order_code = 'M20240201001',
                 psp_order_code = 'P20240201001',
                 received_token_amount = '103.0305',
-                refund_id = 'R20250304-M1001-1001',
-                amount = '0.0025',
-                to_address = '0x9876543210abcdef1234567890abcdef12345678',
                 transactions = [
                     cobo_waas2.models.payment_transaction.PaymentTransaction(
                         tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
                         tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
+                        token_id = 'ETH_USDT', 
                         from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
                         to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                         amount = '0.15', 
@@ -193,28 +191,39 @@ class TestWebhookEventData(unittest.TestCase):
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
                     ],
+                refund_id = 'R20250304-M1001-1001',
+                amount = '0.0025',
+                to_address = '0x9876543210abcdef1234567890abcdef12345678',
+                refund_type = 'Merchant',
                 settlement_request_id = 'S20250304-1001',
                 settlements = [
                     cobo_waas2.models.settlement_detail.SettlementDetail(
                         currency = 'USD', 
                         token_id = 'ETH_USDT', 
                         chain_id = 'ETH', 
+                        merchant_id = 'M1001', 
                         amount = '500.00', 
+                        settled_amount = '500.00', 
                         status = 'Pending', 
                         bank_account = cobo_waas2.models.bank_account.BankAccount(
                             bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
-                            info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, ), 
+                            info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, 
+                            created_timestamp = 1744689600, 
+                            updated_timestamp = 1744689600, ), 
                         transactions = [
                             cobo_waas2.models.payment_transaction.PaymentTransaction(
                                 tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
                                 tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
+                                token_id = 'ETH_USDT', 
                                 from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
                                 to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                                 amount = '0.15', 
                                 status = 'Submitted', 
                                 created_timestamp = 1610445878970, 
                                 updated_timestamp = 1610445878970, )
-                            ], )
+                            ], 
+                        created_timestamp = 1744689600, 
+                        updated_timestamp = 1744689600, )
                     ]
             )
         else:
@@ -229,8 +238,8 @@ class TestWebhookEventData(unittest.TestCase):
                 source = 'API',
                 destination = None,
                 initiator_type = 'API',
-                created_timestamp = 1625097600000,
-                updated_timestamp = 1625184000000,
+                created_timestamp = 1744689600,
+                updated_timestamp = 1744689600,
                 chains = [
                     cobo_waas2.models.chain_info.ChainInfo(
                         chain_id = 'ETH', 
@@ -261,7 +270,7 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 contract_address = '0x6B175474E89094C44Da98b954EedeAC495271d0F',
                 wallet_subtype = 'Asset',
-                order_id = '5001',
+                order_id = 'O20250304-M1001-1001',
                 payable_amount = '103.03',
                 receive_address = '0x1234567890abcdef1234567890abcdef12345678',
                 currency = 'USD',
@@ -279,22 +288,29 @@ class TestWebhookEventData(unittest.TestCase):
                         currency = 'USD', 
                         token_id = 'ETH_USDT', 
                         chain_id = 'ETH', 
+                        merchant_id = 'M1001', 
                         amount = '500.00', 
+                        settled_amount = '500.00', 
                         status = 'Pending', 
                         bank_account = cobo_waas2.models.bank_account.BankAccount(
                             bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
-                            info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, ), 
+                            info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, 
+                            created_timestamp = 1744689600, 
+                            updated_timestamp = 1744689600, ), 
                         transactions = [
                             cobo_waas2.models.payment_transaction.PaymentTransaction(
                                 tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
                                 tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
+                                token_id = 'ETH_USDT', 
                                 from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
                                 to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                                 amount = '0.15', 
                                 status = 'Submitted', 
                                 created_timestamp = 1610445878970, 
                                 updated_timestamp = 1610445878970, )
-                            ], )
+                            ], 
+                        created_timestamp = 1744689600, 
+                        updated_timestamp = 1744689600, )
                     ],
         )
         """

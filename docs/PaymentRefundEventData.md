@@ -8,12 +8,17 @@ Name | Type | Description | Notes
 **data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. | 
 **request_id** | **str** | The request ID provided by you when creating the refund request. | [optional] 
 **refund_id** | **str** | The refund order ID. | 
+**order_id** | **str** | The order ID corresponding to this refund. | [optional] 
 **merchant_id** | **str** | The merchant ID. | [optional] 
 **token_id** | **str** | The ID of the cryptocurrency used for refund. | 
 **chain_id** | **str** | The ID of the blockchain network on which the refund transaction occurs. | 
 **amount** | **str** | The amount in cryptocurrency to be returned for this refund order. | 
 **to_address** | **str** | The recipient&#39;s wallet address where the refund will be sent. | 
 **status** | [**RefundStatus**](RefundStatus.md) |  | 
+**refund_type** | [**RefundType**](RefundType.md) |  | [optional] 
+**created_timestamp** | **int** | The created time of the refund order, represented as a UNIX timestamp in seconds. | [optional] 
+**updated_timestamp** | **int** | The updated time of the refund order, represented as a UNIX timestamp in seconds. | [optional] 
+**initiator** | **str** | The initiator of this refund order, usually the user&#39;s API key. | [optional] 
 **transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process. | [optional] 
 
 ## Example
