@@ -31,6 +31,8 @@ from cobo_waas2.models.transaction_detail import TransactionDetail
 from cobo_waas2.models.transaction_rbf import TransactionRbf
 from cobo_waas2.models.transaction_resend import TransactionResend
 from cobo_waas2.models.transfer_params import TransferParams
+from cobo_waas2.models.wallet_subtype import WalletSubtype
+from cobo_waas2.models.wallet_type import WalletType
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
 from cobo_waas2.api_response import ApiResponse
@@ -1992,9 +1994,11 @@ class TransactionsApi:
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         asset_ids: Annotated[Optional[StrictStr], Field(description="(This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account.")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
-        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.")] = None,
-        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.")] = None,
+        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
+        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -2034,11 +2038,15 @@ class TransactionsApi:
         :type asset_ids: str
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).
         :type vault_id: str
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :type wallet_type: WalletType
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :type wallet_subtype: WalletSubtype
         :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
-        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.
+        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
-        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.
+        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. 
         :type max_created_timestamp: int
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2068,6 +2076,8 @@ class TransactionsApi:
             token_ids=token_ids,
             asset_ids=asset_ids,
             vault_id=vault_id,
+            wallet_type=wallet_type,
+            wallet_subtype=wallet_subtype,
             project_id=project_id,
             min_created_timestamp=min_created_timestamp,
             max_created_timestamp=max_created_timestamp,
@@ -2106,9 +2116,11 @@ class TransactionsApi:
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         asset_ids: Annotated[Optional[StrictStr], Field(description="(This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account.")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
-        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.")] = None,
-        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.")] = None,
+        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
+        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -2148,11 +2160,15 @@ class TransactionsApi:
         :type asset_ids: str
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).
         :type vault_id: str
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :type wallet_type: WalletType
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :type wallet_subtype: WalletSubtype
         :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
-        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.
+        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
-        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.
+        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. 
         :type max_created_timestamp: int
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2182,6 +2198,8 @@ class TransactionsApi:
             token_ids=token_ids,
             asset_ids=asset_ids,
             vault_id=vault_id,
+            wallet_type=wallet_type,
+            wallet_subtype=wallet_subtype,
             project_id=project_id,
             min_created_timestamp=min_created_timestamp,
             max_created_timestamp=max_created_timestamp,
@@ -2220,9 +2238,11 @@ class TransactionsApi:
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         asset_ids: Annotated[Optional[StrictStr], Field(description="(This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account.")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
-        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.")] = None,
-        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.")] = None,
+        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
+        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -2262,11 +2282,15 @@ class TransactionsApi:
         :type asset_ids: str
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).
         :type vault_id: str
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :type wallet_type: WalletType
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :type wallet_subtype: WalletSubtype
         :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
-        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.
+        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
-        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.
+        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. 
         :type max_created_timestamp: int
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2296,6 +2320,8 @@ class TransactionsApi:
             token_ids=token_ids,
             asset_ids=asset_ids,
             vault_id=vault_id,
+            wallet_type=wallet_type,
+            wallet_subtype=wallet_subtype,
             project_id=project_id,
             min_created_timestamp=min_created_timestamp,
             max_created_timestamp=max_created_timestamp,
@@ -2329,6 +2355,8 @@ class TransactionsApi:
         token_ids,
         asset_ids,
         vault_id,
+        wallet_type,
+        wallet_subtype,
         project_id,
         min_created_timestamp,
         max_created_timestamp,
@@ -2388,6 +2416,14 @@ class TransactionsApi:
         if vault_id is not None:
             
             _query_params.append(('vault_id', vault_id))
+            
+        if wallet_type is not None:
+            
+            _query_params.append(('wallet_type', wallet_type.value))
+            
+        if wallet_subtype is not None:
+            
+            _query_params.append(('wallet_subtype', wallet_subtype.value))
             
         if project_id is not None:
             

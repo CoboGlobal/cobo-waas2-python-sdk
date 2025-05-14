@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 **memo** | **str** | The memo. | [optional] 
 **wallet_name** | **str** | The wallet name. | [optional] 
 **wallet_type** | [**WalletType**](WalletType.md) |  | [optional] 
+**wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | [optional] 
 **label** | **str** | The address label. | 
 **chain_ids** | **List[str]** | A list of chain IDs. | [optional] 
 **email** | **str** | The email of the address owner. | [optional] 
+**encoding** | [**AddressEncoding**](AddressEncoding.md) |  | [optional] 
 
 ## Example
 

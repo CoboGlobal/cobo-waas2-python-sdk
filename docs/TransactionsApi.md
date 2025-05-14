@@ -828,7 +828,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_transactions**
-> ListTransactions200Response list_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, wallet_ids=wallet_ids, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, vault_id=vault_id, project_id=project_id, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
+> ListTransactions200Response list_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, wallet_ids=wallet_ids, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, vault_id=vault_id, wallet_type=wallet_type, wallet_subtype=wallet_subtype, project_id=project_id, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
 
 List all transactions
 
@@ -842,6 +842,8 @@ This operation retrieves all the transactions under your organization.  You can 
 ```python
 import cobo_waas2
 from cobo_waas2.models.list_transactions200_response import ListTransactions200Response
+from cobo_waas2.models.wallet_subtype import WalletSubtype
+from cobo_waas2.models.wallet_type import WalletType
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -867,6 +869,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     token_ids = 'ETH_USDT,ETH_USDC'
     asset_ids = 'USDT,USDC'
     vault_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    wallet_type = cobo_waas2.WalletType()
+    wallet_subtype = cobo_waas2.WalletSubtype()
     project_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
     min_created_timestamp = 1635744000000
     max_created_timestamp = 1635744000000
@@ -877,7 +881,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
     try:
         # List all transactions
-        api_response = api_instance.list_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, wallet_ids=wallet_ids, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, vault_id=vault_id, project_id=project_id, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
+        api_response = api_instance.list_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, wallet_ids=wallet_ids, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, vault_id=vault_id, wallet_type=wallet_type, wallet_subtype=wallet_subtype, project_id=project_id, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         print("The response of TransactionsApi->list_transactions:\n")
         pprint(api_response)
     except Exception as e:
@@ -902,9 +906,11 @@ Name | Type | Description  | Notes
  **token_ids** | **str**| A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | [optional] 
  **asset_ids** | **str**| (This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account. | [optional] 
  **vault_id** | **str**| The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). | [optional] 
+ **wallet_type** | [**WalletType**](.md)| The wallet type.  - &#x60;Custodial&#x60;: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - &#x60;MPC&#x60;: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - &#x60;SmartContract&#x60;: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - &#x60;Exchange&#x60;: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction)  | [optional] 
+ **wallet_subtype** | [**WalletSubtype**](.md)| The wallet subtype.  - &#x60;Asset&#x60;: Custodial Wallets (Asset Wallets)  - &#x60;Web3&#x60;: Custodial Wallets (Web3 Wallets)  - &#x60;Main&#x60;: Exchange Wallets (Main Account)  - &#x60;Sub&#x60;: Exchange Wallets (Sub Account)  - &#x60;Org-Controlled&#x60;: MPC Wallets (Organization-Controlled Wallets)  - &#x60;User-Controlled&#x60;: MPC Wallets (User-Controlled Wallets)  - &#x60;Safe{Wallet}&#x60;: Smart Contract Wallets (Safe{Wallet})  | [optional] 
  **project_id** | **str**| The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects).  | [optional] 
- **min_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time. | [optional] 
- **max_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time. | [optional] 
+ **min_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change.  | [optional] 
+ **max_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change.  | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
  **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 

@@ -28,13 +28,14 @@ class PaymentTransaction(BaseModel):
     """  # noqa: E501
     tx_id: StrictStr = Field(description="The transaction ID.")
     tx_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency.")
     from_address: StrictStr = Field(description="The source address of the transaction.")
     to_address: StrictStr = Field(description="The destination address of the transaction.")
     amount: StrictStr = Field(description="The amount of cryptocurrency transferred, as a decimal string.")
     status: TransactionStatus
     created_timestamp: StrictInt = Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: StrictInt = Field(description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["tx_id", "tx_hash", "from_address", "to_address", "amount", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["tx_id", "tx_hash", "token_id", "from_address", "to_address", "amount", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +90,7 @@ class PaymentTransaction(BaseModel):
         _obj = cls.model_validate({
             "tx_id": obj.get("tx_id"),
             "tx_hash": obj.get("tx_hash"),
+            "token_id": obj.get("token_id"),
             "from_address": obj.get("from_address"),
             "to_address": obj.get("to_address"),
             "amount": obj.get("amount"),

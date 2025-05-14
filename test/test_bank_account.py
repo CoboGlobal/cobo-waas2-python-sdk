@@ -35,12 +35,14 @@ class TestBankAccount(unittest.TestCase):
         if include_optional:
             return BankAccount(
                 bank_account_id = '123e4567-e89b-12d3-a456-426614174003',
-                info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}
+                info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"},
+                created_timestamp = 1744689600,
+                updated_timestamp = 1744689600
             )
         else:
             return BankAccount(
                 bank_account_id = '123e4567-e89b-12d3-a456-426614174003',
-                info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"},
+                info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"},
         )
         """
 

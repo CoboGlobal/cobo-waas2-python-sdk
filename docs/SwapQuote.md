@@ -6,8 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quote_id** | **str** | The unique id of quote. | 
+**pay_token_id** | **str** | The token ID to pay. | 
 **pay_amount** | **str** | The amount of tokens to pay. | 
+**receive_token_id** | **str** | The token ID to receive. | 
 **receive_amount** | **str** | The amount of tokens to receive. | 
+**fee_token_id** | **str** | The fee token ID. | 
 **fee_amount** | **str** | The amount of tokens to pay for fee. | 
 **min_receive_amount** | **str** | The minimum amount of tokens to receive if the pay amount is specified. | [optional] 
 **max_pay_amount** | **str** | The maximum amount of tokens to pay if the receive amount is specified. | [optional] 

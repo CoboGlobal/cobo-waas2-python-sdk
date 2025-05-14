@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.payment_transaction import PaymentTransaction
@@ -31,11 +31,15 @@ class SettlementDetail(BaseModel):
     currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the settlement.")
     token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency settled.")
     chain_id: Optional[StrictStr] = Field(default=None, description="The ID of the blockchain network on which the settlement occurred.")
+    merchant_id: Optional[StrictStr] = Field(default=None, description="The Merchant ID associated with this settlement.")
     amount: Optional[StrictStr] = Field(default=None, description="The settlement amount.  - If `token_id` is specified, this represents the settlement amount in the specified cryptocurrency.  - If `token_id` is not specified, this represents the settlement amount in the specified fiat currency. ")
+    settled_amount: Optional[StrictStr] = Field(default=None, description="The settled amount of this settlement detail.  - If `token_id` is specified, this represents the actual settled amount in the specified cryptocurrency.  - If `token_id` is not specified, this represents the actual settled amount in the specified fiat currency. ")
     status: Optional[SettleStatus] = None
     bank_account: Optional[BankAccount] = None
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this settlement request. Each transaction represents a separate blockchain operation related to the settlement process.")
-    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "amount", "status", "bank_account", "transactions"]
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the settlement, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "merchant_id", "amount", "settled_amount", "status", "bank_account", "transactions", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,10 +105,14 @@ class SettlementDetail(BaseModel):
             "currency": obj.get("currency"),
             "token_id": obj.get("token_id"),
             "chain_id": obj.get("chain_id"),
+            "merchant_id": obj.get("merchant_id"),
             "amount": obj.get("amount"),
+            "settled_amount": obj.get("settled_amount"),
             "status": obj.get("status"),
             "bank_account": BankAccount.from_dict(obj["bank_account"]) if obj.get("bank_account") is not None else None,
-            "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None
+            "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj
 

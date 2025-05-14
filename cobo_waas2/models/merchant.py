@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,9 @@ class Merchant(BaseModel):
     merchant_id: StrictStr = Field(description="The merchant ID.")
     name: StrictStr = Field(description="The merchant name.")
     wallet_id: StrictStr = Field(description="The ID of the linked wallet.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "name", "wallet_id"]
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the merchant, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the merchant, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["merchant_id", "name", "wallet_id", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +85,9 @@ class Merchant(BaseModel):
         _obj = cls.model_validate({
             "merchant_id": obj.get("merchant_id"),
             "name": obj.get("name"),
-            "wallet_id": obj.get("wallet_id")
+            "wallet_id": obj.get("wallet_id"),
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj
 

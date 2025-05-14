@@ -31,17 +31,17 @@ class TokenListingEventData(BaseModel):
     TokenListingEventData
     """  # noqa: E501
     data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data.")
-    request_id: StrictStr = Field(description="Unique identifier of the token listing request")
-    chain_id: StrictStr = Field(description="chain_id of the blockchain where the token exists")
-    contract_address: StrictStr = Field(description="Contract address of the token")
+    request_id: StrictStr = Field(description="The unique identifier of the token listing request.")
+    chain_id: StrictStr = Field(description="The ID of the blockchain where the token is deployed.")
+    contract_address: StrictStr = Field(description="The token's contract address on the specified blockchain.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
     token: Optional[TokenInfo] = None
     status: TokenListingRequestStatus
     source: Optional[TokenListingRequestSource] = None
-    feedback: Optional[StrictStr] = Field(default=None, description="Feedback provided by the admin for rejected requests")
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="Timestamp when the request was created (in milliseconds since Unix epoch)")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="Timestamp when the request was last updated (in milliseconds since Unix epoch)")
+    feedback: Optional[StrictStr] = Field(default=None, description="The feedback provided by Cobo when a token listing request is rejected.")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the request was created in Unix timestamp format, measured in milliseconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the request was last updated in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["data_type", "request_id", "chain_id", "contract_address", "wallet_type", "wallet_subtype", "token", "status", "source", "feedback", "created_timestamp", "updated_timestamp"]
 
     @field_validator('data_type')

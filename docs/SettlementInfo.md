@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **available_currency_balance** | **str** | The amount available for settlement or refund, in the specified fiat currency. | [optional] 
 **pending_amount** | **str** | The amount unavailable for settlement or refund, in the specified cryptocurrency. | [optional] 
 **pending_currency_balance** | **str** | The amount unavailable for settlement or refund, in the specified fiat currency. | [optional] 
+**settled_amount** | **str** | The amount already settled, in the specified cryptocurrency. | [optional] 
+**created_timestamp** | **int** | The created time of the settlement, represented as a UNIX timestamp in seconds. | [optional] 
+**updated_timestamp** | **int** | The updated time of the settlement, represented as a UNIX timestamp in seconds. | [optional] 
 
 ## Example
 

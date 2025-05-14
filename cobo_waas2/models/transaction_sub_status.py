@@ -65,6 +65,11 @@ class TransactionSubStatus(str, Enum):
     REJECTEDTRAVELRULEDUETOUNSUPPORTEDTOKEN = 'RejectedTravelRuleDueToUnsupportedToken'
     SIGNATUREVERIFICATIONSUCCESS = 'SignatureVerificationSuccess'
     SIGNATUREVERIFICATIONFAILED = 'SignatureVerificationFailed'
+    PENDINGCOBOCHECK = 'PendingCoboCheck'
+    REJECTEDTRANSACTIONPOLICY = 'RejectedTransactionPolicy'
+    REJECTEDBYSCREENINGAPP = 'RejectedByScreeningApp'
+    PENDINGSCREENINGAPPCHECK = 'PendingScreeningAppCheck'
+    PENDINGCOBOTRAVELRULECHECK = 'PendingCoboTravelRuleCheck'
 
     UNKNOWN = None
 

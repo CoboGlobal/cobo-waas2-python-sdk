@@ -26,13 +26,16 @@ class SwapQuote(BaseModel):
     SwapQuote
     """  # noqa: E501
     quote_id: StrictStr = Field(description="The unique id of quote.")
+    pay_token_id: StrictStr = Field(description="The token ID to pay.")
     pay_amount: StrictStr = Field(description="The amount of tokens to pay.")
+    receive_token_id: StrictStr = Field(description="The token ID to receive.")
     receive_amount: StrictStr = Field(description="The amount of tokens to receive.")
+    fee_token_id: StrictStr = Field(description="The fee token ID.")
     fee_amount: StrictStr = Field(description="The amount of tokens to pay for fee.")
     min_receive_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount of tokens to receive if the pay amount is specified.")
     max_pay_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount of tokens to pay if the receive amount is specified.")
     quote_expired_timestamp: StrictInt = Field(description="The time when the quote will expire, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["quote_id", "pay_amount", "receive_amount", "fee_amount", "min_receive_amount", "max_pay_amount", "quote_expired_timestamp"]
+    __properties: ClassVar[List[str]] = ["quote_id", "pay_token_id", "pay_amount", "receive_token_id", "receive_amount", "fee_token_id", "fee_amount", "min_receive_amount", "max_pay_amount", "quote_expired_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,8 +89,11 @@ class SwapQuote(BaseModel):
 
         _obj = cls.model_validate({
             "quote_id": obj.get("quote_id"),
+            "pay_token_id": obj.get("pay_token_id"),
             "pay_amount": obj.get("pay_amount"),
+            "receive_token_id": obj.get("receive_token_id"),
             "receive_amount": obj.get("receive_amount"),
+            "fee_token_id": obj.get("fee_token_id"),
             "fee_amount": obj.get("fee_amount"),
             "min_receive_amount": obj.get("min_receive_amount"),
             "max_pay_amount": obj.get("max_pay_amount"),

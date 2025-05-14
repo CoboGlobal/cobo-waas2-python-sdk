@@ -17,6 +17,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.address_encoding import AddressEncoding
+from cobo_waas2.models.wallet_subtype import WalletSubtype
 from cobo_waas2.models.wallet_type import WalletType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,10 +34,12 @@ class AddressBook(BaseModel):
     memo: Optional[StrictStr] = Field(default=None, description="The memo.")
     wallet_name: Optional[StrictStr] = Field(default=None, description="The wallet name.")
     wallet_type: Optional[WalletType] = None
+    wallet_subtype: Optional[WalletSubtype] = None
     label: StrictStr = Field(description="The address label.")
     chain_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of chain IDs.")
     email: Optional[StrictStr] = Field(default=None, description="The email of the address owner.")
-    __properties: ClassVar[List[str]] = ["org_id", "entry_id", "address", "memo", "wallet_name", "wallet_type", "label", "chain_ids", "email"]
+    encoding: Optional[AddressEncoding] = None
+    __properties: ClassVar[List[str]] = ["org_id", "entry_id", "address", "memo", "wallet_name", "wallet_type", "wallet_subtype", "label", "chain_ids", "email", "encoding"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,9 +98,11 @@ class AddressBook(BaseModel):
             "memo": obj.get("memo"),
             "wallet_name": obj.get("wallet_name"),
             "wallet_type": obj.get("wallet_type"),
+            "wallet_subtype": obj.get("wallet_subtype"),
             "label": obj.get("label"),
             "chain_ids": obj.get("chain_ids"),
-            "email": obj.get("email")
+            "email": obj.get("email"),
+            "encoding": obj.get("encoding")
         })
         return _obj
 

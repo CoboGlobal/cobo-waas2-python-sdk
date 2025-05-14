@@ -102,6 +102,19 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_exchange_rate(token_id, currency)
         """
 
+    def test_get_payment_order_address_info(self) -> None:
+        """
+        Test case for get_payment_order_address_info
+
+        Get pay-in order's receiving address info
+        """
+        """
+        token_id = 'ETH_USDT'
+        address = '0x9876543210abcdef1234567890abcdef12345678'
+
+        api_response = self.api.get_payment_order_address_info(token_id=token_id, address=address)
+        """
+
     def test_get_payment_order_detail_by_id(self) -> None:
         """
         Test case for get_payment_order_detail_by_id

@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.order_status import OrderStatus
+from cobo_waas2.models.payment_transaction import PaymentTransaction
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -41,7 +42,10 @@ class Order(BaseModel):
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
     status: OrderStatus
     received_token_amount: StrictStr = Field(description="The total cryptocurrency amount received for this order. Updates until the expiration time. Precision matches the token standard (e.g., 6 decimals for USDT).")
-    __properties: ClassVar[List[str]] = ["order_id", "merchant_id", "token_id", "chain_id", "payable_amount", "receive_address", "currency", "order_amount", "fee_amount", "exchange_rate", "expired_at", "merchant_order_code", "psp_order_code", "status", "received_token_amount"]
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the order, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the order, represented as a UNIX timestamp in seconds.")
+    transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the settlement process.")
+    __properties: ClassVar[List[str]] = ["order_id", "merchant_id", "token_id", "chain_id", "payable_amount", "receive_address", "currency", "order_amount", "fee_amount", "exchange_rate", "expired_at", "merchant_order_code", "psp_order_code", "status", "received_token_amount", "created_timestamp", "updated_timestamp", "transactions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +86,13 @@ class Order(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in transactions (list)
+        _items = []
+        if self.transactions:
+            for _item in self.transactions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['transactions'] = _items
         return _dict
 
     @classmethod
@@ -108,7 +119,10 @@ class Order(BaseModel):
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
             "status": obj.get("status"),
-            "received_token_amount": obj.get("received_token_amount")
+            "received_token_amount": obj.get("received_token_amount"),
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None
         })
         return _obj
 

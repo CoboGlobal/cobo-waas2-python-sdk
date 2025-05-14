@@ -29,8 +29,8 @@ class SwapToken(BaseModel):
     chain_id: StrictStr = Field(description="The chain id.")
     asset_id: StrictStr = Field(description="The asset id.")
     token_address: Optional[StrictStr] = Field(default=None, description="The token address.")
-    min_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount to swap.")
-    max_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount to swap.")
+    min_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount.")
+    max_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount.")
     __properties: ClassVar[List[str]] = ["token_id", "chain_id", "asset_id", "token_address", "min_amount", "max_amount"]
 
     model_config = ConfigDict(

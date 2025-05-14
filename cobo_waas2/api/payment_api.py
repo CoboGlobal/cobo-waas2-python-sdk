@@ -30,6 +30,7 @@ from cobo_waas2.models.list_payment_orders200_response import ListPaymentOrders2
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
 from cobo_waas2.models.merchant import Merchant
 from cobo_waas2.models.order import Order
+from cobo_waas2.models.order_address_info import OrderAddressInfo
 from cobo_waas2.models.refund import Refund
 from cobo_waas2.models.settlement import Settlement
 from cobo_waas2.models.update_merchant_by_id_request import UpdateMerchantByIdRequest
@@ -1073,6 +1074,194 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/exchange_rates/{token_id}/{currency}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_payment_order_address_info(
+        self,
+        token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")] = None,
+        address: Annotated[Optional[StrictStr], Field(description="The receiving address. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> OrderAddressInfo:
+        """Get pay-in order's receiving address info
+
+        This operation retrieves the detailed information about a specific pay-in address. 
+
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` 
+        :type token_id: str
+        :param address: The receiving address. 
+        :type address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payment_order_address_info_serialize(
+            token_id=token_id,
+            address=address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrderAddressInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_payment_order_address_info_with_http_info(
+        self,
+        token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")] = None,
+        address: Annotated[Optional[StrictStr], Field(description="The receiving address. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[OrderAddressInfo]:
+        """Get pay-in order's receiving address info
+
+        This operation retrieves the detailed information about a specific pay-in address. 
+
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` 
+        :type token_id: str
+        :param address: The receiving address. 
+        :type address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payment_order_address_info_serialize(
+            token_id=token_id,
+            address=address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrderAddressInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_payment_order_address_info_without_preload_content(
+        self,
+        token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")] = None,
+        address: Annotated[Optional[StrictStr], Field(description="The receiving address. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get pay-in order's receiving address info
+
+        This operation retrieves the detailed information about a specific pay-in address. 
+
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` 
+        :type token_id: str
+        :param address: The receiving address. 
+        :type address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payment_order_address_info_serialize(
+            token_id=token_id,
+            address=address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrderAddressInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_payment_order_address_info_serialize(
+        self,
+        token_id,
+        address,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if token_id is not None:
+            
+            _query_params.append(('token_id', token_id))
+            
+        if address is not None:
+            
+            _query_params.append(('address', address))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/orders/address_info',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

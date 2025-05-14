@@ -48,7 +48,21 @@ class TestOrder(unittest.TestCase):
                 merchant_order_code = 'M20240201001',
                 psp_order_code = 'P20240201001',
                 status = 'Pending',
-                received_token_amount = '103.0305'
+                received_token_amount = '103.0305',
+                created_timestamp = 1744689600,
+                updated_timestamp = 1744689600,
+                transactions = [
+                    cobo_waas2.models.payment_transaction.PaymentTransaction(
+                        tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
+                        tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
+                        token_id = 'ETH_USDT', 
+                        from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
+                        to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
+                        amount = '0.15', 
+                        status = 'Submitted', 
+                        created_timestamp = 1610445878970, 
+                        updated_timestamp = 1610445878970, )
+                    ]
             )
         else:
             return Order(

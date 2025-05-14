@@ -15,10 +15,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.payment_transaction import PaymentTransaction
 from cobo_waas2.models.refund_status import RefundStatus
+from cobo_waas2.models.refund_type import RefundType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,14 +31,19 @@ class PaymentRefundEventData(BaseModel):
     data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID provided by you when creating the refund request.")
     refund_id: StrictStr = Field(description="The refund order ID.")
+    order_id: Optional[StrictStr] = Field(default=None, description="The order ID corresponding to this refund.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
     token_id: StrictStr = Field(description="The ID of the cryptocurrency used for refund.")
     chain_id: StrictStr = Field(description="The ID of the blockchain network on which the refund transaction occurs.")
     amount: StrictStr = Field(description="The amount in cryptocurrency to be returned for this refund order.")
     to_address: StrictStr = Field(description="The recipient's wallet address where the refund will be sent.")
     status: RefundStatus
+    refund_type: Optional[RefundType] = None
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the refund order, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the refund order, represented as a UNIX timestamp in seconds.")
+    initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this refund order, usually the user's API key.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process.")
-    __properties: ClassVar[List[str]] = ["data_type", "request_id", "refund_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "transactions"]
+    __properties: ClassVar[List[str]] = ["data_type", "request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
@@ -107,12 +113,17 @@ class PaymentRefundEventData(BaseModel):
             "data_type": obj.get("data_type"),
             "request_id": obj.get("request_id"),
             "refund_id": obj.get("refund_id"),
+            "order_id": obj.get("order_id"),
             "merchant_id": obj.get("merchant_id"),
             "token_id": obj.get("token_id"),
             "chain_id": obj.get("chain_id"),
             "amount": obj.get("amount"),
             "to_address": obj.get("to_address"),
             "status": obj.get("status"),
+            "refund_type": obj.get("refund_type"),
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "initiator": obj.get("initiator"),
             "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None
         })
         return _obj

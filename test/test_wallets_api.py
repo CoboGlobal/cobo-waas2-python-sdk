@@ -85,7 +85,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for create_token_listing_request
 
-        Submit token listing request
+        Create token listing request
         """
         """
         create_token_listing_request_request = cobo_waas2.CreateTokenListingRequestRequest()
@@ -161,7 +161,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for get_token_listing_request_by_request_id
 
-        Get token listing request details
+        Get token listing request
         """
         """
         request_id = '123e4567e89b12d3a456426614174000'
@@ -320,7 +320,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for list_token_listing_requests
 
-        Get all token listing requests
+        List token listing requests
         """
         """
         limit = 10

@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **chain_id** | **str** | The chain id. | 
 **asset_id** | **str** | The asset id. | 
 **token_address** | **str** | The token address. | [optional] 
-**min_amount** | **str** | The minimum amount to swap. | [optional] 
-**max_amount** | **str** | The maximum amount to swap. | [optional] 
+**min_amount** | **str** | The minimum amount. | [optional] 
+**max_amount** | **str** | The maximum amount. | [optional] 
 
 ## Example
 
