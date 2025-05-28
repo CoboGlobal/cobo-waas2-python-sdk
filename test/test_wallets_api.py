@@ -29,6 +29,19 @@ class TestWalletsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_batch_check_utxo(self) -> None:
+        """
+        Test case for batch_check_utxo
+
+        Batch check UTXOs
+        """
+        """
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        batch_check_utxo_request = cobo_waas2.BatchCheckUtxoRequest()
+
+        api_response = self.api.batch_check_utxo(wallet_id, batch_check_utxo_request=batch_check_utxo_request)
+        """
+
     def test_check_address_chains_validity(self) -> None:
         """
         Test case for check_address_chains_validity

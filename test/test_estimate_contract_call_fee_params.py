@@ -39,7 +39,8 @@ class TestEstimateContractCallFeeParams(unittest.TestCase):
                 chain_id = 'ETH',
                 source = None,
                 destination = None,
-                fee_type = 'EVM_EIP_1559'
+                fee_type = 'EVM_EIP_1559',
+                replaced_transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f'
             )
         else:
             return EstimateContractCallFeeParams(

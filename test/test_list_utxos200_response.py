@@ -43,7 +43,8 @@ class TestListUtxos200Response(unittest.TestCase):
                         value = '0.5', 
                         is_coinbase = False, 
                         is_locked = False, 
-                        confirmed_number = 66716, )
+                        confirmed_number = 66716, 
+                        is_frozen = False, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

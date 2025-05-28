@@ -38,6 +38,7 @@ class TestCreateStakeActivityExtra(unittest.TestCase):
                 finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
                 stake_block_time = 2000,
                 auto_broadcast = False,
+                babylon_address = None,
                 provider_name = 'Stakefish',
                 timelock = 1704067200,
                 change_address = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',

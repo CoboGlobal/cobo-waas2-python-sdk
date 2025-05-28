@@ -29,8 +29,8 @@ class CreateSettlement(BaseModel):
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
     token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency you want to settle. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
     currency: Optional[StrictStr] = Field(default='USD', description="The fiat currency for settling the cryptocurrency. Currently, only `USD` is supported.")
-    amount: StrictStr = Field(description="The settlement amount. - If `token_id` is specified, this represents the settlement amount in the specified cryptocurrency. - If `token_id` is not specified, this represents the settlement amount in the specified fiat currency.")
-    bank_account_id: StrictStr = Field(description="The ID of the bank account where the settled funds will be deposited.")
+    amount: Optional[StrictStr] = Field(default=None, description="The settlement amount. - If `token_id` is specified, this represents the settlement amount in the specified cryptocurrency. - If `token_id` is not specified, this represents the settlement amount in the specified fiat currency.")
+    bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account where the settled funds will be deposited.")
     settlement_type: Optional[SettlementType] = None
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "amount", "bank_account_id", "settlement_type"]
 

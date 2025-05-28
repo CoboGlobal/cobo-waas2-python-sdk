@@ -40,7 +40,8 @@ class TestChainInfo(unittest.TestCase):
                 explorer_tx_url = 'https://etherscan.io/tx/{txn_id}',
                 explorer_address_url = 'https://etherscan.io/address/{address}',
                 require_memo = False,
-                confirming_threshold = 15
+                confirming_threshold = 15,
+                coinbase_maturity = 15
             )
         else:
             return ChainInfo(

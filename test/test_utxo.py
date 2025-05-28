@@ -41,7 +41,8 @@ class TestUTXO(unittest.TestCase):
                 value = '0.5',
                 is_coinbase = False,
                 is_locked = False,
-                confirmed_number = 66716
+                confirmed_number = 66716,
+                is_frozen = False
             )
         else:
             return UTXO(

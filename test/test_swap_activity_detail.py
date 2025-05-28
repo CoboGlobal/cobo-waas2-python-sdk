@@ -55,6 +55,11 @@ class TestSwapActivityDetail(unittest.TestCase):
                         action = 'Submitted', 
                         status = 'Success', 
                         timestamp = 1640995200000, )
+                    ],
+                approvers = [
+                    cobo_waas2.models.swap_activity_approvers.SwapActivityApprovers(
+                        name = 'Wenyu.Xiao', 
+                        status = 'Pending', )
                     ]
             )
         else:

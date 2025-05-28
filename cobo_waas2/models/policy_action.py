@@ -15,21 +15,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.policy_action_content import PolicyActionContent
+from cobo_waas2.models.policy_action_type import PolicyActionType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class OrderAddressInfo(BaseModel):
+class PolicyAction(BaseModel):
     """
-    OrderAddressInfo
+    The information of an app workflow policy action, content is valuable when action_type is Quorum.
     """  # noqa: E501
-    wallet_id: StrictStr = Field(description="The ID of the linked wallet.")
-    amount: StrictStr = Field(description="The amount of cryptocurrency received by the order's receiving address.")
-    created_timestamp: StrictInt = Field(description="The created time of the address, represented as a UNIX timestamp in seconds.")
-    updated_timestamp: StrictInt = Field(description="The updated time of the address, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["wallet_id", "amount", "created_timestamp", "updated_timestamp"]
+    action_type: PolicyActionType
+    content: Optional[PolicyActionContent] = None
+    __properties: ClassVar[List[str]] = ["action_type", "content"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +49,7 @@ class OrderAddressInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OrderAddressInfo from a JSON string"""
+        """Create an instance of PolicyAction from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,11 +70,14 @@ class OrderAddressInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of content
+        if self.content:
+            _dict['content'] = self.content.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OrderAddressInfo from a dict"""
+        """Create an instance of PolicyAction from a dict"""
         if obj is None:
             return None
 
@@ -82,10 +85,8 @@ class OrderAddressInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "wallet_id": obj.get("wallet_id"),
-            "amount": obj.get("amount"),
-            "created_timestamp": obj.get("created_timestamp"),
-            "updated_timestamp": obj.get("updated_timestamp")
+            "action_type": obj.get("action_type"),
+            "content": PolicyActionContent.from_dict(obj["content"]) if obj.get("content") is not None else None
         })
         return _obj
 

@@ -43,8 +43,6 @@ class TestCreateSettlement(unittest.TestCase):
             )
         else:
             return CreateSettlement(
-                amount = '500.00',
-                bank_account_id = '0123e457-e89b-12d3-a456-426614174004',
         )
         """
 

@@ -32,7 +32,8 @@ class ChainInfo(BaseModel):
     explorer_address_url: Optional[StrictStr] = Field(default=None, description="The address URL pattern on the blockchain explorer. You can use it to concatenate the address URLs.")
     require_memo: Optional[StrictBool] = Field(default=None, description="Whether the chain requires a memo.")
     confirming_threshold: Optional[StrictInt] = Field(default=None, description="The number of confirmations required for an on-chain transaction, such as 64 for Ethereum.")
-    __properties: ClassVar[List[str]] = ["chain_id", "symbol", "icon_url", "explorer_tx_url", "explorer_address_url", "require_memo", "confirming_threshold"]
+    coinbase_maturity: Optional[StrictInt] = Field(default=None, description="The number of confirmations required for a coinbase transaction to be mature, such as 100 for BTC.")
+    __properties: ClassVar[List[str]] = ["chain_id", "symbol", "icon_url", "explorer_tx_url", "explorer_address_url", "require_memo", "confirming_threshold", "coinbase_maturity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +92,8 @@ class ChainInfo(BaseModel):
             "explorer_tx_url": obj.get("explorer_tx_url"),
             "explorer_address_url": obj.get("explorer_address_url"),
             "require_memo": obj.get("require_memo"),
-            "confirming_threshold": obj.get("confirming_threshold")
+            "confirming_threshold": obj.get("confirming_threshold"),
+            "coinbase_maturity": obj.get("coinbase_maturity")
         })
         return _obj
 

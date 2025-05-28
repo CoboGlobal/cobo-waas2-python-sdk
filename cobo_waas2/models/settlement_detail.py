@@ -39,7 +39,8 @@ class SettlementDetail(BaseModel):
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this settlement request. Each transaction represents a separate blockchain operation related to the settlement process.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the settlement, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "merchant_id", "amount", "settled_amount", "status", "bank_account", "transactions", "created_timestamp", "updated_timestamp"]
+    crypto_address_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the pre-approved crypto address, used to reference the address securely in requests.")
+    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "merchant_id", "amount", "settled_amount", "status", "bank_account", "transactions", "created_timestamp", "updated_timestamp", "crypto_address_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -112,7 +113,8 @@ class SettlementDetail(BaseModel):
             "bank_account": BankAccount.from_dict(obj["bank_account"]) if obj.get("bank_account") is not None else None,
             "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
-            "updated_timestamp": obj.get("updated_timestamp")
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "crypto_address_id": obj.get("crypto_address_id")
         })
         return _obj
 
