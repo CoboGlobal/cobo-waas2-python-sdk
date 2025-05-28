@@ -16,6 +16,7 @@ __version__ = "1.16.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
+from cobo_waas2.api.app_workflows_api import AppWorkflowsApi
 from cobo_waas2.api.developers_api import DevelopersApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.fee_station_api import FeeStationApi
@@ -62,7 +63,15 @@ from cobo_waas2.models.amount_details_inner import AmountDetailsInner
 from cobo_waas2.models.amount_status import AmountStatus
 from cobo_waas2.models.api_log_details import ApiLogDetails
 from cobo_waas2.models.api_log_summary import ApiLogSummary
+from cobo_waas2.models.app_workflow import AppWorkflow
+from cobo_waas2.models.app_workflow_field import AppWorkflowField
+from cobo_waas2.models.app_workflow_policy import AppWorkflowPolicy
+from cobo_waas2.models.approval_entry import ApprovalEntry
+from cobo_waas2.models.approval_request import ApprovalRequest
+from cobo_waas2.models.approval_request_detail import ApprovalRequestDetail
 from cobo_waas2.models.approval_statement_status import ApprovalStatementStatus
+from cobo_waas2.models.approval_status import ApprovalStatus
+from cobo_waas2.models.approval_user import ApprovalUser
 from cobo_waas2.models.asset_balance import AssetBalance
 from cobo_waas2.models.asset_info import AssetInfo
 from cobo_waas2.models.auto_fuel_type import AutoFuelType
@@ -86,6 +95,9 @@ from cobo_waas2.models.base_contract_call_source import BaseContractCallSource
 from cobo_waas2.models.base_estimate_staking_fee import BaseEstimateStakingFee
 from cobo_waas2.models.base_stake_extra import BaseStakeExtra
 from cobo_waas2.models.base_stake_source import BaseStakeSource
+from cobo_waas2.models.batch_check_utxo201_response import BatchCheckUtxo201Response
+from cobo_waas2.models.batch_check_utxo_request import BatchCheckUtxoRequest
+from cobo_waas2.models.batch_utxo_param import BatchUTXOParam
 from cobo_waas2.models.broadcast_signed_transactions201_response_inner import BroadcastSignedTransactions201ResponseInner
 from cobo_waas2.models.broadcast_signed_transactions_request import BroadcastSignedTransactionsRequest
 from cobo_waas2.models.callback_message import CallbackMessage
@@ -110,6 +122,7 @@ from cobo_waas2.models.cosmos_adr36_message_sign_destination import CosmosAdr36M
 from cobo_waas2.models.cosmos_contract_call_destination import CosmosContractCallDestination
 from cobo_waas2.models.cosmos_contract_call_message import CosmosContractCallMessage
 from cobo_waas2.models.create_address_request import CreateAddressRequest
+from cobo_waas2.models.create_approval_request201_response import CreateApprovalRequest201Response
 from cobo_waas2.models.create_babylon_airdrop_registration201_response import CreateBabylonAirdropRegistration201Response
 from cobo_waas2.models.create_babylon_airdrop_registration_request import CreateBabylonAirdropRegistrationRequest
 from cobo_waas2.models.create_babylon_staking_registration201_response import CreateBabylonStakingRegistration201Response
@@ -225,6 +238,7 @@ from cobo_waas2.models.key_share_holder_type import KeyShareHolderType
 from cobo_waas2.models.list_address_balances_by_token200_response import ListAddressBalancesByToken200Response
 from cobo_waas2.models.list_address_books200_response import ListAddressBooks200Response
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
+from cobo_waas2.models.list_approval_requests200_response import ListApprovalRequests200Response
 from cobo_waas2.models.list_asset_balances_for_exchange_wallet200_response import ListAssetBalancesForExchangeWallet200Response
 from cobo_waas2.models.list_babylon_airdrop_registrations200_response import ListBabylonAirdropRegistrations200Response
 from cobo_waas2.models.list_babylon_eligible_airdrops200_response import ListBabylonEligibleAirdrops200Response
@@ -283,7 +297,6 @@ from cobo_waas2.models.mpc_signing_group import MpcSigningGroup
 from cobo_waas2.models.mpc_stake_source import MpcStakeSource
 from cobo_waas2.models.mpc_transfer_source import MpcTransferSource
 from cobo_waas2.models.order import Order
-from cobo_waas2.models.order_address_info import OrderAddressInfo
 from cobo_waas2.models.order_status import OrderStatus
 from cobo_waas2.models.org_info import OrgInfo
 from cobo_waas2.models.pagination import Pagination
@@ -291,6 +304,12 @@ from cobo_waas2.models.payment_order_event_data import PaymentOrderEventData
 from cobo_waas2.models.payment_refund_event_data import PaymentRefundEventData
 from cobo_waas2.models.payment_settlement_event import PaymentSettlementEvent
 from cobo_waas2.models.payment_transaction import PaymentTransaction
+from cobo_waas2.models.policy_action import PolicyAction
+from cobo_waas2.models.policy_action_content import PolicyActionContent
+from cobo_waas2.models.policy_action_type import PolicyActionType
+from cobo_waas2.models.policy_condition import PolicyCondition
+from cobo_waas2.models.policy_field_operator import PolicyFieldOperator
+from cobo_waas2.models.policy_field_value_type import PolicyFieldValueType
 from cobo_waas2.models.pool_details import PoolDetails
 from cobo_waas2.models.pool_details_all_of_validators_info import PoolDetailsAllOfValidatorsInfo
 from cobo_waas2.models.pool_summary import PoolSummary
@@ -306,8 +325,11 @@ from cobo_waas2.models.refund import Refund
 from cobo_waas2.models.refund_status import RefundStatus
 from cobo_waas2.models.refund_type import RefundType
 from cobo_waas2.models.replace_type import ReplaceType
+from cobo_waas2.models.request_approval import RequestApproval
 from cobo_waas2.models.retry_callback_message201_response import RetryCallbackMessage201Response
 from cobo_waas2.models.retry_webhook_event_by_id201_response import RetryWebhookEventById201Response
+from cobo_waas2.models.revoke_approval_request201_response import RevokeApprovalRequest201Response
+from cobo_waas2.models.revoke_approval_request_request import RevokeApprovalRequestRequest
 from cobo_waas2.models.role_scopes import RoleScopes
 from cobo_waas2.models.root_pubkey import RootPubkey
 from cobo_waas2.models.safe_contract_call_source import SafeContractCallSource
@@ -346,9 +368,11 @@ from cobo_waas2.models.stakings_extra import StakingsExtra
 from cobo_waas2.models.sub_wallet_asset_balance import SubWalletAssetBalance
 from cobo_waas2.models.submit_deposit_travel_rule_info201_response import SubmitDepositTravelRuleInfo201Response
 from cobo_waas2.models.swap_activity import SwapActivity
+from cobo_waas2.models.swap_activity_approvers import SwapActivityApprovers
 from cobo_waas2.models.swap_activity_detail import SwapActivityDetail
 from cobo_waas2.models.swap_activity_status import SwapActivityStatus
 from cobo_waas2.models.swap_activity_timeline import SwapActivityTimeline
+from cobo_waas2.models.swap_approvers_status import SwapApproversStatus
 from cobo_waas2.models.swap_quote import SwapQuote
 from cobo_waas2.models.swap_token import SwapToken
 from cobo_waas2.models.swap_type import SwapType

@@ -2,6 +2,7 @@
 
 # import apis into api package
 from cobo_waas2.api.address_books_api import AddressBooksApi
+from cobo_waas2.api.app_workflows_api import AppWorkflowsApi
 from cobo_waas2.api.developers_api import DevelopersApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.fee_station_api import FeeStationApi

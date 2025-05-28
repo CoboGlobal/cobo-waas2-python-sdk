@@ -35,7 +35,8 @@ class EstimateTransferFeeParams(BaseModel):
     token_id: StrictStr = Field(description="The token ID of the transferred token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     destination: Optional[TransferDestination] = None
     fee_type: Optional[FeeType] = None
-    __properties: ClassVar[List[str]] = ["request_id", "request_type", "source", "token_id", "destination", "fee_type"]
+    replaced_transaction_id: Optional[StrictStr] = Field(default=None, description="The ID of the transaction that this transaction replaced.")
+    __properties: ClassVar[List[str]] = ["request_id", "request_type", "source", "token_id", "destination", "fee_type", "replaced_transaction_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,7 +100,8 @@ class EstimateTransferFeeParams(BaseModel):
             "source": TransferSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "token_id": obj.get("token_id"),
             "destination": TransferDestination.from_dict(obj["destination"]) if obj.get("destination") is not None else None,
-            "fee_type": obj.get("fee_type")
+            "fee_type": obj.get("fee_type"),
+            "replaced_transaction_id": obj.get("replaced_transaction_id")
         })
         return _obj
 

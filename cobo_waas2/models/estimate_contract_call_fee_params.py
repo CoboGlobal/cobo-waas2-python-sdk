@@ -35,7 +35,8 @@ class EstimateContractCallFeeParams(BaseModel):
     source: ContractCallSource
     destination: ContractCallDestination
     fee_type: Optional[FeeType] = None
-    __properties: ClassVar[List[str]] = ["request_id", "request_type", "chain_id", "source", "destination", "fee_type"]
+    replaced_transaction_id: Optional[StrictStr] = Field(default=None, description="The ID of the transaction that this transaction replaced.")
+    __properties: ClassVar[List[str]] = ["request_id", "request_type", "chain_id", "source", "destination", "fee_type", "replaced_transaction_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,7 +100,8 @@ class EstimateContractCallFeeParams(BaseModel):
             "chain_id": obj.get("chain_id"),
             "source": ContractCallSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "destination": ContractCallDestination.from_dict(obj["destination"]) if obj.get("destination") is not None else None,
-            "fee_type": obj.get("fee_type")
+            "fee_type": obj.get("fee_type"),
+            "replaced_transaction_id": obj.get("replaced_transaction_id")
         })
         return _obj
 

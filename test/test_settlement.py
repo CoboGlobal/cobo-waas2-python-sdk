@@ -64,7 +64,8 @@ class TestSettlement(unittest.TestCase):
                                 updated_timestamp = 1610445878970, )
                             ], 
                         created_timestamp = 1744689600, 
-                        updated_timestamp = 1744689600, )
+                        updated_timestamp = 1744689600, 
+                        crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', )
                     ],
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600,
@@ -102,7 +103,8 @@ class TestSettlement(unittest.TestCase):
                                 updated_timestamp = 1610445878970, )
                             ], 
                         created_timestamp = 1744689600, 
-                        updated_timestamp = 1744689600, )
+                        updated_timestamp = 1744689600, 
+                        crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', )
                     ],
         )
         """

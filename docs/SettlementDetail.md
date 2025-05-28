@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this settlement request. Each transaction represents a separate blockchain operation related to the settlement process. | [optional] 
 **created_timestamp** | **int** | The created time of the settlement, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The updated time of the settlement, represented as a UNIX timestamp in seconds. | [optional] 
+**crypto_address_id** | **str** | Unique identifier for the pre-approved crypto address, used to reference the address securely in requests. | [optional] 
 
 ## Example
 

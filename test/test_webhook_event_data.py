@@ -126,7 +126,8 @@ class TestWebhookEventData(unittest.TestCase):
                         explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
-                        confirming_threshold = 15, )
+                        confirming_threshold = 15, 
+                        coinbase_maturity = 15, )
                     ],
                 wallet_type = 'Custodial',
                 wallet_subtypes = [
@@ -223,7 +224,8 @@ class TestWebhookEventData(unittest.TestCase):
                                 updated_timestamp = 1610445878970, )
                             ], 
                         created_timestamp = 1744689600, 
-                        updated_timestamp = 1744689600, )
+                        updated_timestamp = 1744689600, 
+                        crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', )
                     ]
             )
         else:
@@ -248,7 +250,8 @@ class TestWebhookEventData(unittest.TestCase):
                         explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
-                        confirming_threshold = 15, )
+                        confirming_threshold = 15, 
+                        coinbase_maturity = 15, )
                     ],
                 wallet_type = 'Custodial',
                 tokens = [
@@ -310,7 +313,8 @@ class TestWebhookEventData(unittest.TestCase):
                                 updated_timestamp = 1610445878970, )
                             ], 
                         created_timestamp = 1744689600, 
-                        updated_timestamp = 1744689600, )
+                        updated_timestamp = 1744689600, 
+                        crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', )
                     ],
         )
         """

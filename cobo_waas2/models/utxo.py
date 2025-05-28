@@ -33,7 +33,8 @@ class UTXO(BaseModel):
     is_coinbase: Optional[StrictBool] = Field(default=None, description="Whether the UTXO comes from a coinbase transaction.")
     is_locked: Optional[StrictBool] = Field(default=None, description="Whether the UTXO is locked.")
     confirmed_number: Optional[StrictInt] = Field(default=None, description="The number of confirmations for the UTXO.")
-    __properties: ClassVar[List[str]] = ["tx_hash", "vout_n", "address", "token_id", "value", "is_coinbase", "is_locked", "confirmed_number"]
+    is_frozen: Optional[StrictBool] = Field(default=None, description="Whether the UTXO is frozen.")
+    __properties: ClassVar[List[str]] = ["tx_hash", "vout_n", "address", "token_id", "value", "is_coinbase", "is_locked", "confirmed_number", "is_frozen"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +94,8 @@ class UTXO(BaseModel):
             "value": obj.get("value"),
             "is_coinbase": obj.get("is_coinbase"),
             "is_locked": obj.get("is_locked"),
-            "confirmed_number": obj.get("confirmed_number")
+            "confirmed_number": obj.get("confirmed_number"),
+            "is_frozen": obj.get("is_frozen")
         })
         return _obj
 

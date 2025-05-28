@@ -69,6 +69,8 @@ class TransactionSubStatus(str, Enum):
     REJECTEDTRANSACTIONPOLICY = 'RejectedTransactionPolicy'
     REJECTEDBYSCREENINGAPP = 'RejectedByScreeningApp'
     PENDINGSCREENINGAPPCHECK = 'PendingScreeningAppCheck'
+    PENDINGCOBOKYTCHECK = 'PendingCoboKYTCheck'
+    REJECTEDBYCOBOKYT = 'RejectedByCoboKYT'
     PENDINGCOBOTRAVELRULECHECK = 'PendingCoboTravelRuleCheck'
 
     UNKNOWN = None

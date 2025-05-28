@@ -40,6 +40,7 @@ class TestEstimateFeeParams(unittest.TestCase):
                 token_id = 'ETH_USDT',
                 destination = None,
                 fee_type = 'EVM_EIP_1559',
+                replaced_transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 chain_id = 'ETH'
             )
         else:
