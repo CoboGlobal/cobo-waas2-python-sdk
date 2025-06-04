@@ -41,6 +41,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_bank_account(create_bank_account_request=create_bank_account_request)
         """
 
+    def test_create_crypto_address(self) -> None:
+        """
+        Test case for create_crypto_address
+
+        Create crypto address
+        """
+        """
+        create_crypto_address_request = cobo_waas2.CreateCryptoAddressRequest()
+
+        api_response = self.api.create_crypto_address(create_crypto_address_request=create_crypto_address_request)
+        """
+
     def test_create_merchant(self) -> None:
         """
         Test case for create_merchant
@@ -178,6 +190,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_bank_accounts()
         """
 
+    def test_list_crypto_addresses(self) -> None:
+        """
+        Test case for list_crypto_addresses
+
+        List crypto addresses
+        """
+        """
+        token_id = 'ETH_USDT'
+
+        api_response = self.api.list_crypto_addresses(token_id=token_id)
+        """
+
     def test_list_merchants(self) -> None:
         """
         Test case for list_merchants
@@ -205,8 +229,20 @@ class TestPaymentApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         merchant_id = 'M1001'
+        psp_order_id = 'P20240201001'
 
-        api_response = self.api.list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id)
+        api_response = self.api.list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id)
+        """
+
+    def test_list_payment_supported_tokens(self) -> None:
+        """
+        Test case for list_payment_supported_tokens
+
+        List all supported tokens
+        """
+        """
+
+        api_response = self.api.list_payment_supported_tokens()
         """
 
     def test_list_settlement_requests(self) -> None:

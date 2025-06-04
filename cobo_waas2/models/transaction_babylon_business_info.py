@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class TransactionBabylonBusinessInfo(BaseModel):
     """
-    The extra information related to Babylon business logic.
+    The Babylon business information.
     """  # noqa: E501
     extra_type: TransactionExtraType
     babylon_address_info: Optional[AddressInfo] = None

@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class CosmosAdr36MessageSignDestination(BaseModel):
     """
-    The information about the destination `COSMOS_ADR_36_Signature`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
+    The information about the destination `COSMOS_ADR_36`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
     """  # noqa: E501
     destination_type: MessageSignDestinationType
     message_cosmos_adr36: StrictStr = Field(description="Message to be signed, in hexadecimal format.")

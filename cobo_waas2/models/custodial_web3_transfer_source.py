@@ -29,7 +29,7 @@ class CustodialWeb3TransferSource(BaseModel):
     """  # noqa: E501
     source_type: WalletSubtype
     wallet_id: StrictStr = Field(description="The wallet ID.")
-    address: Optional[StrictStr] = Field(default=None, description="The wallet address.  If you want to specify the UTXOs to be used, please provide the `included_utxos` property. When `included_utxos` is specified, only these specified UTXOs will be used for the transaction. If you specify both the `address` and `included_utxos` properties, the specified included UTXOs must belong to the address. It is recommended to specify no more than 100 included UTXOs to ensure optimal transaction processing.  You need to provide either the `address` or `included_utxos` property. If neither property is provided, the transfer will fail. ")
+    address: Optional[StrictStr] = Field(default=None, description="The wallet address.  If you want to specify the UTXOs to be used, please provide the `included_utxos` property. If you specify both the `address` and `included_utxos` properties, the specified included UTXOs must belong to the address. It is recommended to specify no more than 100 included UTXOs to ensure optimal transaction processing.  You need to provide either the `address` or `included_utxos` property. If neither property is provided, the transfer will fail. ")
     included_utxos: Optional[List[TransactionUtxo]] = None
     excluded_utxos: Optional[List[TransactionUtxo]] = None
     __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address", "included_utxos", "excluded_utxos"]

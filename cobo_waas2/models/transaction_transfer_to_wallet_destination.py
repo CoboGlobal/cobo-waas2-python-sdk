@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class TransactionTransferToWalletDestination(BaseModel):
     """
-    Information about the transaction destination type `ExchangeWallet`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Switch between the tabs to display the properties for different transaction destinations. 
+    Information about the transaction destination type `CustodialWallet` or `ExchangeWallet`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Switch between the tabs to display the properties for different transaction destinations. 
     """  # noqa: E501
     destination_type: TransactionDestinationType
     wallet_id: StrictStr = Field(description="The wallet ID.")
-    trading_account_type: Optional[StrictStr] = Field(default=None, description="The trading account type.")
+    trading_account_type: Optional[StrictStr] = Field(default=None, description="The trading account type. Only available for `ExchangeWallet`.")
     exchange_id: Optional[ExchangeId] = None
     amount: StrictStr = Field(description="The transfer amount. For example, if you trade 1.5 BTC, then the value is `1.5`. ")
     __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "trading_account_type", "exchange_id", "amount"]
