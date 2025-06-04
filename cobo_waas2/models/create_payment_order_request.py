@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,8 @@ class CreatePaymentOrderRequest(BaseModel):
     merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system.")
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
     expired_at: Optional[StrictInt] = Field(default=None, description="The expiration time of the pay-in order, represented as a UNIX timestamp in seconds. After this time: - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_at"]
+    use_dedicated_address: Optional[StrictBool] = Field(default=None, description="Indicates whether to allocate a dedicated address for this order.  If false, a shared address from the address pool will be used. ")
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_at", "use_dedicated_address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +94,8 @@ class CreatePaymentOrderRequest(BaseModel):
             "fee_amount": obj.get("fee_amount"),
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
-            "expired_at": obj.get("expired_at")
+            "expired_at": obj.get("expired_at"),
+            "use_dedicated_address": obj.get("use_dedicated_address")
         })
         return _obj
 

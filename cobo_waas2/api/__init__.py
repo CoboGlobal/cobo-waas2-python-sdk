@@ -6,10 +6,12 @@ from cobo_waas2.api.app_workflows_api import AppWorkflowsApi
 from cobo_waas2.api.developers_api import DevelopersApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.fee_station_api import FeeStationApi
+from cobo_waas2.api.graph_ql_api import GraphQLApi
 from cobo_waas2.api.o_auth_api import OAuthApi
 from cobo_waas2.api.payment_api import PaymentApi
 from cobo_waas2.api.prime_broker_api import PrimeBrokerApi
 from cobo_waas2.api.stakings_api import StakingsApi
+from cobo_waas2.api.swaps_api import SwapsApi
 from cobo_waas2.api.transactions_api import TransactionsApi
 from cobo_waas2.api.travel_rule_api import TravelRuleApi
 from cobo_waas2.api.wallets_api import WalletsApi
