@@ -15,7 +15,10 @@ from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from cobo_waas2.models.exchange_permission_token201_response import ExchangePermissionToken201Response
+from cobo_waas2.models.exchange_permission_token_request import ExchangePermissionTokenRequest
 from cobo_waas2.models.get_token2_xx_response import GetToken2XXResponse
+from cobo_waas2.models.refresh_permission_token_request import RefreshPermissionTokenRequest
 from cobo_waas2.models.refresh_token2_xx_response import RefreshToken2XXResponse
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 
@@ -35,6 +38,175 @@ class OAuthApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def exchange_permission_token(
+        self,
+        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body for exchanging an Permission Access Token.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ExchangePermissionToken201Response:
+        """Exchange Permission Access Token by API Key
+
+        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+        :param exchange_permission_token_request: The request body for exchanging an Permission Access Token. (required)
+        :type exchange_permission_token_request: ExchangePermissionTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._exchange_permission_token_serialize(
+            exchange_permission_token_request=exchange_permission_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ExchangePermissionToken201Response",
+            '4XX': "GetToken4XXResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def exchange_permission_token_with_http_info(
+        self,
+        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body for exchanging an Permission Access Token.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ExchangePermissionToken201Response]:
+        """Exchange Permission Access Token by API Key
+
+        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+        :param exchange_permission_token_request: The request body for exchanging an Permission Access Token. (required)
+        :type exchange_permission_token_request: ExchangePermissionTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._exchange_permission_token_serialize(
+            exchange_permission_token_request=exchange_permission_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ExchangePermissionToken201Response",
+            '4XX': "GetToken4XXResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def exchange_permission_token_without_preload_content(
+        self,
+        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body for exchanging an Permission Access Token.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Exchange Permission Access Token by API Key
+
+        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+        :param exchange_permission_token_request: The request body for exchanging an Permission Access Token. (required)
+        :type exchange_permission_token_request: ExchangePermissionTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._exchange_permission_token_serialize(
+            exchange_permission_token_request=exchange_permission_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ExchangePermissionToken201Response",
+            '4XX': "GetToken4XXResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _exchange_permission_token_serialize(
+        self,
+        exchange_permission_token_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if exchange_permission_token_request is not None:
+            _body_params = exchange_permission_token_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/permission_token/exchange',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
 
     @validate_call
     def get_token(
@@ -233,6 +405,175 @@ class OAuthApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/oauth/token',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def refresh_permission_token(
+        self,
+        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body for refreshing an Permission Access Token.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ExchangePermissionToken201Response:
+        """Refresh Permission Access Token by Permission Refresh Token
+
+        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+        :param refresh_permission_token_request: The request body for refreshing an Permission Access Token. (required)
+        :type refresh_permission_token_request: RefreshPermissionTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._refresh_permission_token_serialize(
+            refresh_permission_token_request=refresh_permission_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ExchangePermissionToken201Response",
+            '4XX': "GetToken4XXResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def refresh_permission_token_with_http_info(
+        self,
+        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body for refreshing an Permission Access Token.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ExchangePermissionToken201Response]:
+        """Refresh Permission Access Token by Permission Refresh Token
+
+        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+        :param refresh_permission_token_request: The request body for refreshing an Permission Access Token. (required)
+        :type refresh_permission_token_request: RefreshPermissionTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._refresh_permission_token_serialize(
+            refresh_permission_token_request=refresh_permission_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ExchangePermissionToken201Response",
+            '4XX': "GetToken4XXResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def refresh_permission_token_without_preload_content(
+        self,
+        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body for refreshing an Permission Access Token.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Refresh Permission Access Token by Permission Refresh Token
+
+        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+        :param refresh_permission_token_request: The request body for refreshing an Permission Access Token. (required)
+        :type refresh_permission_token_request: RefreshPermissionTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._refresh_permission_token_serialize(
+            refresh_permission_token_request=refresh_permission_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ExchangePermissionToken201Response",
+            '4XX': "GetToken4XXResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _refresh_permission_token_serialize(
+        self,
+        refresh_permission_token_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if refresh_permission_token_request is not None:
+            _body_params = refresh_permission_token_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/permission_token/refresh',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

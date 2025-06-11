@@ -29,6 +29,18 @@ class TestOAuthApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_exchange_permission_token(self) -> None:
+        """
+        Test case for exchange_permission_token
+
+        Exchange Permission Access Token by API Key
+        """
+        """
+        exchange_permission_token_request = cobo_waas2.ExchangePermissionTokenRequest()
+
+        api_response = self.api.exchange_permission_token(exchange_permission_token_request)
+        """
+
     def test_get_token(self) -> None:
         """
         Test case for get_token
@@ -41,6 +53,18 @@ class TestOAuthApi(unittest.TestCase):
         grant_type = 'org_implicit'
 
         api_response = self.api.get_token(client_id, org_id, grant_type)
+        """
+
+    def test_refresh_permission_token(self) -> None:
+        """
+        Test case for refresh_permission_token
+
+        Refresh Permission Access Token by Permission Refresh Token
+        """
+        """
+        refresh_permission_token_request = cobo_waas2.RefreshPermissionTokenRequest()
+
+        api_response = self.api.refresh_permission_token(refresh_permission_token_request)
         """
 
     def test_refresh_token(self) -> None:
