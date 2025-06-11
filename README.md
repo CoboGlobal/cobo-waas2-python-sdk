@@ -102,7 +102,9 @@ Class | Method | HTTP request | Description
 *FeeStationApi* | [**list_fee_station_transactions**](docs/FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all Fee Station transactions
 *FeeStationApi* | [**list_token_balances_for_fee_station**](docs/FeeStationApi.md#list_token_balances_for_fee_station) | **GET** /fee_station/tokens | List Fee Station token balances
 *GraphQLApi* | [**execute_graphql**](docs/GraphQLApi.md#execute_graphql) | **POST** /graphql | Execute a GraphQL query or mutation
+*OAuthApi* | [**exchange_permission_token**](docs/OAuthApi.md#exchange_permission_token) | **POST** /oauth/permission_token/exchange | Exchange Permission Access Token by API Key
 *OAuthApi* | [**get_token**](docs/OAuthApi.md#get_token) | **GET** /oauth/token | Get Org Access Token
+*OAuthApi* | [**refresh_permission_token**](docs/OAuthApi.md#refresh_permission_token) | **POST** /oauth/permission_token/refresh | Refresh Permission Access Token by Permission Refresh Token
 *OAuthApi* | [**refresh_token**](docs/OAuthApi.md#refresh_token) | **POST** /oauth/token | Refresh Org Access Token
 *PaymentApi* | [**create_bank_account**](docs/PaymentApi.md#create_bank_account) | **POST** /payments/bank_accounts | Create bank account
 *PaymentApi* | [**create_crypto_address**](docs/PaymentApi.md#create_crypto_address) | **POST** /payments/crypto_addresses | Create crypto address
@@ -399,6 +401,8 @@ Class | Method | HTTP request | Description
  - [EvmLegacyFeeBasePrice](docs/EvmLegacyFeeBasePrice.md)
  - [EvmLegacyFeeRate](docs/EvmLegacyFeeRate.md)
  - [ExchangeId](docs/ExchangeId.md)
+ - [ExchangePermissionToken201Response](docs/ExchangePermissionToken201Response.md)
+ - [ExchangePermissionTokenRequest](docs/ExchangePermissionTokenRequest.md)
  - [ExchangeTransferDestination](docs/ExchangeTransferDestination.md)
  - [ExchangeTransferSource](docs/ExchangeTransferSource.md)
  - [ExchangeWalletInfo](docs/ExchangeWalletInfo.md)
@@ -516,6 +520,7 @@ Class | Method | HTTP request | Description
  - [RawMessageSignDestination](docs/RawMessageSignDestination.md)
  - [RefreshAddressBalancesByToken200Response](docs/RefreshAddressBalancesByToken200Response.md)
  - [RefreshAddressBalancesByTokenRequest](docs/RefreshAddressBalancesByTokenRequest.md)
+ - [RefreshPermissionTokenRequest](docs/RefreshPermissionTokenRequest.md)
  - [RefreshToken2XXResponse](docs/RefreshToken2XXResponse.md)
  - [RefreshTokenRequest](docs/RefreshTokenRequest.md)
  - [Refund](docs/Refund.md)

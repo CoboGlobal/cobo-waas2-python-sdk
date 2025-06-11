@@ -200,6 +200,8 @@ cobo_waas2/models/evm_eip712_message_sign_destination.py
 cobo_waas2/models/evm_legacy_fee_base_price.py
 cobo_waas2/models/evm_legacy_fee_rate.py
 cobo_waas2/models/exchange_id.py
+cobo_waas2/models/exchange_permission_token201_response.py
+cobo_waas2/models/exchange_permission_token_request.py
 cobo_waas2/models/exchange_transfer_destination.py
 cobo_waas2/models/exchange_transfer_source.py
 cobo_waas2/models/exchange_wallet_info.py
@@ -317,6 +319,7 @@ cobo_waas2/models/query_guard_pubkey200_response_addresses_inner.py
 cobo_waas2/models/raw_message_sign_destination.py
 cobo_waas2/models/refresh_address_balances_by_token200_response.py
 cobo_waas2/models/refresh_address_balances_by_token_request.py
+cobo_waas2/models/refresh_permission_token_request.py
 cobo_waas2/models/refresh_token2_xx_response.py
 cobo_waas2/models/refresh_token_request.py
 cobo_waas2/models/refund.py
@@ -727,6 +730,8 @@ docs/EvmEip1559FeeRate.md
 docs/EvmLegacyFeeBasePrice.md
 docs/EvmLegacyFeeRate.md
 docs/ExchangeId.md
+docs/ExchangePermissionToken201Response.md
+docs/ExchangePermissionTokenRequest.md
 docs/ExchangeTransferDestination.md
 docs/ExchangeTransferSource.md
 docs/ExchangeWalletInfo.md
@@ -849,6 +854,7 @@ docs/QueryGuardPubkey200ResponseAddressesInner.md
 docs/RawMessageSignDestination.md
 docs/RefreshAddressBalancesByToken200Response.md
 docs/RefreshAddressBalancesByTokenRequest.md
+docs/RefreshPermissionTokenRequest.md
 docs/RefreshToken2XXResponse.md
 docs/RefreshTokenRequest.md
 docs/Refund.md
@@ -1271,6 +1277,8 @@ test/test_evm_eip712_message_sign_destination.py
 test/test_evm_legacy_fee_base_price.py
 test/test_evm_legacy_fee_rate.py
 test/test_exchange_id.py
+test/test_exchange_permission_token201_response.py
+test/test_exchange_permission_token_request.py
 test/test_exchange_transfer_destination.py
 test/test_exchange_transfer_source.py
 test/test_exchange_wallet_info.py
@@ -1393,6 +1401,7 @@ test/test_query_guard_pubkey200_response_addresses_inner.py
 test/test_raw_message_sign_destination.py
 test/test_refresh_address_balances_by_token200_response.py
 test/test_refresh_address_balances_by_token_request.py
+test/test_refresh_permission_token_request.py
 test/test_refresh_token2_xx_response.py
 test/test_refresh_token_request.py
 test/test_refund.py
