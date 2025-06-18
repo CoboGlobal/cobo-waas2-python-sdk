@@ -24,13 +24,13 @@ from typing_extensions import Self
 
 class RequestApproval(BaseModel):
     """
-    The information about a request that approve an operation.
+    The information about a approval request.
     """  # noqa: E501
-    operation_id: StrictStr = Field(description="The operation id of workflow approval request.")
-    request_id: StrictStr = Field(description="The request id of workflow approval request.")
-    initiator_email: StrictStr = Field(description="The initiator email of workflow approval request.")
+    operation_id: StrictStr = Field(description="The unique ID of the approval workflow.")
+    request_id: StrictStr = Field(description="An identifier provided by you to track this request.")
+    initiator_email: StrictStr = Field(description="The email of the user who requested the approval.")
     fields: List[AppWorkflowField]
-    guard_template: StrictStr = Field(description="The guard template content of workflow approval request, need to connect cobo.")
+    guard_template: StrictStr = Field(description="The template of a Cobo Guard message. Please connect [help@cobo.com](mailto:help@cobo.com) to get the template content.")
     __properties: ClassVar[List[str]] = ["operation_id", "request_id", "initiator_email", "fields", "guard_template"]
 
     model_config = ConfigDict(

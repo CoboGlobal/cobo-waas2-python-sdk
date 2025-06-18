@@ -35,13 +35,13 @@ class TestAppWorkflowField(unittest.TestCase):
         if include_optional:
             return AppWorkflowField(
                 var_field = 'amount',
-                value_type = 'Pending',
+                value_type = 'INT',
                 value = '11.23'
             )
         else:
             return AppWorkflowField(
                 var_field = 'amount',
-                value_type = 'Pending',
+                value_type = 'INT',
                 value = '11.23',
         )
         """

@@ -44,7 +44,7 @@ class AppWorkflowsApi:
     @validate_call
     def create_approval_request(
         self,
-        request_approval: Annotated[Optional[RequestApproval], Field(description="The request body to app workflow approval.")] = None,
+        request_approval: Annotated[Optional[RequestApproval], Field(description="The request body to request workflow approval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -56,9 +56,9 @@ class AppWorkflowsApi:
     ) -> CreateApprovalRequest201Response:
         """Request workflow approval
 
-        This operation is request approval from app workflow with idempotency checks. 
+        This operation triggers a specified workflow and generates a new approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param request_approval: The request body to app workflow approval.
+        :param request_approval: The request body to request workflow approval.
         :type request_approval: RequestApproval
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -90,7 +90,7 @@ class AppWorkflowsApi:
     @validate_call
     def create_approval_request_with_http_info(
         self,
-        request_approval: Annotated[Optional[RequestApproval], Field(description="The request body to app workflow approval.")] = None,
+        request_approval: Annotated[Optional[RequestApproval], Field(description="The request body to request workflow approval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -102,9 +102,9 @@ class AppWorkflowsApi:
     ) -> ApiResponse[CreateApprovalRequest201Response]:
         """Request workflow approval
 
-        This operation is request approval from app workflow with idempotency checks. 
+        This operation triggers a specified workflow and generates a new approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param request_approval: The request body to app workflow approval.
+        :param request_approval: The request body to request workflow approval.
         :type request_approval: RequestApproval
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -136,7 +136,7 @@ class AppWorkflowsApi:
     @validate_call
     def create_approval_request_without_preload_content(
         self,
-        request_approval: Annotated[Optional[RequestApproval], Field(description="The request body to app workflow approval.")] = None,
+        request_approval: Annotated[Optional[RequestApproval], Field(description="The request body to request workflow approval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -148,9 +148,9 @@ class AppWorkflowsApi:
     ) -> RESTResponseType:
         """Request workflow approval
 
-        This operation is request approval from app workflow with idempotency checks. 
+        This operation triggers a specified workflow and generates a new approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param request_approval: The request body to app workflow approval.
+        :param request_approval: The request body to request workflow approval.
         :type request_approval: RequestApproval
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -213,7 +213,7 @@ class AppWorkflowsApi:
     @validate_call
     def get_approval_request_by_id(
         self,
-        approval_id: Annotated[StrictStr, Field(description="The approval ID that is used to track a workflow approval request.")],
+        approval_id: Annotated[StrictStr, Field(description="The system-generated unique ID of the approval request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -225,9 +225,9 @@ class AppWorkflowsApi:
     ) -> ApprovalRequestDetail:
         """Get approval request details
 
-        This operation is retrieves approval request from app workflow. 
+        This operation retrieves the details of a specific approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param approval_id: The approval ID that is used to track a workflow approval request. (required)
+        :param approval_id: The system-generated unique ID of the approval request. (required)
         :type approval_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -259,7 +259,7 @@ class AppWorkflowsApi:
     @validate_call
     def get_approval_request_by_id_with_http_info(
         self,
-        approval_id: Annotated[StrictStr, Field(description="The approval ID that is used to track a workflow approval request.")],
+        approval_id: Annotated[StrictStr, Field(description="The system-generated unique ID of the approval request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -271,9 +271,9 @@ class AppWorkflowsApi:
     ) -> ApiResponse[ApprovalRequestDetail]:
         """Get approval request details
 
-        This operation is retrieves approval request from app workflow. 
+        This operation retrieves the details of a specific approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param approval_id: The approval ID that is used to track a workflow approval request. (required)
+        :param approval_id: The system-generated unique ID of the approval request. (required)
         :type approval_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -305,7 +305,7 @@ class AppWorkflowsApi:
     @validate_call
     def get_approval_request_by_id_without_preload_content(
         self,
-        approval_id: Annotated[StrictStr, Field(description="The approval ID that is used to track a workflow approval request.")],
+        approval_id: Annotated[StrictStr, Field(description="The system-generated unique ID of the approval request.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -317,9 +317,9 @@ class AppWorkflowsApi:
     ) -> RESTResponseType:
         """Get approval request details
 
-        This operation is retrieves approval request from app workflow. 
+        This operation retrieves the details of a specific approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param approval_id: The approval ID that is used to track a workflow approval request. (required)
+        :param approval_id: The system-generated unique ID of the approval request. (required)
         :type approval_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -391,9 +391,9 @@ class AppWorkflowsApi:
             ]
         ] = None,
     ) -> List[AppWorkflow]:
-        """list app workflows
+        """List app workflows
 
-        This operation is list app workflows of app. 
+        This operation retrieves all approval workflows of an Cobo Portal App. <Note>You need to [configure approval workflow](https://www.cobo.com/developers/v2/apps/configure-workflow) in the app Manifest file first.</Note> <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -433,9 +433,9 @@ class AppWorkflowsApi:
             ]
         ] = None,
     ) -> ApiResponse[List[AppWorkflow]]:
-        """list app workflows
+        """List app workflows
 
-        This operation is list app workflows of app. 
+        This operation retrieves all approval workflows of an Cobo Portal App. <Note>You need to [configure approval workflow](https://www.cobo.com/developers/v2/apps/configure-workflow) in the app Manifest file first.</Note> <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -475,9 +475,9 @@ class AppWorkflowsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """list app workflows
+        """List app workflows
 
-        This operation is list app workflows of app. 
+        This operation retrieves all approval workflows of an Cobo Portal App. <Note>You need to [configure approval workflow](https://www.cobo.com/developers/v2/apps/configure-workflow) in the app Manifest file first.</Note> <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -536,7 +536,7 @@ class AppWorkflowsApi:
     @validate_call
     def list_approval_requests(
         self,
-        operation_id: Annotated[StrictStr, Field(description="The operation ID that is used to track a workflow. The operation ID is provided by you and must be unique within your app.")],
+        operation_id: Annotated[StrictStr, Field(description="The unique ID of the approval workflow.")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
@@ -551,9 +551,9 @@ class AppWorkflowsApi:
     ) -> ListApprovalRequests200Response:
         """List approval requests
 
-        This operation is retrieves list approval requests from app workflow. 
+        This operation retrieves a list of approval requests.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param operation_id: The operation ID that is used to track a workflow. The operation ID is provided by you and must be unique within your app. (required)
+        :param operation_id: The unique ID of the approval workflow. (required)
         :type operation_id: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -594,7 +594,7 @@ class AppWorkflowsApi:
     @validate_call
     def list_approval_requests_with_http_info(
         self,
-        operation_id: Annotated[StrictStr, Field(description="The operation ID that is used to track a workflow. The operation ID is provided by you and must be unique within your app.")],
+        operation_id: Annotated[StrictStr, Field(description="The unique ID of the approval workflow.")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
@@ -609,9 +609,9 @@ class AppWorkflowsApi:
     ) -> ApiResponse[ListApprovalRequests200Response]:
         """List approval requests
 
-        This operation is retrieves list approval requests from app workflow. 
+        This operation retrieves a list of approval requests.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param operation_id: The operation ID that is used to track a workflow. The operation ID is provided by you and must be unique within your app. (required)
+        :param operation_id: The unique ID of the approval workflow. (required)
         :type operation_id: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -652,7 +652,7 @@ class AppWorkflowsApi:
     @validate_call
     def list_approval_requests_without_preload_content(
         self,
-        operation_id: Annotated[StrictStr, Field(description="The operation ID that is used to track a workflow. The operation ID is provided by you and must be unique within your app.")],
+        operation_id: Annotated[StrictStr, Field(description="The unique ID of the approval workflow.")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
@@ -667,9 +667,9 @@ class AppWorkflowsApi:
     ) -> RESTResponseType:
         """List approval requests
 
-        This operation is retrieves list approval requests from app workflow. 
+        This operation retrieves a list of approval requests.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param operation_id: The operation ID that is used to track a workflow. The operation ID is provided by you and must be unique within your app. (required)
+        :param operation_id: The unique ID of the approval workflow. (required)
         :type operation_id: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -758,8 +758,8 @@ class AppWorkflowsApi:
     @validate_call
     def revoke_approval_request(
         self,
-        approval_id: Annotated[StrictStr, Field(description="The approval ID that is used to track a workflow approval request.")],
-        revoke_approval_request_request: Annotated[Optional[RevokeApprovalRequestRequest], Field(description="The revoke request body to app workflow approval.")] = None,
+        approval_id: Annotated[StrictStr, Field(description="The system-generated unique ID of the approval request.")],
+        revoke_approval_request_request: Annotated[Optional[RevokeApprovalRequestRequest], Field(description="The request body to revoke an approval request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -771,11 +771,11 @@ class AppWorkflowsApi:
     ) -> RevokeApprovalRequest201Response:
         """Revoke approval request
 
-        This operation is revoke approval request from app workflow. 
+        This operation revokes a pending approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param approval_id: The approval ID that is used to track a workflow approval request. (required)
+        :param approval_id: The system-generated unique ID of the approval request. (required)
         :type approval_id: str
-        :param revoke_approval_request_request: The revoke request body to app workflow approval.
+        :param revoke_approval_request_request: The request body to revoke an approval request.
         :type revoke_approval_request_request: RevokeApprovalRequestRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -808,8 +808,8 @@ class AppWorkflowsApi:
     @validate_call
     def revoke_approval_request_with_http_info(
         self,
-        approval_id: Annotated[StrictStr, Field(description="The approval ID that is used to track a workflow approval request.")],
-        revoke_approval_request_request: Annotated[Optional[RevokeApprovalRequestRequest], Field(description="The revoke request body to app workflow approval.")] = None,
+        approval_id: Annotated[StrictStr, Field(description="The system-generated unique ID of the approval request.")],
+        revoke_approval_request_request: Annotated[Optional[RevokeApprovalRequestRequest], Field(description="The request body to revoke an approval request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -821,11 +821,11 @@ class AppWorkflowsApi:
     ) -> ApiResponse[RevokeApprovalRequest201Response]:
         """Revoke approval request
 
-        This operation is revoke approval request from app workflow. 
+        This operation revokes a pending approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param approval_id: The approval ID that is used to track a workflow approval request. (required)
+        :param approval_id: The system-generated unique ID of the approval request. (required)
         :type approval_id: str
-        :param revoke_approval_request_request: The revoke request body to app workflow approval.
+        :param revoke_approval_request_request: The request body to revoke an approval request.
         :type revoke_approval_request_request: RevokeApprovalRequestRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -858,8 +858,8 @@ class AppWorkflowsApi:
     @validate_call
     def revoke_approval_request_without_preload_content(
         self,
-        approval_id: Annotated[StrictStr, Field(description="The approval ID that is used to track a workflow approval request.")],
-        revoke_approval_request_request: Annotated[Optional[RevokeApprovalRequestRequest], Field(description="The revoke request body to app workflow approval.")] = None,
+        approval_id: Annotated[StrictStr, Field(description="The system-generated unique ID of the approval request.")],
+        revoke_approval_request_request: Annotated[Optional[RevokeApprovalRequestRequest], Field(description="The request body to revoke an approval request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -871,11 +871,11 @@ class AppWorkflowsApi:
     ) -> RESTResponseType:
         """Revoke approval request
 
-        This operation is revoke approval request from app workflow. 
+        This operation revokes a pending approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
 
-        :param approval_id: The approval ID that is used to track a workflow approval request. (required)
+        :param approval_id: The system-generated unique ID of the approval request. (required)
         :type approval_id: str
-        :param revoke_approval_request_request: The revoke request body to app workflow approval.
+        :param revoke_approval_request_request: The request body to revoke an approval request.
         :type revoke_approval_request_request: RevokeApprovalRequestRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

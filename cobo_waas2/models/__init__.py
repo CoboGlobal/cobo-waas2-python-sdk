@@ -96,7 +96,6 @@ from cobo_waas2.models.create_babylon_airdrop_registration201_response import Cr
 from cobo_waas2.models.create_babylon_airdrop_registration_request import CreateBabylonAirdropRegistrationRequest
 from cobo_waas2.models.create_babylon_staking_registration201_response import CreateBabylonStakingRegistration201Response
 from cobo_waas2.models.create_babylon_staking_registration_request import CreateBabylonStakingRegistrationRequest
-from cobo_waas2.models.create_bank_account_request import CreateBankAccountRequest
 from cobo_waas2.models.create_claim_activity import CreateClaimActivity
 from cobo_waas2.models.create_claim_activity_request import CreateClaimActivityRequest
 from cobo_waas2.models.create_custodial_wallet_params import CreateCustodialWalletParams
@@ -131,7 +130,9 @@ from cobo_waas2.models.create_webhook_endpoint_request import CreateWebhookEndpo
 from cobo_waas2.models.create_withdraw_activity import CreateWithdrawActivity
 from cobo_waas2.models.create_withdraw_activity_request import CreateWithdrawActivityRequest
 from cobo_waas2.models.created_wallet_info import CreatedWalletInfo
+from cobo_waas2.models.crypto_address import CryptoAddress
 from cobo_waas2.models.curve_type import CurveType
+from cobo_waas2.models.custodial_transfer_destination import CustodialTransferDestination
 from cobo_waas2.models.custodial_transfer_source import CustodialTransferSource
 from cobo_waas2.models.custodial_wallet_info import CustodialWalletInfo
 from cobo_waas2.models.custodial_web3_contract_call_source import CustodialWeb3ContractCallSource
@@ -175,6 +176,8 @@ from cobo_waas2.models.evm_eip1559_fee_rate import EvmEip1559FeeRate
 from cobo_waas2.models.evm_legacy_fee_base_price import EvmLegacyFeeBasePrice
 from cobo_waas2.models.evm_legacy_fee_rate import EvmLegacyFeeRate
 from cobo_waas2.models.exchange_id import ExchangeId
+from cobo_waas2.models.exchange_permission_token201_response import ExchangePermissionToken201Response
+from cobo_waas2.models.exchange_permission_token_request import ExchangePermissionTokenRequest
 from cobo_waas2.models.exchange_transfer_destination import ExchangeTransferDestination
 from cobo_waas2.models.exchange_transfer_source import ExchangeTransferSource
 from cobo_waas2.models.exchange_wallet_info import ExchangeWalletInfo
@@ -273,6 +276,7 @@ from cobo_waas2.models.payment_order_event_data import PaymentOrderEventData
 from cobo_waas2.models.payment_refund_event_data import PaymentRefundEventData
 from cobo_waas2.models.payment_settlement_event import PaymentSettlementEvent
 from cobo_waas2.models.payment_transaction import PaymentTransaction
+from cobo_waas2.models.payout_channel import PayoutChannel
 from cobo_waas2.models.policy_action import PolicyAction
 from cobo_waas2.models.policy_action_content import PolicyActionContent
 from cobo_waas2.models.policy_action_type import PolicyActionType
@@ -288,6 +292,7 @@ from cobo_waas2.models.query_guard_pubkey200_response_addresses_inner import Que
 from cobo_waas2.models.raw_message_sign_destination import RawMessageSignDestination
 from cobo_waas2.models.refresh_address_balances_by_token200_response import RefreshAddressBalancesByToken200Response
 from cobo_waas2.models.refresh_address_balances_by_token_request import RefreshAddressBalancesByTokenRequest
+from cobo_waas2.models.refresh_permission_token_request import RefreshPermissionTokenRequest
 from cobo_waas2.models.refresh_token2_xx_response import RefreshToken2XXResponse
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 from cobo_waas2.models.refund import Refund
@@ -336,6 +341,7 @@ from cobo_waas2.models.stakings import Stakings
 from cobo_waas2.models.stakings_extra import StakingsExtra
 from cobo_waas2.models.sub_wallet_asset_balance import SubWalletAssetBalance
 from cobo_waas2.models.submit_deposit_travel_rule_info201_response import SubmitDepositTravelRuleInfo201Response
+from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.swap_activity import SwapActivity
 from cobo_waas2.models.swap_activity_approvers import SwapActivityApprovers
 from cobo_waas2.models.swap_activity_detail import SwapActivityDetail

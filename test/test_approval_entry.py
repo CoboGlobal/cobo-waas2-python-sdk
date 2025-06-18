@@ -38,8 +38,8 @@ class TestApprovalEntry(unittest.TestCase):
                 created_timestamp = 1610445878970,
                 approval_users = [
                     cobo_waas2.models.approval_user.ApprovalUser(
-                        email = 'test@cobo.com', 
-                        name = 'test', 
+                        email = 'john.smith@example.com', 
+                        name = 'John Smith', 
                         status = 'Pending', 
                         created_timestamp = 1610445878970, )
                     ]

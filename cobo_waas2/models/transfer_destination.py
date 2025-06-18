@@ -16,12 +16,13 @@ import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from cobo_waas2.models.address_transfer_destination import AddressTransferDestination
+from cobo_waas2.models.custodial_transfer_destination import CustodialTransferDestination
 from cobo_waas2.models.exchange_transfer_destination import ExchangeTransferDestination
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSFERDESTINATION_ONE_OF_SCHEMAS = ["AddressTransferDestination", "ExchangeTransferDestination"]
+TRANSFERDESTINATION_ONE_OF_SCHEMAS = ["AddressTransferDestination", "CustodialTransferDestination", "ExchangeTransferDestination"]
 
 class TransferDestination(BaseModel):
     """
@@ -29,10 +30,12 @@ class TransferDestination(BaseModel):
     """
     # data type: AddressTransferDestination
     oneof_schema_1_validator: Optional[AddressTransferDestination] = None
+    # data type: CustodialTransferDestination
+    oneof_schema_2_validator: Optional[CustodialTransferDestination] = None
     # data type: ExchangeTransferDestination
-    oneof_schema_2_validator: Optional[ExchangeTransferDestination] = None
-    actual_instance: Optional[Union[AddressTransferDestination, ExchangeTransferDestination]] = None
-    one_of_schemas: Set[str] = { "AddressTransferDestination", "ExchangeTransferDestination" }
+    oneof_schema_3_validator: Optional[ExchangeTransferDestination] = None
+    actual_instance: Optional[Union[AddressTransferDestination, CustodialTransferDestination, ExchangeTransferDestination]] = None
+    one_of_schemas: Set[str] = { "AddressTransferDestination", "CustodialTransferDestination", "ExchangeTransferDestination" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -63,6 +66,11 @@ class TransferDestination(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `AddressTransferDestination`")
         else:
             match += 1
+        # validate data type: CustodialTransferDestination
+        if not isinstance(v, CustodialTransferDestination):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CustodialTransferDestination`")
+        else:
+            match += 1
         # validate data type: ExchangeTransferDestination
         if not isinstance(v, ExchangeTransferDestination):
             error_messages.append(f"Error! Input type `{type(v)}` is not `ExchangeTransferDestination`")
@@ -70,10 +78,10 @@ class TransferDestination(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransferDestination with oneOf schemas: AddressTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransferDestination with oneOf schemas: AddressTransferDestination, CustodialTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransferDestination with oneOf schemas: AddressTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransferDestination with oneOf schemas: AddressTransferDestination, CustodialTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -98,6 +106,11 @@ class TransferDestination(BaseModel):
             instance.actual_instance = AddressTransferDestination.from_json(json_str)
             return instance
 
+        # check if data type is `CustodialTransferDestination`
+        if _data_type == "CustodialWallet":
+            instance.actual_instance = CustodialTransferDestination.from_json(json_str)
+            return instance
+
         # check if data type is `ExchangeTransferDestination`
         if _data_type == "ExchangeWallet":
             instance.actual_instance = ExchangeTransferDestination.from_json(json_str)
@@ -106,6 +119,11 @@ class TransferDestination(BaseModel):
         # check if data type is `AddressTransferDestination`
         if _data_type == "AddressTransferDestination":
             instance.actual_instance = AddressTransferDestination.from_json(json_str)
+            return instance
+
+        # check if data type is `CustodialTransferDestination`
+        if _data_type == "CustodialTransferDestination":
+            instance.actual_instance = CustodialTransferDestination.from_json(json_str)
             return instance
 
         # check if data type is `ExchangeTransferDestination`
@@ -120,6 +138,12 @@ class TransferDestination(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CustodialTransferDestination
+        try:
+            instance.actual_instance = CustodialTransferDestination.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into ExchangeTransferDestination
         try:
             instance.actual_instance = ExchangeTransferDestination.from_json(json_str)
@@ -129,11 +153,11 @@ class TransferDestination(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransferDestination with oneOf schemas: AddressTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransferDestination with oneOf schemas: AddressTransferDestination, CustodialTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransferDestination with oneOf schemas: AddressTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransferDestination with oneOf schemas: AddressTransferDestination, CustodialTransferDestination, ExchangeTransferDestination. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -147,7 +171,7 @@ class TransferDestination(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], AddressTransferDestination, ExchangeTransferDestination]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], AddressTransferDestination, CustodialTransferDestination, ExchangeTransferDestination]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

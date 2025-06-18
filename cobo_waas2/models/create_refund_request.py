@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.refund_type import RefundType
 from typing import Optional, Set
@@ -33,7 +33,10 @@ class CreateRefundRequest(BaseModel):
     token_id: StrictStr = Field(description="The ID of the cryptocurrency used for refund. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
     refund_type: RefundType
     order_id: Optional[StrictStr] = Field(default=None, description="The ID of the original pay-in order associated with this refund. Use this to track refunds against specific payments.")
-    __properties: ClassVar[List[str]] = ["request_id", "merchant_id", "payable_amount", "to_address", "token_id", "refund_type", "order_id"]
+    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Indicates whether the merchant should bear the transaction fee for the refund.  If true, the fee will be deducted from merchant's account balance. ")
+    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of the transaction fee that the merchant will bear for the refund.  This is only applicable if `charge_merchant_fee` is set to true. ")
+    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the transaction fee.  This is only applicable if `charge_merchant_fee` is set to true. ")
+    __properties: ClassVar[List[str]] = ["request_id", "merchant_id", "payable_amount", "to_address", "token_id", "refund_type", "order_id", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +95,10 @@ class CreateRefundRequest(BaseModel):
             "to_address": obj.get("to_address"),
             "token_id": obj.get("token_id"),
             "refund_type": obj.get("refund_type"),
-            "order_id": obj.get("order_id")
+            "order_id": obj.get("order_id"),
+            "charge_merchant_fee": obj.get("charge_merchant_fee"),
+            "merchant_fee_amount": obj.get("merchant_fee_amount"),
+            "merchant_fee_token_id": obj.get("merchant_fee_token_id")
         })
         return _obj
 

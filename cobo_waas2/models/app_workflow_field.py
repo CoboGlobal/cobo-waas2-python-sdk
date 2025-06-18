@@ -24,11 +24,11 @@ from typing_extensions import Self
 
 class AppWorkflowField(BaseModel):
     """
-    The information of an app workflow field.
+    The information of a workflow field.
     """  # noqa: E501
-    var_field: StrictStr = Field(description="The app workflow field name.", alias="field")
+    var_field: StrictStr = Field(description="The workflow field name.", alias="field")
     value_type: PolicyFieldValueType
-    value: StrictStr = Field(description="The app workflow field value.")
+    value: StrictStr = Field(description="The workflow field value.")
     __properties: ClassVar[List[str]] = ["field", "value_type", "value"]
 
     model_config = ConfigDict(

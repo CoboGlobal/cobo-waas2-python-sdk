@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class AppWorkflowPolicy(BaseModel):
     """
-    The information of an app workflow policy entry.
+    The current approval workflow policy, consisting of one or more conditions and an associated action. When the conditions are met, the action is triggered.
     """  # noqa: E501
     action: PolicyAction
     conditions: Optional[List[PolicyCondition]] = None

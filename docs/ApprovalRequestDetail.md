@@ -1,12 +1,12 @@
 # ApprovalRequestDetail
 
-The information of an app workflow approval detail.
+The information of an approval request detail.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**approval_id** | **str** |  | [optional] 
+**approval_id** | **str** | The system-generated unique ID of the approval request. | [optional] 
 **initiator** | [**ApprovalUser**](ApprovalUser.md) |  | 
 **approved_list** | [**List[ApprovalEntry]**](ApprovalEntry.md) |  | [optional] 
 **status** | [**ApprovalStatus**](ApprovalStatus.md) |  | 

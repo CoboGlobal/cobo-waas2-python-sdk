@@ -32,8 +32,8 @@ class CreatePaymentOrderRequest(BaseModel):
     fee_amount: StrictStr = Field(description="The developer fee for the order in fiat currency. It is added to the base amount (`order_amount`) to determine the final charge. For example, if order_amount is \"100.00\" and fee_amount is \"2.00\", the customer will be charged \"102.00\" in total, with \"100.00\" being settled to the merchant and \"2.00\" settled to the developer. Values must be greater than 0 and contain two decimal places.")
     merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system.")
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
-    expired_at: Optional[StrictInt] = Field(default=None, description="The expiration time of the pay-in order, represented as a UNIX timestamp in seconds. After this time: - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_at"]
+    expired_in: Optional[StrictInt] = Field(default=None, description="The pay-in order will expire after approximately a certain number of seconds: - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_in"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +93,7 @@ class CreatePaymentOrderRequest(BaseModel):
             "fee_amount": obj.get("fee_amount"),
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
-            "expired_at": obj.get("expired_at")
+            "expired_in": obj.get("expired_in")
         })
         return _obj
 

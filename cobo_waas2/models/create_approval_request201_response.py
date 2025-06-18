@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -25,7 +25,7 @@ class CreateApprovalRequest201Response(BaseModel):
     """
     CreateApprovalRequest201Response
     """  # noqa: E501
-    approval_id: StrictStr
+    approval_id: StrictStr = Field(description="The system-generated unique ID of the approval request. You can use this ID to query the approval request status or revoke the request.")
     __properties: ClassVar[List[str]] = ["approval_id"]
 
     model_config = ConfigDict(

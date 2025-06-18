@@ -4,9 +4,83 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**exchange_permission_token**](OAuthApi.md#exchange_permission_token) | **POST** /oauth/permission_token/exchange | Exchange Permission Access Token by API Key
 [**get_token**](OAuthApi.md#get_token) | **GET** /oauth/token | Get Org Access Token
+[**refresh_permission_token**](OAuthApi.md#refresh_permission_token) | **POST** /oauth/permission_token/refresh | Refresh Permission Access Token by Permission Refresh Token
 [**refresh_token**](OAuthApi.md#refresh_token) | **POST** /oauth/token | Refresh Org Access Token
 
+
+# **exchange_permission_token**
+> ExchangePermissionToken201Response exchange_permission_token(exchange_permission_token_request)
+
+Exchange Permission Access Token by API Key
+
+<Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.exchange_permission_token201_response import ExchangePermissionToken201Response
+from cobo_waas2.models.exchange_permission_token_request import ExchangePermissionTokenRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.OAuthApi(api_client)
+    exchange_permission_token_request = cobo_waas2.ExchangePermissionTokenRequest()
+
+    try:
+        # Exchange Permission Access Token by API Key
+        api_response = api_instance.exchange_permission_token(exchange_permission_token_request)
+        print("The response of OAuthApi->exchange_permission_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OAuthApi->exchange_permission_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exchange_permission_token_request** | [**ExchangePermissionTokenRequest**](ExchangePermissionTokenRequest.md)| The request body for exchanging an Permission Access Token. | 
+
+### Return type
+
+[**ExchangePermissionToken201Response**](ExchangePermissionToken201Response.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Unauthorized. Please provide valid credentials. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_token**
 > GetToken2XXResponse get_token(client_id, org_id, grant_type)
@@ -78,6 +152,78 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **2XX** | The request was successful. |  -  |
+**4XX** | Unauthorized. Please provide valid credentials. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **refresh_permission_token**
+> ExchangePermissionToken201Response refresh_permission_token(refresh_permission_token_request)
+
+Refresh Permission Access Token by Permission Refresh Token
+
+<Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.exchange_permission_token201_response import ExchangePermissionToken201Response
+from cobo_waas2.models.refresh_permission_token_request import RefreshPermissionTokenRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.OAuthApi(api_client)
+    refresh_permission_token_request = cobo_waas2.RefreshPermissionTokenRequest()
+
+    try:
+        # Refresh Permission Access Token by Permission Refresh Token
+        api_response = api_instance.refresh_permission_token(refresh_permission_token_request)
+        print("The response of OAuthApi->refresh_permission_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OAuthApi->refresh_permission_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **refresh_permission_token_request** | [**RefreshPermissionTokenRequest**](RefreshPermissionTokenRequest.md)| The request body for refreshing an Permission Access Token. | 
+
+### Return type
+
+[**ExchangePermissionToken201Response**](ExchangePermissionToken201Response.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
 **4XX** | Unauthorized. Please provide valid credentials. |  -  |
 **5XX** | Internal server error. |  -  |
 
