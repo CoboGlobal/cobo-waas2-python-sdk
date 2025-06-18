@@ -25,6 +25,7 @@ class TransferDestinationType(str, Enum):
     allowed enum values
     """
     ADDRESS = 'Address'
+    CUSTODIALWALLET = 'CustodialWallet'
     EXCHANGEWALLET = 'ExchangeWallet'
 
     UNKNOWN = None

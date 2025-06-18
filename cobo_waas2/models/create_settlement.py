@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.payout_channel import PayoutChannel
 from cobo_waas2.models.settlement_type import SettlementType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +33,10 @@ class CreateSettlement(BaseModel):
     amount: Optional[StrictStr] = Field(default=None, description="The settlement amount. - If `token_id` is specified, this represents the settlement amount in the specified cryptocurrency. - If `token_id` is not specified, this represents the settlement amount in the specified fiat currency.")
     bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account where the settled funds will be deposited.")
     settlement_type: Optional[SettlementType] = None
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "amount", "bank_account_id", "settlement_type"]
+    crypto_address_id: Optional[StrictStr] = Field(default=None, description="The ID of the pre-approved crypto address used for Crypto settlements.  - This field is only applicable when `payout_channel` is set to `Crypto`. - If `payout_channel` is `OffRamp`, this field will be ignored. - The value must refer to a valid address that has been pre-configured and approved for the given token. ")
+    payout_channel: Optional[PayoutChannel] = None
+    order_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of unique order IDs to be included in this settlement.  - This field is only applicable when `settlement_type` is set to `Merchant`. - If provided, the settlement will only apply to the specified orders. - The settlement `amount` must exactly match the total eligible amount from these orders. - This ensures consistency between the declared amount and the actual order-level data being settled. ")
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "amount", "bank_account_id", "settlement_type", "crypto_address_id", "payout_channel", "order_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,7 +94,10 @@ class CreateSettlement(BaseModel):
             "currency": obj.get("currency") if obj.get("currency") is not None else 'USD',
             "amount": obj.get("amount"),
             "bank_account_id": obj.get("bank_account_id"),
-            "settlement_type": obj.get("settlement_type")
+            "settlement_type": obj.get("settlement_type"),
+            "crypto_address_id": obj.get("crypto_address_id"),
+            "payout_channel": obj.get("payout_channel"),
+            "order_ids": obj.get("order_ids")
         })
         return _obj
 

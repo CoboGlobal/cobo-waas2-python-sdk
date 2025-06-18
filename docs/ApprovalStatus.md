@@ -1,6 +1,6 @@
 # ApprovalStatus
 
-The approval status. Possible values include:    - `Pending`: The approval is pending.   - `Completed`: The approval is completed.    - `Failed`: The approval is failed.   - `Revoked`: The approval is revoked.  
+The approval status. Possible values include:    - `Pending`: The approval is pending.   - `Completed`: The approval is completed.    - `Failed`: The approval is rejected.   - `Revoked`: The approval is revoked.  
 
 ## Properties
 

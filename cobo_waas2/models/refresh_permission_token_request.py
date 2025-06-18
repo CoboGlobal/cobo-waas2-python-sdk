@@ -15,18 +15,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CreateBankAccountRequest(BaseModel):
+class RefreshPermissionTokenRequest(BaseModel):
     """
-    CreateBankAccountRequest
+    RefreshPermissionTokenRequest
     """  # noqa: E501
-    info: Dict[str, Any] = Field(description="JSON-formatted bank account details. The object should include the following fields: - beneficiary_name: Name of the account holder - beneficiary_address: Address of the account holder - account_number: Bank account number - bank_name: Name of the bank - bank_address: Address of the bank - iban: (Optional) International Bank Account Number - swift_or_bic: SWIFT or BIC code of the bank ")
-    __properties: ClassVar[List[str]] = ["info"]
+    refresh_token: StrictStr = Field(description="The Refresh Token of the current Org Access Token.")
+    __properties: ClassVar[List[str]] = ["refresh_token"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -46,7 +46,7 @@ class CreateBankAccountRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateBankAccountRequest from a JSON string"""
+        """Create an instance of RefreshPermissionTokenRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,7 +71,7 @@ class CreateBankAccountRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateBankAccountRequest from a dict"""
+        """Create an instance of RefreshPermissionTokenRequest from a dict"""
         if obj is None:
             return None
 
@@ -79,7 +79,7 @@ class CreateBankAccountRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "info": obj.get("info")
+            "refresh_token": obj.get("refresh_token")
         })
         return _obj
 

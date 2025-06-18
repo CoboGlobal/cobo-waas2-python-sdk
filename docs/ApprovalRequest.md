@@ -1,13 +1,13 @@
 # ApprovalRequest
 
-The information of an app workflow approval.
+The information of an approval request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**approval_id** | **str** |  | 
-**request_id** | **str** |  | 
+**approval_id** | **str** | The system-generated unique ID of the approval request. | 
+**request_id** | **str** | An identifier provided by you when requesting the approval. | 
 **fields** | [**List[AppWorkflowField]**](AppWorkflowField.md) |  | 
 **status** | [**ApprovalStatus**](ApprovalStatus.md) |  | 
 **initiated_timestamp** | **int** | The time when the approval was initiated, in Unix timestamp format, measured in milliseconds. | 

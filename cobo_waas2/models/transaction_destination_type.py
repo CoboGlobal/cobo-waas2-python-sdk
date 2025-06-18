@@ -25,6 +25,7 @@ class TransactionDestinationType(str, Enum):
     allowed enum values
     """
     ADDRESS = 'Address'
+    CUSTODIALWALLET = 'CustodialWallet'
     EXCHANGEWALLET = 'ExchangeWallet'
     EVM_CONTRACT = 'EVM_Contract'
     SOL_CONTRACT = 'SOL_Contract'

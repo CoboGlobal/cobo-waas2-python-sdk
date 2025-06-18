@@ -19,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.payment_transaction import PaymentTransaction
+from cobo_waas2.models.payout_channel import PayoutChannel
 from cobo_waas2.models.settle_status import SettleStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -40,7 +41,8 @@ class SettlementDetail(BaseModel):
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the settlement, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement, represented as a UNIX timestamp in seconds.")
     crypto_address_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the pre-approved crypto address, used to reference the address securely in requests.")
-    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "merchant_id", "amount", "settled_amount", "status", "bank_account", "transactions", "created_timestamp", "updated_timestamp", "crypto_address_id"]
+    payout_channel: Optional[PayoutChannel] = None
+    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "merchant_id", "amount", "settled_amount", "status", "bank_account", "transactions", "created_timestamp", "updated_timestamp", "crypto_address_id", "payout_channel"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,7 +116,8 @@ class SettlementDetail(BaseModel):
             "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
-            "crypto_address_id": obj.get("crypto_address_id")
+            "crypto_address_id": obj.get("crypto_address_id"),
+            "payout_channel": obj.get("payout_channel")
         })
         return _obj
 

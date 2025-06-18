@@ -29,8 +29,8 @@ class Order(BaseModel):
     """  # noqa: E501
     order_id: StrictStr = Field(description="The order ID.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment.")
-    chain_id: StrictStr = Field(description="The ID of the blockchain network where the payment transaction should be made.")
+    token_id: StrictStr = Field(description=" The ID of the cryptocurrency used for payment. Supported tokens:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    chain_id: StrictStr = Field(description=" The ID of the blockchain network where the payment transaction should be made. Supported chains:  - USDC: `ETH`, `ARBITRUM`, `SOL`, `BASE`, `MATIC`, `BSC` - USDT: `TRON`, `ETH`, `ARBITRUM`, `SOL`, `BASE`, `MATIC`, `BSC` ")
     payable_amount: StrictStr = Field(description="The cryptocurrency amount to be paid for this order.")
     receive_address: StrictStr = Field(description="The recipient wallet address to be used for the payment transaction.")
     currency: StrictStr = Field(description="The fiat currency of the order.")

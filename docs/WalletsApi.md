@@ -39,7 +39,7 @@ Method | HTTP request | Description
 
 Batch check UTXOs
 
-The operation check a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets. This interface can only withdraw a maximum of 100 utxos</Note> 
+This operation verifies the existence and details of specified unspent transaction outputs (UTXOs) for a given wallet and token. A maximum of 100 UTXOs can be verified per request. <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
 ### Example
 
@@ -84,7 +84,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **wallet_id** | **str**| The wallet ID. | 
- **batch_check_utxo_request** | [**BatchCheckUtxoRequest**](BatchCheckUtxoRequest.md)| The request body of the batch check UTXOs operation. | [optional] 
+ **batch_check_utxo_request** | [**BatchCheckUtxoRequest**](BatchCheckUtxoRequest.md)| The request body of the Batch check UTXOs operation. | [optional] 
 
 ### Return type
 
@@ -1729,7 +1729,7 @@ Name | Type | Description  | Notes
 
 List UTXOs
 
-The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets.</Note> 
+The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
 ### Example
 

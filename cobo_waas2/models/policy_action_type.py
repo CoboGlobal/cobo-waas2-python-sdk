@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class PolicyActionType(str, Enum):
     """
-    The app policy action type. Possible values include:    - `Reject`: The action is reject.   - `Accept`: The action is accept.    - `Quorum`: The action is multiple people approval. 
+    The approval action type. Possible values include:    - `Reject`: The action rejects the request.   - `Accept`: The action approves the request.   - `Quorum`: The action requires approval from multiple participants. 
     """
 
     """

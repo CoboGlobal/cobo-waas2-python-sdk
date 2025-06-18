@@ -219,6 +219,11 @@ class TransactionDestination(BaseModel):
             instance.actual_instance = TransactionCosmosContractDestination.from_json(json_str)
             return instance
 
+        # check if data type is `TransactionTransferToWalletDestination`
+        if _data_type == "CustodialWallet":
+            instance.actual_instance = TransactionTransferToWalletDestination.from_json(json_str)
+            return instance
+
         # check if data type is `TransactionDepositToAddressDestination`
         if _data_type == "DepositToAddress":
             instance.actual_instance = TransactionDepositToAddressDestination.from_json(json_str)

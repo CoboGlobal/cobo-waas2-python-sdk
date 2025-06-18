@@ -57,7 +57,7 @@ class TestAppWorkflowsApi(unittest.TestCase):
         """
         Test case for list_app_workflows
 
-        list app workflows
+        List app workflows
         """
         """
 

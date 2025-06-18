@@ -71,7 +71,7 @@ class WalletsApi:
     def batch_check_utxo(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        batch_check_utxo_request: Annotated[Optional[BatchCheckUtxoRequest], Field(description="The request body of the batch check UTXOs operation.")] = None,
+        batch_check_utxo_request: Annotated[Optional[BatchCheckUtxoRequest], Field(description="The request body of the Batch check UTXOs operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -83,11 +83,11 @@ class WalletsApi:
     ) -> BatchCheckUtxo201Response:
         """Batch check UTXOs
 
-        The operation check a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets. This interface can only withdraw a maximum of 100 utxos</Note> 
+        This operation verifies the existence and details of specified unspent transaction outputs (UTXOs) for a given wallet and token. A maximum of 100 UTXOs can be verified per request. <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
-        :param batch_check_utxo_request: The request body of the batch check UTXOs operation.
+        :param batch_check_utxo_request: The request body of the Batch check UTXOs operation.
         :type batch_check_utxo_request: BatchCheckUtxoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -121,7 +121,7 @@ class WalletsApi:
     def batch_check_utxo_with_http_info(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        batch_check_utxo_request: Annotated[Optional[BatchCheckUtxoRequest], Field(description="The request body of the batch check UTXOs operation.")] = None,
+        batch_check_utxo_request: Annotated[Optional[BatchCheckUtxoRequest], Field(description="The request body of the Batch check UTXOs operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -133,11 +133,11 @@ class WalletsApi:
     ) -> ApiResponse[BatchCheckUtxo201Response]:
         """Batch check UTXOs
 
-        The operation check a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets. This interface can only withdraw a maximum of 100 utxos</Note> 
+        This operation verifies the existence and details of specified unspent transaction outputs (UTXOs) for a given wallet and token. A maximum of 100 UTXOs can be verified per request. <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
-        :param batch_check_utxo_request: The request body of the batch check UTXOs operation.
+        :param batch_check_utxo_request: The request body of the Batch check UTXOs operation.
         :type batch_check_utxo_request: BatchCheckUtxoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -171,7 +171,7 @@ class WalletsApi:
     def batch_check_utxo_without_preload_content(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
-        batch_check_utxo_request: Annotated[Optional[BatchCheckUtxoRequest], Field(description="The request body of the batch check UTXOs operation.")] = None,
+        batch_check_utxo_request: Annotated[Optional[BatchCheckUtxoRequest], Field(description="The request body of the Batch check UTXOs operation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -183,11 +183,11 @@ class WalletsApi:
     ) -> RESTResponseType:
         """Batch check UTXOs
 
-        The operation check a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets. This interface can only withdraw a maximum of 100 utxos</Note> 
+        This operation verifies the existence and details of specified unspent transaction outputs (UTXOs) for a given wallet and token. A maximum of 100 UTXOs can be verified per request. <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
-        :param batch_check_utxo_request: The request body of the batch check UTXOs operation.
+        :param batch_check_utxo_request: The request body of the Batch check UTXOs operation.
         :type batch_check_utxo_request: BatchCheckUtxoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4681,7 +4681,7 @@ class WalletsApi:
     ) -> ListUtxos200Response:
         """List UTXOs
 
-        The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets.</Note> 
+        The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -4751,7 +4751,7 @@ class WalletsApi:
     ) -> ApiResponse[ListUtxos200Response]:
         """List UTXOs
 
-        The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets.</Note> 
+        The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -4821,7 +4821,7 @@ class WalletsApi:
     ) -> RESTResponseType:
         """List UTXOs
 
-        The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC and Custodial Web3 Wallets.</Note> 
+        The operation retrieves a list of unspent transaction outputs (UTXOs) for a specified wallet and token.  <Note>This operation is applicable to MPC Wallets and Custodial Wallets (Web3 Wallets) only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
