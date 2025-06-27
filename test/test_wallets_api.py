@@ -158,6 +158,19 @@ class TestWalletsApi(unittest.TestCase):
         api_response = self.api.get_max_transferable_value(wallet_id, token_id, fee_rate, to_address, from_address=from_address)
         """
 
+    def test_get_max_transferable_value_with_fee_model(self) -> None:
+        """
+        Test case for get_max_transferable_value_with_fee_model
+
+        Get maximum transferable value with fee model
+        """
+        """
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        get_max_transferable_value_with_fee_model_request = cobo_waas2.GetMaxTransferableValueWithFeeModelRequest()
+
+        api_response = self.api.get_max_transferable_value_with_fee_model(wallet_id, get_max_transferable_value_with_fee_model_request=get_max_transferable_value_with_fee_model_request)
+        """
+
     def test_get_token_by_id(self) -> None:
         """
         Test case for get_token_by_id
@@ -254,11 +267,12 @@ class TestWalletsApi(unittest.TestCase):
         wallet_type = cobo_waas2.WalletType()
         wallet_subtype = cobo_waas2.WalletSubtype()
         chain_ids = 'BTC,ETH'
+        token_ids = 'ETH_USDT,ETH_USDC'
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
-        api_response = self.api.list_enabled_tokens(wallet_type=wallet_type, wallet_subtype=wallet_subtype, chain_ids=chain_ids, limit=limit, before=before, after=after)
+        api_response = self.api.list_enabled_tokens(wallet_type=wallet_type, wallet_subtype=wallet_subtype, chain_ids=chain_ids, token_ids=token_ids, limit=limit, before=before, after=after)
         """
 
     def test_list_supported_chains(self) -> None:

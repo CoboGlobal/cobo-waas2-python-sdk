@@ -53,7 +53,8 @@ class TestCreateSwapActivityRequest(unittest.TestCase):
                     change_address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sDEMO', 
                     change_output_type = 'First', 
                     force_internal = False, 
-                    force_external = False, )
+                    force_external = False, ),
+                fee = None
             )
         else:
             return CreateSwapActivityRequest(

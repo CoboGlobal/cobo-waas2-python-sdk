@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.acquiring_type import AcquiringType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,9 +33,10 @@ class SettlementInfo(BaseModel):
     pending_amount: Optional[StrictStr] = Field(default=None, description="The amount unavailable for settlement or refund, in the specified cryptocurrency.")
     pending_currency_balance: Optional[StrictStr] = Field(default=None, description="The amount unavailable for settlement or refund, in the specified fiat currency.")
     settled_amount: Optional[StrictStr] = Field(default=None, description="The amount already settled, in the specified cryptocurrency.")
+    acquiring_type: Optional[AcquiringType] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the settlement, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "available_amount", "available_currency_balance", "pending_amount", "pending_currency_balance", "settled_amount", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "available_amount", "available_currency_balance", "pending_amount", "pending_currency_balance", "settled_amount", "acquiring_type", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +96,7 @@ class SettlementInfo(BaseModel):
             "pending_amount": obj.get("pending_amount"),
             "pending_currency_balance": obj.get("pending_currency_balance"),
             "settled_amount": obj.get("settled_amount"),
+            "acquiring_type": obj.get("acquiring_type"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

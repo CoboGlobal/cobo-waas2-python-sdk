@@ -39,6 +39,7 @@ class TestListMerchants200Response(unittest.TestCase):
                         merchant_id = '1', 
                         name = 'Merchant-1', 
                         wallet_id = '123e4567-e89b-12d3-a456-426614174001', 
+                        developer_fee_rate = '0.01', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )
                     ],

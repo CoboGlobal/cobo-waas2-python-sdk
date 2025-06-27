@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **created_timestamp** | **int** | The created time of the order, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The updated time of the order, represented as a UNIX timestamp in seconds. | [optional] 
 **transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the settlement process. | [optional] 
+**settlement_status** | [**SettleStatus**](SettleStatus.md) |  | [optional] 
 
 ## Example
 

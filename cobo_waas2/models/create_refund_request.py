@@ -29,7 +29,7 @@ class CreateRefundRequest(BaseModel):
     request_id: StrictStr = Field(description="The request ID that is used to track a refund request. The request ID is provided by you and must be unique.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
     payable_amount: StrictStr = Field(description="The amount to refund in cryptocurrency.")
-    to_address: StrictStr = Field(description="The address where the refunded cryptocurrency will be sent.")
+    to_address: Optional[StrictStr] = Field(default=None, description="The address where the refunded cryptocurrency will be sent.")
     token_id: StrictStr = Field(description="The ID of the cryptocurrency used for refund. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
     refund_type: RefundType
     order_id: Optional[StrictStr] = Field(default=None, description="The ID of the original pay-in order associated with this refund. Use this to track refunds against specific payments.")

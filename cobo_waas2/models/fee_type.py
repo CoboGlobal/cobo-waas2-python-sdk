@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class FeeType(str, Enum):
     """
-    The fee model. Possible values include: - `Fixed`: The fixed fee model.  - `EVM_EIP_1559`: The EIP-1559 fee model. - `EVM_Legacy`: The legacy fee model. - `UTXO`: The fee model used in UTXO-based blockchains, such as Bitcoin.  Each fee model requires a different set of properties. Switch between the above tabs for details.  To learn more about the fee models, refer to [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models). 
+    The fee model. Possible values include: - `Fixed`: The fixed fee model.  - `EVM_EIP_1559`: The EIP-1559 fee model. - `EVM_Legacy`: The legacy fee model. - `UTXO`: The fee model used in UTXO-based blockchains, such as Bitcoin. - `SOL`: The fee model used in Solana. - `FIL`: The fee model used in Filecoin.   Each fee model requires a different set of properties. Switch between the above tabs for details.  To learn more about the fee models, refer to [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models). 
     """
 
     """
@@ -28,6 +28,8 @@ class FeeType(str, Enum):
     EVM_EIP_1559 = 'EVM_EIP_1559'
     EVM_LEGACY = 'EVM_Legacy'
     UTXO = 'UTXO'
+    SOL = 'SOL'
+    FIL = 'FIL'
 
     UNKNOWN = None
 

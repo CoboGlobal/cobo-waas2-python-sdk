@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **updated_timestamp** | **int** | The updated time of the settlement, represented as a UNIX timestamp in seconds. | [optional] 
 **crypto_address_id** | **str** | Unique identifier for the pre-approved crypto address, used to reference the address securely in requests. | [optional] 
 **payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | [optional] 
+**acquiring_type** | [**AcquiringType**](AcquiringType.md) |  | [optional] 
 
 ## Example
 

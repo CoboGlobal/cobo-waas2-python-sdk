@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.address_transfer_destination import AddressTransferDestination
+from cobo_waas2.models.estimated_fee import EstimatedFee
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +33,8 @@ class CreateSwapActivityRequest(BaseModel):
     app_initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the app activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request id of the swap activity.")
     destination: Optional[AddressTransferDestination] = None
-    __properties: ClassVar[List[str]] = ["wallet_id", "address", "quote_id", "app_initiator", "request_id", "destination"]
+    fee: Optional[EstimatedFee] = None
+    __properties: ClassVar[List[str]] = ["wallet_id", "address", "quote_id", "app_initiator", "request_id", "destination", "fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +78,9 @@ class CreateSwapActivityRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of destination
         if self.destination:
             _dict['destination'] = self.destination.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fee
+        if self.fee:
+            _dict['fee'] = self.fee.to_dict()
         return _dict
 
     @classmethod
@@ -93,7 +98,8 @@ class CreateSwapActivityRequest(BaseModel):
             "quote_id": obj.get("quote_id"),
             "app_initiator": obj.get("app_initiator"),
             "request_id": obj.get("request_id"),
-            "destination": AddressTransferDestination.from_dict(obj["destination"]) if obj.get("destination") is not None else None
+            "destination": AddressTransferDestination.from_dict(obj["destination"]) if obj.get("destination") is not None else None,
+            "fee": EstimatedFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None
         })
         return _obj
 

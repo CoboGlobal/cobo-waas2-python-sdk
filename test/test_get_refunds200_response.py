@@ -60,7 +60,10 @@ class TestGetRefunds200Response(unittest.TestCase):
                                 status = 'Submitted', 
                                 created_timestamp = 1610445878970, 
                                 updated_timestamp = 1610445878970, )
-                            ], )
+                            ], 
+                        charge_merchant_fee = False, 
+                        merchant_fee_amount = '0.0001', 
+                        merchant_fee_token_id = 'ETH_USDT', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

@@ -34,7 +34,8 @@ class TestUpdateMerchantByIdRequest(unittest.TestCase):
         model = UpdateMerchantByIdRequest()
         if include_optional:
             return UpdateMerchantByIdRequest(
-                name = 'Merchant B'
+                name = 'Merchant B',
+                developer_fee_rate = '0.1'
             )
         else:
             return UpdateMerchantByIdRequest(

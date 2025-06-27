@@ -17,8 +17,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.payout_channel import PayoutChannel
-from cobo_waas2.models.settlement_type import SettlementType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,16 +25,14 @@ class CreateSettlement(BaseModel):
     """
     CreateSettlement
     """  # noqa: E501
-    merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
-    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency you want to settle. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    currency: Optional[StrictStr] = Field(default='USD', description="The fiat currency for settling the cryptocurrency. Currently, only `USD` is supported.")
-    amount: Optional[StrictStr] = Field(default=None, description="The settlement amount. - If `token_id` is specified, this represents the settlement amount in the specified cryptocurrency. - If `token_id` is not specified, this represents the settlement amount in the specified fiat currency.")
-    bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account where the settled funds will be deposited.")
-    settlement_type: Optional[SettlementType] = None
-    crypto_address_id: Optional[StrictStr] = Field(default=None, description="The ID of the pre-approved crypto address used for Crypto settlements.  - This field is only applicable when `payout_channel` is set to `Crypto`. - If `payout_channel` is `OffRamp`, this field will be ignored. - The value must refer to a valid address that has been pre-configured and approved for the given token. ")
-    payout_channel: Optional[PayoutChannel] = None
+    merchant_id: Optional[StrictStr] = Field(default=None, description="Only used in Merchant settlement type. The merchant ID. ")
+    token_id: Optional[StrictStr] = Field(default=None, description="Only used in Crypto payout channel. The ID of the cryptocurrency you want to settle. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    currency: Optional[StrictStr] = Field(default=None, description="Only used in OffRamp payout channel. The fiat currency for settling the cryptocurrency. Currently, only `USD` is supported. ")
+    amount: Optional[StrictStr] = Field(default=None, description="The settlement amount. - In Crypto payout channel, this represents the settlement amount in the specified cryptocurrency. - In OffRamp payout channel, this represents the settlement amount in the specified fiat currency. ")
+    bank_account_id: Optional[StrictStr] = Field(default=None, description="｜ Only used in OffRamp payout channel. The ID of the bank account where the settled funds will be deposited.")
+    crypto_address_id: Optional[StrictStr] = Field(default=None, description="Only used in Crypto payout channel. The ID of the pre-approved crypto address used for Crypto settlements. - The value must refer to a valid address that has been pre-configured and approved for the given token. ")
     order_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of unique order IDs to be included in this settlement.  - This field is only applicable when `settlement_type` is set to `Merchant`. - If provided, the settlement will only apply to the specified orders. - The settlement `amount` must exactly match the total eligible amount from these orders. - This ensures consistency between the declared amount and the actual order-level data being settled. ")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "amount", "bank_account_id", "settlement_type", "crypto_address_id", "payout_channel", "order_ids"]
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "amount", "bank_account_id", "crypto_address_id", "order_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,12 +87,10 @@ class CreateSettlement(BaseModel):
         _obj = cls.model_validate({
             "merchant_id": obj.get("merchant_id"),
             "token_id": obj.get("token_id"),
-            "currency": obj.get("currency") if obj.get("currency") is not None else 'USD',
+            "currency": obj.get("currency"),
             "amount": obj.get("amount"),
             "bank_account_id": obj.get("bank_account_id"),
-            "settlement_type": obj.get("settlement_type"),
             "crypto_address_id": obj.get("crypto_address_id"),
-            "payout_channel": obj.get("payout_channel"),
             "order_ids": obj.get("order_ids")
         })
         return _obj

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**chain_id** | **str** | The ID of the chain on which the smart contract is deployed. | [optional] 
+**chain_id** | **str** | The ID of the chain on which the smart contract is issued. | [optional] 
 **address** | **str** | The address of the smart contract. | [optional] 
 **name** | **str** | The name of the smart contract. | [optional] 
 **impl_address** | **str** | The address of the implementation smart contract. This property is applicable only when the specified smart contract is a proxy contract. | [optional] 

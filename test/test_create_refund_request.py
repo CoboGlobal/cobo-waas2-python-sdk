@@ -49,7 +49,6 @@ class TestCreateRefundRequest(unittest.TestCase):
             return CreateRefundRequest(
                 request_id = '123e4567-e89b-12d3-a456-426614174004',
                 payable_amount = '0.0025',
-                to_address = '0x9876543210abcdef1234567890abcdef12345678',
                 token_id = 'ETH_USDT',
                 refund_type = 'Merchant',
         )
