@@ -35,7 +35,7 @@ class TestEstimatedFee(unittest.TestCase):
         if include_optional:
             return EstimatedFee(
                 fee_type = 'EVM_EIP_1559',
-                token_id = 'BTC',
+                token_id = 'ETH',
                 is_loop = False,
                 fee_amount = '0.1',
                 slow = None,
@@ -45,7 +45,7 @@ class TestEstimatedFee(unittest.TestCase):
         else:
             return EstimatedFee(
                 fee_type = 'EVM_EIP_1559',
-                token_id = 'BTC',
+                token_id = 'ETH',
                 fee_amount = '0.1',
                 recommended = None,
         )

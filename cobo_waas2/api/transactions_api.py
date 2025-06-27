@@ -23,7 +23,9 @@ from cobo_waas2.models.contract_call_params import ContractCallParams
 from cobo_waas2.models.create_transfer_transaction201_response import CreateTransferTransaction201Response
 from cobo_waas2.models.estimate_fee_params import EstimateFeeParams
 from cobo_waas2.models.estimated_fee import EstimatedFee
+from cobo_waas2.models.list_approval_details200_response import ListApprovalDetails200Response
 from cobo_waas2.models.list_transaction_approval_details200_response import ListTransactionApprovalDetails200Response
+from cobo_waas2.models.list_transaction_templates200_response import ListTransactionTemplates200Response
 from cobo_waas2.models.list_transactions200_response import ListTransactions200Response
 from cobo_waas2.models.message_sign_params import MessageSignParams
 from cobo_waas2.models.transaction_approval_detail import TransactionApprovalDetail
@@ -1793,6 +1795,211 @@ class TransactionsApi:
         )
 
     @validate_call
+    def list_approval_details(
+        self,
+        transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
+        cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListApprovalDetails200Response:
+        """List transaction approval details
+
+        This operation retrieves detailed approval information for a specified transaction. 
+
+        :param transaction_ids: A list of transaction IDs, separated by comma.
+        :type transaction_ids: str
+        :param cobo_ids: A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.
+        :type cobo_ids: str
+        :param request_id: A list of request IDs, separated by comma.
+        :type request_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_approval_details_serialize(
+            transaction_ids=transaction_ids,
+            cobo_ids=cobo_ids,
+            request_id=request_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListApprovalDetails200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_approval_details_with_http_info(
+        self,
+        transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
+        cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListApprovalDetails200Response]:
+        """List transaction approval details
+
+        This operation retrieves detailed approval information for a specified transaction. 
+
+        :param transaction_ids: A list of transaction IDs, separated by comma.
+        :type transaction_ids: str
+        :param cobo_ids: A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.
+        :type cobo_ids: str
+        :param request_id: A list of request IDs, separated by comma.
+        :type request_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_approval_details_serialize(
+            transaction_ids=transaction_ids,
+            cobo_ids=cobo_ids,
+            request_id=request_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListApprovalDetails200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_approval_details_without_preload_content(
+        self,
+        transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
+        cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List transaction approval details
+
+        This operation retrieves detailed approval information for a specified transaction. 
+
+        :param transaction_ids: A list of transaction IDs, separated by comma.
+        :type transaction_ids: str
+        :param cobo_ids: A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.
+        :type cobo_ids: str
+        :param request_id: A list of request IDs, separated by comma.
+        :type request_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_approval_details_serialize(
+            transaction_ids=transaction_ids,
+            cobo_ids=cobo_ids,
+            request_id=request_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListApprovalDetails200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_approval_details_serialize(
+        self,
+        transaction_ids,
+        cobo_ids,
+        request_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if transaction_ids is not None:
+            
+            _query_params.append(('transaction_ids', transaction_ids))
+            
+        if cobo_ids is not None:
+            
+            _query_params.append(('cobo_ids', cobo_ids))
+            
+        if request_id is not None:
+            
+            _query_params.append(('request_id', request_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/transactions/approval/details',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_transaction_approval_details(
         self,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
@@ -1972,6 +2179,194 @@ class TransactionsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/transactions/approval_details',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_transaction_templates(
+        self,
+        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListTransactionTemplates200Response:
+        """list transaction templates
+
+        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
+
+        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
+        :type transaction_type: str
+        :param template_version: The version of the template used for the transaction approval.
+        :type template_version: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_transaction_templates_serialize(
+            transaction_type=transaction_type,
+            template_version=template_version,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListTransactionTemplates200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_transaction_templates_with_http_info(
+        self,
+        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListTransactionTemplates200Response]:
+        """list transaction templates
+
+        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
+
+        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
+        :type transaction_type: str
+        :param template_version: The version of the template used for the transaction approval.
+        :type template_version: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_transaction_templates_serialize(
+            transaction_type=transaction_type,
+            template_version=template_version,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListTransactionTemplates200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_transaction_templates_without_preload_content(
+        self,
+        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """list transaction templates
+
+        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
+
+        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
+        :type transaction_type: str
+        :param template_version: The version of the template used for the transaction approval.
+        :type template_version: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_transaction_templates_serialize(
+            transaction_type=transaction_type,
+            template_version=template_version,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListTransactionTemplates200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_transaction_templates_serialize(
+        self,
+        transaction_type,
+        template_version,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if transaction_type is not None:
+            
+            _query_params.append(('transaction_type', transaction_type))
+            
+        if template_version is not None:
+            
+            _query_params.append(('template_version', template_version))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/transactions/templates',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

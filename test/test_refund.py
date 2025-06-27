@@ -58,7 +58,10 @@ class TestRefund(unittest.TestCase):
                         status = 'Submitted', 
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
-                    ]
+                    ],
+                charge_merchant_fee = False,
+                merchant_fee_amount = '0.0001',
+                merchant_fee_token_id = 'ETH_USDT'
             )
         else:
             return Refund(

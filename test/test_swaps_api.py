@@ -85,7 +85,7 @@ class TestSwapsApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         sort_by = ''
-        direction = ''
+        direction = 'ASC'
 
         api_response = self.api.list_swap_activities(type=type, status=status, min_updated_timestamp=min_updated_timestamp, max_updated_timestamp=max_updated_timestamp, initiator=initiator, limit=limit, before=before, after=after, sort_by=sort_by, direction=direction)
         """

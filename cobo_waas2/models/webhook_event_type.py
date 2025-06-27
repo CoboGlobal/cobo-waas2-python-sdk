@@ -43,6 +43,8 @@ class WebhookEventType(str, Enum):
     FEE_STATION_DOT_TRANSACTION_DOT_SUCCEEDED = 'fee_station.transaction.succeeded'
     WALLET_DOT_TOKEN_DOT_ENABLED = 'wallet.token.enabled'
     WALLET_DOT_CHAIN_DOT_ENABLED = 'wallet.chain.enabled'
+    WALLET_DOT_MPC_DOT_BALANCE_DOT_UPDATED = 'wallet.mpc.balance.updated'
+    WALLET_DOT_WEB3_DOT_BALANCE_DOT_UPDATED = 'wallet.web3.balance.updated'
 
     UNKNOWN = None
 

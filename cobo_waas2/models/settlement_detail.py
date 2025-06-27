@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.payment_transaction import PaymentTransaction
 from cobo_waas2.models.payout_channel import PayoutChannel
@@ -42,7 +43,8 @@ class SettlementDetail(BaseModel):
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement, represented as a UNIX timestamp in seconds.")
     crypto_address_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the pre-approved crypto address, used to reference the address securely in requests.")
     payout_channel: Optional[PayoutChannel] = None
-    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "merchant_id", "amount", "settled_amount", "status", "bank_account", "transactions", "created_timestamp", "updated_timestamp", "crypto_address_id", "payout_channel"]
+    acquiring_type: Optional[AcquiringType] = None
+    __properties: ClassVar[List[str]] = ["currency", "token_id", "chain_id", "merchant_id", "amount", "settled_amount", "status", "bank_account", "transactions", "created_timestamp", "updated_timestamp", "crypto_address_id", "payout_channel", "acquiring_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -117,7 +119,8 @@ class SettlementDetail(BaseModel):
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "crypto_address_id": obj.get("crypto_address_id"),
-            "payout_channel": obj.get("payout_channel")
+            "payout_channel": obj.get("payout_channel"),
+            "acquiring_type": obj.get("acquiring_type")
         })
         return _obj
 

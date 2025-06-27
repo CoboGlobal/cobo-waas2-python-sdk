@@ -35,21 +35,29 @@ class TestTransactionRequestFee(unittest.TestCase):
         if include_optional:
             return TransactionRequestFee(
                 fee_type = 'EVM_EIP_1559',
-                token_id = 'BTC',
+                token_id = 'ETH',
                 max_fee_amount = '0.1',
-                gas_limit = '21000',
+                gas_limit = '500',
                 max_fee_per_gas = '9000000000000',
                 max_priority_fee_per_gas = '1000000000000',
                 gas_price = '100000000',
-                fee_rate = '50'
+                fee_rate = '50',
+                compute_unit_price = '0.0001',
+                compute_unit_limit = '200000',
+                gas_premium = '0.0001',
+                gas_fee_cap = '0.00035'
             )
         else:
             return TransactionRequestFee(
                 fee_type = 'EVM_EIP_1559',
-                token_id = 'BTC',
+                token_id = 'ETH',
                 max_fee_per_gas = '9000000000000',
                 max_priority_fee_per_gas = '1000000000000',
                 gas_price = '100000000',
+                compute_unit_price = '0.0001',
+                compute_unit_limit = '200000',
+                gas_premium = '0.0001',
+                gas_fee_cap = '0.00035',
         )
         """
 

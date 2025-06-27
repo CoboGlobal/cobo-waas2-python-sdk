@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.payment_transaction import PaymentTransaction
 from cobo_waas2.models.refund_status import RefundStatus
@@ -42,7 +42,10 @@ class Refund(BaseModel):
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the refund order, represented as a UNIX timestamp in seconds.")
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this refund order, usually the user's API key.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process.")
-    __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions"]
+    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Indicates whether the merchant should bear the transaction fee for the refund.  If true, the fee will be deducted from merchant's account balance. ")
+    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of the transaction fee that the merchant will bear for the refund.  This is only applicable if `charge_merchant_fee` is set to true. ")
+    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the transaction fee.  This is only applicable if `charge_merchant_fee` is set to true. ")
+    __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -115,7 +118,10 @@ class Refund(BaseModel):
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "initiator": obj.get("initiator"),
-            "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None
+            "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
+            "charge_merchant_fee": obj.get("charge_merchant_fee"),
+            "merchant_fee_amount": obj.get("merchant_fee_amount"),
+            "merchant_fee_token_id": obj.get("merchant_fee_token_id")
         })
         return _obj
 

@@ -152,6 +152,20 @@ class TestTransactionsApi(unittest.TestCase):
         api_response = self.api.get_transaction_by_id(transaction_id)
         """
 
+    def test_list_approval_details(self) -> None:
+        """
+        Test case for list_approval_details
+
+        List transaction approval details
+        """
+        """
+        transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
+        cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
+        request_id = 'web_send_by_user_327_1610444045047,web_send_by_user_327_1610444045048'
+
+        api_response = self.api.list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_id=request_id)
+        """
+
     def test_list_transaction_approval_details(self) -> None:
         """
         Test case for list_transaction_approval_details
@@ -163,6 +177,19 @@ class TestTransactionsApi(unittest.TestCase):
         cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
 
         api_response = self.api.list_transaction_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids)
+        """
+
+    def test_list_transaction_templates(self) -> None:
+        """
+        Test case for list_transaction_templates
+
+        list transaction templates
+        """
+        """
+        transaction_type = 'DEPOSIT'
+        template_version = '1.0.0'
+
+        api_response = self.api.list_transaction_templates(transaction_type, template_version=template_version)
         """
 
     def test_list_transactions(self) -> None:
@@ -191,7 +218,7 @@ class TestTransactionsApi(unittest.TestCase):
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-        direction = ''
+        direction = 'ASC'
 
         api_response = self.api.list_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, wallet_ids=wallet_ids, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, vault_id=vault_id, wallet_type=wallet_type, wallet_subtype=wallet_subtype, project_id=project_id, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         """

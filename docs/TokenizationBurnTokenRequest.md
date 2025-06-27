@@ -1,0 +1,32 @@
+# TokenizationBurnTokenRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**source** | [**TokenizationTokenOperationSource**](TokenizationTokenOperationSource.md) |  | 
+**burns** | [**List[TokenizationBurnTokenParamsBurnsInner]**](TokenizationBurnTokenParamsBurnsInner.md) | Details for each token burn, including amount and address to burn from. | 
+**app_initiator** | **str** | The initiator of the tokenization activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator. | [optional] 
+**fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | 
+
+## Example
+
+```python
+from cobo_waas2.models.tokenization_burn_token_request import TokenizationBurnTokenRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TokenizationBurnTokenRequest from a JSON string
+tokenization_burn_token_request_instance = TokenizationBurnTokenRequest.from_json(json)
+# print the JSON string representation of the object
+print(TokenizationBurnTokenRequest.to_json())
+
+# convert the object into a dict
+tokenization_burn_token_request_dict = tokenization_burn_token_request_instance.to_dict()
+# create an instance of TokenizationBurnTokenRequest from a dict
+tokenization_burn_token_request_from_dict = TokenizationBurnTokenRequest.from_dict(tokenization_burn_token_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
