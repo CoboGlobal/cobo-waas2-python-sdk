@@ -28,14 +28,14 @@ class CreateRefundRequest(BaseModel):
     """  # noqa: E501
     request_id: StrictStr = Field(description="The request ID that is used to track a refund request. The request ID is provided by you and must be unique.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
-    payable_amount: StrictStr = Field(description="The amount to refund in cryptocurrency.")
-    to_address: StrictStr = Field(description="The address where the refunded cryptocurrency will be sent.")
+    payable_amount: StrictStr = Field(description="The amount to refund in cryptocurrency. The amount must be a positive integer with up to two decimal places.")
+    to_address: Optional[StrictStr] = Field(default=None, description="The address where the refunded cryptocurrency will be sent.")
     token_id: StrictStr = Field(description="The ID of the cryptocurrency used for refund. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
     refund_type: RefundType
     order_id: Optional[StrictStr] = Field(default=None, description="The ID of the original pay-in order associated with this refund. Use this to track refunds against specific payments.")
-    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Indicates whether the merchant should bear the transaction fee for the refund.  If true, the fee will be deducted from merchant's account balance. ")
-    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of the transaction fee that the merchant will bear for the refund.  This is only applicable if `charge_merchant_fee` is set to true. ")
-    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the transaction fee.  This is only applicable if `charge_merchant_fee` is set to true. ")
+    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Whether to charge developer fee to the merchant.     - `true`: The fee amount (specified in `merchant_fee_amount`) will be deducted from the merchant's balance and added to the developer's balance    - `false`: The merchant is not charged any developer fee  When enabled, ensure both `merchant_fee_amount` and `merchant_fee_token_id` are properly specified. ")
+    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by `merchant_fee_token_id`. Required when `charge_merchant_fee` is `true`. Must be:   - A positive integer with up to two decimal places.   - Less than the refund amount ")
+    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the developer fee. It must be the same as `token_id`. Supported values:   - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
     __properties: ClassVar[List[str]] = ["request_id", "merchant_id", "payable_amount", "to_address", "token_id", "refund_type", "order_id", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id"]
 
     model_config = ConfigDict(

@@ -33,7 +33,7 @@ class TestOAuthApi(unittest.TestCase):
         """
         Test case for exchange_permission_token
 
-        Exchange Permission Access Token by API Key
+        Get Access Token
         """
         """
         exchange_permission_token_request = cobo_waas2.ExchangePermissionTokenRequest()
@@ -59,7 +59,7 @@ class TestOAuthApi(unittest.TestCase):
         """
         Test case for refresh_permission_token
 
-        Refresh Permission Access Token by Permission Refresh Token
+        Refresh Access Token
         """
         """
         refresh_permission_token_request = cobo_waas2.RefreshPermissionTokenRequest()

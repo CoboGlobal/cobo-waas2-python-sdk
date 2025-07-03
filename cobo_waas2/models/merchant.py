@@ -28,9 +28,10 @@ class Merchant(BaseModel):
     merchant_id: StrictStr = Field(description="The merchant ID.")
     name: StrictStr = Field(description="The merchant name.")
     wallet_id: StrictStr = Field(description="The ID of the linked wallet.")
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the merchant, represented as a UNIX timestamp in seconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the merchant, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "name", "wallet_id", "created_timestamp", "updated_timestamp"]
+    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Expressed as a string in decimal format where \"0.1\" represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions.")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the merchant, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the merchant, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["merchant_id", "name", "wallet_id", "developer_fee_rate", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,7 @@ class Merchant(BaseModel):
             "merchant_id": obj.get("merchant_id"),
             "name": obj.get("name"),
             "wallet_id": obj.get("wallet_id"),
+            "developer_fee_rate": obj.get("developer_fee_rate"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

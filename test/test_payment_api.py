@@ -29,6 +29,18 @@ class TestPaymentApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_cancel_refund_by_id(self) -> None:
+        """
+        Test case for cancel_refund_by_id
+
+        Cancel refund order
+        """
+        """
+        refund_id = 'R20250304-M1001-1001'
+
+        api_response = self.api.cancel_refund_by_id(refund_id)
+        """
+
     def test_create_merchant(self) -> None:
         """
         Test case for create_merchant
@@ -151,8 +163,23 @@ class TestPaymentApi(unittest.TestCase):
         """
         merchant_ids = 'M1001,M1002,M1003'
         currency = 'USD'
+        acquiring_type = cobo_waas2.AcquiringType()
 
-        api_response = self.api.get_settlement_info_by_ids(merchant_ids=merchant_ids, currency=currency)
+        api_response = self.api.get_settlement_info_by_ids(merchant_ids=merchant_ids, currency=currency, acquiring_type=acquiring_type)
+        """
+
+    def test_get_top_up_address(self) -> None:
+        """
+        Test case for get_top_up_address
+
+        Get top-up address
+        """
+        """
+        merchant_id = 'M1001'
+        token_id = 'ETH_USDT'
+        custom_payer_id = 'payer_0001'
+
+        api_response = self.api.get_top_up_address(merchant_id, token_id, custom_payer_id)
         """
 
     def test_list_bank_accounts(self) -> None:
@@ -236,6 +263,22 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_settlement_requests(limit=limit, before=before, after=after, request_id=request_id)
         """
 
+    def test_list_top_up_payers(self) -> None:
+        """
+        Test case for list_top_up_payers
+
+        List payers
+        """
+        """
+        merchant_id = 'M1001'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        payer_id = 'P20250619T0310056d7aa'
+
+        api_response = self.api.list_top_up_payers(merchant_id, limit=limit, before=before, after=after, payer_id=payer_id)
+        """
+
     def test_update_merchant_by_id(self) -> None:
         """
         Test case for update_merchant_by_id
@@ -260,6 +303,19 @@ class TestPaymentApi(unittest.TestCase):
         update_payment_order_request = cobo_waas2.UpdatePaymentOrderRequest()
 
         api_response = self.api.update_payment_order(order_id, update_payment_order_request=update_payment_order_request)
+        """
+
+    def test_update_refund_by_id(self) -> None:
+        """
+        Test case for update_refund_by_id
+
+        Update refund order information
+        """
+        """
+        refund_id = 'R20250304-M1001-1001'
+        update_refund_by_id_request = cobo_waas2.UpdateRefundByIdRequest()
+
+        api_response = self.api.update_refund_by_id(refund_id, update_refund_by_id_request=update_refund_by_id_request)
         """
 
 

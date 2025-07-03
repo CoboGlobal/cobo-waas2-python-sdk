@@ -36,20 +36,19 @@ class TestCreateRefundRequest(unittest.TestCase):
             return CreateRefundRequest(
                 request_id = '123e4567-e89b-12d3-a456-426614174004',
                 merchant_id = 'M1001',
-                payable_amount = '0.0025',
+                payable_amount = '0.25',
                 to_address = '0x9876543210abcdef1234567890abcdef12345678',
                 token_id = 'ETH_USDT',
                 refund_type = 'Merchant',
                 order_id = 'R20250304-M1001-1001',
                 charge_merchant_fee = False,
-                merchant_fee_amount = '0.0001',
+                merchant_fee_amount = '0.01',
                 merchant_fee_token_id = 'ETH_USDT'
             )
         else:
             return CreateRefundRequest(
                 request_id = '123e4567-e89b-12d3-a456-426614174004',
-                payable_amount = '0.0025',
-                to_address = '0x9876543210abcdef1234567890abcdef12345678',
+                payable_amount = '0.25',
                 token_id = 'ETH_USDT',
                 refund_type = 'Merchant',
         )

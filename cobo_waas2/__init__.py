@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.17.0"
+__version__ = "1.18.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -21,6 +21,7 @@ from cobo_waas2.api.developers_api import DevelopersApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.fee_station_api import FeeStationApi
 from cobo_waas2.api.o_auth_api import OAuthApi
+from cobo_waas2.api.organizations_api import OrganizationsApi
 from cobo_waas2.api.payment_api import PaymentApi
 from cobo_waas2.api.prime_broker_api import PrimeBrokerApi
 from cobo_waas2.api.stakings_api import StakingsApi
@@ -43,6 +44,8 @@ from cobo_waas2.exceptions import ApiAttributeError
 from cobo_waas2.exceptions import ApiException
 
 # import models into sdk package
+from cobo_waas2.models.account import Account
+from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.activity import Activity
 from cobo_waas2.models.activity_action import ActivityAction
 from cobo_waas2.models.activity_extra import ActivityExtra
@@ -90,6 +93,8 @@ from cobo_waas2.models.babylon_staking_extra import BabylonStakingExtra
 from cobo_waas2.models.babylon_staking_registration import BabylonStakingRegistration
 from cobo_waas2.models.babylon_validator import BabylonValidator
 from cobo_waas2.models.balance import Balance
+from cobo_waas2.models.balance_update_info import BalanceUpdateInfo
+from cobo_waas2.models.balance_update_info_event_data import BalanceUpdateInfoEventData
 from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.base_contract_call_source import BaseContractCallSource
 from cobo_waas2.models.base_estimate_staking_fee import BaseEstimateStakingFee
@@ -189,8 +194,12 @@ from cobo_waas2.models.estimated_evm_eip1559_fee import EstimatedEvmEip1559Fee
 from cobo_waas2.models.estimated_evm_eip1559_fee_slow import EstimatedEvmEip1559FeeSlow
 from cobo_waas2.models.estimated_evm_legacy_fee import EstimatedEvmLegacyFee
 from cobo_waas2.models.estimated_evm_legacy_fee_slow import EstimatedEvmLegacyFeeSlow
+from cobo_waas2.models.estimated_fil_fee import EstimatedFILFee
+from cobo_waas2.models.estimated_fil_fee_slow import EstimatedFILFeeSlow
 from cobo_waas2.models.estimated_fee import EstimatedFee
 from cobo_waas2.models.estimated_fixed_fee import EstimatedFixedFee
+from cobo_waas2.models.estimated_sol_fee import EstimatedSOLFee
+from cobo_waas2.models.estimated_sol_fee_slow import EstimatedSOLFeeSlow
 from cobo_waas2.models.estimated_utxo_fee import EstimatedUtxoFee
 from cobo_waas2.models.estimated_utxo_fee_slow import EstimatedUtxoFeeSlow
 from cobo_waas2.models.eth_stake_estimated_fee import EthStakeEstimatedFee
@@ -213,6 +222,8 @@ from cobo_waas2.models.exchange_transfer_destination import ExchangeTransferDest
 from cobo_waas2.models.exchange_transfer_source import ExchangeTransferSource
 from cobo_waas2.models.exchange_wallet_info import ExchangeWalletInfo
 from cobo_waas2.models.extended_token_info import ExtendedTokenInfo
+from cobo_waas2.models.fil_base import FILBase
+from cobo_waas2.models.fil_price import FILPrice
 from cobo_waas2.models.fee_amount import FeeAmount
 from cobo_waas2.models.fee_gas_limit import FeeGasLimit
 from cobo_waas2.models.fee_rate import FeeRate
@@ -231,6 +242,10 @@ from cobo_waas2.models.get_staking_estimation_fee_request import GetStakingEstim
 from cobo_waas2.models.get_token2_xx_response import GetToken2XXResponse
 from cobo_waas2.models.get_token4_xx_response import GetToken4XXResponse
 from cobo_waas2.models.get_transaction_limitation200_response import GetTransactionLimitation200Response
+from cobo_waas2.models.graph_ql_error import GraphQLError
+from cobo_waas2.models.graph_ql_error_locations_inner import GraphQLErrorLocationsInner
+from cobo_waas2.models.graph_ql_request import GraphQLRequest
+from cobo_waas2.models.graph_ql_response import GraphQLResponse
 from cobo_waas2.models.guard_pubkey_status import GuardPubkeyStatus
 from cobo_waas2.models.key_share_holder import KeyShareHolder
 from cobo_waas2.models.key_share_holder_group import KeyShareHolderGroup
@@ -268,6 +283,8 @@ from cobo_waas2.models.list_token_balances_for_address200_response import ListTo
 from cobo_waas2.models.list_token_balances_for_fee_station200_response import ListTokenBalancesForFeeStation200Response
 from cobo_waas2.models.list_token_balances_for_fee_station200_response_data_inner import ListTokenBalancesForFeeStation200ResponseDataInner
 from cobo_waas2.models.list_token_listing_requests200_response import ListTokenListingRequests200Response
+from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200Response
+from cobo_waas2.models.list_top_up_payers200_response_data_inner import ListTopUpPayers200ResponseDataInner
 from cobo_waas2.models.list_transaction_approval_details200_response import ListTransactionApprovalDetails200Response
 from cobo_waas2.models.list_transactions200_response import ListTransactions200Response
 from cobo_waas2.models.list_tss_requests200_response import ListTssRequests200Response
@@ -303,6 +320,7 @@ from cobo_waas2.models.order import Order
 from cobo_waas2.models.order_status import OrderStatus
 from cobo_waas2.models.org_info import OrgInfo
 from cobo_waas2.models.pagination import Pagination
+from cobo_waas2.models.payer_account import PayerAccount
 from cobo_waas2.models.payment_order_event_data import PaymentOrderEventData
 from cobo_waas2.models.payment_refund_event_data import PaymentRefundEventData
 from cobo_waas2.models.payment_settlement_event import PaymentSettlementEvent
@@ -337,6 +355,8 @@ from cobo_waas2.models.revoke_approval_request201_response import RevokeApproval
 from cobo_waas2.models.revoke_approval_request_request import RevokeApprovalRequestRequest
 from cobo_waas2.models.role_scopes import RoleScopes
 from cobo_waas2.models.root_pubkey import RootPubkey
+from cobo_waas2.models.sol_base import SOLBase
+from cobo_waas2.models.sol_compute_unit import SOLComputeUnit
 from cobo_waas2.models.safe_contract_call_source import SafeContractCallSource
 from cobo_waas2.models.safe_transfer_source import SafeTransferSource
 from cobo_waas2.models.safe_tx_decoded_data import SafeTxDecodedData
@@ -376,10 +396,12 @@ from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.swap_activity import SwapActivity
 from cobo_waas2.models.swap_activity_approvers import SwapActivityApprovers
 from cobo_waas2.models.swap_activity_detail import SwapActivityDetail
+from cobo_waas2.models.swap_activity_signers import SwapActivitySigners
 from cobo_waas2.models.swap_activity_status import SwapActivityStatus
 from cobo_waas2.models.swap_activity_timeline import SwapActivityTimeline
 from cobo_waas2.models.swap_approvers_status import SwapApproversStatus
 from cobo_waas2.models.swap_quote import SwapQuote
+from cobo_waas2.models.swap_singing_status import SwapSingingStatus
 from cobo_waas2.models.swap_token import SwapToken
 from cobo_waas2.models.swap_type import SwapType
 from cobo_waas2.models.tss_base_request_event_data import TSSBaseRequestEventData
@@ -430,6 +452,7 @@ from cobo_waas2.models.token_listing_event_data import TokenListingEventData
 from cobo_waas2.models.token_listing_request_source import TokenListingRequestSource
 from cobo_waas2.models.token_listing_request_status import TokenListingRequestStatus
 from cobo_waas2.models.tokens_event_data import TokensEventData
+from cobo_waas2.models.top_up_address import TopUpAddress
 from cobo_waas2.models.transaction import Transaction
 from cobo_waas2.models.transaction_approval_detail import TransactionApprovalDetail
 from cobo_waas2.models.transaction_approval_result import TransactionApprovalResult
@@ -464,13 +487,13 @@ from cobo_waas2.models.transaction_evm_legacy_fee import TransactionEvmLegacyFee
 from cobo_waas2.models.transaction_exchange_wallet_source import TransactionExchangeWalletSource
 from cobo_waas2.models.transaction_extra import TransactionExtra
 from cobo_waas2.models.transaction_extra_type import TransactionExtraType
+from cobo_waas2.models.transaction_fil_fee import TransactionFILFee
 from cobo_waas2.models.transaction_fee import TransactionFee
 from cobo_waas2.models.transaction_fee_station_wallet_source import TransactionFeeStationWalletSource
 from cobo_waas2.models.transaction_fixed_fee import TransactionFixedFee
 from cobo_waas2.models.transaction_fueling_info import TransactionFuelingInfo
 from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorType
 from cobo_waas2.models.transaction_mpc_wallet_source import TransactionMPCWalletSource
-from cobo_waas2.models.transaction_message_sign_btceip191_destination import TransactionMessageSignBTCEIP191Destination
 from cobo_waas2.models.transaction_message_sign_eip191_destination import TransactionMessageSignEIP191Destination
 from cobo_waas2.models.transaction_message_sign_eip712_destination import TransactionMessageSignEIP712Destination
 from cobo_waas2.models.transaction_process_type import TransactionProcessType
@@ -481,13 +504,16 @@ from cobo_waas2.models.transaction_rbf_source import TransactionRbfSource
 from cobo_waas2.models.transaction_replacement import TransactionReplacement
 from cobo_waas2.models.transaction_request_evm_eip1559_fee import TransactionRequestEvmEip1559Fee
 from cobo_waas2.models.transaction_request_evm_legacy_fee import TransactionRequestEvmLegacyFee
+from cobo_waas2.models.transaction_request_fil_fee import TransactionRequestFILFee
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from cobo_waas2.models.transaction_request_fixed_fee import TransactionRequestFixedFee
+from cobo_waas2.models.transaction_request_sol_fee import TransactionRequestSOLFee
 from cobo_waas2.models.transaction_request_utxo_fee import TransactionRequestUtxoFee
 from cobo_waas2.models.transaction_resend import TransactionResend
 from cobo_waas2.models.transaction_result import TransactionResult
 from cobo_waas2.models.transaction_result_type import TransactionResultType
 from cobo_waas2.models.transaction_role_approval_detail import TransactionRoleApprovalDetail
+from cobo_waas2.models.transaction_sol_fee import TransactionSOLFee
 from cobo_waas2.models.transaction_selected_utxo import TransactionSelectedUtxo
 from cobo_waas2.models.transaction_signature_result import TransactionSignatureResult
 from cobo_waas2.models.transaction_signer import TransactionSigner
@@ -540,7 +566,9 @@ from cobo_waas2.models.update_mpc_project_by_id_request import UpdateMpcProjectB
 from cobo_waas2.models.update_mpc_vault_by_id_request import UpdateMpcVaultByIdRequest
 from cobo_waas2.models.update_mpc_wallet_params import UpdateMpcWalletParams
 from cobo_waas2.models.update_payment_order_request import UpdatePaymentOrderRequest
+from cobo_waas2.models.update_refund_by_id_request import UpdateRefundByIdRequest
 from cobo_waas2.models.update_smart_contract_wallet_params import UpdateSmartContractWalletParams
+from cobo_waas2.models.update_top_up_address import UpdateTopUpAddress
 from cobo_waas2.models.update_wallet_params import UpdateWalletParams
 from cobo_waas2.models.update_webhook_endpoint_by_id_request import UpdateWebhookEndpointByIdRequest
 from cobo_waas2.models.utxo_fee_base_price import UtxoFeeBasePrice

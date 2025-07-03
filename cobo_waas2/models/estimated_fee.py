@@ -17,13 +17,15 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, f
 from typing import Any, List, Optional
 from cobo_waas2.models.estimated_evm_eip1559_fee import EstimatedEvmEip1559Fee
 from cobo_waas2.models.estimated_evm_legacy_fee import EstimatedEvmLegacyFee
+from cobo_waas2.models.estimated_fil_fee import EstimatedFILFee
 from cobo_waas2.models.estimated_fixed_fee import EstimatedFixedFee
+from cobo_waas2.models.estimated_sol_fee import EstimatedSOLFee
 from cobo_waas2.models.estimated_utxo_fee import EstimatedUtxoFee
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-ESTIMATEDFEE_ONE_OF_SCHEMAS = ["EstimatedEvmEip1559Fee", "EstimatedEvmLegacyFee", "EstimatedFixedFee", "EstimatedUtxoFee"]
+ESTIMATEDFEE_ONE_OF_SCHEMAS = ["EstimatedEvmEip1559Fee", "EstimatedEvmLegacyFee", "EstimatedFILFee", "EstimatedFixedFee", "EstimatedSOLFee", "EstimatedUtxoFee"]
 
 class EstimatedFee(BaseModel):
     """
@@ -37,8 +39,12 @@ class EstimatedFee(BaseModel):
     oneof_schema_3_validator: Optional[EstimatedEvmLegacyFee] = None
     # data type: EstimatedUtxoFee
     oneof_schema_4_validator: Optional[EstimatedUtxoFee] = None
-    actual_instance: Optional[Union[EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFixedFee, EstimatedUtxoFee]] = None
-    one_of_schemas: Set[str] = { "EstimatedEvmEip1559Fee", "EstimatedEvmLegacyFee", "EstimatedFixedFee", "EstimatedUtxoFee" }
+    # data type: EstimatedSOLFee
+    oneof_schema_5_validator: Optional[EstimatedSOLFee] = None
+    # data type: EstimatedFILFee
+    oneof_schema_6_validator: Optional[EstimatedFILFee] = None
+    actual_instance: Optional[Union[EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFILFee, EstimatedFixedFee, EstimatedSOLFee, EstimatedUtxoFee]] = None
+    one_of_schemas: Set[str] = { "EstimatedEvmEip1559Fee", "EstimatedEvmLegacyFee", "EstimatedFILFee", "EstimatedFixedFee", "EstimatedSOLFee", "EstimatedUtxoFee" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -84,12 +90,22 @@ class EstimatedFee(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `EstimatedUtxoFee`")
         else:
             match += 1
+        # validate data type: EstimatedSOLFee
+        if not isinstance(v, EstimatedSOLFee):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `EstimatedSOLFee`")
+        else:
+            match += 1
+        # validate data type: EstimatedFILFee
+        if not isinstance(v, EstimatedFILFee):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `EstimatedFILFee`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFixedFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFILFee, EstimatedFixedFee, EstimatedSOLFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFixedFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFILFee, EstimatedFixedFee, EstimatedSOLFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -119,9 +135,19 @@ class EstimatedFee(BaseModel):
             instance.actual_instance = EstimatedEvmLegacyFee.from_json(json_str)
             return instance
 
+        # check if data type is `EstimatedFILFee`
+        if _data_type == "FIL":
+            instance.actual_instance = EstimatedFILFee.from_json(json_str)
+            return instance
+
         # check if data type is `EstimatedFixedFee`
         if _data_type == "Fixed":
             instance.actual_instance = EstimatedFixedFee.from_json(json_str)
+            return instance
+
+        # check if data type is `EstimatedSOLFee`
+        if _data_type == "SOL":
+            instance.actual_instance = EstimatedSOLFee.from_json(json_str)
             return instance
 
         # check if data type is `EstimatedUtxoFee`
@@ -139,9 +165,19 @@ class EstimatedFee(BaseModel):
             instance.actual_instance = EstimatedEvmLegacyFee.from_json(json_str)
             return instance
 
+        # check if data type is `EstimatedFILFee`
+        if _data_type == "EstimatedFILFee":
+            instance.actual_instance = EstimatedFILFee.from_json(json_str)
+            return instance
+
         # check if data type is `EstimatedFixedFee`
         if _data_type == "EstimatedFixedFee":
             instance.actual_instance = EstimatedFixedFee.from_json(json_str)
+            return instance
+
+        # check if data type is `EstimatedSOLFee`
+        if _data_type == "EstimatedSOLFee":
+            instance.actual_instance = EstimatedSOLFee.from_json(json_str)
             return instance
 
         # check if data type is `EstimatedUtxoFee`
@@ -174,14 +210,26 @@ class EstimatedFee(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into EstimatedSOLFee
+        try:
+            instance.actual_instance = EstimatedSOLFee.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into EstimatedFILFee
+        try:
+            instance.actual_instance = EstimatedFILFee.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFixedFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFILFee, EstimatedFixedFee, EstimatedSOLFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFixedFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into EstimatedFee with oneOf schemas: EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFILFee, EstimatedFixedFee, EstimatedSOLFee, EstimatedUtxoFee. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -195,7 +243,7 @@ class EstimatedFee(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFixedFee, EstimatedUtxoFee]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], EstimatedEvmEip1559Fee, EstimatedEvmLegacyFee, EstimatedFILFee, EstimatedFixedFee, EstimatedSOLFee, EstimatedUtxoFee]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

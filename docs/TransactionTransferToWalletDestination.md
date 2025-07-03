@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_type** | [**TransactionDestinationType**](TransactionDestinationType.md) |  | 
 **wallet_id** | **str** | The wallet ID. | 
-**trading_account_type** | **str** | The trading account type. Only available for &#x60;ExchangeWallet&#x60;. | [optional] 
+**trading_account_type** | **str** | The trading account type. This field is only applicable when &#x60;destination_type&#x60; is &#x60;ExchangeWallet&#x60;. | [optional] 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | [optional] 
 **amount** | **str** | The transfer amount. For example, if you trade 1.5 BTC, then the value is &#x60;1.5&#x60;.  | 
 

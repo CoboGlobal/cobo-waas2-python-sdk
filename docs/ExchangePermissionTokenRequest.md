@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**permission_type** | **str** | The OAuth permission type. Set the value as &#x60;payment_orders_payin&#x60;. | 
+**permission_type** | **str** | Set the value to &#x60;payment_orders_payin&#x60;. | 
 
 ## Example
 

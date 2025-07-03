@@ -90,7 +90,7 @@ class TestFeeStationApi(unittest.TestCase):
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-        direction = ''
+        direction = 'ASC'
 
         api_response = self.api.list_fee_station_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         """

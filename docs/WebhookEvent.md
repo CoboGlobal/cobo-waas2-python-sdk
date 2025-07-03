@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **event_id** | **str** | The event ID. | [optional] 
 **url** | **str** | The webhook endpoint URL. | 
-**created_timestamp** | **int** | The time when the event occurred, in Unix timestamp format, measured in milliseconds. | 
+**created_timestamp** | **int** | The time when the event type was triggered, in Unix timestamp format (milliseconds). - The value remains unchanged across retries. - The default webhook timeout is 2 seconds.  | 
 **type** | [**WebhookEventType**](WebhookEventType.md) |  | 
 **data** | [**WebhookEventData**](WebhookEventData.md) |  | 
 **status** | [**WebhookEventStatus**](WebhookEventStatus.md) |  | [optional] 

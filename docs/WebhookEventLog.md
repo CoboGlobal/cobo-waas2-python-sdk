@@ -7,7 +7,7 @@ The webhook event log.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The event log ID. | 
-**created_timestamp** | **int** | The time when the log was created, in Unix timestamp format, measured in milliseconds. | 
+**created_timestamp** | **int** | The time when the event type was triggered, in Unix timestamp format (milliseconds). - The value remains unchanged across retries. - The default webhook timeout is 2 seconds.  | 
 **request_headers** | **object** | The request headers of the webhook event. | 
 **request_body** | [**WebhookEvent**](WebhookEvent.md) |  | 
 **response_body** | **str** | The response body of the webhook event. | [optional] 

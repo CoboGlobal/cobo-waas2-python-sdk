@@ -16,19 +16,18 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TransactionMessageSignBTCEIP191Destination(BaseModel):
+class SOLBase(BaseModel):
     """
-    The information about the destination `BTC_EIP_191_Signature`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Switch between the tabs to display the properties for different transaction destinations. 
+    The transaction base fee based on the SOL fee model.
     """  # noqa: E501
-    destination_type: TransactionDestinationType
-    message: StrictStr = Field(description="The raw data of the message to be signed, encoded in Base64 format.")
-    __properties: ClassVar[List[str]] = ["destination_type", "message"]
+    base_fee: Optional[StrictStr] = Field(default=None, description="The fundamental fee required for each transaction. It is charged to prevent spam transactions and network congestion, ensuring that only meaningful transactions consume network resources.")
+    rent_amount: Optional[StrictStr] = Field(default=None, description="The fee charged as rent for maintaining the state of accounts on the blockchain. This rent ensures accounts are stored on-chain over the long term and that there's sufficient balance to sustain the account state.")
+    __properties: ClassVar[List[str]] = ["base_fee", "rent_amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +47,7 @@ class TransactionMessageSignBTCEIP191Destination(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TransactionMessageSignBTCEIP191Destination from a JSON string"""
+        """Create an instance of SOLBase from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +72,7 @@ class TransactionMessageSignBTCEIP191Destination(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TransactionMessageSignBTCEIP191Destination from a dict"""
+        """Create an instance of SOLBase from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +80,8 @@ class TransactionMessageSignBTCEIP191Destination(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "destination_type": obj.get("destination_type"),
-            "message": obj.get("message")
+            "base_fee": obj.get("base_fee"),
+            "rent_amount": obj.get("rent_amount")
         })
         return _obj
 
