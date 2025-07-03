@@ -51,6 +51,10 @@ class TransactionCoboCategory(str, Enum):
     STAKINGSKYFARMCLAIM = 'StakingSkyfarmClaim'
     STAKINGSKYFARMSTAKE = 'StakingSkyfarmStake'
     STAKINGSKYFARMUNSTAKE = 'StakingSkyfarmUnstake'
+    SCREENAPPREFUND = 'ScreenAppRefund'
+    SCREENAPPISOLATE = 'ScreenAppIsolate'
+    COMPLIANCEREFUND = 'ComplianceRefund'
+    COMPLIANCEISOLATE = 'ComplianceIsolate'
 
     UNKNOWN = None
 

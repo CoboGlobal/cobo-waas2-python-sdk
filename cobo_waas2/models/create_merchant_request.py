@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,8 @@ class CreateMerchantRequest(BaseModel):
     """  # noqa: E501
     name: StrictStr = Field(description="The merchant name.")
     wallet_id: StrictStr = Field(description="The ID of the wallet linked to the merchant.")
-    __properties: ClassVar[List[str]] = ["name", "wallet_id"]
+    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Expressed as a string in decimal format where \"0.1\" represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions.")
+    __properties: ClassVar[List[str]] = ["name", "wallet_id", "developer_fee_rate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +82,8 @@ class CreateMerchantRequest(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "wallet_id": obj.get("wallet_id")
+            "wallet_id": obj.get("wallet_id"),
+            "developer_fee_rate": obj.get("developer_fee_rate")
         })
         return _obj
 

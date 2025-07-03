@@ -12,6 +12,7 @@ cobo_waas2/api/developers_api.py
 cobo_waas2/api/developers_webhooks_api.py
 cobo_waas2/api/fee_station_api.py
 cobo_waas2/api/o_auth_api.py
+cobo_waas2/api/organizations_api.py
 cobo_waas2/api/payment_api.py
 cobo_waas2/api/prime_broker_api.py
 cobo_waas2/api/stakings_api.py
@@ -31,6 +32,8 @@ cobo_waas2/crypto/signer.py
 cobo_waas2/crypto/signing_helper.py
 cobo_waas2/exceptions.py
 cobo_waas2/models/__init__.py
+cobo_waas2/models/account.py
+cobo_waas2/models/acquiring_type.py
 cobo_waas2/models/activity.py
 cobo_waas2/models/activity_action.py
 cobo_waas2/models/activity_extra.py
@@ -75,6 +78,8 @@ cobo_waas2/models/babylon_staking_extra.py
 cobo_waas2/models/babylon_staking_registration.py
 cobo_waas2/models/babylon_validator.py
 cobo_waas2/models/balance.py
+cobo_waas2/models/balance_update_info.py
+cobo_waas2/models/balance_update_info_event_data.py
 cobo_waas2/models/bank_account.py
 cobo_waas2/models/base_contract_call_source.py
 cobo_waas2/models/base_estimate_staking_fee.py
@@ -178,7 +183,11 @@ cobo_waas2/models/estimated_evm_eip1559_fee_slow.py
 cobo_waas2/models/estimated_evm_legacy_fee.py
 cobo_waas2/models/estimated_evm_legacy_fee_slow.py
 cobo_waas2/models/estimated_fee.py
+cobo_waas2/models/estimated_fil_fee.py
+cobo_waas2/models/estimated_fil_fee_slow.py
 cobo_waas2/models/estimated_fixed_fee.py
+cobo_waas2/models/estimated_sol_fee.py
+cobo_waas2/models/estimated_sol_fee_slow.py
 cobo_waas2/models/estimated_utxo_fee.py
 cobo_waas2/models/estimated_utxo_fee_slow.py
 cobo_waas2/models/eth_stake_estimated_fee.py
@@ -209,6 +218,8 @@ cobo_waas2/models/fee_station_destination.py
 cobo_waas2/models/fee_station_transaction_type.py
 cobo_waas2/models/fee_station_transfer.py
 cobo_waas2/models/fee_type.py
+cobo_waas2/models/fil_base.py
+cobo_waas2/models/fil_price.py
 cobo_waas2/models/fixed_fee_rate.py
 cobo_waas2/models/get_api_key_info200_response.py
 cobo_waas2/models/get_exchange_rate200_response.py
@@ -219,6 +230,10 @@ cobo_waas2/models/get_staking_estimation_fee_request.py
 cobo_waas2/models/get_token2_xx_response.py
 cobo_waas2/models/get_token4_xx_response.py
 cobo_waas2/models/get_transaction_limitation200_response.py
+cobo_waas2/models/graph_ql_error.py
+cobo_waas2/models/graph_ql_error_locations_inner.py
+cobo_waas2/models/graph_ql_request.py
+cobo_waas2/models/graph_ql_response.py
 cobo_waas2/models/guard_pubkey_status.py
 cobo_waas2/models/key_share_holder.py
 cobo_waas2/models/key_share_holder_group.py
@@ -256,6 +271,8 @@ cobo_waas2/models/list_token_balances_for_address200_response.py
 cobo_waas2/models/list_token_balances_for_fee_station200_response.py
 cobo_waas2/models/list_token_balances_for_fee_station200_response_data_inner.py
 cobo_waas2/models/list_token_listing_requests200_response.py
+cobo_waas2/models/list_top_up_payers200_response.py
+cobo_waas2/models/list_top_up_payers200_response_data_inner.py
 cobo_waas2/models/list_transaction_approval_details200_response.py
 cobo_waas2/models/list_transactions200_response.py
 cobo_waas2/models/list_tss_requests200_response.py
@@ -291,6 +308,7 @@ cobo_waas2/models/order.py
 cobo_waas2/models/order_status.py
 cobo_waas2/models/org_info.py
 cobo_waas2/models/pagination.py
+cobo_waas2/models/payer_account.py
 cobo_waas2/models/payment_order_event_data.py
 cobo_waas2/models/payment_refund_event_data.py
 cobo_waas2/models/payment_settlement_event.py
@@ -348,6 +366,8 @@ cobo_waas2/models/smart_contract_initiator.py
 cobo_waas2/models/smart_contract_wallet_info.py
 cobo_waas2/models/smart_contract_wallet_operation_type.py
 cobo_waas2/models/smart_contract_wallet_type.py
+cobo_waas2/models/sol_base.py
+cobo_waas2/models/sol_compute_unit.py
 cobo_waas2/models/sol_contract_call_account.py
 cobo_waas2/models/sol_contract_call_destination.py
 cobo_waas2/models/sol_contract_call_instruction.py
@@ -364,10 +384,12 @@ cobo_waas2/models/supported_token.py
 cobo_waas2/models/swap_activity.py
 cobo_waas2/models/swap_activity_approvers.py
 cobo_waas2/models/swap_activity_detail.py
+cobo_waas2/models/swap_activity_signers.py
 cobo_waas2/models/swap_activity_status.py
 cobo_waas2/models/swap_activity_timeline.py
 cobo_waas2/models/swap_approvers_status.py
 cobo_waas2/models/swap_quote.py
+cobo_waas2/models/swap_singing_status.py
 cobo_waas2/models/swap_token.py
 cobo_waas2/models/swap_type.py
 cobo_waas2/models/token_asset_model_type.py
@@ -378,6 +400,7 @@ cobo_waas2/models/token_listing_event_data.py
 cobo_waas2/models/token_listing_request_source.py
 cobo_waas2/models/token_listing_request_status.py
 cobo_waas2/models/tokens_event_data.py
+cobo_waas2/models/top_up_address.py
 cobo_waas2/models/transaction.py
 cobo_waas2/models/transaction_approval_detail.py
 cobo_waas2/models/transaction_approval_result.py
@@ -414,10 +437,10 @@ cobo_waas2/models/transaction_extra.py
 cobo_waas2/models/transaction_extra_type.py
 cobo_waas2/models/transaction_fee.py
 cobo_waas2/models/transaction_fee_station_wallet_source.py
+cobo_waas2/models/transaction_fil_fee.py
 cobo_waas2/models/transaction_fixed_fee.py
 cobo_waas2/models/transaction_fueling_info.py
 cobo_waas2/models/transaction_initiator_type.py
-cobo_waas2/models/transaction_message_sign_btceip191_destination.py
 cobo_waas2/models/transaction_message_sign_eip191_destination.py
 cobo_waas2/models/transaction_message_sign_eip712_destination.py
 cobo_waas2/models/transaction_mpc_wallet_source.py
@@ -430,7 +453,9 @@ cobo_waas2/models/transaction_replacement.py
 cobo_waas2/models/transaction_request_evm_eip1559_fee.py
 cobo_waas2/models/transaction_request_evm_legacy_fee.py
 cobo_waas2/models/transaction_request_fee.py
+cobo_waas2/models/transaction_request_fil_fee.py
 cobo_waas2/models/transaction_request_fixed_fee.py
+cobo_waas2/models/transaction_request_sol_fee.py
 cobo_waas2/models/transaction_request_utxo_fee.py
 cobo_waas2/models/transaction_resend.py
 cobo_waas2/models/transaction_result.py
@@ -443,6 +468,7 @@ cobo_waas2/models/transaction_smart_contract_safe_wallet_source.py
 cobo_waas2/models/transaction_sol_contract_account.py
 cobo_waas2/models/transaction_sol_contract_destination.py
 cobo_waas2/models/transaction_sol_contract_instruction.py
+cobo_waas2/models/transaction_sol_fee.py
 cobo_waas2/models/transaction_source.py
 cobo_waas2/models/transaction_source_type.py
 cobo_waas2/models/transaction_status.py
@@ -527,7 +553,9 @@ cobo_waas2/models/update_mpc_project_by_id_request.py
 cobo_waas2/models/update_mpc_vault_by_id_request.py
 cobo_waas2/models/update_mpc_wallet_params.py
 cobo_waas2/models/update_payment_order_request.py
+cobo_waas2/models/update_refund_by_id_request.py
 cobo_waas2/models/update_smart_contract_wallet_params.py
+cobo_waas2/models/update_top_up_address.py
 cobo_waas2/models/update_wallet_params.py
 cobo_waas2/models/update_webhook_endpoint_by_id_request.py
 cobo_waas2/models/utxo.py
@@ -549,6 +577,8 @@ cobo_waas2/models/webhook_event_type.py
 cobo_waas2/py.typed
 cobo_waas2/rest.py
 cobo_waas2/server_demo.py
+docs/Account.md
+docs/AcquiringType.md
 docs/Activity.md
 docs/ActivityAction.md
 docs/ActivityExtra.md
@@ -598,6 +628,8 @@ docs/BabylonStakingExtra.md
 docs/BabylonStakingRegistration.md
 docs/BabylonValidator.md
 docs/Balance.md
+docs/BalanceUpdateInfo.md
+docs/BalanceUpdateInfoEventData.md
 docs/BankAccount.md
 docs/BaseContractCallSource.md
 docs/BaseEstimateStakingFee.md
@@ -699,8 +731,12 @@ docs/EstimatedEvmEip1559Fee.md
 docs/EstimatedEvmEip1559FeeSlow.md
 docs/EstimatedEvmLegacyFee.md
 docs/EstimatedEvmLegacyFeeSlow.md
+docs/EstimatedFILFee.md
+docs/EstimatedFILFeeSlow.md
 docs/EstimatedFee.md
 docs/EstimatedFixedFee.md
+docs/EstimatedSOLFee.md
+docs/EstimatedSOLFeeSlow.md
 docs/EstimatedUtxoFee.md
 docs/EstimatedUtxoFeeSlow.md
 docs/EthStakeEstimatedFee.md
@@ -723,6 +759,8 @@ docs/ExchangeTransferDestination.md
 docs/ExchangeTransferSource.md
 docs/ExchangeWalletInfo.md
 docs/ExtendedTokenInfo.md
+docs/FILBase.md
+docs/FILPrice.md
 docs/FeeAmount.md
 docs/FeeGasLimit.md
 docs/FeeRate.md
@@ -742,6 +780,10 @@ docs/GetStakingEstimationFeeRequest.md
 docs/GetToken2XXResponse.md
 docs/GetToken4XXResponse.md
 docs/GetTransactionLimitation200Response.md
+docs/GraphQLError.md
+docs/GraphQLErrorLocationsInner.md
+docs/GraphQLRequest.md
+docs/GraphQLResponse.md
 docs/GuardPubkeyStatus.md
 docs/KeyShareHolder.md
 docs/KeyShareHolderGroup.md
@@ -779,6 +821,8 @@ docs/ListTokenBalancesForAddress200Response.md
 docs/ListTokenBalancesForFeeStation200Response.md
 docs/ListTokenBalancesForFeeStation200ResponseDataInner.md
 docs/ListTokenListingRequests200Response.md
+docs/ListTopUpPayers200Response.md
+docs/ListTopUpPayers200ResponseDataInner.md
 docs/ListTransactionApprovalDetails200Response.md
 docs/ListTransactions200Response.md
 docs/ListTssRequests200Response.md
@@ -814,7 +858,9 @@ docs/OAuthApi.md
 docs/Order.md
 docs/OrderStatus.md
 docs/OrgInfo.md
+docs/OrganizationsApi.md
 docs/Pagination.md
+docs/PayerAccount.md
 docs/PaymentApi.md
 docs/PaymentOrderEventData.md
 docs/PaymentRefundEventData.md
@@ -851,6 +897,8 @@ docs/RevokeApprovalRequest201Response.md
 docs/RevokeApprovalRequestRequest.md
 docs/RoleScopes.md
 docs/RootPubkey.md
+docs/SOLBase.md
+docs/SOLComputeUnit.md
 docs/SafeContractCallSource.md
 docs/SafeTransferSource.md
 docs/SafeTxDecodedData.md
@@ -891,10 +939,12 @@ docs/SupportedToken.md
 docs/SwapActivity.md
 docs/SwapActivityApprovers.md
 docs/SwapActivityDetail.md
+docs/SwapActivitySigners.md
 docs/SwapActivityStatus.md
 docs/SwapActivityTimeline.md
 docs/SwapApproversStatus.md
 docs/SwapQuote.md
+docs/SwapSingingStatus.md
 docs/SwapToken.md
 docs/SwapType.md
 docs/TSSBaseRequestEventData.md
@@ -945,6 +995,7 @@ docs/TokenListingEventData.md
 docs/TokenListingRequestSource.md
 docs/TokenListingRequestStatus.md
 docs/TokensEventData.md
+docs/TopUpAddress.md
 docs/Transaction.md
 docs/TransactionApprovalDetail.md
 docs/TransactionApprovalResult.md
@@ -979,13 +1030,13 @@ docs/TransactionEvmLegacyFee.md
 docs/TransactionExchangeWalletSource.md
 docs/TransactionExtra.md
 docs/TransactionExtraType.md
+docs/TransactionFILFee.md
 docs/TransactionFee.md
 docs/TransactionFeeStationWalletSource.md
 docs/TransactionFixedFee.md
 docs/TransactionFuelingInfo.md
 docs/TransactionInitiatorType.md
 docs/TransactionMPCWalletSource.md
-docs/TransactionMessageSignBTCEIP191Destination.md
 docs/TransactionMessageSignEIP191Destination.md
 docs/TransactionMessageSignEIP712Destination.md
 docs/TransactionProcessType.md
@@ -996,13 +1047,16 @@ docs/TransactionRbfSource.md
 docs/TransactionReplacement.md
 docs/TransactionRequestEvmEip1559Fee.md
 docs/TransactionRequestEvmLegacyFee.md
+docs/TransactionRequestFILFee.md
 docs/TransactionRequestFee.md
 docs/TransactionRequestFixedFee.md
+docs/TransactionRequestSOLFee.md
 docs/TransactionRequestUtxoFee.md
 docs/TransactionResend.md
 docs/TransactionResult.md
 docs/TransactionResultType.md
 docs/TransactionRoleApprovalDetail.md
+docs/TransactionSOLFee.md
 docs/TransactionSelectedUtxo.md
 docs/TransactionSignatureResult.md
 docs/TransactionSigner.md
@@ -1057,7 +1111,9 @@ docs/UpdateMpcProjectByIdRequest.md
 docs/UpdateMpcVaultByIdRequest.md
 docs/UpdateMpcWalletParams.md
 docs/UpdatePaymentOrderRequest.md
+docs/UpdateRefundByIdRequest.md
 docs/UpdateSmartContractWalletParams.md
+docs/UpdateTopUpAddress.md
 docs/UpdateWalletParams.md
 docs/UpdateWebhookEndpointByIdRequest.md
 docs/UtxoFeeBasePrice.md
@@ -1086,6 +1142,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_account.py
+test/test_acquiring_type.py
 test/test_activity.py
 test/test_activity_action.py
 test/test_activity_extra.py
@@ -1132,6 +1190,8 @@ test/test_babylon_staking_extra.py
 test/test_babylon_staking_registration.py
 test/test_babylon_validator.py
 test/test_balance.py
+test/test_balance_update_info.py
+test/test_balance_update_info_event_data.py
 test/test_bank_account.py
 test/test_base_contract_call_source.py
 test/test_base_estimate_staking_fee.py
@@ -1237,7 +1297,11 @@ test/test_estimated_evm_eip1559_fee_slow.py
 test/test_estimated_evm_legacy_fee.py
 test/test_estimated_evm_legacy_fee_slow.py
 test/test_estimated_fee.py
+test/test_estimated_fil_fee.py
+test/test_estimated_fil_fee_slow.py
 test/test_estimated_fixed_fee.py
+test/test_estimated_sol_fee.py
+test/test_estimated_sol_fee_slow.py
 test/test_estimated_utxo_fee.py
 test/test_estimated_utxo_fee_slow.py
 test/test_eth_stake_estimated_fee.py
@@ -1269,6 +1333,8 @@ test/test_fee_station_destination.py
 test/test_fee_station_transaction_type.py
 test/test_fee_station_transfer.py
 test/test_fee_type.py
+test/test_fil_base.py
+test/test_fil_price.py
 test/test_fixed_fee_rate.py
 test/test_get_api_key_info200_response.py
 test/test_get_exchange_rate200_response.py
@@ -1279,6 +1345,10 @@ test/test_get_staking_estimation_fee_request.py
 test/test_get_token2_xx_response.py
 test/test_get_token4_xx_response.py
 test/test_get_transaction_limitation200_response.py
+test/test_graph_ql_error.py
+test/test_graph_ql_error_locations_inner.py
+test/test_graph_ql_request.py
+test/test_graph_ql_response.py
 test/test_guard_pubkey_status.py
 test/test_key_share_holder.py
 test/test_key_share_holder_group.py
@@ -1316,6 +1386,8 @@ test/test_list_token_balances_for_address200_response.py
 test/test_list_token_balances_for_fee_station200_response.py
 test/test_list_token_balances_for_fee_station200_response_data_inner.py
 test/test_list_token_listing_requests200_response.py
+test/test_list_top_up_payers200_response.py
+test/test_list_top_up_payers200_response_data_inner.py
 test/test_list_transaction_approval_details200_response.py
 test/test_list_transactions200_response.py
 test/test_list_tss_requests200_response.py
@@ -1351,7 +1423,9 @@ test/test_o_auth_api.py
 test/test_order.py
 test/test_order_status.py
 test/test_org_info.py
+test/test_organizations_api.py
 test/test_pagination.py
+test/test_payer_account.py
 test/test_payment_api.py
 test/test_payment_order_event_data.py
 test/test_payment_refund_event_data.py
@@ -1411,6 +1485,8 @@ test/test_smart_contract_initiator.py
 test/test_smart_contract_wallet_info.py
 test/test_smart_contract_wallet_operation_type.py
 test/test_smart_contract_wallet_type.py
+test/test_sol_base.py
+test/test_sol_compute_unit.py
 test/test_sol_contract_call_account.py
 test/test_sol_contract_call_destination.py
 test/test_sol_contract_call_instruction.py
@@ -1428,10 +1504,12 @@ test/test_supported_token.py
 test/test_swap_activity.py
 test/test_swap_activity_approvers.py
 test/test_swap_activity_detail.py
+test/test_swap_activity_signers.py
 test/test_swap_activity_status.py
 test/test_swap_activity_timeline.py
 test/test_swap_approvers_status.py
 test/test_swap_quote.py
+test/test_swap_singing_status.py
 test/test_swap_token.py
 test/test_swap_type.py
 test/test_token_asset_model_type.py
@@ -1442,6 +1520,7 @@ test/test_token_listing_event_data.py
 test/test_token_listing_request_source.py
 test/test_token_listing_request_status.py
 test/test_tokens_event_data.py
+test/test_top_up_address.py
 test/test_transaction.py
 test/test_transaction_approval_detail.py
 test/test_transaction_approval_result.py
@@ -1478,10 +1557,10 @@ test/test_transaction_extra.py
 test/test_transaction_extra_type.py
 test/test_transaction_fee.py
 test/test_transaction_fee_station_wallet_source.py
+test/test_transaction_fil_fee.py
 test/test_transaction_fixed_fee.py
 test/test_transaction_fueling_info.py
 test/test_transaction_initiator_type.py
-test/test_transaction_message_sign_btceip191_destination.py
 test/test_transaction_message_sign_eip191_destination.py
 test/test_transaction_message_sign_eip712_destination.py
 test/test_transaction_mpc_wallet_source.py
@@ -1494,7 +1573,9 @@ test/test_transaction_replacement.py
 test/test_transaction_request_evm_eip1559_fee.py
 test/test_transaction_request_evm_legacy_fee.py
 test/test_transaction_request_fee.py
+test/test_transaction_request_fil_fee.py
 test/test_transaction_request_fixed_fee.py
+test/test_transaction_request_sol_fee.py
 test/test_transaction_request_utxo_fee.py
 test/test_transaction_resend.py
 test/test_transaction_result.py
@@ -1507,6 +1588,7 @@ test/test_transaction_smart_contract_safe_wallet_source.py
 test/test_transaction_sol_contract_account.py
 test/test_transaction_sol_contract_destination.py
 test/test_transaction_sol_contract_instruction.py
+test/test_transaction_sol_fee.py
 test/test_transaction_source.py
 test/test_transaction_source_type.py
 test/test_transaction_status.py
@@ -1593,7 +1675,9 @@ test/test_update_mpc_project_by_id_request.py
 test/test_update_mpc_vault_by_id_request.py
 test/test_update_mpc_wallet_params.py
 test/test_update_payment_order_request.py
+test/test_update_refund_by_id_request.py
 test/test_update_smart_contract_wallet_params.py
+test/test_update_top_up_address.py
 test/test_update_wallet_params.py
 test/test_update_webhook_endpoint_by_id_request.py
 test/test_utxo.py

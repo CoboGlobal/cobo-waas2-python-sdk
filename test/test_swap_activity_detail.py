@@ -60,6 +60,12 @@ class TestSwapActivityDetail(unittest.TestCase):
                     cobo_waas2.models.swap_activity_approvers.SwapActivityApprovers(
                         name = 'Wenyu.Xiao', 
                         status = 'Pending', )
+                    ],
+                signers = [
+                    cobo_waas2.models.swap_activity_signers.SwapActivitySigners(
+                        signer = 'Cobo TSS', 
+                        status = 'Pending', 
+                        failed_reason = 'Rejected by signer Cobo TSS', )
                     ]
             )
         else:

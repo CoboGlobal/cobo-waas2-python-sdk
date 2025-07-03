@@ -20,9 +20,10 @@ Name | Type | Description | Notes
 **psp_order_code** | **str** | A unique reference code assigned by the developer to identify this order in their system. | 
 **status** | [**OrderStatus**](OrderStatus.md) |  | 
 **received_token_amount** | **str** | The total cryptocurrency amount received for this order. Updates until the expiration time. Precision matches the token standard (e.g., 6 decimals for USDT). | 
-**created_timestamp** | **int** | The created time of the order, represented as a UNIX timestamp in seconds. | [optional] 
-**updated_timestamp** | **int** | The updated time of the order, represented as a UNIX timestamp in seconds. | [optional] 
-**transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the settlement process. | [optional] 
+**created_timestamp** | **int** | The creation time of the order, represented as a UNIX timestamp in seconds. | [optional] 
+**updated_timestamp** | **int** | The last update time of the order, represented as a UNIX timestamp in seconds. | [optional] 
+**transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the pay-in process. | [optional] 
+**settlement_status** | [**SettleStatus**](SettleStatus.md) |  | [optional] 
 
 ## Example
 

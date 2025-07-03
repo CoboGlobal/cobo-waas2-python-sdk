@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class PayoutChannel(str, Enum):
     """
-    PayoutChannel defines the method by which settlement funds are paid out: - `Crypto`: Funds will be settled to a pre-approved blockchain crypto address. (Requires crypto_address_id to be specified.) - `OffRamp`: Funds will be settled through an off-ramp to a fiat bank account. (Requires bank_account_id to be specified.) 
+    The channel through which settlement funds will be transferred. Available options: - `Crypto`: Direct withdrawal to a registered crypto address. - `OffRamp`: Settle to a registered bank account. 
     """
 
     """

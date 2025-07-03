@@ -37,7 +37,7 @@ class TestCryptoAddress(unittest.TestCase):
                 token_id = 'ETH_USDT',
                 address_id = 'addr_ethusdt_20250429T134512_a8c31f',
                 address = '0xabc123456789def0000000000000000000000000',
-                label = 'Main Payout Wallet',
+                label = 'Main Withdrawal Address',
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600
             )

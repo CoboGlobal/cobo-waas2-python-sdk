@@ -17,13 +17,15 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, f
 from typing import Any, List, Optional
 from cobo_waas2.models.transaction_evm_eip1559_fee import TransactionEvmEip1559Fee
 from cobo_waas2.models.transaction_evm_legacy_fee import TransactionEvmLegacyFee
+from cobo_waas2.models.transaction_fil_fee import TransactionFILFee
 from cobo_waas2.models.transaction_fixed_fee import TransactionFixedFee
+from cobo_waas2.models.transaction_sol_fee import TransactionSOLFee
 from cobo_waas2.models.transaction_utxo_fee import TransactionUtxoFee
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSACTIONFEE_ONE_OF_SCHEMAS = ["TransactionEvmEip1559Fee", "TransactionEvmLegacyFee", "TransactionFixedFee", "TransactionUtxoFee"]
+TRANSACTIONFEE_ONE_OF_SCHEMAS = ["TransactionEvmEip1559Fee", "TransactionEvmLegacyFee", "TransactionFILFee", "TransactionFixedFee", "TransactionSOLFee", "TransactionUtxoFee"]
 
 class TransactionFee(BaseModel):
     """
@@ -37,8 +39,12 @@ class TransactionFee(BaseModel):
     oneof_schema_3_validator: Optional[TransactionUtxoFee] = None
     # data type: TransactionFixedFee
     oneof_schema_4_validator: Optional[TransactionFixedFee] = None
-    actual_instance: Optional[Union[TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFixedFee, TransactionUtxoFee]] = None
-    one_of_schemas: Set[str] = { "TransactionEvmEip1559Fee", "TransactionEvmLegacyFee", "TransactionFixedFee", "TransactionUtxoFee" }
+    # data type: TransactionSOLFee
+    oneof_schema_5_validator: Optional[TransactionSOLFee] = None
+    # data type: TransactionFILFee
+    oneof_schema_6_validator: Optional[TransactionFILFee] = None
+    actual_instance: Optional[Union[TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFILFee, TransactionFixedFee, TransactionSOLFee, TransactionUtxoFee]] = None
+    one_of_schemas: Set[str] = { "TransactionEvmEip1559Fee", "TransactionEvmLegacyFee", "TransactionFILFee", "TransactionFixedFee", "TransactionSOLFee", "TransactionUtxoFee" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -84,12 +90,22 @@ class TransactionFee(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionFixedFee`")
         else:
             match += 1
+        # validate data type: TransactionSOLFee
+        if not isinstance(v, TransactionSOLFee):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionSOLFee`")
+        else:
+            match += 1
+        # validate data type: TransactionFILFee
+        if not isinstance(v, TransactionFILFee):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionFILFee`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFixedFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFILFee, TransactionFixedFee, TransactionSOLFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFixedFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFILFee, TransactionFixedFee, TransactionSOLFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -119,9 +135,19 @@ class TransactionFee(BaseModel):
             instance.actual_instance = TransactionEvmLegacyFee.from_json(json_str)
             return instance
 
+        # check if data type is `TransactionFILFee`
+        if _data_type == "FIL":
+            instance.actual_instance = TransactionFILFee.from_json(json_str)
+            return instance
+
         # check if data type is `TransactionFixedFee`
         if _data_type == "Fixed":
             instance.actual_instance = TransactionFixedFee.from_json(json_str)
+            return instance
+
+        # check if data type is `TransactionSOLFee`
+        if _data_type == "SOL":
+            instance.actual_instance = TransactionSOLFee.from_json(json_str)
             return instance
 
         # check if data type is `TransactionUtxoFee`
@@ -139,9 +165,19 @@ class TransactionFee(BaseModel):
             instance.actual_instance = TransactionEvmLegacyFee.from_json(json_str)
             return instance
 
+        # check if data type is `TransactionFILFee`
+        if _data_type == "TransactionFILFee":
+            instance.actual_instance = TransactionFILFee.from_json(json_str)
+            return instance
+
         # check if data type is `TransactionFixedFee`
         if _data_type == "TransactionFixedFee":
             instance.actual_instance = TransactionFixedFee.from_json(json_str)
+            return instance
+
+        # check if data type is `TransactionSOLFee`
+        if _data_type == "TransactionSOLFee":
+            instance.actual_instance = TransactionSOLFee.from_json(json_str)
             return instance
 
         # check if data type is `TransactionUtxoFee`
@@ -174,14 +210,26 @@ class TransactionFee(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TransactionSOLFee
+        try:
+            instance.actual_instance = TransactionSOLFee.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into TransactionFILFee
+        try:
+            instance.actual_instance = TransactionFILFee.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFixedFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFILFee, TransactionFixedFee, TransactionSOLFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFixedFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransactionFee with oneOf schemas: TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFILFee, TransactionFixedFee, TransactionSOLFee, TransactionUtxoFee. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -195,7 +243,7 @@ class TransactionFee(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFixedFee, TransactionUtxoFee]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionEvmEip1559Fee, TransactionEvmLegacyFee, TransactionFILFee, TransactionFixedFee, TransactionSOLFee, TransactionUtxoFee]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

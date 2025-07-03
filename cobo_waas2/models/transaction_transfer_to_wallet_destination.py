@@ -29,7 +29,7 @@ class TransactionTransferToWalletDestination(BaseModel):
     """  # noqa: E501
     destination_type: TransactionDestinationType
     wallet_id: StrictStr = Field(description="The wallet ID.")
-    trading_account_type: Optional[StrictStr] = Field(default=None, description="The trading account type. Only available for `ExchangeWallet`.")
+    trading_account_type: Optional[StrictStr] = Field(default=None, description="The trading account type. This field is only applicable when `destination_type` is `ExchangeWallet`.")
     exchange_id: Optional[ExchangeId] = None
     amount: StrictStr = Field(description="The transfer amount. For example, if you trade 1.5 BTC, then the value is `1.5`. ")
     __properties: ClassVar[List[str]] = ["destination_type", "wallet_id", "trading_account_type", "exchange_id", "amount"]

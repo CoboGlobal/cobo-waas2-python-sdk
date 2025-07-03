@@ -42,7 +42,7 @@ class OAuthApi:
     @validate_call
     def exchange_permission_token(
         self,
-        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body for exchanging an Permission Access Token.")],
+        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body to acquire an Access Token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -52,11 +52,11 @@ class OAuthApi:
             ]
         ] = None,
     ) -> ExchangePermissionToken201Response:
-        """Exchange Permission Access Token by API Key
+        """Get Access Token
 
-        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
 
-        :param exchange_permission_token_request: The request body for exchanging an Permission Access Token. (required)
+        :param exchange_permission_token_request: The request body to acquire an Access Token. (required)
         :type exchange_permission_token_request: ExchangePermissionTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -88,7 +88,7 @@ class OAuthApi:
     @validate_call
     def exchange_permission_token_with_http_info(
         self,
-        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body for exchanging an Permission Access Token.")],
+        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body to acquire an Access Token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -98,11 +98,11 @@ class OAuthApi:
             ]
         ] = None,
     ) -> ApiResponse[ExchangePermissionToken201Response]:
-        """Exchange Permission Access Token by API Key
+        """Get Access Token
 
-        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
 
-        :param exchange_permission_token_request: The request body for exchanging an Permission Access Token. (required)
+        :param exchange_permission_token_request: The request body to acquire an Access Token. (required)
         :type exchange_permission_token_request: ExchangePermissionTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -134,7 +134,7 @@ class OAuthApi:
     @validate_call
     def exchange_permission_token_without_preload_content(
         self,
-        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body for exchanging an Permission Access Token.")],
+        exchange_permission_token_request: Annotated[ExchangePermissionTokenRequest, Field(description="The request body to acquire an Access Token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -144,11 +144,11 @@ class OAuthApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Exchange Permission Access Token by API Key
+        """Get Access Token
 
-        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
 
-        :param exchange_permission_token_request: The request body for exchanging an Permission Access Token. (required)
+        :param exchange_permission_token_request: The request body to acquire an Access Token. (required)
         :type exchange_permission_token_request: ExchangePermissionTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -416,7 +416,7 @@ class OAuthApi:
     @validate_call
     def refresh_permission_token(
         self,
-        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body for refreshing an Permission Access Token.")],
+        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body to refresh the Access Token and the Refresh Token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -426,11 +426,11 @@ class OAuthApi:
             ]
         ] = None,
     ) -> ExchangePermissionToken201Response:
-        """Refresh Permission Access Token by Permission Refresh Token
+        """Refresh Access Token
 
-        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+        This operation refreshes the Access Token and Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call this operation to get a new Access Token and Refresh Token. 
 
-        :param refresh_permission_token_request: The request body for refreshing an Permission Access Token. (required)
+        :param refresh_permission_token_request: The request body to refresh the Access Token and the Refresh Token. (required)
         :type refresh_permission_token_request: RefreshPermissionTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -462,7 +462,7 @@ class OAuthApi:
     @validate_call
     def refresh_permission_token_with_http_info(
         self,
-        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body for refreshing an Permission Access Token.")],
+        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body to refresh the Access Token and the Refresh Token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -472,11 +472,11 @@ class OAuthApi:
             ]
         ] = None,
     ) -> ApiResponse[ExchangePermissionToken201Response]:
-        """Refresh Permission Access Token by Permission Refresh Token
+        """Refresh Access Token
 
-        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+        This operation refreshes the Access Token and Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call this operation to get a new Access Token and Refresh Token. 
 
-        :param refresh_permission_token_request: The request body for refreshing an Permission Access Token. (required)
+        :param refresh_permission_token_request: The request body to refresh the Access Token and the Refresh Token. (required)
         :type refresh_permission_token_request: RefreshPermissionTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -508,7 +508,7 @@ class OAuthApi:
     @validate_call
     def refresh_permission_token_without_preload_content(
         self,
-        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body for refreshing an Permission Access Token.")],
+        refresh_permission_token_request: Annotated[RefreshPermissionTokenRequest, Field(description="The request body to refresh the Access Token and the Refresh Token.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -518,11 +518,11 @@ class OAuthApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Refresh Permission Access Token by Permission Refresh Token
+        """Refresh Access Token
 
-        <Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
+        This operation refreshes the Access Token and Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call this operation to get a new Access Token and Refresh Token. 
 
-        :param refresh_permission_token_request: The request body for refreshing an Permission Access Token. (required)
+        :param refresh_permission_token_request: The request body to refresh the Access Token and the Refresh Token. (required)
         :type refresh_permission_token_request: RefreshPermissionTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

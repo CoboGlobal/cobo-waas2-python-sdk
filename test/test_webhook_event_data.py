@@ -50,7 +50,7 @@ class TestWebhookEventData(unittest.TestCase):
                 destination = None,
                 result = None,
                 fee = None,
-                initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
+                initiator = 'api_key_b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
                 initiator_type = 'API',
                 confirmed_num = 12,
                 confirming_threshold = 15,
@@ -168,6 +168,13 @@ class TestWebhookEventData(unittest.TestCase):
                     custodial_minimum_deposit_threshold = '0.0001', 
                     asset_model_type = 'Account', ),
                 feedback = 'Token has been added to the system',
+                address = '0x0000000000000000000000000000000000000000',
+                wallet_uuid = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                balance = cobo_waas2.models.balance.Balance(
+                    total = '100.0', 
+                    available = '80.5', 
+                    pending = '0', 
+                    locked = '0', ),
                 order_id = 'O20250304-M1001-1001',
                 merchant_id = 'M1001',
                 payable_amount = '103.03',
@@ -192,10 +199,14 @@ class TestWebhookEventData(unittest.TestCase):
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
                     ],
+                settlement_status = 'Pending',
                 refund_id = 'R20250304-M1001-1001',
                 amount = '0.0025',
                 to_address = '0x9876543210abcdef1234567890abcdef12345678',
                 refund_type = 'Merchant',
+                charge_merchant_fee = False,
+                merchant_fee_amount = '0.0001',
+                merchant_fee_token_id = 'ETH_USDT',
                 settlement_request_id = 'S20250304-1001',
                 settlements = [
                     cobo_waas2.models.settlement_detail.SettlementDetail(
@@ -226,7 +237,8 @@ class TestWebhookEventData(unittest.TestCase):
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, 
                         crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
-                        payout_channel = 'Crypto', )
+                        payout_channel = 'Crypto', 
+                        acquiring_type = 'Order', )
                     ]
             )
         else:
@@ -274,6 +286,13 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 contract_address = '0x6B175474E89094C44Da98b954EedeAC495271d0F',
                 wallet_subtype = 'Asset',
+                address = '0x0000000000000000000000000000000000000000',
+                wallet_uuid = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                balance = cobo_waas2.models.balance.Balance(
+                    total = '100.0', 
+                    available = '80.5', 
+                    pending = '0', 
+                    locked = '0', ),
                 order_id = 'O20250304-M1001-1001',
                 payable_amount = '103.03',
                 receive_address = '0x1234567890abcdef1234567890abcdef12345678',
@@ -316,7 +335,8 @@ class TestWebhookEventData(unittest.TestCase):
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, 
                         crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
-                        payout_channel = 'Crypto', )
+                        payout_channel = 'Crypto', 
+                        acquiring_type = 'Order', )
                     ],
         )
         """

@@ -16,8 +16,11 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.create_settlement import CreateSettlement
+from cobo_waas2.models.payout_channel import PayoutChannel
+from cobo_waas2.models.settlement_type import SettlementType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +30,11 @@ class CreateSettlementRequestRequest(BaseModel):
     CreateSettlementRequestRequest
     """  # noqa: E501
     request_id: StrictStr = Field(description="The request ID that is used to track a settlement request. The request ID is provided by you and must be unique.")
+    acquiring_type: Optional[AcquiringType] = None
+    payout_channel: Optional[PayoutChannel] = None
+    settlement_type: Optional[SettlementType] = None
     settlements: List[CreateSettlement]
-    __properties: ClassVar[List[str]] = ["request_id", "settlements"]
+    __properties: ClassVar[List[str]] = ["request_id", "acquiring_type", "payout_channel", "settlement_type", "settlements"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +95,9 @@ class CreateSettlementRequestRequest(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
+            "acquiring_type": obj.get("acquiring_type"),
+            "payout_channel": obj.get("payout_channel"),
+            "settlement_type": obj.get("settlement_type"),
             "settlements": [CreateSettlement.from_dict(_item) for _item in obj["settlements"]] if obj.get("settlements") is not None else None
         })
         return _obj

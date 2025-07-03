@@ -25,7 +25,7 @@ class RefreshPermissionTokenRequest(BaseModel):
     """
     RefreshPermissionTokenRequest
     """  # noqa: E501
-    refresh_token: StrictStr = Field(description="The Refresh Token of the current Org Access Token.")
+    refresh_token: StrictStr = Field(description="The Refresh Token of the current Access Token.")
     __properties: ClassVar[List[str]] = ["refresh_token"]
 
     model_config = ConfigDict(

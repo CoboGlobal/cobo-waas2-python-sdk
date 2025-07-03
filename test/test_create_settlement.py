@@ -39,9 +39,7 @@ class TestCreateSettlement(unittest.TestCase):
                 currency = 'USD',
                 amount = '500.00',
                 bank_account_id = '0123e457-e89b-12d3-a456-426614174004',
-                settlement_type = 'Merchant',
                 crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd',
-                payout_channel = 'Crypto',
                 order_ids = [
                     'O20250304-M1001-1001'
                     ]

@@ -27,7 +27,7 @@ class WebhookEventLog(BaseModel):
     The webhook event log.
     """  # noqa: E501
     id: StrictStr = Field(description="The event log ID.")
-    created_timestamp: StrictInt = Field(description="The time when the log was created, in Unix timestamp format, measured in milliseconds.")
+    created_timestamp: StrictInt = Field(description="The time when the event type was triggered, in Unix timestamp format (milliseconds). - The value remains unchanged across retries. - The default webhook timeout is 2 seconds. ")
     request_headers: Dict[str, Any] = Field(description="The request headers of the webhook event.")
     request_body: WebhookEvent
     response_body: Optional[StrictStr] = Field(default=None, description="The response body of the webhook event.")

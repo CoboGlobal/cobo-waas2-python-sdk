@@ -26,7 +26,8 @@ class UpdateMerchantByIdRequest(BaseModel):
     UpdateMerchantByIdRequest
     """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The merchant name.")
-    __properties: ClassVar[List[str]] = ["name"]
+    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Expressed as a string in decimal format where \"0.1\" represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions.")
+    __properties: ClassVar[List[str]] = ["name", "developer_fee_rate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,7 +80,8 @@ class UpdateMerchantByIdRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "developer_fee_rate": obj.get("developer_fee_rate")
         })
         return _obj
 

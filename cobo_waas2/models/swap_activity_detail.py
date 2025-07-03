@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.swap_activity_approvers import SwapActivityApprovers
+from cobo_waas2.models.swap_activity_signers import SwapActivitySigners
 from cobo_waas2.models.swap_activity_status import SwapActivityStatus
 from cobo_waas2.models.swap_activity_timeline import SwapActivityTimeline
 from cobo_waas2.models.swap_type import SwapType
@@ -48,7 +49,8 @@ class SwapActivityDetail(BaseModel):
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was last updated, in Unix timestamp format, measured in milliseconds.")
     timeline: Optional[List[SwapActivityTimeline]] = None
     approvers: Optional[List[SwapActivityApprovers]] = None
-    __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp", "timeline", "approvers"]
+    signers: Optional[List[SwapActivitySigners]] = None
+    __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp", "timeline", "approvers", "signers"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +105,13 @@ class SwapActivityDetail(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['approvers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in signers (list)
+        _items = []
+        if self.signers:
+            for _item in self.signers:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['signers'] = _items
         # set to None if initiator (nullable) is None
         # and model_fields_set contains the field
         if self.initiator is None and "initiator" in self.model_fields_set:
@@ -137,7 +146,8 @@ class SwapActivityDetail(BaseModel):
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "timeline": [SwapActivityTimeline.from_dict(_item) for _item in obj["timeline"]] if obj.get("timeline") is not None else None,
-            "approvers": [SwapActivityApprovers.from_dict(_item) for _item in obj["approvers"]] if obj.get("approvers") is not None else None
+            "approvers": [SwapActivityApprovers.from_dict(_item) for _item in obj["approvers"]] if obj.get("approvers") is not None else None,
+            "signers": [SwapActivitySigners.from_dict(_item) for _item in obj["signers"]] if obj.get("signers") is not None else None
         })
         return _obj
 

@@ -26,7 +26,7 @@ class TransactionEvmCalldataInfo(BaseModel):
     """
     TransactionEvmCalldataInfo
     """  # noqa: E501
-    chain_id: Optional[StrictStr] = Field(default=None, description="The ID of the chain on which the smart contract is deployed.")
+    chain_id: Optional[StrictStr] = Field(default=None, description="The ID of the chain on which the smart contract is issued.")
     address: Optional[StrictStr] = Field(default=None, description="The address of the smart contract.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the smart contract.")
     impl_address: Optional[StrictStr] = Field(default=None, description="The address of the implementation smart contract. This property is applicable only when the specified smart contract is a proxy contract.")

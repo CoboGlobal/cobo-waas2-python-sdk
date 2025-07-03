@@ -62,7 +62,8 @@ class TestOrder(unittest.TestCase):
                         status = 'Submitted', 
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
-                    ]
+                    ],
+                settlement_status = 'Pending'
             )
         else:
             return Order(

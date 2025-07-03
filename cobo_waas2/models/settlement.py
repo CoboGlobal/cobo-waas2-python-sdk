@@ -31,9 +31,9 @@ class Settlement(BaseModel):
     request_id: StrictStr = Field(description="The request ID provided by you when creating the settlement request.")
     status: SettleRequestStatus
     settlements: List[SettlementDetail]
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the settlement request, represented as a UNIX timestamp in seconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement request, represented as a UNIX timestamp in seconds.")
-    initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this settlement request, usually the user's API key.")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the settlement request, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the settlement request, represented as a UNIX timestamp in seconds.")
+    initiator: Optional[StrictStr] = Field(default=None, description=" The initiator of this settlement request. Can return either an API key or the Payment Management App's ID.  - Format `api_key_<API_KEY>`: Indicates the settlement request was initiated via the Payment API using the API key. - Format `app_<APP_ID>`: Indicates the settlement request was initiated through the Payment Management App using the App ID. ")
     __properties: ClassVar[List[str]] = ["settlement_request_id", "request_id", "status", "settlements", "created_timestamp", "updated_timestamp", "initiator"]
 
     model_config = ConfigDict(

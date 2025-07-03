@@ -27,8 +27,8 @@ class BankAccount(BaseModel):
     """  # noqa: E501
     bank_account_id: StrictStr = Field(description="The bank account ID.")
     info: Dict[str, Any] = Field(description="JSON-formatted bank account details.")
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the bank account, represented as a UNIX timestamp in seconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the bank account, represented as a UNIX timestamp in seconds.")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the bank account, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the bank account, represented as a UNIX timestamp in seconds.")
     __properties: ClassVar[List[str]] = ["bank_account_id", "info", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(

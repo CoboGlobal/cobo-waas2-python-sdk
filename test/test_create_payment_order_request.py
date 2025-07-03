@@ -41,7 +41,8 @@ class TestCreatePaymentOrderRequest(unittest.TestCase):
                 fee_amount = '2.00',
                 merchant_order_code = 'M20240201001',
                 psp_order_code = 'P20240201001',
-                expired_in = 1800
+                expired_in = 1800,
+                use_dedicated_address = False
             )
         else:
             return CreatePaymentOrderRequest(
