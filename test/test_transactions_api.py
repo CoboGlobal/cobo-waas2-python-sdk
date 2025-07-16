@@ -128,6 +128,18 @@ class TestTransactionsApi(unittest.TestCase):
         api_response = self.api.estimate_fee(estimate_fee_params=estimate_fee_params)
         """
 
+    def test_get_transaction_approval_detail(self) -> None:
+        """
+        Test case for get_transaction_approval_detail
+
+        Get transaction approval details
+        """
+        """
+        transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.get_transaction_approval_detail(transaction_id)
+        """
+
     def test_get_transaction_by_id(self) -> None:
         """
         Test case for get_transaction_by_id
@@ -138,6 +150,19 @@ class TestTransactionsApi(unittest.TestCase):
         transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
         api_response = self.api.get_transaction_by_id(transaction_id)
+        """
+
+    def test_list_transaction_approval_details(self) -> None:
+        """
+        Test case for list_transaction_approval_details
+
+        List transaction approval details
+        """
+        """
+        transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
+        cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
+
+        api_response = self.api.list_transaction_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids)
         """
 
     def test_list_transactions(self) -> None:
