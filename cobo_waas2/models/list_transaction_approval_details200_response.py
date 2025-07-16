@@ -15,18 +15,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.transaction_approval_detail import TransactionApprovalDetail
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class FILBase(BaseModel):
+class ListTransactionApprovalDetails200Response(BaseModel):
     """
-    FILBase
+    ListTransactionApprovalDetails200Response
     """  # noqa: E501
-    gas_base: Optional[StrictStr] = Field(default=None, description="The minimum fee required for a transaction to be included in a block. The base fee is dynamically adjusted based on network congestion to maintain target block utilization. It is burned rather than paid to miners, reducing the total Filecoin supply over time.")
-    __properties: ClassVar[List[str]] = ["gas_base"]
+    data: Optional[List[TransactionApprovalDetail]] = None
+    __properties: ClassVar[List[str]] = ["data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -46,7 +47,7 @@ class FILBase(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FILBase from a JSON string"""
+        """Create an instance of ListTransactionApprovalDetails200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -67,11 +68,18 @@ class FILBase(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        _items = []
+        if self.data:
+            for _item in self.data:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['data'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FILBase from a dict"""
+        """Create an instance of ListTransactionApprovalDetails200Response from a dict"""
         if obj is None:
             return None
 
@@ -79,7 +87,7 @@ class FILBase(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "gas_base": obj.get("gas_base")
+            "data": [TransactionApprovalDetail.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
         })
         return _obj
 

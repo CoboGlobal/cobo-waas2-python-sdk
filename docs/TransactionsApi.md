@@ -12,7 +12,9 @@ Method | HTTP request | Description
 [**create_transfer_transaction**](TransactionsApi.md#create_transfer_transaction) | **POST** /transactions/transfer | Transfer token
 [**drop_transaction_by_id**](TransactionsApi.md#drop_transaction_by_id) | **POST** /transactions/{transaction_id}/drop | Drop transaction
 [**estimate_fee**](TransactionsApi.md#estimate_fee) | **POST** /transactions/estimate_fee | Estimate transaction fee
+[**get_transaction_approval_detail**](TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval details
 [**get_transaction_by_id**](TransactionsApi.md#get_transaction_by_id) | **GET** /transactions/{transaction_id} | Get transaction information
+[**list_transaction_approval_details**](TransactionsApi.md#list_transaction_approval_details) | **GET** /transactions/approval_details | List transaction approval details
 [**list_transactions**](TransactionsApi.md#list_transactions) | **GET** /transactions | List all transactions
 [**resend_transaction_by_id**](TransactionsApi.md#resend_transaction_by_id) | **POST** /transactions/{transaction_id}/resend | Resend transaction
 [**sign_and_broadcast_transaction_by_id**](TransactionsApi.md#sign_and_broadcast_transaction_by_id) | **POST** /transactions/{transaction_id}/sign_and_broadcast | Sign and broadcast transaction
@@ -607,6 +609,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_transaction_approval_detail**
+> TransactionApprovalDetail get_transaction_approval_detail(transaction_id)
+
+Get transaction approval details
+
+This operation retrieves detailed approval information about a specified transaction. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.transaction_approval_detail import TransactionApprovalDetail
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TransactionsApi(api_client)
+    transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+    try:
+        # Get transaction approval details
+        api_response = api_instance.get_transaction_approval_detail(transaction_id)
+        print("The response of TransactionsApi->get_transaction_approval_detail:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TransactionsApi->get_transaction_approval_detail: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transaction_id** | **str**| The transaction ID. | 
+
+### Return type
+
+[**TransactionApprovalDetail**](TransactionApprovalDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The information about a transaction approval detail. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_transaction_by_id**
 > TransactionDetail get_transaction_by_id(transaction_id)
 
@@ -674,6 +748,80 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The information about a transaction. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_transaction_approval_details**
+> ListTransactionApprovalDetails200Response list_transaction_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids)
+
+List transaction approval details
+
+This operation retrieves detailed approval information for all transactions. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_transaction_approval_details200_response import ListTransactionApprovalDetails200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TransactionsApi(api_client)
+    transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
+    cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
+
+    try:
+        # List transaction approval details
+        api_response = api_instance.list_transaction_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids)
+        print("The response of TransactionsApi->list_transaction_approval_details:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TransactionsApi->list_transaction_approval_details: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transaction_ids** | **str**| A list of transaction IDs, separated by comma. | [optional] 
+ **cobo_ids** | **str**| A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction. | [optional] 
+
+### Return type
+
+[**ListTransactionApprovalDetails200Response**](ListTransactionApprovalDetails200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The information about transaction approval detail. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

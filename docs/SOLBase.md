@@ -1,6 +1,5 @@
 # SOLBase
 
-The transaction base fee based on the SOL fee model.
 
 ## Properties
 

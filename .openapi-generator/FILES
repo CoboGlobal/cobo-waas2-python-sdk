@@ -280,6 +280,7 @@ cobo_waas2/models/list_token_balances_for_fee_station200_response_data_inner.py
 cobo_waas2/models/list_token_listing_requests200_response.py
 cobo_waas2/models/list_top_up_payers200_response.py
 cobo_waas2/models/list_top_up_payers200_response_data_inner.py
+cobo_waas2/models/list_transaction_approval_details200_response.py
 cobo_waas2/models/list_transactions200_response.py
 cobo_waas2/models/list_tss_requests200_response.py
 cobo_waas2/models/list_utxos200_response.py
@@ -903,6 +904,7 @@ docs/ListTokenBalancesForFeeStation200ResponseDataInner.md
 docs/ListTokenListingRequests200Response.md
 docs/ListTopUpPayers200Response.md
 docs/ListTopUpPayers200ResponseDataInner.md
+docs/ListTransactionApprovalDetails200Response.md
 docs/ListTransactions200Response.md
 docs/ListTssRequests200Response.md
 docs/ListUtxos200Response.md
@@ -1541,6 +1543,7 @@ test/test_list_token_balances_for_fee_station200_response_data_inner.py
 test/test_list_token_listing_requests200_response.py
 test/test_list_top_up_payers200_response.py
 test/test_list_top_up_payers200_response_data_inner.py
+test/test_list_transaction_approval_details200_response.py
 test/test_list_transactions200_response.py
 test/test_list_tss_requests200_response.py
 test/test_list_utxos200_response.py
