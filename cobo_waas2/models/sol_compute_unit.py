@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class SOLComputeUnit(BaseModel):
     """
-    The transaction gas price configuration based on the Solana fee model.
+    SOLComputeUnit
     """  # noqa: E501
     compute_unit_price: Optional[StrictStr] = Field(default=None, description="The price paid per compute unit. This value determines the priority fee for the transaction, allowing you to increase inclusion probability in congested conditions.")
     compute_unit_limit: Optional[StrictStr] = Field(default=None, description="The maximum number of compute units your transaction is allowed to consume. It sets an upper bound on computational resource usage to prevent overload.")

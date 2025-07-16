@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class UtxoFeeBasePrice(BaseModel):
     """
-    The transaction fee rate for UTXO-based chains (such as Bitcoin).
+    UtxoFeeBasePrice
     """  # noqa: E501
     fee_rate: Optional[StrictStr] = Field(default=None, description="The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain.")
     __properties: ClassVar[List[str]] = ["fee_rate"]

@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class EvmLegacyFeeBasePrice(BaseModel):
     """
-    The transaction gas price based on the legacy fee model.
+    EvmLegacyFeeBasePrice
     """  # noqa: E501
     gas_price: Optional[StrictStr] = Field(default=None, description="The gas price, in wei. The gas price represents the amount of ETH that must be paid to validators for processing transactions per gas unit used.")
     __properties: ClassVar[List[str]] = ["gas_price"]

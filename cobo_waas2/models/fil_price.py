@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class FILPrice(BaseModel):
     """
-    The transaction gas price configuration based on the Filecoin fee model.
+    FILPrice
     """  # noqa: E501
     gas_premium: Optional[StrictStr] = Field(default=None, description="An optional tip you can include to prioritize your transaction. The gas premium incentivizes miners to include your transaction sooner than those offering only the base fee.")
     gas_fee_cap: Optional[StrictStr] = Field(default=None, description="The maximum gas price you are willing to pay per unit of gas.")
