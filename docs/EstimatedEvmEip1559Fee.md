@@ -7,7 +7,7 @@ The estimated transaction fee based on the EIP-1559 fee model.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fee_type** | [**FeeType**](FeeType.md) |  | 
-**token_id** | **str** | The token ID of the transaction fee. | 
+**token_id** | **str** | The token used to pay the transaction fee. | 
 **slow** | [**EstimatedEvmEip1559FeeSlow**](EstimatedEvmEip1559FeeSlow.md) |  | [optional] 
 **recommended** | [**EstimatedEvmEip1559FeeSlow**](EstimatedEvmEip1559FeeSlow.md) |  | 
 **fast** | [**EstimatedEvmEip1559FeeSlow**](EstimatedEvmEip1559FeeSlow.md) |  | [optional] 

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fee_type** | [**FeeType**](FeeType.md) |  | 
-**token_id** | **str** | The token ID of the transaction fee. | 
+**token_id** | **str** | The token used to pay the transaction fee. | 
 **fee_amount** | **str** | The transaction fee that you need to pay for the transaction. | [optional] 
 **slow** | [**UtxoFeeBasePrice**](UtxoFeeBasePrice.md) |  | [optional] 
 **recommended** | [**UtxoFeeBasePrice**](UtxoFeeBasePrice.md) |  | 

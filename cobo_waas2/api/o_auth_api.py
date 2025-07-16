@@ -54,7 +54,7 @@ class OAuthApi:
     ) -> ExchangePermissionToken201Response:
         """Get Access Token
 
-        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
+        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](https://www.cobo.com/developers/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
 
         :param exchange_permission_token_request: The request body to acquire an Access Token. (required)
         :type exchange_permission_token_request: ExchangePermissionTokenRequest
@@ -100,7 +100,7 @@ class OAuthApi:
     ) -> ApiResponse[ExchangePermissionToken201Response]:
         """Get Access Token
 
-        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
+        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](https://www.cobo.com/developers/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
 
         :param exchange_permission_token_request: The request body to acquire an Access Token. (required)
         :type exchange_permission_token_request: ExchangePermissionTokenRequest
@@ -146,7 +146,7 @@ class OAuthApi:
     ) -> RESTResponseType:
         """Get Access Token
 
-        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
+        This operation acquires an Access Token and a Refresh Token for the Checkout SDK.  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](https://www.cobo.com/developers/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
 
         :param exchange_permission_token_request: The request body to acquire an Access Token. (required)
         :type exchange_permission_token_request: ExchangePermissionTokenRequest

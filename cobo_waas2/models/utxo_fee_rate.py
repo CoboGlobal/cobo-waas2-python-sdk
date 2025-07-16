@@ -28,7 +28,7 @@ class UtxoFeeRate(BaseModel):
     The transaction fee rate for UTXO-based chains.
     """  # noqa: E501
     fee_type: FeeType
-    token_id: StrictStr = Field(description="The token ID of the transaction fee.")
+    token_id: StrictStr = Field(description="The token used to pay the transaction fee.")
     slow: Optional[UtxoFeeBasePrice] = None
     recommended: UtxoFeeBasePrice
     fast: Optional[UtxoFeeBasePrice] = None

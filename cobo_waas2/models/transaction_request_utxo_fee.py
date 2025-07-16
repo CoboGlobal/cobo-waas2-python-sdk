@@ -28,7 +28,7 @@ class TransactionRequestUtxoFee(BaseModel):
     """  # noqa: E501
     fee_rate: Optional[StrictStr] = Field(default=None, description="The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain.")
     fee_type: FeeType
-    token_id: StrictStr = Field(description="The token ID of the transaction fee.")
+    token_id: StrictStr = Field(description="The token used to pay the transaction fee.")
     max_fee_amount: Optional[StrictStr] = Field(default=None, description="The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee.")
     __properties: ClassVar[List[str]] = ["fee_rate", "fee_type", "token_id", "max_fee_amount"]
 

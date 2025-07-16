@@ -24,15 +24,15 @@ from typing_extensions import Self
 
 class TransactionSOLFee(BaseModel):
     """
-    The transaction fee actually charged by the chain that uses the SOL fee model.  In the SOL fee model, the calculation method for the fee is: fee = base_fee + compute_unit_price * compute_unit_limit + rent_amount, refer to [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
+    The transaction fee actually charged by the chain that uses the Solana fee model.  In this model, the fee is calculated as: fee = base fee + (compute unit price * compute unit limit) + rent (if applicable). For more details, refer to [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
-    base_fee: Optional[StrictStr] = Field(default=None, description="The fundamental fee required for each transaction. It is charged to prevent spam transactions and network congestion, ensuring that only meaningful transactions consume network resources.")
-    rent_amount: Optional[StrictStr] = Field(default=None, description="The fee charged as rent for maintaining the state of accounts on the blockchain. This rent ensures accounts are stored on-chain over the long term and that there's sufficient balance to sustain the account state.")
-    compute_unit_price: Optional[StrictStr] = Field(default=None, description="The cost per compute unit. Transactions consume computational resources measured in compute units, and this price helps determine the cost of executing transactions, especially complex ones involving smart contracts.")
-    compute_unit_limit: Optional[StrictStr] = Field(default=None, description="The maximum number of compute units allowed for a transaction. This limits the resources any single transaction can consume, preventing excessive resource usage that could impact network performance negatively.")
+    base_fee: Optional[StrictStr] = Field(default=None, description="A fixed fee charged per signature. The default is 5,000 lamports per signature.")
+    rent_amount: Optional[StrictStr] = Field(default=None, description="The rent fee charged by the network to store non–rent-exempt accounts on-chain. It is deducted periodically until the account maintains the minimum balance required for rent exemption.")
+    compute_unit_price: Optional[StrictStr] = Field(default=None, description="The price paid per compute unit. This value determines the priority fee for the transaction, allowing you to increase inclusion probability in congested conditions.")
+    compute_unit_limit: Optional[StrictStr] = Field(default=None, description="The maximum number of compute units your transaction is allowed to consume. It sets an upper bound on computational resource usage to prevent overload.")
     fee_type: FeeType
-    token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
-    fee_used: Optional[StrictStr] = Field(default=None, description="The transaction fee.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token used to pay the transaction fee.")
+    fee_used: Optional[StrictStr] = Field(default=None, description="The actually charged transaction fee.")
     estimated_fee_used: Optional[StrictStr] = Field(default=None, description="The estimated transaction fee.")
     __properties: ClassVar[List[str]] = ["base_fee", "rent_amount", "compute_unit_price", "compute_unit_limit", "fee_type", "token_id", "fee_used", "estimated_fee_used"]
 

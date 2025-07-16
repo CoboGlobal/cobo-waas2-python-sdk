@@ -28,7 +28,7 @@ class TransactionRequestFixedFee(BaseModel):
     """  # noqa: E501
     max_fee_amount: Optional[StrictStr] = Field(default=None, description="The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee.")
     fee_type: FeeType
-    token_id: StrictStr = Field(description="The token ID of the transaction fee.")
+    token_id: StrictStr = Field(description="The token used to pay the transaction fee.")
     __properties: ClassVar[List[str]] = ["max_fee_amount", "fee_type", "token_id"]
 
     model_config = ConfigDict(

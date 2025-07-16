@@ -35,7 +35,7 @@ class TestTransactionFee(unittest.TestCase):
         if include_optional:
             return TransactionFee(
                 fee_type = 'EVM_EIP_1559',
-                token_id = 'BTC',
+                token_id = 'FIL',
                 effective_gas_price = '100000000',
                 fee_used = '0.1',
                 estimated_fee_used = '0.1',

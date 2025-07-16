@@ -1,0 +1,31 @@
+# SuspendedTokenEventData
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The token suspension event data. | 
+**token_ids** | **str** | A list of token IDs, separated by comma. | 
+**operation_type** | [**SuspendedTokenOperationType**](SuspendedTokenOperationType.md) |  | 
+
+## Example
+
+```python
+from cobo_waas2.models.suspended_token_event_data import SuspendedTokenEventData
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SuspendedTokenEventData from a JSON string
+suspended_token_event_data_instance = SuspendedTokenEventData.from_json(json)
+# print the JSON string representation of the object
+print(SuspendedTokenEventData.to_json())
+
+# convert the object into a dict
+suspended_token_event_data_dict = suspended_token_event_data_instance.to_dict()
+# create an instance of SuspendedTokenEventData from a dict
+suspended_token_event_data_from_dict = SuspendedTokenEventData.from_dict(suspended_token_event_data_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

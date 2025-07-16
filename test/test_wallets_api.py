@@ -158,6 +158,19 @@ class TestWalletsApi(unittest.TestCase):
         api_response = self.api.get_max_transferable_value(wallet_id, token_id, fee_rate, to_address, from_address=from_address)
         """
 
+    def test_get_max_transferable_value_with_fee_model(self) -> None:
+        """
+        Test case for get_max_transferable_value_with_fee_model
+
+        Estimate maximum transferable value
+        """
+        """
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        get_max_transferable_value_with_fee_model_request = cobo_waas2.GetMaxTransferableValueWithFeeModelRequest()
+
+        api_response = self.api.get_max_transferable_value_with_fee_model(wallet_id, get_max_transferable_value_with_fee_model_request=get_max_transferable_value_with_fee_model_request)
+        """
+
     def test_get_token_by_id(self) -> None:
         """
         Test case for get_token_by_id
