@@ -32,7 +32,7 @@ class TopUpAddress(BaseModel):
     token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
     chain: Optional[StrictStr] = Field(default=None, description="The chain ID.")
     developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to top-up transactions made to this address. Expressed as a decimal string where \"0.1\" represents 10%.")
-    min_amount: StrictStr = Field(description="The minimum top-up amount allowed for this address. Top-ups below this threshold will not be credited to merchant funds, but to developer funds instead.")
+    min_amount: StrictStr = Field(description="The minimum top-up amount allowed for this address. Top-ups below this threshold will not be credited to merchant or developer funds.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the top-up address, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the top-up address, represented as a UNIX timestamp in seconds.")
     __properties: ClassVar[List[str]] = ["address", "payer_id", "custom_payer_id", "merchant_id", "token_id", "chain", "developer_fee_rate", "min_amount", "created_timestamp", "updated_timestamp"]

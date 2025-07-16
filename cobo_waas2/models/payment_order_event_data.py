@@ -28,7 +28,7 @@ class PaymentOrderEventData(BaseModel):
     """
     PaymentOrderEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `BalanceUpdateInfo`: The balance update event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data.")
     order_id: StrictStr = Field(description="The order ID.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
     token_id: StrictStr = Field(description=" The ID of the cryptocurrency used for payment. Supported tokens:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
@@ -53,8 +53,8 @@ class PaymentOrderEventData(BaseModel):
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'BalanceUpdateInfo', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'BalanceUpdateInfo', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'BalanceUpdateInfo', 'SuspendedToken']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'BalanceUpdateInfo', 'SuspendedToken')")
         return value
 
     model_config = ConfigDict(

@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **max_fee_amount** | **str** | The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee. | [optional] 
 **fee_type** | [**FeeType**](FeeType.md) |  | 
-**token_id** | **str** | The token ID of the transaction fee. | [optional] 
-**fee_used** | **str** | The transaction fee. | [optional] 
+**token_id** | **str** | The token used to pay the transaction fee. | [optional] 
+**fee_used** | **str** | The actually charged transaction fee. | [optional] 
 **estimated_fee_used** | **str** | The estimated transaction fee. | [optional] 
 
 ## Example

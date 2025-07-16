@@ -25,8 +25,8 @@ class SOLBase(BaseModel):
     """
     The transaction base fee based on the SOL fee model.
     """  # noqa: E501
-    base_fee: Optional[StrictStr] = Field(default=None, description="The fundamental fee required for each transaction. It is charged to prevent spam transactions and network congestion, ensuring that only meaningful transactions consume network resources.")
-    rent_amount: Optional[StrictStr] = Field(default=None, description="The fee charged as rent for maintaining the state of accounts on the blockchain. This rent ensures accounts are stored on-chain over the long term and that there's sufficient balance to sustain the account state.")
+    base_fee: Optional[StrictStr] = Field(default=None, description="A fixed fee charged per signature. The default is 5,000 lamports per signature.")
+    rent_amount: Optional[StrictStr] = Field(default=None, description="The rent fee charged by the network to store non–rent-exempt accounts on-chain. It is deducted periodically until the account maintains the minimum balance required for rent exemption.")
     __properties: ClassVar[List[str]] = ["base_fee", "rent_amount"]
 
     model_config = ConfigDict(

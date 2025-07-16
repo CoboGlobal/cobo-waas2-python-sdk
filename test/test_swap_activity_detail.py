@@ -50,6 +50,8 @@ class TestSwapActivityDetail(unittest.TestCase):
                 description = 'This is a description of the swap activity.',
                 created_timestamp = 1677587333000,
                 updated_timestamp = 1677587393000,
+                network_fee = None,
+                destination_address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
                 timeline = [
                     cobo_waas2.models.swap_activity_timeline.SwapActivityTimeline(
                         action = 'Submitted', 

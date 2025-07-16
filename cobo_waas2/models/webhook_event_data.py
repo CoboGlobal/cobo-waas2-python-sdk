@@ -22,6 +22,7 @@ from cobo_waas2.models.mpc_vault_event_data import MPCVaultEventData
 from cobo_waas2.models.payment_order_event_data import PaymentOrderEventData
 from cobo_waas2.models.payment_refund_event_data import PaymentRefundEventData
 from cobo_waas2.models.payment_settlement_event import PaymentSettlementEvent
+from cobo_waas2.models.suspended_token_event_data import SuspendedTokenEventData
 from cobo_waas2.models.token_listing_event_data import TokenListingEventData
 from cobo_waas2.models.tokens_event_data import TokensEventData
 from cobo_waas2.models.transaction_webhook_event_data import TransactionWebhookEventData
@@ -31,7 +32,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-WEBHOOKEVENTDATA_ONE_OF_SCHEMAS = ["AddressesEventData", "BalanceUpdateInfoEventData", "ChainsEventData", "MPCVaultEventData", "PaymentOrderEventData", "PaymentRefundEventData", "PaymentSettlementEvent", "TSSRequestWebhookEventData", "TokenListingEventData", "TokensEventData", "TransactionWebhookEventData", "WalletInfoEventData"]
+WEBHOOKEVENTDATA_ONE_OF_SCHEMAS = ["AddressesEventData", "BalanceUpdateInfoEventData", "ChainsEventData", "MPCVaultEventData", "PaymentOrderEventData", "PaymentRefundEventData", "PaymentSettlementEvent", "SuspendedTokenEventData", "TSSRequestWebhookEventData", "TokenListingEventData", "TokensEventData", "TransactionWebhookEventData", "WalletInfoEventData"]
 
 class WebhookEventData(BaseModel):
     """
@@ -55,14 +56,16 @@ class WebhookEventData(BaseModel):
     oneof_schema_8_validator: Optional[TokenListingEventData] = None
     # data type: BalanceUpdateInfoEventData
     oneof_schema_9_validator: Optional[BalanceUpdateInfoEventData] = None
+    # data type: SuspendedTokenEventData
+    oneof_schema_10_validator: Optional[SuspendedTokenEventData] = None
     # data type: PaymentOrderEventData
-    oneof_schema_10_validator: Optional[PaymentOrderEventData] = None
+    oneof_schema_11_validator: Optional[PaymentOrderEventData] = None
     # data type: PaymentRefundEventData
-    oneof_schema_11_validator: Optional[PaymentRefundEventData] = None
+    oneof_schema_12_validator: Optional[PaymentRefundEventData] = None
     # data type: PaymentSettlementEvent
-    oneof_schema_12_validator: Optional[PaymentSettlementEvent] = None
-    actual_instance: Optional[Union[AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData]] = None
-    one_of_schemas: Set[str] = { "AddressesEventData", "BalanceUpdateInfoEventData", "ChainsEventData", "MPCVaultEventData", "PaymentOrderEventData", "PaymentRefundEventData", "PaymentSettlementEvent", "TSSRequestWebhookEventData", "TokenListingEventData", "TokensEventData", "TransactionWebhookEventData", "WalletInfoEventData" }
+    oneof_schema_13_validator: Optional[PaymentSettlementEvent] = None
+    actual_instance: Optional[Union[AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, SuspendedTokenEventData, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData]] = None
+    one_of_schemas: Set[str] = { "AddressesEventData", "BalanceUpdateInfoEventData", "ChainsEventData", "MPCVaultEventData", "PaymentOrderEventData", "PaymentRefundEventData", "PaymentSettlementEvent", "SuspendedTokenEventData", "TSSRequestWebhookEventData", "TokenListingEventData", "TokensEventData", "TransactionWebhookEventData", "WalletInfoEventData" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -133,6 +136,11 @@ class WebhookEventData(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `BalanceUpdateInfoEventData`")
         else:
             match += 1
+        # validate data type: SuspendedTokenEventData
+        if not isinstance(v, SuspendedTokenEventData):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `SuspendedTokenEventData`")
+        else:
+            match += 1
         # validate data type: PaymentOrderEventData
         if not isinstance(v, PaymentOrderEventData):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentOrderEventData`")
@@ -150,10 +158,10 @@ class WebhookEventData(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, SuspendedTokenEventData, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, SuspendedTokenEventData, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -206,6 +214,11 @@ class WebhookEventData(BaseModel):
         # check if data type is `PaymentSettlementEvent`
         if _data_type == "PaymentSettlement":
             instance.actual_instance = PaymentSettlementEvent.from_json(json_str)
+            return instance
+
+        # check if data type is `SuspendedTokenEventData`
+        if _data_type == "SuspendedToken":
+            instance.actual_instance = SuspendedTokenEventData.from_json(json_str)
             return instance
 
         # check if data type is `TSSRequestWebhookEventData`
@@ -266,6 +279,11 @@ class WebhookEventData(BaseModel):
         # check if data type is `PaymentSettlementEvent`
         if _data_type == "PaymentSettlementEvent":
             instance.actual_instance = PaymentSettlementEvent.from_json(json_str)
+            return instance
+
+        # check if data type is `SuspendedTokenEventData`
+        if _data_type == "SuspendedTokenEventData":
+            instance.actual_instance = SuspendedTokenEventData.from_json(json_str)
             return instance
 
         # check if data type is `TSSRequestWebhookEventData`
@@ -348,6 +366,12 @@ class WebhookEventData(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into SuspendedTokenEventData
+        try:
+            instance.actual_instance = SuspendedTokenEventData.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into PaymentOrderEventData
         try:
             instance.actual_instance = PaymentOrderEventData.from_json(json_str)
@@ -369,11 +393,11 @@ class WebhookEventData(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, SuspendedTokenEventData, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into WebhookEventData with oneOf schemas: AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, SuspendedTokenEventData, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -387,7 +411,7 @@ class WebhookEventData(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], AddressesEventData, BalanceUpdateInfoEventData, ChainsEventData, MPCVaultEventData, PaymentOrderEventData, PaymentRefundEventData, PaymentSettlementEvent, SuspendedTokenEventData, TSSRequestWebhookEventData, TokenListingEventData, TokensEventData, TransactionWebhookEventData, WalletInfoEventData]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

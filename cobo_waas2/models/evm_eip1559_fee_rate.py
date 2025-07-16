@@ -28,7 +28,7 @@ class EvmEip1559FeeRate(BaseModel):
     The transaction fee rate based on the EIP-1559 fee model.
     """  # noqa: E501
     fee_type: FeeType
-    token_id: StrictStr = Field(description="The token ID of the transaction fee.")
+    token_id: StrictStr = Field(description="The token used to pay the transaction fee.")
     slow: Optional[EvmEip1559FeeBasePrice] = None
     recommended: EvmEip1559FeeBasePrice
     fast: Optional[EvmEip1559FeeBasePrice] = None

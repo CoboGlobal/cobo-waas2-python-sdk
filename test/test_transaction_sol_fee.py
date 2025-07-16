@@ -39,7 +39,7 @@ class TestTransactionSOLFee(unittest.TestCase):
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
                 fee_type = 'EVM_EIP_1559',
-                token_id = 'BTC',
+                token_id = 'SOL',
                 fee_used = '0.1',
                 estimated_fee_used = '0.1'
             )

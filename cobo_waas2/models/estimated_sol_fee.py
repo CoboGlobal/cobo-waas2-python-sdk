@@ -28,7 +28,7 @@ class EstimatedSOLFee(BaseModel):
     The estimated transaction fee based on the sol fee model.
     """  # noqa: E501
     fee_type: FeeType
-    token_id: StrictStr = Field(description="The token ID of the transaction fee.")
+    token_id: StrictStr = Field(description="The token used to pay the transaction fee.")
     slow: Optional[EstimatedSOLFeeSlow] = None
     recommended: EstimatedSOLFeeSlow
     fast: Optional[EstimatedSOLFeeSlow] = None

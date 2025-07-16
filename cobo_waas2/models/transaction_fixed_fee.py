@@ -28,8 +28,8 @@ class TransactionFixedFee(BaseModel):
     """  # noqa: E501
     max_fee_amount: Optional[StrictStr] = Field(default=None, description="The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee.")
     fee_type: FeeType
-    token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
-    fee_used: Optional[StrictStr] = Field(default=None, description="The transaction fee.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token used to pay the transaction fee.")
+    fee_used: Optional[StrictStr] = Field(default=None, description="The actually charged transaction fee.")
     estimated_fee_used: Optional[StrictStr] = Field(default=None, description="The estimated transaction fee.")
     __properties: ClassVar[List[str]] = ["max_fee_amount", "fee_type", "token_id", "fee_used", "estimated_fee_used"]
 

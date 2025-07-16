@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**delete_wallet_by_id**](WalletsApi.md#delete_wallet_by_id) | **POST** /wallets/{wallet_id}/delete | Delete wallet
 [**get_chain_by_id**](WalletsApi.md#get_chain_by_id) | **GET** /wallets/chains/{chain_id} | Get chain information
 [**get_max_transferable_value**](WalletsApi.md#get_max_transferable_value) | **GET** /wallets/{wallet_id}/max_transferable_value | Get maximum transferable value
+[**get_max_transferable_value_with_fee_model**](WalletsApi.md#get_max_transferable_value_with_fee_model) | **POST** /wallets/{wallet_id}/max_transferable_value_with_fee_model | Estimate maximum transferable value
 [**get_token_by_id**](WalletsApi.md#get_token_by_id) | **GET** /wallets/tokens/{token_id} | Get token information
 [**get_token_listing_request_by_request_id**](WalletsApi.md#get_token_listing_request_by_request_id) | **GET** /wallets/tokens/listing_requests/{request_id} | Get token listing request
 [**get_wallet_by_id**](WalletsApi.md#get_wallet_by_id) | **GET** /wallets/{wallet_id} | Get wallet information
@@ -767,6 +768,81 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_max_transferable_value_with_fee_model**
+> MaxTransferableValue get_max_transferable_value_with_fee_model(wallet_id, get_max_transferable_value_with_fee_model_request=get_max_transferable_value_with_fee_model_request)
+
+Estimate maximum transferable value
+
+This operation estimates the maximum transferable value from a wallet or a specific wallet address, based on the specified fee settings.  The `to_address` property is required because it affects the fee calculation.  <Note>This operation is applicable to Custodial Wallets (Web3 Wallets) and MPC Wallets only.</Note> 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.get_max_transferable_value_with_fee_model_request import GetMaxTransferableValueWithFeeModelRequest
+from cobo_waas2.models.max_transferable_value import MaxTransferableValue
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.WalletsApi(api_client)
+    wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    get_max_transferable_value_with_fee_model_request = cobo_waas2.GetMaxTransferableValueWithFeeModelRequest()
+
+    try:
+        # Estimate maximum transferable value
+        api_response = api_instance.get_max_transferable_value_with_fee_model(wallet_id, get_max_transferable_value_with_fee_model_request=get_max_transferable_value_with_fee_model_request)
+        print("The response of WalletsApi->get_max_transferable_value_with_fee_model:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WalletsApi->get_max_transferable_value_with_fee_model: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **wallet_id** | **str**| The wallet ID. | 
+ **get_max_transferable_value_with_fee_model_request** | [**GetMaxTransferableValueWithFeeModelRequest**](GetMaxTransferableValueWithFeeModelRequest.md)| The request body for retrieving the maximum transferable value from a specified wallet. | [optional] 
+
+### Return type
+
+[**MaxTransferableValue**](MaxTransferableValue.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **max_priority_fee_per_gas** | **str** | The maximum priority fee per gas unit used, in wei. The maximum priority fee represents the highest amount of miner tips that you are willing to pay for your transaction. | [optional] 
 **gas_limit** | **str** | The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies. | [optional] 
 **fee_type** | [**FeeType**](FeeType.md) |  | 
-**token_id** | **str** | The token ID of the transaction fee. | [optional] 
+**token_id** | **str** | The token used to pay the transaction fee. | [optional] 
 **effective_gas_price** | **str** | The gas price (gas fee per gas unit) on the chain, in wei. The gas price represents the amount of ETH that must be paid to validators for processing transactions. | [optional] 
-**fee_used** | **str** | The transaction fee. | [optional] 
+**fee_used** | **str** | The actually charged transaction fee. | [optional] 
 **estimated_fee_used** | **str** | The estimated transaction fee. | [optional] 
 **gas_used** | **str** | The number of gas units used in the transaction. | [optional] 
 
