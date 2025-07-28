@@ -37,8 +37,9 @@ class TestTokenizationIssuedTokenRequest(unittest.TestCase):
                 chain_id = 'ETH',
                 source = None,
                 token_params = None,
-                app_initiator = '0x1234567890',
-                fee = None
+                app_initiator = 'steve@example.com',
+                fee = None,
+                request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
             )
         else:
             return TokenizationIssuedTokenRequest(

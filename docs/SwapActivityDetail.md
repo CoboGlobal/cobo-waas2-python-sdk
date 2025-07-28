@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **description** | **str** | The description of the swap activity. | [optional] 
 **created_timestamp** | **int** | The time when the swap activity was created, in Unix timestamp format, measured in milliseconds. | [optional] 
 **updated_timestamp** | **int** | The time when the swap activity was last updated, in Unix timestamp format, measured in milliseconds. | [optional] 
+**network_fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
+**destination_address** | **str** | the destination address of web3/mpc wallets. | [optional] 
 **timeline** | [**List[SwapActivityTimeline]**](SwapActivityTimeline.md) |  | [optional] 
 **approvers** | [**List[SwapActivityApprovers]**](SwapActivityApprovers.md) |  | [optional] 
 **signers** | [**List[SwapActivitySigners]**](SwapActivitySigners.md) |  | [optional] 

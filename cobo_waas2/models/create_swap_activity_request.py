@@ -17,8 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.address_transfer_destination import AddressTransferDestination
-from cobo_waas2.models.estimated_fee import EstimatedFee
+from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,13 +27,13 @@ class CreateSwapActivityRequest(BaseModel):
     CreateSwapActivityRequest
     """  # noqa: E501
     wallet_id: StrictStr = Field(description="The unique identifier of the wallet to pay.")
-    address: Optional[StrictStr] = Field(default=None, description="The wallet address.")
+    address: Optional[StrictStr] = Field(default=None, description="The wallet address, required when the wallet is not a custodial wallet.")
     quote_id: StrictStr = Field(description="The unique identifier of the quote.")
     app_initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the app activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request id of the swap activity.")
-    destination: Optional[AddressTransferDestination] = None
-    fee: Optional[EstimatedFee] = None
-    __properties: ClassVar[List[str]] = ["wallet_id", "address", "quote_id", "app_initiator", "request_id", "destination", "fee"]
+    receiver_address: Optional[StrictStr] = Field(default=None, description="The address of the receiver.")
+    fee: Optional[TransactionRequestFee] = None
+    __properties: ClassVar[List[str]] = ["wallet_id", "address", "quote_id", "app_initiator", "request_id", "receiver_address", "fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,9 +74,6 @@ class CreateSwapActivityRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of destination
-        if self.destination:
-            _dict['destination'] = self.destination.to_dict()
         # override the default output from pydantic by calling `to_dict()` of fee
         if self.fee:
             _dict['fee'] = self.fee.to_dict()
@@ -98,8 +94,8 @@ class CreateSwapActivityRequest(BaseModel):
             "quote_id": obj.get("quote_id"),
             "app_initiator": obj.get("app_initiator"),
             "request_id": obj.get("request_id"),
-            "destination": AddressTransferDestination.from_dict(obj["destination"]) if obj.get("destination") is not None else None,
-            "fee": EstimatedFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None
+            "receiver_address": obj.get("receiver_address"),
+            "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None
         })
         return _obj
 

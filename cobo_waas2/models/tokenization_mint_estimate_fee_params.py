@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.tokenization_mint_token_params_mints_inner import TokenizationMintTokenParamsMintsInner
 from cobo_waas2.models.tokenization_operation_type import TokenizationOperationType
 from cobo_waas2.models.tokenization_token_operation_source import TokenizationTokenOperationSource
@@ -32,7 +32,8 @@ class TokenizationMintEstimateFeeParams(BaseModel):
     mints: List[TokenizationMintTokenParamsMintsInner] = Field(description="Details for each token mint, including amount and address to mint to.")
     operation_type: TokenizationOperationType
     token_id: StrictStr = Field(description="The ID of the token.")
-    __properties: ClassVar[List[str]] = ["source", "mints", "operation_type", "token_id"]
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
+    __properties: ClassVar[List[str]] = ["source", "mints", "operation_type", "token_id", "request_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,7 +99,8 @@ class TokenizationMintEstimateFeeParams(BaseModel):
             "source": TokenizationTokenOperationSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "mints": [TokenizationMintTokenParamsMintsInner.from_dict(_item) for _item in obj["mints"]] if obj.get("mints") is not None else None,
             "operation_type": obj.get("operation_type"),
-            "token_id": obj.get("token_id")
+            "token_id": obj.get("token_id"),
+            "request_id": obj.get("request_id")
         })
         return _obj
 

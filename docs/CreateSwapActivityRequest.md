@@ -6,12 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wallet_id** | **str** | The unique identifier of the wallet to pay. | 
-**address** | **str** | The wallet address. | [optional] 
+**address** | **str** | The wallet address, required when the wallet is not a custodial wallet. | [optional] 
 **quote_id** | **str** | The unique identifier of the quote. | 
 **app_initiator** | **str** | The initiator of the app activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator. | [optional] 
 **request_id** | **str** | The request id of the swap activity. | [optional] 
-**destination** | [**AddressTransferDestination**](AddressTransferDestination.md) |  | [optional] 
-**fee** | [**EstimatedFee**](EstimatedFee.md) |  | [optional] 
+**receiver_address** | **str** | The address of the receiver. | [optional] 
+**fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
 
 ## Example
 

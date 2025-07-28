@@ -756,7 +756,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_approval_details**
-> ListApprovalDetails200Response list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_id=request_id)
+> List[ApprovalDetail] list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_ids=request_ids)
 
 List transaction approval details
 
@@ -769,7 +769,7 @@ This operation retrieves detailed approval information for a specified transacti
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.list_approval_details200_response import ListApprovalDetails200Response
+from cobo_waas2.models.approval_detail import ApprovalDetail
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -786,11 +786,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     api_instance = cobo_waas2.TransactionsApi(api_client)
     transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
     cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
-    request_id = 'web_send_by_user_327_1610444045047,web_send_by_user_327_1610444045048'
+    request_ids = 'web_send_by_user_327_1610444045047,web_send_by_user_327_1610444045048'
 
     try:
         # List transaction approval details
-        api_response = api_instance.list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_id=request_id)
+        api_response = api_instance.list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_ids=request_ids)
         print("The response of TransactionsApi->list_approval_details:\n")
         pprint(api_response)
     except Exception as e:
@@ -806,11 +806,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transaction_ids** | **str**| A list of transaction IDs, separated by comma. | [optional] 
  **cobo_ids** | **str**| A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction. | [optional] 
- **request_id** | **str**| A list of request IDs, separated by comma. | [optional] 
+ **request_ids** | **str**| A list of request IDs, separated by comma. | [optional] 
 
 ### Return type
 
-[**ListApprovalDetails200Response**](ListApprovalDetails200Response.md)
+[**List[ApprovalDetail]**](ApprovalDetail.md)
 
 ### Authorization
 
@@ -906,7 +906,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_transaction_templates**
-> ListTransactionTemplates200Response list_transaction_templates(transaction_type, template_version=template_version)
+> List[ApprovalTemplate] list_transaction_templates(template_key, template_version=template_version)
 
 list transaction templates
 
@@ -919,7 +919,7 @@ This operation retrieves transaction templates based on the specified transactio
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.list_transaction_templates200_response import ListTransactionTemplates200Response
+from cobo_waas2.models.approval_template import ApprovalTemplate
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -934,12 +934,12 @@ configuration = cobo_waas2.Configuration(
 with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.TransactionsApi(api_client)
-    transaction_type = 'DEPOSIT'
+    template_key = 'withdrawal'
     template_version = '1.0.0'
 
     try:
         # list transaction templates
-        api_response = api_instance.list_transaction_templates(transaction_type, template_version=template_version)
+        api_response = api_instance.list_transaction_templates(template_key, template_version=template_version)
         print("The response of TransactionsApi->list_transaction_templates:\n")
         pprint(api_response)
     except Exception as e:
@@ -953,12 +953,12 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transaction_type** | **str**| The transaction type. Possible values include:    - &#x60;DEPOSIT&#x60;: A deposit transaction.   - &#x60;WITHDRAW&#x60;: A withdrawal transaction.  | 
+ **template_key** | **str**| The key of the transaction template to be used for creating a transaction approval message.  | 
  **template_version** | **str**| The version of the template used for the transaction approval. | [optional] 
 
 ### Return type
 
-[**ListTransactionTemplates200Response**](ListTransactionTemplates200Response.md)
+[**List[ApprovalTemplate]**](ApprovalTemplate.md)
 
 ### Authorization
 

@@ -38,6 +38,7 @@ class TestTokenizationEstimateFeeRequestOperationParams(unittest.TestCase):
                 source = None,
                 token_params = None,
                 operation_type = 'Issue',
+                request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 mints = [
                     cobo_waas2.models.tokenization_mint_token_params_mints_inner.TokenizationMintTokenParams_mints_inner(
                         amount = '0.99', 

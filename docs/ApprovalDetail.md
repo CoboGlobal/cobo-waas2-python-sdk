@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **transaction_id** | **str** | The transaction ID. | [optional] 
 **cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
 **request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | [optional] 
-**result** | [**ApprovalTransactionResult**](ApprovalTransactionResult.md) |  | [optional] 
-**threshold** | **int** | The threshold for the transaction approval. | [optional] 
-**user_details** | [**List[ApprovalUserDetail]**](ApprovalUserDetail.md) |  | [optional] 
+**broker_user** | [**RoleDetail**](RoleDetail.md) |  | [optional] 
+**spender** | [**RoleDetail**](RoleDetail.md) |  | [optional] 
+**approver** | [**RoleDetail**](RoleDetail.md) |  | [optional] 
 
 ## Example
 

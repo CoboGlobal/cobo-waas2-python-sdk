@@ -15,19 +15,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.approval_template import ApprovalTemplate
+from typing_extensions import Annotated
+from cobo_waas2.models.tokenization_sol_token_permission_params import TokenizationSolTokenPermissionParams
+from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListTransactionTemplates200Response(BaseModel):
+class TokenizationSOLTokenParams(BaseModel):
     """
-    ListTransactionTemplates200Response
+    TokenizationSOLTokenParams
     """  # noqa: E501
-    data: Optional[List[ApprovalTemplate]] = None
-    __properties: ClassVar[List[str]] = ["data"]
+    standard: TokenizationTokenStandard
+    name: StrictStr = Field(description="The name of the token.")
+    symbol: StrictStr = Field(description="The symbol of the token.")
+    decimals: Annotated[int, Field(le=18, strict=True, ge=0)] = Field(description="The number of decimals for the token (0-18).")
+    token_access_activated: Optional[StrictBool] = Field(default=False, description="Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations.")
+    permissions: Optional[TokenizationSolTokenPermissionParams] = None
+    __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "decimals", "token_access_activated", "permissions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +54,7 @@ class ListTransactionTemplates200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListTransactionTemplates200Response from a JSON string"""
+        """Create an instance of TokenizationSOLTokenParams from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,18 +75,14 @@ class ListTransactionTemplates200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
+        # override the default output from pydantic by calling `to_dict()` of permissions
+        if self.permissions:
+            _dict['permissions'] = self.permissions.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListTransactionTemplates200Response from a dict"""
+        """Create an instance of TokenizationSOLTokenParams from a dict"""
         if obj is None:
             return None
 
@@ -87,7 +90,12 @@ class ListTransactionTemplates200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data": [ApprovalTemplate.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
+            "standard": obj.get("standard"),
+            "name": obj.get("name"),
+            "symbol": obj.get("symbol"),
+            "decimals": obj.get("decimals"),
+            "token_access_activated": obj.get("token_access_activated") if obj.get("token_access_activated") is not None else False,
+            "permissions": TokenizationSolTokenPermissionParams.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         return _obj
 

@@ -88,6 +88,7 @@ cobo_waas2/models/babylon_staking_registration.py
 cobo_waas2/models/babylon_validator.py
 cobo_waas2/models/balance.py
 cobo_waas2/models/balance_update_info.py
+cobo_waas2/models/balance_update_info_event_data.py
 cobo_waas2/models/bank_account.py
 cobo_waas2/models/base_contract_call_source.py
 cobo_waas2/models/base_estimate_staking_fee.py
@@ -232,6 +233,9 @@ cobo_waas2/models/fee_type.py
 cobo_waas2/models/fil_base.py
 cobo_waas2/models/fil_price.py
 cobo_waas2/models/fixed_fee_rate.py
+cobo_waas2/models/forced_sweep.py
+cobo_waas2/models/forced_sweep_request.py
+cobo_waas2/models/forced_sweep_status.py
 cobo_waas2/models/get_api_key_info200_response.py
 cobo_waas2/models/get_exchange_rate200_response.py
 cobo_waas2/models/get_max_transferable_value_with_fee_model_request.py
@@ -242,7 +246,6 @@ cobo_waas2/models/get_staking_estimation_fee_request.py
 cobo_waas2/models/get_token2_xx_response.py
 cobo_waas2/models/get_token4_xx_response.py
 cobo_waas2/models/get_tokenization_allowlist_activation200_response.py
-cobo_waas2/models/get_top_up_address200_response.py
 cobo_waas2/models/get_transaction_limitation200_response.py
 cobo_waas2/models/graph_ql_error.py
 cobo_waas2/models/graph_ql_error_locations_inner.py
@@ -258,7 +261,6 @@ cobo_waas2/models/key_share_holder_type.py
 cobo_waas2/models/list_address_balances_by_token200_response.py
 cobo_waas2/models/list_address_books200_response.py
 cobo_waas2/models/list_addresses200_response.py
-cobo_waas2/models/list_approval_details200_response.py
 cobo_waas2/models/list_approval_requests200_response.py
 cobo_waas2/models/list_asset_balances_for_exchange_wallet200_response.py
 cobo_waas2/models/list_babylon_airdrop_registrations200_response.py
@@ -268,12 +270,15 @@ cobo_waas2/models/list_babylon_eligible_stakings200_response_data_inner.py
 cobo_waas2/models/list_babylon_staking_registrations200_response.py
 cobo_waas2/models/list_callback_messages200_response.py
 cobo_waas2/models/list_exchanges200_response_inner.py
+cobo_waas2/models/list_forced_sweep_requests200_response.py
 cobo_waas2/models/list_key_share_holder_groups200_response.py
 cobo_waas2/models/list_key_share_holders200_response.py
+cobo_waas2/models/list_merchant_balances200_response.py
 cobo_waas2/models/list_merchants200_response.py
 cobo_waas2/models/list_mpc_projects200_response.py
 cobo_waas2/models/list_mpc_vaults200_response.py
 cobo_waas2/models/list_payment_orders200_response.py
+cobo_waas2/models/list_payment_wallet_balances200_response.py
 cobo_waas2/models/list_settlement_requests200_response.py
 cobo_waas2/models/list_staking_activities200_response.py
 cobo_waas2/models/list_staking_pools200_response.py
@@ -293,7 +298,6 @@ cobo_waas2/models/list_top_up_payer_accounts200_response.py
 cobo_waas2/models/list_top_up_payers200_response.py
 cobo_waas2/models/list_top_up_payers200_response_data_inner.py
 cobo_waas2/models/list_transaction_approval_details200_response.py
-cobo_waas2/models/list_transaction_templates200_response.py
 cobo_waas2/models/list_transactions200_response.py
 cobo_waas2/models/list_tss_requests200_response.py
 cobo_waas2/models/list_utxos200_response.py
@@ -308,6 +312,7 @@ cobo_waas2/models/lock_utxos_request_utxos_inner.py
 cobo_waas2/models/max_fee_amount.py
 cobo_waas2/models/max_transferable_value.py
 cobo_waas2/models/merchant.py
+cobo_waas2/models/merchant_balance.py
 cobo_waas2/models/message_sign_destination.py
 cobo_waas2/models/message_sign_destination_type.py
 cobo_waas2/models/message_sign_params.py
@@ -329,7 +334,13 @@ cobo_waas2/models/order_status.py
 cobo_waas2/models/org_info.py
 cobo_waas2/models/pagination.py
 cobo_waas2/models/payer_account.py
+cobo_waas2/models/payment_address_update_event_data.py
+cobo_waas2/models/payment_order_event_data.py
+cobo_waas2/models/payment_refund_event_data.py
+cobo_waas2/models/payment_settlement_event.py
 cobo_waas2/models/payment_transaction.py
+cobo_waas2/models/payment_transaction_event_data.py
+cobo_waas2/models/payment_wallet_balance.py
 cobo_waas2/models/payout_channel.py
 cobo_waas2/models/policy_action.py
 cobo_waas2/models/policy_action_content.py
@@ -340,6 +351,7 @@ cobo_waas2/models/policy_field_value_type.py
 cobo_waas2/models/pool_details.py
 cobo_waas2/models/pool_details_all_of_validators_info.py
 cobo_waas2/models/pool_summary.py
+cobo_waas2/models/psp_balance.py
 cobo_waas2/models/query_approval_statement200_response.py
 cobo_waas2/models/query_guard_pubkey200_response.py
 cobo_waas2/models/query_guard_pubkey200_response_addresses_inner.py
@@ -358,6 +370,7 @@ cobo_waas2/models/retry_callback_message201_response.py
 cobo_waas2/models/retry_webhook_event_by_id201_response.py
 cobo_waas2/models/revoke_approval_request201_response.py
 cobo_waas2/models/revoke_approval_request_request.py
+cobo_waas2/models/role_detail.py
 cobo_waas2/models/role_scopes.py
 cobo_waas2/models/root_pubkey.py
 cobo_waas2/models/safe_contract_call_source.py
@@ -398,6 +411,8 @@ cobo_waas2/models/stakings_extra.py
 cobo_waas2/models/sub_wallet_asset_balance.py
 cobo_waas2/models/submit_deposit_travel_rule_info201_response.py
 cobo_waas2/models/supported_token.py
+cobo_waas2/models/suspended_token_event_data.py
+cobo_waas2/models/suspended_token_operation_type.py
 cobo_waas2/models/swap_activity.py
 cobo_waas2/models/swap_activity_approvers.py
 cobo_waas2/models/swap_activity_detail.py
@@ -405,6 +420,7 @@ cobo_waas2/models/swap_activity_signers.py
 cobo_waas2/models/swap_activity_status.py
 cobo_waas2/models/swap_activity_timeline.py
 cobo_waas2/models/swap_approvers_status.py
+cobo_waas2/models/swap_estimate_fee.py
 cobo_waas2/models/swap_quote.py
 cobo_waas2/models/swap_singing_status.py
 cobo_waas2/models/swap_token.py
@@ -434,7 +450,6 @@ cobo_waas2/models/tokenization_contract_call_params.py
 cobo_waas2/models/tokenization_contract_call_params_data.py
 cobo_waas2/models/tokenization_contract_call_request.py
 cobo_waas2/models/tokenization_contract_call_type.py
-cobo_waas2/models/tokenization_deploy_estimate_fee_params.py
 cobo_waas2/models/tokenization_erc20_token_params.py
 cobo_waas2/models/tokenization_estimate_fee_request.py
 cobo_waas2/models/tokenization_estimate_fee_request_operation_params.py
@@ -459,6 +474,9 @@ cobo_waas2/models/tokenization_operation_type.py
 cobo_waas2/models/tokenization_pause_estimate_fee_params.py
 cobo_waas2/models/tokenization_pause_token_params.py
 cobo_waas2/models/tokenization_pause_token_request.py
+cobo_waas2/models/tokenization_sol_contract_call_params.py
+cobo_waas2/models/tokenization_sol_token_params.py
+cobo_waas2/models/tokenization_sol_token_permission_params.py
 cobo_waas2/models/tokenization_status.py
 cobo_waas2/models/tokenization_toggle_allowlist_estimate_fee_params.py
 cobo_waas2/models/tokenization_token_detail_info.py
@@ -483,6 +501,7 @@ cobo_waas2/models/tokenization_update_blocklist_addresses_params_addresses_inner
 cobo_waas2/models/tokenization_update_blocklist_addresses_request.py
 cobo_waas2/models/tokenization_web3_operation_source.py
 cobo_waas2/models/tokens_event_data.py
+cobo_waas2/models/top_up_address.py
 cobo_waas2/models/transaction.py
 cobo_waas2/models/transaction_approval_detail.py
 cobo_waas2/models/transaction_approval_result.py
@@ -637,6 +656,7 @@ cobo_waas2/models/update_mpc_wallet_params.py
 cobo_waas2/models/update_payment_order_request.py
 cobo_waas2/models/update_refund_by_id_request.py
 cobo_waas2/models/update_smart_contract_wallet_params.py
+cobo_waas2/models/update_top_up_address.py
 cobo_waas2/models/update_wallet_params.py
 cobo_waas2/models/update_webhook_endpoint_by_id_request.py
 cobo_waas2/models/utxo.py
@@ -716,6 +736,7 @@ docs/BabylonStakingRegistration.md
 docs/BabylonValidator.md
 docs/Balance.md
 docs/BalanceUpdateInfo.md
+docs/BalanceUpdateInfoEventData.md
 docs/BankAccount.md
 docs/BaseContractCallSource.md
 docs/BaseEstimateStakingFee.md
@@ -860,6 +881,9 @@ docs/FeeStationTransactionType.md
 docs/FeeStationTransfer.md
 docs/FeeType.md
 docs/FixedFeeRate.md
+docs/ForcedSweep.md
+docs/ForcedSweepRequest.md
+docs/ForcedSweepStatus.md
 docs/GetApiKeyInfo200Response.md
 docs/GetExchangeRate200Response.md
 docs/GetMaxTransferableValueWithFeeModelRequest.md
@@ -870,7 +894,6 @@ docs/GetStakingEstimationFeeRequest.md
 docs/GetToken2XXResponse.md
 docs/GetToken4XXResponse.md
 docs/GetTokenizationAllowlistActivation200Response.md
-docs/GetTopUpAddress200Response.md
 docs/GetTransactionLimitation200Response.md
 docs/GraphQLApi.md
 docs/GraphQLError.md
@@ -887,7 +910,6 @@ docs/KeyShareHolderType.md
 docs/ListAddressBalancesByToken200Response.md
 docs/ListAddressBooks200Response.md
 docs/ListAddresses200Response.md
-docs/ListApprovalDetails200Response.md
 docs/ListApprovalRequests200Response.md
 docs/ListAssetBalancesForExchangeWallet200Response.md
 docs/ListBabylonAirdropRegistrations200Response.md
@@ -897,12 +919,15 @@ docs/ListBabylonEligibleStakings200ResponseDataInner.md
 docs/ListBabylonStakingRegistrations200Response.md
 docs/ListCallbackMessages200Response.md
 docs/ListExchanges200ResponseInner.md
+docs/ListForcedSweepRequests200Response.md
 docs/ListKeyShareHolderGroups200Response.md
 docs/ListKeyShareHolders200Response.md
+docs/ListMerchantBalances200Response.md
 docs/ListMerchants200Response.md
 docs/ListMpcProjects200Response.md
 docs/ListMpcVaults200Response.md
 docs/ListPaymentOrders200Response.md
+docs/ListPaymentWalletBalances200Response.md
 docs/ListSettlementRequests200Response.md
 docs/ListStakingActivities200Response.md
 docs/ListStakingPools200Response.md
@@ -922,7 +947,6 @@ docs/ListTopUpPayerAccounts200Response.md
 docs/ListTopUpPayers200Response.md
 docs/ListTopUpPayers200ResponseDataInner.md
 docs/ListTransactionApprovalDetails200Response.md
-docs/ListTransactionTemplates200Response.md
 docs/ListTransactions200Response.md
 docs/ListTssRequests200Response.md
 docs/ListUtxos200Response.md
@@ -943,6 +967,7 @@ docs/MPCWalletInfo.md
 docs/MaxFeeAmount.md
 docs/MaxTransferableValue.md
 docs/Merchant.md
+docs/MerchantBalance.md
 docs/MessageSignDestination.md
 docs/MessageSignDestinationType.md
 docs/MessageSignParams.md
@@ -960,8 +985,14 @@ docs/OrgInfo.md
 docs/OrganizationsApi.md
 docs/Pagination.md
 docs/PayerAccount.md
+docs/PaymentAddressUpdateEventData.md
 docs/PaymentApi.md
+docs/PaymentOrderEventData.md
+docs/PaymentRefundEventData.md
+docs/PaymentSettlementEvent.md
 docs/PaymentTransaction.md
+docs/PaymentTransactionEventData.md
+docs/PaymentWalletBalance.md
 docs/PayoutChannel.md
 docs/PolicyAction.md
 docs/PolicyActionContent.md
@@ -973,6 +1004,7 @@ docs/PoolDetails.md
 docs/PoolDetailsAllOfValidatorsInfo.md
 docs/PoolSummary.md
 docs/PrimeBrokerApi.md
+docs/PspBalance.md
 docs/QueryApprovalStatement200Response.md
 docs/QueryGuardPubkey200Response.md
 docs/QueryGuardPubkey200ResponseAddressesInner.md
@@ -991,6 +1023,7 @@ docs/RetryCallbackMessage201Response.md
 docs/RetryWebhookEventById201Response.md
 docs/RevokeApprovalRequest201Response.md
 docs/RevokeApprovalRequestRequest.md
+docs/RoleDetail.md
 docs/RoleScopes.md
 docs/RootPubkey.md
 docs/SOLBase.md
@@ -1032,6 +1065,8 @@ docs/StakingsExtra.md
 docs/SubWalletAssetBalance.md
 docs/SubmitDepositTravelRuleInfo201Response.md
 docs/SupportedToken.md
+docs/SuspendedTokenEventData.md
+docs/SuspendedTokenOperationType.md
 docs/SwapActivity.md
 docs/SwapActivityApprovers.md
 docs/SwapActivityDetail.md
@@ -1039,6 +1074,7 @@ docs/SwapActivitySigners.md
 docs/SwapActivityStatus.md
 docs/SwapActivityTimeline.md
 docs/SwapApproversStatus.md
+docs/SwapEstimateFee.md
 docs/SwapQuote.md
 docs/SwapSingingStatus.md
 docs/SwapToken.md
@@ -1110,7 +1146,6 @@ docs/TokenizationContractCallParams.md
 docs/TokenizationContractCallParamsData.md
 docs/TokenizationContractCallRequest.md
 docs/TokenizationContractCallType.md
-docs/TokenizationDeployEstimateFeeParams.md
 docs/TokenizationERC20TokenParams.md
 docs/TokenizationEstimateFeeRequest.md
 docs/TokenizationEstimateFeeRequestOperationParams.md
@@ -1135,6 +1170,9 @@ docs/TokenizationOperationType.md
 docs/TokenizationPauseEstimateFeeParams.md
 docs/TokenizationPauseTokenParams.md
 docs/TokenizationPauseTokenRequest.md
+docs/TokenizationSOLTokenParams.md
+docs/TokenizationSolContractCallParams.md
+docs/TokenizationSolTokenPermissionParams.md
 docs/TokenizationStatus.md
 docs/TokenizationToggleAllowlistEstimateFeeParams.md
 docs/TokenizationTokenDetailInfo.md
@@ -1159,6 +1197,7 @@ docs/TokenizationUpdateBlocklistAddressesParamsAddressesInner.md
 docs/TokenizationUpdateBlocklistAddressesRequest.md
 docs/TokenizationWeb3OperationSource.md
 docs/TokensEventData.md
+docs/TopUpAddress.md
 docs/Transaction.md
 docs/TransactionApprovalDetail.md
 docs/TransactionApprovalResult.md
@@ -1276,6 +1315,7 @@ docs/UpdateMpcWalletParams.md
 docs/UpdatePaymentOrderRequest.md
 docs/UpdateRefundByIdRequest.md
 docs/UpdateSmartContractWalletParams.md
+docs/UpdateTopUpAddress.md
 docs/UpdateWalletParams.md
 docs/UpdateWebhookEndpointByIdRequest.md
 docs/UtxoFeeBasePrice.md
@@ -1359,6 +1399,7 @@ test/test_babylon_staking_registration.py
 test/test_babylon_validator.py
 test/test_balance.py
 test/test_balance_update_info.py
+test/test_balance_update_info_event_data.py
 test/test_bank_account.py
 test/test_base_contract_call_source.py
 test/test_base_estimate_staking_fee.py
@@ -1506,6 +1547,9 @@ test/test_fee_type.py
 test/test_fil_base.py
 test/test_fil_price.py
 test/test_fixed_fee_rate.py
+test/test_forced_sweep.py
+test/test_forced_sweep_request.py
+test/test_forced_sweep_status.py
 test/test_get_api_key_info200_response.py
 test/test_get_exchange_rate200_response.py
 test/test_get_max_transferable_value_with_fee_model_request.py
@@ -1516,7 +1560,6 @@ test/test_get_staking_estimation_fee_request.py
 test/test_get_token2_xx_response.py
 test/test_get_token4_xx_response.py
 test/test_get_tokenization_allowlist_activation200_response.py
-test/test_get_top_up_address200_response.py
 test/test_get_transaction_limitation200_response.py
 test/test_graph_ql_api.py
 test/test_graph_ql_error.py
@@ -1533,7 +1576,6 @@ test/test_key_share_holder_type.py
 test/test_list_address_balances_by_token200_response.py
 test/test_list_address_books200_response.py
 test/test_list_addresses200_response.py
-test/test_list_approval_details200_response.py
 test/test_list_approval_requests200_response.py
 test/test_list_asset_balances_for_exchange_wallet200_response.py
 test/test_list_babylon_airdrop_registrations200_response.py
@@ -1543,12 +1585,15 @@ test/test_list_babylon_eligible_stakings200_response_data_inner.py
 test/test_list_babylon_staking_registrations200_response.py
 test/test_list_callback_messages200_response.py
 test/test_list_exchanges200_response_inner.py
+test/test_list_forced_sweep_requests200_response.py
 test/test_list_key_share_holder_groups200_response.py
 test/test_list_key_share_holders200_response.py
+test/test_list_merchant_balances200_response.py
 test/test_list_merchants200_response.py
 test/test_list_mpc_projects200_response.py
 test/test_list_mpc_vaults200_response.py
 test/test_list_payment_orders200_response.py
+test/test_list_payment_wallet_balances200_response.py
 test/test_list_settlement_requests200_response.py
 test/test_list_staking_activities200_response.py
 test/test_list_staking_pools200_response.py
@@ -1568,7 +1613,6 @@ test/test_list_top_up_payer_accounts200_response.py
 test/test_list_top_up_payers200_response.py
 test/test_list_top_up_payers200_response_data_inner.py
 test/test_list_transaction_approval_details200_response.py
-test/test_list_transaction_templates200_response.py
 test/test_list_transactions200_response.py
 test/test_list_tss_requests200_response.py
 test/test_list_utxos200_response.py
@@ -1583,6 +1627,7 @@ test/test_lock_utxos_request_utxos_inner.py
 test/test_max_fee_amount.py
 test/test_max_transferable_value.py
 test/test_merchant.py
+test/test_merchant_balance.py
 test/test_message_sign_destination.py
 test/test_message_sign_destination_type.py
 test/test_message_sign_params.py
@@ -1606,8 +1651,14 @@ test/test_org_info.py
 test/test_organizations_api.py
 test/test_pagination.py
 test/test_payer_account.py
+test/test_payment_address_update_event_data.py
 test/test_payment_api.py
+test/test_payment_order_event_data.py
+test/test_payment_refund_event_data.py
+test/test_payment_settlement_event.py
 test/test_payment_transaction.py
+test/test_payment_transaction_event_data.py
+test/test_payment_wallet_balance.py
 test/test_payout_channel.py
 test/test_policy_action.py
 test/test_policy_action_content.py
@@ -1619,6 +1670,7 @@ test/test_pool_details.py
 test/test_pool_details_all_of_validators_info.py
 test/test_pool_summary.py
 test/test_prime_broker_api.py
+test/test_psp_balance.py
 test/test_query_approval_statement200_response.py
 test/test_query_guard_pubkey200_response.py
 test/test_query_guard_pubkey200_response_addresses_inner.py
@@ -1637,6 +1689,7 @@ test/test_retry_callback_message201_response.py
 test/test_retry_webhook_event_by_id201_response.py
 test/test_revoke_approval_request201_response.py
 test/test_revoke_approval_request_request.py
+test/test_role_detail.py
 test/test_role_scopes.py
 test/test_root_pubkey.py
 test/test_safe_contract_call_source.py
@@ -1678,6 +1731,8 @@ test/test_stakings_extra.py
 test/test_sub_wallet_asset_balance.py
 test/test_submit_deposit_travel_rule_info201_response.py
 test/test_supported_token.py
+test/test_suspended_token_event_data.py
+test/test_suspended_token_operation_type.py
 test/test_swap_activity.py
 test/test_swap_activity_approvers.py
 test/test_swap_activity_detail.py
@@ -1685,6 +1740,7 @@ test/test_swap_activity_signers.py
 test/test_swap_activity_status.py
 test/test_swap_activity_timeline.py
 test/test_swap_approvers_status.py
+test/test_swap_estimate_fee.py
 test/test_swap_quote.py
 test/test_swap_singing_status.py
 test/test_swap_token.py
@@ -1716,7 +1772,6 @@ test/test_tokenization_contract_call_params.py
 test/test_tokenization_contract_call_params_data.py
 test/test_tokenization_contract_call_request.py
 test/test_tokenization_contract_call_type.py
-test/test_tokenization_deploy_estimate_fee_params.py
 test/test_tokenization_erc20_token_params.py
 test/test_tokenization_estimate_fee_request.py
 test/test_tokenization_estimate_fee_request_operation_params.py
@@ -1741,6 +1796,9 @@ test/test_tokenization_operation_type.py
 test/test_tokenization_pause_estimate_fee_params.py
 test/test_tokenization_pause_token_params.py
 test/test_tokenization_pause_token_request.py
+test/test_tokenization_sol_contract_call_params.py
+test/test_tokenization_sol_token_params.py
+test/test_tokenization_sol_token_permission_params.py
 test/test_tokenization_status.py
 test/test_tokenization_toggle_allowlist_estimate_fee_params.py
 test/test_tokenization_token_detail_info.py
@@ -1765,6 +1823,7 @@ test/test_tokenization_update_blocklist_addresses_params_addresses_inner.py
 test/test_tokenization_update_blocklist_addresses_request.py
 test/test_tokenization_web3_operation_source.py
 test/test_tokens_event_data.py
+test/test_top_up_address.py
 test/test_transaction.py
 test/test_transaction_approval_detail.py
 test/test_transaction_approval_result.py
@@ -1921,6 +1980,7 @@ test/test_update_mpc_wallet_params.py
 test/test_update_payment_order_request.py
 test/test_update_refund_by_id_request.py
 test/test_update_smart_contract_wallet_params.py
+test/test_update_top_up_address.py
 test/test_update_wallet_params.py
 test/test_update_webhook_endpoint_by_id_request.py
 test/test_utxo.py

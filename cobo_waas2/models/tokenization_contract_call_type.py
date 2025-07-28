@@ -25,6 +25,7 @@ class TokenizationContractCallType(str, Enum):
     allowed enum values
     """
     EVM_CONTRACT = 'EVM_Contract'
+    SOL_CONTRACT = 'SOL_Contract'
 
     UNKNOWN = None
 

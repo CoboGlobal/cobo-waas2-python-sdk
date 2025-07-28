@@ -17,10 +17,12 @@ from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.create_swap_activity_request import CreateSwapActivityRequest
+from cobo_waas2.models.estimated_fee import EstimatedFee
 from cobo_waas2.models.list_swap_activities200_response import ListSwapActivities200Response
 from cobo_waas2.models.list_swap_enabled_tokens200_response import ListSwapEnabledTokens200Response
 from cobo_waas2.models.swap_activity_detail import SwapActivityDetail
 from cobo_waas2.models.swap_activity_status import SwapActivityStatus
+from cobo_waas2.models.swap_estimate_fee import SwapEstimateFee
 from cobo_waas2.models.swap_quote import SwapQuote
 from cobo_waas2.models.swap_type import SwapType
 
@@ -202,6 +204,175 @@ class SwapsApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/swaps/swap',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def estimate_swap_fee(
+        self,
+        swap_estimate_fee: Annotated[SwapEstimateFee, Field(description="The request body for estimating the fee of a swap activity.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> EstimatedFee:
+        """Estimate Swap Fee
+
+        This operation to estimate the fee of a swap activity. 
+
+        :param swap_estimate_fee: The request body for estimating the fee of a swap activity. (required)
+        :type swap_estimate_fee: SwapEstimateFee
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._estimate_swap_fee_serialize(
+            swap_estimate_fee=swap_estimate_fee,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EstimatedFee",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def estimate_swap_fee_with_http_info(
+        self,
+        swap_estimate_fee: Annotated[SwapEstimateFee, Field(description="The request body for estimating the fee of a swap activity.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[EstimatedFee]:
+        """Estimate Swap Fee
+
+        This operation to estimate the fee of a swap activity. 
+
+        :param swap_estimate_fee: The request body for estimating the fee of a swap activity. (required)
+        :type swap_estimate_fee: SwapEstimateFee
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._estimate_swap_fee_serialize(
+            swap_estimate_fee=swap_estimate_fee,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EstimatedFee",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def estimate_swap_fee_without_preload_content(
+        self,
+        swap_estimate_fee: Annotated[SwapEstimateFee, Field(description="The request body for estimating the fee of a swap activity.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Estimate Swap Fee
+
+        This operation to estimate the fee of a swap activity. 
+
+        :param swap_estimate_fee: The request body for estimating the fee of a swap activity. (required)
+        :type swap_estimate_fee: SwapEstimateFee
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._estimate_swap_fee_serialize(
+            swap_estimate_fee=swap_estimate_fee,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "EstimatedFee",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _estimate_swap_fee_serialize(
+        self,
+        swap_estimate_fee,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if swap_estimate_fee is not None:
+            _body_params = swap_estimate_fee
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/swaps/estimate_fee',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

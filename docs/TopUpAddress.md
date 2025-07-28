@@ -1,5 +1,6 @@
-# GetTopUpAddress200Response
+# TopUpAddress
 
+The details of top up address
 
 ## Properties
 
@@ -19,19 +20,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cobo_waas2.models.get_top_up_address200_response import GetTopUpAddress200Response
+from cobo_waas2.models.top_up_address import TopUpAddress
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of GetTopUpAddress200Response from a JSON string
-get_top_up_address200_response_instance = GetTopUpAddress200Response.from_json(json)
+# create an instance of TopUpAddress from a JSON string
+top_up_address_instance = TopUpAddress.from_json(json)
 # print the JSON string representation of the object
-print(GetTopUpAddress200Response.to_json())
+print(TopUpAddress.to_json())
 
 # convert the object into a dict
-get_top_up_address200_response_dict = get_top_up_address200_response_instance.to_dict()
-# create an instance of GetTopUpAddress200Response from a dict
-get_top_up_address200_response_from_dict = GetTopUpAddress200Response.from_dict(get_top_up_address200_response_dict)
+top_up_address_dict = top_up_address_instance.to_dict()
+# create an instance of TopUpAddress from a dict
+top_up_address_from_dict = TopUpAddress.from_dict(top_up_address_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

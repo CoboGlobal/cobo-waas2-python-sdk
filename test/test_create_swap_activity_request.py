@@ -39,21 +39,7 @@ class TestCreateSwapActivityRequest(unittest.TestCase):
                 quote_id = '123e4567-e89b-12d3-a456-426614174001',
                 app_initiator = 'steve@example.com',
                 request_id = '123e4567-e89b-12d3-a456-426614174002',
-                destination = cobo_waas2.models.address.Address(
-                    destination_type = 'Address', 
-                    account_output = cobo_waas2.models.address_transfer_destination_account_output.AddressTransferDestination_account_output(
-                        address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku', 
-                        memo = '82840924', 
-                        amount = '1.5', ), 
-                    utxo_outputs = [
-                        cobo_waas2.models.address_transfer_destination_utxo_outputs_inner.AddressTransferDestination_utxo_outputs_inner(
-                            address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sDEMO', 
-                            amount = '1.5', )
-                        ], 
-                    change_address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sDEMO', 
-                    change_output_type = 'First', 
-                    force_internal = False, 
-                    force_external = False, ),
+                receiver_address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
                 fee = None
             )
         else:

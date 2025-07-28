@@ -161,9 +161,9 @@ class TestTransactionsApi(unittest.TestCase):
         """
         transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
         cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
-        request_id = 'web_send_by_user_327_1610444045047,web_send_by_user_327_1610444045048'
+        request_ids = 'web_send_by_user_327_1610444045047,web_send_by_user_327_1610444045048'
 
-        api_response = self.api.list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_id=request_id)
+        api_response = self.api.list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_ids=request_ids)
         """
 
     def test_list_transaction_approval_details(self) -> None:
@@ -186,10 +186,10 @@ class TestTransactionsApi(unittest.TestCase):
         list transaction templates
         """
         """
-        transaction_type = 'DEPOSIT'
+        template_key = 'withdrawal'
         template_version = '1.0.0'
 
-        api_response = self.api.list_transaction_templates(transaction_type, template_version=template_version)
+        api_response = self.api.list_transaction_templates(template_key, template_version=template_version)
         """
 
     def test_list_transactions(self) -> None:

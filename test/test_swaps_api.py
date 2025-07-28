@@ -41,6 +41,18 @@ class TestSwapsApi(unittest.TestCase):
         api_response = self.api.create_swap_activity(create_swap_activity_request)
         """
 
+    def test_estimate_swap_fee(self) -> None:
+        """
+        Test case for estimate_swap_fee
+
+        Estimate Swap Fee
+        """
+        """
+        swap_estimate_fee = cobo_waas2.SwapEstimateFee()
+
+        api_response = self.api.estimate_swap_fee(swap_estimate_fee)
+        """
+
     def test_get_swap_activity(self) -> None:
         """
         Test case for get_swap_activity

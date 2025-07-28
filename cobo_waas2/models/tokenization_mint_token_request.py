@@ -32,7 +32,8 @@ class TokenizationMintTokenRequest(BaseModel):
     mints: List[TokenizationMintTokenParamsMintsInner] = Field(description="Details for each token mint, including amount and address to mint to.")
     app_initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the tokenization activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator.")
     fee: TransactionRequestFee
-    __properties: ClassVar[List[str]] = ["source", "mints", "app_initiator", "fee"]
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
+    __properties: ClassVar[List[str]] = ["source", "mints", "app_initiator", "fee", "request_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,7 +102,8 @@ class TokenizationMintTokenRequest(BaseModel):
             "source": TokenizationTokenOperationSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "mints": [TokenizationMintTokenParamsMintsInner.from_dict(_item) for _item in obj["mints"]] if obj.get("mints") is not None else None,
             "app_initiator": obj.get("app_initiator"),
-            "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None
+            "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
+            "request_id": obj.get("request_id")
         })
         return _obj
 

@@ -45,6 +45,18 @@ class WebhookEventType(str, Enum):
     WALLET_DOT_CHAIN_DOT_ENABLED = 'wallet.chain.enabled'
     WALLET_DOT_MPC_DOT_BALANCE_DOT_UPDATED = 'wallet.mpc.balance.updated'
     WALLET_DOT_WEB3_DOT_BALANCE_DOT_UPDATED = 'wallet.web3.balance.updated'
+    WALLET_DOT_TOKEN_DOT_DISABLED = 'wallet.token.disabled'
+    WALLET_DOT_CHAIN_DOT_DISABLED = 'wallet.chain.disabled'
+    TOKEN_DOT_SUSPENDED_DOT_DEPOSIT = 'token.suspended.deposit'
+    TOKEN_DOT_SUSPENDED_DOT_WITHDRAW = 'token.suspended.withdraw'
+    PAYMENT_DOT_TRANSACTION_DOT_CREATED = 'payment.transaction.created'
+    PAYMENT_DOT_TRANSACTION_DOT_LATE = 'payment.transaction.late'
+    PAYMENT_DOT_TRANSACTION_DOT_COMPLETED = 'payment.transaction.completed'
+    PAYMENT_DOT_TRANSACTION_DOT_HELD = 'payment.transaction.held'
+    PAYMENT_DOT_STATUS_DOT_UPDATED = 'payment.status.updated'
+    PAYMENT_DOT_REFUND_DOT_STATUS_DOT_UPDATED = 'payment.refund.status.updated'
+    PAYMENT_DOT_SETTLEMENT_DOT_STATUS_DOT_UPDATED = 'payment.settlement.status.updated'
+    PAYMENT_DOT_ADDRESS_DOT_UPDATED = 'payment.address.updated'
 
     UNKNOWN = None
 

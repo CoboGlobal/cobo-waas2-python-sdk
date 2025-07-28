@@ -16,6 +16,8 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from cobo_waas2.models.approval_detail import ApprovalDetail
+from cobo_waas2.models.approval_template import ApprovalTemplate
 from cobo_waas2.models.broadcast_signed_transactions201_response_inner import BroadcastSignedTransactions201ResponseInner
 from cobo_waas2.models.broadcast_signed_transactions_request import BroadcastSignedTransactionsRequest
 from cobo_waas2.models.check_loop_transfers200_response_inner import CheckLoopTransfers200ResponseInner
@@ -23,9 +25,7 @@ from cobo_waas2.models.contract_call_params import ContractCallParams
 from cobo_waas2.models.create_transfer_transaction201_response import CreateTransferTransaction201Response
 from cobo_waas2.models.estimate_fee_params import EstimateFeeParams
 from cobo_waas2.models.estimated_fee import EstimatedFee
-from cobo_waas2.models.list_approval_details200_response import ListApprovalDetails200Response
 from cobo_waas2.models.list_transaction_approval_details200_response import ListTransactionApprovalDetails200Response
-from cobo_waas2.models.list_transaction_templates200_response import ListTransactionTemplates200Response
 from cobo_waas2.models.list_transactions200_response import ListTransactions200Response
 from cobo_waas2.models.message_sign_params import MessageSignParams
 from cobo_waas2.models.transaction_approval_detail import TransactionApprovalDetail
@@ -1799,7 +1799,7 @@ class TransactionsApi:
         self,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
-        request_id: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
+        request_ids: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1808,7 +1808,7 @@ class TransactionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ListApprovalDetails200Response:
+    ) -> List[ApprovalDetail]:
         """List transaction approval details
 
         This operation retrieves detailed approval information for a specified transaction. 
@@ -1817,8 +1817,8 @@ class TransactionsApi:
         :type transaction_ids: str
         :param cobo_ids: A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.
         :type cobo_ids: str
-        :param request_id: A list of request IDs, separated by comma.
-        :type request_id: str
+        :param request_ids: A list of request IDs, separated by comma.
+        :type request_ids: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1830,11 +1830,11 @@ class TransactionsApi:
         _param = self._list_approval_details_serialize(
             transaction_ids=transaction_ids,
             cobo_ids=cobo_ids,
-            request_id=request_id,
+            request_ids=request_ids,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListApprovalDetails200Response",
+            '200': "List[ApprovalDetail]",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -1853,7 +1853,7 @@ class TransactionsApi:
         self,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
-        request_id: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
+        request_ids: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1862,7 +1862,7 @@ class TransactionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[ListApprovalDetails200Response]:
+    ) -> ApiResponse[List[ApprovalDetail]]:
         """List transaction approval details
 
         This operation retrieves detailed approval information for a specified transaction. 
@@ -1871,8 +1871,8 @@ class TransactionsApi:
         :type transaction_ids: str
         :param cobo_ids: A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.
         :type cobo_ids: str
-        :param request_id: A list of request IDs, separated by comma.
-        :type request_id: str
+        :param request_ids: A list of request IDs, separated by comma.
+        :type request_ids: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1884,11 +1884,11 @@ class TransactionsApi:
         _param = self._list_approval_details_serialize(
             transaction_ids=transaction_ids,
             cobo_ids=cobo_ids,
-            request_id=request_id,
+            request_ids=request_ids,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListApprovalDetails200Response",
+            '200': "List[ApprovalDetail]",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -1907,7 +1907,7 @@ class TransactionsApi:
         self,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
-        request_id: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
+        request_ids: Annotated[Optional[StrictStr], Field(description="A list of request IDs, separated by comma.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1925,8 +1925,8 @@ class TransactionsApi:
         :type transaction_ids: str
         :param cobo_ids: A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.
         :type cobo_ids: str
-        :param request_id: A list of request IDs, separated by comma.
-        :type request_id: str
+        :param request_ids: A list of request IDs, separated by comma.
+        :type request_ids: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1938,11 +1938,11 @@ class TransactionsApi:
         _param = self._list_approval_details_serialize(
             transaction_ids=transaction_ids,
             cobo_ids=cobo_ids,
-            request_id=request_id,
+            request_ids=request_ids,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListApprovalDetails200Response",
+            '200': "List[ApprovalDetail]",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -1956,7 +1956,7 @@ class TransactionsApi:
         self,
         transaction_ids,
         cobo_ids,
-        request_id,
+        request_ids,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1974,9 +1974,9 @@ class TransactionsApi:
             
             _query_params.append(('cobo_ids', cobo_ids))
             
-        if request_id is not None:
+        if request_ids is not None:
             
-            _query_params.append(('request_id', request_id))
+            _query_params.append(('request_ids', request_ids))
             
         # process the header parameters
         # process the form parameters
@@ -2190,7 +2190,7 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates(
         self,
-        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
         template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
         _request_timeout: Union[
             None,
@@ -2200,13 +2200,13 @@ class TransactionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ListTransactionTemplates200Response:
+    ) -> List[ApprovalTemplate]:
         """list transaction templates
 
         This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
 
-        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
-        :type transaction_type: str
+        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
+        :type template_key: str
         :param template_version: The version of the template used for the transaction approval.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2218,12 +2218,12 @@ class TransactionsApi:
         """  # noqa: E501
 
         _param = self._list_transaction_templates_serialize(
-            transaction_type=transaction_type,
+            template_key=template_key,
             template_version=template_version,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTransactionTemplates200Response",
+            '200': "List[ApprovalTemplate]",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -2240,7 +2240,7 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates_with_http_info(
         self,
-        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
         template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
         _request_timeout: Union[
             None,
@@ -2250,13 +2250,13 @@ class TransactionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[ListTransactionTemplates200Response]:
+    ) -> ApiResponse[List[ApprovalTemplate]]:
         """list transaction templates
 
         This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
 
-        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
-        :type transaction_type: str
+        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
+        :type template_key: str
         :param template_version: The version of the template used for the transaction approval.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2268,12 +2268,12 @@ class TransactionsApi:
         """  # noqa: E501
 
         _param = self._list_transaction_templates_serialize(
-            transaction_type=transaction_type,
+            template_key=template_key,
             template_version=template_version,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTransactionTemplates200Response",
+            '200': "List[ApprovalTemplate]",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -2290,7 +2290,7 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates_without_preload_content(
         self,
-        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
         template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
         _request_timeout: Union[
             None,
@@ -2305,8 +2305,8 @@ class TransactionsApi:
 
         This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
 
-        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
-        :type transaction_type: str
+        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
+        :type template_key: str
         :param template_version: The version of the template used for the transaction approval.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2318,12 +2318,12 @@ class TransactionsApi:
         """  # noqa: E501
 
         _param = self._list_transaction_templates_serialize(
-            transaction_type=transaction_type,
+            template_key=template_key,
             template_version=template_version,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTransactionTemplates200Response",
+            '200': "List[ApprovalTemplate]",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -2335,7 +2335,7 @@ class TransactionsApi:
 
     def _list_transaction_templates_serialize(
         self,
-        transaction_type,
+        template_key,
         template_version,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
@@ -2346,9 +2346,9 @@ class TransactionsApi:
 
         # process the path parameters
         # process the query parameters
-        if transaction_type is not None:
+        if template_key is not None:
             
-            _query_params.append(('transaction_type', transaction_type))
+            _query_params.append(('template_key', template_key))
             
         if template_version is not None:
             

@@ -51,7 +51,9 @@ class TestListSwapActivities200Response(unittest.TestCase):
                         initiator_type = 'API', 
                         description = 'This is a description of the swap activity.', 
                         created_timestamp = 1677587333000, 
-                        updated_timestamp = 1677587393000, )
+                        updated_timestamp = 1677587393000, 
+                        network_fee = null, 
+                        destination_address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

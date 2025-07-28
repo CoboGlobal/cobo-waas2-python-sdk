@@ -37,7 +37,8 @@ class TestTokenizationIssueEstimateFeeParams(unittest.TestCase):
                 chain_id = 'ETH',
                 source = None,
                 token_params = None,
-                operation_type = 'Issue'
+                operation_type = 'Issue',
+                request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
             )
         else:
             return TokenizationIssueEstimateFeeParams(

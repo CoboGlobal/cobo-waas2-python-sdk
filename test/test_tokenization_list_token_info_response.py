@@ -42,7 +42,7 @@ class TestTokenizationListTokenInfoResponse(unittest.TestCase):
                         token_name = 'CUSD', 
                         token_symbol = 'CUSD', 
                         decimals = 18, 
-                        allowlist_activated = False, 
+                        token_access_activated = False, 
                         status = 'Active', 
                         total_supply = '133399', 
                         holdings = '12399', )
@@ -62,7 +62,7 @@ class TestTokenizationListTokenInfoResponse(unittest.TestCase):
                         token_name = 'CUSD', 
                         token_symbol = 'CUSD', 
                         decimals = 18, 
-                        allowlist_activated = False, 
+                        token_access_activated = False, 
                         status = 'Active', 
                         total_supply = '133399', 
                         holdings = '12399', )

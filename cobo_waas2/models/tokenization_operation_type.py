@@ -24,7 +24,6 @@ class TokenizationOperationType(str, Enum):
     """
     allowed enum values
     """
-    DEPLOY = 'Deploy'
     ISSUE = 'Issue'
     MINT = 'Mint'
     BURN = 'Burn'

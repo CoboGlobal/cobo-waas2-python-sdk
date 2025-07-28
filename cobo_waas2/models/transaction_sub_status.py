@@ -30,6 +30,7 @@ class TransactionSubStatus(str, Enum):
     PENDINGRISKCONTROLCHECK = 'PendingRiskControlCheck'
     PENDINGAPPROVERCHECK = 'PendingApproverCheck'
     REJECTEDCOBOCHECK = 'RejectedCoboCheck'
+    REJECTEDBYCOBO = 'RejectedByCobo'
     REJECTEDWHITELIST = 'RejectedWhiteList'
     REJECTEDDOUBLECHECK = 'RejectedDoubleCheck'
     REJECTEDSPENDERAUTH = 'RejectedSpenderAuth'

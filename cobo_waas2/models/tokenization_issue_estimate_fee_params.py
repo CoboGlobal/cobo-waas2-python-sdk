@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.tokenization_issue_token_params_token_params import TokenizationIssueTokenParamsTokenParams
 from cobo_waas2.models.tokenization_operation_type import TokenizationOperationType
 from cobo_waas2.models.tokenization_token_operation_source import TokenizationTokenOperationSource
@@ -32,7 +32,8 @@ class TokenizationIssueEstimateFeeParams(BaseModel):
     source: TokenizationTokenOperationSource
     token_params: TokenizationIssueTokenParamsTokenParams
     operation_type: TokenizationOperationType
-    __properties: ClassVar[List[str]] = ["chain_id", "source", "token_params", "operation_type"]
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
+    __properties: ClassVar[List[str]] = ["chain_id", "source", "token_params", "operation_type", "request_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +95,8 @@ class TokenizationIssueEstimateFeeParams(BaseModel):
             "chain_id": obj.get("chain_id"),
             "source": TokenizationTokenOperationSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "token_params": TokenizationIssueTokenParamsTokenParams.from_dict(obj["token_params"]) if obj.get("token_params") is not None else None,
-            "operation_type": obj.get("operation_type")
+            "operation_type": obj.get("operation_type"),
+            "request_id": obj.get("request_id")
         })
         return _obj
 
