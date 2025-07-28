@@ -42,9 +42,9 @@ class Refund(BaseModel):
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the refund order, represented as a UNIX timestamp in seconds.")
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this refund order, usually the user's API key.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process.")
-    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Indicates whether the merchant should bear the transaction fee for the refund.  If true, the fee will be deducted from merchant's account balance. ")
-    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of the transaction fee that the merchant will bear for the refund.  This is only applicable if `charge_merchant_fee` is set to true. ")
-    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the transaction fee.  This is only applicable if `charge_merchant_fee` is set to true. ")
+    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Whether to charge developer fee to the merchant.  - `true`: The fee amount (specified in `merchant_fee_amount`) will be deducted from the merchant's balance and added to the developer's balance - `false`: The merchant is not charged any developer fee. ")
+    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by `merchant_fee_token_id`.")
+    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the developer fee.")
     __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id"]
 
     model_config = ConfigDict(

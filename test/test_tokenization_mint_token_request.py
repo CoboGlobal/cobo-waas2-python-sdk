@@ -41,7 +41,8 @@ class TestTokenizationMintTokenRequest(unittest.TestCase):
                         to_address = '0x051A924H4dCb264226d7B036C2893a0D344', )
                     ],
                 app_initiator = 'steve@example.com',
-                fee = None
+                fee = None,
+                request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
             )
         else:
             return TokenizationMintTokenRequest(

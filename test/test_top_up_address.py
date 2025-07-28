@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.get_top_up_address200_response import GetTopUpAddress200Response
+from cobo_waas2.models.top_up_address import TopUpAddress
 
 
-class TestGetTopUpAddress200Response(unittest.TestCase):
-    """GetTopUpAddress200Response unit test stubs"""
+class TestTopUpAddress(unittest.TestCase):
+    """TopUpAddress unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,16 +24,16 @@ class TestGetTopUpAddress200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetTopUpAddress200Response:
-        """Test GetTopUpAddress200Response
+    def make_instance(self, include_optional) -> TopUpAddress:
+        """Test TopUpAddress
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `GetTopUpAddress200Response`
+        # uncomment below to create an instance of `TopUpAddress`
         """
-        model = GetTopUpAddress200Response()
+        model = TopUpAddress()
         if include_optional:
-            return GetTopUpAddress200Response(
+            return TopUpAddress(
                 address = '0x1234567890abcdef...',
                 payer_id = 'P20250619T0310056d7aa',
                 custom_payer_id = 'user_abc_10001',
@@ -46,7 +46,7 @@ class TestGetTopUpAddress200Response(unittest.TestCase):
                 updated_timestamp = 1744689600
             )
         else:
-            return GetTopUpAddress200Response(
+            return TopUpAddress(
                 address = '0x1234567890abcdef...',
                 payer_id = 'P20250619T0310056d7aa',
                 custom_payer_id = 'user_abc_10001',
@@ -56,8 +56,8 @@ class TestGetTopUpAddress200Response(unittest.TestCase):
         )
         """
 
-    def testGetTopUpAddress200Response(self):
-        """Test GetTopUpAddress200Response"""
+    def testTopUpAddress(self):
+        """Test TopUpAddress"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

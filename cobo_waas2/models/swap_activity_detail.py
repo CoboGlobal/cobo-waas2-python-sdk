@@ -23,6 +23,7 @@ from cobo_waas2.models.swap_activity_status import SwapActivityStatus
 from cobo_waas2.models.swap_activity_timeline import SwapActivityTimeline
 from cobo_waas2.models.swap_type import SwapType
 from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorType
+from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -47,10 +48,12 @@ class SwapActivityDetail(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="The description of the swap activity.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was last updated, in Unix timestamp format, measured in milliseconds.")
+    network_fee: Optional[TransactionRequestFee] = None
+    destination_address: Optional[StrictStr] = Field(default=None, description="the destination address of web3/mpc wallets.")
     timeline: Optional[List[SwapActivityTimeline]] = None
     approvers: Optional[List[SwapActivityApprovers]] = None
     signers: Optional[List[SwapActivitySigners]] = None
-    __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp", "timeline", "approvers", "signers"]
+    __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp", "network_fee", "destination_address", "timeline", "approvers", "signers"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +94,9 @@ class SwapActivityDetail(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of network_fee
+        if self.network_fee:
+            _dict['network_fee'] = self.network_fee.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in timeline (list)
         _items = []
         if self.timeline:
@@ -145,6 +151,8 @@ class SwapActivityDetail(BaseModel):
             "description": obj.get("description"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
+            "network_fee": TransactionRequestFee.from_dict(obj["network_fee"]) if obj.get("network_fee") is not None else None,
+            "destination_address": obj.get("destination_address"),
             "timeline": [SwapActivityTimeline.from_dict(_item) for _item in obj["timeline"]] if obj.get("timeline") is not None else None,
             "approvers": [SwapActivityApprovers.from_dict(_item) for _item in obj["approvers"]] if obj.get("approvers") is not None else None,
             "signers": [SwapActivitySigners.from_dict(_item) for _item in obj["signers"]] if obj.get("signers") is not None else None

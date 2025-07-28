@@ -15,10 +15,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.approval_transaction_result import ApprovalTransactionResult
-from cobo_waas2.models.approval_user_detail import ApprovalUserDetail
+from cobo_waas2.models.role_detail import RoleDetail
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,10 +29,10 @@ class ApprovalDetail(BaseModel):
     transaction_id: Optional[StrictStr] = Field(default=None, description="The transaction ID.")
     cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
-    result: Optional[ApprovalTransactionResult] = None
-    threshold: Optional[StrictInt] = Field(default=None, description="The threshold for the transaction approval.")
-    user_details: Optional[List[ApprovalUserDetail]] = None
-    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "result", "threshold", "user_details"]
+    broker_user: Optional[RoleDetail] = None
+    spender: Optional[RoleDetail] = None
+    approver: Optional[RoleDetail] = None
+    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "broker_user", "spender", "approver"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,13 +73,15 @@ class ApprovalDetail(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in user_details (list)
-        _items = []
-        if self.user_details:
-            for _item in self.user_details:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['user_details'] = _items
+        # override the default output from pydantic by calling `to_dict()` of broker_user
+        if self.broker_user:
+            _dict['broker_user'] = self.broker_user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of spender
+        if self.spender:
+            _dict['spender'] = self.spender.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of approver
+        if self.approver:
+            _dict['approver'] = self.approver.to_dict()
         return _dict
 
     @classmethod
@@ -96,9 +97,9 @@ class ApprovalDetail(BaseModel):
             "transaction_id": obj.get("transaction_id"),
             "cobo_id": obj.get("cobo_id"),
             "request_id": obj.get("request_id"),
-            "result": obj.get("result"),
-            "threshold": obj.get("threshold"),
-            "user_details": [ApprovalUserDetail.from_dict(_item) for _item in obj["user_details"]] if obj.get("user_details") is not None else None
+            "broker_user": RoleDetail.from_dict(obj["broker_user"]) if obj.get("broker_user") is not None else None,
+            "spender": RoleDetail.from_dict(obj["spender"]) if obj.get("spender") is not None else None,
+            "approver": RoleDetail.from_dict(obj["approver"]) if obj.get("approver") is not None else None
         })
         return _obj
 

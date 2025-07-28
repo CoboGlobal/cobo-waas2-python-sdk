@@ -29,6 +29,18 @@ class TestPaymentApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_cancel_refund_by_id(self) -> None:
+        """
+        Test case for cancel_refund_by_id
+
+        Cancel refund order
+        """
+        """
+        refund_id = 'R20250304-M1001-1001'
+
+        api_response = self.api.cancel_refund_by_id(refund_id)
+        """
+
     def test_create_bank_account(self) -> None:
         """
         Test case for create_bank_account
@@ -51,6 +63,18 @@ class TestPaymentApi(unittest.TestCase):
         create_crypto_address_request = cobo_waas2.CreateCryptoAddressRequest()
 
         api_response = self.api.create_crypto_address(create_crypto_address_request=create_crypto_address_request)
+        """
+
+    def test_create_forced_sweep_request(self) -> None:
+        """
+        Test case for create_forced_sweep_request
+
+        Create force sweep request
+        """
+        """
+        forced_sweep_request = cobo_waas2.ForcedSweepRequest()
+
+        api_response = self.api.create_forced_sweep_request(forced_sweep_request=forced_sweep_request)
         """
 
     def test_create_merchant(self) -> None:
@@ -124,6 +148,18 @@ class TestPaymentApi(unittest.TestCase):
         order_id = 'O20250304-M1001-1001'
 
         api_response = self.api.get_payment_order_detail_by_id(order_id)
+        """
+
+    def test_get_psp_balance(self) -> None:
+        """
+        Test case for get_psp_balance
+
+        Get psp balance
+        """
+        """
+        token_id = 'ETH_USDT'
+
+        api_response = self.api.get_psp_balance(token_id)
         """
 
     def test_get_refund_detail_by_id(self) -> None:
@@ -217,6 +253,35 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_crypto_addresses(token_id=token_id)
         """
 
+    def test_list_forced_sweep_requests(self) -> None:
+        """
+        Test case for list_forced_sweep_requests
+
+        List force sweep requests
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        request_id = 'random_request_id'
+
+        api_response = self.api.list_forced_sweep_requests(limit=limit, before=before, after=after, request_id=request_id)
+        """
+
+    def test_list_merchant_balances(self) -> None:
+        """
+        Test case for list_merchant_balances
+
+        List merchant balances
+        """
+        """
+        token_id = 'ETH_USDT'
+        acquiring_type = cobo_waas2.AcquiringType()
+        merchant_ids = 'M1001,M1002,M1003'
+
+        api_response = self.api.list_merchant_balances(token_id, acquiring_type, merchant_ids=merchant_ids)
+        """
+
     def test_list_merchants(self) -> None:
         """
         Test case for list_merchants
@@ -258,6 +323,19 @@ class TestPaymentApi(unittest.TestCase):
         """
 
         api_response = self.api.list_payment_supported_tokens()
+        """
+
+    def test_list_payment_wallet_balances(self) -> None:
+        """
+        Test case for list_payment_wallet_balances
+
+        List payment wallet balances
+        """
+        """
+        token_id = 'ETH_USDT'
+        wallet_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d472'
+
+        api_response = self.api.list_payment_wallet_balances(token_id, wallet_ids=wallet_ids)
         """
 
     def test_list_settlement_requests(self) -> None:
@@ -357,6 +435,18 @@ class TestPaymentApi(unittest.TestCase):
         update_refund_by_id_request = cobo_waas2.UpdateRefundByIdRequest()
 
         api_response = self.api.update_refund_by_id(refund_id, update_refund_by_id_request=update_refund_by_id_request)
+        """
+
+    def test_update_top_up_address(self) -> None:
+        """
+        Test case for update_top_up_address
+
+        Update top-up address
+        """
+        """
+        update_top_up_address = cobo_waas2.UpdateTopUpAddress()
+
+        api_response = self.api.update_top_up_address(update_top_up_address=update_top_up_address)
         """
 
 

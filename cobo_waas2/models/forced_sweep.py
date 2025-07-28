@@ -15,24 +15,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.tokenization_issue_token_params_token_params import TokenizationIssueTokenParamsTokenParams
-from cobo_waas2.models.tokenization_operation_type import TokenizationOperationType
-from cobo_waas2.models.tokenization_token_operation_source import TokenizationTokenOperationSource
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.forced_sweep_status import ForcedSweepStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TokenizationDeployEstimateFeeParams(BaseModel):
+class ForcedSweep(BaseModel):
     """
-    TokenizationDeployEstimateFeeParams
+    ForcedSweep
     """  # noqa: E501
-    chain_id: StrictStr = Field(description="The chain ID where the token will be issued.")
-    source: TokenizationTokenOperationSource
-    token_params: TokenizationIssueTokenParamsTokenParams
-    operation_type: TokenizationOperationType
-    __properties: ClassVar[List[str]] = ["chain_id", "source", "token_params", "operation_type"]
+    forced_sweep_id: StrictStr = Field(description="The force sweep ID.")
+    request_id: StrictStr = Field(description="The request ID provided by you when creating the force sweep request.")
+    wallet_id: Optional[StrictStr] = Field(default=None, description="The wallet ID to force sweep, which is the unique identifier of a wallet.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token ID to force sweep, which is the unique identifier of a token.")
+    amount: Optional[StrictStr] = Field(default=None, description="The amount of needing force sweep.")
+    status: ForcedSweepStatus
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the force sweep request, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the force sweep request, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["forced_sweep_id", "request_id", "wallet_id", "token_id", "amount", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +54,7 @@ class TokenizationDeployEstimateFeeParams(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TokenizationDeployEstimateFeeParams from a JSON string"""
+        """Create an instance of ForcedSweep from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,17 +75,11 @@ class TokenizationDeployEstimateFeeParams(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of source
-        if self.source:
-            _dict['source'] = self.source.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of token_params
-        if self.token_params:
-            _dict['token_params'] = self.token_params.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TokenizationDeployEstimateFeeParams from a dict"""
+        """Create an instance of ForcedSweep from a dict"""
         if obj is None:
             return None
 
@@ -91,10 +87,14 @@ class TokenizationDeployEstimateFeeParams(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "chain_id": obj.get("chain_id"),
-            "source": TokenizationTokenOperationSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
-            "token_params": TokenizationIssueTokenParamsTokenParams.from_dict(obj["token_params"]) if obj.get("token_params") is not None else None,
-            "operation_type": obj.get("operation_type")
+            "forced_sweep_id": obj.get("forced_sweep_id"),
+            "request_id": obj.get("request_id"),
+            "wallet_id": obj.get("wallet_id"),
+            "token_id": obj.get("token_id"),
+            "amount": obj.get("amount"),
+            "status": obj.get("status"),
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj
 

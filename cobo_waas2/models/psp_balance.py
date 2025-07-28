@@ -15,19 +15,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.approval_detail import ApprovalDetail
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListApprovalDetails200Response(BaseModel):
+class PspBalance(BaseModel):
     """
-    ListApprovalDetails200Response
+    PspBalance
     """  # noqa: E501
-    data: Optional[List[ApprovalDetail]] = None
-    __properties: ClassVar[List[str]] = ["data"]
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency.")
+    developer_fee_amount: Optional[StrictStr] = Field(default=None, description="The psp developer fee amount.")
+    settled_amount: Optional[StrictStr] = Field(default=None, description="The psp settled amount.")
+    refunded_amount: Optional[StrictStr] = Field(default=None, description="The psp total refunded amount.")
+    total_balance: Optional[StrictStr] = Field(default=None, description="The psp total balance.")
+    available_balance: Optional[StrictStr] = Field(default=None, description="The psp available balance.")
+    __properties: ClassVar[List[str]] = ["token_id", "developer_fee_amount", "settled_amount", "refunded_amount", "total_balance", "available_balance"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +51,7 @@ class ListApprovalDetails200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListApprovalDetails200Response from a JSON string"""
+        """Create an instance of PspBalance from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,18 +72,11 @@ class ListApprovalDetails200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListApprovalDetails200Response from a dict"""
+        """Create an instance of PspBalance from a dict"""
         if obj is None:
             return None
 
@@ -87,7 +84,12 @@ class ListApprovalDetails200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data": [ApprovalDetail.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
+            "token_id": obj.get("token_id"),
+            "developer_fee_amount": obj.get("developer_fee_amount"),
+            "settled_amount": obj.get("settled_amount"),
+            "refunded_amount": obj.get("refunded_amount"),
+            "total_balance": obj.get("total_balance"),
+            "available_balance": obj.get("available_balance")
         })
         return _obj
 

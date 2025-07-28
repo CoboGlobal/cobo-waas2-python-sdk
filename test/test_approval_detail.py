@@ -37,26 +37,66 @@ class TestApprovalDetail(unittest.TestCase):
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 cobo_id = '20231213122855000000000000000000',
                 request_id = 'web_send_by_user_327_1610444045047',
-                result = 1,
-                threshold = 2,
-                user_details = [
-                    cobo_waas2.models.approval_user_detail.ApprovalUserDetail(
-                        user_email = 'example@gmail.com', 
-                        pubkey = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
-                        signature = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
-                        statement_uuid = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
-                        result = 1, 
-                        created_time = 1610444045, 
-                        template_version = '1.0.0', 
-                        header_title = 'Transaction Approval', 
-                        is_for_sign = True, 
-                        show_info = cobo_waas2.models.approval_show_info.ApprovalShowInfo(
-                            org_name = 'Cobo', 
-                            wallet_name = 'Cobo Wallet', 
-                            environment = 'Prod', 
-                            from_address_label = 'Main Address', 
-                            to_address_label = 'Exchange Address', ), )
-                    ]
+                broker_user = cobo_waas2.models.role_detail.RoleDetail(
+                    result = 1, 
+                    threshold = 2, 
+                    user_details = [
+                        cobo_waas2.models.approval_user_detail.ApprovalUserDetail(
+                            user_email = 'example@gmail.com', 
+                            pubkey = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                            signature = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                            statement_uuid = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
+                            created_time = 1610444045, 
+                            template_version = '1.0.0', 
+                            header_title = 'Transaction Approval', 
+                            is_for_sign = True, 
+                            show_info = cobo_waas2.models.approval_show_info.ApprovalShowInfo(
+                                org_name = 'Cobo', 
+                                wallet_name = 'Cobo Wallet', 
+                                environment = 'Prod', 
+                                from_address_label = 'Main Address', 
+                                to_address_label = 'Exchange Address', ), )
+                        ], ),
+                spender = cobo_waas2.models.role_detail.RoleDetail(
+                    result = 1, 
+                    threshold = 2, 
+                    user_details = [
+                        cobo_waas2.models.approval_user_detail.ApprovalUserDetail(
+                            user_email = 'example@gmail.com', 
+                            pubkey = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                            signature = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                            statement_uuid = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
+                            created_time = 1610444045, 
+                            template_version = '1.0.0', 
+                            header_title = 'Transaction Approval', 
+                            is_for_sign = True, 
+                            show_info = cobo_waas2.models.approval_show_info.ApprovalShowInfo(
+                                org_name = 'Cobo', 
+                                wallet_name = 'Cobo Wallet', 
+                                environment = 'Prod', 
+                                from_address_label = 'Main Address', 
+                                to_address_label = 'Exchange Address', ), )
+                        ], ),
+                approver = cobo_waas2.models.role_detail.RoleDetail(
+                    result = 1, 
+                    threshold = 2, 
+                    user_details = [
+                        cobo_waas2.models.approval_user_detail.ApprovalUserDetail(
+                            user_email = 'example@gmail.com', 
+                            pubkey = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                            signature = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                            statement_uuid = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
+                            created_time = 1610444045, 
+                            template_version = '1.0.0', 
+                            header_title = 'Transaction Approval', 
+                            is_for_sign = True, 
+                            show_info = cobo_waas2.models.approval_show_info.ApprovalShowInfo(
+                                org_name = 'Cobo', 
+                                wallet_name = 'Cobo Wallet', 
+                                environment = 'Prod', 
+                                from_address_label = 'Main Address', 
+                                to_address_label = 'Exchange Address', ), )
+                        ], )
             )
         else:
             return ApprovalDetail(

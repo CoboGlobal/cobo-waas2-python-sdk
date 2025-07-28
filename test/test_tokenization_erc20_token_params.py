@@ -38,7 +38,7 @@ class TestTokenizationERC20TokenParams(unittest.TestCase):
                 name = 'My Awesome Token',
                 symbol = 'MAT',
                 decimals = 18,
-                allowlist_activated = False,
+                token_access_activated = False,
                 permissions = cobo_waas2.models.tokenization_token_permission_params.TokenizationTokenPermissionParams(
                     admin = ["0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045","0x742d35Cc6634C0532925a3b8D4C2C4e4C7C6B5f6"], 
                     minter = ["0x742d35Cc6634C0532925a3b8D4C2C4e4C7C6B5f6","0x8ba1f109551bD432803012645Hac136c34B8f7f7"], 

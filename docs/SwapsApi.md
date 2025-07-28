@@ -5,6 +5,7 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_swap_activity**](SwapsApi.md#create_swap_activity) | **POST** /swaps/swap | Create Swap Activity
+[**estimate_swap_fee**](SwapsApi.md#estimate_swap_fee) | **POST** /swaps/estimate_fee | Estimate Swap Fee
 [**get_swap_activity**](SwapsApi.md#get_swap_activity) | **GET** /swaps/activities/{activity_id} | Get Swap Activity Details
 [**get_swap_quote**](SwapsApi.md#get_swap_quote) | **GET** /swaps/quote | Get Current Swap Rate
 [**list_swap_activities**](SwapsApi.md#list_swap_activities) | **GET** /swaps/activities | List Swap Activities
@@ -79,6 +80,79 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The swap activity details have been successfully retrieved. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **estimate_swap_fee**
+> EstimatedFee estimate_swap_fee(swap_estimate_fee)
+
+Estimate Swap Fee
+
+This operation to estimate the fee of a swap activity. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.estimated_fee import EstimatedFee
+from cobo_waas2.models.swap_estimate_fee import SwapEstimateFee
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.SwapsApi(api_client)
+    swap_estimate_fee = cobo_waas2.SwapEstimateFee()
+
+    try:
+        # Estimate Swap Fee
+        api_response = api_instance.estimate_swap_fee(swap_estimate_fee)
+        print("The response of SwapsApi->estimate_swap_fee:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SwapsApi->estimate_swap_fee: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **swap_estimate_fee** | [**SwapEstimateFee**](SwapEstimateFee.md)| The request body for estimating the fee of a swap activity. | 
+
+### Return type
+
+[**EstimatedFee**](EstimatedFee.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successfully retrieved the estimated fee for swap activity. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

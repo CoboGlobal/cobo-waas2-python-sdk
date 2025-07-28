@@ -4,14 +4,17 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**cancel_refund_by_id**](PaymentApi.md#cancel_refund_by_id) | **PUT** /payments/refunds/{refund_id}/cancel | Cancel refund order
 [**create_bank_account**](PaymentApi.md#create_bank_account) | **POST** /payments/bank_accounts | Create bank account
 [**create_crypto_address**](PaymentApi.md#create_crypto_address) | **POST** /payments/crypto_addresses | Create crypto address
+[**create_forced_sweep_request**](PaymentApi.md#create_forced_sweep_request) | **POST** /payments/force_sweep_requests | Create force sweep request
 [**create_merchant**](PaymentApi.md#create_merchant) | **POST** /payments/merchants | Create merchant
 [**create_payment_order**](PaymentApi.md#create_payment_order) | **POST** /payments/orders | Create pay-in order
 [**create_refund**](PaymentApi.md#create_refund) | **POST** /payments/refunds | Create refund order
 [**create_settlement_request**](PaymentApi.md#create_settlement_request) | **POST** /payments/settlement_requests | Create settlement request
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
+[**get_psp_balance**](PaymentApi.md#get_psp_balance) | **GET** /payments/balance/psp | Get psp balance
 [**get_refund_detail_by_id**](PaymentApi.md#get_refund_detail_by_id) | **GET** /payments/refunds/{refund_id} | Get refund order information
 [**get_refunds**](PaymentApi.md#get_refunds) | **GET** /payments/refunds | List all refund orders
 [**get_settlement_by_id**](PaymentApi.md#get_settlement_by_id) | **GET** /payments/settlement_requests/{settlement_request_id} | Get settlement request information
@@ -19,9 +22,12 @@ Method | HTTP request | Description
 [**get_top_up_address**](PaymentApi.md#get_top_up_address) | **GET** /payments/topup/address | Get top-up address
 [**list_bank_accounts**](PaymentApi.md#list_bank_accounts) | **GET** /payments/bank_accounts | List all bank accounts
 [**list_crypto_addresses**](PaymentApi.md#list_crypto_addresses) | **GET** /payments/crypto_addresses | List crypto addresses
+[**list_forced_sweep_requests**](PaymentApi.md#list_forced_sweep_requests) | **GET** /payments/force_sweep_requests | List force sweep requests
+[**list_merchant_balances**](PaymentApi.md#list_merchant_balances) | **GET** /payments/balance/merchants | List merchant balances
 [**list_merchants**](PaymentApi.md#list_merchants) | **GET** /payments/merchants | List all merchants
 [**list_payment_orders**](PaymentApi.md#list_payment_orders) | **GET** /payments/orders | List all pay-in orders
 [**list_payment_supported_tokens**](PaymentApi.md#list_payment_supported_tokens) | **GET** /payments/supported_tokens | List all supported tokens
+[**list_payment_wallet_balances**](PaymentApi.md#list_payment_wallet_balances) | **GET** /payments/balance/payment_wallets | List payment wallet balances
 [**list_settlement_requests**](PaymentApi.md#list_settlement_requests) | **GET** /payments/settlement_requests | List all settlement requests
 [**list_top_up_payer_accounts**](PaymentApi.md#list_top_up_payer_accounts) | **GET** /payments/topup/payer_accounts | List top-up payer accounts
 [**list_top_up_payers**](PaymentApi.md#list_top_up_payers) | **GET** /payments/topup/payers | List top-up payers
@@ -29,7 +35,80 @@ Method | HTTP request | Description
 [**update_merchant_by_id**](PaymentApi.md#update_merchant_by_id) | **PUT** /payments/merchants/{merchant_id} | Update merchant
 [**update_payment_order**](PaymentApi.md#update_payment_order) | **PUT** /payments/orders/{order_id} | Update pay-in order
 [**update_refund_by_id**](PaymentApi.md#update_refund_by_id) | **PUT** /payments/refunds/{refund_id} | Update refund order information
+[**update_top_up_address**](PaymentApi.md#update_top_up_address) | **PUT** /payments/topup/address | Update top-up address
 
+
+# **cancel_refund_by_id**
+> Refund cancel_refund_by_id(refund_id)
+
+Cancel refund order
+
+This operation cancels a specified refund order. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.refund import Refund
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    refund_id = 'R20250304-M1001-1001'
+
+    try:
+        # Cancel refund order
+        api_response = api_instance.cancel_refund_by_id(refund_id)
+        print("The response of PaymentApi->cancel_refund_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->cancel_refund_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **refund_id** | **str**| The refund order ID. | 
+
+### Return type
+
+[**Refund**](Refund.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_bank_account**
 > BankAccount create_bank_account(create_bank_account_request=create_bank_account_request)
@@ -172,6 +251,79 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Crypto address created successfully. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_forced_sweep_request**
+> ForcedSweep create_forced_sweep_request(forced_sweep_request=forced_sweep_request)
+
+Create force sweep request
+
+This operation creates a force sweep request to settle or refund available balances.  
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.forced_sweep import ForcedSweep
+from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    forced_sweep_request = cobo_waas2.ForcedSweepRequest()
+
+    try:
+        # Create force sweep request
+        api_response = api_instance.create_forced_sweep_request(forced_sweep_request=forced_sweep_request)
+        print("The response of PaymentApi->create_forced_sweep_request:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_forced_sweep_request: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **forced_sweep_request** | [**ForcedSweepRequest**](ForcedSweepRequest.md)| The request body to force sweep. | [optional] 
+
+### Return type
+
+[**ForcedSweep**](ForcedSweep.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Force sweep request created successfully. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -614,6 +766,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_psp_balance**
+> PspBalance get_psp_balance(token_id)
+
+Get psp balance
+
+This operation retrieves the information of psp balance. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.psp_balance import PspBalance
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    token_id = 'ETH_USDT'
+
+    try:
+        # Get psp balance
+        api_response = api_instance.get_psp_balance(token_id)
+        print("The response of PaymentApi->get_psp_balance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_psp_balance: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which identifies the cryptocurrency. Supported values:    - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDC&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
+
+### Return type
+
+[**PspBalance**](PspBalance.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_refund_detail_by_id**
 > Refund get_refund_detail_by_id(refund_id)
 
@@ -916,7 +1140,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_top_up_address**
-> GetTopUpAddress200Response get_top_up_address(merchant_id, token_id, custom_payer_id)
+> TopUpAddress get_top_up_address(merchant_id, token_id, custom_payer_id)
 
 Get top-up address
 
@@ -929,7 +1153,7 @@ Get a top-up address for certain payer under merchant.
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.get_top_up_address200_response import GetTopUpAddress200Response
+from cobo_waas2.models.top_up_address import TopUpAddress
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -970,7 +1194,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetTopUpAddress200Response**](GetTopUpAddress200Response.md)
+[**TopUpAddress**](TopUpAddress.md)
 
 ### Authorization
 
@@ -1111,6 +1335,161 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List[CryptoAddress]**](CryptoAddress.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_forced_sweep_requests**
+> ListForcedSweepRequests200Response list_forced_sweep_requests(limit=limit, before=before, after=after, request_id=request_id)
+
+List force sweep requests
+
+This operation retrieves the information of force_sweep requests. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    request_id = 'random_request_id'
+
+    try:
+        # List force sweep requests
+        api_response = api_instance.list_forced_sweep_requests(limit=limit, before=before, after=after, request_id=request_id)
+        print("The response of PaymentApi->list_forced_sweep_requests:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_forced_sweep_requests: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **request_id** | **str**| The request ID. | [optional] 
+
+### Return type
+
+[**ListForcedSweepRequests200Response**](ListForcedSweepRequests200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_merchant_balances**
+> ListMerchantBalances200Response list_merchant_balances(token_id, acquiring_type, merchant_ids=merchant_ids)
+
+List merchant balances
+
+This operation retrieves the information of merchant balances. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.acquiring_type import AcquiringType
+from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBalances200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    token_id = 'ETH_USDT'
+    acquiring_type = cobo_waas2.AcquiringType()
+    merchant_ids = 'M1001,M1002,M1003'
+
+    try:
+        # List merchant balances
+        api_response = api_instance.list_merchant_balances(token_id, acquiring_type, merchant_ids=merchant_ids)
+        print("The response of PaymentApi->list_merchant_balances:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_merchant_balances: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which identifies the cryptocurrency. Supported values:    - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDC&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
+ **acquiring_type** | [**AcquiringType**](.md)| AcquiringType defines the acquisition logic used in the payment flow: - &#x60;Order&#x60;: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - &#x60;TopUp&#x60;: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  | 
+ **merchant_ids** | **str**| A list of merchant IDs to query. | [optional] 
+
+### Return type
+
+[**ListMerchantBalances200Response**](ListMerchantBalances200Response.md)
 
 ### Authorization
 
@@ -1339,6 +1718,80 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**List[SupportedToken]**](SupportedToken.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_payment_wallet_balances**
+> ListPaymentWalletBalances200Response list_payment_wallet_balances(token_id, wallet_ids=wallet_ids)
+
+List payment wallet balances
+
+This operation retrieves the information of payment wallet balances. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_payment_wallet_balances200_response import ListPaymentWalletBalances200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    token_id = 'ETH_USDT'
+    wallet_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d472'
+
+    try:
+        # List payment wallet balances
+        api_response = api_instance.list_payment_wallet_balances(token_id, wallet_ids=wallet_ids)
+        print("The response of PaymentApi->list_payment_wallet_balances:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_payment_wallet_balances: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which identifies the cryptocurrency. Supported values:    - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDC&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
+ **wallet_ids** | **str**| A list of wallet IDs to query. | [optional] 
+
+### Return type
+
+[**ListPaymentWalletBalances200Response**](ListPaymentWalletBalances200Response.md)
 
 ### Authorization
 
@@ -1892,6 +2345,79 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_top_up_address**
+> TopUpAddress update_top_up_address(update_top_up_address=update_top_up_address)
+
+Update top-up address
+
+Update the top-up address for a payer under a specific merchant and token. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.top_up_address import TopUpAddress
+from cobo_waas2.models.update_top_up_address import UpdateTopUpAddress
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    update_top_up_address = cobo_waas2.UpdateTopUpAddress()
+
+    try:
+        # Update top-up address
+        api_response = api_instance.update_top_up_address(update_top_up_address=update_top_up_address)
+        print("The response of PaymentApi->update_top_up_address:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->update_top_up_address: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **update_top_up_address** | [**UpdateTopUpAddress**](UpdateTopUpAddress.md)| The request body to update top up address. | [optional] 
+
+### Return type
+
+[**TopUpAddress**](TopUpAddress.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Top-up address updated successfully. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

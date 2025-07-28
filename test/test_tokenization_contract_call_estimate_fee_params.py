@@ -37,7 +37,8 @@ class TestTokenizationContractCallEstimateFeeParams(unittest.TestCase):
                 source = None,
                 data = None,
                 operation_type = 'Issue',
-                token_id = '8a4f9324-ef2a-43cf-9f0e-d7f99999d3e8'
+                token_id = '8a4f9324-ef2a-43cf-9f0e-d7f99999d3e8',
+                request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
             )
         else:
             return TokenizationContractCallEstimateFeeParams(

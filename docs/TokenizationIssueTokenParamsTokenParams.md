@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **name** | **str** | The name of the token. | 
 **symbol** | **str** | The symbol of the token. | 
 **decimals** | **int** | The number of decimals for the token (0-18). | 
-**allowlist_activated** | **bool** | Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations. | [optional] [default to False]
-**permissions** | [**TokenizationTokenPermissionParams**](TokenizationTokenPermissionParams.md) |  | [optional] 
+**token_access_activated** | **bool** | Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations. | [optional] [default to False]
+**permissions** | [**TokenizationSolTokenPermissionParams**](TokenizationSolTokenPermissionParams.md) |  | [optional] 
 
 ## Example
 

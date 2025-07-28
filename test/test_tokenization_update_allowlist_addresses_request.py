@@ -38,7 +38,8 @@ class TestTokenizationUpdateAllowlistAddressesRequest(unittest.TestCase):
                 source = None,
                 addresses = [{"address":"0x789abc...","note":"reason for allowing"},{"address":"0xdef012..."}],
                 app_initiator = 'steve@example.com',
-                fee = None
+                fee = None,
+                request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
             )
         else:
             return TokenizationUpdateAllowlistAddressesRequest(
