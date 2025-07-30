@@ -41,6 +41,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.cancel_refund_by_id(refund_id)
         """
 
+    def test_create_forced_sweep_request(self) -> None:
+        """
+        Test case for create_forced_sweep_request
+
+        Create force sweep request
+        """
+        """
+        forced_sweep_request = cobo_waas2.ForcedSweepRequest()
+
+        api_response = self.api.create_forced_sweep_request(forced_sweep_request=forced_sweep_request)
+        """
+
     def test_create_merchant(self) -> None:
         """
         Test case for create_merchant
@@ -205,6 +217,21 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_crypto_addresses(token_id=token_id)
         """
 
+    def test_list_forced_sweep_requests(self) -> None:
+        """
+        Test case for list_forced_sweep_requests
+
+        List force sweep requests
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        request_id = 'random_request_id'
+
+        api_response = self.api.list_forced_sweep_requests(limit=limit, before=before, after=after, request_id=request_id)
+        """
+
     def test_list_merchants(self) -> None:
         """
         Test case for list_merchants
@@ -316,6 +343,18 @@ class TestPaymentApi(unittest.TestCase):
         update_refund_by_id_request = cobo_waas2.UpdateRefundByIdRequest()
 
         api_response = self.api.update_refund_by_id(refund_id, update_refund_by_id_request=update_refund_by_id_request)
+        """
+
+    def test_update_top_up_address(self) -> None:
+        """
+        Test case for update_top_up_address
+
+        Update top-up address
+        """
+        """
+        update_top_up_address = cobo_waas2.UpdateTopUpAddress()
+
+        api_response = self.api.update_top_up_address(update_top_up_address=update_top_up_address)
         """
 
 

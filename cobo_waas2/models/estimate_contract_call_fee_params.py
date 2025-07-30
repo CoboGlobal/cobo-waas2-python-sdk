@@ -33,7 +33,7 @@ class EstimateContractCallFeeParams(BaseModel):
     request_type: EstimateFeeRequestType
     chain_id: StrictStr = Field(description="The chain ID of the chain on which the smart contract is issued. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
     source: ContractCallSource
-    destination: ContractCallDestination
+    destination: Optional[ContractCallDestination] = None
     fee_type: Optional[FeeType] = None
     replaced_transaction_id: Optional[StrictStr] = Field(default=None, description="The ID of the transaction that this transaction replaced.")
     __properties: ClassVar[List[str]] = ["request_id", "request_type", "chain_id", "source", "destination", "fee_type", "replaced_transaction_id"]

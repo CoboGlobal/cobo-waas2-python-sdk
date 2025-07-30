@@ -47,7 +47,6 @@ class TestEstimateContractCallFeeParams(unittest.TestCase):
                 request_type = 'Transfer',
                 chain_id = 'ETH',
                 source = None,
-                destination = None,
         )
         """
 

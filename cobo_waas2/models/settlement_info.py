@@ -33,10 +33,12 @@ class SettlementInfo(BaseModel):
     pending_amount: Optional[StrictStr] = Field(default=None, description="The amount unavailable for settlement or refund, in the specified cryptocurrency.")
     pending_currency_balance: Optional[StrictStr] = Field(default=None, description="The amount unavailable for settlement or refund, in the specified fiat currency.")
     settled_amount: Optional[StrictStr] = Field(default=None, description="The amount already settled, in the specified cryptocurrency.")
+    available_balance: Optional[StrictStr] = Field(default=None, description="The balance available for settlement or refund, in the specified fiat currency.")
+    total_balance: Optional[StrictStr] = Field(default=None, description="The balance total for settlement or refund, in the specified fiat currency.")
     acquiring_type: Optional[AcquiringType] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the settlement, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the settlement, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "available_amount", "available_currency_balance", "pending_amount", "pending_currency_balance", "settled_amount", "acquiring_type", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "available_amount", "available_currency_balance", "pending_amount", "pending_currency_balance", "settled_amount", "available_balance", "total_balance", "acquiring_type", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +98,8 @@ class SettlementInfo(BaseModel):
             "pending_amount": obj.get("pending_amount"),
             "pending_currency_balance": obj.get("pending_currency_balance"),
             "settled_amount": obj.get("settled_amount"),
+            "available_balance": obj.get("available_balance"),
+            "total_balance": obj.get("total_balance"),
             "acquiring_type": obj.get("acquiring_type"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")

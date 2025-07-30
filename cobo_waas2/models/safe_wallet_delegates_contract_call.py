@@ -29,7 +29,7 @@ class SafeWalletDelegatesContractCall(BaseModel):
     request_type: EstimateFeeRequestType
     address: Optional[StrictStr] = Field(default=None, description="The destination address.")
     value: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
-    calldata: Optional[StrictStr] = Field(default=None, description="The data that is used to invoke a specific function or method within the specified contract at the destination address. ")
+    calldata: Optional[StrictStr] = Field(default=None, description="The data used to invoke a specific function or method within the specified contract at the destination address, with a maximum length of 65,000 characters. ")
     __properties: ClassVar[List[str]] = ["request_type", "address", "value", "calldata"]
 
     model_config = ConfigDict(

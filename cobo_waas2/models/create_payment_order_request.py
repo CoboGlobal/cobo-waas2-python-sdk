@@ -26,8 +26,8 @@ class CreatePaymentOrderRequest(BaseModel):
     CreatePaymentOrderRequest
     """  # noqa: E501
     merchant_id: StrictStr = Field(description="The merchant ID.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    currency: Optional[StrictStr] = Field(default='USD', description="The fiat currency of the order. Currently, only `USD` is supported.")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    currency: Optional[StrictStr] = Field(default='', description="The fiat currency of the order. Currently, only `USD` is supported.")
     order_amount: StrictStr = Field(description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`). Values must be greater than `0` and contain two decimal places.")
     fee_amount: StrictStr = Field(description="The developer fee for the order in fiat currency. It is added to the base amount (`order_amount`) to determine the final charge. For example, if order_amount is \"100.00\" and fee_amount is \"2.00\", the customer will be charged \"102.00\" in total, with \"100.00\" being settled to the merchant and \"2.00\" settled to the developer. Values must be greater than 0 and contain two decimal places.")
     merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system. The code should have a maximum length of 128 characters.")
@@ -89,7 +89,7 @@ class CreatePaymentOrderRequest(BaseModel):
         _obj = cls.model_validate({
             "merchant_id": obj.get("merchant_id"),
             "token_id": obj.get("token_id"),
-            "currency": obj.get("currency") if obj.get("currency") is not None else 'USD',
+            "currency": obj.get("currency") if obj.get("currency") is not None else '',
             "order_amount": obj.get("order_amount"),
             "fee_amount": obj.get("fee_amount"),
             "merchant_order_code": obj.get("merchant_order_code"),

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **request_type** | [**EstimateFeeRequestType**](EstimateFeeRequestType.md) |  | 
 **address** | **str** | The address of the recipient. | [optional] 
 **value** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | [optional] 
-**calldata** | **str** | The data that is used to invoke a specific function or method within the specified contract at the destination address.  | [optional] 
+**calldata** | **str** | The data used to invoke a specific function or method within the specified contract at the destination address, with a maximum length of 65,000 characters.  | [optional] 
 **token_id** | **str** | The token ID. | 
 **amount** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;. | [optional] 
 
