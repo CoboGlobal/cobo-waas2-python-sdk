@@ -48,7 +48,6 @@ class TestEstimateFeeParams(unittest.TestCase):
                 request_type = 'Transfer',
                 source = None,
                 token_id = 'ETH_USDT',
-                destination = None,
                 chain_id = 'ETH',
         )
         """

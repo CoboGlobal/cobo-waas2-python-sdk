@@ -43,6 +43,8 @@ class TestGetSettlementInfoByIds200Response(unittest.TestCase):
                         pending_amount = '500.00', 
                         pending_currency_balance = '500.00', 
                         settled_amount = '500.00', 
+                        available_balance = '500.00', 
+                        total_balance = '500.00', 
                         acquiring_type = 'Order', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )
@@ -56,6 +58,8 @@ class TestGetSettlementInfoByIds200Response(unittest.TestCase):
                         pending_amount = '500.00', 
                         pending_currency_balance = '500.00', 
                         settled_amount = '500.00', 
+                        available_balance = '500.00', 
+                        total_balance = '500.00', 
                         acquiring_type = 'Order', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )

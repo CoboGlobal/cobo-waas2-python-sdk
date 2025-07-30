@@ -227,6 +227,9 @@ cobo_waas2/models/fee_type.py
 cobo_waas2/models/fil_base.py
 cobo_waas2/models/fil_price.py
 cobo_waas2/models/fixed_fee_rate.py
+cobo_waas2/models/forced_sweep.py
+cobo_waas2/models/forced_sweep_request.py
+cobo_waas2/models/forced_sweep_status.py
 cobo_waas2/models/get_api_key_info200_response.py
 cobo_waas2/models/get_exchange_rate200_response.py
 cobo_waas2/models/get_max_transferable_value_with_fee_model_request.py
@@ -260,6 +263,7 @@ cobo_waas2/models/list_babylon_eligible_stakings200_response_data_inner.py
 cobo_waas2/models/list_babylon_staking_registrations200_response.py
 cobo_waas2/models/list_callback_messages200_response.py
 cobo_waas2/models/list_exchanges200_response_inner.py
+cobo_waas2/models/list_forced_sweep_requests200_response.py
 cobo_waas2/models/list_key_share_holder_groups200_response.py
 cobo_waas2/models/list_key_share_holders200_response.py
 cobo_waas2/models/list_merchants200_response.py
@@ -316,10 +320,12 @@ cobo_waas2/models/order_status.py
 cobo_waas2/models/org_info.py
 cobo_waas2/models/pagination.py
 cobo_waas2/models/payer_account.py
+cobo_waas2/models/payment_address_update_event_data.py
 cobo_waas2/models/payment_order_event_data.py
 cobo_waas2/models/payment_refund_event_data.py
 cobo_waas2/models/payment_settlement_event.py
 cobo_waas2/models/payment_transaction.py
+cobo_waas2/models/payment_transaction_event_data.py
 cobo_waas2/models/payout_channel.py
 cobo_waas2/models/policy_action.py
 cobo_waas2/models/policy_action_content.py
@@ -851,6 +857,9 @@ docs/FeeStationTransactionType.md
 docs/FeeStationTransfer.md
 docs/FeeType.md
 docs/FixedFeeRate.md
+docs/ForcedSweep.md
+docs/ForcedSweepRequest.md
+docs/ForcedSweepStatus.md
 docs/GetApiKeyInfo200Response.md
 docs/GetExchangeRate200Response.md
 docs/GetMaxTransferableValueWithFeeModelRequest.md
@@ -884,6 +893,7 @@ docs/ListBabylonEligibleStakings200ResponseDataInner.md
 docs/ListBabylonStakingRegistrations200Response.md
 docs/ListCallbackMessages200Response.md
 docs/ListExchanges200ResponseInner.md
+docs/ListForcedSweepRequests200Response.md
 docs/ListKeyShareHolderGroups200Response.md
 docs/ListKeyShareHolders200Response.md
 docs/ListMerchants200Response.md
@@ -942,11 +952,13 @@ docs/OrgInfo.md
 docs/OrganizationsApi.md
 docs/Pagination.md
 docs/PayerAccount.md
+docs/PaymentAddressUpdateEventData.md
 docs/PaymentApi.md
 docs/PaymentOrderEventData.md
 docs/PaymentRefundEventData.md
 docs/PaymentSettlementEvent.md
 docs/PaymentTransaction.md
+docs/PaymentTransactionEventData.md
 docs/PayoutChannel.md
 docs/PolicyAction.md
 docs/PolicyActionContent.md
@@ -1490,6 +1502,9 @@ test/test_fee_type.py
 test/test_fil_base.py
 test/test_fil_price.py
 test/test_fixed_fee_rate.py
+test/test_forced_sweep.py
+test/test_forced_sweep_request.py
+test/test_forced_sweep_status.py
 test/test_get_api_key_info200_response.py
 test/test_get_exchange_rate200_response.py
 test/test_get_max_transferable_value_with_fee_model_request.py
@@ -1523,6 +1538,7 @@ test/test_list_babylon_eligible_stakings200_response_data_inner.py
 test/test_list_babylon_staking_registrations200_response.py
 test/test_list_callback_messages200_response.py
 test/test_list_exchanges200_response_inner.py
+test/test_list_forced_sweep_requests200_response.py
 test/test_list_key_share_holder_groups200_response.py
 test/test_list_key_share_holders200_response.py
 test/test_list_merchants200_response.py
@@ -1581,11 +1597,13 @@ test/test_org_info.py
 test/test_organizations_api.py
 test/test_pagination.py
 test/test_payer_account.py
+test/test_payment_address_update_event_data.py
 test/test_payment_api.py
 test/test_payment_order_event_data.py
 test/test_payment_refund_event_data.py
 test/test_payment_settlement_event.py
 test/test_payment_transaction.py
+test/test_payment_transaction_event_data.py
 test/test_payout_channel.py
 test/test_policy_action.py
 test/test_policy_action_content.py

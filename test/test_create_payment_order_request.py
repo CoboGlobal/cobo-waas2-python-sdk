@@ -36,7 +36,7 @@ class TestCreatePaymentOrderRequest(unittest.TestCase):
             return CreatePaymentOrderRequest(
                 merchant_id = '1001',
                 token_id = 'ETH_USDT',
-                currency = 'USD',
+                currency = '',
                 order_amount = '100.00',
                 fee_amount = '2.00',
                 merchant_order_code = 'M20240201001',
