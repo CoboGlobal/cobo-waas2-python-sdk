@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | 
 **name** | **str** | The wallet name. | 
 **org_id** | **str** | The ID of the owning organization. | 
+**enable_auto_sweep** | **bool** | Enable the auto sweep feature for the wallet | [optional] 
 **apikey** | **str** | The API key of your exchange account. | 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | 
 **main_wallet_id** | **str** | The wallet ID of the Main Account associated with the Sub Account. This property is returned only if you are creating or querying an Exchange Wallet (Sub Account). | [optional] 

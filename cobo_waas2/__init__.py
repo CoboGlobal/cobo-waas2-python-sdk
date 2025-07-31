@@ -12,11 +12,12 @@
 """  # noqa: E501
 
 
-__version__ = "1.19.1"
+__version__ = "1.20.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
 from cobo_waas2.api.app_workflows_api import AppWorkflowsApi
+from cobo_waas2.api.auto_sweep_api import AutoSweepApi
 from cobo_waas2.api.developers_api import DevelopersApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.fee_station_api import FeeStationApi
@@ -166,6 +167,7 @@ from cobo_waas2.models.create_stake_activity201_response import CreateStakeActiv
 from cobo_waas2.models.create_stake_activity_extra import CreateStakeActivityExtra
 from cobo_waas2.models.create_stake_activity_request import CreateStakeActivityRequest
 from cobo_waas2.models.create_swap_activity_request import CreateSwapActivityRequest
+from cobo_waas2.models.create_sweep_to_address import CreateSweepToAddress
 from cobo_waas2.models.create_token_listing_request201_response import CreateTokenListingRequest201Response
 from cobo_waas2.models.create_token_listing_request_request import CreateTokenListingRequestRequest
 from cobo_waas2.models.create_transfer_transaction201_response import CreateTransferTransaction201Response
@@ -291,6 +293,7 @@ from cobo_waas2.models.list_mpc_projects200_response import ListMpcProjects200Re
 from cobo_waas2.models.list_mpc_vaults200_response import ListMpcVaults200Response
 from cobo_waas2.models.list_payment_orders200_response import ListPaymentOrders200Response
 from cobo_waas2.models.list_payment_wallet_balances200_response import ListPaymentWalletBalances200Response
+from cobo_waas2.models.list_settlement_details200_response import ListSettlementDetails200Response
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
 from cobo_waas2.models.list_staking_activities200_response import ListStakingActivities200Response
 from cobo_waas2.models.list_staking_pools200_response import ListStakingPools200Response
@@ -313,6 +316,7 @@ from cobo_waas2.models.list_transaction_approval_details200_response import List
 from cobo_waas2.models.list_transactions200_response import ListTransactions200Response
 from cobo_waas2.models.list_tss_requests200_response import ListTssRequests200Response
 from cobo_waas2.models.list_utxos200_response import ListUtxos200Response
+from cobo_waas2.models.list_wallet_sweep_to_addresses200_response import ListWalletSweepToAddresses200Response
 from cobo_waas2.models.list_wallets200_response import ListWallets200Response
 from cobo_waas2.models.list_webhook_endpoints200_response import ListWebhookEndpoints200Response
 from cobo_waas2.models.list_webhook_event_definitions200_response_inner import ListWebhookEventDefinitions200ResponseInner
@@ -437,6 +441,8 @@ from cobo_waas2.models.swap_quote import SwapQuote
 from cobo_waas2.models.swap_singing_status import SwapSingingStatus
 from cobo_waas2.models.swap_token import SwapToken
 from cobo_waas2.models.swap_type import SwapType
+from cobo_waas2.models.sweep_to_address import SweepToAddress
+from cobo_waas2.models.sweep_to_address_status import SweepToAddressStatus
 from cobo_waas2.models.tss_base_request_event_data import TSSBaseRequestEventData
 from cobo_waas2.models.tss_callback_action_type import TSSCallbackActionType
 from cobo_waas2.models.tss_callback_request import TSSCallbackRequest

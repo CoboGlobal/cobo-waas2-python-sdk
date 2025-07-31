@@ -28,6 +28,7 @@ Method | HTTP request | Description
 [**list_payment_orders**](PaymentApi.md#list_payment_orders) | **GET** /payments/orders | List all pay-in orders
 [**list_payment_supported_tokens**](PaymentApi.md#list_payment_supported_tokens) | **GET** /payments/supported_tokens | List all supported tokens
 [**list_payment_wallet_balances**](PaymentApi.md#list_payment_wallet_balances) | **GET** /payments/balance/payment_wallets | List payment wallet balances
+[**list_settlement_details**](PaymentApi.md#list_settlement_details) | **GET** /payments/settlement_details | List all settlement details
 [**list_settlement_requests**](PaymentApi.md#list_settlement_requests) | **GET** /payments/settlement_requests | List all settlement requests
 [**list_top_up_payer_accounts**](PaymentApi.md#list_top_up_payer_accounts) | **GET** /payments/topup/payer_accounts | List top-up payer accounts
 [**list_top_up_payers**](PaymentApi.md#list_top_up_payers) | **GET** /payments/topup/payers | List top-up payers
@@ -911,7 +912,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_refunds**
-> GetRefunds200Response get_refunds(limit=limit, before=before, after=after, merchant_id=merchant_id, request_id=request_id)
+> GetRefunds200Response get_refunds(limit=limit, before=before, after=after, merchant_id=merchant_id, request_id=request_id, statuses=statuses)
 
 List all refund orders
 
@@ -944,10 +945,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
     merchant_id = 'M1001'
     request_id = 'random_request_id'
+    statuses = 'Pending,Processing'
 
     try:
         # List all refund orders
-        api_response = api_instance.get_refunds(limit=limit, before=before, after=after, merchant_id=merchant_id, request_id=request_id)
+        api_response = api_instance.get_refunds(limit=limit, before=before, after=after, merchant_id=merchant_id, request_id=request_id, statuses=statuses)
         print("The response of PaymentApi->get_refunds:\n")
         pprint(api_response)
     except Exception as e:
@@ -966,6 +968,7 @@ Name | Type | Description  | Notes
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
  **merchant_id** | **str**| The merchant ID. | [optional] 
  **request_id** | **str**| The request ID. | [optional] 
+ **statuses** | **str**| A list of  statuses of order, refund or settle request. | [optional] 
 
 ### Return type
 
@@ -1591,7 +1594,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_payment_orders**
-> ListPaymentOrders200Response list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id)
+> ListPaymentOrders200Response list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id, statuses=statuses)
 
 List all pay-in orders
 
@@ -1624,10 +1627,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
     merchant_id = 'M1001'
     psp_order_id = 'P20240201001'
+    statuses = 'Pending,Processing'
 
     try:
         # List all pay-in orders
-        api_response = api_instance.list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id)
+        api_response = api_instance.list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id, statuses=statuses)
         print("The response of PaymentApi->list_payment_orders:\n")
         pprint(api_response)
     except Exception as e:
@@ -1646,6 +1650,7 @@ Name | Type | Description  | Notes
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
  **merchant_id** | **str**| The merchant ID. | [optional] 
  **psp_order_id** | **str**| The PSP order ID. | [optional] 
+ **statuses** | **str**| A list of  statuses of order, refund or settle request. | [optional] 
 
 ### Return type
 
@@ -1792,6 +1797,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListPaymentWalletBalances200Response**](ListPaymentWalletBalances200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_settlement_details**
+> ListSettlementDetails200Response list_settlement_details(limit=limit, before=before, after=after, merchant_id=merchant_id, statuses=statuses)
+
+List all settlement details
+
+This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_settlement_details200_response import ListSettlementDetails200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    merchant_id = 'M1001'
+    statuses = 'Pending,Processing'
+
+    try:
+        # List all settlement details
+        api_response = api_instance.list_settlement_details(limit=limit, before=before, after=after, merchant_id=merchant_id, statuses=statuses)
+        print("The response of PaymentApi->list_settlement_details:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_settlement_details: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **merchant_id** | **str**| The merchant ID. | [optional] 
+ **statuses** | **str**| A list of  statuses of order, refund or settle request. | [optional] 
+
+### Return type
+
+[**ListSettlementDetails200Response**](ListSettlementDetails200Response.md)
 
 ### Authorization
 

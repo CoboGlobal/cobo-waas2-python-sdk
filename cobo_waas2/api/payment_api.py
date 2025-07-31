@@ -35,6 +35,7 @@ from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBal
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
 from cobo_waas2.models.list_payment_orders200_response import ListPaymentOrders200Response
 from cobo_waas2.models.list_payment_wallet_balances200_response import ListPaymentWalletBalances200Response
+from cobo_waas2.models.list_settlement_details200_response import ListSettlementDetails200Response
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
 from cobo_waas2.models.list_top_up_payer_accounts200_response import ListTopUpPayerAccounts200Response
 from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200Response
@@ -2120,6 +2121,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2143,6 +2145,8 @@ class PaymentApi:
         :type merchant_id: str
         :param request_id: The request ID.
         :type request_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2157,6 +2161,7 @@ class PaymentApi:
             after=after,
             merchant_id=merchant_id,
             request_id=request_id,
+            statuses=statuses,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -2182,6 +2187,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2205,6 +2211,8 @@ class PaymentApi:
         :type merchant_id: str
         :param request_id: The request ID.
         :type request_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2219,6 +2227,7 @@ class PaymentApi:
             after=after,
             merchant_id=merchant_id,
             request_id=request_id,
+            statuses=statuses,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -2244,6 +2253,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2267,6 +2277,8 @@ class PaymentApi:
         :type merchant_id: str
         :param request_id: The request ID.
         :type request_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2281,6 +2293,7 @@ class PaymentApi:
             after=after,
             merchant_id=merchant_id,
             request_id=request_id,
+            statuses=statuses,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -2301,6 +2314,7 @@ class PaymentApi:
         after,
         merchant_id,
         request_id,
+        statuses,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2329,6 +2343,10 @@ class PaymentApi:
         if request_id is not None:
             
             _query_params.append(('request_id', request_id))
+            
+        if statuses is not None:
+            
+            _query_params.append(('statuses', statuses))
             
         # process the header parameters
         # process the form parameters
@@ -3929,6 +3947,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         psp_order_id: Annotated[Optional[StrictStr], Field(description="The PSP order ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3952,6 +3971,8 @@ class PaymentApi:
         :type merchant_id: str
         :param psp_order_id: The PSP order ID.
         :type psp_order_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3966,6 +3987,7 @@ class PaymentApi:
             after=after,
             merchant_id=merchant_id,
             psp_order_id=psp_order_id,
+            statuses=statuses,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -3991,6 +4013,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         psp_order_id: Annotated[Optional[StrictStr], Field(description="The PSP order ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4014,6 +4037,8 @@ class PaymentApi:
         :type merchant_id: str
         :param psp_order_id: The PSP order ID.
         :type psp_order_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4028,6 +4053,7 @@ class PaymentApi:
             after=after,
             merchant_id=merchant_id,
             psp_order_id=psp_order_id,
+            statuses=statuses,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -4053,6 +4079,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         psp_order_id: Annotated[Optional[StrictStr], Field(description="The PSP order ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4076,6 +4103,8 @@ class PaymentApi:
         :type merchant_id: str
         :param psp_order_id: The PSP order ID.
         :type psp_order_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4090,6 +4119,7 @@ class PaymentApi:
             after=after,
             merchant_id=merchant_id,
             psp_order_id=psp_order_id,
+            statuses=statuses,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -4110,6 +4140,7 @@ class PaymentApi:
         after,
         merchant_id,
         psp_order_id,
+        statuses,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4138,6 +4169,10 @@ class PaymentApi:
         if psp_order_id is not None:
             
             _query_params.append(('psp_order_id', psp_order_id))
+            
+        if statuses is not None:
+            
+            _query_params.append(('statuses', statuses))
             
         # process the header parameters
         # process the form parameters
@@ -4494,6 +4529,245 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/balance/payment_wallets',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_settlement_details(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListSettlementDetails200Response:
+        """List all settlement details
+
+        This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_settlement_details_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            merchant_id=merchant_id,
+            statuses=statuses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSettlementDetails200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_settlement_details_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListSettlementDetails200Response]:
+        """List all settlement details
+
+        This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_settlement_details_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            merchant_id=merchant_id,
+            statuses=statuses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSettlementDetails200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_settlement_details_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List all settlement details
+
+        This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param statuses: A list of  statuses of order, refund or settle request.
+        :type statuses: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_settlement_details_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            merchant_id=merchant_id,
+            statuses=statuses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSettlementDetails200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_settlement_details_serialize(
+        self,
+        limit,
+        before,
+        after,
+        merchant_id,
+        statuses,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if merchant_id is not None:
+            
+            _query_params.append(('merchant_id', merchant_id))
+            
+        if statuses is not None:
+            
+            _query_params.append(('statuses', statuses))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/settlement_details',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

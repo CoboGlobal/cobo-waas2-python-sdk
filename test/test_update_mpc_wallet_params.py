@@ -35,7 +35,8 @@ class TestUpdateMpcWalletParams(unittest.TestCase):
         if include_optional:
             return UpdateMpcWalletParams(
                 wallet_type = 'Custodial',
-                name = 'My WaaS 2.0 Wallet'
+                name = 'My WaaS 2.0 Wallet',
+                enable_auto_sweep = True
             )
         else:
             return UpdateMpcWalletParams(

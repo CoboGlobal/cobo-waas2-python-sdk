@@ -186,8 +186,9 @@ class TestPaymentApi(unittest.TestCase):
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         merchant_id = 'M1001'
         request_id = 'random_request_id'
+        statuses = 'Pending,Processing'
 
-        api_response = self.api.get_refunds(limit=limit, before=before, after=after, merchant_id=merchant_id, request_id=request_id)
+        api_response = self.api.get_refunds(limit=limit, before=before, after=after, merchant_id=merchant_id, request_id=request_id, statuses=statuses)
         """
 
     def test_get_settlement_by_id(self) -> None:
@@ -310,8 +311,9 @@ class TestPaymentApi(unittest.TestCase):
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         merchant_id = 'M1001'
         psp_order_id = 'P20240201001'
+        statuses = 'Pending,Processing'
 
-        api_response = self.api.list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id)
+        api_response = self.api.list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id, statuses=statuses)
         """
 
     def test_list_payment_supported_tokens(self) -> None:
@@ -336,6 +338,22 @@ class TestPaymentApi(unittest.TestCase):
         wallet_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d472'
 
         api_response = self.api.list_payment_wallet_balances(token_id, wallet_ids=wallet_ids)
+        """
+
+    def test_list_settlement_details(self) -> None:
+        """
+        Test case for list_settlement_details
+
+        List all settlement details
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        merchant_id = 'M1001'
+        statuses = 'Pending,Processing'
+
+        api_response = self.api.list_settlement_details(limit=limit, before=before, after=after, merchant_id=merchant_id, statuses=statuses)
         """
 
     def test_list_settlement_requests(self) -> None:

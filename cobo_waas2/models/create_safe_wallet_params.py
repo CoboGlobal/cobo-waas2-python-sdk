@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.smart_contract_initiator import SmartContractInitiator
@@ -33,6 +33,7 @@ class CreateSafeWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet. This parameter only applies to MPC and Web3 wallets.")
     chain_id: StrictStr = Field(description="The ID of the chain that the wallet operates on.")
     smart_contract_wallet_type: SmartContractWalletType
     safe_address: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The address of the Smart Contract Wallet. If this is not provided, Cobo will create a new Safe{Wallet} and set up Cobo Safe for you. In that case, the `threshold` and `signers` properties are required.")
@@ -40,7 +41,7 @@ class CreateSafeWalletParams(BaseModel):
     threshold: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="The minimum number of confirmations required for the Smart Contract Wallet. This property is required when creating a new Safe{Wallet}.")
     cobo_safe_address: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The address of Cobo Safe. If you are importing an existing Safe{Wallet}, Cobo Safe must have been created and enabled.")
     initiator: Optional[SmartContractInitiator] = None
-    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "chain_id", "smart_contract_wallet_type", "safe_address", "signers", "threshold", "cobo_safe_address", "initiator"]
+    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "enable_auto_sweep", "chain_id", "smart_contract_wallet_type", "safe_address", "signers", "threshold", "cobo_safe_address", "initiator"]
 
     @field_validator('safe_address')
     def safe_address_validate_regular_expression(cls, value):
@@ -119,6 +120,7 @@ class CreateSafeWalletParams(BaseModel):
             "name": obj.get("name"),
             "wallet_type": obj.get("wallet_type"),
             "wallet_subtype": obj.get("wallet_subtype"),
+            "enable_auto_sweep": obj.get("enable_auto_sweep"),
             "chain_id": obj.get("chain_id"),
             "smart_contract_wallet_type": obj.get("smart_contract_wallet_type"),
             "safe_address": obj.get("safe_address"),

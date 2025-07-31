@@ -8,6 +8,7 @@ cobo_waas2/__init__.py
 cobo_waas2/api/__init__.py
 cobo_waas2/api/address_books_api.py
 cobo_waas2/api/app_workflows_api.py
+cobo_waas2/api/auto_sweep_api.py
 cobo_waas2/api/developers_api.py
 cobo_waas2/api/developers_webhooks_api.py
 cobo_waas2/api/fee_station_api.py
@@ -154,6 +155,7 @@ cobo_waas2/models/create_stake_activity201_response.py
 cobo_waas2/models/create_stake_activity_extra.py
 cobo_waas2/models/create_stake_activity_request.py
 cobo_waas2/models/create_swap_activity_request.py
+cobo_waas2/models/create_sweep_to_address.py
 cobo_waas2/models/create_token_listing_request201_response.py
 cobo_waas2/models/create_token_listing_request_request.py
 cobo_waas2/models/create_transfer_transaction201_response.py
@@ -279,6 +281,7 @@ cobo_waas2/models/list_mpc_projects200_response.py
 cobo_waas2/models/list_mpc_vaults200_response.py
 cobo_waas2/models/list_payment_orders200_response.py
 cobo_waas2/models/list_payment_wallet_balances200_response.py
+cobo_waas2/models/list_settlement_details200_response.py
 cobo_waas2/models/list_settlement_requests200_response.py
 cobo_waas2/models/list_staking_activities200_response.py
 cobo_waas2/models/list_staking_pools200_response.py
@@ -301,6 +304,7 @@ cobo_waas2/models/list_transaction_approval_details200_response.py
 cobo_waas2/models/list_transactions200_response.py
 cobo_waas2/models/list_tss_requests200_response.py
 cobo_waas2/models/list_utxos200_response.py
+cobo_waas2/models/list_wallet_sweep_to_addresses200_response.py
 cobo_waas2/models/list_wallets200_response.py
 cobo_waas2/models/list_webhook_endpoints200_response.py
 cobo_waas2/models/list_webhook_event_definitions200_response_inner.py
@@ -425,6 +429,8 @@ cobo_waas2/models/swap_quote.py
 cobo_waas2/models/swap_singing_status.py
 cobo_waas2/models/swap_token.py
 cobo_waas2/models/swap_type.py
+cobo_waas2/models/sweep_to_address.py
+cobo_waas2/models/sweep_to_address_status.py
 cobo_waas2/models/token_asset_model_type.py
 cobo_waas2/models/token_balance.py
 cobo_waas2/models/token_info.py
@@ -720,6 +726,7 @@ docs/ApprovalUserDetail.md
 docs/AssetBalance.md
 docs/AssetInfo.md
 docs/AutoFuelType.md
+docs/AutoSweepApi.md
 docs/BTCBIP137MessageSignDestination.md
 docs/BTCBIP322MessageSignDestination.md
 docs/BTCEIP191MessageSignDestination.md
@@ -799,6 +806,7 @@ docs/CreateStakeActivity201Response.md
 docs/CreateStakeActivityExtra.md
 docs/CreateStakeActivityRequest.md
 docs/CreateSwapActivityRequest.md
+docs/CreateSweepToAddress.md
 docs/CreateTokenListingRequest201Response.md
 docs/CreateTokenListingRequestRequest.md
 docs/CreateTransferTransaction201Response.md
@@ -928,6 +936,7 @@ docs/ListMpcProjects200Response.md
 docs/ListMpcVaults200Response.md
 docs/ListPaymentOrders200Response.md
 docs/ListPaymentWalletBalances200Response.md
+docs/ListSettlementDetails200Response.md
 docs/ListSettlementRequests200Response.md
 docs/ListStakingActivities200Response.md
 docs/ListStakingPools200Response.md
@@ -950,6 +959,7 @@ docs/ListTransactionApprovalDetails200Response.md
 docs/ListTransactions200Response.md
 docs/ListTssRequests200Response.md
 docs/ListUtxos200Response.md
+docs/ListWalletSweepToAddresses200Response.md
 docs/ListWallets200Response.md
 docs/ListWebhookEndpoints200Response.md
 docs/ListWebhookEventDefinitions200ResponseInner.md
@@ -1080,6 +1090,8 @@ docs/SwapSingingStatus.md
 docs/SwapToken.md
 docs/SwapType.md
 docs/SwapsApi.md
+docs/SweepToAddress.md
+docs/SweepToAddressStatus.md
 docs/TSSBaseRequestEventData.md
 docs/TSSCallbackActionType.md
 docs/TSSCallbackRequest.md
@@ -1386,6 +1398,7 @@ test/test_approval_user_detail.py
 test/test_asset_balance.py
 test/test_asset_info.py
 test/test_auto_fuel_type.py
+test/test_auto_sweep_api.py
 test/test_babylon_airdrop_pop.py
 test/test_babylon_airdrop_registration.py
 test/test_babylon_eligible_airdrop.py
@@ -1465,6 +1478,7 @@ test/test_create_stake_activity201_response.py
 test/test_create_stake_activity_extra.py
 test/test_create_stake_activity_request.py
 test/test_create_swap_activity_request.py
+test/test_create_sweep_to_address.py
 test/test_create_token_listing_request201_response.py
 test/test_create_token_listing_request_request.py
 test/test_create_transfer_transaction201_response.py
@@ -1594,6 +1608,7 @@ test/test_list_mpc_projects200_response.py
 test/test_list_mpc_vaults200_response.py
 test/test_list_payment_orders200_response.py
 test/test_list_payment_wallet_balances200_response.py
+test/test_list_settlement_details200_response.py
 test/test_list_settlement_requests200_response.py
 test/test_list_staking_activities200_response.py
 test/test_list_staking_pools200_response.py
@@ -1616,6 +1631,7 @@ test/test_list_transaction_approval_details200_response.py
 test/test_list_transactions200_response.py
 test/test_list_tss_requests200_response.py
 test/test_list_utxos200_response.py
+test/test_list_wallet_sweep_to_addresses200_response.py
 test/test_list_wallets200_response.py
 test/test_list_webhook_endpoints200_response.py
 test/test_list_webhook_event_definitions200_response_inner.py
@@ -1746,6 +1762,8 @@ test/test_swap_singing_status.py
 test/test_swap_token.py
 test/test_swap_type.py
 test/test_swaps_api.py
+test/test_sweep_to_address.py
+test/test_sweep_to_address_status.py
 test/test_token_asset_model_type.py
 test/test_token_balance.py
 test/test_token_info.py

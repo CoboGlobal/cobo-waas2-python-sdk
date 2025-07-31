@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.exchange_id import ExchangeId
 from cobo_waas2.models.wallet_subtype import WalletSubtype
@@ -33,10 +33,11 @@ class ExchangeWalletInfo(BaseModel):
     wallet_subtype: WalletSubtype
     name: StrictStr = Field(description="The wallet name.")
     org_id: StrictStr = Field(description="The ID of the owning organization.")
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet")
     apikey: StrictStr = Field(description="The API key of your exchange account.")
     exchange_id: ExchangeId
     main_wallet_id: Optional[StrictStr] = Field(default=None, description="The wallet ID of the Main Account associated with the Sub Account. This property is returned only if you are creating or querying an Exchange Wallet (Sub Account).")
-    __properties: ClassVar[List[str]] = ["wallet_id", "wallet_type", "wallet_subtype", "name", "org_id", "apikey", "exchange_id", "main_wallet_id"]
+    __properties: ClassVar[List[str]] = ["wallet_id", "wallet_type", "wallet_subtype", "name", "org_id", "enable_auto_sweep", "apikey", "exchange_id", "main_wallet_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,7 @@ class ExchangeWalletInfo(BaseModel):
             "wallet_subtype": obj.get("wallet_subtype"),
             "name": obj.get("name"),
             "org_id": obj.get("org_id"),
+            "enable_auto_sweep": obj.get("enable_auto_sweep"),
             "apikey": obj.get("apikey"),
             "exchange_id": obj.get("exchange_id"),
             "main_wallet_id": obj.get("main_wallet_id")
