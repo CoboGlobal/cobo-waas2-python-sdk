@@ -39,6 +39,7 @@ class TestExchangeWalletInfo(unittest.TestCase):
                 wallet_subtype = 'Asset',
                 name = 'Example Wallet',
                 org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                enable_auto_sweep = True,
                 apikey = 'd8f062da-39f4-4a11-8b9d-12595854237f',
                 exchange_id = 'binance',
                 main_wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'

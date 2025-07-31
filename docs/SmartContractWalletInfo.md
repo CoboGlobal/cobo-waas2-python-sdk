@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | 
 **name** | **str** | The wallet name. | 
 **org_id** | **str** | The ID of the owning organization. | 
+**enable_auto_sweep** | **bool** | Enable the auto sweep feature for the wallet | [optional] 
 **chain_id** | **str** | The ID of the chain on which the wallet operates. | [optional] 
 **smart_contract_wallet_type** | [**SmartContractWalletType**](SmartContractWalletType.md) |  | 
 **safe_address** | **str** | The Smart Contract Wallet address. | [optional] 

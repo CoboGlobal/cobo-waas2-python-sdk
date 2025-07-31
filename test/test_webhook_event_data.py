@@ -240,7 +240,8 @@ class TestWebhookEventData(unittest.TestCase):
                         updated_timestamp = 1744689600, 
                         crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
                         payout_channel = 'Crypto', 
-                        acquiring_type = 'Order', )
+                        acquiring_type = 'Order', 
+                        settlement_request_id = 'S20250304-1001', )
                     ],
                 acquiring_type = 'Order',
                 payer_id = 'P20250619T0310056d7aa',
@@ -346,7 +347,8 @@ class TestWebhookEventData(unittest.TestCase):
                         updated_timestamp = 1744689600, 
                         crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
                         payout_channel = 'Crypto', 
-                        acquiring_type = 'Order', )
+                        acquiring_type = 'Order', 
+                        settlement_request_id = 'S20250304-1001', )
                     ],
                 acquiring_type = 'Order',
                 payer_id = 'P20250619T0310056d7aa',

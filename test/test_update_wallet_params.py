@@ -35,7 +35,8 @@ class TestUpdateWalletParams(unittest.TestCase):
         if include_optional:
             return UpdateWalletParams(
                 wallet_type = 'Custodial',
-                name = 'Example Wallet'
+                name = 'Example Wallet',
+                enable_auto_sweep = True
             )
         else:
             return UpdateWalletParams(
