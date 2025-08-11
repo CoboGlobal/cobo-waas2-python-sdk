@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**create_payment_order**](PaymentApi.md#create_payment_order) | **POST** /payments/orders | Create pay-in order
 [**create_refund**](PaymentApi.md#create_refund) | **POST** /payments/refunds | Create refund order
 [**create_settlement_request**](PaymentApi.md#create_settlement_request) | **POST** /payments/settlement_requests | Create settlement request
+[**delete_crypto_address**](PaymentApi.md#delete_crypto_address) | **POST** /payments/crypto_addresses/{crypto_address_id}/delete | Delete crypto address
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
 [**get_psp_balance**](PaymentApi.md#get_psp_balance) | **GET** /payments/balance/psp | Get psp balance
@@ -619,6 +620,79 @@ Name | Type | Description  | Notes
 **201** | The settlement request was successfully created. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_crypto_address**
+> DeleteCryptoAddress201Response delete_crypto_address(crypto_address_id)
+
+Delete crypto address
+
+This operation deletes a crypto address. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.delete_crypto_address201_response import DeleteCryptoAddress201Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd'
+
+    try:
+        # Delete crypto address
+        api_response = api_instance.delete_crypto_address(crypto_address_id)
+        print("The response of PaymentApi->delete_crypto_address:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->delete_crypto_address: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **crypto_address_id** | **str**| The crypto address ID. | 
+
+### Return type
+
+[**DeleteCryptoAddress201Response**](DeleteCryptoAddress201Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**401** | Unauthorized. Please provide valid credentials. |  -  |
+**403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
