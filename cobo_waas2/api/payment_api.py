@@ -25,6 +25,7 @@ from cobo_waas2.models.create_payment_order_request import CreatePaymentOrderReq
 from cobo_waas2.models.create_refund_request import CreateRefundRequest
 from cobo_waas2.models.create_settlement_request_request import CreateSettlementRequestRequest
 from cobo_waas2.models.crypto_address import CryptoAddress
+from cobo_waas2.models.delete_crypto_address201_response import DeleteCryptoAddress201Response
 from cobo_waas2.models.forced_sweep import ForcedSweep
 from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
 from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
@@ -1412,6 +1413,178 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/settlement_requests',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def delete_crypto_address(
+        self,
+        crypto_address_id: Annotated[StrictStr, Field(description="The crypto address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DeleteCryptoAddress201Response:
+        """Delete crypto address
+
+        This operation deletes a crypto address. 
+
+        :param crypto_address_id: The crypto address ID. (required)
+        :type crypto_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_crypto_address_serialize(
+            crypto_address_id=crypto_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DeleteCryptoAddress201Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_crypto_address_with_http_info(
+        self,
+        crypto_address_id: Annotated[StrictStr, Field(description="The crypto address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DeleteCryptoAddress201Response]:
+        """Delete crypto address
+
+        This operation deletes a crypto address. 
+
+        :param crypto_address_id: The crypto address ID. (required)
+        :type crypto_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_crypto_address_serialize(
+            crypto_address_id=crypto_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DeleteCryptoAddress201Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_crypto_address_without_preload_content(
+        self,
+        crypto_address_id: Annotated[StrictStr, Field(description="The crypto address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Delete crypto address
+
+        This operation deletes a crypto address. 
+
+        :param crypto_address_id: The crypto address ID. (required)
+        :type crypto_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_crypto_address_serialize(
+            crypto_address_id=crypto_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DeleteCryptoAddress201Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_crypto_address_serialize(
+        self,
+        crypto_address_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if crypto_address_id is not None:
+            _path_params['crypto_address_id'] = crypto_address_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/crypto_addresses/{crypto_address_id}/delete',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

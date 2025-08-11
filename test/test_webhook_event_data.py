@@ -241,9 +241,14 @@ class TestWebhookEventData(unittest.TestCase):
                         crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
                         payout_channel = 'Crypto', 
                         acquiring_type = 'Order', 
-                        settlement_request_id = 'S20250304-1001', )
+                        settlement_request_id = 'S20250304-1001', 
+                        order_ids = [
+                            'O20250304-M1001-1001'
+                            ], )
                     ],
                 acquiring_type = 'Order',
+                payout_channel = 'Crypto',
+                settlement_type = 'Merchant',
                 payer_id = 'P20250619T0310056d7aa',
                 custom_payer_id = 'user_abc_10001',
                 chain = 'ETH',
@@ -348,7 +353,10 @@ class TestWebhookEventData(unittest.TestCase):
                         crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
                         payout_channel = 'Crypto', 
                         acquiring_type = 'Order', 
-                        settlement_request_id = 'S20250304-1001', )
+                        settlement_request_id = 'S20250304-1001', 
+                        order_ids = [
+                            'O20250304-M1001-1001'
+                            ], )
                     ],
                 acquiring_type = 'Order',
                 payer_id = 'P20250619T0310056d7aa',

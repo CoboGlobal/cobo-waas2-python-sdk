@@ -26,12 +26,12 @@ class CryptoAddress(BaseModel):
     CryptoAddress
     """  # noqa: E501
     token_id: StrictStr = Field(description="The token identifier (e.g., ETH_USDT, TRON_USDT) that this address is associated with.")
-    address_id: StrictStr = Field(description="Unique identifier for the pre-approved crypto address, used to reference the address securely in requests. This ID is returned by the system and should be used instead of the raw blockchain address in API calls.")
+    crypto_address_id: StrictStr = Field(description="Unique identifier for the pre-approved crypto address, used to reference the address securely in requests. This ID is returned by the system and should be used instead of the raw blockchain address in API calls.")
     address: StrictStr = Field(description="The actual blockchain address to which funds will be transferred. This is for display purposes only; external clients should always use address_id to refer to the address in secure operations.")
     label: Optional[StrictStr] = Field(default=None, description="A human-readable label or alias for the crypto address, set by the merchant or platform operator. This field is optional and intended to help distinguish addresses by usage or purpose (e.g., \"Main Payout Wallet\", \"Cold Wallet\").")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the crypto address, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the crypto address, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["token_id", "address_id", "address", "label", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["token_id", "crypto_address_id", "address", "label", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +85,7 @@ class CryptoAddress(BaseModel):
 
         _obj = cls.model_validate({
             "token_id": obj.get("token_id"),
-            "address_id": obj.get("address_id"),
+            "crypto_address_id": obj.get("crypto_address_id"),
             "address": obj.get("address"),
             "label": obj.get("label"),
             "created_timestamp": obj.get("created_timestamp"),

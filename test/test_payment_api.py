@@ -125,6 +125,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_settlement_request(create_settlement_request_request=create_settlement_request_request)
         """
 
+    def test_delete_crypto_address(self) -> None:
+        """
+        Test case for delete_crypto_address
+
+        Delete crypto address
+        """
+        """
+        crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd'
+
+        api_response = self.api.delete_crypto_address(crypto_address_id)
+        """
+
     def test_get_exchange_rate(self) -> None:
         """
         Test case for get_exchange_rate

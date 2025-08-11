@@ -65,7 +65,10 @@ class TestListSettlementDetails200Response(unittest.TestCase):
                         crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
                         payout_channel = 'Crypto', 
                         acquiring_type = 'Order', 
-                        settlement_request_id = 'S20250304-1001', )
+                        settlement_request_id = 'S20250304-1001', 
+                        order_ids = [
+                            'O20250304-M1001-1001'
+                            ], )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

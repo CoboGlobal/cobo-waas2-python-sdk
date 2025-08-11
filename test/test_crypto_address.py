@@ -35,7 +35,7 @@ class TestCryptoAddress(unittest.TestCase):
         if include_optional:
             return CryptoAddress(
                 token_id = 'ETH_USDT',
-                address_id = 'addr_ethusdt_20250429T134512_a8c31f',
+                crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f',
                 address = '0xabc123456789def0000000000000000000000000',
                 label = 'Main Payout Wallet',
                 created_timestamp = 1744689600,
@@ -44,7 +44,7 @@ class TestCryptoAddress(unittest.TestCase):
         else:
             return CryptoAddress(
                 token_id = 'ETH_USDT',
-                address_id = 'addr_ethusdt_20250429T134512_a8c31f',
+                crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f',
                 address = '0xabc123456789def0000000000000000000000000',
         )
         """

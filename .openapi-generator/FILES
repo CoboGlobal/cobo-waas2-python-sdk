@@ -176,6 +176,7 @@ cobo_waas2/models/custodial_wallet_info.py
 cobo_waas2/models/custodial_web3_contract_call_source.py
 cobo_waas2/models/custodial_web3_message_sign_source.py
 cobo_waas2/models/custodial_web3_transfer_source.py
+cobo_waas2/models/delete_crypto_address201_response.py
 cobo_waas2/models/delete_guard_pubkey201_response.py
 cobo_waas2/models/delete_key_share_holder_group_by_id201_response.py
 cobo_waas2/models/delete_wallet_by_id201_response.py
@@ -827,6 +828,7 @@ docs/CustodialWalletInfo.md
 docs/CustodialWeb3ContractCallSource.md
 docs/CustodialWeb3MessageSignSource.md
 docs/CustodialWeb3TransferSource.md
+docs/DeleteCryptoAddress201Response.md
 docs/DeleteGuardPubkey201Response.md
 docs/DeleteKeyShareHolderGroupById201Response.md
 docs/DeleteWalletById201Response.md
@@ -1499,6 +1501,7 @@ test/test_custodial_wallet_info.py
 test/test_custodial_web3_contract_call_source.py
 test/test_custodial_web3_message_sign_source.py
 test/test_custodial_web3_transfer_source.py
+test/test_delete_crypto_address201_response.py
 test/test_delete_guard_pubkey201_response.py
 test/test_delete_key_share_holder_group_by_id201_response.py
 test/test_delete_wallet_by_id201_response.py
