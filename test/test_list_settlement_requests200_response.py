@@ -68,11 +68,18 @@ class TestListSettlementRequests200Response(unittest.TestCase):
                                 updated_timestamp = 1744689600, 
                                 crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
                                 payout_channel = 'Crypto', 
-                                acquiring_type = 'Order', )
+                                acquiring_type = 'Order', 
+                                settlement_request_id = 'S20250304-1001', 
+                                order_ids = [
+                                    'O20250304-M1001-1001'
+                                    ], )
                             ], 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, 
-                        initiator = 'api_key_b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d', )
+                        initiator = 'api_key_b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d', 
+                        acquiring_type = 'Order', 
+                        payout_channel = 'Crypto', 
+                        settlement_type = 'Merchant', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

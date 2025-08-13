@@ -16,19 +16,19 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class UpdateTopUpAddress(BaseModel):
+class CreateCryptoAddressRequest(BaseModel):
     """
-    The request body to update top-up address.
+    CreateCryptoAddressRequest
     """  # noqa: E501
-    merchant_id: StrictStr = Field(description="The merchant ID.")
-    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    custom_payer_id: StrictStr = Field(description="A unique identifier assigned by the developer to track and identify individual payers in their system.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "custom_payer_id"]
+    token_id: StrictStr = Field(description="The token ID that identifies the cryptocurrency and its corresponding blockchain.  **Supported values**:   - **USDC**: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - **USDT**: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    address: StrictStr = Field(description="The blockchain address where crypto withdrawals will be sent. Must be a valid address format for the blockchain specified by `token_id`. For example: - For `SOL_USDC`: Provide a Solana address. - For `ETH_USDT`: Provide an Ethereum address. ")
+    label: Optional[StrictStr] = Field(default=None, description="A label to help identify the address's purpose. ")
+    __properties: ClassVar[List[str]] = ["token_id", "address", "label"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class UpdateTopUpAddress(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UpdateTopUpAddress from a JSON string"""
+        """Create an instance of CreateCryptoAddressRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class UpdateTopUpAddress(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UpdateTopUpAddress from a dict"""
+        """Create an instance of CreateCryptoAddressRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,9 +81,9 @@ class UpdateTopUpAddress(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "merchant_id": obj.get("merchant_id"),
             "token_id": obj.get("token_id"),
-            "custom_payer_id": obj.get("custom_payer_id")
+            "address": obj.get("address"),
+            "label": obj.get("label")
         })
         return _obj
 

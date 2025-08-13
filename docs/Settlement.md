@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **created_timestamp** | **int** | The creation time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The last update time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
 **initiator** | **str** |  The initiator of this settlement request. Can return either an API key or the Payment Management App&#39;s ID.  - Format &#x60;api_key_&lt;API_KEY&gt;&#x60;: Indicates the settlement request was initiated via the Payment API using the API key. - Format &#x60;app_&lt;APP_ID&gt;&#x60;: Indicates the settlement request was initiated through the Payment Management App using the App ID.  | [optional] 
+**acquiring_type** | [**AcquiringType**](AcquiringType.md) |  | [optional] 
+**payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | [optional] 
+**settlement_type** | [**SettlementType**](SettlementType.md) |  | [optional] 
 
 ## Example
 

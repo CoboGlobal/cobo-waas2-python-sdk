@@ -21,14 +21,12 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class UpdateTopUpAddress(BaseModel):
+class DeleteCryptoAddress201Response(BaseModel):
     """
-    The request body to update top-up address.
+    DeleteCryptoAddress201Response
     """  # noqa: E501
-    merchant_id: StrictStr = Field(description="The merchant ID.")
-    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    custom_payer_id: StrictStr = Field(description="A unique identifier assigned by the developer to track and identify individual payers in their system.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "custom_payer_id"]
+    crypto_address_id: StrictStr = Field(description="The crypto address ID.")
+    __properties: ClassVar[List[str]] = ["crypto_address_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +46,7 @@ class UpdateTopUpAddress(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UpdateTopUpAddress from a JSON string"""
+        """Create an instance of DeleteCryptoAddress201Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +71,7 @@ class UpdateTopUpAddress(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UpdateTopUpAddress from a dict"""
+        """Create an instance of DeleteCryptoAddress201Response from a dict"""
         if obj is None:
             return None
 
@@ -81,9 +79,7 @@ class UpdateTopUpAddress(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "merchant_id": obj.get("merchant_id"),
-            "token_id": obj.get("token_id"),
-            "custom_payer_id": obj.get("custom_payer_id")
+            "crypto_address_id": obj.get("crypto_address_id")
         })
         return _obj
 

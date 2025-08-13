@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.crypto_address import CryptoAddress
+from cobo_waas2.models.create_crypto_address_request import CreateCryptoAddressRequest
 
 
-class TestCryptoAddress(unittest.TestCase):
-    """CryptoAddress unit test stubs"""
+class TestCreateCryptoAddressRequest(unittest.TestCase):
+    """CreateCryptoAddressRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,33 +24,29 @@ class TestCryptoAddress(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CryptoAddress:
-        """Test CryptoAddress
+    def make_instance(self, include_optional) -> CreateCryptoAddressRequest:
+        """Test CreateCryptoAddressRequest
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CryptoAddress`
+        # uncomment below to create an instance of `CreateCryptoAddressRequest`
         """
-        model = CryptoAddress()
+        model = CreateCryptoAddressRequest()
         if include_optional:
-            return CryptoAddress(
+            return CreateCryptoAddressRequest(
                 token_id = 'ETH_USDT',
-                crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f',
                 address = '0xabc123456789def0000000000000000000000000',
-                label = 'Main Withdrawal Address',
-                created_timestamp = 1744689600,
-                updated_timestamp = 1744689600
+                label = 'Main Withdrawal Address'
             )
         else:
-            return CryptoAddress(
+            return CreateCryptoAddressRequest(
                 token_id = 'ETH_USDT',
-                crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f',
                 address = '0xabc123456789def0000000000000000000000000',
         )
         """
 
-    def testCryptoAddress(self):
-        """Test CryptoAddress"""
+    def testCreateCryptoAddressRequest(self):
+        """Test CreateCryptoAddressRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 
