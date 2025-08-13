@@ -128,6 +128,7 @@ cobo_waas2/models/create_babylon_staking_registration201_response.py
 cobo_waas2/models/create_babylon_staking_registration_request.py
 cobo_waas2/models/create_claim_activity.py
 cobo_waas2/models/create_claim_activity_request.py
+cobo_waas2/models/create_crypto_address_request.py
 cobo_waas2/models/create_custodial_wallet_params.py
 cobo_waas2/models/create_exchange_wallet_params.py
 cobo_waas2/models/create_key_share_holder.py
@@ -168,6 +169,7 @@ cobo_waas2/models/custodial_wallet_info.py
 cobo_waas2/models/custodial_web3_contract_call_source.py
 cobo_waas2/models/custodial_web3_message_sign_source.py
 cobo_waas2/models/custodial_web3_transfer_source.py
+cobo_waas2/models/delete_crypto_address201_response.py
 cobo_waas2/models/delete_guard_pubkey201_response.py
 cobo_waas2/models/delete_key_share_holder_group_by_id201_response.py
 cobo_waas2/models/delete_wallet_by_id201_response.py
@@ -270,6 +272,7 @@ cobo_waas2/models/list_merchants200_response.py
 cobo_waas2/models/list_mpc_projects200_response.py
 cobo_waas2/models/list_mpc_vaults200_response.py
 cobo_waas2/models/list_payment_orders200_response.py
+cobo_waas2/models/list_settlement_details200_response.py
 cobo_waas2/models/list_settlement_requests200_response.py
 cobo_waas2/models/list_staking_activities200_response.py
 cobo_waas2/models/list_staking_pools200_response.py
@@ -755,6 +758,7 @@ docs/CreateBabylonStakingRegistration201Response.md
 docs/CreateBabylonStakingRegistrationRequest.md
 docs/CreateClaimActivity.md
 docs/CreateClaimActivityRequest.md
+docs/CreateCryptoAddressRequest.md
 docs/CreateCustodialWalletParams.md
 docs/CreateExchangeWalletParams.md
 docs/CreateKeyShareHolder.md
@@ -795,6 +799,7 @@ docs/CustodialWalletInfo.md
 docs/CustodialWeb3ContractCallSource.md
 docs/CustodialWeb3MessageSignSource.md
 docs/CustodialWeb3TransferSource.md
+docs/DeleteCryptoAddress201Response.md
 docs/DeleteGuardPubkey201Response.md
 docs/DeleteKeyShareHolderGroupById201Response.md
 docs/DeleteWalletById201Response.md
@@ -900,6 +905,7 @@ docs/ListMerchants200Response.md
 docs/ListMpcProjects200Response.md
 docs/ListMpcVaults200Response.md
 docs/ListPaymentOrders200Response.md
+docs/ListSettlementDetails200Response.md
 docs/ListSettlementRequests200Response.md
 docs/ListStakingActivities200Response.md
 docs/ListStakingPools200Response.md
@@ -1400,6 +1406,7 @@ test/test_create_babylon_staking_registration201_response.py
 test/test_create_babylon_staking_registration_request.py
 test/test_create_claim_activity.py
 test/test_create_claim_activity_request.py
+test/test_create_crypto_address_request.py
 test/test_create_custodial_wallet_params.py
 test/test_create_exchange_wallet_params.py
 test/test_create_key_share_holder.py
@@ -1440,6 +1447,7 @@ test/test_custodial_wallet_info.py
 test/test_custodial_web3_contract_call_source.py
 test/test_custodial_web3_message_sign_source.py
 test/test_custodial_web3_transfer_source.py
+test/test_delete_crypto_address201_response.py
 test/test_delete_guard_pubkey201_response.py
 test/test_delete_key_share_holder_group_by_id201_response.py
 test/test_delete_wallet_by_id201_response.py
@@ -1545,6 +1553,7 @@ test/test_list_merchants200_response.py
 test/test_list_mpc_projects200_response.py
 test/test_list_mpc_vaults200_response.py
 test/test_list_payment_orders200_response.py
+test/test_list_settlement_details200_response.py
 test/test_list_settlement_requests200_response.py
 test/test_list_staking_activities200_response.py
 test/test_list_staking_pools200_response.py

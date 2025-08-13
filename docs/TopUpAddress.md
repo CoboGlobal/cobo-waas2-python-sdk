@@ -1,6 +1,5 @@
 # TopUpAddress
 
-The details of a top-up address
 
 ## Properties
 

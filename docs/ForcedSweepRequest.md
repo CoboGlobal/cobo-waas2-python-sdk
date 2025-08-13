@@ -1,15 +1,14 @@
 # ForcedSweepRequest
 
-The information about the request to force sweep.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_id** | **str** | The request id of the force sweep. | 
-**wallet_id** | **str** | The wallet ID to force sweep, which is the unique identifier of a wallet. | 
-**token_id** | **str** | The token ID to force sweep, which is the unique identifier of a token. | 
-**amount** | **str** | The amount of needing force sweep. | 
+**request_id** | **str** | The request ID that is used to track a forced sweep. The request ID is provided by you and must be unique. | 
+**wallet_id** | **str** | The ID of the wallet in which the funds will be forcefully swept. | 
+**token_id** | **str** | The ID of the token to be forcefully swept. | 
+**amount** | **str** | The amount of the token to be forcefully swept. | 
 
 ## Example
 

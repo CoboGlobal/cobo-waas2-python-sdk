@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class TopUpAddress(BaseModel):
     """
-    The details of a top-up address
+    TopUpAddress
     """  # noqa: E501
     address: StrictStr = Field(description="The dedicated top-up address assigned to a specific payer under a merchant on a specified chain.")
     payer_id: StrictStr = Field(description="A unique identifier assigned by Cobo to track and identify individual payers.")
