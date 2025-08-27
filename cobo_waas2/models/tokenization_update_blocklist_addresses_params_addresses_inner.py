@@ -26,7 +26,7 @@ class TokenizationUpdateBlocklistAddressesParamsAddressesInner(BaseModel):
     TokenizationUpdateBlocklistAddressesParamsAddressesInner
     """  # noqa: E501
     address: StrictStr = Field(description="The address to add or remove.")
-    note: Optional[StrictStr] = Field(default=None, description="An optional note for the address, primarily used when adding.")
+    note: Optional[StrictStr] = Field(default=None, description="An optional note for the address, primarily used when adding addresses.")
     __properties: ClassVar[List[str]] = ["address", "note"]
 
     model_config = ConfigDict(

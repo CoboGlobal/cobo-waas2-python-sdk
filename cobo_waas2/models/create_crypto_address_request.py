@@ -25,9 +25,9 @@ class CreateCryptoAddressRequest(BaseModel):
     """
     CreateCryptoAddressRequest
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token ID that identifies the cryptocurrency and its corresponding blockchain.  **Supported values**:   - **USDC**: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - **USDT**: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    address: StrictStr = Field(description="The blockchain address where crypto withdrawals will be sent. Must be a valid address format for the blockchain specified by `token_id`. For example: - For `SOL_USDC`: Provide a Solana address. - For `ETH_USDT`: Provide an Ethereum address. ")
-    label: Optional[StrictStr] = Field(default=None, description="A label to help identify the address's purpose. ")
+    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    address: StrictStr = Field(description="The blockchain address in its native format. This is the actual destination address where funds will be sent. The address must match the format required by the specified blockchain. For example:   - For `SOL_USDC`: Provide a Solana address   - For `ETH_USDT`: Provide an Ethereum address ")
+    label: Optional[StrictStr] = Field(default=None, description="A label to help identify the address's purpose.")
     __properties: ClassVar[List[str]] = ["token_id", "address", "label"]
 
     model_config = ConfigDict(

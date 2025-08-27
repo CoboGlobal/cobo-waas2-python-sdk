@@ -37,6 +37,7 @@ class TestCreateWalletParams(unittest.TestCase):
                 name = 'My WaaS 2.0 Wallet',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
+                enable_auto_sweep = True,
                 vault_id = '',
                 exchange_id = 'binance',
                 apikey = 'd8f062da-39f4-4a11-8b9d-12595854237f',

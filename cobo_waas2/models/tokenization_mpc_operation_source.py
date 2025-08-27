@@ -28,7 +28,7 @@ class TokenizationMpcOperationSource(BaseModel):
     """  # noqa: E501
     source_type: TokenizationOperationSourceType
     wallet_id: StrictStr = Field(description="The wallet ID.")
-    address: StrictStr = Field(description="The wallet address to interact with the token contract from.")
+    address: StrictStr = Field(description="The wallet address used to interact with the token contract.")
     __properties: ClassVar[List[str]] = ["source_type", "wallet_id", "address"]
 
     model_config = ConfigDict(

@@ -25,8 +25,8 @@ class TokenizationBurnTokenParamsBurnsInner(BaseModel):
     """
     TokenizationBurnTokenParamsBurnsInner
     """  # noqa: E501
-    amount: StrictStr = Field(description="The amount of tokens to burn from this source.")
-    from_address: StrictStr = Field(description="The address to burn tokens from for this source.")
+    amount: StrictStr = Field(description="The amount of tokens to burn.")
+    from_address: StrictStr = Field(description="The address to burn tokens from.")
     __properties: ClassVar[List[str]] = ["amount", "from_address"]
 
     model_config = ConfigDict(

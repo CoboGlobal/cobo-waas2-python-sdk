@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** | The wallet name. | 
 **wallet_type** | [**WalletType**](WalletType.md) |  | 
 **wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | 
+**enable_auto_sweep** | **bool** | Enable the auto sweep feature for the wallet. This parameter only applies to MPC and Web3 wallets. | [optional] 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | 
 **apikey** | **str** | The API key of your exchange account. | 
 **secret** | **str** | The API secret of your exchange account. | 

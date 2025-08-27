@@ -25,6 +25,7 @@ class TokenizationTokenStandard(str, Enum):
     allowed enum values
     """
     ERC20 = 'ERC20'
+    SPLTOKEN2022 = 'SPLToken2022'
 
     UNKNOWN = None
 

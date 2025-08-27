@@ -36,7 +36,8 @@ class TestCreateCustodialWalletParams(unittest.TestCase):
             return CreateCustodialWalletParams(
                 name = 'My WaaS 2.0 Wallet',
                 wallet_type = 'Custodial',
-                wallet_subtype = 'Asset'
+                wallet_subtype = 'Asset',
+                enable_auto_sweep = True
             )
         else:
             return CreateCustodialWalletParams(

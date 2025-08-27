@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **address** | **str** | The address to add or remove. | 
-**note** | **str** | An optional note for the address, primarily used when adding. | [optional] 
+**note** | **str** | An optional note for the address, primarily used when adding addresses. | [optional] 
 
 ## Example
 

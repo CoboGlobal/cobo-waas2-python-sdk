@@ -37,6 +37,7 @@ class TestCreateMpcWalletParams(unittest.TestCase):
                 name = 'My WaaS 2.0 Wallet',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
+                enable_auto_sweep = True,
                 vault_id = ''
             )
         else:

@@ -25,9 +25,9 @@ class TokenizationAllowlistAddressNote(BaseModel):
     """
     TokenizationAllowlistAddressNote
     """  # noqa: E501
-    address: StrictStr = Field(description="The allowed address.")
-    note: Optional[StrictStr] = Field(default=None, description="The note for the allowed address.")
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the allowlist address was created, in Unix timestamp format, measured in milliseconds.")
+    address: StrictStr = Field(description="The address on the allowlist.")
+    note: Optional[StrictStr] = Field(default=None, description="The note for the address on the allowlist.")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the address was added to the allowlist, in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["address", "note", "created_timestamp"]
 
     model_config = ConfigDict(

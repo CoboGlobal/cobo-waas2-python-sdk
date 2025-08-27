@@ -29,10 +29,10 @@ class ApprovalDetail(BaseModel):
     transaction_id: Optional[StrictStr] = Field(default=None, description="The transaction ID.")
     cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
-    broker_user: Optional[RoleDetail] = None
+    address_owner: Optional[RoleDetail] = None
     spender: Optional[RoleDetail] = None
     approver: Optional[RoleDetail] = None
-    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "broker_user", "spender", "approver"]
+    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "address_owner", "spender", "approver"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,9 +73,9 @@ class ApprovalDetail(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of broker_user
-        if self.broker_user:
-            _dict['broker_user'] = self.broker_user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of address_owner
+        if self.address_owner:
+            _dict['address_owner'] = self.address_owner.to_dict()
         # override the default output from pydantic by calling `to_dict()` of spender
         if self.spender:
             _dict['spender'] = self.spender.to_dict()
@@ -97,7 +97,7 @@ class ApprovalDetail(BaseModel):
             "transaction_id": obj.get("transaction_id"),
             "cobo_id": obj.get("cobo_id"),
             "request_id": obj.get("request_id"),
-            "broker_user": RoleDetail.from_dict(obj["broker_user"]) if obj.get("broker_user") is not None else None,
+            "address_owner": RoleDetail.from_dict(obj["address_owner"]) if obj.get("address_owner") is not None else None,
             "spender": RoleDetail.from_dict(obj["spender"]) if obj.get("spender") is not None else None,
             "approver": RoleDetail.from_dict(obj["approver"]) if obj.get("approver") is not None else None
         })

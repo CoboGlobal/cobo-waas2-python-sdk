@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from cobo_waas2.models.tokenization_activity_status import TokenizationActivityStatus
 from cobo_waas2.models.tokenization_operation_type import TokenizationOperationType
 from cobo_waas2.models.tokenization_token_operation_source import TokenizationTokenOperationSource
@@ -36,8 +36,8 @@ class TokenizationActivityInfo(BaseModel):
     source: TokenizationTokenOperationSource
     initiator: StrictStr = Field(description="The initiator of the activity.")
     initiator_type: TransactionInitiatorType
-    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The IDs of the corresponding transactions of the activity.")
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation timestamp of the activity in milliseconds since the Unix epoch.")
+    transaction_ids: List[StrictStr] = Field(description="The IDs of the corresponding transactions of the activity.")
+    created_timestamp: StrictInt = Field(description="The creation timestamp of the activity in milliseconds since the Unix epoch.")
     updated_timestamp: StrictInt = Field(description="The last update timestamp of the activity in milliseconds since the Unix epoch.")
     __properties: ClassVar[List[str]] = ["activity_id", "token_id", "type", "status", "source", "initiator", "initiator_type", "transaction_ids", "created_timestamp", "updated_timestamp"]
 

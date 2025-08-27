@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.wallet_subtype import WalletSubtype
 from cobo_waas2.models.wallet_type import WalletType
 from typing import Optional, Set
@@ -30,7 +30,8 @@ class CreateCustodialWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype"]
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet. This parameter only applies to MPC and Web3 wallets.")
+    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "enable_auto_sweep"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +86,8 @@ class CreateCustodialWalletParams(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "wallet_type": obj.get("wallet_type"),
-            "wallet_subtype": obj.get("wallet_subtype")
+            "wallet_subtype": obj.get("wallet_subtype"),
+            "enable_auto_sweep": obj.get("enable_auto_sweep")
         })
         return _obj
 

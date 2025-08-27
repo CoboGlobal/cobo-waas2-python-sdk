@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **token_name** | **str** | The name of the token. | [optional] 
 **token_symbol** | **str** | The unique token symbol. | 
 **decimals** | **int** | The number of decimals of the token. | 
-**allowlist_activated** | **bool** | Whether the allowlist feature is activated for the token. | [optional] 
+**token_access_activated** | **bool** | Whether the allowlist feature is activated for the token. | [optional] 
 **status** | [**TokenizationStatus**](TokenizationStatus.md) |  | 
 **total_supply** | **str** | The total supply of the token. | [optional] 
 **holdings** | **str** | The amount of tokens held by the organization. | [optional] 

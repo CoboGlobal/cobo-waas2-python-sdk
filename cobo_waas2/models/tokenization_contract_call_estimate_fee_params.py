@@ -32,7 +32,8 @@ class TokenizationContractCallEstimateFeeParams(BaseModel):
     data: Optional[TokenizationContractCallParamsData] = None
     operation_type: TokenizationOperationType
     token_id: StrictStr = Field(description="The ID of the token.")
-    __properties: ClassVar[List[str]] = ["source", "data", "operation_type", "token_id"]
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
+    __properties: ClassVar[List[str]] = ["source", "data", "operation_type", "token_id", "request_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +95,8 @@ class TokenizationContractCallEstimateFeeParams(BaseModel):
             "source": TokenizationTokenOperationSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "data": TokenizationContractCallParamsData.from_dict(obj["data"]) if obj.get("data") is not None else None,
             "operation_type": obj.get("operation_type"),
-            "token_id": obj.get("token_id")
+            "token_id": obj.get("token_id"),
+            "request_id": obj.get("request_id")
         })
         return _obj
 
