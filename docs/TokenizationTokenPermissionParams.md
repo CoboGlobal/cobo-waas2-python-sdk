@@ -1,6 +1,6 @@
 # TokenizationTokenPermissionParams
 
-Role-based permission settings for token contract. If not provided, all permissions will be granted to the issuance wallet by default.
+Role-based permission settings for token contract. If not provided, all permissions will be granted to the issuing wallet by default.
 
 ## Properties
 

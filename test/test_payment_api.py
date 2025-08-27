@@ -138,6 +138,20 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_exchange_rate(token_id, currency)
         """
 
+    def test_get_payer_balance_by_address(self) -> None:
+        """
+        Test case for get_payer_balance_by_address
+
+        Get payer balance by address
+        """
+        """
+        merchant_id = 'M1001'
+        payer_id = 'P20250619T0310056d7aa'
+        token_id = 'ETH_USDT'
+
+        api_response = self.api.get_payer_balance_by_address(merchant_id, payer_id, token_id)
+        """
+
     def test_get_payment_order_detail_by_id(self) -> None:
         """
         Test case for get_payment_order_detail_by_id
@@ -148,6 +162,18 @@ class TestPaymentApi(unittest.TestCase):
         order_id = 'O20250304-M1001-1001'
 
         api_response = self.api.get_payment_order_detail_by_id(order_id)
+        """
+
+    def test_get_psp_balance(self) -> None:
+        """
+        Test case for get_psp_balance
+
+        Get psp balance
+        """
+        """
+        token_id = 'ETH_USDT'
+
+        api_response = self.api.get_psp_balance(token_id)
         """
 
     def test_get_refund_detail_by_id(self) -> None:
@@ -257,6 +283,20 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_forced_sweep_requests(limit=limit, before=before, after=after, request_id=request_id)
         """
 
+    def test_list_merchant_balances(self) -> None:
+        """
+        Test case for list_merchant_balances
+
+        List merchant balances
+        """
+        """
+        token_id = 'ETH_USDT'
+        acquiring_type = cobo_waas2.AcquiringType()
+        merchant_ids = 'M1001,M1002,M1003'
+
+        api_response = self.api.list_merchant_balances(token_id, acquiring_type, merchant_ids=merchant_ids)
+        """
+
     def test_list_merchants(self) -> None:
         """
         Test case for list_merchants
@@ -299,6 +339,19 @@ class TestPaymentApi(unittest.TestCase):
         """
 
         api_response = self.api.list_payment_supported_tokens()
+        """
+
+    def test_list_payment_wallet_balances(self) -> None:
+        """
+        Test case for list_payment_wallet_balances
+
+        List payment wallet balances
+        """
+        """
+        token_id = 'ETH_USDT'
+        wallet_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d472'
+
+        api_response = self.api.list_payment_wallet_balances(token_id, wallet_ids=wallet_ids)
         """
 
     def test_list_settlement_details(self) -> None:
@@ -378,7 +431,7 @@ class TestPaymentApi(unittest.TestCase):
         """
         Test case for update_refund_by_id
 
-        Update refund order information
+        Update refund order
         """
         """
         refund_id = 'R20250304-M1001-1001'

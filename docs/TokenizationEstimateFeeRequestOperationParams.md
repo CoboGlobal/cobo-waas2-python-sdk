@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **source** | [**TokenizationTokenOperationSource**](TokenizationTokenOperationSource.md) |  | 
 **token_params** | [**TokenizationIssueTokenParamsTokenParams**](TokenizationIssueTokenParamsTokenParams.md) |  | 
 **operation_type** | [**TokenizationOperationType**](TokenizationOperationType.md) |  | 
+**request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | [optional] 
 **mints** | [**List[TokenizationMintTokenParamsMintsInner]**](TokenizationMintTokenParamsMintsInner.md) | Details for each token mint, including amount and address to mint to. | 
 **token_id** | **str** | The ID of the token. | 
 **burns** | [**List[TokenizationBurnTokenParamsBurnsInner]**](TokenizationBurnTokenParamsBurnsInner.md) | Details for each token burn, including amount and address to burn from. | 

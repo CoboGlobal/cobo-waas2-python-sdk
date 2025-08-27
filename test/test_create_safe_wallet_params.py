@@ -37,6 +37,7 @@ class TestCreateSafeWalletParams(unittest.TestCase):
                 name = 'My WaaS 2.0 Wallet',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
+                enable_auto_sweep = True,
                 chain_id = 'ETH',
                 smart_contract_wallet_type = 'Safe{Wallet}',
                 safe_address = '0x1234567890123456789012345678901234567890',

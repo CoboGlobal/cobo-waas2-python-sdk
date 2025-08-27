@@ -37,7 +37,7 @@ class TestApprovalDetail(unittest.TestCase):
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 cobo_id = '20231213122855000000000000000000',
                 request_id = 'web_send_by_user_327_1610444045047',
-                broker_user = cobo_waas2.models.role_detail.RoleDetail(
+                address_owner = cobo_waas2.models.role_detail.RoleDetail(
                     result = 1, 
                     threshold = 2, 
                     user_details = [

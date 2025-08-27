@@ -32,11 +32,11 @@ class TokenizationTokenInfo(BaseModel):
     token_name: Optional[StrictStr] = Field(default=None, description="The name of the token.")
     token_symbol: StrictStr = Field(description="The unique token symbol.")
     decimals: StrictInt = Field(description="The number of decimals of the token.")
-    allowlist_activated: Optional[StrictBool] = Field(default=None, description="Whether the allowlist feature is activated for the token.")
+    token_access_activated: Optional[StrictBool] = Field(default=None, description="Whether the allowlist feature is activated for the token.")
     status: TokenizationStatus
     total_supply: Optional[StrictStr] = Field(default=None, description="The total supply of the token.")
     holdings: Optional[StrictStr] = Field(default=None, description="The amount of tokens held by the organization.")
-    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "decimals", "allowlist_activated", "status", "total_supply", "holdings"]
+    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "decimals", "token_access_activated", "status", "total_supply", "holdings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +95,7 @@ class TokenizationTokenInfo(BaseModel):
             "token_name": obj.get("token_name"),
             "token_symbol": obj.get("token_symbol"),
             "decimals": obj.get("decimals"),
-            "allowlist_activated": obj.get("allowlist_activated"),
+            "token_access_activated": obj.get("token_access_activated"),
             "status": obj.get("status"),
             "total_supply": obj.get("total_supply"),
             "holdings": obj.get("holdings")

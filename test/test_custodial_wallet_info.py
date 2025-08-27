@@ -38,7 +38,8 @@ class TestCustodialWalletInfo(unittest.TestCase):
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',
                 name = 'Example Wallet',
-                org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+                org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                enable_auto_sweep = True
             )
         else:
             return CustodialWalletInfo(

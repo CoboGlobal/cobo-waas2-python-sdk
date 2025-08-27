@@ -39,6 +39,7 @@ class TestWalletInfo(unittest.TestCase):
                 wallet_subtype = 'Asset',
                 name = 'Example Wallet',
                 org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                enable_auto_sweep = True,
                 project_id = '0111039d-27fb-49ba-b172-6e0aa80e37ec',
                 project_name = 'Project name',
                 vault_id = '',

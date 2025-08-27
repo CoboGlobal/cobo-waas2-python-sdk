@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.wallet_subtype import WalletSubtype
 from cobo_waas2.models.wallet_type import WalletType
 from typing import Optional, Set
@@ -30,8 +30,9 @@ class CreateMpcWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet. This parameter only applies to MPC and Web3 wallets.")
     vault_id: StrictStr = Field(description="The ID of the owning vault. You can call [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults) to retrieve all vault IDs under your organization.")
-    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "vault_id"]
+    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "enable_auto_sweep", "vault_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +88,7 @@ class CreateMpcWalletParams(BaseModel):
             "name": obj.get("name"),
             "wallet_type": obj.get("wallet_type"),
             "wallet_subtype": obj.get("wallet_subtype"),
+            "enable_auto_sweep": obj.get("enable_auto_sweep"),
             "vault_id": obj.get("vault_id")
         })
         return _obj

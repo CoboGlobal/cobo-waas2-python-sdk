@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.wallet_type import WalletType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,9 @@ class UpdateCustodialWalletParams(BaseModel):
     The information of Custodial Wallets.
     """  # noqa: E501
     wallet_type: WalletType
-    name: StrictStr = Field(description="The wallet name.")
-    __properties: ClassVar[List[str]] = ["wallet_type", "name"]
+    name: Optional[StrictStr] = Field(default=None, description="The wallet name.")
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet")
+    __properties: ClassVar[List[str]] = ["wallet_type", "name", "enable_auto_sweep"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +83,8 @@ class UpdateCustodialWalletParams(BaseModel):
 
         _obj = cls.model_validate({
             "wallet_type": obj.get("wallet_type"),
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "enable_auto_sweep": obj.get("enable_auto_sweep")
         })
         return _obj
 

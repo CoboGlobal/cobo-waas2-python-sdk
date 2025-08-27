@@ -31,13 +31,17 @@ from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Re
 from cobo_waas2.models.get_refunds200_response import GetRefunds200Response
 from cobo_waas2.models.get_settlement_info_by_ids200_response import GetSettlementInfoByIds200Response
 from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
+from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBalances200Response
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
 from cobo_waas2.models.list_payment_orders200_response import ListPaymentOrders200Response
+from cobo_waas2.models.list_payment_wallet_balances200_response import ListPaymentWalletBalances200Response
 from cobo_waas2.models.list_settlement_details200_response import ListSettlementDetails200Response
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
 from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200Response
 from cobo_waas2.models.merchant import Merchant
 from cobo_waas2.models.order import Order
+from cobo_waas2.models.psp_balance import PspBalance
+from cobo_waas2.models.received_amount_per_address import ReceivedAmountPerAddress
 from cobo_waas2.models.refund import Refund
 from cobo_waas2.models.settlement import Settlement
 from cobo_waas2.models.supported_token import SupportedToken
@@ -79,7 +83,7 @@ class PaymentApi:
     ) -> Refund:
         """Cancel refund order
 
-        This operation cancels a specified refund order. 
+        This operation cancels a specified refund order. You can only cancel refund orders that have not been processed yet. 
 
         :param refund_id: The refund order ID. (required)
         :type refund_id: str
@@ -125,7 +129,7 @@ class PaymentApi:
     ) -> ApiResponse[Refund]:
         """Cancel refund order
 
-        This operation cancels a specified refund order. 
+        This operation cancels a specified refund order. You can only cancel refund orders that have not been processed yet. 
 
         :param refund_id: The refund order ID. (required)
         :type refund_id: str
@@ -171,7 +175,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Cancel refund order
 
-        This operation cancels a specified refund order. 
+        This operation cancels a specified refund order. You can only cancel refund orders that have not been processed yet. 
 
         :param refund_id: The refund order ID. (required)
         :type refund_id: str
@@ -236,7 +240,7 @@ class PaymentApi:
     @validate_call
     def create_crypto_address(
         self,
-        create_crypto_address_request: Annotated[Optional[CreateCryptoAddressRequest], Field(description="The request body to create a crypto address.")] = None,
+        create_crypto_address_request: Annotated[Optional[CreateCryptoAddressRequest], Field(description="The request body to register a crypto address.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -248,9 +252,9 @@ class PaymentApi:
     ) -> CryptoAddress:
         """Create crypto address
 
-        Create a new cryptocurrency address for receiving payouts or transfers.  The address must match the specified `token_id`'s blockchain.  Optionally, a label can be provided to help categorize the address internally. 
+        This operation registers a crypto address for crypto withdrawal.  The registered address can later be referenced by its ID when creating settlement requests. 
 
-        :param create_crypto_address_request: The request body to create a crypto address.
+        :param create_crypto_address_request: The request body to register a crypto address.
         :type create_crypto_address_request: CreateCryptoAddressRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -282,7 +286,7 @@ class PaymentApi:
     @validate_call
     def create_crypto_address_with_http_info(
         self,
-        create_crypto_address_request: Annotated[Optional[CreateCryptoAddressRequest], Field(description="The request body to create a crypto address.")] = None,
+        create_crypto_address_request: Annotated[Optional[CreateCryptoAddressRequest], Field(description="The request body to register a crypto address.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -294,9 +298,9 @@ class PaymentApi:
     ) -> ApiResponse[CryptoAddress]:
         """Create crypto address
 
-        Create a new cryptocurrency address for receiving payouts or transfers.  The address must match the specified `token_id`'s blockchain.  Optionally, a label can be provided to help categorize the address internally. 
+        This operation registers a crypto address for crypto withdrawal.  The registered address can later be referenced by its ID when creating settlement requests. 
 
-        :param create_crypto_address_request: The request body to create a crypto address.
+        :param create_crypto_address_request: The request body to register a crypto address.
         :type create_crypto_address_request: CreateCryptoAddressRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -328,7 +332,7 @@ class PaymentApi:
     @validate_call
     def create_crypto_address_without_preload_content(
         self,
-        create_crypto_address_request: Annotated[Optional[CreateCryptoAddressRequest], Field(description="The request body to create a crypto address.")] = None,
+        create_crypto_address_request: Annotated[Optional[CreateCryptoAddressRequest], Field(description="The request body to register a crypto address.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -340,9 +344,9 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create crypto address
 
-        Create a new cryptocurrency address for receiving payouts or transfers.  The address must match the specified `token_id`'s blockchain.  Optionally, a label can be provided to help categorize the address internally. 
+        This operation registers a crypto address for crypto withdrawal.  The registered address can later be referenced by its ID when creating settlement requests. 
 
-        :param create_crypto_address_request: The request body to create a crypto address.
+        :param create_crypto_address_request: The request body to register a crypto address.
         :type create_crypto_address_request: CreateCryptoAddressRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1262,7 +1266,7 @@ class PaymentApi:
     ) -> DeleteCryptoAddress201Response:
         """Delete crypto address
 
-        This operation deletes a crypto address. 
+        This operation unregisters a crypto address from being used for crypto withdrawals. 
 
         :param crypto_address_id: The crypto address ID. (required)
         :type crypto_address_id: str
@@ -1309,7 +1313,7 @@ class PaymentApi:
     ) -> ApiResponse[DeleteCryptoAddress201Response]:
         """Delete crypto address
 
-        This operation deletes a crypto address. 
+        This operation unregisters a crypto address from being used for crypto withdrawals. 
 
         :param crypto_address_id: The crypto address ID. (required)
         :type crypto_address_id: str
@@ -1356,7 +1360,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Delete crypto address
 
-        This operation deletes a crypto address. 
+        This operation unregisters a crypto address from being used for crypto withdrawals. 
 
         :param crypto_address_id: The crypto address ID. (required)
         :type crypto_address_id: str
@@ -1604,6 +1608,211 @@ class PaymentApi:
         )
 
     @validate_call
+    def get_payer_balance_by_address(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> List[ReceivedAmountPerAddress]:
+        """Get payer balance by address
+
+        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
+        :type payer_id: str
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payer_balance_by_address_serialize(
+            merchant_id=merchant_id,
+            payer_id=payer_id,
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ReceivedAmountPerAddress]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_payer_balance_by_address_with_http_info(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[List[ReceivedAmountPerAddress]]:
+        """Get payer balance by address
+
+        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
+        :type payer_id: str
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payer_balance_by_address_serialize(
+            merchant_id=merchant_id,
+            payer_id=payer_id,
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ReceivedAmountPerAddress]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_payer_balance_by_address_without_preload_content(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get payer balance by address
+
+        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
+        :type payer_id: str
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payer_balance_by_address_serialize(
+            merchant_id=merchant_id,
+            payer_id=payer_id,
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ReceivedAmountPerAddress]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_payer_balance_by_address_serialize(
+        self,
+        merchant_id,
+        payer_id,
+        token_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if merchant_id is not None:
+            
+            _query_params.append(('merchant_id', merchant_id))
+            
+        if payer_id is not None:
+            
+            _query_params.append(('payer_id', payer_id))
+            
+        if token_id is not None:
+            
+            _query_params.append(('token_id', token_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/balance/payer/address',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def get_payment_order_detail_by_id(
         self,
         order_id: Annotated[StrictStr, Field(description="The pay-in order ID.")],
@@ -1764,6 +1973,177 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/orders/{order_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_psp_balance(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PspBalance:
+        """Get psp balance
+
+        This operation retrieves the information of psp balance. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_psp_balance_serialize(
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PspBalance",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_psp_balance_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PspBalance]:
+        """Get psp balance
+
+        This operation retrieves the information of psp balance. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_psp_balance_serialize(
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PspBalance",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_psp_balance_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get psp balance
+
+        This operation retrieves the information of psp balance. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_psp_balance_serialize(
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PspBalance",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_psp_balance_serialize(
+        self,
+        token_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if token_id is not None:
+            
+            _query_params.append(('token_id', token_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/balance/psp',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1949,7 +2329,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1973,7 +2353,7 @@ class PaymentApi:
         :type merchant_id: str
         :param request_id: The request ID.
         :type request_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2015,7 +2395,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2039,7 +2419,7 @@ class PaymentApi:
         :type merchant_id: str
         :param request_id: The request ID.
         :type request_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2081,7 +2461,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2105,7 +2485,7 @@ class PaymentApi:
         :type merchant_id: str
         :param request_id: The request ID.
         :type request_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3324,6 +3704,211 @@ class PaymentApi:
         )
 
     @validate_call
+    def list_merchant_balances(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        acquiring_type: Annotated[AcquiringType, Field(description="AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models. ")],
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListMerchantBalances200Response:
+        """List merchant balances
+
+        This operation retrieves the information of merchant balances. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param acquiring_type: AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  (required)
+        :type acquiring_type: AcquiringType
+        :param merchant_ids: A list of merchant IDs to query.
+        :type merchant_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_merchant_balances_serialize(
+            token_id=token_id,
+            acquiring_type=acquiring_type,
+            merchant_ids=merchant_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListMerchantBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_merchant_balances_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        acquiring_type: Annotated[AcquiringType, Field(description="AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models. ")],
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListMerchantBalances200Response]:
+        """List merchant balances
+
+        This operation retrieves the information of merchant balances. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param acquiring_type: AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  (required)
+        :type acquiring_type: AcquiringType
+        :param merchant_ids: A list of merchant IDs to query.
+        :type merchant_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_merchant_balances_serialize(
+            token_id=token_id,
+            acquiring_type=acquiring_type,
+            merchant_ids=merchant_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListMerchantBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_merchant_balances_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        acquiring_type: Annotated[AcquiringType, Field(description="AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models. ")],
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List merchant balances
+
+        This operation retrieves the information of merchant balances. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param acquiring_type: AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  (required)
+        :type acquiring_type: AcquiringType
+        :param merchant_ids: A list of merchant IDs to query.
+        :type merchant_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_merchant_balances_serialize(
+            token_id=token_id,
+            acquiring_type=acquiring_type,
+            merchant_ids=merchant_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListMerchantBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_merchant_balances_serialize(
+        self,
+        token_id,
+        acquiring_type,
+        merchant_ids,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if merchant_ids is not None:
+            
+            _query_params.append(('merchant_ids', merchant_ids))
+            
+        if token_id is not None:
+            
+            _query_params.append(('token_id', token_id))
+            
+        if acquiring_type is not None:
+            
+            _query_params.append(('acquiring_type', acquiring_type.value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/balance/merchants',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_merchants(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -3570,7 +4155,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         psp_order_id: Annotated[Optional[StrictStr], Field(description="A unique reference code assigned by the developer to identify this order in their system.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3594,7 +4179,7 @@ class PaymentApi:
         :type merchant_id: str
         :param psp_order_id: A unique reference code assigned by the developer to identify this order in their system.
         :type psp_order_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3636,7 +4221,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         psp_order_id: Annotated[Optional[StrictStr], Field(description="A unique reference code assigned by the developer to identify this order in their system.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3660,7 +4245,7 @@ class PaymentApi:
         :type merchant_id: str
         :param psp_order_id: A unique reference code assigned by the developer to identify this order in their system.
         :type psp_order_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3702,7 +4287,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         psp_order_id: Annotated[Optional[StrictStr], Field(description="A unique reference code assigned by the developer to identify this order in their system.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3726,7 +4311,7 @@ class PaymentApi:
         :type merchant_id: str
         :param psp_order_id: A unique reference code assigned by the developer to identify this order in their system.
         :type psp_order_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3973,13 +4558,201 @@ class PaymentApi:
         )
 
     @validate_call
+    def list_payment_wallet_balances(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListPaymentWalletBalances200Response:
+        """List payment wallet balances
+
+        This operation retrieves the information of payment wallet balances. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param wallet_ids: A list of wallet IDs to query.
+        :type wallet_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_payment_wallet_balances_serialize(
+            token_id=token_id,
+            wallet_ids=wallet_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListPaymentWalletBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_payment_wallet_balances_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListPaymentWalletBalances200Response]:
+        """List payment wallet balances
+
+        This operation retrieves the information of payment wallet balances. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param wallet_ids: A list of wallet IDs to query.
+        :type wallet_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_payment_wallet_balances_serialize(
+            token_id=token_id,
+            wallet_ids=wallet_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListPaymentWalletBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_payment_wallet_balances_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List payment wallet balances
+
+        This operation retrieves the information of payment wallet balances. 
+
+        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param wallet_ids: A list of wallet IDs to query.
+        :type wallet_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_payment_wallet_balances_serialize(
+            token_id=token_id,
+            wallet_ids=wallet_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListPaymentWalletBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_payment_wallet_balances_serialize(
+        self,
+        token_id,
+        wallet_ids,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if wallet_ids is not None:
+            
+            _query_params.append(('wallet_ids', wallet_ids))
+            
+        if token_id is not None:
+            
+            _query_params.append(('token_id', token_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/balance/payment_wallets',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_settlement_details(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4001,7 +4774,7 @@ class PaymentApi:
         :type after: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4041,7 +4814,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4063,7 +4836,7 @@ class PaymentApi:
         :type after: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4103,7 +4876,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of  statuses of order, refund or settle request.")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4125,7 +4898,7 @@ class PaymentApi:
         :type after: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
-        :param statuses: A list of  statuses of order, refund or settle request.
+        :param statuses: A list of order, refund or settlement statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/developers/v2/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/developers/v2/api-references/payment/get-refund-order-information)  - [List all settlement details](https://www.cobo.com/developers/v2/api-references/payment/list-all-settlement-details) 
         :type statuses: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5054,9 +5827,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> Refund:
-        """Update refund order information
+        """Update refund order
 
-        This operation updates a specified refund order. 
+        This operation updates a specified refund order by modifying its recipient address. You can only update the recipient address for refund orders that have not been processed yet. 
 
         :param refund_id: The refund order ID. (required)
         :type refund_id: str
@@ -5104,9 +5877,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[Refund]:
-        """Update refund order information
+        """Update refund order
 
-        This operation updates a specified refund order. 
+        This operation updates a specified refund order by modifying its recipient address. You can only update the recipient address for refund orders that have not been processed yet. 
 
         :param refund_id: The refund order ID. (required)
         :type refund_id: str
@@ -5154,9 +5927,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Update refund order information
+        """Update refund order
 
-        This operation updates a specified refund order. 
+        This operation updates a specified refund order by modifying its recipient address. You can only update the recipient address for refund orders that have not been processed yet. 
 
         :param refund_id: The refund order ID. (required)
         :type refund_id: str

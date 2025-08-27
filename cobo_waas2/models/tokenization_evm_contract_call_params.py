@@ -27,7 +27,7 @@ class TokenizationEvmContractCallParams(BaseModel):
     The information about the EVM contract call.
     """  # noqa: E501
     type: Optional[TokenizationContractCallType] = None
-    calldata: StrictStr = Field(description="The data used to invoke a specific function or method within the specified contract at the destination address, with a maximum length of 65,000 characters. ")
+    calldata: StrictStr = Field(description="The data that is used to invoke a specific function or method within the specified contract at the destination address. ")
     value: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
     __properties: ClassVar[List[str]] = ["type", "calldata", "value"]
 

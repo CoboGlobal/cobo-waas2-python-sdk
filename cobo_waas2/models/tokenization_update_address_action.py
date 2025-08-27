@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class TokenizationUpdateAddressAction(str, Enum):
     """
-    The operation to perform on the blocklist or allowlist addresses list.
+    The operation to perform on the blocklist or allowlist.
     """
 
     """

@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class TokenizationTokenPermissionParams(BaseModel):
     """
-    Role-based permission settings for token contract. If not provided, all permissions will be granted to the issuance wallet by default.
+    Role-based permission settings for token contract. If not provided, all permissions will be granted to the issuing wallet by default.
     """  # noqa: E501
     admin: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the admin role.")
     minter: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the minter role.")

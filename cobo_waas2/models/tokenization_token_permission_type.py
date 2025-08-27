@@ -31,6 +31,9 @@ class TokenizationTokenPermissionType(str, Enum):
     RECOVERTOKENS = 'RecoverTokens'
     UPGRADECONTRACT = 'UpgradeContract'
     PAUSECONTRACT = 'PauseContract'
+    FREEZEACCOUNTS = 'FreezeAccounts'
+    UPDATEMETADATA = 'UpdateMetadata'
+    PERMANENTDELEGATE = 'PermanentDelegate'
 
     UNKNOWN = None
 

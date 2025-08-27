@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.exchange_id import ExchangeId
 from cobo_waas2.models.wallet_subtype import WalletSubtype
@@ -31,6 +31,7 @@ class CreateExchangeWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet. This parameter only applies to MPC and Web3 wallets.")
     exchange_id: ExchangeId
     apikey: StrictStr = Field(description="The API key of your exchange account.")
     secret: StrictStr = Field(description="The API secret of your exchange account.")
@@ -39,7 +40,7 @@ class CreateExchangeWalletParams(BaseModel):
     account_identify: Optional[StrictStr] = Field(default=None, description="The identifier of your exchange account. - For Binance, this is email address of your exchange account. - For OKX, this is the user name of your exchange account. ")
     ga_code: Optional[StrictStr] = Field(default=None, description="The GA code for the exchange.")
     main_wallet_id: Optional[StrictStr] = Field(default=None, description="The ID of the Exchange Wallet (Main Account).")
-    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "exchange_id", "apikey", "secret", "passphrase", "memo", "account_identify", "ga_code", "main_wallet_id"]
+    __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "enable_auto_sweep", "exchange_id", "apikey", "secret", "passphrase", "memo", "account_identify", "ga_code", "main_wallet_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,7 @@ class CreateExchangeWalletParams(BaseModel):
             "name": obj.get("name"),
             "wallet_type": obj.get("wallet_type"),
             "wallet_subtype": obj.get("wallet_subtype"),
+            "enable_auto_sweep": obj.get("enable_auto_sweep"),
             "exchange_id": obj.get("exchange_id"),
             "apikey": obj.get("apikey"),
             "secret": obj.get("secret"),

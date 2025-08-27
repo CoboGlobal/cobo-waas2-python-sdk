@@ -32,9 +32,9 @@ class TokenizationERC20TokenParams(BaseModel):
     name: StrictStr = Field(description="The name of the token.")
     symbol: StrictStr = Field(description="The symbol of the token.")
     decimals: Annotated[int, Field(le=18, strict=True, ge=0)] = Field(description="The number of decimals for the token (0-18).")
-    allowlist_activated: Optional[StrictBool] = Field(default=False, description="Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations.")
+    token_access_activated: Optional[StrictBool] = Field(default=False, description="Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations.")
     permissions: Optional[TokenizationTokenPermissionParams] = None
-    __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "decimals", "allowlist_activated", "permissions"]
+    __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "decimals", "token_access_activated", "permissions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +94,7 @@ class TokenizationERC20TokenParams(BaseModel):
             "name": obj.get("name"),
             "symbol": obj.get("symbol"),
             "decimals": obj.get("decimals"),
-            "allowlist_activated": obj.get("allowlist_activated") if obj.get("allowlist_activated") is not None else False,
+            "token_access_activated": obj.get("token_access_activated") if obj.get("token_access_activated") is not None else False,
             "permissions": TokenizationTokenPermissionParams.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         return _obj

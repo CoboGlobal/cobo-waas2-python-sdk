@@ -16,11 +16,12 @@ import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from cobo_waas2.models.tokenization_evm_contract_call_params import TokenizationEvmContractCallParams
+from cobo_waas2.models.tokenization_sol_contract_call_params import TokenizationSolContractCallParams
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TOKENIZATIONCONTRACTCALLPARAMSDATA_ONE_OF_SCHEMAS = ["TokenizationEvmContractCallParams"]
+TOKENIZATIONCONTRACTCALLPARAMSDATA_ONE_OF_SCHEMAS = ["TokenizationEvmContractCallParams", "TokenizationSolContractCallParams"]
 
 class TokenizationContractCallParamsData(BaseModel):
     """
@@ -28,8 +29,10 @@ class TokenizationContractCallParamsData(BaseModel):
     """
     # data type: TokenizationEvmContractCallParams
     oneof_schema_1_validator: Optional[TokenizationEvmContractCallParams] = None
-    actual_instance: Optional[Union[TokenizationEvmContractCallParams]] = None
-    one_of_schemas: Set[str] = { "TokenizationEvmContractCallParams" }
+    # data type: TokenizationSolContractCallParams
+    oneof_schema_2_validator: Optional[TokenizationSolContractCallParams] = None
+    actual_instance: Optional[Union[TokenizationEvmContractCallParams, TokenizationSolContractCallParams]] = None
+    one_of_schemas: Set[str] = { "TokenizationEvmContractCallParams", "TokenizationSolContractCallParams" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,12 +63,17 @@ class TokenizationContractCallParamsData(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TokenizationEvmContractCallParams`")
         else:
             match += 1
+        # validate data type: TokenizationSolContractCallParams
+        if not isinstance(v, TokenizationSolContractCallParams):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TokenizationSolContractCallParams`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams, TokenizationSolContractCallParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams, TokenizationSolContractCallParams. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -90,9 +98,19 @@ class TokenizationContractCallParamsData(BaseModel):
             instance.actual_instance = TokenizationEvmContractCallParams.from_json(json_str)
             return instance
 
+        # check if data type is `TokenizationSolContractCallParams`
+        if _data_type == "SOL_Contract":
+            instance.actual_instance = TokenizationSolContractCallParams.from_json(json_str)
+            return instance
+
         # check if data type is `TokenizationEvmContractCallParams`
         if _data_type == "TokenizationEvmContractCallParams":
             instance.actual_instance = TokenizationEvmContractCallParams.from_json(json_str)
+            return instance
+
+        # check if data type is `TokenizationSolContractCallParams`
+        if _data_type == "TokenizationSolContractCallParams":
+            instance.actual_instance = TokenizationSolContractCallParams.from_json(json_str)
             return instance
 
         return instance
@@ -102,14 +120,20 @@ class TokenizationContractCallParamsData(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TokenizationSolContractCallParams
+        try:
+            instance.actual_instance = TokenizationSolContractCallParams.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams, TokenizationSolContractCallParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TokenizationContractCallParamsData with oneOf schemas: TokenizationEvmContractCallParams, TokenizationSolContractCallParams. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -123,7 +147,7 @@ class TokenizationContractCallParamsData(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TokenizationEvmContractCallParams]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TokenizationEvmContractCallParams, TokenizationSolContractCallParams]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

@@ -152,6 +152,20 @@ class TestTransactionsApi(unittest.TestCase):
         api_response = self.api.get_transaction_by_id(transaction_id)
         """
 
+    def test_list_approval_details(self) -> None:
+        """
+        Test case for list_approval_details
+
+        List transaction approval details
+        """
+        """
+        transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
+        cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
+        request_ids = 'web_send_by_user_327_1610444045047,web_send_by_user_327_1610444045048'
+
+        api_response = self.api.list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_ids=request_ids)
+        """
+
     def test_list_transaction_approval_details(self) -> None:
         """
         Test case for list_transaction_approval_details
@@ -163,6 +177,19 @@ class TestTransactionsApi(unittest.TestCase):
         cobo_ids = '20231213122855000000000000000000,20231213122955000000000000000000'
 
         api_response = self.api.list_transaction_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids)
+        """
+
+    def test_list_transaction_templates(self) -> None:
+        """
+        Test case for list_transaction_templates
+
+        list transaction templates
+        """
+        """
+        template_key = 'withdrawal'
+        template_version = '1.0.0'
+
+        api_response = self.api.list_transaction_templates(template_key, template_version=template_version)
         """
 
     def test_list_transactions(self) -> None:
