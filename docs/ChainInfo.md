@@ -7,8 +7,9 @@ The chain information.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chain_id** | **str** | The chain ID, which is the unique identifier of a blockchain. | 
-**symbol** | **str** | The chain symbol, which is the abbreviated name of a chain. | [optional] 
+**symbol** | **str** | The chain symbol for display purposes, which is the abbreviated name of a chain. | [optional] 
 **icon_url** | **str** | The URL of the chain icon. | [optional] 
+**chain_identifier** | **str** | A functional identifier used to group blockchains with similar execution logic. For example, &#x60;ETH&#x60; for all EVM-compatible chains (Ethereum, BNB Smart Chain, Polygon). | [optional] 
 **explorer_tx_url** | **str** | The transaction URL pattern on the blockchain explorer. You can use it to concatenate the transaction URLs. | [optional] 
 **explorer_address_url** | **str** | The address URL pattern on the blockchain explorer. You can use it to concatenate the address URLs. | [optional] 
 **require_memo** | **bool** | Whether the chain requires a memo. | [optional] 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The top-up address update event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The token suspension event data. | 
+**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The top-up address update event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The token suspension event data. - &#x60;ComplianceDisposition&#x60;: The compliance disposition event data. | 
 **transaction_id** | **str** | The transaction ID. | 
 **cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
 **request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | 
@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 **extra** | **List[str]** | A list of JSON-encoded strings containing structured, business-specific extra information for the transaction. Each item corresponds to a specific data type, indicated by the &#x60;extra_type&#x60; field in the JSON object (for example, \&quot;BabylonBusinessInfo\&quot;, \&quot;BtcAddressInfo\&quot;).  | [optional] 
 **fueling_info** | [**TransactionFuelingInfo**](TransactionFuelingInfo.md) |  | [optional] 
 **created_timestamp** | **int** | The time when the transaction was created, in Unix timestamp format, measured in milliseconds. | 
-**updated_timestamp** | **int** | The time when the transaction was updated, in Unix timestamp format, measured in milliseconds. | 
+**updated_timestamp** | **int** | The time when the disposition was updated, in Unix timestamp format, measured in milliseconds. | 
 **tss_request_id** | **str** | The TSS request ID. | [optional] 
 **source_key_share_holder_group** | [**SourceGroup**](SourceGroup.md) |  | [optional] 
 **target_key_share_holder_group_id** | **str** | The target key share holder group ID. | [optional] 
@@ -90,6 +90,10 @@ Name | Type | Description | Notes
 **chain** | **str** | The chain ID. | 
 **previous_address** | **str** | The previous top-up address that was assigned to the payer. | 
 **updated_address** | **str** | The new top-up address that has been assigned to the payer. | 
+**disposition_type** | [**DispositionType**](DispositionType.md) |  | 
+**disposition_status** | [**DispositionStatus**](DispositionStatus.md) |  | 
+**destination_address** | **str** | The blockchain address to receive the refunded/isolated funds. | [optional] 
+**disposition_amount** | **str** | The amount to be refunded/isolated from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction.  | [optional] 
 
 ## Example
 

@@ -42,7 +42,6 @@ from cobo_waas2.models.approval_entry import ApprovalEntry
 from cobo_waas2.models.approval_request import ApprovalRequest
 from cobo_waas2.models.approval_request_detail import ApprovalRequestDetail
 from cobo_waas2.models.approval_result import ApprovalResult
-from cobo_waas2.models.approval_show_info import ApprovalShowInfo
 from cobo_waas2.models.approval_statement_status import ApprovalStatementStatus
 from cobo_waas2.models.approval_status import ApprovalStatus
 from cobo_waas2.models.approval_template import ApprovalTemplate
@@ -91,6 +90,7 @@ from cobo_waas2.models.check_addresses_validity200_response_inner import CheckAd
 from cobo_waas2.models.check_loop_transfers200_response_inner import CheckLoopTransfers200ResponseInner
 from cobo_waas2.models.cobo_safe_delegate import CoboSafeDelegate
 from cobo_waas2.models.cobo_safe_delegate_type import CoboSafeDelegateType
+from cobo_waas2.models.compliance_disposition_update_event_data import ComplianceDispositionUpdateEventData
 from cobo_waas2.models.contract_call_destination import ContractCallDestination
 from cobo_waas2.models.contract_call_destination_type import ContractCallDestinationType
 from cobo_waas2.models.contract_call_params import ContractCallParams
@@ -102,6 +102,9 @@ from cobo_waas2.models.core_staking_extra import CoreStakingExtra
 from cobo_waas2.models.cosmos_adr36_message_sign_destination import CosmosAdr36MessageSignDestination
 from cobo_waas2.models.cosmos_contract_call_destination import CosmosContractCallDestination
 from cobo_waas2.models.cosmos_contract_call_message import CosmosContractCallMessage
+from cobo_waas2.models.create_address_book_param import CreateAddressBookParam
+from cobo_waas2.models.create_address_books201_response import CreateAddressBooks201Response
+from cobo_waas2.models.create_address_books_param import CreateAddressBooksParam
 from cobo_waas2.models.create_address_request import CreateAddressRequest
 from cobo_waas2.models.create_approval_request201_response import CreateApprovalRequest201Response
 from cobo_waas2.models.create_auto_sweep_task import CreateAutoSweepTask
@@ -153,11 +156,17 @@ from cobo_waas2.models.custodial_wallet_info import CustodialWalletInfo
 from cobo_waas2.models.custodial_web3_contract_call_source import CustodialWeb3ContractCallSource
 from cobo_waas2.models.custodial_web3_message_sign_source import CustodialWeb3MessageSignSource
 from cobo_waas2.models.custodial_web3_transfer_source import CustodialWeb3TransferSource
+from cobo_waas2.models.delete_address_book_by_id201_response import DeleteAddressBookById201Response
 from cobo_waas2.models.delete_crypto_address201_response import DeleteCryptoAddress201Response
 from cobo_waas2.models.delete_guard_pubkey201_response import DeleteGuardPubkey201Response
 from cobo_waas2.models.delete_key_share_holder_group_by_id201_response import DeleteKeyShareHolderGroupById201Response
 from cobo_waas2.models.delete_wallet_by_id201_response import DeleteWalletById201Response
 from cobo_waas2.models.destination_wallet_type import DestinationWalletType
+from cobo_waas2.models.disposition_event_data import DispositionEventData
+from cobo_waas2.models.disposition_query_response import DispositionQueryResponse
+from cobo_waas2.models.disposition_response import DispositionResponse
+from cobo_waas2.models.disposition_status import DispositionStatus
+from cobo_waas2.models.disposition_type import DispositionType
 from cobo_waas2.models.eigen_layer_lst_stake_extra import EigenLayerLstStakeExtra
 from cobo_waas2.models.eigen_layer_native_stake_extra import EigenLayerNativeStakeExtra
 from cobo_waas2.models.eigenlayer_validator import EigenlayerValidator
@@ -232,6 +241,7 @@ from cobo_waas2.models.graph_ql_error_locations_inner import GraphQLErrorLocatio
 from cobo_waas2.models.graph_ql_request import GraphQLRequest
 from cobo_waas2.models.graph_ql_response import GraphQLResponse
 from cobo_waas2.models.guard_pubkey_status import GuardPubkeyStatus
+from cobo_waas2.models.isolate_disposition import IsolateDisposition
 from cobo_waas2.models.key_share_holder import KeyShareHolder
 from cobo_waas2.models.key_share_holder_group import KeyShareHolderGroup
 from cobo_waas2.models.key_share_holder_group_status import KeyShareHolderGroupStatus
@@ -343,6 +353,7 @@ from cobo_waas2.models.refresh_permission_token_request import RefreshPermission
 from cobo_waas2.models.refresh_token2_xx_response import RefreshToken2XXResponse
 from cobo_waas2.models.refresh_token_request import RefreshTokenRequest
 from cobo_waas2.models.refund import Refund
+from cobo_waas2.models.refund_disposition import RefundDisposition
 from cobo_waas2.models.refund_status import RefundStatus
 from cobo_waas2.models.refund_type import RefundType
 from cobo_waas2.models.replace_type import ReplaceType
@@ -628,6 +639,8 @@ from cobo_waas2.models.travel_rule_withdraw_request_travel_rule_info import Trav
 from cobo_waas2.models.trigger_test_webhook_event201_response import TriggerTestWebhookEvent201Response
 from cobo_waas2.models.trigger_test_webhook_event_request import TriggerTestWebhookEventRequest
 from cobo_waas2.models.utxo import UTXO
+from cobo_waas2.models.unfreeze_disposition import UnfreezeDisposition
+from cobo_waas2.models.update_address_book_param import UpdateAddressBookParam
 from cobo_waas2.models.update_custodial_wallet_params import UpdateCustodialWalletParams
 from cobo_waas2.models.update_exchange_wallet_params import UpdateExchangeWalletParams
 from cobo_waas2.models.update_group_action import UpdateGroupAction

@@ -25,12 +25,12 @@ class PspBalance(BaseModel):
     """
     PspBalance
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency.")
-    developer_fee_amount: Optional[StrictStr] = Field(default=None, description="The psp developer fee amount.")
-    settled_amount: Optional[StrictStr] = Field(default=None, description="The psp settled amount.")
-    refunded_amount: Optional[StrictStr] = Field(default=None, description="The psp total refunded amount.")
-    total_balance: Optional[StrictStr] = Field(default=None, description="The psp total balance.")
-    available_balance: Optional[StrictStr] = Field(default=None, description="The psp available balance.")
+    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
+    developer_fee_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been received as developer fee.")
+    settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been settled from the developer's balance.")
+    refunded_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been refunded from the developer's balance.")
+    total_balance: Optional[StrictStr] = Field(default=None, description="The total balance of the token for the developer.")
+    available_balance: Optional[StrictStr] = Field(default=None, description="The balance available for settlement or refund, in the specified cryptocurrency.")
     __properties: ClassVar[List[str]] = ["token_id", "developer_fee_amount", "settled_amount", "refunded_amount", "total_balance", "available_balance"]
 
     model_config = ConfigDict(

@@ -142,7 +142,7 @@ class TestPaymentApi(unittest.TestCase):
         """
         Test case for get_payer_balance_by_address
 
-        Get payer balance by address
+        Get payer balance
         """
         """
         merchant_id = 'M1001'
@@ -168,7 +168,7 @@ class TestPaymentApi(unittest.TestCase):
         """
         Test case for get_psp_balance
 
-        Get psp balance
+        Get developer balance
         """
         """
         token_id = 'ETH_USDT'

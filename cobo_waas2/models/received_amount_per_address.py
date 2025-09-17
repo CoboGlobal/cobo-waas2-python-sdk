@@ -23,10 +23,10 @@ from typing_extensions import Self
 
 class ReceivedAmountPerAddress(BaseModel):
     """
-    Total amount of a specific token received at a given address.
+    The total amount of the token that has been received at a given address.
     """  # noqa: E501
-    address: StrictStr = Field(description="Receiving address.")
-    total_received_amount: StrictStr = Field(description="Total tokens received at this address, as a decimal string.")
+    address: StrictStr = Field(description="The receiving address.")
+    total_received_amount: StrictStr = Field(description="The total amount of the token that has been received at this address.")
     __properties: ClassVar[List[str]] = ["address", "total_received_amount"]
 
     model_config = ConfigDict(

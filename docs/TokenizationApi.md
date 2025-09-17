@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**list_issued_tokens**](TokenizationApi.md#list_issued_tokens) | **GET** /tokenization/tokens | List issued tokens
 [**list_tokenization_activities**](TokenizationApi.md#list_tokenization_activities) | **GET** /tokenization/activities | List tokenization activities
 [**list_tokenization_allowlist_addresses**](TokenizationApi.md#list_tokenization_allowlist_addresses) | **GET** /tokenization/tokens/{token_id}/allowlist/addresses | List addresses on allowlist
-[**list_tokenization_blocklist_addresses**](TokenizationApi.md#list_tokenization_blocklist_addresses) | **GET** /tokenization/tokens/{token_id}/blocklist/addresses | Lists addresses on blocklist
+[**list_tokenization_blocklist_addresses**](TokenizationApi.md#list_tokenization_blocklist_addresses) | **GET** /tokenization/tokens/{token_id}/blocklist/addresses | List addresses on blocklist
 [**list_tokenization_holdings**](TokenizationApi.md#list_tokenization_holdings) | **GET** /tokenization/tokens/{token_id}/holdings | Get token holdings information
 [**list_tokenization_supported_chains**](TokenizationApi.md#list_tokenization_supported_chains) | **GET** /tokenization/enabled_chains | List supported chains for tokenization
 [**mint_tokenization**](TokenizationApi.md#mint_tokenization) | **POST** /tokenization/tokens/{token_id}/mint | Mint tokens
@@ -717,7 +717,7 @@ Name | Type | Description  | Notes
 # **list_tokenization_blocklist_addresses**
 > ListTokenizationBlocklistAddresses200Response list_tokenization_blocklist_addresses(token_id, limit=limit, after=after, before=before, direction=direction)
 
-Lists addresses on blocklist
+List addresses on blocklist
 
 This operation lists addresses on the blocklist. 
 
@@ -750,7 +750,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     direction = 'ASC'
 
     try:
-        # Lists addresses on blocklist
+        # List addresses on blocklist
         api_response = api_instance.list_tokenization_blocklist_addresses(token_id, limit=limit, after=after, before=before, direction=direction)
         print("The response of TokenizationApi->list_tokenization_blocklist_addresses:\n")
         pprint(api_response)

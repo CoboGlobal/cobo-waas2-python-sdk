@@ -17,20 +17,21 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ApprovalShowInfo(BaseModel):
+class RefundDisposition(BaseModel):
     """
-    Extra information for transaction approval details. 
+    The information about a request to refund funds.
     """  # noqa: E501
-    org_name: Optional[StrictStr] = Field(default=None, description="The name of the organization that the transaction belongs to.")
-    wallet_name: Optional[StrictStr] = Field(default=None, description="The name of the wallet that the transaction belongs to.")
-    environment: Optional[StrictStr] = Field(default=None, description="The environment in which the transaction is processed.")
-    from_address_label: Optional[StrictStr] = Field(default=None, description="The label of the address from which the transaction is initiated.")
-    to_address_label: Optional[StrictStr] = Field(default=None, description="The label of the address to which the transaction is sent.")
-    __properties: ClassVar[List[str]] = ["org_name", "wallet_name", "environment", "from_address_label", "to_address_label"]
+    transaction_id: StrictStr = Field(description="The UUID of the transaction whose funds are to be refunded. This identifies the original transaction that requires refund processing.")
+    destination_address: StrictStr = Field(description="The blockchain address to receive the refunded funds.")
+    disposition_amount: StrictStr = Field(description="The amount to be refunded from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction. ")
+    category_names: Optional[List[StrictStr]] = Field(default=None, description="Custom categories to identify and track this refund transaction. Used for transaction classification and reporting.")
+    description: Optional[Annotated[str, Field(strict=True, max_length=200)]] = Field(default=None, description="Additional notes or description for the refund.")
+    __properties: ClassVar[List[str]] = ["transaction_id", "destination_address", "disposition_amount", "category_names", "description"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +51,7 @@ class ApprovalShowInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ApprovalShowInfo from a JSON string"""
+        """Create an instance of RefundDisposition from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +76,7 @@ class ApprovalShowInfo(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ApprovalShowInfo from a dict"""
+        """Create an instance of RefundDisposition from a dict"""
         if obj is None:
             return None
 
@@ -83,11 +84,11 @@ class ApprovalShowInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "org_name": obj.get("org_name"),
-            "wallet_name": obj.get("wallet_name"),
-            "environment": obj.get("environment"),
-            "from_address_label": obj.get("from_address_label"),
-            "to_address_label": obj.get("to_address_label")
+            "transaction_id": obj.get("transaction_id"),
+            "destination_address": obj.get("destination_address"),
+            "disposition_amount": obj.get("disposition_amount"),
+            "category_names": obj.get("category_names"),
+            "description": obj.get("description")
         })
         return _obj
 

@@ -34,21 +34,22 @@ class TestApprovalUserDetail(unittest.TestCase):
         model = ApprovalUserDetail()
         if include_optional:
             return ApprovalUserDetail(
-                user_email = 'example@gmail.com',
+                name = 'John Doe',
+                email = 'example@gmail.com',
                 pubkey = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
                 signature = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
                 statement_uuid = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
-                result = 1,
+                result = 'Approved',
+                approval_result_code = 1,
                 created_time = 1610444045,
                 template_version = '1.0.0',
                 header_title = 'Transaction Approval',
                 is_for_sign = True,
-                show_info = cobo_waas2.models.approval_show_info.ApprovalShowInfo(
-                    org_name = 'Cobo', 
-                    wallet_name = 'Cobo Wallet', 
-                    environment = 'Prod', 
-                    from_address_label = 'Main Address', 
-                    to_address_label = 'Exchange Address', )
+                show_info = '{'org_name': 'Cobo', 'wallet_name': 'Cobo Wallet', 'environment': 'Prod'}',
+                language = 'en',
+                message_version = '1.0.0',
+                message = 'Please approve the transaction.',
+                extra_message = 'Please review the transaction details carefully.'
             )
         else:
             return ApprovalUserDetail(

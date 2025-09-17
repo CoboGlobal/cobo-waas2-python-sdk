@@ -1888,7 +1888,7 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> ListTokenizationBlocklistAddresses200Response:
-        """Lists addresses on blocklist
+        """List addresses on blocklist
 
         This operation lists addresses on the blocklist. 
 
@@ -1950,7 +1950,7 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListTokenizationBlocklistAddresses200Response]:
-        """Lists addresses on blocklist
+        """List addresses on blocklist
 
         This operation lists addresses on the blocklist. 
 
@@ -2012,7 +2012,7 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Lists addresses on blocklist
+        """List addresses on blocklist
 
         This operation lists addresses on the blocklist. 
 

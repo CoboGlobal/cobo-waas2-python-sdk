@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **merchant_id** | **str** | The merchant ID. | 
 **name** | **str** | The merchant name. | 
 **wallet_id** | **str** | The ID of the linked wallet. | 
-**developer_fee_rate** | **str** | The developer fee rate applied to this merchant. Expressed as a string in decimal format where \&quot;0.1\&quot; represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions. | [optional] 
+**developer_fee_rate** | **str** | The developer fee rate applied to this merchant. Expressed as a string in decimal format where \&quot;0.1\&quot; represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions. If you are a merchant (directly serving the payer), you do not need to configure the developer fee rate. | [optional] 
 **created_timestamp** | **int** | The creation time of the merchant, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The last update time of the merchant, represented as a UNIX timestamp in seconds. | [optional] 
 

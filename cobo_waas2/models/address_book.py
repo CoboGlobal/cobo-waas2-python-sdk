@@ -26,18 +26,18 @@ from typing_extensions import Self
 
 class AddressBook(BaseModel):
     """
-    The information of an address book entry.
+    The information of an Address Book entry.
     """  # noqa: E501
-    org_id: StrictStr = Field(description="The organization ID.")
-    entry_id: StrictStr = Field(description="The entry ID.")
-    address: StrictStr = Field(description="The wallet address.")
-    memo: Optional[StrictStr] = Field(default=None, description="The memo.")
-    wallet_name: Optional[StrictStr] = Field(default=None, description="The wallet name.")
+    org_id: StrictStr = Field(description="Organization ID.")
+    entry_id: StrictStr = Field(description="Address Book entry ID.")
+    address: StrictStr = Field(description="Wallet address.")
+    memo: Optional[StrictStr] = Field(default=None, description="Optional memo or tag required by some chains.")
+    wallet_name: Optional[StrictStr] = Field(default=None, description="Wallet name.")
     wallet_type: Optional[WalletType] = None
     wallet_subtype: Optional[WalletSubtype] = None
-    label: StrictStr = Field(description="The address label.")
+    label: StrictStr = Field(description="A user-defined label for the address.")
     chain_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of chain IDs.")
-    email: Optional[StrictStr] = Field(default=None, description="The email of the address owner.")
+    email: Optional[StrictStr] = Field(default=None, description="Email of the address owner.")
     encoding: Optional[AddressEncoding] = None
     __properties: ClassVar[List[str]] = ["org_id", "entry_id", "address", "memo", "wallet_name", "wallet_type", "wallet_subtype", "label", "chain_ids", "email", "encoding"]
 

@@ -780,7 +780,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Sign message
 
-        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
+        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note> This operation only supports message signing transactions from the following wallets and chains: - MPC Wallets: BTC, EVM-compatible chains, Cosmos, and Solana.   - Web3 Wallets: EVM-compatible chains. </Note> 
 
         :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
@@ -826,7 +826,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Sign message
 
-        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
+        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note> This operation only supports message signing transactions from the following wallets and chains: - MPC Wallets: BTC, EVM-compatible chains, Cosmos, and Solana.   - Web3 Wallets: EVM-compatible chains. </Note> 
 
         :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
@@ -872,7 +872,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Sign message
 
-        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
+        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note> This operation only supports message signing transactions from the following wallets and chains: - MPC Wallets: BTC, EVM-compatible chains, Cosmos, and Solana.   - Web3 Wallets: EVM-compatible chains. </Note> 
 
         :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
@@ -1809,9 +1809,9 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> List[ApprovalDetail]:
-        """List transaction approval details
+        """List approval details
 
-        This operation retrieves detailed approval information for a specified transaction. 
+        This operation retrieves comprehensive approval information for transactions, including approval status, reviewer details, signatures, and approval history. You can filter the results by transaction IDs, Cobo IDs, or request IDs.   This operation is commonly used to monitor approval progress and identify delays in multi-signature workflows. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -1863,9 +1863,9 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> ApiResponse[List[ApprovalDetail]]:
-        """List transaction approval details
+        """List approval details
 
-        This operation retrieves detailed approval information for a specified transaction. 
+        This operation retrieves comprehensive approval information for transactions, including approval status, reviewer details, signatures, and approval history. You can filter the results by transaction IDs, Cobo IDs, or request IDs.   This operation is commonly used to monitor approval progress and identify delays in multi-signature workflows. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -1917,9 +1917,9 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List transaction approval details
+        """List approval details
 
-        This operation retrieves detailed approval information for a specified transaction. 
+        This operation retrieves comprehensive approval information for transactions, including approval status, reviewer details, signatures, and approval history. You can filter the results by transaction IDs, Cobo IDs, or request IDs.   This operation is commonly used to monitor approval progress and identify delays in multi-signature workflows. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -2190,8 +2190,8 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates(
         self,
-        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
-        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
+        template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2201,13 +2201,13 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> List[ApprovalTemplate]:
-        """list transaction templates
+        """List transaction templates
 
-        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
+        This operation retrieves approval templates based on the specified template key and template version.  These templates define the content used to generate approval messages displayed to users, including messages for transaction approvals and other approval workflows. 
 
-        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
+        :param template_key: Key of the transaction template used to create an approval message.  (required)
         :type template_key: str
-        :param template_version: The version of the template used for the transaction approval.
+        :param template_version: Version of the template.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2240,8 +2240,8 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates_with_http_info(
         self,
-        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
-        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
+        template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2251,13 +2251,13 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> ApiResponse[List[ApprovalTemplate]]:
-        """list transaction templates
+        """List transaction templates
 
-        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
+        This operation retrieves approval templates based on the specified template key and template version.  These templates define the content used to generate approval messages displayed to users, including messages for transaction approvals and other approval workflows. 
 
-        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
+        :param template_key: Key of the transaction template used to create an approval message.  (required)
         :type template_key: str
-        :param template_version: The version of the template used for the transaction approval.
+        :param template_version: Version of the template.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2290,8 +2290,8 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates_without_preload_content(
         self,
-        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
-        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
+        template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2301,13 +2301,13 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """list transaction templates
+        """List transaction templates
 
-        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
+        This operation retrieves approval templates based on the specified template key and template version.  These templates define the content used to generate approval messages displayed to users, including messages for transaction approvals and other approval workflows. 
 
-        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
+        :param template_key: Key of the transaction template used to create an approval message.  (required)
         :type template_key: str
-        :param template_version: The version of the template used for the transaction approval.
+        :param template_version: Version of the template.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2391,7 +2391,7 @@ class TransactionsApi:
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
         wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
-        project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
+        project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -2437,7 +2437,7 @@ class TransactionsApi:
         :type wallet_type: WalletType
         :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
         :type wallet_subtype: WalletSubtype
-        :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
+        :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
         :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
@@ -2513,7 +2513,7 @@ class TransactionsApi:
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
         wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
-        project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
+        project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -2559,7 +2559,7 @@ class TransactionsApi:
         :type wallet_type: WalletType
         :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
         :type wallet_subtype: WalletSubtype
-        :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
+        :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
         :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
@@ -2635,7 +2635,7 @@ class TransactionsApi:
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
         wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
-        project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
+        project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -2681,7 +2681,7 @@ class TransactionsApi:
         :type wallet_type: WalletType
         :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
         :type wallet_subtype: WalletSubtype
-        :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
+        :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
         :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int

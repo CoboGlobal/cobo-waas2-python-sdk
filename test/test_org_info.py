@@ -35,6 +35,7 @@ class TestOrgInfo(unittest.TestCase):
         if include_optional:
             return OrgInfo(
                 org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                biz_org_id = 1,
                 name = 'Org name',
                 created_timestamp = 1718619403933
             )

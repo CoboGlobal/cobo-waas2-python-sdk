@@ -9,6 +9,7 @@ cobo_waas2/api/__init__.py
 cobo_waas2/api/address_books_api.py
 cobo_waas2/api/app_workflows_api.py
 cobo_waas2/api/auto_sweep_api.py
+cobo_waas2/api/compliance_api.py
 cobo_waas2/api/developers_api.py
 cobo_waas2/api/developers_webhooks_api.py
 cobo_waas2/api/fee_station_api.py
@@ -64,7 +65,6 @@ cobo_waas2/models/approval_entry.py
 cobo_waas2/models/approval_request.py
 cobo_waas2/models/approval_request_detail.py
 cobo_waas2/models/approval_result.py
-cobo_waas2/models/approval_show_info.py
 cobo_waas2/models/approval_statement_status.py
 cobo_waas2/models/approval_status.py
 cobo_waas2/models/approval_template.py
@@ -113,6 +113,7 @@ cobo_waas2/models/check_addresses_validity200_response_inner.py
 cobo_waas2/models/check_loop_transfers200_response_inner.py
 cobo_waas2/models/cobo_safe_delegate.py
 cobo_waas2/models/cobo_safe_delegate_type.py
+cobo_waas2/models/compliance_disposition_update_event_data.py
 cobo_waas2/models/contract_call_destination.py
 cobo_waas2/models/contract_call_destination_type.py
 cobo_waas2/models/contract_call_params.py
@@ -124,6 +125,9 @@ cobo_waas2/models/core_staking_extra.py
 cobo_waas2/models/cosmos_adr36_message_sign_destination.py
 cobo_waas2/models/cosmos_contract_call_destination.py
 cobo_waas2/models/cosmos_contract_call_message.py
+cobo_waas2/models/create_address_book_param.py
+cobo_waas2/models/create_address_books201_response.py
+cobo_waas2/models/create_address_books_param.py
 cobo_waas2/models/create_address_request.py
 cobo_waas2/models/create_approval_request201_response.py
 cobo_waas2/models/create_auto_sweep_task.py
@@ -175,11 +179,17 @@ cobo_waas2/models/custodial_wallet_info.py
 cobo_waas2/models/custodial_web3_contract_call_source.py
 cobo_waas2/models/custodial_web3_message_sign_source.py
 cobo_waas2/models/custodial_web3_transfer_source.py
+cobo_waas2/models/delete_address_book_by_id201_response.py
 cobo_waas2/models/delete_crypto_address201_response.py
 cobo_waas2/models/delete_guard_pubkey201_response.py
 cobo_waas2/models/delete_key_share_holder_group_by_id201_response.py
 cobo_waas2/models/delete_wallet_by_id201_response.py
 cobo_waas2/models/destination_wallet_type.py
+cobo_waas2/models/disposition_event_data.py
+cobo_waas2/models/disposition_query_response.py
+cobo_waas2/models/disposition_response.py
+cobo_waas2/models/disposition_status.py
+cobo_waas2/models/disposition_type.py
 cobo_waas2/models/eigen_layer_lst_stake_extra.py
 cobo_waas2/models/eigen_layer_native_stake_extra.py
 cobo_waas2/models/eigenlayer_validator.py
@@ -254,6 +264,7 @@ cobo_waas2/models/graph_ql_error_locations_inner.py
 cobo_waas2/models/graph_ql_request.py
 cobo_waas2/models/graph_ql_response.py
 cobo_waas2/models/guard_pubkey_status.py
+cobo_waas2/models/isolate_disposition.py
 cobo_waas2/models/key_share_holder.py
 cobo_waas2/models/key_share_holder_group.py
 cobo_waas2/models/key_share_holder_group_status.py
@@ -365,6 +376,7 @@ cobo_waas2/models/refresh_permission_token_request.py
 cobo_waas2/models/refresh_token2_xx_response.py
 cobo_waas2/models/refresh_token_request.py
 cobo_waas2/models/refund.py
+cobo_waas2/models/refund_disposition.py
 cobo_waas2/models/refund_status.py
 cobo_waas2/models/refund_type.py
 cobo_waas2/models/replace_type.py
@@ -649,6 +661,8 @@ cobo_waas2/models/tss_signature.py
 cobo_waas2/models/tss_signature_type.py
 cobo_waas2/models/tss_signatures.py
 cobo_waas2/models/tss_status.py
+cobo_waas2/models/unfreeze_disposition.py
+cobo_waas2/models/update_address_book_param.py
 cobo_waas2/models/update_custodial_wallet_params.py
 cobo_waas2/models/update_exchange_wallet_params.py
 cobo_waas2/models/update_group_action.py
@@ -714,7 +728,6 @@ docs/ApprovalEntry.md
 docs/ApprovalRequest.md
 docs/ApprovalRequestDetail.md
 docs/ApprovalResult.md
-docs/ApprovalShowInfo.md
 docs/ApprovalStatementStatus.md
 docs/ApprovalStatus.md
 docs/ApprovalTemplate.md
@@ -764,6 +777,8 @@ docs/CheckAddressesValidity200ResponseInner.md
 docs/CheckLoopTransfers200ResponseInner.md
 docs/CoboSafeDelegate.md
 docs/CoboSafeDelegateType.md
+docs/ComplianceApi.md
+docs/ComplianceDispositionUpdateEventData.md
 docs/ContractCallDestination.md
 docs/ContractCallDestinationType.md
 docs/ContractCallParams.md
@@ -775,6 +790,9 @@ docs/CoreStakingExtra.md
 docs/CosmosAdr36MessageSignDestination.md
 docs/CosmosContractCallDestination.md
 docs/CosmosContractCallMessage.md
+docs/CreateAddressBookParam.md
+docs/CreateAddressBooks201Response.md
+docs/CreateAddressBooksParam.md
 docs/CreateAddressRequest.md
 docs/CreateApprovalRequest201Response.md
 docs/CreateAutoSweepTask.md
@@ -826,6 +844,7 @@ docs/CustodialWalletInfo.md
 docs/CustodialWeb3ContractCallSource.md
 docs/CustodialWeb3MessageSignSource.md
 docs/CustodialWeb3TransferSource.md
+docs/DeleteAddressBookById201Response.md
 docs/DeleteCryptoAddress201Response.md
 docs/DeleteGuardPubkey201Response.md
 docs/DeleteKeyShareHolderGroupById201Response.md
@@ -833,6 +852,11 @@ docs/DeleteWalletById201Response.md
 docs/DestinationWalletType.md
 docs/DevelopersApi.md
 docs/DevelopersWebhooksApi.md
+docs/DispositionEventData.md
+docs/DispositionQueryResponse.md
+docs/DispositionResponse.md
+docs/DispositionStatus.md
+docs/DispositionType.md
 docs/EigenLayerLstStakeExtra.md
 docs/EigenLayerNativeStakeExtra.md
 docs/EigenlayerValidator.md
@@ -908,6 +932,7 @@ docs/GraphQLErrorLocationsInner.md
 docs/GraphQLRequest.md
 docs/GraphQLResponse.md
 docs/GuardPubkeyStatus.md
+docs/IsolateDisposition.md
 docs/KeyShareHolder.md
 docs/KeyShareHolderGroup.md
 docs/KeyShareHolderGroupStatus.md
@@ -1023,6 +1048,7 @@ docs/RefreshPermissionTokenRequest.md
 docs/RefreshToken2XXResponse.md
 docs/RefreshTokenRequest.md
 docs/Refund.md
+docs/RefundDisposition.md
 docs/RefundStatus.md
 docs/RefundType.md
 docs/ReplaceType.md
@@ -1312,6 +1338,8 @@ docs/TravelRuleWithdrawRequestTravelRuleInfo.md
 docs/TriggerTestWebhookEvent201Response.md
 docs/TriggerTestWebhookEventRequest.md
 docs/UTXO.md
+docs/UnfreezeDisposition.md
+docs/UpdateAddressBookParam.md
 docs/UpdateCustodialWalletParams.md
 docs/UpdateExchangeWalletParams.md
 docs/UpdateGroupAction.md
@@ -1384,7 +1412,6 @@ test/test_approval_entry.py
 test/test_approval_request.py
 test/test_approval_request_detail.py
 test/test_approval_result.py
-test/test_approval_show_info.py
 test/test_approval_statement_status.py
 test/test_approval_status.py
 test/test_approval_template.py
@@ -1434,6 +1461,8 @@ test/test_check_addresses_validity200_response_inner.py
 test/test_check_loop_transfers200_response_inner.py
 test/test_cobo_safe_delegate.py
 test/test_cobo_safe_delegate_type.py
+test/test_compliance_api.py
+test/test_compliance_disposition_update_event_data.py
 test/test_contract_call_destination.py
 test/test_contract_call_destination_type.py
 test/test_contract_call_params.py
@@ -1445,6 +1474,9 @@ test/test_core_staking_extra.py
 test/test_cosmos_adr36_message_sign_destination.py
 test/test_cosmos_contract_call_destination.py
 test/test_cosmos_contract_call_message.py
+test/test_create_address_book_param.py
+test/test_create_address_books201_response.py
+test/test_create_address_books_param.py
 test/test_create_address_request.py
 test/test_create_approval_request201_response.py
 test/test_create_auto_sweep_task.py
@@ -1496,6 +1528,7 @@ test/test_custodial_wallet_info.py
 test/test_custodial_web3_contract_call_source.py
 test/test_custodial_web3_message_sign_source.py
 test/test_custodial_web3_transfer_source.py
+test/test_delete_address_book_by_id201_response.py
 test/test_delete_crypto_address201_response.py
 test/test_delete_guard_pubkey201_response.py
 test/test_delete_key_share_holder_group_by_id201_response.py
@@ -1503,6 +1536,11 @@ test/test_delete_wallet_by_id201_response.py
 test/test_destination_wallet_type.py
 test/test_developers_api.py
 test/test_developers_webhooks_api.py
+test/test_disposition_event_data.py
+test/test_disposition_query_response.py
+test/test_disposition_response.py
+test/test_disposition_status.py
+test/test_disposition_type.py
 test/test_eigen_layer_lst_stake_extra.py
 test/test_eigen_layer_native_stake_extra.py
 test/test_eigenlayer_validator.py
@@ -1578,6 +1616,7 @@ test/test_graph_ql_error_locations_inner.py
 test/test_graph_ql_request.py
 test/test_graph_ql_response.py
 test/test_guard_pubkey_status.py
+test/test_isolate_disposition.py
 test/test_key_share_holder.py
 test/test_key_share_holder_group.py
 test/test_key_share_holder_group_status.py
@@ -1693,6 +1732,7 @@ test/test_refresh_permission_token_request.py
 test/test_refresh_token2_xx_response.py
 test/test_refresh_token_request.py
 test/test_refund.py
+test/test_refund_disposition.py
 test/test_refund_status.py
 test/test_refund_type.py
 test/test_replace_type.py
@@ -1981,6 +2021,8 @@ test/test_tss_signature.py
 test/test_tss_signature_type.py
 test/test_tss_signatures.py
 test/test_tss_status.py
+test/test_unfreeze_disposition.py
+test/test_update_address_book_param.py
 test/test_update_custodial_wallet_params.py
 test/test_update_exchange_wallet_params.py
 test/test_update_group_action.py

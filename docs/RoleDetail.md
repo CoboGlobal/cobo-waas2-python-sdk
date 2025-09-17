@@ -1,13 +1,16 @@
 # RoleDetail
 
-Transaction approval details response schema.
+Details of the role in a transaction approval.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**ApprovalTransactionResult**](ApprovalTransactionResult.md) |  | [optional] 
-**threshold** | **int** | The threshold for the transaction approval. | [optional] 
+**review_threshold** | **int** | Minimum number of approvals required for this role. | [optional] 
+**initiator** | **str** | The initiator of the transaction. | [optional] 
+**is_upgraded** | **bool** | Indicates whether the transaction approval has been upgraded. | [optional] 
+**complete_time** | **str** | Time when the role completed the approval. | [optional] 
 **user_details** | [**List[ApprovalUserDetail]**](ApprovalUserDetail.md) |  | [optional] 
 
 ## Example
