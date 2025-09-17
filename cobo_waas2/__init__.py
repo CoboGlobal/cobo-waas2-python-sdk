@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.22.0"
+__version__ = "1.23.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
