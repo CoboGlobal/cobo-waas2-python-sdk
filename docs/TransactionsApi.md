@@ -14,9 +14,9 @@ Method | HTTP request | Description
 [**estimate_fee**](TransactionsApi.md#estimate_fee) | **POST** /transactions/estimate_fee | Estimate transaction fee
 [**get_transaction_approval_detail**](TransactionsApi.md#get_transaction_approval_detail) | **GET** /transactions/{transaction_id}/approval_detail | Get transaction approval details
 [**get_transaction_by_id**](TransactionsApi.md#get_transaction_by_id) | **GET** /transactions/{transaction_id} | Get transaction information
-[**list_approval_details**](TransactionsApi.md#list_approval_details) | **GET** /transactions/approval/details | List transaction approval details
+[**list_approval_details**](TransactionsApi.md#list_approval_details) | **GET** /transactions/approval/details | List approval details
 [**list_transaction_approval_details**](TransactionsApi.md#list_transaction_approval_details) | **GET** /transactions/approval_details | List transaction approval details
-[**list_transaction_templates**](TransactionsApi.md#list_transaction_templates) | **GET** /transactions/templates | list transaction templates
+[**list_transaction_templates**](TransactionsApi.md#list_transaction_templates) | **GET** /transactions/templates | List transaction templates
 [**list_transactions**](TransactionsApi.md#list_transactions) | **GET** /transactions | List all transactions
 [**resend_transaction_by_id**](TransactionsApi.md#resend_transaction_by_id) | **POST** /transactions/{transaction_id}/resend | Resend transaction
 [**sign_and_broadcast_transaction_by_id**](TransactionsApi.md#sign_and_broadcast_transaction_by_id) | **POST** /transactions/{transaction_id}/sign_and_broadcast | Sign and broadcast transaction
@@ -322,7 +322,7 @@ Name | Type | Description  | Notes
 
 Sign message
 
-This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
+This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note> This operation only supports message signing transactions from the following wallets and chains: - MPC Wallets: BTC, EVM-compatible chains, Cosmos, and Solana.   - Web3 Wallets: EVM-compatible chains. </Note> 
 
 ### Example
 
@@ -758,9 +758,9 @@ Name | Type | Description  | Notes
 # **list_approval_details**
 > List[ApprovalDetail] list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_ids=request_ids)
 
-List transaction approval details
+List approval details
 
-This operation retrieves detailed approval information for a specified transaction. 
+This operation retrieves comprehensive approval information for transactions, including approval status, reviewer details, signatures, and approval history. You can filter the results by transaction IDs, Cobo IDs, or request IDs.   This operation is commonly used to monitor approval progress and identify delays in multi-signature workflows. 
 
 ### Example
 
@@ -789,7 +789,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     request_ids = 'web_send_by_user_327_1610444045047,web_send_by_user_327_1610444045048'
 
     try:
-        # List transaction approval details
+        # List approval details
         api_response = api_instance.list_approval_details(transaction_ids=transaction_ids, cobo_ids=cobo_ids, request_ids=request_ids)
         print("The response of TransactionsApi->list_approval_details:\n")
         pprint(api_response)
@@ -825,7 +825,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The information about transaction approval detail. |  -  |
+**200** | Details of the transaction approvals. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -908,9 +908,9 @@ Name | Type | Description  | Notes
 # **list_transaction_templates**
 > List[ApprovalTemplate] list_transaction_templates(template_key, template_version=template_version)
 
-list transaction templates
+List transaction templates
 
-This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
+This operation retrieves approval templates based on the specified template key and template version.  These templates define the content used to generate approval messages displayed to users, including messages for transaction approvals and other approval workflows. 
 
 ### Example
 
@@ -938,7 +938,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     template_version = '1.0.0'
 
     try:
-        # list transaction templates
+        # List transaction templates
         api_response = api_instance.list_transaction_templates(template_key, template_version=template_version)
         print("The response of TransactionsApi->list_transaction_templates:\n")
         pprint(api_response)
@@ -953,8 +953,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_key** | **str**| The key of the transaction template to be used for creating a transaction approval message.  | 
- **template_version** | **str**| The version of the template used for the transaction approval. | [optional] 
+ **template_key** | **str**| Key of the transaction template used to create an approval message.  | 
+ **template_version** | **str**| Version of the template. | [optional] 
 
 ### Return type
 
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Response containing a list of transaction approval templates. |  -  |
+**200** | Successfully retrieved approval templates. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -1060,7 +1060,7 @@ Name | Type | Description  | Notes
  **vault_id** | **str**| The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults). | [optional] 
  **wallet_type** | [**WalletType**](.md)| The wallet type.  - &#x60;Custodial&#x60;: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - &#x60;MPC&#x60;: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - &#x60;SmartContract&#x60;: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - &#x60;Exchange&#x60;: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction)  | [optional] 
  **wallet_subtype** | [**WalletSubtype**](.md)| The wallet subtype.  - &#x60;Asset&#x60;: Custodial Wallets (Asset Wallets)  - &#x60;Web3&#x60;: Custodial Wallets (Web3 Wallets)  - &#x60;Main&#x60;: Exchange Wallets (Main Account)  - &#x60;Sub&#x60;: Exchange Wallets (Sub Account)  - &#x60;Org-Controlled&#x60;: MPC Wallets (Organization-Controlled Wallets)  - &#x60;User-Controlled&#x60;: MPC Wallets (User-Controlled Wallets)  - &#x60;Safe{Wallet}&#x60;: Smart Contract Wallets (Safe{Wallet})  | [optional] 
- **project_id** | **str**| The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects).  | [optional] 
+ **project_id** | **str**| (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects).  | [optional] 
  **min_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change.  | [optional] 
  **max_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change.  | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]

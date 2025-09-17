@@ -6,11 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wallet_id** | **str** | The unique identifier of the wallet. | 
-**token_id** | **str** | The ID of the cryptocurrency. | 
-**swept_balance** | **str** | The payment wallet swept balance. | [optional] 
-**available_balance** | **str** | The payment wallet available balance. | [optional] 
-**total_balance** | **str** | The payment wallet total balance. | [optional] 
-**above_sweep_threshold_balance** | **str** | The payment wallet above sweep threshold balance. | [optional] 
+**token_id** | **str** | The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format &#x60;{CHAIN}_{TOKEN}&#x60;. | 
+**swept_balance** | **str** | The total amount of the token on the sweep-to address of the payment wallet. | [optional] 
+**available_balance** | **str** | The balance available for settlement or refund, in the specified cryptocurrency. | [optional] 
+**total_balance** | **str** | The total balance of the token for the payment wallet. | [optional] 
+**above_sweep_threshold_balance** | **str** | The total amount of funds that exceed the sweep threshold across all receiving addresses in the payment wallet. When the balance on a receiving address exceeds the sweep threshold, those funds become eligible for automatic sweeping and are included in this balance. | [optional] 
 
 ## Example
 

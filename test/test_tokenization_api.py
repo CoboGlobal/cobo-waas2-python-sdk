@@ -158,7 +158,7 @@ class TestTokenizationApi(unittest.TestCase):
         """
         Test case for list_tokenization_blocklist_addresses
 
-        Lists addresses on blocklist
+        List addresses on blocklist
         """
         """
         token_id = 'ETH_USDT'

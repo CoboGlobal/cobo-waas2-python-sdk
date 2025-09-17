@@ -590,7 +590,7 @@ class PaymentApi:
     ) -> Merchant:
         """Create merchant
 
-        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information. 
+        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information.  If you are a merchant (directly serving the payer), you only need to create one merchant and do not need to configure the developer fee rate. The developer fee rate only applies to platforms such as payment service providers (PSPs) that charge fees to their downstream merchants. 
 
         :param create_merchant_request: The request body to create a merchant.
         :type create_merchant_request: CreateMerchantRequest
@@ -636,7 +636,7 @@ class PaymentApi:
     ) -> ApiResponse[Merchant]:
         """Create merchant
 
-        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information. 
+        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information.  If you are a merchant (directly serving the payer), you only need to create one merchant and do not need to configure the developer fee rate. The developer fee rate only applies to platforms such as payment service providers (PSPs) that charge fees to their downstream merchants. 
 
         :param create_merchant_request: The request body to create a merchant.
         :type create_merchant_request: CreateMerchantRequest
@@ -682,7 +682,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create merchant
 
-        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information. 
+        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information.  If you are a merchant (directly serving the payer), you only need to create one merchant and do not need to configure the developer fee rate. The developer fee rate only applies to platforms such as payment service providers (PSPs) that charge fees to their downstream merchants. 
 
         :param create_merchant_request: The request body to create a merchant.
         :type create_merchant_request: CreateMerchantRequest
@@ -1622,9 +1622,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> List[ReceivedAmountPerAddress]:
-        """Get payer balance by address
+        """Get payer balance
 
-        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+        This operation retrieves the total amount received for a specific payer. The information is grouped by token and receiving address. 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -1676,9 +1676,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[List[ReceivedAmountPerAddress]]:
-        """Get payer balance by address
+        """Get payer balance
 
-        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+        This operation retrieves the total amount received for a specific payer. The information is grouped by token and receiving address. 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -1730,9 +1730,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get payer balance by address
+        """Get payer balance
 
-        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+        This operation retrieves the total amount received for a specific payer. The information is grouped by token and receiving address. 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -1994,9 +1994,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> PspBalance:
-        """Get psp balance
+        """Get developer balance
 
-        This operation retrieves the information of psp balance. 
+        This operation retrieves the balance information for you as the developer. The balance information is grouped by token. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -2040,9 +2040,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[PspBalance]:
-        """Get psp balance
+        """Get developer balance
 
-        This operation retrieves the information of psp balance. 
+        This operation retrieves the balance information for you as the developer. The balance information is grouped by token. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -2086,9 +2086,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get psp balance
+        """Get developer balance
 
-        This operation retrieves the information of psp balance. 
+        This operation retrieves the balance information for you as the developer. The balance information is grouped by token. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -3707,7 +3707,7 @@ class PaymentApi:
     def list_merchant_balances(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        acquiring_type: Annotated[AcquiringType, Field(description="AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models. ")],
+        acquiring_type: Annotated[AcquiringType, Field(description="The payment acquisition type. - `Order`: Payers pay by fixed-amount orders. Ideal for specific purchases and one-time transactions. - `TopUp`: Account recharge flow where payers deposit funds to their dedicated top-up addresses. Ideal for flexible or usage-based payment models. ")],
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
         _request_timeout: Union[
             None,
@@ -3720,11 +3720,11 @@ class PaymentApi:
     ) -> ListMerchantBalances200Response:
         """List merchant balances
 
-        This operation retrieves the information of merchant balances. 
+        This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
-        :param acquiring_type: AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  (required)
+        :param acquiring_type: The payment acquisition type. - `Order`: Payers pay by fixed-amount orders. Ideal for specific purchases and one-time transactions. - `TopUp`: Account recharge flow where payers deposit funds to their dedicated top-up addresses. Ideal for flexible or usage-based payment models.  (required)
         :type acquiring_type: AcquiringType
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
@@ -3761,7 +3761,7 @@ class PaymentApi:
     def list_merchant_balances_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        acquiring_type: Annotated[AcquiringType, Field(description="AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models. ")],
+        acquiring_type: Annotated[AcquiringType, Field(description="The payment acquisition type. - `Order`: Payers pay by fixed-amount orders. Ideal for specific purchases and one-time transactions. - `TopUp`: Account recharge flow where payers deposit funds to their dedicated top-up addresses. Ideal for flexible or usage-based payment models. ")],
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
         _request_timeout: Union[
             None,
@@ -3774,11 +3774,11 @@ class PaymentApi:
     ) -> ApiResponse[ListMerchantBalances200Response]:
         """List merchant balances
 
-        This operation retrieves the information of merchant balances. 
+        This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
-        :param acquiring_type: AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  (required)
+        :param acquiring_type: The payment acquisition type. - `Order`: Payers pay by fixed-amount orders. Ideal for specific purchases and one-time transactions. - `TopUp`: Account recharge flow where payers deposit funds to their dedicated top-up addresses. Ideal for flexible or usage-based payment models.  (required)
         :type acquiring_type: AcquiringType
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
@@ -3815,7 +3815,7 @@ class PaymentApi:
     def list_merchant_balances_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        acquiring_type: Annotated[AcquiringType, Field(description="AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models. ")],
+        acquiring_type: Annotated[AcquiringType, Field(description="The payment acquisition type. - `Order`: Payers pay by fixed-amount orders. Ideal for specific purchases and one-time transactions. - `TopUp`: Account recharge flow where payers deposit funds to their dedicated top-up addresses. Ideal for flexible or usage-based payment models. ")],
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
         _request_timeout: Union[
             None,
@@ -3828,11 +3828,11 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List merchant balances
 
-        This operation retrieves the information of merchant balances. 
+        This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
-        :param acquiring_type: AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  (required)
+        :param acquiring_type: The payment acquisition type. - `Order`: Payers pay by fixed-amount orders. Ideal for specific purchases and one-time transactions. - `TopUp`: Account recharge flow where payers deposit funds to their dedicated top-up addresses. Ideal for flexible or usage-based payment models.  (required)
         :type acquiring_type: AcquiringType
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
@@ -4573,7 +4573,7 @@ class PaymentApi:
     ) -> ListPaymentWalletBalances200Response:
         """List payment wallet balances
 
-        This operation retrieves the information of payment wallet balances. 
+        This operation retrieves the balance information for specified payment wallets. The balance information is grouped by token. If you do not specify the `wallet_ids` parameter, the balance information for all payment wallets will be returned. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -4623,7 +4623,7 @@ class PaymentApi:
     ) -> ApiResponse[ListPaymentWalletBalances200Response]:
         """List payment wallet balances
 
-        This operation retrieves the information of payment wallet balances. 
+        This operation retrieves the balance information for specified payment wallets. The balance information is grouped by token. If you do not specify the `wallet_ids` parameter, the balance information for all payment wallets will be returned. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -4673,7 +4673,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List payment wallet balances
 
-        This operation retrieves the information of payment wallet balances. 
+        This operation retrieves the balance information for specified payment wallets. The balance information is grouped by token. If you do not specify the `wallet_ids` parameter, the balance information for all payment wallets will be returned. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str

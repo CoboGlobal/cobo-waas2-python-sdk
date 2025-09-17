@@ -33,7 +33,7 @@ class TestAutoSweepApi(unittest.TestCase):
         """
         Test case for create_auto_sweep_task
 
-        create auto sweep task
+        Create auto-sweep task
         """
         """
         create_auto_sweep_task = cobo_waas2.CreateAutoSweepTask()
@@ -45,7 +45,7 @@ class TestAutoSweepApi(unittest.TestCase):
         """
         Test case for create_wallet_sweep_to_addresses
 
-        create wallet sweep to addresses
+        create sweep-to address
         """
         """
         create_sweep_to_address = cobo_waas2.CreateSweepToAddress()
@@ -57,7 +57,7 @@ class TestAutoSweepApi(unittest.TestCase):
         """
         Test case for get_auto_sweep_task_by_id
 
-        Get auto sweep task information
+        Get auto-sweep task details
         """
         """
         task_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -69,7 +69,7 @@ class TestAutoSweepApi(unittest.TestCase):
         """
         Test case for list_auto_sweep_task
 
-        List wallet auto sweep task
+        List auto-sweep tasks
         """
         """
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -89,7 +89,7 @@ class TestAutoSweepApi(unittest.TestCase):
         """
         Test case for list_wallet_sweep_to_addresses
 
-        List wallet sweep to addresses
+        List sweep-to addresses
         """
         """
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'

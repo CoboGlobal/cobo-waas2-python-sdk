@@ -24,14 +24,14 @@ from typing_extensions import Self
 
 class AutoSweepTask(BaseModel):
     """
-    The auto sweep task information.
+    Auto-sweep task information.
     """  # noqa: E501
-    task_id: StrictStr = Field(description="The auto sweep task ID.")
-    wallet_id: StrictStr = Field(description="The wallet ID.")
-    token_id: StrictStr = Field(description="The token ID of the swept token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
+    task_id: StrictStr = Field(description="Auto-sweep task ID.")
+    wallet_id: StrictStr = Field(description="Wallet ID.")
+    token_id: StrictStr = Field(description="Token ID of the swept token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     status: AutoSweepTaskStatus
-    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The IDs of the corresponding transactions of the auto sweep task.")
-    failed_reasons: Optional[List[StrictStr]] = Field(default=None, description="Failed reason of create auto sweep transaction.")
+    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="IDs of the transactions triggered by the task.")
+    failed_reasons: Optional[List[StrictStr]] = Field(default=None, description="Reasons why the task creation failed.")
     created_timestamp: StrictInt = Field(description="The time when the task was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the task was updated, in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["task_id", "wallet_id", "token_id", "status", "transaction_ids", "failed_reasons", "created_timestamp", "updated_timestamp"]

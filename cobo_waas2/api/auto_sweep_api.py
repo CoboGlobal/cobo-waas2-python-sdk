@@ -43,7 +43,7 @@ class AutoSweepApi:
     @validate_call
     def create_auto_sweep_task(
         self,
-        create_auto_sweep_task: Annotated[Optional[CreateAutoSweepTask], Field(description="The request body to generates a new sweep to addresses within a specified wallet.")] = None,
+        create_auto_sweep_task: Annotated[Optional[CreateAutoSweepTask], Field(description="The request body to create an auto-sweep task.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -53,11 +53,11 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> AutoSweepTask:
-        """create auto sweep task
+        """Create auto-sweep task
 
-        This operation create a new auto sweep task. 
+        This operation creates an auto-sweep task for the specified wallet and token. The task triggers transactions to sweep the full balance of the specified token to the configured sweep-to address. 
 
-        :param create_auto_sweep_task: The request body to generates a new sweep to addresses within a specified wallet.
+        :param create_auto_sweep_task: The request body to create an auto-sweep task.
         :type create_auto_sweep_task: CreateAutoSweepTask
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -89,7 +89,7 @@ class AutoSweepApi:
     @validate_call
     def create_auto_sweep_task_with_http_info(
         self,
-        create_auto_sweep_task: Annotated[Optional[CreateAutoSweepTask], Field(description="The request body to generates a new sweep to addresses within a specified wallet.")] = None,
+        create_auto_sweep_task: Annotated[Optional[CreateAutoSweepTask], Field(description="The request body to create an auto-sweep task.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -99,11 +99,11 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ApiResponse[AutoSweepTask]:
-        """create auto sweep task
+        """Create auto-sweep task
 
-        This operation create a new auto sweep task. 
+        This operation creates an auto-sweep task for the specified wallet and token. The task triggers transactions to sweep the full balance of the specified token to the configured sweep-to address. 
 
-        :param create_auto_sweep_task: The request body to generates a new sweep to addresses within a specified wallet.
+        :param create_auto_sweep_task: The request body to create an auto-sweep task.
         :type create_auto_sweep_task: CreateAutoSweepTask
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -135,7 +135,7 @@ class AutoSweepApi:
     @validate_call
     def create_auto_sweep_task_without_preload_content(
         self,
-        create_auto_sweep_task: Annotated[Optional[CreateAutoSweepTask], Field(description="The request body to generates a new sweep to addresses within a specified wallet.")] = None,
+        create_auto_sweep_task: Annotated[Optional[CreateAutoSweepTask], Field(description="The request body to create an auto-sweep task.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -145,11 +145,11 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """create auto sweep task
+        """Create auto-sweep task
 
-        This operation create a new auto sweep task. 
+        This operation creates an auto-sweep task for the specified wallet and token. The task triggers transactions to sweep the full balance of the specified token to the configured sweep-to address. 
 
-        :param create_auto_sweep_task: The request body to generates a new sweep to addresses within a specified wallet.
+        :param create_auto_sweep_task: The request body to create an auto-sweep task.
         :type create_auto_sweep_task: CreateAutoSweepTask
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -212,7 +212,7 @@ class AutoSweepApi:
     @validate_call
     def create_wallet_sweep_to_addresses(
         self,
-        create_sweep_to_address: Annotated[Optional[CreateSweepToAddress], Field(description="The request body to generates a new sweep to addresses within a specified wallet.")] = None,
+        create_sweep_to_address: Annotated[Optional[CreateSweepToAddress], Field(description="The request body to generates a new sweep-to address within a specified wallet.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -222,11 +222,11 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> SweepToAddress:
-        """create wallet sweep to addresses
+        """create sweep-to address
 
-        This operation create a new sweep to address for the wallet. The old sweep to address will become invalid. 
+        This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
-        :param create_sweep_to_address: The request body to generates a new sweep to addresses within a specified wallet.
+        :param create_sweep_to_address: The request body to generates a new sweep-to address within a specified wallet.
         :type create_sweep_to_address: CreateSweepToAddress
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -258,7 +258,7 @@ class AutoSweepApi:
     @validate_call
     def create_wallet_sweep_to_addresses_with_http_info(
         self,
-        create_sweep_to_address: Annotated[Optional[CreateSweepToAddress], Field(description="The request body to generates a new sweep to addresses within a specified wallet.")] = None,
+        create_sweep_to_address: Annotated[Optional[CreateSweepToAddress], Field(description="The request body to generates a new sweep-to address within a specified wallet.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -268,11 +268,11 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ApiResponse[SweepToAddress]:
-        """create wallet sweep to addresses
+        """create sweep-to address
 
-        This operation create a new sweep to address for the wallet. The old sweep to address will become invalid. 
+        This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
-        :param create_sweep_to_address: The request body to generates a new sweep to addresses within a specified wallet.
+        :param create_sweep_to_address: The request body to generates a new sweep-to address within a specified wallet.
         :type create_sweep_to_address: CreateSweepToAddress
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -304,7 +304,7 @@ class AutoSweepApi:
     @validate_call
     def create_wallet_sweep_to_addresses_without_preload_content(
         self,
-        create_sweep_to_address: Annotated[Optional[CreateSweepToAddress], Field(description="The request body to generates a new sweep to addresses within a specified wallet.")] = None,
+        create_sweep_to_address: Annotated[Optional[CreateSweepToAddress], Field(description="The request body to generates a new sweep-to address within a specified wallet.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -314,11 +314,11 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """create wallet sweep to addresses
+        """create sweep-to address
 
-        This operation create a new sweep to address for the wallet. The old sweep to address will become invalid. 
+        This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
-        :param create_sweep_to_address: The request body to generates a new sweep to addresses within a specified wallet.
+        :param create_sweep_to_address: The request body to generates a new sweep-to address within a specified wallet.
         :type create_sweep_to_address: CreateSweepToAddress
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -391,9 +391,9 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> AutoSweepTask:
-        """Get auto sweep task information
+        """Get auto-sweep task details
 
-        This operation retrieves detailed information about a specified auto sweep task. 
+        This operation retrieves detailed information about a specified auto-sweep task. 
 
         :param task_id: The auto sweep task ID. (required)
         :type task_id: str
@@ -437,9 +437,9 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ApiResponse[AutoSweepTask]:
-        """Get auto sweep task information
+        """Get auto-sweep task details
 
-        This operation retrieves detailed information about a specified auto sweep task. 
+        This operation retrieves detailed information about a specified auto-sweep task. 
 
         :param task_id: The auto sweep task ID. (required)
         :type task_id: str
@@ -483,9 +483,9 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get auto sweep task information
+        """Get auto-sweep task details
 
-        This operation retrieves detailed information about a specified auto sweep task. 
+        This operation retrieves detailed information about a specified auto-sweep task. 
 
         :param task_id: The auto sweep task ID. (required)
         :type task_id: str
@@ -552,7 +552,7 @@ class AutoSweepApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
-        task_ids: Annotated[Optional[StrictStr], Field(description="A list of auto sweep task IDs, separated by comma.")] = None,
+        task_ids: Annotated[Optional[StrictStr], Field(description="A list of auto-sweep task IDs, separated by comma.")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -568,15 +568,15 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ListAutoSweepTask200Response:
-        """List wallet auto sweep task
+        """List auto-sweep tasks
 
-        This operation retrieves a list of auto sweep task. 
+        This operation retrieves a list of auto-sweep tasks for the specified wallet. You can filter the results by token ID, task IDs, or a created-time range. 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
         :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_id: str
-        :param task_ids: A list of auto sweep task IDs, separated by comma.
+        :param task_ids: A list of auto-sweep task IDs, separated by comma.
         :type task_ids: str
         :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
@@ -630,7 +630,7 @@ class AutoSweepApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
-        task_ids: Annotated[Optional[StrictStr], Field(description="A list of auto sweep task IDs, separated by comma.")] = None,
+        task_ids: Annotated[Optional[StrictStr], Field(description="A list of auto-sweep task IDs, separated by comma.")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -646,15 +646,15 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ApiResponse[ListAutoSweepTask200Response]:
-        """List wallet auto sweep task
+        """List auto-sweep tasks
 
-        This operation retrieves a list of auto sweep task. 
+        This operation retrieves a list of auto-sweep tasks for the specified wallet. You can filter the results by token ID, task IDs, or a created-time range. 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
         :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_id: str
-        :param task_ids: A list of auto sweep task IDs, separated by comma.
+        :param task_ids: A list of auto-sweep task IDs, separated by comma.
         :type task_ids: str
         :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
@@ -708,7 +708,7 @@ class AutoSweepApi:
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
         token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
-        task_ids: Annotated[Optional[StrictStr], Field(description="A list of auto sweep task IDs, separated by comma.")] = None,
+        task_ids: Annotated[Optional[StrictStr], Field(description="A list of auto-sweep task IDs, separated by comma.")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -724,15 +724,15 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List wallet auto sweep task
+        """List auto-sweep tasks
 
-        This operation retrieves a list of auto sweep task. 
+        This operation retrieves a list of auto-sweep tasks for the specified wallet. You can filter the results by token ID, task IDs, or a created-time range. 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
         :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_id: str
-        :param task_ids: A list of auto sweep task IDs, separated by comma.
+        :param task_ids: A list of auto-sweep task IDs, separated by comma.
         :type task_ids: str
         :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
         :type min_created_timestamp: int
@@ -867,9 +867,9 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ListWalletSweepToAddresses200Response:
-        """List wallet sweep to addresses
+        """List sweep-to addresses
 
-        This operation retrieves a list of sweep to addresses within your wallet. 
+        This operation retrieves a list of sweep-to addresses within your wallet. <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -913,9 +913,9 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ApiResponse[ListWalletSweepToAddresses200Response]:
-        """List wallet sweep to addresses
+        """List sweep-to addresses
 
-        This operation retrieves a list of sweep to addresses within your wallet. 
+        This operation retrieves a list of sweep-to addresses within your wallet. <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -959,9 +959,9 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List wallet sweep to addresses
+        """List sweep-to addresses
 
-        This operation retrieves a list of sweep to addresses within your wallet. 
+        This operation retrieves a list of sweep-to addresses within your wallet. <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str

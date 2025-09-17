@@ -24,11 +24,11 @@ from typing_extensions import Self
 
 class ApprovalDetail(BaseModel):
     """
-    The approval detail data for transaction.
+    Details of the transaction approval.
     """  # noqa: E501
-    transaction_id: Optional[StrictStr] = Field(default=None, description="The transaction ID.")
-    cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
-    request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
+    transaction_id: Optional[StrictStr] = Field(default=None, description="Transaction ID.")
+    cobo_id: Optional[StrictStr] = Field(default=None, description="Cobo ID used to track a transaction.")
+    request_id: Optional[StrictStr] = Field(default=None, description="Request ID used to track a transaction request.")
     address_owner: Optional[RoleDetail] = None
     spender: Optional[RoleDetail] = None
     approver: Optional[RoleDetail] = None

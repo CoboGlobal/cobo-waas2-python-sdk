@@ -123,6 +123,7 @@ class TestWebhookEventData(unittest.TestCase):
                         chain_id = 'ETH', 
                         symbol = 'ETH', 
                         icon_url = 'https://d.cobo.com/public/logos/ETH.png', 
+                        chain_identifier = 'ETH', 
                         explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
@@ -253,7 +254,11 @@ class TestWebhookEventData(unittest.TestCase):
                 custom_payer_id = 'user_abc_10001',
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
-                updated_address = '0x789xyz...456'
+                updated_address = '0x789xyz...456',
+                disposition_type = 'Refund',
+                disposition_status = 'Submitted',
+                destination_address = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb7',
+                disposition_amount = '1.5'
             )
         else:
             return WebhookEventData(
@@ -274,6 +279,7 @@ class TestWebhookEventData(unittest.TestCase):
                         chain_id = 'ETH', 
                         symbol = 'ETH', 
                         icon_url = 'https://d.cobo.com/public/logos/ETH.png', 
+                        chain_identifier = 'ETH', 
                         explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
@@ -364,6 +370,8 @@ class TestWebhookEventData(unittest.TestCase):
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
                 updated_address = '0x789xyz...456',
+                disposition_type = 'Refund',
+                disposition_status = 'Submitted',
         )
         """
 

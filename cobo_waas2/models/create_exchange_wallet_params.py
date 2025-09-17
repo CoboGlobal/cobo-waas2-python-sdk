@@ -31,7 +31,7 @@ class CreateExchangeWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet. This parameter only applies to MPC and Web3 wallets.")
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto-sweep feature for the wallet. This parameter only applies to MPC Wallets and Web3 Wallets.")
     exchange_id: ExchangeId
     apikey: StrictStr = Field(description="The API key of your exchange account.")
     secret: StrictStr = Field(description="The API secret of your exchange account.")

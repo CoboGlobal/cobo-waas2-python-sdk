@@ -1,14 +1,14 @@
 # ApprovalTemplate
 
-The template for transaction approval details.
+Approval template details.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**business_key** | **str** | The business key that is used to identify the transaction. | [optional] 
-**template_text** | **str** | The template text that is used for the transaction approval. | [optional] 
-**template_version** | **str** | The version of the template used for the transaction approval. | [optional] 
+**business_key** | **str** | Business key used to identify the type of approval template. | [optional] 
+**template_text** | **str** | Text content defined in the approval template used to generate approval messages shown to users | [optional] 
+**template_version** | **str** | Version of the approval template. | [optional] 
 
 ## Example
 

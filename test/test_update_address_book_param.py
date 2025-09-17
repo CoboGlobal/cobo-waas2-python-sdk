@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.approval_show_info import ApprovalShowInfo
+from cobo_waas2.models.update_address_book_param import UpdateAddressBookParam
 
 
-class TestApprovalShowInfo(unittest.TestCase):
-    """ApprovalShowInfo unit test stubs"""
+class TestUpdateAddressBookParam(unittest.TestCase):
+    """UpdateAddressBookParam unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,29 +24,29 @@ class TestApprovalShowInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ApprovalShowInfo:
-        """Test ApprovalShowInfo
+    def make_instance(self, include_optional) -> UpdateAddressBookParam:
+        """Test UpdateAddressBookParam
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ApprovalShowInfo`
+        # uncomment below to create an instance of `UpdateAddressBookParam`
         """
-        model = ApprovalShowInfo()
+        model = UpdateAddressBookParam()
         if include_optional:
-            return ApprovalShowInfo(
-                org_name = 'Cobo',
-                wallet_name = 'Cobo Wallet',
-                environment = 'Prod',
-                from_address_label = 'Main Address',
-                to_address_label = 'Exchange Address'
+            return UpdateAddressBookParam(
+                chain_ids = ETH,
+                memo = '9d4773eb',
+                label = 'test',
+                email = 'help@cobo.com'
             )
         else:
-            return ApprovalShowInfo(
+            return UpdateAddressBookParam(
+                chain_ids = ETH,
         )
         """
 
-    def testApprovalShowInfo(self):
-        """Test ApprovalShowInfo"""
+    def testUpdateAddressBookParam(self):
+        """Test UpdateAddressBookParam"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -18,26 +18,31 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.approval_result import ApprovalResult
-from cobo_waas2.models.approval_show_info import ApprovalShowInfo
 from typing import Optional, Set
 from typing_extensions import Self
 
 
 class ApprovalUserDetail(BaseModel):
     """
-    The user detail for a transaction approval. This includes the user's email, public key, signature, statement UUID, result of the approval, creation time, template version, header title, whether it is for signing, and additional information to show. 
+    Details about a user involved in a transaction approval workflow. 
     """  # noqa: E501
-    user_email: Optional[StrictStr] = Field(default=None, description="The email address of the user who approved the transaction.")
-    pubkey: Optional[StrictStr] = Field(default=None, description="The public key of the user who approved the transaction.")
-    signature: Optional[StrictStr] = Field(default=None, description="The signature of the transaction approval.")
-    statement_uuid: Optional[StrictStr] = Field(default=None, description="The UUID of the statement associated with the transaction approval.")
+    name: Optional[StrictStr] = Field(default=None, description="Name of the user who approved the transaction.")
+    email: Optional[StrictStr] = Field(default=None, description="Email of the user.")
+    pubkey: Optional[StrictStr] = Field(default=None, description="Public key of the user.")
+    signature: Optional[StrictStr] = Field(default=None, description="Signature produced by the user for this approval.")
+    statement_uuid: Optional[StrictStr] = Field(default=None, description="UUID of the statement associated with this approval.")
     result: Optional[ApprovalResult] = None
-    created_time: Optional[StrictInt] = Field(default=None, description="The timestamp when the approval was created.")
-    template_version: Optional[StrictStr] = Field(default=None, description="The version of the template used for the transaction approval.")
-    header_title: Optional[StrictStr] = Field(default=None, description="The title of the header for the transaction approval.")
-    is_for_sign: Optional[StrictBool] = Field(default=None, description="Indicates whether the approval is for signing.")
-    show_info: Optional[ApprovalShowInfo] = None
-    __properties: ClassVar[List[str]] = ["user_email", "pubkey", "signature", "statement_uuid", "result", "created_time", "template_version", "header_title", "is_for_sign", "show_info"]
+    approval_result_code: Optional[StrictInt] = Field(default=None, description="Integer value representing the result of the approval.")
+    created_time: Optional[StrictInt] = Field(default=None, description="Timestamp when the approval was created.")
+    template_version: Optional[StrictStr] = Field(default=None, description="Version of the template used for the transaction approval.")
+    header_title: Optional[StrictStr] = Field(default=None, description="Display title used in the transaction approval.")
+    is_for_sign: Optional[StrictBool] = Field(default=None, description="Indicates whether this approval requires signing: - `true`: The user must sign the transaction. - `false`: The user only needs to approve or reject without signing. ")
+    show_info: Optional[StrictStr] = Field(default=None, description="Additional information to show for the transaction approval.")
+    language: Optional[StrictStr] = Field(default=None, description="Language used for the transaction approval.")
+    message_version: Optional[StrictStr] = Field(default=None, description="Version of the message format used for the transaction approval.")
+    message: Optional[StrictStr] = Field(default=None, description="Message associated with the transaction approval.")
+    extra_message: Optional[StrictStr] = Field(default=None, description="Any additional message or information related to the transaction approval.")
+    __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,9 +83,6 @@ class ApprovalUserDetail(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of show_info
-        if self.show_info:
-            _dict['show_info'] = self.show_info.to_dict()
         return _dict
 
     @classmethod
@@ -93,16 +95,22 @@ class ApprovalUserDetail(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "user_email": obj.get("user_email"),
+            "name": obj.get("name"),
+            "email": obj.get("email"),
             "pubkey": obj.get("pubkey"),
             "signature": obj.get("signature"),
             "statement_uuid": obj.get("statement_uuid"),
             "result": obj.get("result"),
+            "approval_result_code": obj.get("approval_result_code"),
             "created_time": obj.get("created_time"),
             "template_version": obj.get("template_version"),
             "header_title": obj.get("header_title"),
             "is_for_sign": obj.get("is_for_sign"),
-            "show_info": ApprovalShowInfo.from_dict(obj["show_info"]) if obj.get("show_info") is not None else None
+            "show_info": obj.get("show_info"),
+            "language": obj.get("language"),
+            "message_version": obj.get("message_version"),
+            "message": obj.get("message"),
+            "extra_message": obj.get("extra_message")
         })
         return _obj
 
