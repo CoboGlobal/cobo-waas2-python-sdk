@@ -62,7 +62,9 @@ class TestPaymentRefundEventData(unittest.TestCase):
                     ],
                 charge_merchant_fee = False,
                 merchant_fee_amount = '0.0001',
-                merchant_fee_token_id = 'ETH_USDT'
+                merchant_fee_token_id = 'ETH_USDT',
+                commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                    fee_amount = '', )
             )
         else:
             return PaymentRefundEventData(

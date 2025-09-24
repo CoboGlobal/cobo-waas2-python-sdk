@@ -15,6 +15,9 @@ Name | Type | Description | Notes
 **acquiring_type** | [**AcquiringType**](AcquiringType.md) |  | [optional] 
 **payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | [optional] 
 **settlement_type** | [**SettlementType**](SettlementType.md) |  | [optional] 
+**currency** | **str** | The fiat currency for the settlement request. | [optional] 
+**received_amount_fiat** | **str** | The received fiat amount of this settlement request.  | [optional] 
+**bank_account** | [**BankAccount**](BankAccount.md) |  | [optional] 
 
 ## Example
 

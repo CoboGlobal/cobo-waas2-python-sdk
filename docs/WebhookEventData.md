@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The payment address update event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The suspended token event data. | 
+**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The payment address update event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The suspended token event data. - &#x60;ComplianceDisposition&#x60;: The compliance disposition event data. - &#x60;ComplianceKytScreenings&#x60;: The compliance KYT screenings event data. | 
 **transaction_id** | **str** | The transaction ID. | 
 **cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
 **request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | 
@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 **extra** | **List[str]** | The transaction extra information. | [optional] 
 **fueling_info** | [**TransactionFuelingInfo**](TransactionFuelingInfo.md) |  | [optional] 
 **created_timestamp** | **int** | The time when the transaction was created, in Unix timestamp format, measured in milliseconds. | 
-**updated_timestamp** | **int** | The time when the transaction was updated, in Unix timestamp format, measured in milliseconds. | 
+**updated_timestamp** | **int** | The time when the kyt screening was updated, in Unix timestamp format, measured in milliseconds. | 
 **tss_request_id** | **str** | The TSS request ID. | [optional] 
 **source_key_share_holder_group** | [**SourceGroup**](SourceGroup.md) |  | [optional] 
 **target_key_share_holder_group_id** | **str** | The target key share holder group ID. | [optional] 
@@ -63,7 +63,7 @@ Name | Type | Description | Notes
 **merchant_id** | **str** | The merchant ID. | [optional] 
 **payable_amount** | **str** | The cryptocurrency amount to be paid for this order. | 
 **receive_address** | **str** | The recipient wallet address to be used for the payment transaction. | 
-**currency** | **str** | The fiat currency of the order. | 
+**currency** | **str** | The fiat currency for the settlement request. | 
 **order_amount** | **str** | The base amount of the order in fiat currency, excluding the developer fee (specified in &#x60;fee_amount&#x60;). | 
 **fee_amount** | **str** | The developer fee for the order in fiat currency. It is added to the base amount (&#x60;order_amount&#x60;) to determine the final charge. | 
 **exchange_rate** | **str** | The exchange rate between a currency pair. Expressed as the amount of fiat currency per one unit of cryptocurrency. For example, if the cryptocurrency is USDT and the fiat currency is USD, a rate of \&quot;0.99\&quot; means 1 USDT &#x3D; 0.99 USD. | 
@@ -80,16 +80,27 @@ Name | Type | Description | Notes
 **charge_merchant_fee** | **bool** | Whether to charge developer fee to the merchant.  - &#x60;true&#x60;: The fee amount (specified in &#x60;merchant_fee_amount&#x60;) will be deducted from the merchant&#39;s balance and added to the developer&#39;s balance - &#x60;false&#x60;: The merchant is not charged any developer fee.  | [optional] 
 **merchant_fee_amount** | **str** | The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by &#x60;merchant_fee_token_id&#x60;. | [optional] 
 **merchant_fee_token_id** | **str** | The ID of the cryptocurrency used for the developer fee. | [optional] 
+**commission_fee** | [**CommissionFee**](CommissionFee.md) |  | [optional] 
 **settlement_request_id** | **str** | The settlement request ID generated by Cobo. | 
 **settlements** | [**List[SettlementDetail]**](SettlementDetail.md) |  | 
 **acquiring_type** | [**AcquiringType**](AcquiringType.md) |  | 
 **payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | [optional] 
 **settlement_type** | [**SettlementType**](SettlementType.md) |  | [optional] 
+**received_amount_fiat** | **str** | The received fiat amount of this settlement request.  | [optional] 
+**bank_account** | [**BankAccount**](BankAccount.md) |  | [optional] 
 **payer_id** | **str** | Unique payer identifier on the Cobo side, auto-generated by the system.  | 
 **custom_payer_id** | **str** | Unique user identifier on the merchant side, used to assign a dedicated deposit address.  | 
+**subscription_id** | **str** | A unique identifier assigned by Cobo to track and identify subscription. | [optional] 
 **chain** | **str** | Blockchain network identifier, e.g., &#39;ETH&#39; for Ethereum, &#39;TRON&#39; for Tron.  | 
 **previous_address** | **str** | The previous deposit address that was assigned before update.  | 
 **updated_address** | **str** | The new updated deposit address assigned to the user.  | 
+**disposition_type** | [**DispositionType**](DispositionType.md) |  | 
+**disposition_status** | [**DispositionStatus**](DispositionStatus.md) |  | 
+**destination_address** | **str** | The blockchain address where the refund/isolated funds will be sent. | [optional] 
+**disposition_amount** | **str** | The amount to be refund/isolated from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction.  | [optional] 
+**transaction_type** | [**KytScreeningsTransactionType**](KytScreeningsTransactionType.md) |  | 
+**review_status** | [**ReviewStatusType**](ReviewStatusType.md) |  | 
+**funds_status** | [**FundsStatusType**](FundsStatusType.md) |  | 
 
 ## Example
 

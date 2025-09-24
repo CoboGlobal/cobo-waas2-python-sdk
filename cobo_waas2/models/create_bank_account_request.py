@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -25,8 +25,9 @@ class CreateBankAccountRequest(BaseModel):
     """
     CreateBankAccountRequest
     """  # noqa: E501
+    otc_bank_account_id: StrictStr
     info: Dict[str, Any] = Field(description="JSON-formatted bank account details. The object should include the following fields: - beneficiary_name: Name of the account holder - beneficiary_address: Address of the account holder - account_number: Bank account number - bank_name: Name of the bank - bank_address: Address of the bank - iban: (Optional) International Bank Account Number - swift_or_bic: SWIFT or BIC code of the bank ")
-    __properties: ClassVar[List[str]] = ["info"]
+    __properties: ClassVar[List[str]] = ["otc_bank_account_id", "info"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +80,7 @@ class CreateBankAccountRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "otc_bank_account_id": obj.get("otc_bank_account_id"),
             "info": obj.get("info")
         })
         return _obj

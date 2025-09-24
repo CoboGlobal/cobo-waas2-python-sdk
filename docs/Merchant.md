@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** | The merchant name. | 
 **wallet_id** | **str** | The ID of the linked wallet. | 
 **developer_fee_rate** | **str** | Developer fee rate for this token. For example, 0.01 represents a 1% fee.  | [optional] 
+**wallet_setup** | [**WalletSetup**](WalletSetup.md) |  | [optional] 
 **created_timestamp** | **int** | The created time of the merchant, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The updated time of the merchant, represented as a UNIX timestamp in seconds. | [optional] 
 

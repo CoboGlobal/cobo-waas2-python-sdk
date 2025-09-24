@@ -56,6 +56,10 @@ class TestTokenizationActivityInfo(unittest.TestCase):
                 source = None,
                 initiator = 'steve@example.com',
                 initiator_type = 'API',
+                transaction_ids = [
+                    '0011039d-27fb-49ba-b172-6e0aa80e37ec'
+                    ],
+                created_timestamp = 1678886400000,
                 updated_timestamp = 1678886400000,
         )
         """

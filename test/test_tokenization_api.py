@@ -185,11 +185,28 @@ class TestTokenizationApi(unittest.TestCase):
         api_response = self.api.list_tokenization_holdings(token_id, limit=limit, before=before, after=after)
         """
 
+    def test_list_tokenization_permissions(self) -> None:
+        """
+        Test case for list_tokenization_permissions
+
+        List permissions of the token
+        """
+        """
+        token_id = 'ETH_USDT'
+        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+        limit = 10
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        direction = 'ASC'
+
+        api_response = self.api.list_tokenization_permissions(token_id, address=address, limit=limit, after=after, before=before, direction=direction)
+        """
+
     def test_list_tokenization_supported_chains(self) -> None:
         """
         Test case for list_tokenization_supported_chains
 
-        List tokenization supported chains
+        List supported chains for tokenization
         """
         """
         limit = 10
@@ -216,7 +233,7 @@ class TestTokenizationApi(unittest.TestCase):
         """
         Test case for pause_tokenization
 
-        Pause tokenization
+        Pause token contract
         """
         """
         token_id = 'ETH_USDT'
@@ -229,7 +246,7 @@ class TestTokenizationApi(unittest.TestCase):
         """
         Test case for tokenization_contract_call
 
-        Contract call
+        Call token contract
         """
         """
         token_id = 'ETH_USDT'
@@ -242,7 +259,7 @@ class TestTokenizationApi(unittest.TestCase):
         """
         Test case for unpause_tokenization
 
-        Unpause tokenization
+        Unpause token contract
         """
         """
         token_id = 'ETH_USDT'
@@ -251,9 +268,22 @@ class TestTokenizationApi(unittest.TestCase):
         api_response = self.api.unpause_tokenization(token_id, tokenization_unpause_token_request=tokenization_unpause_token_request)
         """
 
-    def test_update_allowlist_addresses(self) -> None:
+    def test_update_tokenization_allowlist_activation(self) -> None:
         """
-        Test case for update_allowlist_addresses
+        Test case for update_tokenization_allowlist_activation
+
+        Activate or deactivate the allowlist
+        """
+        """
+        token_id = 'ETH_USDT'
+        tokenization_allowlist_activation_request = cobo_waas2.TokenizationAllowlistActivationRequest()
+
+        api_response = self.api.update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
+        """
+
+    def test_update_tokenization_allowlist_addresses(self) -> None:
+        """
+        Test case for update_tokenization_allowlist_addresses
 
         Update allowlist addresses
         """
@@ -261,20 +291,7 @@ class TestTokenizationApi(unittest.TestCase):
         token_id = 'ETH_USDT'
         tokenization_update_allowlist_addresses_request = cobo_waas2.TokenizationUpdateAllowlistAddressesRequest()
 
-        api_response = self.api.update_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
-        """
-
-    def test_update_tokenization_allowlist_activation(self) -> None:
-        """
-        Test case for update_tokenization_allowlist_activation
-
-        Update allowlist activation
-        """
-        """
-        token_id = 'ETH_USDT'
-        tokenization_allowlist_activation_request = cobo_waas2.TokenizationAllowlistActivationRequest()
-
-        api_response = self.api.update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
+        api_response = self.api.update_tokenization_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
         """
 
     def test_update_tokenization_blocklist_addresses(self) -> None:
@@ -288,6 +305,19 @@ class TestTokenizationApi(unittest.TestCase):
         tokenization_update_blocklist_addresses_request = cobo_waas2.TokenizationUpdateBlocklistAddressesRequest()
 
         api_response = self.api.update_tokenization_blocklist_addresses(token_id, tokenization_update_blocklist_addresses_request=tokenization_update_blocklist_addresses_request)
+        """
+
+    def test_update_tokenization_permissions(self) -> None:
+        """
+        Test case for update_tokenization_permissions
+
+        Update permissions of the token
+        """
+        """
+        token_id = 'ETH_USDT'
+        tokenization_update_permissions_request = cobo_waas2.TokenizationUpdatePermissionsRequest()
+
+        api_response = self.api.update_tokenization_permissions(token_id, tokenization_update_permissions_request)
         """
 
 

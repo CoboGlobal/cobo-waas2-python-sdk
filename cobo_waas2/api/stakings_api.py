@@ -20,6 +20,7 @@ from cobo_waas2.models.activity import Activity
 from cobo_waas2.models.activity_status import ActivityStatus
 from cobo_waas2.models.activity_type import ActivityType
 from cobo_waas2.models.babylon_airdrop_registration import BabylonAirdropRegistration
+from cobo_waas2.models.babylon_create_staking_expansion import BabylonCreateStakingExpansion
 from cobo_waas2.models.babylon_staking_registration import BabylonStakingRegistration
 from cobo_waas2.models.create_babylon_airdrop_registration201_response import CreateBabylonAirdropRegistration201Response
 from cobo_waas2.models.create_babylon_airdrop_registration_request import CreateBabylonAirdropRegistrationRequest
@@ -221,6 +222,175 @@ class StakingsApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/stakings/protocols/babylon/airdrops/registrations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_babylon_staking_expansion(
+        self,
+        babylon_create_staking_expansion: Annotated[Optional[BabylonCreateStakingExpansion], Field(description="The request body to expand Babylon BTC staking to phase 3")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> Stakings:
+        """Expand Babylon BTC staking
+
+        This operation initiates a Babylon BTC staking expansion request.   Before calling this operation, please ensure the following: - The BTC staking position is active. - The finality provider public keys are valid. And each BSN chain has a unique finality provider public key at most.  The system first checks whether the provided BTC staking position is active. If active, it creates a new BTC staking position for the phase 3 expansion.  The expansion is processed asynchronously and may take some time to complete.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param babylon_create_staking_expansion: The request body to expand Babylon BTC staking to phase 3
+        :type babylon_create_staking_expansion: BabylonCreateStakingExpansion
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_staking_expansion_serialize(
+            babylon_create_staking_expansion=babylon_create_staking_expansion,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Stakings",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_babylon_staking_expansion_with_http_info(
+        self,
+        babylon_create_staking_expansion: Annotated[Optional[BabylonCreateStakingExpansion], Field(description="The request body to expand Babylon BTC staking to phase 3")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[Stakings]:
+        """Expand Babylon BTC staking
+
+        This operation initiates a Babylon BTC staking expansion request.   Before calling this operation, please ensure the following: - The BTC staking position is active. - The finality provider public keys are valid. And each BSN chain has a unique finality provider public key at most.  The system first checks whether the provided BTC staking position is active. If active, it creates a new BTC staking position for the phase 3 expansion.  The expansion is processed asynchronously and may take some time to complete.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param babylon_create_staking_expansion: The request body to expand Babylon BTC staking to phase 3
+        :type babylon_create_staking_expansion: BabylonCreateStakingExpansion
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_staking_expansion_serialize(
+            babylon_create_staking_expansion=babylon_create_staking_expansion,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Stakings",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_babylon_staking_expansion_without_preload_content(
+        self,
+        babylon_create_staking_expansion: Annotated[Optional[BabylonCreateStakingExpansion], Field(description="The request body to expand Babylon BTC staking to phase 3")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Expand Babylon BTC staking
+
+        This operation initiates a Babylon BTC staking expansion request.   Before calling this operation, please ensure the following: - The BTC staking position is active. - The finality provider public keys are valid. And each BSN chain has a unique finality provider public key at most.  The system first checks whether the provided BTC staking position is active. If active, it creates a new BTC staking position for the phase 3 expansion.  The expansion is processed asynchronously and may take some time to complete.  For more information, refer to [Babylon's official doc](https://github.com/babylonlabs-io/babylon/tree/main/docs). 
+
+        :param babylon_create_staking_expansion: The request body to expand Babylon BTC staking to phase 3
+        :type babylon_create_staking_expansion: BabylonCreateStakingExpansion
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_babylon_staking_expansion_serialize(
+            babylon_create_staking_expansion=babylon_create_staking_expansion,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Stakings",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_babylon_staking_expansion_serialize(
+        self,
+        babylon_create_staking_expansion,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if babylon_create_staking_expansion is not None:
+            _body_params = babylon_create_staking_expansion
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/stakings/protocols/babylon/stakings/expansions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -41,7 +41,6 @@ class TestUpdateCustodialWalletParams(unittest.TestCase):
         else:
             return UpdateCustodialWalletParams(
                 wallet_type = 'Custodial',
-                name = 'My WaaS 2.0 Wallet',
         )
         """
 

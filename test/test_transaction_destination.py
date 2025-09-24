@@ -133,7 +133,8 @@ class TestTransactionDestination(unittest.TestCase):
                     vout_n = 0, ),
                 message_bip137 = '',
                 message_bip322 = '',
-                message_cosmos_adr36 = ''
+                message_cosmos_adr36 = '',
+                contract_param = None
             )
         else:
             return TransactionDestination(
@@ -155,6 +156,7 @@ class TestTransactionDestination(unittest.TestCase):
                 message_bip137 = '',
                 message_bip322 = '',
                 message_cosmos_adr36 = '',
+                contract_param = None,
         )
         """
 

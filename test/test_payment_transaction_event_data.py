@@ -103,7 +103,8 @@ class TestPaymentTransactionEventData(unittest.TestCase):
                 order_id = 'O20250304-M1001-1001',
                 psp_order_code = 'P20240201001',
                 payer_id = 'P20250619T0310056d7aa',
-                custom_payer_id = 'user_abc_10001'
+                custom_payer_id = 'user_abc_10001',
+                subscription_id = '123e457-e89b-12d3-a456-426614174004'
             )
         else:
             return PaymentTransactionEventData(

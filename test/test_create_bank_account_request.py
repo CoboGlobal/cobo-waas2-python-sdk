@@ -34,10 +34,12 @@ class TestCreateBankAccountRequest(unittest.TestCase):
         model = CreateBankAccountRequest()
         if include_optional:
             return CreateBankAccountRequest(
+                otc_bank_account_id = '',
                 info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}
             )
         else:
             return CreateBankAccountRequest(
+                otc_bank_account_id = '',
                 info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"},
         )
         """

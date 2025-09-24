@@ -16,19 +16,18 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class ApprovalResult(int, Enum):
+class ApprovalResult(str, Enum):
     """
-    The single approval result. Possible values include:    - `1`: The transaction is pending approval.   - `2`: The transaction is approved.   - `3`: The transaction is rejected. 
+    The single approval result. Possible values include:    - `Approved`: The transaction is approved.   - `Rejected`: The transaction is rejected. 
     """
 
     """
     allowed enum values
     """
-    PENDING = 1
-    APPROVED = 2
-    REJECTED = 3
+    APPROVED = 'Approved'
+    REJECTED = 'Rejected'
 
-    UNKNOWN = -1
+    UNKNOWN = None
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

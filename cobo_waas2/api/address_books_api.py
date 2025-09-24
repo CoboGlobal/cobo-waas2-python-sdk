@@ -16,7 +16,12 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from cobo_waas2.models.address_book import AddressBook
+from cobo_waas2.models.create_address_books201_response import CreateAddressBooks201Response
+from cobo_waas2.models.create_address_books_param import CreateAddressBooksParam
+from cobo_waas2.models.delete_address_book_by_id201_response import DeleteAddressBookById201Response
 from cobo_waas2.models.list_address_books200_response import ListAddressBooks200Response
+from cobo_waas2.models.update_address_book_param import UpdateAddressBookParam
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
 from cobo_waas2.api_response import ApiResponse
@@ -36,9 +41,516 @@ class AddressBooksApi:
         self.api_client = api_client
 
     @validate_call
+    def create_address_books(
+        self,
+        create_address_books_param: Annotated[Optional[CreateAddressBooksParam], Field(description="The request body of the create address books operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CreateAddressBooks201Response:
+        """Create address books
+
+        This operation add addresses to your address book. 
+
+        :param create_address_books_param: The request body of the create address books operation.
+        :type create_address_books_param: CreateAddressBooksParam
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_address_books_serialize(
+            create_address_books_param=create_address_books_param,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateAddressBooks201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_address_books_with_http_info(
+        self,
+        create_address_books_param: Annotated[Optional[CreateAddressBooksParam], Field(description="The request body of the create address books operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CreateAddressBooks201Response]:
+        """Create address books
+
+        This operation add addresses to your address book. 
+
+        :param create_address_books_param: The request body of the create address books operation.
+        :type create_address_books_param: CreateAddressBooksParam
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_address_books_serialize(
+            create_address_books_param=create_address_books_param,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateAddressBooks201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_address_books_without_preload_content(
+        self,
+        create_address_books_param: Annotated[Optional[CreateAddressBooksParam], Field(description="The request body of the create address books operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create address books
+
+        This operation add addresses to your address book. 
+
+        :param create_address_books_param: The request body of the create address books operation.
+        :type create_address_books_param: CreateAddressBooksParam
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_address_books_serialize(
+            create_address_books_param=create_address_books_param,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateAddressBooks201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_address_books_serialize(
+        self,
+        create_address_books_param,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_address_books_param is not None:
+            _body_params = create_address_books_param
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/address_books',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def delete_address_book_by_id(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DeleteAddressBookById201Response:
+        """Delete address book
+
+        This operation deletes a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_address_book_by_id_serialize(
+            entry_id=entry_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DeleteAddressBookById201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_address_book_by_id_with_http_info(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DeleteAddressBookById201Response]:
+        """Delete address book
+
+        This operation deletes a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_address_book_by_id_serialize(
+            entry_id=entry_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DeleteAddressBookById201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_address_book_by_id_without_preload_content(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Delete address book
+
+        This operation deletes a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_address_book_by_id_serialize(
+            entry_id=entry_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DeleteAddressBookById201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_address_book_by_id_serialize(
+        self,
+        entry_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if entry_id is not None:
+            _path_params['entry_id'] = entry_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/address_books/{entry_id}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_address_book_by_id(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> AddressBook:
+        """Get address book information
+
+        This operation retrieves the detailed information about a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_address_book_by_id_serialize(
+            entry_id=entry_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressBook",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_address_book_by_id_with_http_info(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[AddressBook]:
+        """Get address book information
+
+        This operation retrieves the detailed information about a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_address_book_by_id_serialize(
+            entry_id=entry_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressBook",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_address_book_by_id_without_preload_content(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get address book information
+
+        This operation retrieves the detailed information about a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_address_book_by_id_serialize(
+            entry_id=entry_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressBook",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_address_book_by_id_serialize(
+        self,
+        entry_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if entry_id is not None:
+            _path_params['entry_id'] = entry_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/address_books/{entry_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_address_books(
         self,
-        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")],
+        chain_id: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
         label: Annotated[Optional[StrictStr], Field(description="The address label.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -57,7 +569,7 @@ class AddressBooksApi:
 
         This operation retrieves a list of addresses from your address book. 
 
-        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). (required)
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_id: str
         :param address: The wallet address.
         :type address: str
@@ -104,7 +616,7 @@ class AddressBooksApi:
     @validate_call
     def list_address_books_with_http_info(
         self,
-        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")],
+        chain_id: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
         label: Annotated[Optional[StrictStr], Field(description="The address label.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -123,7 +635,7 @@ class AddressBooksApi:
 
         This operation retrieves a list of addresses from your address book. 
 
-        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). (required)
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_id: str
         :param address: The wallet address.
         :type address: str
@@ -170,7 +682,7 @@ class AddressBooksApi:
     @validate_call
     def list_address_books_without_preload_content(
         self,
-        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")],
+        chain_id: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
         label: Annotated[Optional[StrictStr], Field(description="The address label.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -189,7 +701,7 @@ class AddressBooksApi:
 
         This operation retrieves a list of addresses from your address book. 
 
-        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). (required)
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_id: str
         :param address: The wallet address.
         :type address: str
@@ -283,6 +795,190 @@ class AddressBooksApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/address_books',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def update_address_book_by_id(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        update_address_book_param: Annotated[Optional[UpdateAddressBookParam], Field(description="The request body of the update address book operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> AddressBook:
+        """Update address book
+
+        This operation updates the information of a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param update_address_book_param: The request body of the update address book operation.
+        :type update_address_book_param: UpdateAddressBookParam
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_address_book_by_id_serialize(
+            entry_id=entry_id,
+            update_address_book_param=update_address_book_param,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressBook",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def update_address_book_by_id_with_http_info(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        update_address_book_param: Annotated[Optional[UpdateAddressBookParam], Field(description="The request body of the update address book operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[AddressBook]:
+        """Update address book
+
+        This operation updates the information of a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param update_address_book_param: The request body of the update address book operation.
+        :type update_address_book_param: UpdateAddressBookParam
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_address_book_by_id_serialize(
+            entry_id=entry_id,
+            update_address_book_param=update_address_book_param,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressBook",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def update_address_book_by_id_without_preload_content(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="The address book ID.")],
+        update_address_book_param: Annotated[Optional[UpdateAddressBookParam], Field(description="The request body of the update address book operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Update address book
+
+        This operation updates the information of a specified address book. 
+
+        :param entry_id: The address book ID. (required)
+        :type entry_id: str
+        :param update_address_book_param: The request body of the update address book operation.
+        :type update_address_book_param: UpdateAddressBookParam
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_address_book_by_id_serialize(
+            entry_id=entry_id,
+            update_address_book_param=update_address_book_param,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressBook",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _update_address_book_by_id_serialize(
+        self,
+        entry_id,
+        update_address_book_param,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if entry_id is not None:
+            _path_params['entry_id'] = entry_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_address_book_param is not None:
+            _body_params = update_address_book_param
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/address_books/{entry_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

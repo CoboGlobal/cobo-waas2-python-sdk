@@ -29,6 +29,42 @@ class TestAddressBooksApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_address_books(self) -> None:
+        """
+        Test case for create_address_books
+
+        Create address books
+        """
+        """
+        create_address_books_param = cobo_waas2.CreateAddressBooksParam()
+
+        api_response = self.api.create_address_books(create_address_books_param=create_address_books_param)
+        """
+
+    def test_delete_address_book_by_id(self) -> None:
+        """
+        Test case for delete_address_book_by_id
+
+        Delete address book
+        """
+        """
+        entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.delete_address_book_by_id(entry_id)
+        """
+
+    def test_get_address_book_by_id(self) -> None:
+        """
+        Test case for get_address_book_by_id
+
+        Get address book information
+        """
+        """
+        entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.get_address_book_by_id(entry_id)
+        """
+
     def test_list_address_books(self) -> None:
         """
         Test case for list_address_books
@@ -43,7 +79,20 @@ class TestAddressBooksApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
-        api_response = self.api.list_address_books(chain_id, address=address, label=label, limit=limit, before=before, after=after)
+        api_response = self.api.list_address_books(chain_id=chain_id, address=address, label=label, limit=limit, before=before, after=after)
+        """
+
+    def test_update_address_book_by_id(self) -> None:
+        """
+        Test case for update_address_book_by_id
+
+        Update address book
+        """
+        """
+        entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        update_address_book_param = cobo_waas2.UpdateAddressBookParam()
+
+        api_response = self.api.update_address_book_by_id(entry_id, update_address_book_param=update_address_book_param)
         """
 
 

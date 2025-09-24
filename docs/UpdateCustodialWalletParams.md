@@ -7,7 +7,7 @@ The information of Custodial Wallets.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wallet_type** | [**WalletType**](WalletType.md) |  | 
-**name** | **str** | The wallet name. | 
+**name** | **str** | The wallet name. | [optional] 
 **enable_auto_sweep** | **bool** | Enable the auto sweep feature for the wallet | [optional] 
 
 ## Example

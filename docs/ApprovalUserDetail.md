@@ -6,16 +6,22 @@ The user detail for a transaction approval. This includes the user's email, publ
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_email** | **str** | The email address of the user who approved the transaction. | [optional] 
+**name** | **str** | The name of the user who approved the transaction. | [optional] 
+**email** | **str** | The email address of the user who approved the transaction. | [optional] 
 **pubkey** | **str** | The public key of the user who approved the transaction. | [optional] 
 **signature** | **str** | The signature of the transaction approval. | [optional] 
 **statement_uuid** | **str** | The UUID of the statement associated with the transaction approval. | [optional] 
 **result** | [**ApprovalResult**](ApprovalResult.md) |  | [optional] 
+**approval_result_code** | **int** | The integer value representing the result of the approval. | [optional] 
 **created_time** | **int** | The timestamp when the approval was created. | [optional] 
 **template_version** | **str** | The version of the template used for the transaction approval. | [optional] 
 **header_title** | **str** | The title of the header for the transaction approval. | [optional] 
 **is_for_sign** | **bool** | Indicates whether the approval is for signing. | [optional] 
-**show_info** | [**ApprovalShowInfo**](ApprovalShowInfo.md) |  | [optional] 
+**show_info** | **str** | Additional information to show for the transaction approval. | [optional] 
+**language** | **str** | The language used for the transaction approval. | [optional] 
+**message_version** | **str** | The version of the message format used for the transaction approval. | [optional] 
+**message** | **str** | The message associated with the transaction approval. | [optional] 
+**extra_message** | **str** | Any additional message or information related to the transaction approval. | [optional] 
 
 ## Example
 

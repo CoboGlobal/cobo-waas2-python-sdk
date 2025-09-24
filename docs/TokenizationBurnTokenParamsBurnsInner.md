@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **str** | The amount of tokens to burn from this source. | 
-**from_address** | **str** | The address to burn tokens from for this source. | 
+**amount** | **str** | The amount of tokens to burn. | 
+**from_address** | **str** | The address to burn tokens from. | 
 
 ## Example
 

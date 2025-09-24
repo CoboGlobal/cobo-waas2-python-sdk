@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **source** | [**TokenizationTokenOperationSource**](TokenizationTokenOperationSource.md) |  | 
 **initiator** | **str** | The initiator of the activity. | 
 **initiator_type** | [**TransactionInitiatorType**](TransactionInitiatorType.md) |  | 
-**transaction_ids** | **List[str]** | The IDs of the corresponding transactions of the activity. | [optional] 
-**created_timestamp** | **int** | The creation timestamp of the activity in milliseconds since the Unix epoch. | [optional] 
+**transaction_ids** | **List[str]** | The IDs of the corresponding transactions of the activity. | 
+**created_timestamp** | **int** | The creation timestamp of the activity in milliseconds since the Unix epoch. | 
 **updated_timestamp** | **int** | The last update timestamp of the activity in milliseconds since the Unix epoch. | 
 
 ## Example

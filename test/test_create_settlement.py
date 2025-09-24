@@ -46,6 +46,7 @@ class TestCreateSettlement(unittest.TestCase):
             )
         else:
             return CreateSettlement(
+                token_id = 'ETH_USDT',
         )
         """
 

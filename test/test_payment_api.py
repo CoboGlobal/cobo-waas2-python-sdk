@@ -125,6 +125,30 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_settlement_request(create_settlement_request_request=create_settlement_request_request)
         """
 
+    def test_create_subscription_action(self) -> None:
+        """
+        Test case for create_subscription_action
+
+        Create a subscription action
+        """
+        """
+        payment_create_subscription_action = cobo_waas2.PaymentCreateSubscriptionAction()
+
+        api_response = self.api.create_subscription_action(payment_create_subscription_action=payment_create_subscription_action)
+        """
+
+    def test_create_subscription_plan(self) -> None:
+        """
+        Test case for create_subscription_plan
+
+        Create subscription plan
+        """
+        """
+        payment_create_subscription_plan = cobo_waas2.PaymentCreateSubscriptionPlan()
+
+        api_response = self.api.create_subscription_plan(payment_create_subscription_plan=payment_create_subscription_plan)
+        """
+
     def test_delete_crypto_address(self) -> None:
         """
         Test case for delete_crypto_address
@@ -148,6 +172,20 @@ class TestPaymentApi(unittest.TestCase):
         currency = 'USD'
 
         api_response = self.api.get_exchange_rate(token_id, currency)
+        """
+
+    def test_get_payer_balance_by_address(self) -> None:
+        """
+        Test case for get_payer_balance_by_address
+
+        Get payer balance by address
+        """
+        """
+        payer_id = 'P20250619T0310056d7aa'
+        token_id = 'ETH_USDT'
+        merchant_id = 'M1001'
+
+        api_response = self.api.get_payer_balance_by_address(payer_id, token_id, merchant_id=merchant_id)
         """
 
     def test_get_payment_order_detail_by_id(self) -> None:
@@ -229,6 +267,31 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_settlement_info_by_ids(merchant_ids=merchant_ids, currency=currency, acquiring_type=acquiring_type)
         """
 
+    def test_get_subscription_by_id(self) -> None:
+        """
+        Test case for get_subscription_by_id
+
+        Get subscription by id
+        """
+        """
+        subscription_id = '123e457-e89b-12d3-a456-426614174004'
+
+        api_response = self.api.get_subscription_by_id(subscription_id)
+        """
+
+    def test_get_subscription_plan_by_id(self) -> None:
+        """
+        Test case for get_subscription_plan_by_id
+
+        Get subscription plan by id
+        """
+        """
+        subscription_id = '123e457-e89b-12d3-a456-426614174004'
+        token_id = 'ETH_USDT'
+
+        api_response = self.api.get_subscription_plan_by_id(subscription_id, token_id)
+        """
+
     def test_get_top_up_address(self) -> None:
         """
         Test case for get_top_up_address
@@ -236,11 +299,11 @@ class TestPaymentApi(unittest.TestCase):
         Get top-up address
         """
         """
-        merchant_id = 'M1001'
         token_id = 'ETH_USDT'
         custom_payer_id = 'payer_0001'
+        merchant_id = 'M1001'
 
-        api_response = self.api.get_top_up_address(merchant_id, token_id, custom_payer_id)
+        api_response = self.api.get_top_up_address(token_id, custom_payer_id, merchant_id=merchant_id)
         """
 
     def test_list_bank_accounts(self) -> None:
@@ -306,9 +369,9 @@ class TestPaymentApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         keyword = 'keyword'
-        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        wallet_setup = cobo_waas2.WalletSetup()
 
-        api_response = self.api.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_id=wallet_id)
+        api_response = self.api.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_setup=wallet_setup)
         """
 
     def test_list_payment_orders(self) -> None:
@@ -383,6 +446,57 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_settlement_requests(limit=limit, before=before, after=after, request_id=request_id)
         """
 
+    def test_list_subscription_actions(self) -> None:
+        """
+        Test case for list_subscription_actions
+
+        List subscription actions
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        plan_id = '123e457-e89b-12d3-a456-426614174004'
+        merchant_id = 'M1001'
+        subscription_id = '123e457-e89b-12d3-a456-426614174004'
+        request_id = 'random_request_id'
+        action_type = cobo_waas2.PaymentSubscriptionActionType()
+
+        api_response = self.api.list_subscription_actions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, subscription_id=subscription_id, request_id=request_id, action_type=action_type)
+        """
+
+    def test_list_subscription_plans(self) -> None:
+        """
+        Test case for list_subscription_plans
+
+        List subscription plans
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        developer_plan_id = '123e457-e89b-12d3-a456-426614174004'
+
+        api_response = self.api.list_subscription_plans(limit=limit, before=before, after=after, developer_plan_id=developer_plan_id)
+        """
+
+    def test_list_subscriptions(self) -> None:
+        """
+        Test case for list_subscriptions
+
+        List subscriptions
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        plan_id = '123e457-e89b-12d3-a456-426614174004'
+        merchant_id = 'M1001'
+        subscription_action_id = '123e457-e89b-12d3-a456-426614174004'
+
+        api_response = self.api.list_subscriptions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, subscription_action_id=subscription_action_id)
+        """
+
     def test_list_top_up_payer_accounts(self) -> None:
         """
         Test case for list_top_up_payer_accounts
@@ -406,13 +520,25 @@ class TestPaymentApi(unittest.TestCase):
         List top-up payers
         """
         """
-        merchant_id = 'M1001'
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        merchant_id = 'M1001'
         payer_id = 'P20250619T0310056d7aa'
 
-        api_response = self.api.list_top_up_payers(merchant_id, limit=limit, before=before, after=after, payer_id=payer_id)
+        api_response = self.api.list_top_up_payers(limit=limit, before=before, after=after, merchant_id=merchant_id, payer_id=payer_id)
+        """
+
+    def test_payment_estimate_fee(self) -> None:
+        """
+        Test case for payment_estimate_fee
+
+        Payment estimate fee
+        """
+        """
+        payment_estimate_fee_request = cobo_waas2.PaymentEstimateFeeRequest()
+
+        api_response = self.api.payment_estimate_fee(payment_estimate_fee_request=payment_estimate_fee_request)
         """
 
     def test_update_bank_account_by_id(self) -> None:
@@ -423,9 +549,9 @@ class TestPaymentApi(unittest.TestCase):
         """
         """
         bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-        create_bank_account_request = cobo_waas2.CreateBankAccountRequest()
+        update_bank_account_by_id_request = cobo_waas2.UpdateBankAccountByIdRequest()
 
-        api_response = self.api.update_bank_account_by_id(bank_account_id, create_bank_account_request=create_bank_account_request)
+        api_response = self.api.update_bank_account_by_id(bank_account_id, update_bank_account_by_id_request=update_bank_account_by_id_request)
         """
 
     def test_update_merchant_by_id(self) -> None:

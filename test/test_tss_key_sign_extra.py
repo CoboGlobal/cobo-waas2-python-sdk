@@ -36,6 +36,7 @@ class TestTSSKeySignExtra(unittest.TestCase):
             return TSSKeySignExtra(
                 org = cobo_waas2.models.org_info.OrgInfo(
                     org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
+                    biz_org_id = 1, 
                     name = 'Org name', 
                     created_timestamp = 1718619403933, ),
                 project = cobo_waas2.models.mpc_project.MPCProject(
@@ -90,7 +91,10 @@ class TestTSSKeySignExtra(unittest.TestCase):
                         x_only_pubkey = '0x165ed2f04462ec0d3d44dc8690fa9000903b5a96f14ad7f233c21ff748a17b54', 
                         root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq', 
                         taproot_script_tree_hash = '0x138fdd0f6c3803d45553e730c25924baf7be741b8a72a4e6fdbd9d44cb19f85b', 
-                        taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC', )
+                        taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC', 
+                        stellar_trusted_token_ids = [
+                            'XLM_USDC'
+                            ], )
                     ],
                 transaction = cobo_waas2.models.transaction.Transaction(
                     transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
