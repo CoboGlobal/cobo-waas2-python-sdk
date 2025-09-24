@@ -15,14 +15,16 @@ Method | HTTP request | Description
 [**list_tokenization_allowlist_addresses**](TokenizationApi.md#list_tokenization_allowlist_addresses) | **GET** /tokenization/tokens/{token_id}/allowlist/addresses | List allowlist addresses
 [**list_tokenization_blocklist_addresses**](TokenizationApi.md#list_tokenization_blocklist_addresses) | **GET** /tokenization/tokens/{token_id}/blocklist/addresses | List tokenization blocklist addresses
 [**list_tokenization_holdings**](TokenizationApi.md#list_tokenization_holdings) | **GET** /tokenization/tokens/{token_id}/holdings | Get token holdings information
-[**list_tokenization_supported_chains**](TokenizationApi.md#list_tokenization_supported_chains) | **GET** /tokenization/enabled_chains | List tokenization supported chains
+[**list_tokenization_permissions**](TokenizationApi.md#list_tokenization_permissions) | **GET** /tokenization/tokens/{token_id}/permissions | List permissions of the token
+[**list_tokenization_supported_chains**](TokenizationApi.md#list_tokenization_supported_chains) | **GET** /tokenization/enabled_chains | List supported chains for tokenization
 [**mint_tokenization**](TokenizationApi.md#mint_tokenization) | **POST** /tokenization/tokens/{token_id}/mint | Mint tokens
-[**pause_tokenization**](TokenizationApi.md#pause_tokenization) | **POST** /tokenization/tokens/{token_id}/pause | Pause tokenization
-[**tokenization_contract_call**](TokenizationApi.md#tokenization_contract_call) | **POST** /tokenization/tokens/{token_id}/contract_call | Contract call
-[**unpause_tokenization**](TokenizationApi.md#unpause_tokenization) | **POST** /tokenization/tokens/{token_id}/unpause | Unpause tokenization
-[**update_allowlist_addresses**](TokenizationApi.md#update_allowlist_addresses) | **POST** /tokenization/tokens/{token_id}/allowlist/addresses | Update allowlist addresses
-[**update_tokenization_allowlist_activation**](TokenizationApi.md#update_tokenization_allowlist_activation) | **POST** /tokenization/tokens/{token_id}/allowlist/activation | Update allowlist activation
+[**pause_tokenization**](TokenizationApi.md#pause_tokenization) | **POST** /tokenization/tokens/{token_id}/pause | Pause token contract
+[**tokenization_contract_call**](TokenizationApi.md#tokenization_contract_call) | **POST** /tokenization/tokens/{token_id}/contract_call | Call token contract
+[**unpause_tokenization**](TokenizationApi.md#unpause_tokenization) | **POST** /tokenization/tokens/{token_id}/unpause | Unpause token contract
+[**update_tokenization_allowlist_activation**](TokenizationApi.md#update_tokenization_allowlist_activation) | **POST** /tokenization/tokens/{token_id}/allowlist/activation | Activate or deactivate the allowlist
+[**update_tokenization_allowlist_addresses**](TokenizationApi.md#update_tokenization_allowlist_addresses) | **POST** /tokenization/tokens/{token_id}/allowlist/addresses | Update allowlist addresses
 [**update_tokenization_blocklist_addresses**](TokenizationApi.md#update_tokenization_blocklist_addresses) | **POST** /tokenization/tokens/{token_id}/blocklist/addresses | Update tokenization blocklist addresses
+[**update_tokenization_permissions**](TokenizationApi.md#update_tokenization_permissions) | **POST** /tokenization/tokens/{token_id}/permissions | Update permissions of the token
 
 
 # **burn_tokenization**
@@ -75,7 +77,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_burn_token_request** | [**TokenizationBurnTokenRequest**](TokenizationBurnTokenRequest.md)| Request body for burning tokens | [optional] 
+ **tokenization_burn_token_request** | [**TokenizationBurnTokenRequest**](TokenizationBurnTokenRequest.md)| The request body for burning tokens. | [optional] 
 
 ### Return type
 
@@ -239,7 +241,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Activity details retrieved successfully |  -  |
+**200** | Successfully retrieved Activity details. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -311,7 +313,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful response with the allowlist activation status. |  -  |
+**200** | Successfully retrieved the allowlist activation status. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -383,7 +385,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved token information |  -  |
+**200** | Successfully retrieved token information. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -519,8 +521,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chain_id** | **str**| The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | [optional] 
  **token_id** | **str**| The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | [optional] 
- **token_standard** | [**TokenizationTokenStandard**](.md)| Filter by token standard | [optional] 
- **status** | [**TokenizationStatus**](.md)| Filter by token status | [optional] 
+ **token_standard** | [**TokenizationTokenStandard**](.md)| Filter by token standard. | [optional] 
+ **status** | [**TokenizationStatus**](.md)| Filter by token status. | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
  **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
@@ -628,7 +630,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of tokenization activities retrieved successfully |  -  |
+**200** | Successfully retrieved the list of tokenization activities. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -708,7 +710,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful response with the list of allowlist addresses. |  -  |
+**200** | Successfully retrieved the list of allowlist addresses. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -788,7 +790,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful response with the list of blocklist addresses. |  -  |
+**200** | Successfully retrieved the list of blocklist addresses. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -866,7 +868,89 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved token holdings information |  -  |
+**200** | Successfully retrieved token holdings information. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_tokenization_permissions**
+> TokenizationListPermissionsResponse list_tokenization_permissions(token_id, address=address, limit=limit, after=after, before=before, direction=direction)
+
+List permissions of the token
+
+This operation retrieves the permissions for a tokenization contract. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.tokenization_list_permissions_response import TokenizationListPermissionsResponse
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_id = 'ETH_USDT'
+    address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+    limit = 10
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    direction = 'ASC'
+
+    try:
+        # List permissions of the token
+        api_response = api_instance.list_tokenization_permissions(token_id, address=address, limit=limit, after=after, before=before, direction=direction)
+        print("The response of TokenizationApi->list_tokenization_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TokenizationApi->list_tokenization_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **address** | **str**| The address to query permissions for. If not provided, returns all addresses with permissions. | [optional] 
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **direction** | **str**| The sort direction. Possible values include:   - &#x60;ASC&#x60;: Sort the results in ascending order.   - &#x60;DESC&#x60;: Sort the results in descending order.  | [optional] [default to &#39;ASC&#39;]
+
+### Return type
+
+[**TokenizationListPermissionsResponse**](TokenizationListPermissionsResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully retrieved permissions |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -875,7 +959,7 @@ Name | Type | Description  | Notes
 # **list_tokenization_supported_chains**
 > TokenizationListEnabledChainsResponse list_tokenization_supported_chains(limit=limit, after=after, before=before)
 
-List tokenization supported chains
+List supported chains for tokenization
 
 This operation retrieves a list of tokenization supported chains. 
 
@@ -906,7 +990,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
 
     try:
-        # List tokenization supported chains
+        # List supported chains for tokenization
         api_response = api_instance.list_tokenization_supported_chains(limit=limit, after=after, before=before)
         print("The response of TokenizationApi->list_tokenization_supported_chains:\n")
         pprint(api_response)
@@ -942,7 +1026,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of tokenization supported chains retrieved successfully |  -  |
+**200** | Successfully retrieved the list of tokenization supported chains. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -998,7 +1082,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_mint_token_request** | [**TokenizationMintTokenRequest**](TokenizationMintTokenRequest.md)| The request body for minting tokens | 
+ **tokenization_mint_token_request** | [**TokenizationMintTokenRequest**](TokenizationMintTokenRequest.md)| The request body for minting tokens. | 
 
 ### Return type
 
@@ -1026,9 +1110,9 @@ Name | Type | Description  | Notes
 # **pause_tokenization**
 > TokenizationOperationResponse pause_tokenization(token_id, tokenization_pause_token_request=tokenization_pause_token_request)
 
-Pause tokenization
+Pause token contract
 
-This operation pauses the token contract. Creates a pause transaction that will stop the token contract. 
+This operation pauses the token contract, temporarily halting token operations and transfers. 
 
 ### Example
 
@@ -1057,7 +1141,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tokenization_pause_token_request = cobo_waas2.TokenizationPauseTokenRequest()
 
     try:
-        # Pause tokenization
+        # Pause token contract
         api_response = api_instance.pause_tokenization(token_id, tokenization_pause_token_request=tokenization_pause_token_request)
         print("The response of TokenizationApi->pause_tokenization:\n")
         pprint(api_response)
@@ -1073,7 +1157,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_pause_token_request** | [**TokenizationPauseTokenRequest**](TokenizationPauseTokenRequest.md)| Request body for pausing tokens | [optional] 
+ **tokenization_pause_token_request** | [**TokenizationPauseTokenRequest**](TokenizationPauseTokenRequest.md)| The request body for pausing tokens. | [optional] 
 
 ### Return type
 
@@ -1101,9 +1185,9 @@ Name | Type | Description  | Notes
 # **tokenization_contract_call**
 > TokenizationOperationResponse tokenization_contract_call(token_id, tokenization_contract_call_request=tokenization_contract_call_request)
 
-Contract call
+Call token contract
 
-This operation calls a smart contract. 
+This operation performs a contract call on the token contract. 
 
 ### Example
 
@@ -1132,7 +1216,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tokenization_contract_call_request = cobo_waas2.TokenizationContractCallRequest()
 
     try:
-        # Contract call
+        # Call token contract
         api_response = api_instance.tokenization_contract_call(token_id, tokenization_contract_call_request=tokenization_contract_call_request)
         print("The response of TokenizationApi->tokenization_contract_call:\n")
         pprint(api_response)
@@ -1148,7 +1232,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_contract_call_request** | [**TokenizationContractCallRequest**](TokenizationContractCallRequest.md)| Request body for contract call | [optional] 
+ **tokenization_contract_call_request** | [**TokenizationContractCallRequest**](TokenizationContractCallRequest.md)| The request body for contract call. | [optional] 
 
 ### Return type
 
@@ -1176,9 +1260,9 @@ Name | Type | Description  | Notes
 # **unpause_tokenization**
 > TokenizationOperationResponse unpause_tokenization(token_id, tokenization_unpause_token_request=tokenization_unpause_token_request)
 
-Unpause tokenization
+Unpause token contract
 
-This operation unpauses the token contract. Creates an unpause transaction that will resume the token contract. 
+This operation unpauses the token contract, resuming token operations and transfers. 
 
 ### Example
 
@@ -1207,7 +1291,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tokenization_unpause_token_request = cobo_waas2.TokenizationUnpauseTokenRequest()
 
     try:
-        # Unpause tokenization
+        # Unpause token contract
         api_response = api_instance.unpause_tokenization(token_id, tokenization_unpause_token_request=tokenization_unpause_token_request)
         print("The response of TokenizationApi->unpause_tokenization:\n")
         pprint(api_response)
@@ -1223,7 +1307,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_unpause_token_request** | [**TokenizationUnpauseTokenRequest**](TokenizationUnpauseTokenRequest.md)| Request body for unpausing tokens | [optional] 
+ **tokenization_unpause_token_request** | [**TokenizationUnpauseTokenRequest**](TokenizationUnpauseTokenRequest.md)| The request body for unpausing tokens. | [optional] 
 
 ### Return type
 
@@ -1248,8 +1332,83 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_allowlist_addresses**
-> TokenizationOperationResponse update_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
+# **update_tokenization_allowlist_activation**
+> TokenizationOperationResponse update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
+
+Activate or deactivate the allowlist
+
+This operation activates or deactivates the allowlist. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.tokenization_allowlist_activation_request import TokenizationAllowlistActivationRequest
+from cobo_waas2.models.tokenization_operation_response import TokenizationOperationResponse
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_id = 'ETH_USDT'
+    tokenization_allowlist_activation_request = cobo_waas2.TokenizationAllowlistActivationRequest()
+
+    try:
+        # Activate or deactivate the allowlist
+        api_response = api_instance.update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
+        print("The response of TokenizationApi->update_tokenization_allowlist_activation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TokenizationApi->update_tokenization_allowlist_activation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **tokenization_allowlist_activation_request** | [**TokenizationAllowlistActivationRequest**](TokenizationAllowlistActivationRequest.md)| The request body for activating or deactivating the allowlist. | [optional] 
+
+### Return type
+
+[**TokenizationOperationResponse**](TokenizationOperationResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Tokenization operation transaction created successfully |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_tokenization_allowlist_addresses**
+> TokenizationOperationResponse update_tokenization_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
 
 Update allowlist addresses
 
@@ -1283,11 +1442,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
     try:
         # Update allowlist addresses
-        api_response = api_instance.update_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
-        print("The response of TokenizationApi->update_allowlist_addresses:\n")
+        api_response = api_instance.update_tokenization_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
+        print("The response of TokenizationApi->update_tokenization_allowlist_addresses:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TokenizationApi->update_allowlist_addresses: %s\n" % e)
+        print("Exception when calling TokenizationApi->update_tokenization_allowlist_addresses: %s\n" % e)
 ```
 
 
@@ -1298,82 +1457,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_update_allowlist_addresses_request** | [**TokenizationUpdateAllowlistAddressesRequest**](TokenizationUpdateAllowlistAddressesRequest.md)| Request body for managing multiple allowlist addresses (adding or removing). | [optional] 
-
-### Return type
-
-[**TokenizationOperationResponse**](TokenizationOperationResponse.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Tokenization operation transaction created successfully |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_tokenization_allowlist_activation**
-> TokenizationOperationResponse update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
-
-Update allowlist activation
-
-This operation updates the allowlist activation setting of the token contract. 
-
-### Example
-
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.tokenization_allowlist_activation_request import TokenizationAllowlistActivationRequest
-from cobo_waas2.models.tokenization_operation_response import TokenizationOperationResponse
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.TokenizationApi(api_client)
-    token_id = 'ETH_USDT'
-    tokenization_allowlist_activation_request = cobo_waas2.TokenizationAllowlistActivationRequest()
-
-    try:
-        # Update allowlist activation
-        api_response = api_instance.update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
-        print("The response of TokenizationApi->update_tokenization_allowlist_activation:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TokenizationApi->update_tokenization_allowlist_activation: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_allowlist_activation_request** | [**TokenizationAllowlistActivationRequest**](TokenizationAllowlistActivationRequest.md)| Request body for updating the allowlist activation setting. | [optional] 
+ **tokenization_update_allowlist_addresses_request** | [**TokenizationUpdateAllowlistAddressesRequest**](TokenizationUpdateAllowlistAddressesRequest.md)| The request body for managing multiple allowlist addresses (adding or removing). | [optional] 
 
 ### Return type
 
@@ -1448,7 +1532,82 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_update_blocklist_addresses_request** | [**TokenizationUpdateBlocklistAddressesRequest**](TokenizationUpdateBlocklistAddressesRequest.md)| Request body for managing multiple blocklist addresses (adding or removing). | [optional] 
+ **tokenization_update_blocklist_addresses_request** | [**TokenizationUpdateBlocklistAddressesRequest**](TokenizationUpdateBlocklistAddressesRequest.md)| The request body for managing multiple blocklist addresses (adding or removing). | [optional] 
+
+### Return type
+
+[**TokenizationOperationResponse**](TokenizationOperationResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Tokenization operation transaction created successfully |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_tokenization_permissions**
+> TokenizationOperationResponse update_tokenization_permissions(token_id, tokenization_update_permissions_request)
+
+Update permissions of the token
+
+This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.tokenization_operation_response import TokenizationOperationResponse
+from cobo_waas2.models.tokenization_update_permissions_request import TokenizationUpdatePermissionsRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_id = 'ETH_USDT'
+    tokenization_update_permissions_request = cobo_waas2.TokenizationUpdatePermissionsRequest()
+
+    try:
+        # Update permissions of the token
+        api_response = api_instance.update_tokenization_permissions(token_id, tokenization_update_permissions_request)
+        print("The response of TokenizationApi->update_tokenization_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TokenizationApi->update_tokenization_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **tokenization_update_permissions_request** | [**TokenizationUpdatePermissionsRequest**](TokenizationUpdatePermissionsRequest.md)| The request body for managing permissions. | 
 
 ### Return type
 

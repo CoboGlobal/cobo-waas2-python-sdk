@@ -7,7 +7,10 @@ Transaction approval details response schema.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | [**ApprovalTransactionResult**](ApprovalTransactionResult.md) |  | [optional] 
-**threshold** | **int** | The threshold for the transaction approval. | [optional] 
+**review_threshold** | **int** | The threshold for the transaction approval. | [optional] 
+**initiator** | **str** | The initiator of the transaction. | [optional] 
+**is_upgraded** | **bool** | Indicates whether the transaction approval has been upgraded. | [optional] 
+**complete_time** | **str** | Time to complete the review. | [optional] 
 **user_details** | [**List[ApprovalUserDetail]**](ApprovalUserDetail.md) |  | [optional] 
 
 ## Example

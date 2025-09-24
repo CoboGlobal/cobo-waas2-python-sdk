@@ -38,9 +38,10 @@ class Stakings(BaseModel):
     rewards_info: Optional[Dict[str, Any]] = Field(default=None, description="The information about the staking rewards.")
     created_timestamp: StrictInt = Field(description="The time when the staking position was created.")
     updated_timestamp: StrictInt = Field(description="The time when the staking position was last updated.")
-    validator_info: BabylonValidator
+    validator_info: Optional[BabylonValidator] = None
+    validators: Optional[List[BabylonValidator]] = None
     extra: Optional[StakingsExtra] = None
-    __properties: ClassVar[List[str]] = ["id", "wallet_id", "address", "amounts", "pool_id", "token_id", "rewards_info", "created_timestamp", "updated_timestamp", "validator_info", "extra"]
+    __properties: ClassVar[List[str]] = ["id", "wallet_id", "address", "amounts", "pool_id", "token_id", "rewards_info", "created_timestamp", "updated_timestamp", "validator_info", "validators", "extra"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +92,13 @@ class Stakings(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of validator_info
         if self.validator_info:
             _dict['validator_info'] = self.validator_info.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in validators (list)
+        _items = []
+        if self.validators:
+            for _item in self.validators:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['validators'] = _items
         # override the default output from pydantic by calling `to_dict()` of extra
         if self.extra:
             _dict['extra'] = self.extra.to_dict()
@@ -116,6 +124,7 @@ class Stakings(BaseModel):
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "validator_info": BabylonValidator.from_dict(obj["validator_info"]) if obj.get("validator_info") is not None else None,
+            "validators": [BabylonValidator.from_dict(_item) for _item in obj["validators"]] if obj.get("validators") is not None else None,
             "extra": StakingsExtra.from_dict(obj["extra"]) if obj.get("extra") is not None else None
         })
         return _obj

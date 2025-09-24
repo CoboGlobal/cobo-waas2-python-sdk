@@ -28,12 +28,13 @@ class ChainInfo(BaseModel):
     chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain.")
     symbol: Optional[StrictStr] = Field(default=None, description="The chain symbol, which is the abbreviated name of a chain.")
     icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the chain icon.")
+    chain_identifier: Optional[StrictStr] = Field(default=None, description="The chain identifier, which is the identifier of a blockchain for similar function, such as ETH for ETH, BSC_BNB eth.")
     explorer_tx_url: Optional[StrictStr] = Field(default=None, description="The transaction URL pattern on the blockchain explorer. You can use it to concatenate the transaction URLs.")
     explorer_address_url: Optional[StrictStr] = Field(default=None, description="The address URL pattern on the blockchain explorer. You can use it to concatenate the address URLs.")
     require_memo: Optional[StrictBool] = Field(default=None, description="Whether the chain requires a memo.")
     confirming_threshold: Optional[StrictInt] = Field(default=None, description="The number of confirmations required for an on-chain transaction, such as 64 for Ethereum.")
     coinbase_maturity: Optional[StrictInt] = Field(default=None, description="The number of confirmations required for a coinbase transaction to be mature, such as 100 for BTC.")
-    __properties: ClassVar[List[str]] = ["chain_id", "symbol", "icon_url", "explorer_tx_url", "explorer_address_url", "require_memo", "confirming_threshold", "coinbase_maturity"]
+    __properties: ClassVar[List[str]] = ["chain_id", "symbol", "icon_url", "chain_identifier", "explorer_tx_url", "explorer_address_url", "require_memo", "confirming_threshold", "coinbase_maturity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +90,7 @@ class ChainInfo(BaseModel):
             "chain_id": obj.get("chain_id"),
             "symbol": obj.get("symbol"),
             "icon_url": obj.get("icon_url"),
+            "chain_identifier": obj.get("chain_identifier"),
             "explorer_tx_url": obj.get("explorer_tx_url"),
             "explorer_address_url": obj.get("explorer_address_url"),
             "require_memo": obj.get("require_memo"),

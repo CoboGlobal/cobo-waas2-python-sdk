@@ -24,11 +24,12 @@ from cobo_waas2.models.tokenization_toggle_allowlist_estimate_fee_params import 
 from cobo_waas2.models.tokenization_unpause_estimate_fee_params import TokenizationUnpauseEstimateFeeParams
 from cobo_waas2.models.tokenization_update_allowlist_addresses_estimate_fee_params import TokenizationUpdateAllowlistAddressesEstimateFeeParams
 from cobo_waas2.models.tokenization_update_blocklist_addresses_estimate_fee_params import TokenizationUpdateBlocklistAddressesEstimateFeeParams
+from cobo_waas2.models.tokenization_update_permissions_estimate_fee_params import TokenizationUpdatePermissionsEstimateFeeParams
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TOKENIZATIONESTIMATEFEEREQUESTOPERATIONPARAMS_ONE_OF_SCHEMAS = ["TokenizationBurnEstimateFeeParams", "TokenizationContractCallEstimateFeeParams", "TokenizationIssueEstimateFeeParams", "TokenizationMintEstimateFeeParams", "TokenizationPauseEstimateFeeParams", "TokenizationToggleAllowlistEstimateFeeParams", "TokenizationUnpauseEstimateFeeParams", "TokenizationUpdateAllowlistAddressesEstimateFeeParams", "TokenizationUpdateBlocklistAddressesEstimateFeeParams"]
+TOKENIZATIONESTIMATEFEEREQUESTOPERATIONPARAMS_ONE_OF_SCHEMAS = ["TokenizationBurnEstimateFeeParams", "TokenizationContractCallEstimateFeeParams", "TokenizationIssueEstimateFeeParams", "TokenizationMintEstimateFeeParams", "TokenizationPauseEstimateFeeParams", "TokenizationToggleAllowlistEstimateFeeParams", "TokenizationUnpauseEstimateFeeParams", "TokenizationUpdateAllowlistAddressesEstimateFeeParams", "TokenizationUpdateBlocklistAddressesEstimateFeeParams", "TokenizationUpdatePermissionsEstimateFeeParams"]
 
 class TokenizationEstimateFeeRequestOperationParams(BaseModel):
     """
@@ -52,8 +53,10 @@ class TokenizationEstimateFeeRequestOperationParams(BaseModel):
     oneof_schema_8_validator: Optional[TokenizationToggleAllowlistEstimateFeeParams] = None
     # data type: TokenizationContractCallEstimateFeeParams
     oneof_schema_9_validator: Optional[TokenizationContractCallEstimateFeeParams] = None
-    actual_instance: Optional[Union[TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams]] = None
-    one_of_schemas: Set[str] = { "TokenizationBurnEstimateFeeParams", "TokenizationContractCallEstimateFeeParams", "TokenizationIssueEstimateFeeParams", "TokenizationMintEstimateFeeParams", "TokenizationPauseEstimateFeeParams", "TokenizationToggleAllowlistEstimateFeeParams", "TokenizationUnpauseEstimateFeeParams", "TokenizationUpdateAllowlistAddressesEstimateFeeParams", "TokenizationUpdateBlocklistAddressesEstimateFeeParams" }
+    # data type: TokenizationUpdatePermissionsEstimateFeeParams
+    oneof_schema_10_validator: Optional[TokenizationUpdatePermissionsEstimateFeeParams] = None
+    actual_instance: Optional[Union[TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams, TokenizationUpdatePermissionsEstimateFeeParams]] = None
+    one_of_schemas: Set[str] = { "TokenizationBurnEstimateFeeParams", "TokenizationContractCallEstimateFeeParams", "TokenizationIssueEstimateFeeParams", "TokenizationMintEstimateFeeParams", "TokenizationPauseEstimateFeeParams", "TokenizationToggleAllowlistEstimateFeeParams", "TokenizationUnpauseEstimateFeeParams", "TokenizationUpdateAllowlistAddressesEstimateFeeParams", "TokenizationUpdateBlocklistAddressesEstimateFeeParams", "TokenizationUpdatePermissionsEstimateFeeParams" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -124,12 +127,17 @@ class TokenizationEstimateFeeRequestOperationParams(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TokenizationContractCallEstimateFeeParams`")
         else:
             match += 1
+        # validate data type: TokenizationUpdatePermissionsEstimateFeeParams
+        if not isinstance(v, TokenizationUpdatePermissionsEstimateFeeParams):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TokenizationUpdatePermissionsEstimateFeeParams`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams, TokenizationUpdatePermissionsEstimateFeeParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams, TokenizationUpdatePermissionsEstimateFeeParams. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -194,6 +202,11 @@ class TokenizationEstimateFeeRequestOperationParams(BaseModel):
             instance.actual_instance = TokenizationUpdateBlocklistAddressesEstimateFeeParams.from_json(json_str)
             return instance
 
+        # check if data type is `TokenizationUpdatePermissionsEstimateFeeParams`
+        if _data_type == "UpdatePermissions":
+            instance.actual_instance = TokenizationUpdatePermissionsEstimateFeeParams.from_json(json_str)
+            return instance
+
         # check if data type is `TokenizationBurnEstimateFeeParams`
         if _data_type == "TokenizationBurnEstimateFeeParams":
             instance.actual_instance = TokenizationBurnEstimateFeeParams.from_json(json_str)
@@ -237,6 +250,11 @@ class TokenizationEstimateFeeRequestOperationParams(BaseModel):
         # check if data type is `TokenizationUpdateBlocklistAddressesEstimateFeeParams`
         if _data_type == "TokenizationUpdateBlocklistAddressesEstimateFeeParams":
             instance.actual_instance = TokenizationUpdateBlocklistAddressesEstimateFeeParams.from_json(json_str)
+            return instance
+
+        # check if data type is `TokenizationUpdatePermissionsEstimateFeeParams`
+        if _data_type == "TokenizationUpdatePermissionsEstimateFeeParams":
+            instance.actual_instance = TokenizationUpdatePermissionsEstimateFeeParams.from_json(json_str)
             return instance
 
         return instance
@@ -294,14 +312,20 @@ class TokenizationEstimateFeeRequestOperationParams(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TokenizationUpdatePermissionsEstimateFeeParams
+        try:
+            instance.actual_instance = TokenizationUpdatePermissionsEstimateFeeParams.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams, TokenizationUpdatePermissionsEstimateFeeParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TokenizationEstimateFeeRequestOperationParams with oneOf schemas: TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams, TokenizationUpdatePermissionsEstimateFeeParams. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -315,7 +339,7 @@ class TokenizationEstimateFeeRequestOperationParams(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TokenizationBurnEstimateFeeParams, TokenizationContractCallEstimateFeeParams, TokenizationIssueEstimateFeeParams, TokenizationMintEstimateFeeParams, TokenizationPauseEstimateFeeParams, TokenizationToggleAllowlistEstimateFeeParams, TokenizationUnpauseEstimateFeeParams, TokenizationUpdateAllowlistAddressesEstimateFeeParams, TokenizationUpdateBlocklistAddressesEstimateFeeParams, TokenizationUpdatePermissionsEstimateFeeParams]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

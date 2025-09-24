@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.acquiring_type import AcquiringType
+from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.payout_channel import PayoutChannel
 from cobo_waas2.models.settle_request_status import SettleRequestStatus
 from cobo_waas2.models.settlement_detail import SettlementDetail
@@ -40,7 +41,10 @@ class Settlement(BaseModel):
     acquiring_type: Optional[AcquiringType] = None
     payout_channel: Optional[PayoutChannel] = None
     settlement_type: Optional[SettlementType] = None
-    __properties: ClassVar[List[str]] = ["settlement_request_id", "request_id", "status", "settlements", "created_timestamp", "updated_timestamp", "initiator", "acquiring_type", "payout_channel", "settlement_type"]
+    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the settlement request.")
+    received_amount_fiat: Optional[StrictStr] = Field(default=None, description="The received fiat amount of this settlement request. ")
+    bank_account: Optional[BankAccount] = None
+    __properties: ClassVar[List[str]] = ["settlement_request_id", "request_id", "status", "settlements", "created_timestamp", "updated_timestamp", "initiator", "acquiring_type", "payout_channel", "settlement_type", "currency", "received_amount_fiat", "bank_account"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +92,9 @@ class Settlement(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['settlements'] = _items
+        # override the default output from pydantic by calling `to_dict()` of bank_account
+        if self.bank_account:
+            _dict['bank_account'] = self.bank_account.to_dict()
         return _dict
 
     @classmethod
@@ -109,7 +116,10 @@ class Settlement(BaseModel):
             "initiator": obj.get("initiator"),
             "acquiring_type": obj.get("acquiring_type"),
             "payout_channel": obj.get("payout_channel"),
-            "settlement_type": obj.get("settlement_type")
+            "settlement_type": obj.get("settlement_type"),
+            "currency": obj.get("currency"),
+            "received_amount_fiat": obj.get("received_amount_fiat"),
+            "bank_account": BankAccount.from_dict(obj["bank_account"]) if obj.get("bank_account") is not None else None
         })
         return _obj
 

@@ -29,6 +29,18 @@ class TestAutoSweepApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_auto_sweep_task(self) -> None:
+        """
+        Test case for create_auto_sweep_task
+
+        create auto sweep task
+        """
+        """
+        create_auto_sweep_task = cobo_waas2.CreateAutoSweepTask()
+
+        api_response = self.api.create_auto_sweep_task(create_auto_sweep_task=create_auto_sweep_task)
+        """
+
     def test_create_wallet_sweep_to_addresses(self) -> None:
         """
         Test case for create_wallet_sweep_to_addresses
@@ -39,6 +51,38 @@ class TestAutoSweepApi(unittest.TestCase):
         create_sweep_to_address = cobo_waas2.CreateSweepToAddress()
 
         api_response = self.api.create_wallet_sweep_to_addresses(create_sweep_to_address=create_sweep_to_address)
+        """
+
+    def test_get_auto_sweep_task_by_id(self) -> None:
+        """
+        Test case for get_auto_sweep_task_by_id
+
+        Get auto sweep task information
+        """
+        """
+        task_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.get_auto_sweep_task_by_id(task_id)
+        """
+
+    def test_list_auto_sweep_task(self) -> None:
+        """
+        Test case for list_auto_sweep_task
+
+        List wallet auto sweep task
+        """
+        """
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        token_id = 'ETH_USDT'
+        task_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,1ddca562-8434-41c9-8809-d437bad9c868'
+        min_created_timestamp = 1635744000000
+        max_created_timestamp = 1635744000000
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        direction = 'ASC'
+
+        api_response = self.api.list_auto_sweep_task(wallet_id, token_id=token_id, task_ids=task_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         """
 
     def test_list_wallet_sweep_to_addresses(self) -> None:

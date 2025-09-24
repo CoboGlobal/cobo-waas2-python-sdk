@@ -123,6 +123,7 @@ class TestWebhookEventData(unittest.TestCase):
                         chain_id = 'ETH', 
                         symbol = 'ETH', 
                         icon_url = 'https://d.cobo.com/public/logos/ETH.png', 
+                        chain_identifier = 'ETH', 
                         explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
@@ -209,6 +210,8 @@ class TestWebhookEventData(unittest.TestCase):
                 charge_merchant_fee = False,
                 merchant_fee_amount = '0.0001',
                 merchant_fee_token_id = 'ETH_USDT',
+                commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                    fee_amount = '', ),
                 settlement_request_id = 'S20250304-1001',
                 settlements = [
                     cobo_waas2.models.settlement_detail.SettlementDetail(
@@ -244,16 +247,36 @@ class TestWebhookEventData(unittest.TestCase):
                         settlement_request_id = 'S20250304-1001', 
                         order_ids = [
                             'O20250304-M1001-1001'
-                            ], )
+                            ], 
+                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                            fee_amount = '', ), 
+                        bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
+                            fee_amount = '', 
+                            received_token_id = '', 
+                            received_amount = '', ), )
                     ],
                 acquiring_type = 'Order',
                 payout_channel = 'Crypto',
                 settlement_type = 'Merchant',
+                received_amount_fiat = '500.00',
+                bank_account = cobo_waas2.models.bank_account.BankAccount(
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
+                    info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, 
+                    created_timestamp = 1744689600, 
+                    updated_timestamp = 1744689600, ),
                 payer_id = 'P20250619T0310056d7aa',
                 custom_payer_id = 'user_abc_10001',
+                subscription_id = '123e457-e89b-12d3-a456-426614174004',
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
-                updated_address = '0x789xyz...456'
+                updated_address = '0x789xyz...456',
+                disposition_type = 'Refund',
+                disposition_status = 'Submitted',
+                destination_address = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb7',
+                disposition_amount = '1.5',
+                transaction_type = 'Deposit',
+                review_status = 'PendingScreening',
+                funds_status = 'Frozen'
             )
         else:
             return WebhookEventData(
@@ -274,6 +297,7 @@ class TestWebhookEventData(unittest.TestCase):
                         chain_id = 'ETH', 
                         symbol = 'ETH', 
                         icon_url = 'https://d.cobo.com/public/logos/ETH.png', 
+                        chain_identifier = 'ETH', 
                         explorer_tx_url = 'https://etherscan.io/tx/{txn_id}', 
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
@@ -356,7 +380,13 @@ class TestWebhookEventData(unittest.TestCase):
                         settlement_request_id = 'S20250304-1001', 
                         order_ids = [
                             'O20250304-M1001-1001'
-                            ], )
+                            ], 
+                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                            fee_amount = '', ), 
+                        bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
+                            fee_amount = '', 
+                            received_token_id = '', 
+                            received_amount = '', ), )
                     ],
                 acquiring_type = 'Order',
                 payer_id = 'P20250619T0310056d7aa',
@@ -364,6 +394,11 @@ class TestWebhookEventData(unittest.TestCase):
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
                 updated_address = '0x789xyz...456',
+                disposition_type = 'Refund',
+                disposition_status = 'Submitted',
+                transaction_type = 'Deposit',
+                review_status = 'PendingScreening',
+                funds_status = 'Frozen',
         )
         """
 

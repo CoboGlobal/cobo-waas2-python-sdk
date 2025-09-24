@@ -27,7 +27,7 @@ class UpdateCustodialWalletParams(BaseModel):
     The information of Custodial Wallets.
     """  # noqa: E501
     wallet_type: WalletType
-    name: StrictStr = Field(description="The wallet name.")
+    name: Optional[StrictStr] = Field(default=None, description="The wallet name.")
     enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet")
     __properties: ClassVar[List[str]] = ["wallet_type", "name", "enable_auto_sweep"]
 

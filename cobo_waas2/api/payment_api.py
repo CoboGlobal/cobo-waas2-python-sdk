@@ -38,19 +38,34 @@ from cobo_waas2.models.list_payment_orders200_response import ListPaymentOrders2
 from cobo_waas2.models.list_payment_wallet_balances200_response import ListPaymentWalletBalances200Response
 from cobo_waas2.models.list_settlement_details200_response import ListSettlementDetails200Response
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
+from cobo_waas2.models.list_subscription_actions200_response import ListSubscriptionActions200Response
+from cobo_waas2.models.list_subscription_plans200_response import ListSubscriptionPlans200Response
+from cobo_waas2.models.list_subscriptions200_response import ListSubscriptions200Response
 from cobo_waas2.models.list_top_up_payer_accounts200_response import ListTopUpPayerAccounts200Response
 from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200Response
 from cobo_waas2.models.merchant import Merchant
 from cobo_waas2.models.order import Order
+from cobo_waas2.models.payment_create_subscription_action import PaymentCreateSubscriptionAction
+from cobo_waas2.models.payment_create_subscription_plan import PaymentCreateSubscriptionPlan
+from cobo_waas2.models.payment_estimate_fee201_response import PaymentEstimateFee201Response
+from cobo_waas2.models.payment_estimate_fee_request import PaymentEstimateFeeRequest
+from cobo_waas2.models.payment_subscription_action import PaymentSubscriptionAction
+from cobo_waas2.models.payment_subscription_action_type import PaymentSubscriptionActionType
+from cobo_waas2.models.payment_subscription_detail import PaymentSubscriptionDetail
+from cobo_waas2.models.payment_subscription_plan import PaymentSubscriptionPlan
+from cobo_waas2.models.payment_subscription_plan_detail import PaymentSubscriptionPlanDetail
 from cobo_waas2.models.psp_balance import PspBalance
+from cobo_waas2.models.received_amount_per_address import ReceivedAmountPerAddress
 from cobo_waas2.models.refund import Refund
 from cobo_waas2.models.settlement import Settlement
 from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.top_up_address import TopUpAddress
+from cobo_waas2.models.update_bank_account_by_id_request import UpdateBankAccountByIdRequest
 from cobo_waas2.models.update_merchant_by_id_request import UpdateMerchantByIdRequest
 from cobo_waas2.models.update_payment_order_request import UpdatePaymentOrderRequest
 from cobo_waas2.models.update_refund_by_id_request import UpdateRefundByIdRequest
 from cobo_waas2.models.update_top_up_address import UpdateTopUpAddress
+from cobo_waas2.models.wallet_setup import WalletSetup
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
 from cobo_waas2.api_response import ApiResponse
@@ -1422,6 +1437,344 @@ class PaymentApi:
         )
 
     @validate_call
+    def create_subscription_action(
+        self,
+        payment_create_subscription_action: Annotated[Optional[PaymentCreateSubscriptionAction], Field(description="The request body to create subscription action.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentSubscriptionAction:
+        """Create a subscription action
+
+        This operation creates a subscription action. 
+
+        :param payment_create_subscription_action: The request body to create subscription action.
+        :type payment_create_subscription_action: PaymentCreateSubscriptionAction
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_subscription_action_serialize(
+            payment_create_subscription_action=payment_create_subscription_action,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentSubscriptionAction",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_subscription_action_with_http_info(
+        self,
+        payment_create_subscription_action: Annotated[Optional[PaymentCreateSubscriptionAction], Field(description="The request body to create subscription action.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentSubscriptionAction]:
+        """Create a subscription action
+
+        This operation creates a subscription action. 
+
+        :param payment_create_subscription_action: The request body to create subscription action.
+        :type payment_create_subscription_action: PaymentCreateSubscriptionAction
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_subscription_action_serialize(
+            payment_create_subscription_action=payment_create_subscription_action,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentSubscriptionAction",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_subscription_action_without_preload_content(
+        self,
+        payment_create_subscription_action: Annotated[Optional[PaymentCreateSubscriptionAction], Field(description="The request body to create subscription action.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create a subscription action
+
+        This operation creates a subscription action. 
+
+        :param payment_create_subscription_action: The request body to create subscription action.
+        :type payment_create_subscription_action: PaymentCreateSubscriptionAction
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_subscription_action_serialize(
+            payment_create_subscription_action=payment_create_subscription_action,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentSubscriptionAction",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_subscription_action_serialize(
+        self,
+        payment_create_subscription_action,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if payment_create_subscription_action is not None:
+            _body_params = payment_create_subscription_action
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/subscription_actions',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_subscription_plan(
+        self,
+        payment_create_subscription_plan: Annotated[Optional[PaymentCreateSubscriptionPlan], Field(description="The request body to create subscription plan.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentSubscriptionPlan:
+        """Create subscription plan
+
+        This operation creates a subscription plan. 
+
+        :param payment_create_subscription_plan: The request body to create subscription plan.
+        :type payment_create_subscription_plan: PaymentCreateSubscriptionPlan
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_subscription_plan_serialize(
+            payment_create_subscription_plan=payment_create_subscription_plan,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentSubscriptionPlan",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_subscription_plan_with_http_info(
+        self,
+        payment_create_subscription_plan: Annotated[Optional[PaymentCreateSubscriptionPlan], Field(description="The request body to create subscription plan.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentSubscriptionPlan]:
+        """Create subscription plan
+
+        This operation creates a subscription plan. 
+
+        :param payment_create_subscription_plan: The request body to create subscription plan.
+        :type payment_create_subscription_plan: PaymentCreateSubscriptionPlan
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_subscription_plan_serialize(
+            payment_create_subscription_plan=payment_create_subscription_plan,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentSubscriptionPlan",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_subscription_plan_without_preload_content(
+        self,
+        payment_create_subscription_plan: Annotated[Optional[PaymentCreateSubscriptionPlan], Field(description="The request body to create subscription plan.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create subscription plan
+
+        This operation creates a subscription plan. 
+
+        :param payment_create_subscription_plan: The request body to create subscription plan.
+        :type payment_create_subscription_plan: PaymentCreateSubscriptionPlan
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_subscription_plan_serialize(
+            payment_create_subscription_plan=payment_create_subscription_plan,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentSubscriptionPlan",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_subscription_plan_serialize(
+        self,
+        payment_create_subscription_plan,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if payment_create_subscription_plan is not None:
+            _body_params = payment_create_subscription_plan
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/subscription_plans',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def delete_crypto_address(
         self,
         crypto_address_id: Annotated[StrictStr, Field(description="The crypto address ID.")],
@@ -1769,6 +2122,211 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/exchange_rates/{token_id}/{currency}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_payer_balance_by_address(
+        self,
+        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> List[ReceivedAmountPerAddress]:
+        """Get payer balance by address
+
+        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+
+        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
+        :type payer_id: str
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payer_balance_by_address_serialize(
+            payer_id=payer_id,
+            token_id=token_id,
+            merchant_id=merchant_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ReceivedAmountPerAddress]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_payer_balance_by_address_with_http_info(
+        self,
+        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[List[ReceivedAmountPerAddress]]:
+        """Get payer balance by address
+
+        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+
+        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
+        :type payer_id: str
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payer_balance_by_address_serialize(
+            payer_id=payer_id,
+            token_id=token_id,
+            merchant_id=merchant_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ReceivedAmountPerAddress]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_payer_balance_by_address_without_preload_content(
+        self,
+        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get payer balance by address
+
+        This operation retrieves aggregated balance details for a specific token and payer, with amounts grouped by address. 
+
+        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
+        :type payer_id: str
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payer_balance_by_address_serialize(
+            payer_id=payer_id,
+            token_id=token_id,
+            merchant_id=merchant_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ReceivedAmountPerAddress]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_payer_balance_by_address_serialize(
+        self,
+        payer_id,
+        token_id,
+        merchant_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if merchant_id is not None:
+            
+            _query_params.append(('merchant_id', merchant_id))
+            
+        if payer_id is not None:
+            
+            _query_params.append(('payer_id', payer_id))
+            
+        if token_id is not None:
+            
+            _query_params.append(('token_id', token_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/balance/payer/address',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2917,11 +3475,366 @@ class PaymentApi:
         )
 
     @validate_call
+    def get_subscription_by_id(
+        self,
+        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentSubscriptionDetail:
+        """Get subscription by id
+
+        This operation retrieves the information of subscription detail. You can filter the result by subscription_id. 
+
+        :param subscription_id: A unique identifier subscription. (required)
+        :type subscription_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_subscription_by_id_serialize(
+            subscription_id=subscription_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentSubscriptionDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_subscription_by_id_with_http_info(
+        self,
+        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentSubscriptionDetail]:
+        """Get subscription by id
+
+        This operation retrieves the information of subscription detail. You can filter the result by subscription_id. 
+
+        :param subscription_id: A unique identifier subscription. (required)
+        :type subscription_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_subscription_by_id_serialize(
+            subscription_id=subscription_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentSubscriptionDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_subscription_by_id_without_preload_content(
+        self,
+        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get subscription by id
+
+        This operation retrieves the information of subscription detail. You can filter the result by subscription_id. 
+
+        :param subscription_id: A unique identifier subscription. (required)
+        :type subscription_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_subscription_by_id_serialize(
+            subscription_id=subscription_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentSubscriptionDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_subscription_by_id_serialize(
+        self,
+        subscription_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if subscription_id is not None:
+            _path_params['subscription_id'] = subscription_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/subscriptions/{subscription_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_subscription_plan_by_id(
+        self,
+        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentSubscriptionPlanDetail:
+        """Get subscription plan by id
+
+        This operation retrieves the information of subscription plan detail. You can filter the result by subscription_id. 
+
+        :param subscription_id: A unique identifier subscription. (required)
+        :type subscription_id: str
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_subscription_plan_by_id_serialize(
+            subscription_id=subscription_id,
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentSubscriptionPlanDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_subscription_plan_by_id_with_http_info(
+        self,
+        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentSubscriptionPlanDetail]:
+        """Get subscription plan by id
+
+        This operation retrieves the information of subscription plan detail. You can filter the result by subscription_id. 
+
+        :param subscription_id: A unique identifier subscription. (required)
+        :type subscription_id: str
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_subscription_plan_by_id_serialize(
+            subscription_id=subscription_id,
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentSubscriptionPlanDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_subscription_plan_by_id_without_preload_content(
+        self,
+        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get subscription plan by id
+
+        This operation retrieves the information of subscription plan detail. You can filter the result by subscription_id. 
+
+        :param subscription_id: A unique identifier subscription. (required)
+        :type subscription_id: str
+        :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_subscription_plan_by_id_serialize(
+            subscription_id=subscription_id,
+            token_id=token_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentSubscriptionPlanDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_subscription_plan_by_id_serialize(
+        self,
+        subscription_id,
+        token_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if subscription_id is not None:
+            _path_params['subscription_id'] = subscription_id
+        # process the query parameters
+        if token_id is not None:
+            
+            _query_params.append(('token_id', token_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/subscription_plans/{subscription_plan_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def get_top_up_address(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         custom_payer_id: Annotated[StrictStr, Field(description="Unique customer identifier on the merchant side, used to allocate a dedicated top-up address ")],
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2935,12 +3848,12 @@ class PaymentApi:
 
         Get a top-up address for certain payer under merchant. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
         :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
         :param custom_payer_id: Unique customer identifier on the merchant side, used to allocate a dedicated top-up address  (required)
         :type custom_payer_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2950,9 +3863,9 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._get_top_up_address_serialize(
-            merchant_id=merchant_id,
             token_id=token_id,
             custom_payer_id=custom_payer_id,
+            merchant_id=merchant_id,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -2973,9 +3886,9 @@ class PaymentApi:
     @validate_call
     def get_top_up_address_with_http_info(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         custom_payer_id: Annotated[StrictStr, Field(description="Unique customer identifier on the merchant side, used to allocate a dedicated top-up address ")],
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2989,12 +3902,12 @@ class PaymentApi:
 
         Get a top-up address for certain payer under merchant. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
         :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
         :param custom_payer_id: Unique customer identifier on the merchant side, used to allocate a dedicated top-up address  (required)
         :type custom_payer_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3004,9 +3917,9 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._get_top_up_address_serialize(
-            merchant_id=merchant_id,
             token_id=token_id,
             custom_payer_id=custom_payer_id,
+            merchant_id=merchant_id,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -3027,9 +3940,9 @@ class PaymentApi:
     @validate_call
     def get_top_up_address_without_preload_content(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         custom_payer_id: Annotated[StrictStr, Field(description="Unique customer identifier on the merchant side, used to allocate a dedicated top-up address ")],
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3043,12 +3956,12 @@ class PaymentApi:
 
         Get a top-up address for certain payer under merchant. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
         :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
         :param custom_payer_id: Unique customer identifier on the merchant side, used to allocate a dedicated top-up address  (required)
         :type custom_payer_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3058,9 +3971,9 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._get_top_up_address_serialize(
-            merchant_id=merchant_id,
             token_id=token_id,
             custom_payer_id=custom_payer_id,
+            merchant_id=merchant_id,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -3076,9 +3989,9 @@ class PaymentApi:
 
     def _get_top_up_address_serialize(
         self,
-        merchant_id,
         token_id,
         custom_payer_id,
+        merchant_id,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3880,7 +4793,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
-        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
+        wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3902,8 +4815,8 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
-        :param wallet_id: The wallet ID.
-        :type wallet_id: str
+        :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
+        :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3917,7 +4830,7 @@ class PaymentApi:
             before=before,
             after=after,
             keyword=keyword,
-            wallet_id=wallet_id,
+            wallet_setup=wallet_setup,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -3942,7 +4855,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
-        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
+        wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3964,8 +4877,8 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
-        :param wallet_id: The wallet ID.
-        :type wallet_id: str
+        :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
+        :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3979,7 +4892,7 @@ class PaymentApi:
             before=before,
             after=after,
             keyword=keyword,
-            wallet_id=wallet_id,
+            wallet_setup=wallet_setup,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -4004,7 +4917,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
-        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
+        wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4026,8 +4939,8 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
-        :param wallet_id: The wallet ID.
-        :type wallet_id: str
+        :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
+        :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4041,7 +4954,7 @@ class PaymentApi:
             before=before,
             after=after,
             keyword=keyword,
-            wallet_id=wallet_id,
+            wallet_setup=wallet_setup,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -4061,7 +4974,7 @@ class PaymentApi:
         before,
         after,
         keyword,
-        wallet_id,
+        wallet_setup,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4087,9 +5000,9 @@ class PaymentApi:
             
             _query_params.append(('keyword', keyword))
             
-        if wallet_id is not None:
+        if wallet_setup is not None:
             
-            _query_params.append(('wallet_id', wallet_id))
+            _query_params.append(('wallet_setup', wallet_setup.value))
             
         # process the header parameters
         # process the form parameters
@@ -5172,6 +6085,774 @@ class PaymentApi:
         )
 
     @validate_call
+    def list_subscription_actions(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        subscription_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription.")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        action_type: Optional[PaymentSubscriptionActionType] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListSubscriptionActions200Response:
+        """List subscription actions
+
+        This operation retrieves the information of subscription actions. You can filter the result by plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param plan_id: A unique identifier plan.
+        :type plan_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param subscription_id: A unique identifier subscription.
+        :type subscription_id: str
+        :param request_id: The request ID.
+        :type request_id: str
+        :param action_type:
+        :type action_type: PaymentSubscriptionActionType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscription_actions_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            plan_id=plan_id,
+            merchant_id=merchant_id,
+            subscription_id=subscription_id,
+            request_id=request_id,
+            action_type=action_type,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptionActions200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_subscription_actions_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        subscription_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription.")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        action_type: Optional[PaymentSubscriptionActionType] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListSubscriptionActions200Response]:
+        """List subscription actions
+
+        This operation retrieves the information of subscription actions. You can filter the result by plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param plan_id: A unique identifier plan.
+        :type plan_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param subscription_id: A unique identifier subscription.
+        :type subscription_id: str
+        :param request_id: The request ID.
+        :type request_id: str
+        :param action_type:
+        :type action_type: PaymentSubscriptionActionType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscription_actions_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            plan_id=plan_id,
+            merchant_id=merchant_id,
+            subscription_id=subscription_id,
+            request_id=request_id,
+            action_type=action_type,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptionActions200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_subscription_actions_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        subscription_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription.")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        action_type: Optional[PaymentSubscriptionActionType] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List subscription actions
+
+        This operation retrieves the information of subscription actions. You can filter the result by plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param plan_id: A unique identifier plan.
+        :type plan_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param subscription_id: A unique identifier subscription.
+        :type subscription_id: str
+        :param request_id: The request ID.
+        :type request_id: str
+        :param action_type:
+        :type action_type: PaymentSubscriptionActionType
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscription_actions_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            plan_id=plan_id,
+            merchant_id=merchant_id,
+            subscription_id=subscription_id,
+            request_id=request_id,
+            action_type=action_type,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptionActions200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_subscription_actions_serialize(
+        self,
+        limit,
+        before,
+        after,
+        plan_id,
+        merchant_id,
+        subscription_id,
+        request_id,
+        action_type,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if plan_id is not None:
+            
+            _query_params.append(('plan_id', plan_id))
+            
+        if merchant_id is not None:
+            
+            _query_params.append(('merchant_id', merchant_id))
+            
+        if subscription_id is not None:
+            
+            _query_params.append(('subscription_id', subscription_id))
+            
+        if request_id is not None:
+            
+            _query_params.append(('request_id', request_id))
+            
+        if action_type is not None:
+            
+            _query_params.append(('action_type', action_type.value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/subscription_actions',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_subscription_plans(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        developer_plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier assigned by the developer to track and identify individual subscription plan in their system.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListSubscriptionPlans200Response:
+        """List subscription plans
+
+        This operation retrieves the information of subscription plans. You can filter the result by developer plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param developer_plan_id: A unique identifier assigned by the developer to track and identify individual subscription plan in their system.
+        :type developer_plan_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscription_plans_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            developer_plan_id=developer_plan_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptionPlans200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_subscription_plans_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        developer_plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier assigned by the developer to track and identify individual subscription plan in their system.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListSubscriptionPlans200Response]:
+        """List subscription plans
+
+        This operation retrieves the information of subscription plans. You can filter the result by developer plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param developer_plan_id: A unique identifier assigned by the developer to track and identify individual subscription plan in their system.
+        :type developer_plan_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscription_plans_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            developer_plan_id=developer_plan_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptionPlans200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_subscription_plans_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        developer_plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier assigned by the developer to track and identify individual subscription plan in their system.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List subscription plans
+
+        This operation retrieves the information of subscription plans. You can filter the result by developer plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param developer_plan_id: A unique identifier assigned by the developer to track and identify individual subscription plan in their system.
+        :type developer_plan_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscription_plans_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            developer_plan_id=developer_plan_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptionPlans200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_subscription_plans_serialize(
+        self,
+        limit,
+        before,
+        after,
+        developer_plan_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if developer_plan_id is not None:
+            
+            _query_params.append(('developer_plan_id', developer_plan_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/subscription_plans',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_subscriptions(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        subscription_action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListSubscriptions200Response:
+        """List subscriptions
+
+        This operation retrieves the information of subscriptions. You can filter the result by plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param plan_id: A unique identifier plan.
+        :type plan_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param subscription_action_id: A unique identifier subscription action.
+        :type subscription_action_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscriptions_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            plan_id=plan_id,
+            merchant_id=merchant_id,
+            subscription_action_id=subscription_action_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptions200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_subscriptions_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        subscription_action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListSubscriptions200Response]:
+        """List subscriptions
+
+        This operation retrieves the information of subscriptions. You can filter the result by plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param plan_id: A unique identifier plan.
+        :type plan_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param subscription_action_id: A unique identifier subscription action.
+        :type subscription_action_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscriptions_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            plan_id=plan_id,
+            merchant_id=merchant_id,
+            subscription_action_id=subscription_action_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptions200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_subscriptions_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
+        subscription_action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List subscriptions
+
+        This operation retrieves the information of subscriptions. You can filter the result by plan id. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param plan_id: A unique identifier plan.
+        :type plan_id: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
+        :param subscription_action_id: A unique identifier subscription action.
+        :type subscription_action_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_subscriptions_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            plan_id=plan_id,
+            merchant_id=merchant_id,
+            subscription_action_id=subscription_action_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListSubscriptions200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_subscriptions_serialize(
+        self,
+        limit,
+        before,
+        after,
+        plan_id,
+        merchant_id,
+        subscription_action_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if plan_id is not None:
+            
+            _query_params.append(('plan_id', plan_id))
+            
+        if merchant_id is not None:
+            
+            _query_params.append(('merchant_id', merchant_id))
+            
+        if subscription_action_id is not None:
+            
+            _query_params.append(('subscription_action_id', subscription_action_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/subscriptions',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_top_up_payer_accounts(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -5413,10 +7094,10 @@ class PaymentApi:
     @validate_call
     def list_top_up_payers(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         payer_id: Annotated[Optional[StrictStr], Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")] = None,
         _request_timeout: Union[
             None,
@@ -5431,14 +7112,14 @@ class PaymentApi:
 
         This operation retrieves the information of all payers. You can filter the result by merchant ID and payer_id. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
         :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
         :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system.
         :type payer_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5450,10 +7131,10 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._list_top_up_payers_serialize(
-            merchant_id=merchant_id,
             limit=limit,
             before=before,
             after=after,
+            merchant_id=merchant_id,
             payer_id=payer_id,
         )
 
@@ -5475,10 +7156,10 @@ class PaymentApi:
     @validate_call
     def list_top_up_payers_with_http_info(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         payer_id: Annotated[Optional[StrictStr], Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")] = None,
         _request_timeout: Union[
             None,
@@ -5493,14 +7174,14 @@ class PaymentApi:
 
         This operation retrieves the information of all payers. You can filter the result by merchant ID and payer_id. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
         :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
         :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system.
         :type payer_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5512,10 +7193,10 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._list_top_up_payers_serialize(
-            merchant_id=merchant_id,
             limit=limit,
             before=before,
             after=after,
+            merchant_id=merchant_id,
             payer_id=payer_id,
         )
 
@@ -5537,10 +7218,10 @@ class PaymentApi:
     @validate_call
     def list_top_up_payers_without_preload_content(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         payer_id: Annotated[Optional[StrictStr], Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")] = None,
         _request_timeout: Union[
             None,
@@ -5555,14 +7236,14 @@ class PaymentApi:
 
         This operation retrieves the information of all payers. You can filter the result by merchant ID and payer_id. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
         :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
+        :param merchant_id: The merchant ID.
+        :type merchant_id: str
         :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system.
         :type payer_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5574,10 +7255,10 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._list_top_up_payers_serialize(
-            merchant_id=merchant_id,
             limit=limit,
             before=before,
             after=after,
+            merchant_id=merchant_id,
             payer_id=payer_id,
         )
 
@@ -5594,10 +7275,10 @@ class PaymentApi:
 
     def _list_top_up_payers_serialize(
         self,
-        merchant_id,
         limit,
         before,
         after,
+        merchant_id,
         payer_id,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
@@ -5650,10 +7331,179 @@ class PaymentApi:
         )
 
     @validate_call
+    def payment_estimate_fee(
+        self,
+        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body to create a estimated fee request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentEstimateFee201Response:
+        """Payment estimate fee
+
+        This operation to payment estimate fee. 
+
+        :param payment_estimate_fee_request: The request body to create a estimated fee request.
+        :type payment_estimate_fee_request: PaymentEstimateFeeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._payment_estimate_fee_serialize(
+            payment_estimate_fee_request=payment_estimate_fee_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentEstimateFee201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def payment_estimate_fee_with_http_info(
+        self,
+        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body to create a estimated fee request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentEstimateFee201Response]:
+        """Payment estimate fee
+
+        This operation to payment estimate fee. 
+
+        :param payment_estimate_fee_request: The request body to create a estimated fee request.
+        :type payment_estimate_fee_request: PaymentEstimateFeeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._payment_estimate_fee_serialize(
+            payment_estimate_fee_request=payment_estimate_fee_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentEstimateFee201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def payment_estimate_fee_without_preload_content(
+        self,
+        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body to create a estimated fee request.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Payment estimate fee
+
+        This operation to payment estimate fee. 
+
+        :param payment_estimate_fee_request: The request body to create a estimated fee request.
+        :type payment_estimate_fee_request: PaymentEstimateFeeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._payment_estimate_fee_serialize(
+            payment_estimate_fee_request=payment_estimate_fee_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentEstimateFee201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _payment_estimate_fee_serialize(
+        self,
+        payment_estimate_fee_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if payment_estimate_fee_request is not None:
+            _body_params = payment_estimate_fee_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/estimate_fee',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def update_bank_account_by_id(
         self,
         bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
-        create_bank_account_request: Annotated[Optional[CreateBankAccountRequest], Field(description="The request body for updating an existing bank account.")] = None,
+        update_bank_account_by_id_request: Annotated[Optional[UpdateBankAccountByIdRequest], Field(description="The request body for updating an existing bank account.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5669,8 +7519,8 @@ class PaymentApi:
 
         :param bank_account_id: The bank account ID. (required)
         :type bank_account_id: str
-        :param create_bank_account_request: The request body for updating an existing bank account.
-        :type create_bank_account_request: CreateBankAccountRequest
+        :param update_bank_account_by_id_request: The request body for updating an existing bank account.
+        :type update_bank_account_by_id_request: UpdateBankAccountByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5681,7 +7531,7 @@ class PaymentApi:
 
         _param = self._update_bank_account_by_id_serialize(
             bank_account_id=bank_account_id,
-            create_bank_account_request=create_bank_account_request,
+            update_bank_account_by_id_request=update_bank_account_by_id_request,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -5703,7 +7553,7 @@ class PaymentApi:
     def update_bank_account_by_id_with_http_info(
         self,
         bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
-        create_bank_account_request: Annotated[Optional[CreateBankAccountRequest], Field(description="The request body for updating an existing bank account.")] = None,
+        update_bank_account_by_id_request: Annotated[Optional[UpdateBankAccountByIdRequest], Field(description="The request body for updating an existing bank account.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5719,8 +7569,8 @@ class PaymentApi:
 
         :param bank_account_id: The bank account ID. (required)
         :type bank_account_id: str
-        :param create_bank_account_request: The request body for updating an existing bank account.
-        :type create_bank_account_request: CreateBankAccountRequest
+        :param update_bank_account_by_id_request: The request body for updating an existing bank account.
+        :type update_bank_account_by_id_request: UpdateBankAccountByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5731,7 +7581,7 @@ class PaymentApi:
 
         _param = self._update_bank_account_by_id_serialize(
             bank_account_id=bank_account_id,
-            create_bank_account_request=create_bank_account_request,
+            update_bank_account_by_id_request=update_bank_account_by_id_request,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -5753,7 +7603,7 @@ class PaymentApi:
     def update_bank_account_by_id_without_preload_content(
         self,
         bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
-        create_bank_account_request: Annotated[Optional[CreateBankAccountRequest], Field(description="The request body for updating an existing bank account.")] = None,
+        update_bank_account_by_id_request: Annotated[Optional[UpdateBankAccountByIdRequest], Field(description="The request body for updating an existing bank account.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5769,8 +7619,8 @@ class PaymentApi:
 
         :param bank_account_id: The bank account ID. (required)
         :type bank_account_id: str
-        :param create_bank_account_request: The request body for updating an existing bank account.
-        :type create_bank_account_request: CreateBankAccountRequest
+        :param update_bank_account_by_id_request: The request body for updating an existing bank account.
+        :type update_bank_account_by_id_request: UpdateBankAccountByIdRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5781,7 +7631,7 @@ class PaymentApi:
 
         _param = self._update_bank_account_by_id_serialize(
             bank_account_id=bank_account_id,
-            create_bank_account_request=create_bank_account_request,
+            update_bank_account_by_id_request=update_bank_account_by_id_request,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -5798,7 +7648,7 @@ class PaymentApi:
     def _update_bank_account_by_id_serialize(
         self,
         bank_account_id,
-        create_bank_account_request,
+        update_bank_account_by_id_request,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5813,8 +7663,8 @@ class PaymentApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_bank_account_request is not None:
-            _body_params = create_bank_account_request
+        if update_bank_account_by_id_request is not None:
+            _body_params = update_bank_account_by_id_request
 
         # set the HTTP header `Accept`
         _header_params = {

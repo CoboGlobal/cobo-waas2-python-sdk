@@ -41,7 +41,6 @@ class TestUpdateMpcWalletParams(unittest.TestCase):
         else:
             return UpdateMpcWalletParams(
                 wallet_type = 'Custodial',
-                name = 'My WaaS 2.0 Wallet',
         )
         """
 

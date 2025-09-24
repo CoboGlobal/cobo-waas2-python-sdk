@@ -50,6 +50,9 @@ class TestListStakings200Response(unittest.TestCase):
                         created_timestamp = 1640995200000, 
                         updated_timestamp = 1640995200000, 
                         validator_info = null, 
+                        validators = [
+                            null
+                            ], 
                         extra = null, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(

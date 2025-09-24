@@ -37,6 +37,7 @@ class TestChainInfo(unittest.TestCase):
                 chain_id = 'ETH',
                 symbol = 'ETH',
                 icon_url = 'https://d.cobo.com/public/logos/ETH.png',
+                chain_identifier = 'ETH',
                 explorer_tx_url = 'https://etherscan.io/tx/{txn_id}',
                 explorer_address_url = 'https://etherscan.io/address/{address}',
                 require_memo = False,

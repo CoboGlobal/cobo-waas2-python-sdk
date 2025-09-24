@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.commission_fee import CommissionFee
 from cobo_waas2.models.payment_transaction import PaymentTransaction
 from cobo_waas2.models.refund_status import RefundStatus
 from cobo_waas2.models.refund_type import RefundType
@@ -45,7 +46,8 @@ class Refund(BaseModel):
     charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Whether to charge developer fee to the merchant.  - `true`: The fee amount (specified in `merchant_fee_amount`) will be deducted from the merchant's balance and added to the developer's balance - `false`: The merchant is not charged any developer fee. ")
     merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by `merchant_fee_token_id`.")
     merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the developer fee.")
-    __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id"]
+    commission_fee: Optional[CommissionFee] = None
+    __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id", "commission_fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +95,9 @@ class Refund(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['transactions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of commission_fee
+        if self.commission_fee:
+            _dict['commission_fee'] = self.commission_fee.to_dict()
         return _dict
 
     @classmethod
@@ -121,7 +126,8 @@ class Refund(BaseModel):
             "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
             "charge_merchant_fee": obj.get("charge_merchant_fee"),
             "merchant_fee_amount": obj.get("merchant_fee_amount"),
-            "merchant_fee_token_id": obj.get("merchant_fee_token_id")
+            "merchant_fee_token_id": obj.get("merchant_fee_token_id"),
+            "commission_fee": CommissionFee.from_dict(obj["commission_fee"]) if obj.get("commission_fee") is not None else None
         })
         return _obj
 

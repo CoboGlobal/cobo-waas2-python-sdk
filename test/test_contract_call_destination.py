@@ -48,7 +48,8 @@ class TestContractCallDestination(unittest.TestCase):
                             ], 
                         data = '37u9WtQpcm6ULa3WRQHmj49EPs4if7o9f1jSRVZpm2dvihR9C8jY4NqEwXUbLwx15HBSNcP1', 
                         program_id = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', )
-                    ]
+                    ],
+                contract_param = None
             )
         else:
             return ContractCallDestination(
@@ -66,6 +67,7 @@ class TestContractCallDestination(unittest.TestCase):
                         data = '37u9WtQpcm6ULa3WRQHmj49EPs4if7o9f1jSRVZpm2dvihR9C8jY4NqEwXUbLwx15HBSNcP1', 
                         program_id = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', )
                     ],
+                contract_param = None,
         )
         """
 

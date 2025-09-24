@@ -1,6 +1,6 @@
 # ApprovalResult
 
-The single approval result. Possible values include:    - `1`: The transaction is pending approval.   - `2`: The transaction is approved.   - `3`: The transaction is rejected. 
+The single approval result. Possible values include:    - `Approved`: The transaction is approved.   - `Rejected`: The transaction is rejected. 
 
 ## Properties
 

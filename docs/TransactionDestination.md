@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **message_bip137** | **str** | Message to be signed, in hexadecimal format. | 
 **message_bip322** | **str** | Message to be signed, in hexadecimal format. | 
 **message_cosmos_adr36** | **str** | Message to be signed, in hexadecimal format. | 
+**contract_param** | [**TransactionStellarContractParam**](TransactionStellarContractParam.md) |  | 
 
 ## Example
 

@@ -30,6 +30,7 @@ from cobo_waas2.models.tokenization_issued_token_request import TokenizationIssu
 from cobo_waas2.models.tokenization_list_activities_response import TokenizationListActivitiesResponse
 from cobo_waas2.models.tokenization_list_enabled_chains_response import TokenizationListEnabledChainsResponse
 from cobo_waas2.models.tokenization_list_holdings_response import TokenizationListHoldingsResponse
+from cobo_waas2.models.tokenization_list_permissions_response import TokenizationListPermissionsResponse
 from cobo_waas2.models.tokenization_list_token_info_response import TokenizationListTokenInfoResponse
 from cobo_waas2.models.tokenization_mint_token_request import TokenizationMintTokenRequest
 from cobo_waas2.models.tokenization_operation_response import TokenizationOperationResponse
@@ -41,6 +42,7 @@ from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStand
 from cobo_waas2.models.tokenization_unpause_token_request import TokenizationUnpauseTokenRequest
 from cobo_waas2.models.tokenization_update_allowlist_addresses_request import TokenizationUpdateAllowlistAddressesRequest
 from cobo_waas2.models.tokenization_update_blocklist_addresses_request import TokenizationUpdateBlocklistAddressesRequest
+from cobo_waas2.models.tokenization_update_permissions_request import TokenizationUpdatePermissionsRequest
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
 from cobo_waas2.api_response import ApiResponse
@@ -63,7 +65,7 @@ class TokenizationApi:
     def burn_tokenization(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_burn_token_request: Annotated[Optional[TokenizationBurnTokenRequest], Field(description="Request body for burning tokens")] = None,
+        tokenization_burn_token_request: Annotated[Optional[TokenizationBurnTokenRequest], Field(description="The request body for burning tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -79,7 +81,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_burn_token_request: Request body for burning tokens
+        :param tokenization_burn_token_request: The request body for burning tokens.
         :type tokenization_burn_token_request: TokenizationBurnTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -113,7 +115,7 @@ class TokenizationApi:
     def burn_tokenization_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_burn_token_request: Annotated[Optional[TokenizationBurnTokenRequest], Field(description="Request body for burning tokens")] = None,
+        tokenization_burn_token_request: Annotated[Optional[TokenizationBurnTokenRequest], Field(description="The request body for burning tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -129,7 +131,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_burn_token_request: Request body for burning tokens
+        :param tokenization_burn_token_request: The request body for burning tokens.
         :type tokenization_burn_token_request: TokenizationBurnTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -163,7 +165,7 @@ class TokenizationApi:
     def burn_tokenization_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_burn_token_request: Annotated[Optional[TokenizationBurnTokenRequest], Field(description="Request body for burning tokens")] = None,
+        tokenization_burn_token_request: Annotated[Optional[TokenizationBurnTokenRequest], Field(description="The request body for burning tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -179,7 +181,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_burn_token_request: Request body for burning tokens
+        :param tokenization_burn_token_request: The request body for burning tokens.
         :type tokenization_burn_token_request: TokenizationBurnTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1093,8 +1095,8 @@ class TokenizationApi:
         self,
         chain_id: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
-        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard")] = None,
-        status: Annotated[Optional[TokenizationStatus], Field(description="Filter by token status")] = None,
+        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard.")] = None,
+        status: Annotated[Optional[TokenizationStatus], Field(description="Filter by token status.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -1115,9 +1117,9 @@ class TokenizationApi:
         :type chain_id: str
         :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_id: str
-        :param token_standard: Filter by token standard
+        :param token_standard: Filter by token standard.
         :type token_standard: TokenizationTokenStandard
-        :param status: Filter by token status
+        :param status: Filter by token status.
         :type status: TokenizationStatus
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -1163,8 +1165,8 @@ class TokenizationApi:
         self,
         chain_id: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
-        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard")] = None,
-        status: Annotated[Optional[TokenizationStatus], Field(description="Filter by token status")] = None,
+        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard.")] = None,
+        status: Annotated[Optional[TokenizationStatus], Field(description="Filter by token status.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -1185,9 +1187,9 @@ class TokenizationApi:
         :type chain_id: str
         :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_id: str
-        :param token_standard: Filter by token standard
+        :param token_standard: Filter by token standard.
         :type token_standard: TokenizationTokenStandard
-        :param status: Filter by token status
+        :param status: Filter by token status.
         :type status: TokenizationStatus
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -1233,8 +1235,8 @@ class TokenizationApi:
         self,
         chain_id: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
-        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard")] = None,
-        status: Annotated[Optional[TokenizationStatus], Field(description="Filter by token status")] = None,
+        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard.")] = None,
+        status: Annotated[Optional[TokenizationStatus], Field(description="Filter by token status.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
@@ -1255,9 +1257,9 @@ class TokenizationApi:
         :type chain_id: str
         :param token_id: The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_id: str
-        :param token_standard: Filter by token standard
+        :param token_standard: Filter by token standard.
         :type token_standard: TokenizationTokenStandard
-        :param status: Filter by token status
+        :param status: Filter by token status.
         :type status: TokenizationStatus
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -2329,6 +2331,260 @@ class TokenizationApi:
         )
 
     @validate_call
+    def list_tokenization_permissions(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        address: Annotated[Optional[StrictStr], Field(description="The address to query permissions for. If not provided, returns all addresses with permissions.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TokenizationListPermissionsResponse:
+        """List permissions of the token
+
+        This operation retrieves the permissions for a tokenization contract. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param address: The address to query permissions for. If not provided, returns all addresses with permissions.
+        :type address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
+        :type direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_tokenization_permissions_serialize(
+            token_id=token_id,
+            address=address,
+            limit=limit,
+            after=after,
+            before=before,
+            direction=direction,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TokenizationListPermissionsResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_tokenization_permissions_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        address: Annotated[Optional[StrictStr], Field(description="The address to query permissions for. If not provided, returns all addresses with permissions.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TokenizationListPermissionsResponse]:
+        """List permissions of the token
+
+        This operation retrieves the permissions for a tokenization contract. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param address: The address to query permissions for. If not provided, returns all addresses with permissions.
+        :type address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
+        :type direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_tokenization_permissions_serialize(
+            token_id=token_id,
+            address=address,
+            limit=limit,
+            after=after,
+            before=before,
+            direction=direction,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TokenizationListPermissionsResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_tokenization_permissions_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        address: Annotated[Optional[StrictStr], Field(description="The address to query permissions for. If not provided, returns all addresses with permissions.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List permissions of the token
+
+        This operation retrieves the permissions for a tokenization contract. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param address: The address to query permissions for. If not provided, returns all addresses with permissions.
+        :type address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
+        :type after: str
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
+        :type before: str
+        :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
+        :type direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_tokenization_permissions_serialize(
+            token_id=token_id,
+            address=address,
+            limit=limit,
+            after=after,
+            before=before,
+            direction=direction,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TokenizationListPermissionsResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_tokenization_permissions_serialize(
+        self,
+        token_id,
+        address,
+        limit,
+        after,
+        before,
+        direction,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if token_id is not None:
+            _path_params['token_id'] = token_id
+        # process the query parameters
+        if address is not None:
+            
+            _query_params.append(('address', address))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if direction is not None:
+            
+            _query_params.append(('direction', direction))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/tokenization/tokens/{token_id}/permissions',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_tokenization_supported_chains(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -2343,7 +2599,7 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> TokenizationListEnabledChainsResponse:
-        """List tokenization supported chains
+        """List supported chains for tokenization
 
         This operation retrieves a list of tokenization supported chains. 
 
@@ -2397,7 +2653,7 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> ApiResponse[TokenizationListEnabledChainsResponse]:
-        """List tokenization supported chains
+        """List supported chains for tokenization
 
         This operation retrieves a list of tokenization supported chains. 
 
@@ -2451,7 +2707,7 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List tokenization supported chains
+        """List supported chains for tokenization
 
         This operation retrieves a list of tokenization supported chains. 
 
@@ -2537,7 +2793,7 @@ class TokenizationApi:
     def mint_tokenization(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_mint_token_request: Annotated[TokenizationMintTokenRequest, Field(description="The request body for minting tokens")],
+        tokenization_mint_token_request: Annotated[TokenizationMintTokenRequest, Field(description="The request body for minting tokens.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2553,7 +2809,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_mint_token_request: The request body for minting tokens (required)
+        :param tokenization_mint_token_request: The request body for minting tokens. (required)
         :type tokenization_mint_token_request: TokenizationMintTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2587,7 +2843,7 @@ class TokenizationApi:
     def mint_tokenization_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_mint_token_request: Annotated[TokenizationMintTokenRequest, Field(description="The request body for minting tokens")],
+        tokenization_mint_token_request: Annotated[TokenizationMintTokenRequest, Field(description="The request body for minting tokens.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2603,7 +2859,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_mint_token_request: The request body for minting tokens (required)
+        :param tokenization_mint_token_request: The request body for minting tokens. (required)
         :type tokenization_mint_token_request: TokenizationMintTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2637,7 +2893,7 @@ class TokenizationApi:
     def mint_tokenization_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_mint_token_request: Annotated[TokenizationMintTokenRequest, Field(description="The request body for minting tokens")],
+        tokenization_mint_token_request: Annotated[TokenizationMintTokenRequest, Field(description="The request body for minting tokens.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2653,7 +2909,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_mint_token_request: The request body for minting tokens (required)
+        :param tokenization_mint_token_request: The request body for minting tokens. (required)
         :type tokenization_mint_token_request: TokenizationMintTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2721,7 +2977,7 @@ class TokenizationApi:
     def pause_tokenization(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_pause_token_request: Annotated[Optional[TokenizationPauseTokenRequest], Field(description="Request body for pausing tokens")] = None,
+        tokenization_pause_token_request: Annotated[Optional[TokenizationPauseTokenRequest], Field(description="The request body for pausing tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2731,13 +2987,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> TokenizationOperationResponse:
-        """Pause tokenization
+        """Pause token contract
 
-        This operation pauses the token contract. Creates a pause transaction that will stop the token contract. 
+        This operation pauses the token contract, temporarily halting token operations and transfers. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_pause_token_request: Request body for pausing tokens
+        :param tokenization_pause_token_request: The request body for pausing tokens.
         :type tokenization_pause_token_request: TokenizationPauseTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2771,7 +3027,7 @@ class TokenizationApi:
     def pause_tokenization_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_pause_token_request: Annotated[Optional[TokenizationPauseTokenRequest], Field(description="Request body for pausing tokens")] = None,
+        tokenization_pause_token_request: Annotated[Optional[TokenizationPauseTokenRequest], Field(description="The request body for pausing tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2781,13 +3037,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> ApiResponse[TokenizationOperationResponse]:
-        """Pause tokenization
+        """Pause token contract
 
-        This operation pauses the token contract. Creates a pause transaction that will stop the token contract. 
+        This operation pauses the token contract, temporarily halting token operations and transfers. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_pause_token_request: Request body for pausing tokens
+        :param tokenization_pause_token_request: The request body for pausing tokens.
         :type tokenization_pause_token_request: TokenizationPauseTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2821,7 +3077,7 @@ class TokenizationApi:
     def pause_tokenization_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_pause_token_request: Annotated[Optional[TokenizationPauseTokenRequest], Field(description="Request body for pausing tokens")] = None,
+        tokenization_pause_token_request: Annotated[Optional[TokenizationPauseTokenRequest], Field(description="The request body for pausing tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2831,13 +3087,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Pause tokenization
+        """Pause token contract
 
-        This operation pauses the token contract. Creates a pause transaction that will stop the token contract. 
+        This operation pauses the token contract, temporarily halting token operations and transfers. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_pause_token_request: Request body for pausing tokens
+        :param tokenization_pause_token_request: The request body for pausing tokens.
         :type tokenization_pause_token_request: TokenizationPauseTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2905,7 +3161,7 @@ class TokenizationApi:
     def tokenization_contract_call(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_contract_call_request: Annotated[Optional[TokenizationContractCallRequest], Field(description="Request body for contract call")] = None,
+        tokenization_contract_call_request: Annotated[Optional[TokenizationContractCallRequest], Field(description="The request body for contract call.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2915,13 +3171,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> TokenizationOperationResponse:
-        """Contract call
+        """Call token contract
 
-        This operation calls a smart contract. 
+        This operation performs a contract call on the token contract. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_contract_call_request: Request body for contract call
+        :param tokenization_contract_call_request: The request body for contract call.
         :type tokenization_contract_call_request: TokenizationContractCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2955,7 +3211,7 @@ class TokenizationApi:
     def tokenization_contract_call_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_contract_call_request: Annotated[Optional[TokenizationContractCallRequest], Field(description="Request body for contract call")] = None,
+        tokenization_contract_call_request: Annotated[Optional[TokenizationContractCallRequest], Field(description="The request body for contract call.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2965,13 +3221,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> ApiResponse[TokenizationOperationResponse]:
-        """Contract call
+        """Call token contract
 
-        This operation calls a smart contract. 
+        This operation performs a contract call on the token contract. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_contract_call_request: Request body for contract call
+        :param tokenization_contract_call_request: The request body for contract call.
         :type tokenization_contract_call_request: TokenizationContractCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3005,7 +3261,7 @@ class TokenizationApi:
     def tokenization_contract_call_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_contract_call_request: Annotated[Optional[TokenizationContractCallRequest], Field(description="Request body for contract call")] = None,
+        tokenization_contract_call_request: Annotated[Optional[TokenizationContractCallRequest], Field(description="The request body for contract call.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3015,13 +3271,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Contract call
+        """Call token contract
 
-        This operation calls a smart contract. 
+        This operation performs a contract call on the token contract. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_contract_call_request: Request body for contract call
+        :param tokenization_contract_call_request: The request body for contract call.
         :type tokenization_contract_call_request: TokenizationContractCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3089,7 +3345,7 @@ class TokenizationApi:
     def unpause_tokenization(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_unpause_token_request: Annotated[Optional[TokenizationUnpauseTokenRequest], Field(description="Request body for unpausing tokens")] = None,
+        tokenization_unpause_token_request: Annotated[Optional[TokenizationUnpauseTokenRequest], Field(description="The request body for unpausing tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3099,13 +3355,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> TokenizationOperationResponse:
-        """Unpause tokenization
+        """Unpause token contract
 
-        This operation unpauses the token contract. Creates an unpause transaction that will resume the token contract. 
+        This operation unpauses the token contract, resuming token operations and transfers. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_unpause_token_request: Request body for unpausing tokens
+        :param tokenization_unpause_token_request: The request body for unpausing tokens.
         :type tokenization_unpause_token_request: TokenizationUnpauseTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3139,7 +3395,7 @@ class TokenizationApi:
     def unpause_tokenization_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_unpause_token_request: Annotated[Optional[TokenizationUnpauseTokenRequest], Field(description="Request body for unpausing tokens")] = None,
+        tokenization_unpause_token_request: Annotated[Optional[TokenizationUnpauseTokenRequest], Field(description="The request body for unpausing tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3149,13 +3405,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> ApiResponse[TokenizationOperationResponse]:
-        """Unpause tokenization
+        """Unpause token contract
 
-        This operation unpauses the token contract. Creates an unpause transaction that will resume the token contract. 
+        This operation unpauses the token contract, resuming token operations and transfers. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_unpause_token_request: Request body for unpausing tokens
+        :param tokenization_unpause_token_request: The request body for unpausing tokens.
         :type tokenization_unpause_token_request: TokenizationUnpauseTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3189,7 +3445,7 @@ class TokenizationApi:
     def unpause_tokenization_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_unpause_token_request: Annotated[Optional[TokenizationUnpauseTokenRequest], Field(description="Request body for unpausing tokens")] = None,
+        tokenization_unpause_token_request: Annotated[Optional[TokenizationUnpauseTokenRequest], Field(description="The request body for unpausing tokens.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3199,13 +3455,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Unpause tokenization
+        """Unpause token contract
 
-        This operation unpauses the token contract. Creates an unpause transaction that will resume the token contract. 
+        This operation unpauses the token contract, resuming token operations and transfers. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_unpause_token_request: Request body for unpausing tokens
+        :param tokenization_unpause_token_request: The request body for unpausing tokens.
         :type tokenization_unpause_token_request: TokenizationUnpauseTokenRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3270,194 +3526,10 @@ class TokenizationApi:
         )
 
     @validate_call
-    def update_allowlist_addresses(
-        self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_update_allowlist_addresses_request: Annotated[Optional[TokenizationUpdateAllowlistAddressesRequest], Field(description="Request body for managing multiple allowlist addresses (adding or removing).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> TokenizationOperationResponse:
-        """Update allowlist addresses
-
-        This operation updates the allowlist addresses of the token contract. 
-
-        :param token_id: The token ID, which is the unique identifier of a token. (required)
-        :type token_id: str
-        :param tokenization_update_allowlist_addresses_request: Request body for managing multiple allowlist addresses (adding or removing).
-        :type tokenization_update_allowlist_addresses_request: TokenizationUpdateAllowlistAddressesRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._update_allowlist_addresses_serialize(
-            token_id=token_id,
-            tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TokenizationOperationResponse",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def update_allowlist_addresses_with_http_info(
-        self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_update_allowlist_addresses_request: Annotated[Optional[TokenizationUpdateAllowlistAddressesRequest], Field(description="Request body for managing multiple allowlist addresses (adding or removing).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ApiResponse[TokenizationOperationResponse]:
-        """Update allowlist addresses
-
-        This operation updates the allowlist addresses of the token contract. 
-
-        :param token_id: The token ID, which is the unique identifier of a token. (required)
-        :type token_id: str
-        :param tokenization_update_allowlist_addresses_request: Request body for managing multiple allowlist addresses (adding or removing).
-        :type tokenization_update_allowlist_addresses_request: TokenizationUpdateAllowlistAddressesRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._update_allowlist_addresses_serialize(
-            token_id=token_id,
-            tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TokenizationOperationResponse",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def update_allowlist_addresses_without_preload_content(
-        self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_update_allowlist_addresses_request: Annotated[Optional[TokenizationUpdateAllowlistAddressesRequest], Field(description="Request body for managing multiple allowlist addresses (adding or removing).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> RESTResponseType:
-        """Update allowlist addresses
-
-        This operation updates the allowlist addresses of the token contract. 
-
-        :param token_id: The token ID, which is the unique identifier of a token. (required)
-        :type token_id: str
-        :param tokenization_update_allowlist_addresses_request: Request body for managing multiple allowlist addresses (adding or removing).
-        :type tokenization_update_allowlist_addresses_request: TokenizationUpdateAllowlistAddressesRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._update_allowlist_addresses_serialize(
-            token_id=token_id,
-            tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TokenizationOperationResponse",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _update_allowlist_addresses_serialize(
-        self,
-        token_id,
-        tokenization_update_allowlist_addresses_request,
-    ) -> RequestSerialized:
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if token_id is not None:
-            _path_params['token_id'] = token_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if tokenization_update_allowlist_addresses_request is not None:
-            _body_params = tokenization_update_allowlist_addresses_request
-
-        # set the HTTP header `Accept`
-        _header_params = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/tokenization/tokens/{token_id}/allowlist/addresses',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-        )
-
-    @validate_call
     def update_tokenization_allowlist_activation(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_allowlist_activation_request: Annotated[Optional[TokenizationAllowlistActivationRequest], Field(description="Request body for updating the allowlist activation setting.")] = None,
+        tokenization_allowlist_activation_request: Annotated[Optional[TokenizationAllowlistActivationRequest], Field(description="The request body for activating or deactivating the allowlist.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3467,13 +3539,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> TokenizationOperationResponse:
-        """Update allowlist activation
+        """Activate or deactivate the allowlist
 
-        This operation updates the allowlist activation setting of the token contract. 
+        This operation activates or deactivates the allowlist. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_allowlist_activation_request: Request body for updating the allowlist activation setting.
+        :param tokenization_allowlist_activation_request: The request body for activating or deactivating the allowlist.
         :type tokenization_allowlist_activation_request: TokenizationAllowlistActivationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3507,7 +3579,7 @@ class TokenizationApi:
     def update_tokenization_allowlist_activation_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_allowlist_activation_request: Annotated[Optional[TokenizationAllowlistActivationRequest], Field(description="Request body for updating the allowlist activation setting.")] = None,
+        tokenization_allowlist_activation_request: Annotated[Optional[TokenizationAllowlistActivationRequest], Field(description="The request body for activating or deactivating the allowlist.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3517,13 +3589,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> ApiResponse[TokenizationOperationResponse]:
-        """Update allowlist activation
+        """Activate or deactivate the allowlist
 
-        This operation updates the allowlist activation setting of the token contract. 
+        This operation activates or deactivates the allowlist. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_allowlist_activation_request: Request body for updating the allowlist activation setting.
+        :param tokenization_allowlist_activation_request: The request body for activating or deactivating the allowlist.
         :type tokenization_allowlist_activation_request: TokenizationAllowlistActivationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3557,7 +3629,7 @@ class TokenizationApi:
     def update_tokenization_allowlist_activation_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_allowlist_activation_request: Annotated[Optional[TokenizationAllowlistActivationRequest], Field(description="Request body for updating the allowlist activation setting.")] = None,
+        tokenization_allowlist_activation_request: Annotated[Optional[TokenizationAllowlistActivationRequest], Field(description="The request body for activating or deactivating the allowlist.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3567,13 +3639,13 @@ class TokenizationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Update allowlist activation
+        """Activate or deactivate the allowlist
 
-        This operation updates the allowlist activation setting of the token contract. 
+        This operation activates or deactivates the allowlist. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_allowlist_activation_request: Request body for updating the allowlist activation setting.
+        :param tokenization_allowlist_activation_request: The request body for activating or deactivating the allowlist.
         :type tokenization_allowlist_activation_request: TokenizationAllowlistActivationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3638,10 +3710,194 @@ class TokenizationApi:
         )
 
     @validate_call
+    def update_tokenization_allowlist_addresses(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_update_allowlist_addresses_request: Annotated[Optional[TokenizationUpdateAllowlistAddressesRequest], Field(description="The request body for managing multiple allowlist addresses (adding or removing).")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TokenizationOperationResponse:
+        """Update allowlist addresses
+
+        This operation updates the allowlist addresses of the token contract. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_update_allowlist_addresses_request: The request body for managing multiple allowlist addresses (adding or removing).
+        :type tokenization_update_allowlist_addresses_request: TokenizationUpdateAllowlistAddressesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_tokenization_allowlist_addresses_serialize(
+            token_id=token_id,
+            tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationOperationResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def update_tokenization_allowlist_addresses_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_update_allowlist_addresses_request: Annotated[Optional[TokenizationUpdateAllowlistAddressesRequest], Field(description="The request body for managing multiple allowlist addresses (adding or removing).")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TokenizationOperationResponse]:
+        """Update allowlist addresses
+
+        This operation updates the allowlist addresses of the token contract. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_update_allowlist_addresses_request: The request body for managing multiple allowlist addresses (adding or removing).
+        :type tokenization_update_allowlist_addresses_request: TokenizationUpdateAllowlistAddressesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_tokenization_allowlist_addresses_serialize(
+            token_id=token_id,
+            tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationOperationResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def update_tokenization_allowlist_addresses_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_update_allowlist_addresses_request: Annotated[Optional[TokenizationUpdateAllowlistAddressesRequest], Field(description="The request body for managing multiple allowlist addresses (adding or removing).")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Update allowlist addresses
+
+        This operation updates the allowlist addresses of the token contract. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_update_allowlist_addresses_request: The request body for managing multiple allowlist addresses (adding or removing).
+        :type tokenization_update_allowlist_addresses_request: TokenizationUpdateAllowlistAddressesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_tokenization_allowlist_addresses_serialize(
+            token_id=token_id,
+            tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationOperationResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _update_tokenization_allowlist_addresses_serialize(
+        self,
+        token_id,
+        tokenization_update_allowlist_addresses_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if token_id is not None:
+            _path_params['token_id'] = token_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if tokenization_update_allowlist_addresses_request is not None:
+            _body_params = tokenization_update_allowlist_addresses_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/tokenization/tokens/{token_id}/allowlist/addresses',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def update_tokenization_blocklist_addresses(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_update_blocklist_addresses_request: Annotated[Optional[TokenizationUpdateBlocklistAddressesRequest], Field(description="Request body for managing multiple blocklist addresses (adding or removing).")] = None,
+        tokenization_update_blocklist_addresses_request: Annotated[Optional[TokenizationUpdateBlocklistAddressesRequest], Field(description="The request body for managing multiple blocklist addresses (adding or removing).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3657,7 +3913,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_update_blocklist_addresses_request: Request body for managing multiple blocklist addresses (adding or removing).
+        :param tokenization_update_blocklist_addresses_request: The request body for managing multiple blocklist addresses (adding or removing).
         :type tokenization_update_blocklist_addresses_request: TokenizationUpdateBlocklistAddressesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3691,7 +3947,7 @@ class TokenizationApi:
     def update_tokenization_blocklist_addresses_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_update_blocklist_addresses_request: Annotated[Optional[TokenizationUpdateBlocklistAddressesRequest], Field(description="Request body for managing multiple blocklist addresses (adding or removing).")] = None,
+        tokenization_update_blocklist_addresses_request: Annotated[Optional[TokenizationUpdateBlocklistAddressesRequest], Field(description="The request body for managing multiple blocklist addresses (adding or removing).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3707,7 +3963,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_update_blocklist_addresses_request: Request body for managing multiple blocklist addresses (adding or removing).
+        :param tokenization_update_blocklist_addresses_request: The request body for managing multiple blocklist addresses (adding or removing).
         :type tokenization_update_blocklist_addresses_request: TokenizationUpdateBlocklistAddressesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3741,7 +3997,7 @@ class TokenizationApi:
     def update_tokenization_blocklist_addresses_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
-        tokenization_update_blocklist_addresses_request: Annotated[Optional[TokenizationUpdateBlocklistAddressesRequest], Field(description="Request body for managing multiple blocklist addresses (adding or removing).")] = None,
+        tokenization_update_blocklist_addresses_request: Annotated[Optional[TokenizationUpdateBlocklistAddressesRequest], Field(description="The request body for managing multiple blocklist addresses (adding or removing).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3757,7 +4013,7 @@ class TokenizationApi:
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
-        :param tokenization_update_blocklist_addresses_request: Request body for managing multiple blocklist addresses (adding or removing).
+        :param tokenization_update_blocklist_addresses_request: The request body for managing multiple blocklist addresses (adding or removing).
         :type tokenization_update_blocklist_addresses_request: TokenizationUpdateBlocklistAddressesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3813,6 +4069,190 @@ class TokenizationApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/tokenization/tokens/{token_id}/blocklist/addresses',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def update_tokenization_permissions(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_update_permissions_request: Annotated[TokenizationUpdatePermissionsRequest, Field(description="The request body for managing permissions.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TokenizationOperationResponse:
+        """Update permissions of the token
+
+        This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_update_permissions_request: The request body for managing permissions. (required)
+        :type tokenization_update_permissions_request: TokenizationUpdatePermissionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_tokenization_permissions_serialize(
+            token_id=token_id,
+            tokenization_update_permissions_request=tokenization_update_permissions_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationOperationResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def update_tokenization_permissions_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_update_permissions_request: Annotated[TokenizationUpdatePermissionsRequest, Field(description="The request body for managing permissions.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TokenizationOperationResponse]:
+        """Update permissions of the token
+
+        This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_update_permissions_request: The request body for managing permissions. (required)
+        :type tokenization_update_permissions_request: TokenizationUpdatePermissionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_tokenization_permissions_serialize(
+            token_id=token_id,
+            tokenization_update_permissions_request=tokenization_update_permissions_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationOperationResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def update_tokenization_permissions_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_update_permissions_request: Annotated[TokenizationUpdatePermissionsRequest, Field(description="The request body for managing permissions.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Update permissions of the token
+
+        This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_update_permissions_request: The request body for managing permissions. (required)
+        :type tokenization_update_permissions_request: TokenizationUpdatePermissionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_tokenization_permissions_serialize(
+            token_id=token_id,
+            tokenization_update_permissions_request=tokenization_update_permissions_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationOperationResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _update_tokenization_permissions_serialize(
+        self,
+        token_id,
+        tokenization_update_permissions_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if token_id is not None:
+            _path_params['token_id'] = token_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if tokenization_update_permissions_request is not None:
+            _body_params = tokenization_update_permissions_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/tokenization/tokens/{token_id}/permissions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

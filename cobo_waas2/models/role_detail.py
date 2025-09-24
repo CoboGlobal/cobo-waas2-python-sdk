@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.approval_transaction_result import ApprovalTransactionResult
 from cobo_waas2.models.approval_user_detail import ApprovalUserDetail
@@ -28,9 +28,12 @@ class RoleDetail(BaseModel):
     Transaction approval details response schema.
     """  # noqa: E501
     result: Optional[ApprovalTransactionResult] = None
-    threshold: Optional[StrictInt] = Field(default=None, description="The threshold for the transaction approval.")
+    review_threshold: Optional[StrictInt] = Field(default=None, description="The threshold for the transaction approval.")
+    initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the transaction.")
+    is_upgraded: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction approval has been upgraded.")
+    complete_time: Optional[StrictStr] = Field(default=None, description="Time to complete the review.")
     user_details: Optional[List[ApprovalUserDetail]] = None
-    __properties: ClassVar[List[str]] = ["result", "threshold", "user_details"]
+    __properties: ClassVar[List[str]] = ["result", "review_threshold", "initiator", "is_upgraded", "complete_time", "user_details"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +94,10 @@ class RoleDetail(BaseModel):
 
         _obj = cls.model_validate({
             "result": obj.get("result"),
-            "threshold": obj.get("threshold"),
+            "review_threshold": obj.get("review_threshold"),
+            "initiator": obj.get("initiator"),
+            "is_upgraded": obj.get("is_upgraded"),
+            "complete_time": obj.get("complete_time"),
             "user_details": [ApprovalUserDetail.from_dict(_item) for _item in obj["user_details"]] if obj.get("user_details") is not None else None
         })
         return _obj
