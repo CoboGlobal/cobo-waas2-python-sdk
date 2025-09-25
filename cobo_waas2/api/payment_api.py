@@ -3646,7 +3646,7 @@ class PaymentApi:
     @validate_call
     def get_subscription_plan_by_id(
         self,
-        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        plan_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         _request_timeout: Union[
             None,
@@ -3661,8 +3661,8 @@ class PaymentApi:
 
         This operation retrieves the information of subscription plan detail. You can filter the result by subscription_id. 
 
-        :param subscription_id: A unique identifier subscription. (required)
-        :type subscription_id: str
+        :param plan_id: A unique identifier subscription. (required)
+        :type plan_id: str
         :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -3674,7 +3674,7 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._get_subscription_plan_by_id_serialize(
-            subscription_id=subscription_id,
+            plan_id=plan_id,
             token_id=token_id,
         )
 
@@ -3696,7 +3696,7 @@ class PaymentApi:
     @validate_call
     def get_subscription_plan_by_id_with_http_info(
         self,
-        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        plan_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         _request_timeout: Union[
             None,
@@ -3711,8 +3711,8 @@ class PaymentApi:
 
         This operation retrieves the information of subscription plan detail. You can filter the result by subscription_id. 
 
-        :param subscription_id: A unique identifier subscription. (required)
-        :type subscription_id: str
+        :param plan_id: A unique identifier subscription. (required)
+        :type plan_id: str
         :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -3724,7 +3724,7 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._get_subscription_plan_by_id_serialize(
-            subscription_id=subscription_id,
+            plan_id=plan_id,
             token_id=token_id,
         )
 
@@ -3746,7 +3746,7 @@ class PaymentApi:
     @validate_call
     def get_subscription_plan_by_id_without_preload_content(
         self,
-        subscription_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
+        plan_id: Annotated[StrictStr, Field(description="A unique identifier subscription.")],
         token_id: Annotated[StrictStr, Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         _request_timeout: Union[
             None,
@@ -3761,8 +3761,8 @@ class PaymentApi:
 
         This operation retrieves the information of subscription plan detail. You can filter the result by subscription_id. 
 
-        :param subscription_id: A unique identifier subscription. (required)
-        :type subscription_id: str
+        :param plan_id: A unique identifier subscription. (required)
+        :type plan_id: str
         :param token_id: The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -3774,7 +3774,7 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._get_subscription_plan_by_id_serialize(
-            subscription_id=subscription_id,
+            plan_id=plan_id,
             token_id=token_id,
         )
 
@@ -3791,7 +3791,7 @@ class PaymentApi:
 
     def _get_subscription_plan_by_id_serialize(
         self,
-        subscription_id,
+        plan_id,
         token_id,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
@@ -3801,8 +3801,8 @@ class PaymentApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if subscription_id is not None:
-            _path_params['subscription_id'] = subscription_id
+        if plan_id is not None:
+            _path_params['plan_id'] = plan_id
         # process the query parameters
         if token_id is not None:
             
@@ -3820,7 +3820,7 @@ class PaymentApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/payments/subscription_plans/{subscription_plan_id}',
+            resource_path='/payments/subscription_plans/{plan_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6604,7 +6604,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        subscription_action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
+        action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6628,8 +6628,8 @@ class PaymentApi:
         :type plan_id: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
-        :param subscription_action_id: A unique identifier subscription action.
-        :type subscription_action_id: str
+        :param action_id: A unique identifier subscription action.
+        :type action_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6644,7 +6644,7 @@ class PaymentApi:
             after=after,
             plan_id=plan_id,
             merchant_id=merchant_id,
-            subscription_action_id=subscription_action_id,
+            action_id=action_id,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -6670,7 +6670,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        subscription_action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
+        action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6694,8 +6694,8 @@ class PaymentApi:
         :type plan_id: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
-        :param subscription_action_id: A unique identifier subscription action.
-        :type subscription_action_id: str
+        :param action_id: A unique identifier subscription action.
+        :type action_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6710,7 +6710,7 @@ class PaymentApi:
             after=after,
             plan_id=plan_id,
             merchant_id=merchant_id,
-            subscription_action_id=subscription_action_id,
+            action_id=action_id,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -6736,7 +6736,7 @@ class PaymentApi:
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         plan_id: Annotated[Optional[StrictStr], Field(description="A unique identifier plan.")] = None,
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        subscription_action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
+        action_id: Annotated[Optional[StrictStr], Field(description="A unique identifier subscription action.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6760,8 +6760,8 @@ class PaymentApi:
         :type plan_id: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
-        :param subscription_action_id: A unique identifier subscription action.
-        :type subscription_action_id: str
+        :param action_id: A unique identifier subscription action.
+        :type action_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6776,7 +6776,7 @@ class PaymentApi:
             after=after,
             plan_id=plan_id,
             merchant_id=merchant_id,
-            subscription_action_id=subscription_action_id,
+            action_id=action_id,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -6797,7 +6797,7 @@ class PaymentApi:
         after,
         plan_id,
         merchant_id,
-        subscription_action_id,
+        action_id,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -6827,9 +6827,9 @@ class PaymentApi:
             
             _query_params.append(('merchant_id', merchant_id))
             
-        if subscription_action_id is not None:
+        if action_id is not None:
             
-            _query_params.append(('subscription_action_id', subscription_action_id))
+            _query_params.append(('action_id', action_id))
             
         # process the header parameters
         # process the form parameters

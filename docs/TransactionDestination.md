@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **calldata** | **str** | The data that is used to invoke a specific function or method within the specified contract at the destination address.  | 
 **calldata_info** | [**TransactionEvmCalldataInfo**](TransactionEvmCalldataInfo.md) |  | [optional] 
 **instructions** | [**List[TransactionSolContractInstruction]**](TransactionSolContractInstruction.md) |  | [optional] 
+**address_lookup_table_accounts** | [**List[TransactionSolContractAddressLookupTableAccount]**](TransactionSolContractAddressLookupTableAccount.md) |  | [optional] 
 **cosmos_messages** | [**List[TransactionCosmosMessage]**](TransactionCosmosMessage.md) |  | 
 **message** | **str** | The raw data of the message to be signed, encoded in Base64 format. | 
 **raw_structured_data** | **str** | The raw structured data to be signed, formatted as a JSON string. | [optional] 

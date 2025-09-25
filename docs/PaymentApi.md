@@ -24,7 +24,7 @@ Method | HTTP request | Description
 [**get_settlement_by_id**](PaymentApi.md#get_settlement_by_id) | **GET** /payments/settlement_requests/{settlement_request_id} | Get settlement request information
 [**get_settlement_info_by_ids**](PaymentApi.md#get_settlement_info_by_ids) | **GET** /payments/settlement_info | Get withdrawable balances
 [**get_subscription_by_id**](PaymentApi.md#get_subscription_by_id) | **GET** /payments/subscriptions/{subscription_id} | Get subscription by id
-[**get_subscription_plan_by_id**](PaymentApi.md#get_subscription_plan_by_id) | **GET** /payments/subscription_plans/{subscription_plan_id} | Get subscription plan by id
+[**get_subscription_plan_by_id**](PaymentApi.md#get_subscription_plan_by_id) | **GET** /payments/subscription_plans/{plan_id} | Get subscription plan by id
 [**get_top_up_address**](PaymentApi.md#get_top_up_address) | **GET** /payments/topup/address | Get top-up address
 [**list_bank_accounts**](PaymentApi.md#list_bank_accounts) | **GET** /payments/bank_accounts | List all bank accounts
 [**list_crypto_addresses**](PaymentApi.md#list_crypto_addresses) | **GET** /payments/crypto_addresses | List crypto addresses
@@ -1520,7 +1520,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_subscription_plan_by_id**
-> PaymentSubscriptionPlanDetail get_subscription_plan_by_id(subscription_id, token_id)
+> PaymentSubscriptionPlanDetail get_subscription_plan_by_id(plan_id, token_id)
 
 Get subscription plan by id
 
@@ -1548,12 +1548,12 @@ configuration = cobo_waas2.Configuration(
 with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.PaymentApi(api_client)
-    subscription_id = '123e457-e89b-12d3-a456-426614174004'
+    plan_id = '123e457-e89b-12d3-a456-426614174004'
     token_id = 'ETH_USDT'
 
     try:
         # Get subscription plan by id
-        api_response = api_instance.get_subscription_plan_by_id(subscription_id, token_id)
+        api_response = api_instance.get_subscription_plan_by_id(plan_id, token_id)
         print("The response of PaymentApi->get_subscription_plan_by_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -1567,7 +1567,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subscription_id** | **str**| A unique identifier subscription. | 
+ **plan_id** | **str**| A unique identifier subscription. | 
  **token_id** | **str**| The token ID, which identifies the cryptocurrency. Supported values:    - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDC&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
 
 ### Return type
@@ -2593,7 +2593,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_subscriptions**
-> ListSubscriptions200Response list_subscriptions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, subscription_action_id=subscription_action_id)
+> ListSubscriptions200Response list_subscriptions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, action_id=action_id)
 
 List subscriptions
 
@@ -2626,11 +2626,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
     plan_id = '123e457-e89b-12d3-a456-426614174004'
     merchant_id = 'M1001'
-    subscription_action_id = '123e457-e89b-12d3-a456-426614174004'
+    action_id = '123e457-e89b-12d3-a456-426614174004'
 
     try:
         # List subscriptions
-        api_response = api_instance.list_subscriptions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, subscription_action_id=subscription_action_id)
+        api_response = api_instance.list_subscriptions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, action_id=action_id)
         print("The response of PaymentApi->list_subscriptions:\n")
         pprint(api_response)
     except Exception as e:
@@ -2649,7 +2649,7 @@ Name | Type | Description  | Notes
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
  **plan_id** | **str**| A unique identifier plan. | [optional] 
  **merchant_id** | **str**| The merchant ID. | [optional] 
- **subscription_action_id** | **str**| A unique identifier subscription action. | [optional] 
+ **action_id** | **str**| A unique identifier subscription action. | [optional] 
 
 ### Return type
 

@@ -457,6 +457,7 @@ cobo_waas2/models/smart_contract_wallet_type.py
 cobo_waas2/models/sol_base.py
 cobo_waas2/models/sol_compute_unit.py
 cobo_waas2/models/sol_contract_call_account.py
+cobo_waas2/models/sol_contract_call_address_lookup_table_account.py
 cobo_waas2/models/sol_contract_call_destination.py
 cobo_waas2/models/sol_contract_call_instruction.py
 cobo_waas2/models/source_group.py
@@ -643,6 +644,7 @@ cobo_waas2/models/transaction_signature_result.py
 cobo_waas2/models/transaction_signer.py
 cobo_waas2/models/transaction_smart_contract_safe_wallet_source.py
 cobo_waas2/models/transaction_sol_contract_account.py
+cobo_waas2/models/transaction_sol_contract_address_lookup_table_account.py
 cobo_waas2/models/transaction_sol_contract_destination.py
 cobo_waas2/models/transaction_sol_contract_instruction.py
 cobo_waas2/models/transaction_sol_fee.py
@@ -1195,6 +1197,7 @@ docs/SmartContractWalletInfo.md
 docs/SmartContractWalletOperationType.md
 docs/SmartContractWalletType.md
 docs/SolContractCallAccount.md
+docs/SolContractCallAddressLookupTableAccount.md
 docs/SolContractCallDestination.md
 docs/SolContractCallInstruction.md
 docs/SourceGroup.md
@@ -1425,6 +1428,7 @@ docs/TransactionSignatureResult.md
 docs/TransactionSigner.md
 docs/TransactionSmartContractSafeWalletSource.md
 docs/TransactionSolContractAccount.md
+docs/TransactionSolContractAddressLookupTableAccount.md
 docs/TransactionSolContractDestination.md
 docs/TransactionSolContractInstruction.md
 docs/TransactionSource.md
@@ -1946,6 +1950,7 @@ test/test_smart_contract_wallet_type.py
 test/test_sol_base.py
 test/test_sol_compute_unit.py
 test/test_sol_contract_call_account.py
+test/test_sol_contract_call_address_lookup_table_account.py
 test/test_sol_contract_call_destination.py
 test/test_sol_contract_call_instruction.py
 test/test_source_group.py
@@ -2135,6 +2140,7 @@ test/test_transaction_signature_result.py
 test/test_transaction_signer.py
 test/test_transaction_smart_contract_safe_wallet_source.py
 test/test_transaction_sol_contract_account.py
+test/test_transaction_sol_contract_address_lookup_table_account.py
 test/test_transaction_sol_contract_destination.py
 test/test_transaction_sol_contract_instruction.py
 test/test_transaction_sol_fee.py

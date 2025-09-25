@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **request_id** | **str** | The action request id. | 
-**subscription_action_id** | **str** | The action id. | 
+**action_id** | **str** | The action id. | 
 **plan_id** | **str** | The plan id in cobo. | 
 **subscription_id** | **str** | The subscription id in cobo. | 
 **merchant_id** | **str** | The merchant id in cobo. | 

@@ -37,7 +37,7 @@ class TestPaymentSubscriptionDetail(unittest.TestCase):
                 actions = [
                     cobo_waas2.models.payment_subscription_action.PaymentSubscriptionAction(
                         request_id = '123e457-e89b-12d3-a456-426614174004', 
-                        subscription_action_id = '123e457-e89b-12d3-a456-426614174004', 
+                        action_id = '123e457-e89b-12d3-a456-426614174004', 
                         plan_id = '123e457-e89b-12d3-a456-426614174004', 
                         subscription_id = '123e457-e89b-12d3-a456-426614174004', 
                         merchant_id = '123e457-e89b-12d3-a456-426614174004', 

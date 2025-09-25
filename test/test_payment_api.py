@@ -286,10 +286,10 @@ class TestPaymentApi(unittest.TestCase):
         Get subscription plan by id
         """
         """
-        subscription_id = '123e457-e89b-12d3-a456-426614174004'
+        plan_id = '123e457-e89b-12d3-a456-426614174004'
         token_id = 'ETH_USDT'
 
-        api_response = self.api.get_subscription_plan_by_id(subscription_id, token_id)
+        api_response = self.api.get_subscription_plan_by_id(plan_id, token_id)
         """
 
     def test_get_top_up_address(self) -> None:
@@ -492,9 +492,9 @@ class TestPaymentApi(unittest.TestCase):
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         plan_id = '123e457-e89b-12d3-a456-426614174004'
         merchant_id = 'M1001'
-        subscription_action_id = '123e457-e89b-12d3-a456-426614174004'
+        action_id = '123e457-e89b-12d3-a456-426614174004'
 
-        api_response = self.api.list_subscriptions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, subscription_action_id=subscription_action_id)
+        api_response = self.api.list_subscriptions(limit=limit, before=before, after=after, plan_id=plan_id, merchant_id=merchant_id, action_id=action_id)
         """
 
     def test_list_top_up_payer_accounts(self) -> None:

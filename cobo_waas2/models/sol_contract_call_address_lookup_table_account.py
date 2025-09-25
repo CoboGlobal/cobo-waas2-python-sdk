@@ -15,22 +15,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.payment_subscription_action_type import PaymentSubscriptionActionType
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class PaymentExtendPeriodSubscriptionActionData(BaseModel):
+class SolContractCallAddressLookupTableAccount(BaseModel):
     """
-    PaymentExtendPeriodSubscriptionActionData
+    The information about the Solana address lookup table account.
     """  # noqa: E501
-    periods: Optional[StrictInt] = Field(default=None, description="The periods needed updated.")
-    action_type: PaymentSubscriptionActionType
-    subscription_id: StrictStr = Field(description="The subscription id in cobo.")
-    signature: StrictStr = Field(description="The signature for transaction.")
-    __properties: ClassVar[List[str]] = ["action_type", "subscription_id", "signature"]
+    alt_account_key: StrictStr = Field(description="The on-chain public key of the address lookup table account (ALT), identifying the specific lookup table.")
+    addresses: List[StrictStr] = Field(description="An array of stored account addresses within the lookup table, which can be referenced in the transaction by index.")
+    __properties: ClassVar[List[str]] = ["alt_account_key", "addresses"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +47,7 @@ class PaymentExtendPeriodSubscriptionActionData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentExtendPeriodSubscriptionActionData from a JSON string"""
+        """Create an instance of SolContractCallAddressLookupTableAccount from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +72,7 @@ class PaymentExtendPeriodSubscriptionActionData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentExtendPeriodSubscriptionActionData from a dict"""
+        """Create an instance of SolContractCallAddressLookupTableAccount from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +80,8 @@ class PaymentExtendPeriodSubscriptionActionData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "action_type": obj.get("action_type"),
-            "subscription_id": obj.get("subscription_id"),
-            "signature": obj.get("signature")
+            "alt_account_key": obj.get("alt_account_key"),
+            "addresses": obj.get("addresses")
         })
         return _obj
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action_type** | [**PaymentSubscriptionAction**](PaymentSubscriptionAction.md) |  | 
+**action_type** | [**PaymentSubscriptionActionType**](PaymentSubscriptionActionType.md) |  | 
 **subscription_id** | **str** | The subscription id in cobo. | 
 
 ## Example

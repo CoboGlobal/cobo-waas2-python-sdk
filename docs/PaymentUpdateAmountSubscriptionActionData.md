@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**new_plan_id** | **str** | The new plan id in cobo. | [optional] 
-**action_type** | [**PaymentSubscriptionAction**](PaymentSubscriptionAction.md) |  | 
+**new_plan_id** | **str** | The new plan id in cobo. | 
+**action_type** | [**PaymentSubscriptionActionType**](PaymentSubscriptionActionType.md) |  | 
 **subscription_id** | **str** | The subscription id in cobo. | 
 **signature** | **str** | The signature for transaction. | 
 
