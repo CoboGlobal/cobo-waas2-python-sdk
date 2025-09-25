@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_type** | [**ContractCallDestinationType**](ContractCallDestinationType.md) |  | 
 **instructions** | [**List[SolContractCallInstruction]**](SolContractCallInstruction.md) |  | 
+**address_lookup_table_accounts** | [**List[SolContractCallAddressLookupTableAccount]**](SolContractCallAddressLookupTableAccount.md) |  | [optional] 
 
 ## Example
 

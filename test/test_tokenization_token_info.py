@@ -39,6 +39,7 @@ class TestTokenizationTokenInfo(unittest.TestCase):
                 token_address = '0x1234567890123456789012345678901234567890',
                 token_name = 'CUSD',
                 token_symbol = 'CUSD',
+                token_standard = 'ERC20',
                 decimals = 18,
                 token_access_activated = False,
                 status = 'Active',
@@ -50,6 +51,7 @@ class TestTokenizationTokenInfo(unittest.TestCase):
                 token_id = 'ETH_CUSD2',
                 chain_id = 'ETH',
                 token_symbol = 'CUSD',
+                token_standard = 'ERC20',
                 decimals = 18,
                 status = 'Active',
         )

@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The merchant name. | 
+**wallet_id** | **str** | The ID of the wallet linked to the merchant. | [optional] 
 **developer_fee_rate** | **str** | The fee rate applied when topping up the merchant account. Represented as a string percentage (e.g., \&quot;0.1\&quot; means 10%). | [optional] 
 **wallet_setup** | [**WalletSetup**](WalletSetup.md) |  | [optional] 
 

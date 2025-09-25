@@ -45,6 +45,13 @@ class TestSolContractCallDestination(unittest.TestCase):
                             ], 
                         data = '37u9WtQpcm6ULa3WRQHmj49EPs4if7o9f1jSRVZpm2dvihR9C8jY4NqEwXUbLwx15HBSNcP1', 
                         program_id = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', )
+                    ],
+                address_lookup_table_accounts = [
+                    cobo_waas2.models.sol_address_lookup_table_account.SOL Address Lookup Table Account(
+                        alt_account_key = 'ALT1Xyz9A1b2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q', 
+                        addresses = [
+                            'G7a1b2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9'
+                            ], )
                     ]
             )
         else:

@@ -35,33 +35,14 @@ class TestPaymentUpdateAmountSubscriptionActionData(unittest.TestCase):
         if include_optional:
             return PaymentUpdateAmountSubscriptionActionData(
                 new_plan_id = '123e457-e89b-12d3-a456-426614174004',
-                action_type = cobo_waas2.models.payment_subscription_action.PaymentSubscriptionAction(
-                    request_id = '123e457-e89b-12d3-a456-426614174004', 
-                    subscription_action_id = '123e457-e89b-12d3-a456-426614174004', 
-                    plan_id = '123e457-e89b-12d3-a456-426614174004', 
-                    subscription_id = '123e457-e89b-12d3-a456-426614174004', 
-                    merchant_id = '123e457-e89b-12d3-a456-426614174004', 
-                    merchant_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc', 
-                    data = null, 
-                    status = 'Pending', 
-                    created_timestamp = 1744689600, 
-                    updated_timestamp = 1744689600, ),
+                action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
                 signature = ''
             )
         else:
             return PaymentUpdateAmountSubscriptionActionData(
-                action_type = cobo_waas2.models.payment_subscription_action.PaymentSubscriptionAction(
-                    request_id = '123e457-e89b-12d3-a456-426614174004', 
-                    subscription_action_id = '123e457-e89b-12d3-a456-426614174004', 
-                    plan_id = '123e457-e89b-12d3-a456-426614174004', 
-                    subscription_id = '123e457-e89b-12d3-a456-426614174004', 
-                    merchant_id = '123e457-e89b-12d3-a456-426614174004', 
-                    merchant_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc', 
-                    data = null, 
-                    status = 'Pending', 
-                    created_timestamp = 1744689600, 
-                    updated_timestamp = 1744689600, ),
+                new_plan_id = '123e457-e89b-12d3-a456-426614174004',
+                action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
                 signature = '',
         )

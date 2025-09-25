@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.payment_subscription_action_data import PaymentSubscriptionActionData
 from cobo_waas2.models.payment_subscription_action_status import PaymentSubscriptionActionStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,7 @@ class PaymentSubscriptionAction(BaseModel):
     PaymentSubscriptionAction
     """  # noqa: E501
     request_id: StrictStr = Field(description="The action request id.")
-    subscription_action_id: StrictStr = Field(description="The action id.")
+    action_id: StrictStr = Field(description="The action id.")
     plan_id: StrictStr = Field(description="The plan id in cobo.")
     subscription_id: StrictStr = Field(description="The subscription id in cobo.")
     merchant_id: StrictStr = Field(description="The merchant id in cobo.")
@@ -36,7 +37,7 @@ class PaymentSubscriptionAction(BaseModel):
     status: PaymentSubscriptionActionStatus
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the subscription action, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the subscription action, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["request_id", "subscription_action_id", "plan_id", "subscription_id", "merchant_id", "merchant_address", "data", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["request_id", "action_id", "plan_id", "subscription_id", "merchant_id", "merchant_address", "data", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +94,7 @@ class PaymentSubscriptionAction(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
-            "subscription_action_id": obj.get("subscription_action_id"),
+            "action_id": obj.get("action_id"),
             "plan_id": obj.get("plan_id"),
             "subscription_id": obj.get("subscription_id"),
             "merchant_id": obj.get("merchant_id"),
@@ -105,7 +106,4 @@ class PaymentSubscriptionAction(BaseModel):
         })
         return _obj
 
-from cobo_waas2.models.payment_subscription_action_data import PaymentSubscriptionActionData
-# TODO: Rewrite to not use raise_errors
-PaymentSubscriptionAction.model_rebuild(raise_errors=False)
 

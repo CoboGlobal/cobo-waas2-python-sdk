@@ -16,7 +16,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
+from cobo_waas2.models.payment_subscription_action_type import PaymentSubscriptionActionType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +26,8 @@ class PaymentUpdateAmountSubscriptionActionData(BaseModel):
     """
     PaymentUpdateAmountSubscriptionActionData
     """  # noqa: E501
-    new_plan_id: Optional[StrictStr] = Field(default=None, description="The new plan id in cobo.")
-    action_type: PaymentSubscriptionAction
+    new_plan_id: StrictStr = Field(description="The new plan id in cobo.")
+    action_type: PaymentSubscriptionActionType
     subscription_id: StrictStr = Field(description="The subscription id in cobo.")
     signature: StrictStr = Field(description="The signature for transaction.")
     __properties: ClassVar[List[str]] = ["action_type", "subscription_id", "signature"]
@@ -70,9 +71,6 @@ class PaymentUpdateAmountSubscriptionActionData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of action_type
-        if self.action_type:
-            _dict['action_type'] = self.action_type.to_dict()
         return _dict
 
     @classmethod
@@ -85,13 +83,10 @@ class PaymentUpdateAmountSubscriptionActionData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "action_type": PaymentSubscriptionAction.from_dict(obj["action_type"]) if obj.get("action_type") is not None else None,
+            "action_type": obj.get("action_type"),
             "subscription_id": obj.get("subscription_id"),
             "signature": obj.get("signature")
         })
         return _obj
 
-from cobo_waas2.models.payment_subscription_action import PaymentSubscriptionAction
-# TODO: Rewrite to not use raise_errors
-PaymentUpdateAmountSubscriptionActionData.model_rebuild(raise_errors=False)
 

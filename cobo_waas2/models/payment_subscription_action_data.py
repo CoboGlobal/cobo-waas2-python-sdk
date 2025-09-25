@@ -15,7 +15,12 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from cobo_waas2.models.payment_approve_subscription_action_data import PaymentApproveSubscriptionActionData
+from cobo_waas2.models.payment_base_subscription_action_data import PaymentBaseSubscriptionActionData
 from cobo_waas2.models.payment_create_subscription_action_data import PaymentCreateSubscriptionActionData
+from cobo_waas2.models.payment_developer_subscription_action_data import PaymentDeveloperSubscriptionActionData
+from cobo_waas2.models.payment_extend_period_subscription_action_data import PaymentExtendPeriodSubscriptionActionData
+from cobo_waas2.models.payment_update_amount_subscription_action_data import PaymentUpdateAmountSubscriptionActionData
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
@@ -273,11 +278,4 @@ class PaymentSubscriptionActionData(BaseModel):
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
 
-from cobo_waas2.models.payment_approve_subscription_action_data import PaymentApproveSubscriptionActionData
-from cobo_waas2.models.payment_base_subscription_action_data import PaymentBaseSubscriptionActionData
-from cobo_waas2.models.payment_developer_subscription_action_data import PaymentDeveloperSubscriptionActionData
-from cobo_waas2.models.payment_extend_period_subscription_action_data import PaymentExtendPeriodSubscriptionActionData
-from cobo_waas2.models.payment_update_amount_subscription_action_data import PaymentUpdateAmountSubscriptionActionData
-# TODO: Rewrite to not use raise_errors
-PaymentSubscriptionActionData.model_rebuild(raise_errors=False)
 

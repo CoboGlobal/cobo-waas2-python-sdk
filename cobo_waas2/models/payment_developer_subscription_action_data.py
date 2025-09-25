@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
+from cobo_waas2.models.payment_subscription_action_type import PaymentSubscriptionActionType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +26,7 @@ class PaymentDeveloperSubscriptionActionData(BaseModel):
     """
     PaymentDeveloperSubscriptionActionData
     """  # noqa: E501
-    action_type: PaymentSubscriptionAction
+    action_type: PaymentSubscriptionActionType
     subscription_id: StrictStr = Field(description="The subscription id in cobo.")
     __properties: ClassVar[List[str]] = ["action_type", "subscription_id"]
 
@@ -68,9 +69,6 @@ class PaymentDeveloperSubscriptionActionData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of action_type
-        if self.action_type:
-            _dict['action_type'] = self.action_type.to_dict()
         return _dict
 
     @classmethod
@@ -83,12 +81,9 @@ class PaymentDeveloperSubscriptionActionData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "action_type": PaymentSubscriptionAction.from_dict(obj["action_type"]) if obj.get("action_type") is not None else None,
+            "action_type": obj.get("action_type"),
             "subscription_id": obj.get("subscription_id")
         })
         return _obj
 
-from cobo_waas2.models.payment_subscription_action import PaymentSubscriptionAction
-# TODO: Rewrite to not use raise_errors
-PaymentDeveloperSubscriptionActionData.model_rebuild(raise_errors=False)
 
