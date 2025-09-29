@@ -25,7 +25,7 @@ class RevokeApprovalRequestRequest(BaseModel):
     """
     RevokeApprovalRequestRequest
     """  # noqa: E501
-    initiator_email: StrictStr = Field(description="The email of the user who requested the approval.")
+    initiator_email: StrictStr = Field(description="The initiator email of workflow approval request.")
     __properties: ClassVar[List[str]] = ["initiator_email"]
 
     model_config = ConfigDict(

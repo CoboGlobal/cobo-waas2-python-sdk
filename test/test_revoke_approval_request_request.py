@@ -34,11 +34,11 @@ class TestRevokeApprovalRequestRequest(unittest.TestCase):
         model = RevokeApprovalRequestRequest()
         if include_optional:
             return RevokeApprovalRequestRequest(
-                initiator_email = 'johnsmith@example.com'
+                initiator_email = 'aa@cobo.com'
             )
         else:
             return RevokeApprovalRequestRequest(
-                initiator_email = 'johnsmith@example.com',
+                initiator_email = 'aa@cobo.com',
         )
         """
 

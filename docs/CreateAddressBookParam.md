@@ -1,6 +1,6 @@
 # CreateAddressBookParam
 
-The request body to add an address to your Address Book.
+The request body to create address book.
 
 ## Properties
 
@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chain_ids** | **List[str]** | A list of chain IDs. | 
 **address** | **str** | The wallet address. | 
-**memo** | **str** | Optional memo or tag required by some chains. | [optional] 
-**label** | **str** | A user-defined label for the address. | [optional] 
+**memo** | **str** | The memo. | [optional] 
+**label** | **str** | The address label. | [optional] 
 **email** | **str** | The email of the address owner. | [optional] 
 
 ## Example

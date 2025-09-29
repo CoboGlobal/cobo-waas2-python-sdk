@@ -24,17 +24,18 @@ from typing_extensions import Self
 
 class TransactionFILFee(BaseModel):
     """
-    The transaction fee actually charged by the chain that uses the Filecoin fee model.  In this model, the fee is calculated as: fee = base fee * gas used + gas premium * gas limit. For more details, refer to [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
+    The transaction fee actually charged by the chain that uses the FIL fee model.  In the Fil fee model, the calculation method for the fee is: fee = gas_fee_cap * gas_limit, refer to [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
-    gas_base: Optional[StrictStr] = Field(default=None, description="The minimum fee required for a transaction to be included in a block. The base fee is dynamically adjusted based on network congestion to maintain target block utilization. It is burned rather than paid to miners, reducing the total Filecoin supply over time.")
-    gas_premium: Optional[StrictStr] = Field(default=None, description="An optional tip you can include to prioritize your transaction. The gas premium incentivizes miners to include your transaction sooner than those offering only the base fee.")
-    gas_fee_cap: Optional[StrictStr] = Field(default=None, description="The maximum gas price you are willing to pay per unit of gas.")
-    gas_limit: Optional[StrictStr] = Field(default=None, description="The maximum amount of gas your transaction is allowed to consume.")
+    gas_base: Optional[StrictStr] = Field(default=None, description="This is the minimum fee required to include a transaction in a block. It is determined by the network's congestion level, which adjusts to maintain a target block utilization rate. The base fee is burned, reducing the total supply of Filecoin over time.")
+    gas_premium: Optional[StrictStr] = Field(default=None, description="An optional additional fee that users can include to prioritize their transactions over others. It acts like a tip to incentivize miners to select and include your transaction over transactions with only the base fee.")
+    gas_fee_cap: Optional[StrictStr] = Field(default=None, description="The gas_fee_cap is a user-defined limit on how much they are willing to pay per unit of gas.")
+    gas_limit: Optional[StrictStr] = Field(default=None, description="This defines the maximum amount of computational effort that a transaction is allowed to consume. It's a way to cap the resources that a transaction can use, ensuring it doesn't consume excessive network resources.")
     fee_type: FeeType
-    token_id: Optional[StrictStr] = Field(default=None, description="The token used to pay the transaction fee.")
-    fee_used: Optional[StrictStr] = Field(default=None, description="The actually charged transaction fee.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the transaction fee.")
+    fee_used: Optional[StrictStr] = Field(default=None, description="The transaction fee.")
     estimated_fee_used: Optional[StrictStr] = Field(default=None, description="The estimated transaction fee.")
-    __properties: ClassVar[List[str]] = ["gas_base", "gas_premium", "gas_fee_cap", "gas_limit", "fee_type", "token_id", "fee_used", "estimated_fee_used"]
+    gas_used: Optional[StrictStr] = Field(default=None, description="The gas units used in the transaction.")
+    __properties: ClassVar[List[str]] = ["gas_base", "gas_premium", "gas_fee_cap", "gas_limit", "fee_type", "token_id", "fee_used", "estimated_fee_used", "gas_used"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +95,8 @@ class TransactionFILFee(BaseModel):
             "fee_type": obj.get("fee_type"),
             "token_id": obj.get("token_id"),
             "fee_used": obj.get("fee_used"),
-            "estimated_fee_used": obj.get("estimated_fee_used")
+            "estimated_fee_used": obj.get("estimated_fee_used"),
+            "gas_used": obj.get("gas_used")
         })
         return _obj
 

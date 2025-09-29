@@ -38,7 +38,7 @@ class PaymentTransactionEventData(BaseModel):
     """
     PaymentTransactionEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The payment address update event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The suspended token event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data.")
     transaction_id: StrictStr = Field(description="The transaction ID.")
     cobo_id: Optional[StrictStr] = Field(default=None, description="The Cobo ID, which can be used to track a transaction.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
@@ -66,22 +66,23 @@ class PaymentTransactionEventData(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="The description for your transaction.")
     is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
     cobo_category: Optional[List[StrictStr]] = Field(default=None, description="The transaction category defined by Cobo. Possible values include:  - `AutoSweep`: An auto-sweep transaction. - `AutoFueling`: A transaction where Fee Station pays transaction fees to an address within your wallet. - `AutoFuelingRefund`: A refund for an auto-fueling transaction. - `SafeTxMessage`: A message signing transaction to authorize a Smart Contract Wallet (Safe\\{Wallet\\}) transaction. - `BillPayment`: A transaction to pay Cobo bills through Fee Station. - `BillRefund`: A refund for a previously made bill payment. - `CommissionFeeCharge`: A transaction to charge commission fees via Fee Station. - `CommissionFeeRefund`: A refund of previously charged commission fees. ")
-    extra: Optional[List[StrictStr]] = Field(default=None, description="A list of JSON-encoded strings containing structured, business-specific extra information for the transaction. Each item corresponds to a specific data type, indicated by the `extra_type` field in the JSON object (for example, \"BabylonBusinessInfo\", \"BtcAddressInfo\"). ")
+    extra: Optional[List[StrictStr]] = Field(default=None, description="The transaction extra information.")
     fueling_info: Optional[TransactionFuelingInfo] = None
     created_timestamp: StrictInt = Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: StrictInt = Field(description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
     acquiring_type: AcquiringType
-    order_id: Optional[StrictStr] = Field(default=None, description="The pay-in order ID.")
+    order_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of a single order")
     psp_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the developer to identify this order in their system.")
-    payer_id: Optional[StrictStr] = Field(default=None, description="A unique identifier assigned by Cobo to track and identify individual payers.")
-    custom_payer_id: Optional[StrictStr] = Field(default=None, description="A unique identifier assigned by the developer to track and identify individual payers in their system.")
-    __properties: ClassVar[List[str]] = ["data_type", "transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "extra", "fueling_info", "created_timestamp", "updated_timestamp", "acquiring_type", "order_id", "psp_order_code", "payer_id", "custom_payer_id"]
+    payer_id: Optional[StrictStr] = Field(default=None, description="Unique payer identifier on the Cobo side, auto-generated by the system. ")
+    custom_payer_id: Optional[StrictStr] = Field(default=None, description="Unique user identifier on the merchant side, used to assign a dedicated deposit address. ")
+    subscription_id: Optional[StrictStr] = Field(default=None, description="A unique identifier assigned by Cobo to track and identify subscription.")
+    __properties: ClassVar[List[str]] = ["data_type", "transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "extra", "fueling_info", "created_timestamp", "updated_timestamp", "acquiring_type", "order_id", "psp_order_code", "payer_id", "custom_payer_id", "subscription_id"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings')")
         return value
 
     model_config = ConfigDict(
@@ -195,7 +196,8 @@ class PaymentTransactionEventData(BaseModel):
             "order_id": obj.get("order_id"),
             "psp_order_code": obj.get("psp_order_code"),
             "payer_id": obj.get("payer_id"),
-            "custom_payer_id": obj.get("custom_payer_id")
+            "custom_payer_id": obj.get("custom_payer_id"),
+            "subscription_id": obj.get("subscription_id")
         })
         return _obj
 

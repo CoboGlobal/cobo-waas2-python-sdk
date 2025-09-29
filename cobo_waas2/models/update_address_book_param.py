@@ -23,12 +23,12 @@ from typing_extensions import Self
 
 class UpdateAddressBookParam(BaseModel):
     """
-    The request body to update Address Book.
+    The request body to update address book.
     """  # noqa: E501
     chain_ids: List[StrictStr] = Field(description="A list of chain IDs.")
-    memo: Optional[StrictStr] = Field(default=None, description="Optional memo or tag required by some chains.")
-    label: Optional[StrictStr] = Field(default=None, description="A user-defined label for the address.")
-    email: Optional[StrictStr] = Field(default=None, description="Email of the address owner.")
+    memo: Optional[StrictStr] = Field(default=None, description="The memo.")
+    label: Optional[StrictStr] = Field(default=None, description="The address label.")
+    email: Optional[StrictStr] = Field(default=None, description="The email of the address owner.")
     __properties: ClassVar[List[str]] = ["chain_ids", "memo", "label", "email"]
 
     model_config = ConfigDict(

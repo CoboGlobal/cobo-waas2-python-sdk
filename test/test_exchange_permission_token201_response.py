@@ -35,8 +35,8 @@ class TestExchangePermissionToken201Response(unittest.TestCase):
         if include_optional:
             return ExchangePermissionToken201Response(
                 access_token = 'AnCEPEp5Q8qjAOA1Lb6kVd2OlkCyJnMTeMPdLbPOM8cz176Eb5y7EJoUjJJ0vkzz',
-                token_type = '',
-                expires_in = 56,
+                token_type = 'Bearer',
+                expires_in = 43199,
                 refresh_token = 'rK49jI0zt49gsttzscscik15Asmlpu1TdcxqguJJS8B9f6ilJEC0y3PbVqwsEAw5'
             )
         else:

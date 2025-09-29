@@ -23,11 +23,11 @@ from typing_extensions import Self
 
 class ApprovalTemplate(BaseModel):
     """
-    Approval template details.
+    The template for transaction approval details.
     """  # noqa: E501
-    business_key: Optional[StrictStr] = Field(default=None, description="Business key used to identify the type of approval template.")
-    template_text: Optional[StrictStr] = Field(default=None, description="Text content defined in the approval template used to generate approval messages shown to users")
-    template_version: Optional[StrictStr] = Field(default=None, description="Version of the approval template.")
+    business_key: Optional[StrictStr] = Field(default=None, description="The business key that is used to identify the transaction.")
+    template_text: Optional[StrictStr] = Field(default=None, description="The template text that is used for the transaction approval.")
+    template_version: Optional[StrictStr] = Field(default=None, description="The version of the template used for the transaction approval.")
     __properties: ClassVar[List[str]] = ["business_key", "template_text", "template_version"]
 
     model_config = ConfigDict(

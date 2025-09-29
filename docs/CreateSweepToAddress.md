@@ -1,6 +1,6 @@
 # CreateSweepToAddress
 
-Information of the new sweep-to address to be created.
+The information of create sweep to address.
 
 ## Properties
 

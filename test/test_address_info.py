@@ -43,7 +43,10 @@ class TestAddressInfo(unittest.TestCase):
                 x_only_pubkey = '0x165ed2f04462ec0d3d44dc8690fa9000903b5a96f14ad7f233c21ff748a17b54',
                 root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq',
                 taproot_script_tree_hash = '0x138fdd0f6c3803d45553e730c25924baf7be741b8a72a4e6fdbd9d44cb19f85b',
-                taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC'
+                taproot_internal_address = '3HYV6ta67197syD1ZVFganpmL2wLz4RyoC',
+                stellar_trusted_token_ids = [
+                    'XLM_USDC'
+                    ]
             )
         else:
             return AddressInfo(

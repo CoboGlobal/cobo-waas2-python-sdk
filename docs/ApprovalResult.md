@@ -1,6 +1,6 @@
 # ApprovalResult
 
-Approval result for this user in the transaction approval. Possible values include:    - `Approved`: The transaction is approved.   - `Rejected`: The transaction is rejected. 
+The single approval result. Possible values include:    - `Approved`: The transaction is approved.   - `Rejected`: The transaction is rejected. 
 
 ## Properties
 

@@ -39,9 +39,10 @@ class TestTransactionFILFee(unittest.TestCase):
                 gas_fee_cap = '0.00035',
                 gas_limit = '500',
                 fee_type = 'EVM_EIP_1559',
-                token_id = 'FIL',
+                token_id = 'BTC',
                 fee_used = '0.1',
-                estimated_fee_used = '0.1'
+                estimated_fee_used = '0.1',
+                gas_used = '100000000'
             )
         else:
             return TransactionFILFee(

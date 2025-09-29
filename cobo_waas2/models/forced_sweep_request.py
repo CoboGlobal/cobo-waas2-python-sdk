@@ -23,12 +23,12 @@ from typing_extensions import Self
 
 class ForcedSweepRequest(BaseModel):
     """
-    ForcedSweepRequest
+    The information about the request to force sweep.
     """  # noqa: E501
-    request_id: StrictStr = Field(description="The request ID that is used to track a forced sweep. The request ID is provided by you and must be unique.")
-    wallet_id: StrictStr = Field(description="The ID of the wallet in which the funds will be forcefully swept.")
-    token_id: StrictStr = Field(description="The ID of the token to be forcefully swept.")
-    amount: StrictStr = Field(description="The amount of the token to be forcefully swept.")
+    request_id: StrictStr = Field(description="The request id of the force sweep.")
+    wallet_id: StrictStr = Field(description="The wallet ID to force sweep, which is the unique identifier of a wallet.")
+    token_id: StrictStr = Field(description="The token ID to force sweep, which is the unique identifier of a token.")
+    amount: StrictStr = Field(description="The amount of needing force sweep.")
     __properties: ClassVar[List[str]] = ["request_id", "wallet_id", "token_id", "amount"]
 
     model_config = ConfigDict(

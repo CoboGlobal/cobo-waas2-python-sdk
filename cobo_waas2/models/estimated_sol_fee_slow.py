@@ -25,10 +25,10 @@ class EstimatedSOLFeeSlow(BaseModel):
     """
     EstimatedSOLFeeSlow
     """  # noqa: E501
-    compute_unit_price: StrictStr = Field(description="The price paid per compute unit. This value determines the priority fee for the transaction, allowing you to increase inclusion probability in congested conditions.")
-    compute_unit_limit: StrictStr = Field(description="The maximum number of compute units your transaction is allowed to consume. It sets an upper bound on computational resource usage to prevent overload.")
-    base_fee: StrictStr = Field(description="A fixed fee charged per signature. The default is 5,000 lamports per signature.")
-    rent_amount: Optional[StrictStr] = Field(default=None, description="The rent fee charged by the network to store non–rent-exempt accounts on-chain. It is deducted periodically until the account maintains the minimum balance required for rent exemption.")
+    compute_unit_price: StrictStr = Field(description="The cost per compute unit. Transactions consume computational resources measured in compute units, and this price helps determine the cost of executing transactions, especially complex ones involving smart contracts.")
+    compute_unit_limit: StrictStr = Field(description="The maximum number of compute units allowed for a transaction. This limits the resources any single transaction can consume, preventing excessive resource usage that could impact network performance negatively.")
+    base_fee: StrictStr = Field(description="The fundamental fee required for each transaction. It is charged to prevent spam transactions and network congestion, ensuring that only meaningful transactions consume network resources.")
+    rent_amount: Optional[StrictStr] = Field(default=None, description="The fee charged as rent for maintaining the state of accounts on the blockchain. This rent ensures accounts are stored on-chain over the long term and that there's sufficient balance to sustain the account state.")
     __properties: ClassVar[List[str]] = ["compute_unit_price", "compute_unit_limit", "base_fee", "rent_amount"]
 
     model_config = ConfigDict(

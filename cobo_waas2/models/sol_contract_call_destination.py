@@ -16,8 +16,9 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.contract_call_destination_type import ContractCallDestinationType
+from cobo_waas2.models.sol_contract_call_address_lookup_table_account import SolContractCallAddressLookupTableAccount
 from cobo_waas2.models.sol_contract_call_instruction import SolContractCallInstruction
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +30,8 @@ class SolContractCallDestination(BaseModel):
     """  # noqa: E501
     destination_type: ContractCallDestinationType
     instructions: List[SolContractCallInstruction]
-    __properties: ClassVar[List[str]] = ["destination_type", "instructions"]
+    address_lookup_table_accounts: Optional[List[SolContractCallAddressLookupTableAccount]] = None
+    __properties: ClassVar[List[str]] = ["destination_type", "instructions", "address_lookup_table_accounts"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +79,13 @@ class SolContractCallDestination(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['instructions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in address_lookup_table_accounts (list)
+        _items = []
+        if self.address_lookup_table_accounts:
+            for _item in self.address_lookup_table_accounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['address_lookup_table_accounts'] = _items
         return _dict
 
     @classmethod
@@ -90,7 +99,8 @@ class SolContractCallDestination(BaseModel):
 
         _obj = cls.model_validate({
             "destination_type": obj.get("destination_type"),
-            "instructions": [SolContractCallInstruction.from_dict(_item) for _item in obj["instructions"]] if obj.get("instructions") is not None else None
+            "instructions": [SolContractCallInstruction.from_dict(_item) for _item in obj["instructions"]] if obj.get("instructions") is not None else None,
+            "address_lookup_table_accounts": [SolContractCallAddressLookupTableAccount.from_dict(_item) for _item in obj["address_lookup_table_accounts"]] if obj.get("address_lookup_table_accounts") is not None else None
         })
         return _obj
 

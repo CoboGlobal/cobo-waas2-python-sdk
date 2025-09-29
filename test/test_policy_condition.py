@@ -35,16 +35,16 @@ class TestPolicyCondition(unittest.TestCase):
         if include_optional:
             return PolicyCondition(
                 var_field = 'amount',
-                value_type = 'INT',
+                value_type = 'Pending',
                 value = '11.23',
-                operator = '='
+                operator = 'Pending'
             )
         else:
             return PolicyCondition(
                 var_field = 'amount',
-                value_type = 'INT',
+                value_type = 'Pending',
                 value = '11.23',
-                operator = '=',
+                operator = 'Pending',
         )
         """
 

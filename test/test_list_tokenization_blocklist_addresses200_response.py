@@ -37,7 +37,7 @@ class TestListTokenizationBlocklistAddresses200Response(unittest.TestCase):
                 data = [
                     cobo_waas2.models.blocklist_address_note.BlocklistAddressNote(
                         address = '0xabcdef...', 
-                        note = 'Blocked address', 
+                        note = 'Trusted address', 
                         created_timestamp = 1610445878970, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
@@ -50,7 +50,7 @@ class TestListTokenizationBlocklistAddresses200Response(unittest.TestCase):
                 data = [
                     cobo_waas2.models.blocklist_address_note.BlocklistAddressNote(
                         address = '0xabcdef...', 
-                        note = 'Blocked address', 
+                        note = 'Trusted address', 
                         created_timestamp = 1610445878970, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(

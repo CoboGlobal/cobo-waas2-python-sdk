@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
+from cobo_waas2.models.transaction_sol_contract_address_lookup_table_account import TransactionSolContractAddressLookupTableAccount
 from cobo_waas2.models.transaction_sol_contract_instruction import TransactionSolContractInstruction
 from typing import Optional, Set
 from typing_extensions import Self
@@ -25,11 +26,12 @@ from typing_extensions import Self
 
 class TransactionSolContractDestination(BaseModel):
     """
-    The information about the transaction destination type `SOL_Contract`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Switch between the tabs to display the properties for different transaction destinations. 
+    The information about the transaction destination type `SOL_Contract`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
     """  # noqa: E501
     destination_type: TransactionDestinationType
     instructions: Optional[List[TransactionSolContractInstruction]] = None
-    __properties: ClassVar[List[str]] = ["destination_type", "instructions"]
+    address_lookup_table_accounts: Optional[List[TransactionSolContractAddressLookupTableAccount]] = None
+    __properties: ClassVar[List[str]] = ["destination_type", "instructions", "address_lookup_table_accounts"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +79,13 @@ class TransactionSolContractDestination(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['instructions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in address_lookup_table_accounts (list)
+        _items = []
+        if self.address_lookup_table_accounts:
+            for _item in self.address_lookup_table_accounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['address_lookup_table_accounts'] = _items
         return _dict
 
     @classmethod
@@ -90,7 +99,8 @@ class TransactionSolContractDestination(BaseModel):
 
         _obj = cls.model_validate({
             "destination_type": obj.get("destination_type"),
-            "instructions": [TransactionSolContractInstruction.from_dict(_item) for _item in obj["instructions"]] if obj.get("instructions") is not None else None
+            "instructions": [TransactionSolContractInstruction.from_dict(_item) for _item in obj["instructions"]] if obj.get("instructions") is not None else None,
+            "address_lookup_table_accounts": [TransactionSolContractAddressLookupTableAccount.from_dict(_item) for _item in obj["address_lookup_table_accounts"]] if obj.get("address_lookup_table_accounts") is not None else None
         })
         return _obj
 

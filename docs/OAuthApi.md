@@ -4,18 +4,18 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**exchange_permission_token**](OAuthApi.md#exchange_permission_token) | **POST** /oauth/permission_token/exchange | Get Access Token
+[**exchange_permission_token**](OAuthApi.md#exchange_permission_token) | **POST** /oauth/permission_token/exchange | Exchange Permission Access Token by API Key
 [**get_token**](OAuthApi.md#get_token) | **GET** /oauth/token | Get Org Access Token
-[**refresh_permission_token**](OAuthApi.md#refresh_permission_token) | **POST** /oauth/permission_token/refresh | Refresh Access Token
+[**refresh_permission_token**](OAuthApi.md#refresh_permission_token) | **POST** /oauth/permission_token/refresh | Refresh Permission Access Token by Permission Refresh Token
 [**refresh_token**](OAuthApi.md#refresh_token) | **POST** /oauth/token | Refresh Org Access Token
 
 
 # **exchange_permission_token**
 > ExchangePermissionToken201Response exchange_permission_token(exchange_permission_token_request)
 
-Get Access Token
+Exchange Permission Access Token by API Key
 
-This operation acquires an Access Token and a Refresh Token for the [Checkout SDK](https://www.cobo.com/developers/v2_cn/payments/checkout-sdk).  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call the [Refresh Access Token](https://www.cobo.com/developers/v2/api-references/oauth/refresh-access-token) operation to get a new Access Token and a new Refresh Token. 
+<Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to obtain a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
 
 ### Example
 
@@ -42,7 +42,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     exchange_permission_token_request = cobo_waas2.ExchangePermissionTokenRequest()
 
     try:
-        # Get Access Token
+        # Exchange Permission Access Token by API Key
         api_response = api_instance.exchange_permission_token(exchange_permission_token_request)
         print("The response of OAuthApi->exchange_permission_token:\n")
         pprint(api_response)
@@ -57,7 +57,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange_permission_token_request** | [**ExchangePermissionTokenRequest**](ExchangePermissionTokenRequest.md)| The request body to acquire an Access Token. | 
+ **exchange_permission_token_request** | [**ExchangePermissionTokenRequest**](ExchangePermissionTokenRequest.md)| The request body for exchanging an Permission Access Token. | 
 
 ### Return type
 
@@ -160,9 +160,9 @@ Name | Type | Description  | Notes
 # **refresh_permission_token**
 > ExchangePermissionToken201Response refresh_permission_token(refresh_permission_token_request)
 
-Refresh Access Token
+Refresh Permission Access Token by Permission Refresh Token
 
-This operation refreshes the Access Token and Refresh Token for the [Checkout SDK](https://www.cobo.com/developers/v2_cn/payments/checkout-sdk).  For security purposes, an Access Token expires after a certain period. Once it expires, you need to call this operation to get a new Access Token and Refresh Token. 
+<Note>This operation is only applicable to Cobo Portal Checkout SDK developers. To call this operation, you need to use the Cobo OAuth authentication method that requires an api key.</Note> This operation allows Portal Checkout SDK to refresh a new Permission Access Token with a specified client ID, grant type and a Permission Refresh Token.   For security purposes, Permission Access Tokens expire after a certain period. Once they expire, the app needs to call this operation to get a new Permission Access Token and a new Permission Refresh Token. 
 
 ### Example
 
@@ -189,7 +189,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     refresh_permission_token_request = cobo_waas2.RefreshPermissionTokenRequest()
 
     try:
-        # Refresh Access Token
+        # Refresh Permission Access Token by Permission Refresh Token
         api_response = api_instance.refresh_permission_token(refresh_permission_token_request)
         print("The response of OAuthApi->refresh_permission_token:\n")
         pprint(api_response)
@@ -204,7 +204,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refresh_permission_token_request** | [**RefreshPermissionTokenRequest**](RefreshPermissionTokenRequest.md)| The request body to refresh the Access Token and the Refresh Token. | 
+ **refresh_permission_token_request** | [**RefreshPermissionTokenRequest**](RefreshPermissionTokenRequest.md)| The request body for refreshing an Permission Access Token. | 
 
 ### Return type
 

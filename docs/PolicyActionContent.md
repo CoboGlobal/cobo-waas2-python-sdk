@@ -1,15 +1,15 @@
 # PolicyActionContent
 
-The definition of the quorum action. This property is applicable only when `action_type` is `Quorum`.
+The information of an app workflow policy quorum action content.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | The quorum type. Possible values include:    - &#x60;FULL_APPROVAL&#x60;: Requires approval from all participants.   - &#x60;PART_APPROVAL&#x60;: Requires approval from a specified number of participants.  | 
-**roles** | **List[str]** | The roles included in the quorum. Possible values include &#x60;admin&#x60;, &#x60;spender&#x60;, &#x60;operator&#x60;, and &#x60;approver&#x60;. | [optional] 
-**user_ids** | **List[str]** | The ID of the users included in the quorum. | [optional] 
-**threshold** | **int** | The number of approvers required to meet the quorum. | [optional] 
+**type** | **str** | The quorum action content type. Possible values include:    - &#x60;FULL_APPROVAL&#x60;: The content type is approved by all persons.   - &#x60;PART_APPROVAL&#x60;: The content type is approved by some persons.  | 
+**roles** | **List[str]** |  | [optional] 
+**user_ids** | **List[str]** |  | [optional] 
+**threshold** | **int** | The number of persons need approved, such as 2. | [optional] 
 
 ## Example
 

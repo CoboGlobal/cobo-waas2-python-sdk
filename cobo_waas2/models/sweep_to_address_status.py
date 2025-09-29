@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class SweepToAddressStatus(str, Enum):
     """
-    The status of the sweep-to address:  - `Valid`: The sweep-to address is active and used for auto token sweeping. - `Invalid`: The sweep-to address is no longer used for auto token sweeping. 
+    SweepToAddressStatus
     """
 
     """

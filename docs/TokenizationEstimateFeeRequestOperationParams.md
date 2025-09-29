@@ -13,10 +13,12 @@ Name | Type | Description | Notes
 **mints** | [**List[TokenizationMintTokenParamsMintsInner]**](TokenizationMintTokenParamsMintsInner.md) | Details for each token mint, including amount and address to mint to. | 
 **token_id** | **str** | The ID of the token. | 
 **burns** | [**List[TokenizationBurnTokenParamsBurnsInner]**](TokenizationBurnTokenParamsBurnsInner.md) | Details for each token burn, including amount and address to burn from. | 
-**action** | [**TokenizationUpdateAddressAction**](TokenizationUpdateAddressAction.md) |  | 
+**action** | [**TokenizationPermissionAction**](TokenizationPermissionAction.md) |  | 
 **addresses** | [**List[TokenizationUpdateBlocklistAddressesParamsAddressesInner]**](TokenizationUpdateBlocklistAddressesParamsAddressesInner.md) | A list of addresses to manage. For &#39;add&#39; operations, notes can be provided. For &#39;remove&#39; operations, notes are ignored. | 
 **activation** | **bool** | Whether to activate the allowlist feature for the token. | 
 **data** | [**TokenizationContractCallParamsData**](TokenizationContractCallParamsData.md) |  | [optional] 
+**address** | **str** | The address to manage permissions for. | 
+**permissions** | [**List[TokenizationTokenPermissionType]**](TokenizationTokenPermissionType.md) | The list of permissions to operate on. | 
 
 ## Example
 

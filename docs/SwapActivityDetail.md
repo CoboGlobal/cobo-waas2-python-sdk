@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **timeline** | [**List[SwapActivityTimeline]**](SwapActivityTimeline.md) |  | [optional] 
 **approvers** | [**List[SwapActivityApprovers]**](SwapActivityApprovers.md) |  | [optional] 
 **signers** | [**List[SwapActivitySigners]**](SwapActivitySigners.md) |  | [optional] 
+**receiving_transaction** | [**SwapReceivingTransaction**](SwapReceivingTransaction.md) |  | [optional] 
 
 ## Example
 

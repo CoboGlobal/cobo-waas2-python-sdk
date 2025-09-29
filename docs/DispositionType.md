@@ -1,6 +1,6 @@
 # DispositionType
 
-The type of a disposition operation.
+The type of disposition operation.
 
 ## Properties
 

@@ -1,14 +1,14 @@
 # AppWorkflow
 
-The information of an approval workflow
+The information of an app workflow approval user entry.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**workflow_id** | **str** | The unique ID distinguishing the approval workflow instance among organizations. | 
-**operation_id** | **str** | The unique ID of the approval workflow. | 
-**operation_name** | **str** | The name of the approval workflow. | 
+**workflow_id** | **str** | The workflow id. | 
+**operation_id** | **str** | The workflow operation id. | 
+**operation_name** | **str** | The workflow operation name. | 
 **current_policies** | [**List[AppWorkflowPolicy]**](AppWorkflowPolicy.md) |  | 
 
 ## Example

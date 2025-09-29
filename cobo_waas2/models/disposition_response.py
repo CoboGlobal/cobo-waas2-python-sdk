@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class DispositionResponse(BaseModel):
     """
-    The response for a disposition request.
+    The response for a disposition creation request.
     """  # noqa: E501
     transaction_id: StrictStr = Field(description="The UUID of the transaction being processed for disposition.")
     status: DispositionStatus

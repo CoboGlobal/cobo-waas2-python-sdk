@@ -24,11 +24,11 @@ from typing_extensions import Self
 
 class AppWorkflow(BaseModel):
     """
-    The information of an approval workflow
+    The information of an app workflow approval user entry.
     """  # noqa: E501
-    workflow_id: StrictStr = Field(description="The unique ID distinguishing the approval workflow instance among organizations.")
-    operation_id: StrictStr = Field(description="The unique ID of the approval workflow.")
-    operation_name: StrictStr = Field(description="The name of the approval workflow.")
+    workflow_id: StrictStr = Field(description="The workflow id.")
+    operation_id: StrictStr = Field(description="The workflow operation id.")
+    operation_name: StrictStr = Field(description="The workflow operation name.")
     current_policies: List[AppWorkflowPolicy]
     __properties: ClassVar[List[str]] = ["workflow_id", "operation_id", "operation_name", "current_policies"]
 

@@ -156,7 +156,7 @@ class TestTransactionsApi(unittest.TestCase):
         """
         Test case for list_approval_details
 
-        List approval details
+        List transaction approval details
         """
         """
         transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
@@ -183,7 +183,7 @@ class TestTransactionsApi(unittest.TestCase):
         """
         Test case for list_transaction_templates
 
-        List transaction templates
+        list transaction templates
         """
         """
         template_key = 'withdrawal'

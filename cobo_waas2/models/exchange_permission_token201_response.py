@@ -25,10 +25,10 @@ class ExchangePermissionToken201Response(BaseModel):
     """
     ExchangePermissionToken201Response
     """  # noqa: E501
-    access_token: Optional[StrictStr] = Field(default=None, description="The Access Token.")
-    token_type: Optional[StrictStr] = Field(default=None, description="The token type. This is always `Bearer`.")
-    expires_in: Optional[StrictInt] = Field(default=None, description="The time in seconds until the Access Token expires. This is always `3600`, indicating the token expires 1 hour after issuance.")
-    refresh_token: Optional[StrictStr] = Field(default=None, description="The Refresh Token. Use it to obtain a new Access Token when the current one expires. The Refresh Token is valid for 7 days.")
+    access_token: Optional[StrictStr] = Field(default=None, description="The new Permission Access Token.")
+    token_type: Optional[StrictStr] = Field(default=None, description="The type of the tokens, which is Bearer.")
+    expires_in: Optional[StrictInt] = Field(default=None, description="The time in seconds in which the new Permission Access Token expires.")
+    refresh_token: Optional[StrictStr] = Field(default=None, description="The Refresh Token, used to obtain another Org Access Token when the new Permission Access Token expires. The expiration time for Refresh Tokens is currently set to 7 days and is subject to change.")
     __properties: ClassVar[List[str]] = ["access_token", "token_type", "expires_in", "refresh_token"]
 
     model_config = ConfigDict(

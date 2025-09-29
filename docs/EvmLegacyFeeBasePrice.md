@@ -1,5 +1,6 @@
 # EvmLegacyFeeBasePrice
 
+The transaction gas price based on the legacy fee model.
 
 ## Properties
 

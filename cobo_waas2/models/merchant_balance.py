@@ -27,13 +27,13 @@ class MerchantBalance(BaseModel):
     MerchantBalance
     """  # noqa: E501
     merchant_id: StrictStr = Field(description="The merchant ID.")
-    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency.")
     acquiring_type: AcquiringType
-    total_received_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been received by the merchant.")
-    settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been settled from the merchant's balance.")
-    refunded_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been refunded from the merchant's balance.")
-    total_balance: Optional[StrictStr] = Field(default=None, description="The total balance of the token for the merchant.")
-    available_balance: Optional[StrictStr] = Field(default=None, description="The balance available for settlement or refund, in the specified cryptocurrency.")
+    total_received_amount: Optional[StrictStr] = Field(default=None, description="The merchant total received amount.")
+    settled_amount: Optional[StrictStr] = Field(default=None, description="The merchant settled amount.")
+    refunded_amount: Optional[StrictStr] = Field(default=None, description="The merchant total refunded amount.")
+    total_balance: Optional[StrictStr] = Field(default=None, description="The merchant total balance.")
+    available_balance: Optional[StrictStr] = Field(default=None, description="The merchant available balance.")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "acquiring_type", "total_received_amount", "settled_amount", "refunded_amount", "total_balance", "available_balance"]
 
     model_config = ConfigDict(

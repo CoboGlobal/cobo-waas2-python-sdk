@@ -33,7 +33,7 @@ class TestAppWorkflowsApi(unittest.TestCase):
         """
         Test case for create_approval_request
 
-        Request workflow approval
+        Request app workflow approval
         """
         """
         request_approval = cobo_waas2.RequestApproval()
@@ -45,7 +45,7 @@ class TestAppWorkflowsApi(unittest.TestCase):
         """
         Test case for get_approval_request_by_id
 
-        Get approval request details
+        Get app workflow approval request by approval id
         """
         """
         approval_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -57,7 +57,7 @@ class TestAppWorkflowsApi(unittest.TestCase):
         """
         Test case for list_app_workflows
 
-        List app workflows
+        list app workflows
         """
         """
 
@@ -68,7 +68,7 @@ class TestAppWorkflowsApi(unittest.TestCase):
         """
         Test case for list_approval_requests
 
-        List approval requests
+        List app workflow approval requests by operation_id
         """
         """
         operation_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -83,7 +83,7 @@ class TestAppWorkflowsApi(unittest.TestCase):
         """
         Test case for revoke_approval_request
 
-        Revoke approval request
+        Revoke an app workflow approval request by request initiator.
         """
         """
         approval_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
