@@ -36,15 +36,17 @@ class TestBabylonStakeExtra(unittest.TestCase):
             return BabylonStakeExtra(
                 pool_type = 'Babylon',
                 finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
+                finality_provider_public_keys = [
+                    'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0'
+                    ],
                 stake_block_time = 2000,
                 auto_broadcast = False,
-                babylon_address = None
+                babylon_address = None,
+                original_staking_id = '0011039d-27fb-49ba-b172-6e0aa80e37ec'
             )
         else:
             return BabylonStakeExtra(
                 pool_type = 'Babylon',
-                finality_provider_public_key = 'eca1b104dce16c30705f4147a9c4a373ac88646c5d1bcda6a89c018940cb96a0',
-                stake_block_time = 2000,
         )
         """
 

@@ -26,13 +26,13 @@ from typing_extensions import Self
 
 class TransactionBabylonTxParameters(BaseModel):
     """
-    The extra information for Babylon transaction parameters.
+    The Babylon transaction parameters.
     """  # noqa: E501
     extra_type: TransactionExtraType
-    stake_amount: Optional[StrictStr] = Field(default=None, description="The original staking amount.")
+    stake_amount: Optional[StrictStr] = Field(default=None, description="The origin staking amount.")
     finality_provider_public_key: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The public key of the finality provider.")
     stake_block_time: Optional[StrictInt] = Field(default=None, description="The number of blocks that need to be processed before the locked tokens are unlocked and become accessible.")
-    param_version: Optional[StrictInt] = Field(default=None, description="The version of Babylon global parameters.")
+    param_version: Optional[StrictInt] = Field(default=None, description="The version of babylon global parameters.")
     withdraw_from_type: Optional[ActivityType] = None
     slash_from_type: Optional[ActivityType] = None
     __properties: ClassVar[List[str]] = ["extra_type", "stake_amount", "finality_provider_public_key", "stake_block_time", "param_version", "withdraw_from_type", "slash_from_type"]

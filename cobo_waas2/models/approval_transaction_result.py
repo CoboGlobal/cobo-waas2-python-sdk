@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class ApprovalTransactionResult(str, Enum):
     """
-    Result of transaction approval. Possible values include:    - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is pending approval.   - `Approved`: The transaction is approved. 
+    The transaction approval result. Possible values include:    - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is pending approval.   - `Approved`: The transaction is approved. 
     """
 
     """

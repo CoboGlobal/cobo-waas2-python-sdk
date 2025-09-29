@@ -1,6 +1,6 @@
 # TokenizationUpdateAddressAction
 
-The operation to perform on the blocklist or allowlist.
+The operation to perform on the blocklist or allowlist addresses list.
 
 ## Properties
 

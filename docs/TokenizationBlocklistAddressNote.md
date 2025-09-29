@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**address** | **str** | The address on the blocklist. | 
-**note** | **str** | The note for the address on the blocklist. | [optional] 
-**created_timestamp** | **int** | The time when the address was added to the blocklist, in Unix timestamp format, measured in milliseconds. | [optional] 
+**address** | **str** | The allowed address. | 
+**note** | **str** | The note for the allowed address. | [optional] 
+**created_timestamp** | **int** | The time when the blocklist address was created, in Unix timestamp format, measured in milliseconds. | [optional] 
 
 ## Example
 

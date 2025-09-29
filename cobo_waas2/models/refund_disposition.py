@@ -24,13 +24,13 @@ from typing_extensions import Self
 
 class RefundDisposition(BaseModel):
     """
-    The information about a request to refund funds.
+    The information about a fund refund disposition request.
     """  # noqa: E501
-    transaction_id: StrictStr = Field(description="The UUID of the transaction whose funds are to be refunded. This identifies the original transaction that requires refund processing.")
-    destination_address: StrictStr = Field(description="The blockchain address to receive the refunded funds.")
+    transaction_id: StrictStr = Field(description="The UUID of the transaction to be refunded. This identifies the original transaction that requires refund processing.")
+    destination_address: StrictStr = Field(description="The blockchain address where the refunded funds will be sent.")
     disposition_amount: StrictStr = Field(description="The amount to be refunded from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction. ")
     category_names: Optional[List[StrictStr]] = Field(default=None, description="Custom categories to identify and track this refund transaction. Used for transaction classification and reporting.")
-    description: Optional[Annotated[str, Field(strict=True, max_length=200)]] = Field(default=None, description="Additional notes or description for the refund.")
+    description: Optional[Annotated[str, Field(strict=True, max_length=200)]] = Field(default=None, description="Additional notes or description for this refund disposition.")
     __properties: ClassVar[List[str]] = ["transaction_id", "destination_address", "disposition_amount", "category_names", "description"]
 
     model_config = ConfigDict(

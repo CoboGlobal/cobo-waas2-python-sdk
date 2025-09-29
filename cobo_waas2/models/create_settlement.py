@@ -25,13 +25,13 @@ class CreateSettlement(BaseModel):
     """
     CreateSettlement
     """  # noqa: E501
-    merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID. Specify this field when `settlement_type` is set to `Merchant`.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to settle. Specify this field when `payout_channel` is set to `Crypto`. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for settling the cryptocurrency. Currently, only `USD` is supported. Specify this field when `payout_channel` is set to `OffRamp`.")
-    amount: Optional[StrictStr] = Field(default=None, description="The amount of cryptocurrency to be settled. When settling merchant balance from orders (`acquiring_type` is `Order` and `settlement_type` is `Merchant`), do not specify this field as the amount will be automatically calculated based on the order amounts. ")
-    bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account where the settled funds will be deposited. This field is only applicable when `payout_channel` is set to `OffRamp`. Call [List all bank accounts](/v2/api-references/payment/list-all-bank-accounts) to retrieve the IDs of registered bank accounts. ")
-    crypto_address_id: Optional[StrictStr] = Field(default=None, description="The ID of the crypto address used for crypto withdrawal. Specify this field when `payout_channel` is set to `Crypto`.  Call [List all crypto addresses](/v2/api-references/payments/list-all-crypto-addresses) to retrieve registered crypto addresses. ")
-    order_ids: Optional[List[StrictStr]] = None
+    merchant_id: Optional[StrictStr] = Field(default=None, description="Only used in Merchant settlement type. The merchant ID. ")
+    token_id: StrictStr = Field(description="Only used in Crypto payout channel. The ID of the cryptocurrency you want to settle. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    currency: Optional[StrictStr] = Field(default=None, description="Only used in OffRamp payout channel. The fiat currency for settling the cryptocurrency. Currently, only `USD` is supported. ")
+    amount: Optional[StrictStr] = Field(default=None, description="The settlement amount. - In Crypto payout channel, this represents the settlement amount in the specified cryptocurrency. - In OffRamp payout channel, this represents the settlement amount in the specified fiat currency. ")
+    bank_account_id: Optional[StrictStr] = Field(default=None, description="｜ Only used in OffRamp payout channel. The ID of the bank account where the settled funds will be deposited.")
+    crypto_address_id: Optional[StrictStr] = Field(default=None, description="Only used in Crypto payout channel. The ID of the pre-approved crypto address used for Crypto settlements. - The value must refer to a valid address that has been pre-configured and approved for the given token. ")
+    order_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of unique order IDs to be included in this settlement.  - This field is only applicable when `settlement_type` is set to `Merchant`. - If provided, the settlement will only apply to the specified orders. - The settlement `amount` must exactly match the total eligible amount from these orders. - This ensures consistency between the declared amount and the actual order-level data being settled. ")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "amount", "bank_account_id", "crypto_address_id", "order_ids"]
 
     model_config = ConfigDict(

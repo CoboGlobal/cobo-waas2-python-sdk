@@ -4,19 +4,19 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_auto_sweep_task**](AutoSweepApi.md#create_auto_sweep_task) | **POST** /auto_sweep/tasks | Create auto-sweep task
-[**create_wallet_sweep_to_addresses**](AutoSweepApi.md#create_wallet_sweep_to_addresses) | **POST** /auto_sweep/sweep_to_addresses | create sweep-to address
-[**get_auto_sweep_task_by_id**](AutoSweepApi.md#get_auto_sweep_task_by_id) | **GET** /auto_sweep/tasks/{task_id} | Get auto-sweep task details
-[**list_auto_sweep_task**](AutoSweepApi.md#list_auto_sweep_task) | **GET** /auto_sweep/tasks | List auto-sweep tasks
-[**list_wallet_sweep_to_addresses**](AutoSweepApi.md#list_wallet_sweep_to_addresses) | **GET** /auto_sweep/sweep_to_addresses | List sweep-to addresses
+[**create_auto_sweep_task**](AutoSweepApi.md#create_auto_sweep_task) | **POST** /auto_sweep/tasks | create auto sweep task
+[**create_wallet_sweep_to_addresses**](AutoSweepApi.md#create_wallet_sweep_to_addresses) | **POST** /auto_sweep/sweep_to_addresses | create wallet sweep to addresses
+[**get_auto_sweep_task_by_id**](AutoSweepApi.md#get_auto_sweep_task_by_id) | **GET** /auto_sweep/tasks/{task_id} | Get auto sweep task information
+[**list_auto_sweep_task**](AutoSweepApi.md#list_auto_sweep_task) | **GET** /auto_sweep/tasks | List wallet auto sweep task
+[**list_wallet_sweep_to_addresses**](AutoSweepApi.md#list_wallet_sweep_to_addresses) | **GET** /auto_sweep/sweep_to_addresses | List wallet sweep to addresses
 
 
 # **create_auto_sweep_task**
 > AutoSweepTask create_auto_sweep_task(create_auto_sweep_task=create_auto_sweep_task)
 
-Create auto-sweep task
+create auto sweep task
 
-This operation creates an auto-sweep task for the specified wallet and token. The task triggers transactions to sweep the full balance of the specified token to the configured sweep-to address. 
+This operation create a new auto sweep task. 
 
 ### Example
 
@@ -44,7 +44,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     create_auto_sweep_task = cobo_waas2.CreateAutoSweepTask()
 
     try:
-        # Create auto-sweep task
+        # create auto sweep task
         api_response = api_instance.create_auto_sweep_task(create_auto_sweep_task=create_auto_sweep_task)
         print("The response of AutoSweepApi->create_auto_sweep_task:\n")
         pprint(api_response)
@@ -59,7 +59,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_auto_sweep_task** | [**CreateAutoSweepTask**](CreateAutoSweepTask.md)| The request body to create an auto-sweep task. | [optional] 
+ **create_auto_sweep_task** | [**CreateAutoSweepTask**](CreateAutoSweepTask.md)| The request body to generates a new sweep to addresses within a specified wallet. | [optional] 
 
 ### Return type
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Successfully created auto-sweep task. |  -  |
+**201** | Successfully create auto sweep task |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -87,9 +87,9 @@ Name | Type | Description  | Notes
 # **create_wallet_sweep_to_addresses**
 > SweepToAddress create_wallet_sweep_to_addresses(create_sweep_to_address=create_sweep_to_address)
 
-create sweep-to address
+create wallet sweep to addresses
 
-This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
+This operation create a new sweep to address for the wallet. The old sweep to address will become invalid. 
 
 ### Example
 
@@ -117,7 +117,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     create_sweep_to_address = cobo_waas2.CreateSweepToAddress()
 
     try:
-        # create sweep-to address
+        # create wallet sweep to addresses
         api_response = api_instance.create_wallet_sweep_to_addresses(create_sweep_to_address=create_sweep_to_address)
         print("The response of AutoSweepApi->create_wallet_sweep_to_addresses:\n")
         pprint(api_response)
@@ -132,7 +132,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_sweep_to_address** | [**CreateSweepToAddress**](CreateSweepToAddress.md)| The request body to generates a new sweep-to address within a specified wallet. | [optional] 
+ **create_sweep_to_address** | [**CreateSweepToAddress**](CreateSweepToAddress.md)| The request body to generates a new sweep to addresses within a specified wallet. | [optional] 
 
 ### Return type
 
@@ -160,9 +160,9 @@ Name | Type | Description  | Notes
 # **get_auto_sweep_task_by_id**
 > AutoSweepTask get_auto_sweep_task_by_id(task_id)
 
-Get auto-sweep task details
+Get auto sweep task information
 
-This operation retrieves detailed information about a specified auto-sweep task. 
+This operation retrieves detailed information about a specified auto sweep task. 
 
 ### Example
 
@@ -189,7 +189,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     task_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # Get auto-sweep task details
+        # Get auto sweep task information
         api_response = api_instance.get_auto_sweep_task_by_id(task_id)
         print("The response of AutoSweepApi->get_auto_sweep_task_by_id:\n")
         pprint(api_response)
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Information about a auto-sweep task. |  -  |
+**200** | The information about a auto sweep task. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -232,9 +232,9 @@ Name | Type | Description  | Notes
 # **list_auto_sweep_task**
 > ListAutoSweepTask200Response list_auto_sweep_task(wallet_id, token_id=token_id, task_ids=task_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
 
-List auto-sweep tasks
+List wallet auto sweep task
 
-This operation retrieves a list of auto-sweep tasks for the specified wallet. You can filter the results by token ID, task IDs, or a created-time range. 
+This operation retrieves a list of auto sweep task. 
 
 ### Example
 
@@ -269,7 +269,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     direction = 'ASC'
 
     try:
-        # List auto-sweep tasks
+        # List wallet auto sweep task
         api_response = api_instance.list_auto_sweep_task(wallet_id, token_id=token_id, task_ids=task_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         print("The response of AutoSweepApi->list_auto_sweep_task:\n")
         pprint(api_response)
@@ -286,12 +286,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **wallet_id** | **str**| The wallet ID. | 
  **token_id** | **str**| The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | [optional] 
- **task_ids** | **str**| A list of auto-sweep task IDs, separated by comma. | [optional] 
- **min_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change.  | [optional] 
- **max_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change.  | [optional] 
+ **task_ids** | **str**| A list of auto sweep task IDs, separated by comma. | [optional] 
+ **min_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time. | [optional] 
+ **max_created_timestamp** | **int**| The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time. | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
  **direction** | **str**| The sort direction. Possible values include:   - &#x60;ASC&#x60;: Sort the results in ascending order.   - &#x60;DESC&#x60;: Sort the results in descending order.  | [optional] [default to &#39;ASC&#39;]
 
 ### Return type
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved auto-sweep tasks |  -  |
+**200** | Successfully listed auto sweep tasks |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -320,9 +320,9 @@ Name | Type | Description  | Notes
 # **list_wallet_sweep_to_addresses**
 > ListWalletSweepToAddresses200Response list_wallet_sweep_to_addresses(wallet_id)
 
-List sweep-to addresses
+List wallet sweep to addresses
 
-This operation retrieves a list of sweep-to addresses within your wallet. <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
+This operation retrieves a list of sweep to addresses within your wallet. 
 
 ### Example
 
@@ -349,7 +349,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # List sweep-to addresses
+        # List wallet sweep to addresses
         api_response = api_instance.list_wallet_sweep_to_addresses(wallet_id)
         print("The response of AutoSweepApi->list_wallet_sweep_to_addresses:\n")
         pprint(api_response)
@@ -383,7 +383,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved sweep-to addresses |  -  |
+**200** | Successfully listed sweep to addresses |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

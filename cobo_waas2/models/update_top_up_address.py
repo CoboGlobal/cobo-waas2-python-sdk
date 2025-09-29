@@ -16,18 +16,18 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
 class UpdateTopUpAddress(BaseModel):
     """
-    The request body to update top-up address.
+    The request body to update top up address.
     """  # noqa: E501
-    merchant_id: StrictStr = Field(description="The merchant ID.")
-    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    custom_payer_id: StrictStr = Field(description="A unique identifier assigned by the developer to track and identify individual payers in their system.")
+    merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
+    token_id: StrictStr = Field(description="The token ID, which identifies the cryptocurrency. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    custom_payer_id: StrictStr = Field(description="Unique customer identifier on the merchant side, used to allocate a dedicated top-up address ")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "custom_payer_id"]
 
     model_config = ConfigDict(

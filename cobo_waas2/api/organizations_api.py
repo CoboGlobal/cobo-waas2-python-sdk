@@ -46,7 +46,7 @@ class OrganizationsApi:
     ) -> OrgInfo:
         """Get organization information
 
-        This operation retrieves the detailed information about the organization associated with the current API key. 
+        This operation retrieves the detailed information about the organization linked with current APIKey. 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -88,7 +88,7 @@ class OrganizationsApi:
     ) -> ApiResponse[OrgInfo]:
         """Get organization information
 
-        This operation retrieves the detailed information about the organization associated with the current API key. 
+        This operation retrieves the detailed information about the organization linked with current APIKey. 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -130,7 +130,7 @@ class OrganizationsApi:
     ) -> RESTResponseType:
         """Get organization information
 
-        This operation retrieves the detailed information about the organization associated with the current API key. 
+        This operation retrieves the detailed information about the organization linked with current APIKey. 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

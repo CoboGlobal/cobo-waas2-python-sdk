@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bank_account_id** | **str** | The bank account ID. | 
 **info** | **Dict[str, object]** | JSON-formatted bank account details. | 
-**created_timestamp** | **int** | The creation time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
-**updated_timestamp** | **int** | The last update time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
+**created_timestamp** | **int** | The created time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
+**updated_timestamp** | **int** | The updated time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
 
 ## Example
 

@@ -18,7 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from cobo_waas2.models.tokenization_token_permission_params import TokenizationTokenPermissionParams
+from cobo_waas2.models.tokenization_erc20_token_permission_params import TokenizationERC20TokenPermissionParams
 from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,7 @@ class TokenizationERC20TokenParams(BaseModel):
     symbol: StrictStr = Field(description="The symbol of the token.")
     decimals: Annotated[int, Field(le=18, strict=True, ge=0)] = Field(description="The number of decimals for the token (0-18).")
     token_access_activated: Optional[StrictBool] = Field(default=False, description="Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations.")
-    permissions: Optional[TokenizationTokenPermissionParams] = None
+    permissions: Optional[TokenizationERC20TokenPermissionParams] = None
     __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "decimals", "token_access_activated", "permissions"]
 
     model_config = ConfigDict(
@@ -95,7 +95,7 @@ class TokenizationERC20TokenParams(BaseModel):
             "symbol": obj.get("symbol"),
             "decimals": obj.get("decimals"),
             "token_access_activated": obj.get("token_access_activated") if obj.get("token_access_activated") is not None else False,
-            "permissions": TokenizationTokenPermissionParams.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
+            "permissions": TokenizationERC20TokenPermissionParams.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         return _obj
 

@@ -4,19 +4,19 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_address_books**](AddressBooksApi.md#create_address_books) | **POST** /address_books | Create Address Book entries
-[**delete_address_book_by_id**](AddressBooksApi.md#delete_address_book_by_id) | **POST** /address_books/{entry_id}/delete | Delete Address Book entry
-[**get_address_book_by_id**](AddressBooksApi.md#get_address_book_by_id) | **GET** /address_books/{entry_id} | Get Address Book entry
-[**list_address_books**](AddressBooksApi.md#list_address_books) | **GET** /address_books | List Address Book entries
-[**update_address_book_by_id**](AddressBooksApi.md#update_address_book_by_id) | **PUT** /address_books/{entry_id} | Update Address Book entry
+[**create_address_books**](AddressBooksApi.md#create_address_books) | **POST** /address_books | Create address books
+[**delete_address_book_by_id**](AddressBooksApi.md#delete_address_book_by_id) | **POST** /address_books/{entry_id}/delete | Delete address book
+[**get_address_book_by_id**](AddressBooksApi.md#get_address_book_by_id) | **GET** /address_books/{entry_id} | Get address book information
+[**list_address_books**](AddressBooksApi.md#list_address_books) | **GET** /address_books | List address book entries
+[**update_address_book_by_id**](AddressBooksApi.md#update_address_book_by_id) | **PUT** /address_books/{entry_id} | Update address book
 
 
 # **create_address_books**
 > CreateAddressBooks201Response create_address_books(create_address_books_param=create_address_books_param)
 
-Create Address Book entries
+Create address books
 
-This operation adds new entries (records) to your Address Book. 
+This operation add addresses to your address book. 
 
 ### Example
 
@@ -44,7 +44,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     create_address_books_param = cobo_waas2.CreateAddressBooksParam()
 
     try:
-        # Create Address Book entries
+        # Create address books
         api_response = api_instance.create_address_books(create_address_books_param=create_address_books_param)
         print("The response of AddressBooksApi->create_address_books:\n")
         pprint(api_response)
@@ -59,7 +59,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_address_books_param** | [**CreateAddressBooksParam**](CreateAddressBooksParam.md)| The request body of the create Address Books operation. | [optional] 
+ **create_address_books_param** | [**CreateAddressBooksParam**](CreateAddressBooksParam.md)| The request body of the create address books operation. | [optional] 
 
 ### Return type
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The information about created Address Books. |  -  |
+**201** | The information about created address books. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -87,9 +87,9 @@ Name | Type | Description  | Notes
 # **delete_address_book_by_id**
 > DeleteAddressBookById201Response delete_address_book_by_id(entry_id)
 
-Delete Address Book entry
+Delete address book
 
-This operation deletes a specified Address Book entry (record). 
+This operation deletes a specified address book. 
 
 ### Example
 
@@ -116,7 +116,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # Delete Address Book entry
+        # Delete address book
         api_response = api_instance.delete_address_book_by_id(entry_id)
         print("The response of AddressBooksApi->delete_address_book_by_id:\n")
         pprint(api_response)
@@ -131,7 +131,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entry_id** | **str**| The Address Book entry ID. | 
+ **entry_id** | **str**| The address book ID. | 
 
 ### Return type
 
@@ -159,9 +159,9 @@ Name | Type | Description  | Notes
 # **get_address_book_by_id**
 > AddressBook get_address_book_by_id(entry_id)
 
-Get Address Book entry
+Get address book information
 
-This operation retrieves the detailed information about a specified Address Book entry (record). 
+This operation retrieves the detailed information about a specified address book. 
 
 ### Example
 
@@ -188,7 +188,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # Get Address Book entry
+        # Get address book information
         api_response = api_instance.get_address_book_by_id(entry_id)
         print("The response of AddressBooksApi->get_address_book_by_id:\n")
         pprint(api_response)
@@ -203,7 +203,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entry_id** | **str**| The Address Book entry ID. | 
+ **entry_id** | **str**| The address book ID. | 
 
 ### Return type
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The information about an Address Book. |  -  |
+**200** | The information about an address book. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -231,9 +231,9 @@ Name | Type | Description  | Notes
 # **list_address_books**
 > ListAddressBooks200Response list_address_books(chain_id=chain_id, address=address, label=label, limit=limit, before=before, after=after)
 
-List Address Book entries
+List address book entries
 
-This operation retrieves all entries (records) from your Address Book. You can filter the entries by chain ID, address, and label. 
+This operation retrieves a list of addresses from your address book. 
 
 ### Example
 
@@ -265,7 +265,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
-        # List Address Book entries
+        # List address book entries
         api_response = api_instance.list_address_books(chain_id=chain_id, address=address, label=label, limit=limit, before=before, after=after)
         print("The response of AddressBooksApi->list_address_books:\n")
         pprint(api_response)
@@ -282,10 +282,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chain_id** | **str**| The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | [optional] 
  **address** | **str**| The wallet address. | [optional] 
- **label** | **str**| A user-defined label for the address. | [optional] 
+ **label** | **str**| The address label. | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
 
 ### Return type
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The information about an Address Book. |  -  |
+**200** | The information about an address book. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -313,9 +313,9 @@ Name | Type | Description  | Notes
 # **update_address_book_by_id**
 > AddressBook update_address_book_by_id(entry_id, update_address_book_param=update_address_book_param)
 
-Update Address Book entry
+Update address book
 
-This operation updates the information of a specified Address Book entry (record). 
+This operation updates the information of a specified address book. 
 
 ### Example
 
@@ -344,7 +344,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     update_address_book_param = cobo_waas2.UpdateAddressBookParam()
 
     try:
-        # Update Address Book entry
+        # Update address book
         api_response = api_instance.update_address_book_by_id(entry_id, update_address_book_param=update_address_book_param)
         print("The response of AddressBooksApi->update_address_book_by_id:\n")
         pprint(api_response)
@@ -359,8 +359,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **entry_id** | **str**| The Address Book entry ID. | 
- **update_address_book_param** | [**UpdateAddressBookParam**](UpdateAddressBookParam.md)| The request body of the update Address Book operation. | [optional] 
+ **entry_id** | **str**| The address book ID. | 
+ **update_address_book_param** | [**UpdateAddressBookParam**](UpdateAddressBookParam.md)| The request body of the update address book operation. | [optional] 
 
 ### Return type
 
@@ -379,7 +379,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully updated Address Book. |  -  |
+**200** | Successfully updated address book. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

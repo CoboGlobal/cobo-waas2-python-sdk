@@ -6,12 +6,12 @@ Details of a payment account used for top-up operations, including address and b
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token_id** | **str** | The ID of the cryptocurrency that this account is configured to handle. | 
-**address** | **str** | The top-up address corresponding to the account. | 
-**merchant_balance** | **str** | The amount of merchant funds under this account. | 
-**psp_balance** | **str** | The amount of developer funds under this account. | 
-**created_timestamp** | **int** | The creation time of the account, in Unix timestamp format, measured in milliseconds. | [optional] 
-**updated_timestamp** | **int** | The last update time of the account, in Unix timestamp format, measured in milliseconds. | [optional] 
+**token_id** | **str** | The ID of the cryptocurrency. | 
+**address** | **str** | The token receiving address of the account. | 
+**merchant_balance** | **str** | The merchant account balance, as a decimal string. | 
+**psp_balance** | **str** | The PSP account balance, as a decimal string. | 
+**created_timestamp** | **int** | The time when the account was created, in Unix timestamp format, measured in milliseconds. | [optional] 
+**updated_timestamp** | **int** | The time when the account was updated, in Unix timestamp format, measured in milliseconds. | [optional] 
 
 ## Example
 

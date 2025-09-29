@@ -1,6 +1,6 @@
 # PolicyFieldValueType
 
-The field value type. Possible values include:  - `INT`: The field value is an integer. - `Float2`: The field value is a float with two decimal places. 
+The app field value type. Possible values include:    - `INT`: The file value type is int.   - `Float2`: The field value type is float with two decimal places.  
 
 ## Properties
 

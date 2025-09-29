@@ -23,9 +23,9 @@ from typing_extensions import Self
 
 class UnfreezeDisposition(BaseModel):
     """
-    The information about a request to unfreeze funds.
+    The information about a fund unfreeze disposition request.
     """  # noqa: E501
-    transaction_id: StrictStr = Field(description="The UUID of the transaction whose funds are to be unfrozen.")
+    transaction_id: StrictStr = Field(description="The UUID of the transaction to be unfrozen. This identifies the frozen transaction that needs to be released.")
     __properties: ClassVar[List[str]] = ["transaction_id"]
 
     model_config = ConfigDict(

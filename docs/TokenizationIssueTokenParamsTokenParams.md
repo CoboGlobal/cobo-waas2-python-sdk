@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **decimals** | **int** | The number of decimals for the token (0-18). | 
 **token_access_activated** | **bool** | Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations. | [optional] [default to False]
 **permissions** | [**TokenizationSolTokenPermissionParams**](TokenizationSolTokenPermissionParams.md) |  | [optional] 
+**underlying_token** | **str** | The address of the underlying token that this tokenized asset represents. | 
 
 ## Example
 

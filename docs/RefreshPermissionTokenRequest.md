@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**refresh_token** | **str** | The Refresh Token of the current Access Token. | 
+**refresh_token** | **str** | The Refresh Token of the current Org Access Token. | 
 
 ## Example
 

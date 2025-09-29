@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**address** | **str** | The address on the allowlist. | 
-**note** | **str** | The note for the address on the allowlist. | [optional] 
-**created_timestamp** | **int** | The time when the address was added to the allowlist, in Unix timestamp format, measured in milliseconds. | [optional] 
+**address** | **str** | The allowed address. | 
+**note** | **str** | The note for the allowed address. | [optional] 
+**created_timestamp** | **int** | The time when the allowlist address was created, in Unix timestamp format, measured in milliseconds. | [optional] 
 
 ## Example
 

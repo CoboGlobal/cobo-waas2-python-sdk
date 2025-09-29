@@ -1,6 +1,6 @@
 # TransactionSolContractDestination
 
-The information about the transaction destination type `SOL_Contract`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  Switch between the tabs to display the properties for different transaction destinations. 
+The information about the transaction destination type `SOL_Contract`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
 
 ## Properties
 
@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **destination_type** | [**TransactionDestinationType**](TransactionDestinationType.md) |  | 
 **instructions** | [**List[TransactionSolContractInstruction]**](TransactionSolContractInstruction.md) |  | [optional] 
+**address_lookup_table_accounts** | [**List[TransactionSolContractAddressLookupTableAccount]**](TransactionSolContractAddressLookupTableAccount.md) |  | [optional] 
 
 ## Example
 

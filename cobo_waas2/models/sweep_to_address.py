@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class SweepToAddress(BaseModel):
     """
-    Information about the sweep-to address.
+    The sweep to address information.
     """  # noqa: E501
     address: StrictStr = Field(description="The wallet address.")
     chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")

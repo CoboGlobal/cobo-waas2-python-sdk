@@ -1,16 +1,16 @@
 # IsolateDisposition
 
-The information about a request to isolate funds.
+The information about a fund isolate disposition request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transaction_id** | **str** | The UUID of the transaction whose funds are to be isolated. This identifies the original transaction that requires fund isolation. | 
-**destination_address** | **str** | The blockchain address to receive the isolated funds. | 
+**transaction_id** | **str** | The UUID of the transaction to be isolated. This identifies the original transaction that requires isolation processing. | 
+**destination_address** | **str** | The blockchain address where the isolated funds will be sent. | 
 **disposition_amount** | **str** | The amount to be isolated from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction.  | 
-**category_names** | **List[str]** | Custom categories to identify and track this isolation transaction. Used for transaction classification and reporting. | [optional] 
-**description** | **str** | Additional notes or description for the isolation. | [optional] 
+**category_names** | **List[str]** | Custom categories to identify and track this isolate transaction. Used for transaction classification and reporting. | [optional] 
+**description** | **str** | Additional notes or description for this isolate disposition. | [optional] 
 
 ## Example
 

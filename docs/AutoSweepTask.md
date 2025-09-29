@@ -1,17 +1,17 @@
 # AutoSweepTask
 
-Auto-sweep task information.
+The auto sweep task information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**task_id** | **str** | Auto-sweep task ID. | 
-**wallet_id** | **str** | Wallet ID. | 
-**token_id** | **str** | Token ID of the swept token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
+**task_id** | **str** | The auto sweep task ID. | 
+**wallet_id** | **str** | The wallet ID. | 
+**token_id** | **str** | The token ID of the swept token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
 **status** | [**AutoSweepTaskStatus**](AutoSweepTaskStatus.md) |  | 
-**transaction_ids** | **List[str]** | IDs of the transactions triggered by the task. | [optional] 
-**failed_reasons** | **List[str]** | Reasons why the task creation failed. | [optional] 
+**transaction_ids** | **List[str]** | The IDs of the corresponding transactions of the auto sweep task. | [optional] 
+**failed_reasons** | **List[str]** | Failed reason of create auto sweep transaction. | [optional] 
 **created_timestamp** | **int** | The time when the task was created, in Unix timestamp format, measured in milliseconds. | 
 **updated_timestamp** | **int** | The time when the task was updated, in Unix timestamp format, measured in milliseconds. | [optional] 
 

@@ -1,15 +1,15 @@
 # UpdateAddressBookParam
 
-The request body to update Address Book.
+The request body to update address book.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chain_ids** | **List[str]** | A list of chain IDs. | 
-**memo** | **str** | Optional memo or tag required by some chains. | [optional] 
-**label** | **str** | A user-defined label for the address. | [optional] 
-**email** | **str** | Email of the address owner. | [optional] 
+**memo** | **str** | The memo. | [optional] 
+**label** | **str** | The address label. | [optional] 
+**email** | **str** | The email of the address owner. | [optional] 
 
 ## Example
 

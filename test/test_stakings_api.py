@@ -41,6 +41,18 @@ class TestStakingsApi(unittest.TestCase):
         api_response = self.api.create_babylon_airdrop_registration(create_babylon_airdrop_registration_request=create_babylon_airdrop_registration_request)
         """
 
+    def test_create_babylon_staking_expansion(self) -> None:
+        """
+        Test case for create_babylon_staking_expansion
+
+        Expand Babylon BTC staking
+        """
+        """
+        babylon_create_staking_expansion = cobo_waas2.BabylonCreateStakingExpansion()
+
+        api_response = self.api.create_babylon_staking_expansion(babylon_create_staking_expansion=babylon_create_staking_expansion)
+        """
+
     def test_create_babylon_staking_registration(self) -> None:
         """
         Test case for create_babylon_staking_registration

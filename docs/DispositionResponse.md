@@ -1,6 +1,6 @@
 # DispositionResponse
 
-The response for a disposition request.
+The response for a disposition creation request.
 
 ## Properties
 

@@ -33,6 +33,7 @@ class TokenizationOperationType(str, Enum):
     UPDATEBLOCKLISTADDRESSES = 'UpdateBlocklistAddresses'
     TOGGLEALLOWLIST = 'ToggleAllowlist'
     CONTRACTCALL = 'ContractCall'
+    UPDATEPERMISSIONS = 'UpdatePermissions'
 
     UNKNOWN = None
 

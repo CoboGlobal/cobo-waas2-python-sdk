@@ -1,14 +1,14 @@
 # ApprovalDetail
 
-Details of the transaction approval.
+The approval detail data for transaction.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transaction_id** | **str** | Transaction ID. | [optional] 
-**cobo_id** | **str** | Cobo ID used to track a transaction. | [optional] 
-**request_id** | **str** | Request ID used to track a transaction request. | [optional] 
+**transaction_id** | **str** | The transaction ID. | [optional] 
+**cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
+**request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | [optional] 
 **address_owner** | [**RoleDetail**](RoleDetail.md) |  | [optional] 
 **spender** | [**RoleDetail**](RoleDetail.md) |  | [optional] 
 **approver** | [**RoleDetail**](RoleDetail.md) |  | [optional] 

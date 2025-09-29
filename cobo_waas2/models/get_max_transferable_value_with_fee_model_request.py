@@ -29,7 +29,7 @@ class GetMaxTransferableValueWithFeeModelRequest(BaseModel):
     token_id: StrictStr = Field(description="The token ID of the transferred token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). For transfers from Exchange Wallets, this property value represents the asset ID.")
     fee: TransactionRequestFee
     to_address: StrictStr = Field(description="The recipient's address.")
-    from_address: Optional[StrictStr] = Field(default=None, description="The sender's address. This property is required when using an EVM address in an MPC Wallet.")
+    from_address: Optional[StrictStr] = Field(default=None, description="The sender's address. For EVM addresses in MPC Wallets, this parameter is required.")
     __properties: ClassVar[List[str]] = ["token_id", "fee", "to_address", "from_address"]
 
     model_config = ConfigDict(

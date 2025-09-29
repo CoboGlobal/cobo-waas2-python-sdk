@@ -23,9 +23,9 @@ from typing_extensions import Self
 
 class FILBase(BaseModel):
     """
-    FILBase
+    The transaction gas base based on the FIL fee model.
     """  # noqa: E501
-    gas_base: Optional[StrictStr] = Field(default=None, description="The minimum fee required for a transaction to be included in a block. The base fee is dynamically adjusted based on network congestion to maintain target block utilization. It is burned rather than paid to miners, reducing the total Filecoin supply over time.")
+    gas_base: Optional[StrictStr] = Field(default=None, description="This is the minimum fee required to include a transaction in a block. It is determined by the network's congestion level, which adjusts to maintain a target block utilization rate. The base fee is burned, reducing the total supply of Filecoin over time.")
     __properties: ClassVar[List[str]] = ["gas_base"]
 
     model_config = ConfigDict(

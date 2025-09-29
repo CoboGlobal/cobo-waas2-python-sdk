@@ -26,7 +26,7 @@ class OrgInfo(BaseModel):
     The information of an organization. To learn more about organizations, see [Introduction to Organization](https://manuals.cobo.com/en/portal/organization/introduction). 
     """  # noqa: E501
     org_id: StrictStr = Field(description="The organization ID.")
-    biz_org_id: Optional[StrictInt] = Field(default=None, description="An internal business ID assigned by Cobo. Used mainly by Cobo's customer support to locate the organization.")
+    biz_org_id: Optional[StrictInt] = Field(default=None, description="The organization biz ID.")
     name: Optional[StrictStr] = Field(default=None, description="The organization name.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The organization's creation time in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["org_id", "biz_org_id", "name", "created_timestamp"]

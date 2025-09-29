@@ -63,7 +63,9 @@ class TestGetRefunds200Response(unittest.TestCase):
                             ], 
                         charge_merchant_fee = False, 
                         merchant_fee_amount = '0.0001', 
-                        merchant_fee_token_id = 'ETH_USDT', )
+                        merchant_fee_token_id = 'ETH_USDT', 
+                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                            fee_amount = '', ), )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

@@ -30,8 +30,8 @@ class DispositionEventData(BaseModel):
     transaction_id: StrictStr = Field(description="The transaction ID.")
     disposition_type: DispositionType
     disposition_status: DispositionStatus
-    destination_address: Optional[StrictStr] = Field(default=None, description="The blockchain address to receive the refunded/isolated funds.")
-    disposition_amount: Optional[StrictStr] = Field(default=None, description="The amount to be refunded/isolated from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction. ")
+    destination_address: Optional[StrictStr] = Field(default=None, description="The blockchain address where the refund/isolated funds will be sent.")
+    disposition_amount: Optional[StrictStr] = Field(default=None, description="The amount to be refund/isolated from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction. ")
     updated_timestamp: StrictInt = Field(description="The time when the disposition was updated, in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["transaction_id", "disposition_type", "disposition_status", "destination_address", "disposition_amount", "updated_timestamp"]
 

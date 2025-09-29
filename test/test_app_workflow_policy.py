@@ -48,9 +48,9 @@ class TestAppWorkflowPolicy(unittest.TestCase):
                 conditions = [
                     cobo_waas2.models.policy_condition.PolicyCondition(
                         field = 'amount', 
-                        value_type = 'INT', 
+                        value_type = 'Pending', 
                         value = '11.23', 
-                        operator = '=', )
+                        operator = 'Pending', )
                     ]
             )
         else:

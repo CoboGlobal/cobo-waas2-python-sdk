@@ -24,23 +24,23 @@ from typing_extensions import Self
 
 class ApprovalUserDetail(BaseModel):
     """
-    Details about a user involved in a transaction approval workflow. 
+    The user detail for a transaction approval. This includes the user's email, public key, signature, statement UUID, result of the approval, creation time, template version, header title, whether it is for signing, and additional information to show. 
     """  # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="Name of the user who approved the transaction.")
-    email: Optional[StrictStr] = Field(default=None, description="Email of the user.")
-    pubkey: Optional[StrictStr] = Field(default=None, description="Public key of the user.")
-    signature: Optional[StrictStr] = Field(default=None, description="Signature produced by the user for this approval.")
-    statement_uuid: Optional[StrictStr] = Field(default=None, description="UUID of the statement associated with this approval.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the user who approved the transaction.")
+    email: Optional[StrictStr] = Field(default=None, description="The email address of the user who approved the transaction.")
+    pubkey: Optional[StrictStr] = Field(default=None, description="The public key of the user who approved the transaction.")
+    signature: Optional[StrictStr] = Field(default=None, description="The signature of the transaction approval.")
+    statement_uuid: Optional[StrictStr] = Field(default=None, description="The UUID of the statement associated with the transaction approval.")
     result: Optional[ApprovalResult] = None
-    approval_result_code: Optional[StrictInt] = Field(default=None, description="Integer value representing the result of the approval.")
-    created_time: Optional[StrictInt] = Field(default=None, description="Timestamp when the approval was created.")
-    template_version: Optional[StrictStr] = Field(default=None, description="Version of the template used for the transaction approval.")
-    header_title: Optional[StrictStr] = Field(default=None, description="Display title used in the transaction approval.")
-    is_for_sign: Optional[StrictBool] = Field(default=None, description="Indicates whether this approval requires signing: - `true`: The user must sign the transaction. - `false`: The user only needs to approve or reject without signing. ")
+    approval_result_code: Optional[StrictInt] = Field(default=None, description="The integer value representing the result of the approval.")
+    created_time: Optional[StrictInt] = Field(default=None, description="The timestamp when the approval was created.")
+    template_version: Optional[StrictStr] = Field(default=None, description="The version of the template used for the transaction approval.")
+    header_title: Optional[StrictStr] = Field(default=None, description="The title of the header for the transaction approval.")
+    is_for_sign: Optional[StrictBool] = Field(default=None, description="Indicates whether the approval is for signing.")
     show_info: Optional[StrictStr] = Field(default=None, description="Additional information to show for the transaction approval.")
-    language: Optional[StrictStr] = Field(default=None, description="Language used for the transaction approval.")
-    message_version: Optional[StrictStr] = Field(default=None, description="Version of the message format used for the transaction approval.")
-    message: Optional[StrictStr] = Field(default=None, description="Message associated with the transaction approval.")
+    language: Optional[StrictStr] = Field(default=None, description="The language used for the transaction approval.")
+    message_version: Optional[StrictStr] = Field(default=None, description="The version of the message format used for the transaction approval.")
+    message: Optional[StrictStr] = Field(default=None, description="The message associated with the transaction approval.")
     extra_message: Optional[StrictStr] = Field(default=None, description="Any additional message or information related to the transaction approval.")
     __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message"]
 
