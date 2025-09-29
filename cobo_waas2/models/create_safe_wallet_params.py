@@ -33,7 +33,7 @@ class CreateSafeWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto-sweep feature for the wallet. This parameter only applies to MPC Wallets and Web3 Wallets.")
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto sweep feature for the wallet. This parameter only applies to MPC and Web3 wallets.")
     chain_id: StrictStr = Field(description="The ID of the chain that the wallet operates on.")
     smart_contract_wallet_type: SmartContractWalletType
     safe_address: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The address of the Smart Contract Wallet. If this is not provided, Cobo will create a new Safe{Wallet} and set up Cobo Safe for you. In that case, the `threshold` and `signers` properties are required.")

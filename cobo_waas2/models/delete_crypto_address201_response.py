@@ -25,7 +25,7 @@ class DeleteCryptoAddress201Response(BaseModel):
     """
     DeleteCryptoAddress201Response
     """  # noqa: E501
-    crypto_address_id: StrictStr = Field(description="The ID of the deleted crypto address.")
+    crypto_address_id: StrictStr = Field(description="The crypto address ID.")
     __properties: ClassVar[List[str]] = ["crypto_address_id"]
 
     model_config = ConfigDict(

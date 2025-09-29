@@ -35,7 +35,7 @@ class TestTokenizationBlocklistAddressNote(unittest.TestCase):
         if include_optional:
             return TokenizationBlocklistAddressNote(
                 address = '0xabcdef...',
-                note = 'Blocked address',
+                note = 'Trusted address',
                 created_timestamp = 1610445878970
             )
         else:

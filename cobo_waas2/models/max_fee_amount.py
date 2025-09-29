@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class MaxFeeAmount(BaseModel):
     """
-    MaxFeeAmount
+    The maximum transaction fee.
     """  # noqa: E501
     max_fee_amount: Optional[StrictStr] = Field(default=None, description="The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee.")
     __properties: ClassVar[List[str]] = ["max_fee_amount"]

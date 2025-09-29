@@ -25,7 +25,7 @@ class DeleteAddressBookById201Response(BaseModel):
     """
     DeleteAddressBookById201Response
     """  # noqa: E501
-    submitted: StrictBool = Field(description="Whether the request to delete the Address Book entry (record) has been successfully submitted. - `true`: The request has been successfully submitted. - `false`: The request has not been submitted. ")
+    submitted: StrictBool = Field(description="Whether the request to delete the address book has been successfully submitted. - `true`: The request to delete the address book has been successfully submitted. - `false`: The request to delete the address book has not been submitted. ")
     __properties: ClassVar[List[str]] = ["submitted"]
 
     model_config = ConfigDict(

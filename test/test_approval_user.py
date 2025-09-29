@@ -34,14 +34,14 @@ class TestApprovalUser(unittest.TestCase):
         model = ApprovalUser()
         if include_optional:
             return ApprovalUser(
-                email = 'john.smith@example.com',
-                name = 'John Smith',
+                email = 'test@cobo.com',
+                name = 'test',
                 status = 'Pending',
                 created_timestamp = 1610445878970
             )
         else:
             return ApprovalUser(
-                email = 'john.smith@example.com',
+                email = 'test@cobo.com',
                 status = 'Pending',
                 created_timestamp = 1610445878970,
         )

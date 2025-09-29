@@ -26,9 +26,9 @@ from typing_extensions import Self
 
 class ApprovalRequestDetail(BaseModel):
     """
-    The information of an approval request detail.
+    The information of an app workflow approval detail.
     """  # noqa: E501
-    approval_id: Optional[StrictStr] = Field(default=None, description="The system-generated unique ID of the approval request.")
+    approval_id: Optional[StrictStr] = None
     initiator: ApprovalUser
     approved_list: Optional[List[ApprovalEntry]] = None
     status: ApprovalStatus

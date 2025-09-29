@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | [optional] 
 **settlement_type** | [**SettlementType**](SettlementType.md) |  | [optional] 
 **settlements** | [**List[CreateSettlement]**](CreateSettlement.md) |  | 
+**bank_account_id** | **str** | ｜ Only used in OffRamp payout channel. The ID of the bank account where the settled funds will be deposited. | [optional] 
+**currency** | **str** | The fiat currency for the settlement request. | [optional] 
 
 ## Example
 

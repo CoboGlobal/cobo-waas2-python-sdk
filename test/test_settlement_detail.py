@@ -66,7 +66,13 @@ class TestSettlementDetail(unittest.TestCase):
                 settlement_request_id = 'S20250304-1001',
                 order_ids = [
                     'O20250304-M1001-1001'
-                    ]
+                    ],
+                commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                    fee_amount = '', ),
+                bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
+                    fee_amount = '', 
+                    received_token_id = '', 
+                    received_amount = '', )
             )
         else:
             return SettlementDetail(

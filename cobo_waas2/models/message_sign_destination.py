@@ -17,16 +17,14 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, f
 from typing import Any, List, Optional
 from cobo_waas2.models.btcbip137_message_sign_destination import BTCBIP137MessageSignDestination
 from cobo_waas2.models.btcbip322_message_sign_destination import BTCBIP322MessageSignDestination
-from cobo_waas2.models.btceip191_message_sign_destination import BTCEIP191MessageSignDestination
 from cobo_waas2.models.cosmos_adr36_message_sign_destination import CosmosAdr36MessageSignDestination
 from cobo_waas2.models.evm_eip191_message_sign_destination import EvmEIP191MessageSignDestination
 from cobo_waas2.models.evm_eip712_message_sign_destination import EvmEIP712MessageSignDestination
-from cobo_waas2.models.raw_message_sign_destination import RawMessageSignDestination
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-MESSAGESIGNDESTINATION_ONE_OF_SCHEMAS = ["BTCBIP137MessageSignDestination", "BTCBIP322MessageSignDestination", "BTCEIP191MessageSignDestination", "CosmosAdr36MessageSignDestination", "EvmEIP191MessageSignDestination", "EvmEIP712MessageSignDestination", "RawMessageSignDestination"]
+MESSAGESIGNDESTINATION_ONE_OF_SCHEMAS = ["BTCBIP137MessageSignDestination", "BTCBIP322MessageSignDestination", "CosmosAdr36MessageSignDestination", "EvmEIP191MessageSignDestination", "EvmEIP712MessageSignDestination"]
 
 class MessageSignDestination(BaseModel):
     """
@@ -36,18 +34,14 @@ class MessageSignDestination(BaseModel):
     oneof_schema_1_validator: Optional[EvmEIP191MessageSignDestination] = None
     # data type: EvmEIP712MessageSignDestination
     oneof_schema_2_validator: Optional[EvmEIP712MessageSignDestination] = None
-    # data type: RawMessageSignDestination
-    oneof_schema_3_validator: Optional[RawMessageSignDestination] = None
-    # data type: BTCEIP191MessageSignDestination
-    oneof_schema_4_validator: Optional[BTCEIP191MessageSignDestination] = None
     # data type: BTCBIP137MessageSignDestination
-    oneof_schema_5_validator: Optional[BTCBIP137MessageSignDestination] = None
+    oneof_schema_3_validator: Optional[BTCBIP137MessageSignDestination] = None
     # data type: BTCBIP322MessageSignDestination
-    oneof_schema_6_validator: Optional[BTCBIP322MessageSignDestination] = None
+    oneof_schema_4_validator: Optional[BTCBIP322MessageSignDestination] = None
     # data type: CosmosAdr36MessageSignDestination
-    oneof_schema_7_validator: Optional[CosmosAdr36MessageSignDestination] = None
-    actual_instance: Optional[Union[BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, BTCEIP191MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination, RawMessageSignDestination]] = None
-    one_of_schemas: Set[str] = { "BTCBIP137MessageSignDestination", "BTCBIP322MessageSignDestination", "BTCEIP191MessageSignDestination", "CosmosAdr36MessageSignDestination", "EvmEIP191MessageSignDestination", "EvmEIP712MessageSignDestination", "RawMessageSignDestination" }
+    oneof_schema_5_validator: Optional[CosmosAdr36MessageSignDestination] = None
+    actual_instance: Optional[Union[BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination]] = None
+    one_of_schemas: Set[str] = { "BTCBIP137MessageSignDestination", "BTCBIP322MessageSignDestination", "CosmosAdr36MessageSignDestination", "EvmEIP191MessageSignDestination", "EvmEIP712MessageSignDestination" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -83,16 +77,6 @@ class MessageSignDestination(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `EvmEIP712MessageSignDestination`")
         else:
             match += 1
-        # validate data type: RawMessageSignDestination
-        if not isinstance(v, RawMessageSignDestination):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `RawMessageSignDestination`")
-        else:
-            match += 1
-        # validate data type: BTCEIP191MessageSignDestination
-        if not isinstance(v, BTCEIP191MessageSignDestination):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BTCEIP191MessageSignDestination`")
-        else:
-            match += 1
         # validate data type: BTCBIP137MessageSignDestination
         if not isinstance(v, BTCBIP137MessageSignDestination):
             error_messages.append(f"Error! Input type `{type(v)}` is not `BTCBIP137MessageSignDestination`")
@@ -110,10 +94,10 @@ class MessageSignDestination(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, BTCEIP191MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination, RawMessageSignDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, BTCEIP191MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination, RawMessageSignDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -143,11 +127,6 @@ class MessageSignDestination(BaseModel):
             instance.actual_instance = BTCBIP322MessageSignDestination.from_json(json_str)
             return instance
 
-        # check if data type is `BTCEIP191MessageSignDestination`
-        if _data_type == "BTC_EIP_191_Signature":
-            instance.actual_instance = BTCEIP191MessageSignDestination.from_json(json_str)
-            return instance
-
         # check if data type is `CosmosAdr36MessageSignDestination`
         if _data_type == "COSMOS_ADR_36_Signature":
             instance.actual_instance = CosmosAdr36MessageSignDestination.from_json(json_str)
@@ -163,11 +142,6 @@ class MessageSignDestination(BaseModel):
             instance.actual_instance = EvmEIP712MessageSignDestination.from_json(json_str)
             return instance
 
-        # check if data type is `RawMessageSignDestination`
-        if _data_type == "Raw_Message_Signature":
-            instance.actual_instance = RawMessageSignDestination.from_json(json_str)
-            return instance
-
         # check if data type is `BTCBIP137MessageSignDestination`
         if _data_type == "BTCBIP137MessageSignDestination":
             instance.actual_instance = BTCBIP137MessageSignDestination.from_json(json_str)
@@ -176,11 +150,6 @@ class MessageSignDestination(BaseModel):
         # check if data type is `BTCBIP322MessageSignDestination`
         if _data_type == "BTCBIP322MessageSignDestination":
             instance.actual_instance = BTCBIP322MessageSignDestination.from_json(json_str)
-            return instance
-
-        # check if data type is `BTCEIP191MessageSignDestination`
-        if _data_type == "BTCEIP191MessageSignDestination":
-            instance.actual_instance = BTCEIP191MessageSignDestination.from_json(json_str)
             return instance
 
         # check if data type is `CosmosAdr36MessageSignDestination`
@@ -198,11 +167,6 @@ class MessageSignDestination(BaseModel):
             instance.actual_instance = EvmEIP712MessageSignDestination.from_json(json_str)
             return instance
 
-        # check if data type is `RawMessageSignDestination`
-        if _data_type == "RawMessageSignDestination":
-            instance.actual_instance = RawMessageSignDestination.from_json(json_str)
-            return instance
-
         return instance
         # deserialize data into EvmEIP191MessageSignDestination
         try:
@@ -213,18 +177,6 @@ class MessageSignDestination(BaseModel):
         # deserialize data into EvmEIP712MessageSignDestination
         try:
             instance.actual_instance = EvmEIP712MessageSignDestination.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into RawMessageSignDestination
-        try:
-            instance.actual_instance = RawMessageSignDestination.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into BTCEIP191MessageSignDestination
-        try:
-            instance.actual_instance = BTCEIP191MessageSignDestination.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -249,11 +201,11 @@ class MessageSignDestination(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, BTCEIP191MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination, RawMessageSignDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, BTCEIP191MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination, RawMessageSignDestination. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into MessageSignDestination with oneOf schemas: BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -267,7 +219,7 @@ class MessageSignDestination(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, BTCEIP191MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination, RawMessageSignDestination]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], BTCBIP137MessageSignDestination, BTCBIP322MessageSignDestination, CosmosAdr36MessageSignDestination, EvmEIP191MessageSignDestination, EvmEIP712MessageSignDestination]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

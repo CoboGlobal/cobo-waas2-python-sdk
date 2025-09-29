@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class AcquiringType(str, Enum):
     """
-    The payment acquisition type. - `Order`: Payers pay by fixed-amount orders. Ideal for specific purchases and one-time transactions. - `TopUp`: Account recharge flow where payers deposit funds to their dedicated top-up addresses. Ideal for flexible or usage-based payment models. 
+    AcquiringType defines the acquisition logic used in the payment flow: - `Order`: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - `TopUp`: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models. - `Subscription`: Subscription. 
     """
 
     """
@@ -26,6 +26,7 @@ class AcquiringType(str, Enum):
     """
     ORDER = 'Order'
     TOPUP = 'TopUp'
+    SUBSCRIPTION = 'Subscription'
 
     UNKNOWN = None
 

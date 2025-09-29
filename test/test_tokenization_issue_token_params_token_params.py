@@ -44,7 +44,8 @@ class TestTokenizationIssueTokenParamsTokenParams(unittest.TestCase):
                     minter = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
                     freezer = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
                     updater = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
-                    pauser = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', )
+                    pauser = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', ),
+                underlying_token = '0xdac17f958d2ee523a2206206994597c13d831ec7'
             )
         else:
             return TokenizationIssueTokenParamsTokenParams(
@@ -52,6 +53,7 @@ class TestTokenizationIssueTokenParamsTokenParams(unittest.TestCase):
                 name = 'My Awesome Token',
                 symbol = 'MAT',
                 decimals = 18,
+                underlying_token = '0xdac17f958d2ee523a2206206994597c13d831ec7',
         )
         """
 

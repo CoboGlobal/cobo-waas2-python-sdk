@@ -25,13 +25,13 @@ from typing_extensions import Self
 
 class RoleDetail(BaseModel):
     """
-    Details of the role in a transaction approval.
+    Transaction approval details response schema.
     """  # noqa: E501
     result: Optional[ApprovalTransactionResult] = None
-    review_threshold: Optional[StrictInt] = Field(default=None, description="Minimum number of approvals required for this role.")
+    review_threshold: Optional[StrictInt] = Field(default=None, description="The threshold for the transaction approval.")
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the transaction.")
     is_upgraded: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction approval has been upgraded.")
-    complete_time: Optional[StrictStr] = Field(default=None, description="Time when the role completed the approval.")
+    complete_time: Optional[StrictStr] = Field(default=None, description="Time to complete the review.")
     user_details: Optional[List[ApprovalUserDetail]] = None
     __properties: ClassVar[List[str]] = ["result", "review_threshold", "initiator", "is_upgraded", "complete_time", "user_details"]
 

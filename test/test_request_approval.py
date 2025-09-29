@@ -36,11 +36,11 @@ class TestRequestApproval(unittest.TestCase):
             return RequestApproval(
                 operation_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                initiator_email = 'johnsmith@example.com',
+                initiator_email = 'aa@cobo.com',
                 fields = [
                     cobo_waas2.models.app_workflow_field.AppWorkflowField(
                         field = 'amount', 
-                        value_type = 'INT', 
+                        value_type = 'Pending', 
                         value = '11.23', )
                     ],
                 guard_template = ''
@@ -49,11 +49,11 @@ class TestRequestApproval(unittest.TestCase):
             return RequestApproval(
                 operation_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                initiator_email = 'johnsmith@example.com',
+                initiator_email = 'aa@cobo.com',
                 fields = [
                     cobo_waas2.models.app_workflow_field.AppWorkflowField(
                         field = 'amount', 
-                        value_type = 'INT', 
+                        value_type = 'Pending', 
                         value = '11.23', )
                     ],
                 guard_template = '',

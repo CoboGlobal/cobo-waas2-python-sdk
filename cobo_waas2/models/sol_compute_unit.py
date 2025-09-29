@@ -23,10 +23,10 @@ from typing_extensions import Self
 
 class SOLComputeUnit(BaseModel):
     """
-    SOLComputeUnit
+    The transaction gas price based on the SOL fee model.
     """  # noqa: E501
-    compute_unit_price: Optional[StrictStr] = Field(default=None, description="The price paid per compute unit. This value determines the priority fee for the transaction, allowing you to increase inclusion probability in congested conditions.")
-    compute_unit_limit: Optional[StrictStr] = Field(default=None, description="The maximum number of compute units your transaction is allowed to consume. It sets an upper bound on computational resource usage to prevent overload.")
+    compute_unit_price: Optional[StrictStr] = Field(default=None, description="The cost per compute unit. Transactions consume computational resources measured in compute units, and this price helps determine the cost of executing transactions, especially complex ones involving smart contracts.")
+    compute_unit_limit: Optional[StrictStr] = Field(default=None, description="The maximum number of compute units allowed for a transaction. This limits the resources any single transaction can consume, preventing excessive resource usage that could impact network performance negatively.")
     __properties: ClassVar[List[str]] = ["compute_unit_price", "compute_unit_limit"]
 
     model_config = ConfigDict(

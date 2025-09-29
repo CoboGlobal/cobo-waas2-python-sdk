@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class ApprovalRequest(BaseModel):
     """
-    The information of an approval request.
+    The information of an app workflow approval.
     """  # noqa: E501
-    approval_id: StrictStr = Field(description="The system-generated unique ID of the approval request.")
-    request_id: StrictStr = Field(description="An identifier provided by you when requesting the approval.")
+    approval_id: StrictStr
+    request_id: StrictStr
     fields: List[AppWorkflowField]
     status: ApprovalStatus
     initiated_timestamp: StrictInt = Field(description="The time when the approval was initiated, in Unix timestamp format, measured in milliseconds.")

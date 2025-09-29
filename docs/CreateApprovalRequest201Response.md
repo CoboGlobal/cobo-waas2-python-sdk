@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**approval_id** | **str** | The system-generated unique ID of the approval request. You can use this ID to query the approval request status or revoke the request. | 
+**approval_id** | **str** |  | 
 
 ## Example
 

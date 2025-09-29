@@ -48,6 +48,9 @@ class TestStakings(unittest.TestCase):
                 created_timestamp = 1640995200000,
                 updated_timestamp = 1640995200000,
                 validator_info = None,
+                validators = [
+                    null
+                    ],
                 extra = None
             )
         else:
@@ -64,7 +67,6 @@ class TestStakings(unittest.TestCase):
                 token_id = 'BTC',
                 created_timestamp = 1640995200000,
                 updated_timestamp = 1640995200000,
-                validator_info = None,
         )
         """
 

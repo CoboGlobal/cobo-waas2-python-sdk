@@ -1,6 +1,5 @@
 # AutoSweepTaskStatus
 
-Auto-sweep task status: - `Submitted`: The auto-sweep task has been submitted. - `TransactionCreated`: The auto-sweep task triggered one or more token sweeping transactions. 
 
 ## Properties
 

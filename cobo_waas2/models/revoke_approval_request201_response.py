@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.approval_status import ApprovalStatus
 from typing import Optional, Set
@@ -26,7 +26,7 @@ class RevokeApprovalRequest201Response(BaseModel):
     """
     RevokeApprovalRequest201Response
     """  # noqa: E501
-    approval_id: StrictStr = Field(description="The system-generated unique ID of the approval request.")
+    approval_id: StrictStr
     status: Optional[ApprovalStatus] = None
     __properties: ClassVar[List[str]] = ["approval_id", "status"]
 

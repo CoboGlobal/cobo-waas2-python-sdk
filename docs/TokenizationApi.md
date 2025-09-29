@@ -9,20 +9,22 @@ Method | HTTP request | Description
 [**get_tokenization_activity**](TokenizationApi.md#get_tokenization_activity) | **GET** /tokenization/activities/{activity_id} | Get tokenization activity details
 [**get_tokenization_allowlist_activation**](TokenizationApi.md#get_tokenization_allowlist_activation) | **GET** /tokenization/tokens/{token_id}/allowlist/activation | Get allowlist activation status
 [**get_tokenization_info**](TokenizationApi.md#get_tokenization_info) | **GET** /tokenization/tokens/{token_id} | Get token details
-[**issue_token**](TokenizationApi.md#issue_token) | **POST** /tokenization/tokens | Issue token
+[**issue_token**](TokenizationApi.md#issue_token) | **POST** /tokenization/tokens | Issue a new token
 [**list_issued_tokens**](TokenizationApi.md#list_issued_tokens) | **GET** /tokenization/tokens | List issued tokens
 [**list_tokenization_activities**](TokenizationApi.md#list_tokenization_activities) | **GET** /tokenization/activities | List tokenization activities
-[**list_tokenization_allowlist_addresses**](TokenizationApi.md#list_tokenization_allowlist_addresses) | **GET** /tokenization/tokens/{token_id}/allowlist/addresses | List addresses on allowlist
-[**list_tokenization_blocklist_addresses**](TokenizationApi.md#list_tokenization_blocklist_addresses) | **GET** /tokenization/tokens/{token_id}/blocklist/addresses | List addresses on blocklist
+[**list_tokenization_allowlist_addresses**](TokenizationApi.md#list_tokenization_allowlist_addresses) | **GET** /tokenization/tokens/{token_id}/allowlist/addresses | List allowlist addresses
+[**list_tokenization_blocklist_addresses**](TokenizationApi.md#list_tokenization_blocklist_addresses) | **GET** /tokenization/tokens/{token_id}/blocklist/addresses | List tokenization blocklist addresses
 [**list_tokenization_holdings**](TokenizationApi.md#list_tokenization_holdings) | **GET** /tokenization/tokens/{token_id}/holdings | Get token holdings information
+[**list_tokenization_permissions**](TokenizationApi.md#list_tokenization_permissions) | **GET** /tokenization/tokens/{token_id}/permissions | List permissions of the token
 [**list_tokenization_supported_chains**](TokenizationApi.md#list_tokenization_supported_chains) | **GET** /tokenization/enabled_chains | List supported chains for tokenization
 [**mint_tokenization**](TokenizationApi.md#mint_tokenization) | **POST** /tokenization/tokens/{token_id}/mint | Mint tokens
 [**pause_tokenization**](TokenizationApi.md#pause_tokenization) | **POST** /tokenization/tokens/{token_id}/pause | Pause token contract
 [**tokenization_contract_call**](TokenizationApi.md#tokenization_contract_call) | **POST** /tokenization/tokens/{token_id}/contract_call | Call token contract
 [**unpause_tokenization**](TokenizationApi.md#unpause_tokenization) | **POST** /tokenization/tokens/{token_id}/unpause | Unpause token contract
-[**update_tokenization_allowlist_activation**](TokenizationApi.md#update_tokenization_allowlist_activation) | **POST** /tokenization/tokens/{token_id}/allowlist/activation | Activate or deactivate allowlist
-[**update_tokenization_allowlist_addresses**](TokenizationApi.md#update_tokenization_allowlist_addresses) | **POST** /tokenization/tokens/{token_id}/allowlist/addresses | Update addresses on allowlist
-[**update_tokenization_blocklist_addresses**](TokenizationApi.md#update_tokenization_blocklist_addresses) | **POST** /tokenization/tokens/{token_id}/blocklist/addresses | Update addresses on blocklist
+[**update_tokenization_allowlist_activation**](TokenizationApi.md#update_tokenization_allowlist_activation) | **POST** /tokenization/tokens/{token_id}/allowlist/activation | Activate or deactivate the allowlist
+[**update_tokenization_allowlist_addresses**](TokenizationApi.md#update_tokenization_allowlist_addresses) | **POST** /tokenization/tokens/{token_id}/allowlist/addresses | Update allowlist addresses
+[**update_tokenization_blocklist_addresses**](TokenizationApi.md#update_tokenization_blocklist_addresses) | **POST** /tokenization/tokens/{token_id}/blocklist/addresses | Update tokenization blocklist addresses
+[**update_tokenization_permissions**](TokenizationApi.md#update_tokenization_permissions) | **POST** /tokenization/tokens/{token_id}/permissions | Update permissions of the token
 
 
 # **burn_tokenization**
@@ -392,7 +394,7 @@ Name | Type | Description  | Notes
 # **issue_token**
 > TokenizationOperationResponse issue_token(tokenization_issued_token_request)
 
-Issue token
+Issue a new token
 
 This operation issues a new token contract. It supports various blockchain platforms.  For EVM-based chains, this involves issuing a new smart contract from a template. 
 
@@ -422,7 +424,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tokenization_issued_token_request = cobo_waas2.TokenizationIssuedTokenRequest()
 
     try:
-        # Issue token
+        # Issue a new token
         api_response = api_instance.issue_token(tokenization_issued_token_request)
         print("The response of TokenizationApi->issue_token:\n")
         pprint(api_response)
@@ -522,8 +524,8 @@ Name | Type | Description  | Notes
  **token_standard** | [**TokenizationTokenStandard**](.md)| Filter by token standard. | [optional] 
  **status** | [**TokenizationStatus**](.md)| Filter by token status. | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
 
 ### Return type
 
@@ -607,8 +609,8 @@ Name | Type | Description  | Notes
  **activity_type** | [**TokenizationOperationType**](.md)| Filter by tokenization activity type. | [optional] 
  **activity_status** | [**TokenizationActivityStatus**](.md)| Filter by tokenization activity status. | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **direction** | **str**| The sort direction. Possible values include:   - &#x60;ASC&#x60;: Sort the results in ascending order.   - &#x60;DESC&#x60;: Sort the results in descending order.  | [optional] [default to &#39;ASC&#39;]
 
 ### Return type
@@ -637,9 +639,9 @@ Name | Type | Description  | Notes
 # **list_tokenization_allowlist_addresses**
 > TokenizationAllowlistAddressesResponse list_tokenization_allowlist_addresses(token_id, limit=limit, after=after, before=before, direction=direction)
 
-List addresses on allowlist
+List allowlist addresses
 
-This operation lists addresses on the allowlist. 
+This operation lists the allowlist addresses of the token contract. 
 
 ### Example
 
@@ -670,7 +672,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     direction = 'ASC'
 
     try:
-        # List addresses on allowlist
+        # List allowlist addresses
         api_response = api_instance.list_tokenization_allowlist_addresses(token_id, limit=limit, after=after, before=before, direction=direction)
         print("The response of TokenizationApi->list_tokenization_allowlist_addresses:\n")
         pprint(api_response)
@@ -687,8 +689,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **direction** | **str**| The sort direction. Possible values include:   - &#x60;ASC&#x60;: Sort the results in ascending order.   - &#x60;DESC&#x60;: Sort the results in descending order.  | [optional] [default to &#39;ASC&#39;]
 
 ### Return type
@@ -708,7 +710,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved addresses on the allowlist. |  -  |
+**200** | Successfully retrieved the list of allowlist addresses. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -717,9 +719,9 @@ Name | Type | Description  | Notes
 # **list_tokenization_blocklist_addresses**
 > ListTokenizationBlocklistAddresses200Response list_tokenization_blocklist_addresses(token_id, limit=limit, after=after, before=before, direction=direction)
 
-List addresses on blocklist
+List tokenization blocklist addresses
 
-This operation lists addresses on the blocklist. 
+This operation lists the tokenization blocklist addresses. 
 
 ### Example
 
@@ -750,7 +752,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     direction = 'ASC'
 
     try:
-        # List addresses on blocklist
+        # List tokenization blocklist addresses
         api_response = api_instance.list_tokenization_blocklist_addresses(token_id, limit=limit, after=after, before=before, direction=direction)
         print("The response of TokenizationApi->list_tokenization_blocklist_addresses:\n")
         pprint(api_response)
@@ -767,8 +769,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **direction** | **str**| The sort direction. Possible values include:   - &#x60;ASC&#x60;: Sort the results in ascending order.   - &#x60;DESC&#x60;: Sort the results in descending order.  | [optional] [default to &#39;ASC&#39;]
 
 ### Return type
@@ -788,7 +790,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved addresses on the blocklist. |  -  |
+**200** | Successfully retrieved the list of blocklist addresses. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -846,8 +848,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
 
 ### Return type
 
@@ -867,6 +869,88 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successfully retrieved token holdings information. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_tokenization_permissions**
+> TokenizationListPermissionsResponse list_tokenization_permissions(token_id, address=address, limit=limit, after=after, before=before, direction=direction)
+
+List permissions of the token
+
+This operation retrieves the permissions for a tokenization contract. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.tokenization_list_permissions_response import TokenizationListPermissionsResponse
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_id = 'ETH_USDT'
+    address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+    limit = 10
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    direction = 'ASC'
+
+    try:
+        # List permissions of the token
+        api_response = api_instance.list_tokenization_permissions(token_id, address=address, limit=limit, after=after, before=before, direction=direction)
+        print("The response of TokenizationApi->list_tokenization_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TokenizationApi->list_tokenization_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **address** | **str**| The address to query permissions for. If not provided, returns all addresses with permissions. | [optional] 
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **direction** | **str**| The sort direction. Possible values include:   - &#x60;ASC&#x60;: Sort the results in ascending order.   - &#x60;DESC&#x60;: Sort the results in descending order.  | [optional] [default to &#39;ASC&#39;]
+
+### Return type
+
+[**TokenizationListPermissionsResponse**](TokenizationListPermissionsResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully retrieved permissions |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -922,8 +1006,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
 
 ### Return type
 
@@ -1251,7 +1335,7 @@ Name | Type | Description  | Notes
 # **update_tokenization_allowlist_activation**
 > TokenizationOperationResponse update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
 
-Activate or deactivate allowlist
+Activate or deactivate the allowlist
 
 This operation activates or deactivates the allowlist. 
 
@@ -1282,7 +1366,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tokenization_allowlist_activation_request = cobo_waas2.TokenizationAllowlistActivationRequest()
 
     try:
-        # Activate or deactivate allowlist
+        # Activate or deactivate the allowlist
         api_response = api_instance.update_tokenization_allowlist_activation(token_id, tokenization_allowlist_activation_request=tokenization_allowlist_activation_request)
         print("The response of TokenizationApi->update_tokenization_allowlist_activation:\n")
         pprint(api_response)
@@ -1326,9 +1410,9 @@ Name | Type | Description  | Notes
 # **update_tokenization_allowlist_addresses**
 > TokenizationOperationResponse update_tokenization_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
 
-Update addresses on allowlist
+Update allowlist addresses
 
-This operation updates addresses on the allowlist. 
+This operation updates the allowlist addresses of the token contract. 
 
 ### Example
 
@@ -1357,7 +1441,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tokenization_update_allowlist_addresses_request = cobo_waas2.TokenizationUpdateAllowlistAddressesRequest()
 
     try:
-        # Update addresses on allowlist
+        # Update allowlist addresses
         api_response = api_instance.update_tokenization_allowlist_addresses(token_id, tokenization_update_allowlist_addresses_request=tokenization_update_allowlist_addresses_request)
         print("The response of TokenizationApi->update_tokenization_allowlist_addresses:\n")
         pprint(api_response)
@@ -1373,7 +1457,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_update_allowlist_addresses_request** | [**TokenizationUpdateAllowlistAddressesRequest**](TokenizationUpdateAllowlistAddressesRequest.md)| The request body for adding or removing multiple addresses on the allowlist. | [optional] 
+ **tokenization_update_allowlist_addresses_request** | [**TokenizationUpdateAllowlistAddressesRequest**](TokenizationUpdateAllowlistAddressesRequest.md)| The request body for managing multiple allowlist addresses (adding or removing). | [optional] 
 
 ### Return type
 
@@ -1401,9 +1485,9 @@ Name | Type | Description  | Notes
 # **update_tokenization_blocklist_addresses**
 > TokenizationOperationResponse update_tokenization_blocklist_addresses(token_id, tokenization_update_blocklist_addresses_request=tokenization_update_blocklist_addresses_request)
 
-Update addresses on blocklist
+Update tokenization blocklist addresses
 
-This operation updates addresses on the blocklist. 
+This operation updates the tokenization blocklist addresses. 
 
 ### Example
 
@@ -1432,7 +1516,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     tokenization_update_blocklist_addresses_request = cobo_waas2.TokenizationUpdateBlocklistAddressesRequest()
 
     try:
-        # Update addresses on blocklist
+        # Update tokenization blocklist addresses
         api_response = api_instance.update_tokenization_blocklist_addresses(token_id, tokenization_update_blocklist_addresses_request=tokenization_update_blocklist_addresses_request)
         print("The response of TokenizationApi->update_tokenization_blocklist_addresses:\n")
         pprint(api_response)
@@ -1448,7 +1532,82 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
- **tokenization_update_blocklist_addresses_request** | [**TokenizationUpdateBlocklistAddressesRequest**](TokenizationUpdateBlocklistAddressesRequest.md)| The request body for adding or removing multiple addresses on the blocklist. | [optional] 
+ **tokenization_update_blocklist_addresses_request** | [**TokenizationUpdateBlocklistAddressesRequest**](TokenizationUpdateBlocklistAddressesRequest.md)| The request body for managing multiple blocklist addresses (adding or removing). | [optional] 
+
+### Return type
+
+[**TokenizationOperationResponse**](TokenizationOperationResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Tokenization operation transaction created successfully |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_tokenization_permissions**
+> TokenizationOperationResponse update_tokenization_permissions(token_id, tokenization_update_permissions_request)
+
+Update permissions of the token
+
+This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.tokenization_operation_response import TokenizationOperationResponse
+from cobo_waas2.models.tokenization_update_permissions_request import TokenizationUpdatePermissionsRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_id = 'ETH_USDT'
+    tokenization_update_permissions_request = cobo_waas2.TokenizationUpdatePermissionsRequest()
+
+    try:
+        # Update permissions of the token
+        api_response = api_instance.update_tokenization_permissions(token_id, tokenization_update_permissions_request)
+        print("The response of TokenizationApi->update_tokenization_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TokenizationApi->update_tokenization_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **tokenization_update_permissions_request** | [**TokenizationUpdatePermissionsRequest**](TokenizationUpdatePermissionsRequest.md)| The request body for managing permissions. | 
 
 ### Return type
 

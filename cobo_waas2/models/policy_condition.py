@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class PolicyCondition(BaseModel):
     """
-    A condition that defines under what circumstances the policy’s action should be triggered.
+    The information of an app workflow policy condition.
     """  # noqa: E501
-    var_field: StrictStr = Field(description="The field name.", alias="field")
+    var_field: StrictStr = Field(description="The app workflow field name.", alias="field")
     value_type: PolicyFieldValueType
-    value: StrictStr = Field(description="The field value.")
+    value: StrictStr = Field(description="The app workflow field value.")
     operator: PolicyFieldOperator
     __properties: ClassVar[List[str]] = ["field", "value_type", "value", "operator"]
 

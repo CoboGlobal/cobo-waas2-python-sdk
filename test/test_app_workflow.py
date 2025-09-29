@@ -36,7 +36,7 @@ class TestAppWorkflow(unittest.TestCase):
             return AppWorkflow(
                 workflow_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 operation_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                operation_name = 'Make Batch Payout',
+                operation_name = 'test@cobo.com',
                 current_policies = [
                     cobo_waas2.models.app_workflow_policy.AppWorkflowPolicy(
                         action = cobo_waas2.models.policy_action.PolicyAction(
@@ -53,9 +53,9 @@ class TestAppWorkflow(unittest.TestCase):
                         conditions = [
                             cobo_waas2.models.policy_condition.PolicyCondition(
                                 field = 'amount', 
-                                value_type = 'INT', 
+                                value_type = 'Pending', 
                                 value = '11.23', 
-                                operator = '=', )
+                                operator = 'Pending', )
                             ], )
                     ]
             )
@@ -63,7 +63,7 @@ class TestAppWorkflow(unittest.TestCase):
             return AppWorkflow(
                 workflow_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 operation_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                operation_name = 'Make Batch Payout',
+                operation_name = 'test@cobo.com',
                 current_policies = [
                     cobo_waas2.models.app_workflow_policy.AppWorkflowPolicy(
                         action = cobo_waas2.models.policy_action.PolicyAction(
@@ -80,9 +80,9 @@ class TestAppWorkflow(unittest.TestCase):
                         conditions = [
                             cobo_waas2.models.policy_condition.PolicyCondition(
                                 field = 'amount', 
-                                value_type = 'INT', 
+                                value_type = 'Pending', 
                                 value = '11.23', 
-                                operator = '=', )
+                                operator = 'Pending', )
                             ], )
                     ],
         )

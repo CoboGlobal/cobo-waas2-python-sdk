@@ -27,7 +27,7 @@ class DispositionQueryResponse(BaseModel):
     """
     The response for a disposition query request.
     """  # noqa: E501
-    transaction_id: StrictStr = Field(description="The UUID of the transaction that the disposition applies to.")
+    transaction_id: StrictStr = Field(description="The UUID of the transaction that was disposed.")
     disposition_type: DispositionType
     disposition_status: DispositionStatus
     disposition_transaction_id: Optional[StrictStr] = Field(default=None, description="The UUID of the generated disposition transaction (if available).")

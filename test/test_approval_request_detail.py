@@ -36,8 +36,8 @@ class TestApprovalRequestDetail(unittest.TestCase):
             return ApprovalRequestDetail(
                 approval_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 initiator = cobo_waas2.models.approval_user.ApprovalUser(
-                    email = 'john.smith@example.com', 
-                    name = 'John Smith', 
+                    email = 'test@cobo.com', 
+                    name = 'test', 
                     status = 'Pending', 
                     created_timestamp = 1610445878970, ),
                 approved_list = [
@@ -46,8 +46,8 @@ class TestApprovalRequestDetail(unittest.TestCase):
                         created_timestamp = 1610445878970, 
                         approval_users = [
                             cobo_waas2.models.approval_user.ApprovalUser(
-                                email = 'john.smith@example.com', 
-                                name = 'John Smith', 
+                                email = 'test@cobo.com', 
+                                name = 'test', 
                                 status = 'Pending', 
                                 created_timestamp = 1610445878970, )
                             ], )
@@ -58,8 +58,8 @@ class TestApprovalRequestDetail(unittest.TestCase):
         else:
             return ApprovalRequestDetail(
                 initiator = cobo_waas2.models.approval_user.ApprovalUser(
-                    email = 'john.smith@example.com', 
-                    name = 'John Smith', 
+                    email = 'test@cobo.com', 
+                    name = 'test', 
                     status = 'Pending', 
                     created_timestamp = 1610445878970, ),
                 status = 'Pending',

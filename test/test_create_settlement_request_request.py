@@ -49,7 +49,9 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                         order_ids = [
                             'O20250304-M1001-1001'
                             ], )
-                    ]
+                    ],
+                bank_account_id = '0123e457-e89b-12d3-a456-426614174004',
+                currency = 'USD'
             )
         else:
             return CreateSettlementRequestRequest(
