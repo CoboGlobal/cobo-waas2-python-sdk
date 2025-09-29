@@ -41,7 +41,6 @@ class TestSwapQuote(unittest.TestCase):
                 receive_amount = '100',
                 fee_token_id = 'BTC',
                 fee_amount = '0.3',
-                estimated_network_fee_amount = '0.3',
                 min_receive_amount = '0',
                 max_pay_amount = '10000',
                 quote_expired_timestamp = 1677587393000

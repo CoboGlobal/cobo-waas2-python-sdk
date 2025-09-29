@@ -26,11 +26,11 @@ class PaymentWalletBalance(BaseModel):
     PaymentWalletBalance
     """  # noqa: E501
     wallet_id: StrictStr = Field(description="The unique identifier of the wallet.")
-    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
-    swept_balance: Optional[StrictStr] = Field(default=None, description="The total amount of the token on the sweep-to address of the payment wallet.")
-    available_balance: Optional[StrictStr] = Field(default=None, description="The balance available for settlement or refund, in the specified cryptocurrency.")
-    total_balance: Optional[StrictStr] = Field(default=None, description="The total balance of the token for the payment wallet.")
-    above_sweep_threshold_balance: Optional[StrictStr] = Field(default=None, description="The total amount of funds that exceed the sweep threshold across all receiving addresses in the payment wallet. When the balance on a receiving address exceeds the sweep threshold, those funds become eligible for automatic sweeping and are included in this balance.")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency.")
+    swept_balance: Optional[StrictStr] = Field(default=None, description="The payment wallet swept balance.")
+    available_balance: Optional[StrictStr] = Field(default=None, description="The payment wallet available balance.")
+    total_balance: Optional[StrictStr] = Field(default=None, description="The payment wallet total balance.")
+    above_sweep_threshold_balance: Optional[StrictStr] = Field(default=None, description="The payment wallet above sweep threshold balance.")
     __properties: ClassVar[List[str]] = ["wallet_id", "token_id", "swept_balance", "available_balance", "total_balance", "above_sweep_threshold_balance"]
 
     model_config = ConfigDict(

@@ -19,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.tokenization_address_permission import TokenizationAddressPermission
 from cobo_waas2.models.tokenization_status import TokenizationStatus
+from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,13 +33,14 @@ class TokenizationTokenDetailInfo(BaseModel):
     token_address: Optional[StrictStr] = Field(default=None, description="The address of the token contract.")
     token_name: Optional[StrictStr] = Field(default=None, description="The name of the token.")
     token_symbol: StrictStr = Field(description="The unique token symbol.")
+    token_standard: TokenizationTokenStandard
     decimals: StrictInt = Field(description="The number of decimals of the token.")
     token_access_activated: Optional[StrictBool] = Field(default=None, description="Whether the allowlist feature is activated for the token.")
     status: TokenizationStatus
     total_supply: Optional[StrictStr] = Field(default=None, description="The total supply of the token.")
     holdings: Optional[StrictStr] = Field(default=None, description="The amount of tokens held by the organization.")
     permissions: Optional[List[TokenizationAddressPermission]] = Field(default=None, description="List of execution addresses and their permissions.")
-    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "decimals", "token_access_activated", "status", "total_supply", "holdings", "permissions"]
+    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "token_standard", "decimals", "token_access_activated", "status", "total_supply", "holdings", "permissions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +105,7 @@ class TokenizationTokenDetailInfo(BaseModel):
             "token_address": obj.get("token_address"),
             "token_name": obj.get("token_name"),
             "token_symbol": obj.get("token_symbol"),
+            "token_standard": obj.get("token_standard"),
             "decimals": obj.get("decimals"),
             "token_access_activated": obj.get("token_access_activated"),
             "status": obj.get("status"),

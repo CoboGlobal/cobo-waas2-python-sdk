@@ -36,7 +36,7 @@ class TestCreateCryptoAddressRequest(unittest.TestCase):
             return CreateCryptoAddressRequest(
                 token_id = 'ETH_USDT',
                 address = '0xabc123456789def0000000000000000000000000',
-                label = 'Main Withdrawal Address'
+                label = 'Main Payout Wallet'
             )
         else:
             return CreateCryptoAddressRequest(

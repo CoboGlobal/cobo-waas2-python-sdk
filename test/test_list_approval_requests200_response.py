@@ -41,7 +41,7 @@ class TestListApprovalRequests200Response(unittest.TestCase):
                         fields = [
                             cobo_waas2.models.app_workflow_field.AppWorkflowField(
                                 field = 'amount', 
-                                value_type = 'INT', 
+                                value_type = 'Pending', 
                                 value = '11.23', )
                             ], 
                         status = 'Pending', 

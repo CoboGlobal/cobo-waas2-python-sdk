@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**initiator_email** | **str** | The email of the user who requested the approval. | 
+**initiator_email** | **str** | The initiator email of workflow approval request. | 
 
 ## Example
 

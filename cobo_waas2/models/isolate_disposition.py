@@ -24,13 +24,13 @@ from typing_extensions import Self
 
 class IsolateDisposition(BaseModel):
     """
-    The information about a request to isolate funds.
+    The information about a fund isolate disposition request.
     """  # noqa: E501
-    transaction_id: StrictStr = Field(description="The UUID of the transaction whose funds are to be isolated. This identifies the original transaction that requires fund isolation.")
-    destination_address: StrictStr = Field(description="The blockchain address to receive the isolated funds.")
+    transaction_id: StrictStr = Field(description="The UUID of the transaction to be isolated. This identifies the original transaction that requires isolation processing.")
+    destination_address: StrictStr = Field(description="The blockchain address where the isolated funds will be sent.")
     disposition_amount: StrictStr = Field(description="The amount to be isolated from the original transaction, specified as a numeric string. This value cannot exceed the total amount of the original transaction. ")
-    category_names: Optional[List[StrictStr]] = Field(default=None, description="Custom categories to identify and track this isolation transaction. Used for transaction classification and reporting.")
-    description: Optional[Annotated[str, Field(strict=True, max_length=200)]] = Field(default=None, description="Additional notes or description for the isolation.")
+    category_names: Optional[List[StrictStr]] = Field(default=None, description="Custom categories to identify and track this isolate transaction. Used for transaction classification and reporting.")
+    description: Optional[Annotated[str, Field(strict=True, max_length=200)]] = Field(default=None, description="Additional notes or description for this isolate disposition.")
     __properties: ClassVar[List[str]] = ["transaction_id", "destination_address", "disposition_amount", "category_names", "description"]
 
     model_config = ConfigDict(

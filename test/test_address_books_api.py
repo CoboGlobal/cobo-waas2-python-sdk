@@ -33,7 +33,7 @@ class TestAddressBooksApi(unittest.TestCase):
         """
         Test case for create_address_books
 
-        Create Address Book entries
+        Create address books
         """
         """
         create_address_books_param = cobo_waas2.CreateAddressBooksParam()
@@ -45,7 +45,7 @@ class TestAddressBooksApi(unittest.TestCase):
         """
         Test case for delete_address_book_by_id
 
-        Delete Address Book entry
+        Delete address book
         """
         """
         entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -57,7 +57,7 @@ class TestAddressBooksApi(unittest.TestCase):
         """
         Test case for get_address_book_by_id
 
-        Get Address Book entry
+        Get address book information
         """
         """
         entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -69,7 +69,7 @@ class TestAddressBooksApi(unittest.TestCase):
         """
         Test case for list_address_books
 
-        List Address Book entries
+        List address book entries
         """
         """
         chain_id = 'ETH'
@@ -86,7 +86,7 @@ class TestAddressBooksApi(unittest.TestCase):
         """
         Test case for update_address_book_by_id
 
-        Update Address Book entry
+        Update address book
         """
         """
         entry_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'

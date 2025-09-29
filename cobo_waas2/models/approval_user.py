@@ -24,10 +24,10 @@ from typing_extensions import Self
 
 class ApprovalUser(BaseModel):
     """
-    The information of the user.
+    The information of an app workflow approval user entry.
     """  # noqa: E501
-    email: StrictStr = Field(description="The user email.")
-    name: Optional[StrictStr] = Field(default=None, description="The user name.")
+    email: StrictStr = Field(description="The approval user email.")
+    name: Optional[StrictStr] = Field(default=None, description="The approval user name.")
     status: ApprovalStatus
     created_timestamp: StrictInt = Field(description="The time when the approval was created, in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["email", "name", "status", "created_timestamp"]

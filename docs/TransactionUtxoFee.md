@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fee_rate** | **str** | The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain. | [optional] 
 **fee_type** | [**FeeType**](FeeType.md) |  | 
-**token_id** | **str** | The token used to pay the transaction fee. | [optional] 
-**fee_used** | **str** | The actually charged transaction fee. | [optional] 
+**token_id** | **str** | The token ID of the transaction fee. | [optional] 
+**fee_used** | **str** | The transaction fee. | [optional] 
 **estimated_fee_used** | **str** | The estimated transaction fee. | [optional] 
 **max_fee_amount** | **str** | The maximum fee that you are willing to pay for the transaction. The transaction will fail if the transaction fee exceeds the maximum fee. | [optional] 
 

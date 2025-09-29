@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class DispositionType(str, Enum):
     """
-    The type of a disposition operation.
+    The type of disposition operation.
     """
 
     """

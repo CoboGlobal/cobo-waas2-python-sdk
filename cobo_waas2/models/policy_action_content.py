@@ -23,12 +23,12 @@ from typing_extensions import Self
 
 class PolicyActionContent(BaseModel):
     """
-    The definition of the quorum action. This property is applicable only when `action_type` is `Quorum`.
+    The information of an app workflow policy quorum action content.
     """  # noqa: E501
-    type: StrictStr = Field(description="The quorum type. Possible values include:    - `FULL_APPROVAL`: Requires approval from all participants.   - `PART_APPROVAL`: Requires approval from a specified number of participants. ")
-    roles: Optional[List[StrictStr]] = Field(default=None, description="The roles included in the quorum. Possible values include `admin`, `spender`, `operator`, and `approver`.")
-    user_ids: Optional[List[StrictStr]] = Field(default=None, description="The ID of the users included in the quorum.")
-    threshold: Optional[StrictInt] = Field(default=None, description="The number of approvers required to meet the quorum.")
+    type: StrictStr = Field(description="The quorum action content type. Possible values include:    - `FULL_APPROVAL`: The content type is approved by all persons.   - `PART_APPROVAL`: The content type is approved by some persons. ")
+    roles: Optional[List[StrictStr]] = None
+    user_ids: Optional[List[StrictStr]] = None
+    threshold: Optional[StrictInt] = Field(default=None, description="The number of persons need approved, such as 2.")
     __properties: ClassVar[List[str]] = ["type", "roles", "user_ids", "threshold"]
 
     @field_validator('type')

@@ -1,5 +1,6 @@
 # MaxFeeAmount
 
+The maximum transaction fee.
 
 ## Properties
 

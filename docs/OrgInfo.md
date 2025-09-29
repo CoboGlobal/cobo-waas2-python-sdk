@@ -7,7 +7,7 @@ The information of an organization. To learn more about organizations, see [Intr
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **org_id** | **str** | The organization ID. | 
-**biz_org_id** | **int** | An internal business ID assigned by Cobo. Used mainly by Cobo&#39;s customer support to locate the organization. | [optional] 
+**biz_org_id** | **int** | The organization biz ID. | [optional] 
 **name** | **str** | The organization name. | [optional] 
 **created_timestamp** | **int** | The organization&#39;s creation time in Unix timestamp format, measured in milliseconds. | [optional] 
 

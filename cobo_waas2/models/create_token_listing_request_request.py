@@ -29,8 +29,8 @@ class CreateTokenListingRequestRequest(BaseModel):
     """  # noqa: E501
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    chain_id: StrictStr = Field(description="The ID of the blockchain where the token is deployed.")
-    contract_address: StrictStr = Field(description="The token's contract address on the specified blockchain.")
+    chain_id: StrictStr = Field(description="ID of the blockchain where the token exists")
+    contract_address: StrictStr = Field(description="Contract address of the token")
     __properties: ClassVar[List[str]] = ["wallet_type", "wallet_subtype", "chain_id", "contract_address"]
 
     model_config = ConfigDict(

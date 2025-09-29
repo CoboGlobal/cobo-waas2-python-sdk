@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.commission_fee import CommissionFee
 from cobo_waas2.models.payment_transaction import PaymentTransaction
 from cobo_waas2.models.refund_status import RefundStatus
 from cobo_waas2.models.refund_type import RefundType
@@ -28,10 +29,10 @@ class PaymentRefundEventData(BaseModel):
     """
     PaymentRefundEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The payment address update event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The suspended token event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID provided by you when creating the refund request.")
     refund_id: StrictStr = Field(description="The refund order ID.")
-    order_id: Optional[StrictStr] = Field(default=None, description="The ID of the pay-in order corresponding to this refund.")
+    order_id: Optional[StrictStr] = Field(default=None, description="The order ID corresponding to this refund.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
     token_id: StrictStr = Field(description="The ID of the cryptocurrency used for refund.")
     chain_id: StrictStr = Field(description="The ID of the blockchain network on which the refund transaction occurs.")
@@ -39,20 +40,21 @@ class PaymentRefundEventData(BaseModel):
     to_address: StrictStr = Field(description="The recipient's wallet address where the refund will be sent.")
     status: RefundStatus
     refund_type: Optional[RefundType] = None
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the refund order, represented as a UNIX timestamp in seconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the refund order, represented as a UNIX timestamp in seconds.")
-    initiator: Optional[StrictStr] = Field(default=None, description=" The initiator of this settlement request. Can return either an API key or the Payment Management App's ID.  - Format `api_key_<API_KEY>`: Indicates the settlement request was initiated via the Payment API using the API key. - Format `app_<APP_ID>`: Indicates the settlement request was initiated through the Payment Management App using the App ID. ")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the refund order, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the refund order, represented as a UNIX timestamp in seconds.")
+    initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this refund order, usually the user's API key.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process.")
-    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Whether to charge developer fee to the merchant for the refund.    - `true`: The fee amount (specified in `merchant_fee_amount`) will be deducted from the merchant's balance and added to the developer's balance    - `false`: The merchant is not charged any developer fee. ")
-    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by `merchant_fee_token_id`. This is only applicable if `charge_merchant_fee` is set to `true`.")
-    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the developer fee. This is only applicable if `charge_merchant_fee` is set to true.")
-    __properties: ClassVar[List[str]] = ["data_type", "request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id"]
+    charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Whether to charge developer fee to the merchant.  - `true`: The fee amount (specified in `merchant_fee_amount`) will be deducted from the merchant's balance and added to the developer's balance - `false`: The merchant is not charged any developer fee. ")
+    merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by `merchant_fee_token_id`.")
+    merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the developer fee.")
+    commission_fee: Optional[CommissionFee] = None
+    __properties: ClassVar[List[str]] = ["data_type", "request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id", "commission_fee"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings')")
         return value
 
     model_config = ConfigDict(
@@ -101,6 +103,9 @@ class PaymentRefundEventData(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['transactions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of commission_fee
+        if self.commission_fee:
+            _dict['commission_fee'] = self.commission_fee.to_dict()
         return _dict
 
     @classmethod
@@ -130,7 +135,8 @@ class PaymentRefundEventData(BaseModel):
             "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
             "charge_merchant_fee": obj.get("charge_merchant_fee"),
             "merchant_fee_amount": obj.get("merchant_fee_amount"),
-            "merchant_fee_token_id": obj.get("merchant_fee_token_id")
+            "merchant_fee_token_id": obj.get("merchant_fee_token_id"),
+            "commission_fee": CommissionFee.from_dict(obj["commission_fee"]) if obj.get("commission_fee") is not None else None
         })
         return _obj
 

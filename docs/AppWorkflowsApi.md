@@ -4,19 +4,19 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_approval_request**](AppWorkflowsApi.md#create_approval_request) | **POST** /app/workflows/approval_requests | Request workflow approval
-[**get_approval_request_by_id**](AppWorkflowsApi.md#get_approval_request_by_id) | **GET** /app/workflows/approval_requests/{approval_id} | Get approval request details
-[**list_app_workflows**](AppWorkflowsApi.md#list_app_workflows) | **GET** /app/workflows | List app workflows
-[**list_approval_requests**](AppWorkflowsApi.md#list_approval_requests) | **GET** /app/workflows/approval_requests | List approval requests
-[**revoke_approval_request**](AppWorkflowsApi.md#revoke_approval_request) | **POST** /app/workflows/approval_requests/{approval_id}/revoke | Revoke approval request
+[**create_approval_request**](AppWorkflowsApi.md#create_approval_request) | **POST** /app/workflows/approval_requests | Request app workflow approval
+[**get_approval_request_by_id**](AppWorkflowsApi.md#get_approval_request_by_id) | **GET** /app/workflows/approval_requests/{approval_id} | Get app workflow approval request by approval id
+[**list_app_workflows**](AppWorkflowsApi.md#list_app_workflows) | **GET** /app/workflows | list app workflows
+[**list_approval_requests**](AppWorkflowsApi.md#list_approval_requests) | **GET** /app/workflows/approval_requests | List app workflow approval requests by operation_id
+[**revoke_approval_request**](AppWorkflowsApi.md#revoke_approval_request) | **POST** /app/workflows/approval_requests/{approval_id}/revoke | Revoke an app workflow approval request by request initiator.
 
 
 # **create_approval_request**
 > CreateApprovalRequest201Response create_approval_request(request_approval=request_approval)
 
-Request workflow approval
+Request app workflow approval
 
-This operation triggers a specified workflow and generates a new approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
+This operation is request approval from app workflow with idempotency checks. 
 
 ### Example
 
@@ -44,7 +44,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     request_approval = cobo_waas2.RequestApproval()
 
     try:
-        # Request workflow approval
+        # Request app workflow approval
         api_response = api_instance.create_approval_request(request_approval=request_approval)
         print("The response of AppWorkflowsApi->create_approval_request:\n")
         pprint(api_response)
@@ -59,7 +59,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_approval** | [**RequestApproval**](RequestApproval.md)| The request body to request workflow approval. | [optional] 
+ **request_approval** | [**RequestApproval**](RequestApproval.md)| The request body to app workflow approval. | [optional] 
 
 ### Return type
 
@@ -87,9 +87,9 @@ Name | Type | Description  | Notes
 # **get_approval_request_by_id**
 > ApprovalRequestDetail get_approval_request_by_id(approval_id)
 
-Get approval request details
+Get app workflow approval request by approval id
 
-This operation retrieves the details of a specific approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
+This operation is retrieves approval request from app workflow. 
 
 ### Example
 
@@ -116,7 +116,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     approval_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # Get approval request details
+        # Get app workflow approval request by approval id
         api_response = api_instance.get_approval_request_by_id(approval_id)
         print("The response of AppWorkflowsApi->get_approval_request_by_id:\n")
         pprint(api_response)
@@ -131,7 +131,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **approval_id** | **str**| The system-generated unique ID of the approval request. | 
+ **approval_id** | **str**| The approval ID that is used to track a workflow approval request. | 
 
 ### Return type
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The information about an approval request. |  -  |
+**200** | The information about an app workflow approval. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -159,9 +159,9 @@ Name | Type | Description  | Notes
 # **list_app_workflows**
 > List[AppWorkflow] list_app_workflows()
 
-List app workflows
+list app workflows
 
-This operation retrieves all approval workflows of an Cobo Portal App. <Note>You need to [configure approval workflow](https://www.cobo.com/developers/v2/apps/configure-workflow) in the app Manifest file first.</Note> <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
+This operation is list app workflows of app. 
 
 ### Example
 
@@ -187,7 +187,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     api_instance = cobo_waas2.AppWorkflowsApi(api_client)
 
     try:
-        # List app workflows
+        # list app workflows
         api_response = api_instance.list_app_workflows()
         print("The response of AppWorkflowsApi->list_app_workflows:\n")
         pprint(api_response)
@@ -218,7 +218,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | A list of approval workflows successfully retrieved |  -  |
+**200** | A list of app workflows have been successfully configured. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -227,9 +227,9 @@ This endpoint does not need any parameter.
 # **list_approval_requests**
 > ListApprovalRequests200Response list_approval_requests(operation_id, limit=limit, before=before, after=after)
 
-List approval requests
+List app workflow approval requests by operation_id
 
-This operation retrieves a list of approval requests.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
+This operation is retrieves list approval requests from app workflow. 
 
 ### Example
 
@@ -259,7 +259,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
-        # List approval requests
+        # List app workflow approval requests by operation_id
         api_response = api_instance.list_approval_requests(operation_id, limit=limit, before=before, after=after)
         print("The response of AppWorkflowsApi->list_approval_requests:\n")
         pprint(api_response)
@@ -274,10 +274,10 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **operation_id** | **str**| The unique ID of the approval workflow. | 
+ **operation_id** | **str**| The operation ID that is used to track a workflow. The operation ID is provided by you and must be unique within your app. | 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
 
 ### Return type
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | A list of approval requests have been successfully retrieved. |  -  |
+**200** | A list of approval request have been successfully retrieved. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -305,9 +305,9 @@ Name | Type | Description  | Notes
 # **revoke_approval_request**
 > RevokeApprovalRequest201Response revoke_approval_request(approval_id, revoke_approval_request_request=revoke_approval_request_request)
 
-Revoke approval request
+Revoke an app workflow approval request by request initiator.
 
-This operation revokes a pending approval request.  <Note>To use the approval workflow operations, you must use the Cobo OAuth authentication method ([Org Access Token](https://www.cobo.com/developers/v2/apps/org-access-tokens)).</Note> 
+This operation is revoke approval request from app workflow. 
 
 ### Example
 
@@ -336,7 +336,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     revoke_approval_request_request = cobo_waas2.RevokeApprovalRequestRequest()
 
     try:
-        # Revoke approval request
+        # Revoke an app workflow approval request by request initiator.
         api_response = api_instance.revoke_approval_request(approval_id, revoke_approval_request_request=revoke_approval_request_request)
         print("The response of AppWorkflowsApi->revoke_approval_request:\n")
         pprint(api_response)
@@ -351,8 +351,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **approval_id** | **str**| The system-generated unique ID of the approval request. | 
- **revoke_approval_request_request** | [**RevokeApprovalRequestRequest**](RevokeApprovalRequestRequest.md)| The request body to revoke an approval request. | [optional] 
+ **approval_id** | **str**| The approval ID that is used to track a workflow approval request. | 
+ **revoke_approval_request_request** | [**RevokeApprovalRequestRequest**](RevokeApprovalRequestRequest.md)| The revoke request body to app workflow approval. | [optional] 
 
 ### Return type
 

@@ -25,12 +25,12 @@ class Account(BaseModel):
     """
     Details of a payment account used for top-up operations, including address and balance metadata.
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency that this account is configured to handle.")
-    address: StrictStr = Field(description="The top-up address corresponding to the account.")
-    merchant_balance: StrictStr = Field(description="The amount of merchant funds under this account.")
-    psp_balance: StrictStr = Field(description="The amount of developer funds under this account.")
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the account, in Unix timestamp format, measured in milliseconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the account, in Unix timestamp format, measured in milliseconds.")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency.")
+    address: StrictStr = Field(description="The token receiving address of the account.")
+    merchant_balance: StrictStr = Field(description="The merchant account balance, as a decimal string.")
+    psp_balance: StrictStr = Field(description="The PSP account balance, as a decimal string.")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the account was created, in Unix timestamp format, measured in milliseconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the account was updated, in Unix timestamp format, measured in milliseconds.")
     __properties: ClassVar[List[str]] = ["token_id", "address", "merchant_balance", "psp_balance", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(

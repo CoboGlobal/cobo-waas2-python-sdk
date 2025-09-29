@@ -32,11 +32,10 @@ class SwapQuote(BaseModel):
     receive_amount: StrictStr = Field(description="The amount of tokens to receive.")
     fee_token_id: StrictStr = Field(description="The token ID for the service fee.")
     fee_amount: StrictStr = Field(description="The amount of tokens for the service fee.")
-    estimated_network_fee_amount: Optional[StrictStr] = Field(default=None, description="The estimated amount of tokens for the network fee.")
     min_receive_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount of tokens to receive if the pay amount is specified.")
     max_pay_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount of tokens to pay if the receive amount is specified.")
     quote_expired_timestamp: StrictInt = Field(description="The time when the quote will expire, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["quote_id", "pay_token_id", "pay_amount", "receive_token_id", "receive_amount", "fee_token_id", "fee_amount", "estimated_network_fee_amount", "min_receive_amount", "max_pay_amount", "quote_expired_timestamp"]
+    __properties: ClassVar[List[str]] = ["quote_id", "pay_token_id", "pay_amount", "receive_token_id", "receive_amount", "fee_token_id", "fee_amount", "min_receive_amount", "max_pay_amount", "quote_expired_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,7 +95,6 @@ class SwapQuote(BaseModel):
             "receive_amount": obj.get("receive_amount"),
             "fee_token_id": obj.get("fee_token_id"),
             "fee_amount": obj.get("fee_amount"),
-            "estimated_network_fee_amount": obj.get("estimated_network_fee_amount"),
             "min_receive_amount": obj.get("min_receive_amount"),
             "max_pay_amount": obj.get("max_pay_amount"),
             "quote_expired_timestamp": obj.get("quote_expired_timestamp")

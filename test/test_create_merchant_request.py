@@ -36,12 +36,12 @@ class TestCreateMerchantRequest(unittest.TestCase):
             return CreateMerchantRequest(
                 name = 'Merchant A',
                 wallet_id = '123e4567-e89b-12d3-a456-426614174001',
-                developer_fee_rate = '0.1'
+                developer_fee_rate = '0.1',
+                wallet_setup = 'Shared'
             )
         else:
             return CreateMerchantRequest(
                 name = 'Merchant A',
-                wallet_id = '123e4567-e89b-12d3-a456-426614174001',
         )
         """
 

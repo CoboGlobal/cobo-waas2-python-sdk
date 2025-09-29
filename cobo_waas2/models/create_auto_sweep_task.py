@@ -23,10 +23,10 @@ from typing_extensions import Self
 
 class CreateAutoSweepTask(BaseModel):
     """
-    Wallet and token information required to create an auto-sweep task.
+    The sweep to address information.
     """  # noqa: E501
-    wallet_id: StrictStr = Field(description="ID of the wallet where the token will be swept.")
-    token_id: StrictStr = Field(description="ID of the token to be swept. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
+    wallet_id: StrictStr = Field(description="The wallet ID.")
+    token_id: StrictStr = Field(description="The token ID of the swept token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     __properties: ClassVar[List[str]] = ["wallet_id", "token_id"]
 
     model_config = ConfigDict(

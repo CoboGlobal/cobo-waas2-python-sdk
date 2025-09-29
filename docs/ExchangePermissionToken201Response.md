@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token** | **str** | The Access Token. | [optional] 
-**token_type** | **str** | The token type. This is always &#x60;Bearer&#x60;. | [optional] 
-**expires_in** | **int** | The time in seconds until the Access Token expires. This is always &#x60;3600&#x60;, indicating the token expires 1 hour after issuance. | [optional] 
-**refresh_token** | **str** | The Refresh Token. Use it to obtain a new Access Token when the current one expires. The Refresh Token is valid for 7 days. | [optional] 
+**access_token** | **str** | The new Permission Access Token. | [optional] 
+**token_type** | **str** | The type of the tokens, which is Bearer. | [optional] 
+**expires_in** | **int** | The time in seconds in which the new Permission Access Token expires. | [optional] 
+**refresh_token** | **str** | The Refresh Token, used to obtain another Org Access Token when the new Permission Access Token expires. The expiration time for Refresh Tokens is currently set to 7 days and is subject to change. | [optional] 
 
 ## Example
 

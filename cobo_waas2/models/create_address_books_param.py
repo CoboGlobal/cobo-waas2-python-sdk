@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class CreateAddressBooksParam(BaseModel):
     """
-    The request body to add addresses in batches to your Address Book.
+    The request body to batch create address book.
     """  # noqa: E501
     address_books: List[CreateAddressBookParam]
     __properties: ClassVar[List[str]] = ["address_books"]

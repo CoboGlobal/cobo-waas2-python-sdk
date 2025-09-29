@@ -237,7 +237,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Cancel transaction
 
-        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
+        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (excluding the `SystemProcessingOngoing` and `SignatureVerificationSuccess` sub-statuses) 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -283,7 +283,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Cancel transaction
 
-        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
+        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (excluding the `SystemProcessingOngoing` and `SignatureVerificationSuccess` sub-statuses) 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -329,7 +329,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Cancel transaction
 
-        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
+        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (excluding the `SystemProcessingOngoing` and `SignatureVerificationSuccess` sub-statuses) 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -611,7 +611,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Call smart contract
 
-        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from Custodial Wallets (Web3 Wallets), MPC Wallets, or Smart Contract Wallets on the blockchains that have a similar architecture to Ethereum.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from MPC Wallets or Smart Contract Wallets on the blockchains that have a similar architecture to Ethereum.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
 
         :param contract_call_params: The request body for making a contract call.
         :type contract_call_params: ContractCallParams
@@ -657,7 +657,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Call smart contract
 
-        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from Custodial Wallets (Web3 Wallets), MPC Wallets, or Smart Contract Wallets on the blockchains that have a similar architecture to Ethereum.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from MPC Wallets or Smart Contract Wallets on the blockchains that have a similar architecture to Ethereum.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
 
         :param contract_call_params: The request body for making a contract call.
         :type contract_call_params: ContractCallParams
@@ -703,7 +703,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Call smart contract
 
-        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from Custodial Wallets (Web3 Wallets), MPC Wallets, or Smart Contract Wallets on the blockchains that have a similar architecture to Ethereum.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from MPC Wallets or Smart Contract Wallets on the blockchains that have a similar architecture to Ethereum.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
 
         :param contract_call_params: The request body for making a contract call.
         :type contract_call_params: ContractCallParams
@@ -780,7 +780,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Sign message
 
-        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note> This operation only supports message signing transactions from the following wallets and chains: - MPC Wallets: BTC, EVM-compatible chains, Cosmos, and Solana.   - Web3 Wallets: EVM-compatible chains. </Note> 
+        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
 
         :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
@@ -826,7 +826,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Sign message
 
-        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note> This operation only supports message signing transactions from the following wallets and chains: - MPC Wallets: BTC, EVM-compatible chains, Cosmos, and Solana.   - Web3 Wallets: EVM-compatible chains. </Note> 
+        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
 
         :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
@@ -872,7 +872,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Sign message
 
-        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note> This operation only supports message signing transactions from the following wallets and chains: - MPC Wallets: BTC, EVM-compatible chains, Cosmos, and Solana.   - Web3 Wallets: EVM-compatible chains. </Note> 
+        This operation creates a transaction to sign the provided message using cryptographic techniques.  In some scenarios, you want to sign a message for identity authentication or transaction approval. You need to provide details such as the source address, destination address, and the message to be signed. A transaction request for tracking is returned upon successful operation.  You can get the signature result by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).   <Note>This operation only applies to transactions from MPC Wallets.</Note> 
 
         :param message_sign_params: The request body to create a message signing transaction
         :type message_sign_params: MessageSignParams
@@ -1119,7 +1119,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Drop transaction
 
-        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
+        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1169,7 +1169,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Drop transaction
 
-        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
+        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1219,7 +1219,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Drop transaction
 
-        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
+        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1809,9 +1809,9 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> List[ApprovalDetail]:
-        """List approval details
+        """List transaction approval details
 
-        This operation retrieves comprehensive approval information for transactions, including approval status, reviewer details, signatures, and approval history. You can filter the results by transaction IDs, Cobo IDs, or request IDs.   This operation is commonly used to monitor approval progress and identify delays in multi-signature workflows. 
+        This operation retrieves detailed approval information for a specified transaction. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -1863,9 +1863,9 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> ApiResponse[List[ApprovalDetail]]:
-        """List approval details
+        """List transaction approval details
 
-        This operation retrieves comprehensive approval information for transactions, including approval status, reviewer details, signatures, and approval history. You can filter the results by transaction IDs, Cobo IDs, or request IDs.   This operation is commonly used to monitor approval progress and identify delays in multi-signature workflows. 
+        This operation retrieves detailed approval information for a specified transaction. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -1917,9 +1917,9 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List approval details
+        """List transaction approval details
 
-        This operation retrieves comprehensive approval information for transactions, including approval status, reviewer details, signatures, and approval history. You can filter the results by transaction IDs, Cobo IDs, or request IDs.   This operation is commonly used to monitor approval progress and identify delays in multi-signature workflows. 
+        This operation retrieves detailed approval information for a specified transaction. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -2190,8 +2190,8 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates(
         self,
-        template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
-        template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
+        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2201,13 +2201,13 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> List[ApprovalTemplate]:
-        """List transaction templates
+        """list transaction templates
 
-        This operation retrieves approval templates based on the specified template key and template version.  These templates define the content used to generate approval messages displayed to users, including messages for transaction approvals and other approval workflows. 
+        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
 
-        :param template_key: Key of the transaction template used to create an approval message.  (required)
+        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
         :type template_key: str
-        :param template_version: Version of the template.
+        :param template_version: The version of the template used for the transaction approval.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2240,8 +2240,8 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates_with_http_info(
         self,
-        template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
-        template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
+        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2251,13 +2251,13 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> ApiResponse[List[ApprovalTemplate]]:
-        """List transaction templates
+        """list transaction templates
 
-        This operation retrieves approval templates based on the specified template key and template version.  These templates define the content used to generate approval messages displayed to users, including messages for transaction approvals and other approval workflows. 
+        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
 
-        :param template_key: Key of the transaction template used to create an approval message.  (required)
+        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
         :type template_key: str
-        :param template_version: Version of the template.
+        :param template_version: The version of the template used for the transaction approval.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2290,8 +2290,8 @@ class TransactionsApi:
     @validate_call
     def list_transaction_templates_without_preload_content(
         self,
-        template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
-        template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
+        template_key: Annotated[StrictStr, Field(description="The key of the transaction template to be used for creating a transaction approval message. ")],
+        template_version: Annotated[Optional[StrictStr], Field(description="The version of the template used for the transaction approval.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2301,13 +2301,13 @@ class TransactionsApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List transaction templates
+        """list transaction templates
 
-        This operation retrieves approval templates based on the specified template key and template version.  These templates define the content used to generate approval messages displayed to users, including messages for transaction approvals and other approval workflows. 
+        This operation retrieves transaction templates based on the specified transaction type and template version. The response includes a list of templates that can be used for creating transactions approval message. 
 
-        :param template_key: Key of the transaction template used to create an approval message.  (required)
+        :param template_key: The key of the transaction template to be used for creating a transaction approval message.  (required)
         :type template_key: str
-        :param template_version: Version of the template.
+        :param template_version: The version of the template used for the transaction approval.
         :type template_version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2391,12 +2391,12 @@ class TransactionsApi:
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
         wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
-        project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
-        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
-        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
+        project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
+        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.")] = None,
+        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
         _request_timeout: Union[
             None,
@@ -2437,17 +2437,17 @@ class TransactionsApi:
         :type wallet_type: WalletType
         :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
         :type wallet_subtype: WalletSubtype
-        :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
+        :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
-        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
+        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.
         :type min_created_timestamp: int
-        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. 
+        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.
         :type max_created_timestamp: int
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
         :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
         :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
         :type direction: str
@@ -2513,12 +2513,12 @@ class TransactionsApi:
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
         wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
-        project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
-        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
-        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
+        project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
+        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.")] = None,
+        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
         _request_timeout: Union[
             None,
@@ -2559,17 +2559,17 @@ class TransactionsApi:
         :type wallet_type: WalletType
         :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
         :type wallet_subtype: WalletSubtype
-        :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
+        :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
-        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
+        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.
         :type min_created_timestamp: int
-        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. 
+        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.
         :type max_created_timestamp: int
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
         :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
         :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
         :type direction: str
@@ -2635,12 +2635,12 @@ class TransactionsApi:
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
         wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
-        project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
-        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
-        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
+        project_id: Annotated[Optional[StrictStr], Field(description="The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
+        min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.")] = None,
+        max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
         _request_timeout: Union[
             None,
@@ -2681,17 +2681,17 @@ class TransactionsApi:
         :type wallet_type: WalletType
         :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
         :type wallet_subtype: WalletSubtype
-        :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
+        :param project_id: The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
-        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If not provided, the default value is 90 days before the current time. This default value is subject to change. 
+        :param min_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.
         :type min_created_timestamp: int
-        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If not provided, the default value is the current time. This default value is subject to change. 
+        :param max_created_timestamp: The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.
         :type max_created_timestamp: int
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :param before: This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. 
         :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
         :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
         :type direction: str
@@ -2885,7 +2885,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Resend transaction
 
-        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
+        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  A transaction can be resent if its status is `failed`.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -2935,7 +2935,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Resend transaction
 
-        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
+        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  A transaction can be resent if its status is `failed`.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -2985,7 +2985,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Resend transaction
 
-        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
+        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  A transaction can be resent if its status is `failed`.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -3238,7 +3238,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Speed up transaction
 
-        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
+        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -3288,7 +3288,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Speed up transaction
 
-        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
+        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -3338,7 +3338,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Speed up transaction
 
-        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
+        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str

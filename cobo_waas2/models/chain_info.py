@@ -26,14 +26,14 @@ class ChainInfo(BaseModel):
     The chain information.
     """  # noqa: E501
     chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain.")
-    symbol: Optional[StrictStr] = Field(default=None, description="The chain symbol for display purposes, which is the abbreviated name of a chain.")
+    symbol: Optional[StrictStr] = Field(default=None, description="The chain symbol, which is the abbreviated name of a chain.")
     icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the chain icon.")
-    chain_identifier: Optional[StrictStr] = Field(default=None, description="A functional identifier used to group blockchains with similar execution logic. For example, `ETH` for all EVM-compatible chains (Ethereum, BNB Smart Chain, Polygon).")
+    chain_identifier: Optional[StrictStr] = Field(default=None, description="The chain identifier, which is the identifier of a blockchain for similar function, such as ETH for ETH, BSC_BNB eth.")
     explorer_tx_url: Optional[StrictStr] = Field(default=None, description="The transaction URL pattern on the blockchain explorer. You can use it to concatenate the transaction URLs.")
     explorer_address_url: Optional[StrictStr] = Field(default=None, description="The address URL pattern on the blockchain explorer. You can use it to concatenate the address URLs.")
     require_memo: Optional[StrictBool] = Field(default=None, description="Whether the chain requires a memo.")
     confirming_threshold: Optional[StrictInt] = Field(default=None, description="The number of confirmations required for an on-chain transaction, such as 64 for Ethereum.")
-    coinbase_maturity: Optional[StrictInt] = Field(default=None, description="The number of confirmations required before a coinbase transaction is considered mature and can be spent, for example, 100 confirmations for BTC.")
+    coinbase_maturity: Optional[StrictInt] = Field(default=None, description="The number of confirmations required for a coinbase transaction to be mature, such as 100 for BTC.")
     __properties: ClassVar[List[str]] = ["chain_id", "symbol", "icon_url", "chain_identifier", "explorer_tx_url", "explorer_address_url", "require_memo", "confirming_threshold", "coinbase_maturity"]
 
     model_config = ConfigDict(

@@ -28,7 +28,7 @@ class TransactionRequestEvmLegacyFee(BaseModel):
     """  # noqa: E501
     gas_price: StrictStr = Field(description="The gas price, in wei. The gas price represents the amount of ETH that must be paid to validators for processing transactions per gas unit used.")
     fee_type: FeeType
-    token_id: StrictStr = Field(description="The token used to pay the transaction fee.")
+    token_id: StrictStr = Field(description="The token ID of the transaction fee.")
     gas_limit: Optional[StrictStr] = Field(default=None, description="The gas limit. It represents the maximum number of gas units that you are willing to pay for the execution of a transaction or Ethereum Virtual Machine (EVM) operation. The gas unit cost of each operation varies.")
     __properties: ClassVar[List[str]] = ["gas_price", "fee_type", "token_id", "gas_limit"]
 

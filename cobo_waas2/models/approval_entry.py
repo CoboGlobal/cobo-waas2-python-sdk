@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class ApprovalEntry(BaseModel):
     """
-    The information of an approval request.
+    The information of an app workflow approval entry.
     """  # noqa: E501
     status: ApprovalStatus
     created_timestamp: StrictInt = Field(description="The time when the approval was created, in Unix timestamp format, measured in milliseconds.")

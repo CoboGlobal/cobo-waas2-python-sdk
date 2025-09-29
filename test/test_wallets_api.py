@@ -98,7 +98,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for create_token_listing_request
 
-        Create token listing request
+        Submit token listing request
         """
         """
         create_token_listing_request_request = cobo_waas2.CreateTokenListingRequestRequest()
@@ -162,7 +162,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for get_max_transferable_value_with_fee_model
 
-        Estimate maximum transferable value
+        Get maximum transferable value with fee model
         """
         """
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -187,7 +187,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for get_token_listing_request_by_request_id
 
-        Get token listing request
+        Get token listing request details
         """
         """
         request_id = '123e4567e89b12d3a456426614174000'
@@ -347,7 +347,7 @@ class TestWalletsApi(unittest.TestCase):
         """
         Test case for list_token_listing_requests
 
-        List token listing requests
+        Get all token listing requests
         """
         """
         limit = 10

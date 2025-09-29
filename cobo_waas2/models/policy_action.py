@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class PolicyAction(BaseModel):
     """
-    The action to be executed when the policy conditions are satisfied.
+    The information of an app workflow policy action, content is valuable when action_type is Quorum.
     """  # noqa: E501
     action_type: PolicyActionType
     content: Optional[PolicyActionContent] = None

@@ -26,14 +26,14 @@ class CreatePaymentOrderRequest(BaseModel):
     CreatePaymentOrderRequest
     """  # noqa: E501
     merchant_id: StrictStr = Field(description="The merchant ID.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    currency: Optional[StrictStr] = Field(default='', description="The fiat currency for the base order amount and the developer fee. Currently, only `USD` is supported.  If left empty, both `order_amount` and `fee_amount` will be denominated in the cryptocurrency specified by `token_id` ")
-    order_amount: StrictStr = Field(description=" The base amount of the order, excluding the developer fee (specified in `fee_amount`), in the currency specified by `currency`. If `currency` is not specified, the amount is in the cryptocurrency specified by `token_id`.   Values must be greater than `0` and contain two decimal places.  ")
-    fee_amount: StrictStr = Field(description=" The developer fee for the order, in the currency specified by `currency`. If `currency` is not specified, the fee is in the cryptocurrency specified by `token_id`.  If you are a merchant directly serving payers, set this field to `0`. Developer fees are only relevant for platforms like payment service providers (PSPs) that charge fees to their downstream merchants.  The developer fee is added to the base amount (`order_amount`) to determine the final charge. For example: - Base amount (`order_amount`): \"100.00\" - Developer fee (`fee_amount`): \"2.00\"  - Total charged to customer: \"102.00\"  Values can contain up to two decimal places. ")
-    merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system. The code should have a maximum length of 128 characters.")
-    psp_order_code: StrictStr = Field(description="A unique reference code assigned by you as a developer to identify this order in your system. This code must be unique across all orders in your system. The code should have a maximum length of 128 characters. ")
-    expired_in: Optional[StrictInt] = Field(default=1800, description="The number of seconds until the pay-in order expires, counted from when the request is sent. For example, if set to `1800`, the order will expire in 30 minutes. Must be greater than zero and cannot exceed 3 hours (10800 seconds). After expiration:  - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
-    use_dedicated_address: Optional[StrictBool] = Field(default=None, description="Whether to allocate a dedicated address for this order.  - `true`: A dedicated address will be allocated for this order. - `false`: A shared address from the address pool will be used. ")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    currency: Optional[StrictStr] = Field(default='', description="The fiat currency of the order.")
+    order_amount: StrictStr = Field(description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`). Values must be greater than `0` and contain two decimal places.")
+    fee_amount: StrictStr = Field(description="The developer fee for the order in fiat currency. It is added to the base amount (`order_amount`) to determine the final charge. For example, if order_amount is \"100.00\" and fee_amount is \"2.00\", the customer will be charged \"102.00\" in total, with \"100.00\" being settled to the merchant and \"2.00\" settled to the developer. Values must be greater than 0 and contain two decimal places.")
+    merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system.")
+    psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
+    expired_in: Optional[StrictInt] = Field(default=None, description="The pay-in order will expire after approximately a certain number of seconds: - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
+    use_dedicated_address: Optional[StrictBool] = Field(default=None, description="Indicates whether to allocate a dedicated address for this order.  If false, a shared address from the address pool will be used. ")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_in", "use_dedicated_address"]
 
     model_config = ConfigDict(
@@ -94,7 +94,7 @@ class CreatePaymentOrderRequest(BaseModel):
             "fee_amount": obj.get("fee_amount"),
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
-            "expired_in": obj.get("expired_in") if obj.get("expired_in") is not None else 1800,
+            "expired_in": obj.get("expired_in"),
             "use_dedicated_address": obj.get("use_dedicated_address")
         })
         return _obj

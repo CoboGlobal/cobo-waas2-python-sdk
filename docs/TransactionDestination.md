@@ -9,17 +9,18 @@ Name | Type | Description | Notes
 **account_output** | [**TransactionTransferToAddressDestinationAccountOutput**](TransactionTransferToAddressDestinationAccountOutput.md) |  | [optional] 
 **utxo_outputs** | [**List[TransactionTransferToAddressDestinationUtxoOutputsInner]**](TransactionTransferToAddressDestinationUtxoOutputsInner.md) |  | [optional] 
 **change_address** | **str** | The address used to receive the remaining funds or change from the transaction. | [optional] 
-**force_internal** | **bool** | Whether the transaction request must be executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer.   - &#x60;true&#x60;: The transaction request must be executed as a Cobo Loop transfer.   - &#x60;false&#x60;: The transaction request may not be executed as a Cobo Loop transfer.  If both &#x60;force_internal&#x60; and &#x60;force_external&#x60; are set to &#x60;false&#x60;, the system uses Cobo Loop by default if possible; otherwise, it proceeds with an on-chain transfer.  | [optional] 
-**force_external** | **bool** | Whether the transaction request must not be executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer.   - &#x60;true&#x60;: The transaction request must not be executed as a Cobo Loop transfer.   - &#x60;false&#x60;: The transaction request can be executed as a Cobo Loop transfer.  If both &#x60;force_internal&#x60; and &#x60;force_external&#x60; are set to &#x60;false&#x60;, the system uses Cobo Loop by default if possible; otherwise, it proceeds with an on-chain transfer.  | [optional] 
+**force_internal** | **bool** | Whether the transaction request must be executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer.   - &#x60;true&#x60;: The transaction request must be executed as a Cobo Loop transfer.   - &#x60;false&#x60;: The transaction request may not be executed as a Cobo Loop transfer.  | [optional] 
+**force_external** | **bool** | Whether the transaction request must not be executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer.   - &#x60;true&#x60;: The transaction request must not be executed as a Cobo Loop transfer.   - &#x60;false&#x60;: The transaction request can be executed as a Cobo Loop transfer.  | [optional] 
 **wallet_id** | **str** | The wallet ID. | 
 **trading_account_type** | **str** | The trading account type. | [optional] 
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | [optional] 
 **amount** | **str** | The transfer amount. For example, if you trade 1.5 BTC, then the value is &#x60;1.5&#x60;.  | 
 **address** | **str** | The destination address. | 
 **value** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | [optional] 
-**calldata** | **str** | The data used to invoke a specific function or method within the specified contract at the destination address, with a maximum length of 65,000 characters.  | 
+**calldata** | **str** | The data that is used to invoke a specific function or method within the specified contract at the destination address.  | 
 **calldata_info** | [**TransactionEvmCalldataInfo**](TransactionEvmCalldataInfo.md) |  | [optional] 
 **instructions** | [**List[TransactionSolContractInstruction]**](TransactionSolContractInstruction.md) |  | [optional] 
+**address_lookup_table_accounts** | [**List[TransactionSolContractAddressLookupTableAccount]**](TransactionSolContractAddressLookupTableAccount.md) |  | [optional] 
 **cosmos_messages** | [**List[TransactionCosmosMessage]**](TransactionCosmosMessage.md) |  | 
 **message** | **str** | The raw data of the message to be signed, encoded in Base64 format. | 
 **raw_structured_data** | **str** | The raw structured data to be signed, formatted as a JSON string. | [optional] 
@@ -33,6 +34,7 @@ Name | Type | Description | Notes
 **message_bip137** | **str** | Message to be signed, in hexadecimal format. | 
 **message_bip322** | **str** | Message to be signed, in hexadecimal format. | 
 **message_cosmos_adr36** | **str** | Message to be signed, in hexadecimal format. | 
+**contract_param** | [**TransactionStellarContractParam**](TransactionStellarContractParam.md) |  | 
 
 ## Example
 

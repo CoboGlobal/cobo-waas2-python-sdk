@@ -25,7 +25,7 @@ class ExchangePermissionTokenRequest(BaseModel):
     """
     ExchangePermissionTokenRequest
     """  # noqa: E501
-    permission_type: StrictStr = Field(description="Set the value to `payment_orders_payin`.")
+    permission_type: StrictStr = Field(description="The OAuth permission type. Set the value as `payment_orders_payin`.")
     __properties: ClassVar[List[str]] = ["permission_type"]
 
     model_config = ConfigDict(

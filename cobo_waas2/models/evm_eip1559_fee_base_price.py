@@ -23,7 +23,7 @@ from typing_extensions import Self
 
 class EvmEip1559FeeBasePrice(BaseModel):
     """
-    EvmEip1559FeeBasePrice
+    The transaction gas price based on the EIP-1559 fee model.
     """  # noqa: E501
     max_fee_per_gas: Optional[StrictStr] = Field(default=None, description="The maximum gas fee per gas unit used on the chain, in wei.")
     max_priority_fee_per_gas: Optional[StrictStr] = Field(default=None, description="The maximum priority fee per gas unit used, in wei. The maximum priority fee represents the highest amount of miner tips that you are willing to pay for your transaction.")
