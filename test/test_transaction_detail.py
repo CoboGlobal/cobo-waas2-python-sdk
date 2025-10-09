@@ -95,7 +95,8 @@ class TestTransactionDetail(unittest.TestCase):
                     ],
                 fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
-                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
+                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', 
+                    main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
                 created_timestamp = 1610445878970,
                 updated_timestamp = 1610445878970,
                 timeline = [

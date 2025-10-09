@@ -89,6 +89,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_merchant(create_merchant_request=create_merchant_request)
         """
 
+    def test_create_order_link(self) -> None:
+        """
+        Test case for create_order_link
+
+        Create order link
+        """
+        """
+        create_order_link_request = cobo_waas2.CreateOrderLinkRequest()
+
+        api_response = self.api.create_order_link(create_order_link_request=create_order_link_request)
+        """
+
     def test_create_payment_order(self) -> None:
         """
         Test case for create_payment_order
@@ -369,9 +381,10 @@ class TestPaymentApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         keyword = 'keyword'
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
         wallet_setup = cobo_waas2.WalletSetup()
 
-        api_response = self.api.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_setup=wallet_setup)
+        api_response = self.api.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_id=wallet_id, wallet_setup=wallet_setup)
         """
 
     def test_list_payment_orders(self) -> None:
