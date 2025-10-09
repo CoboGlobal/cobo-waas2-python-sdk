@@ -4,12 +4,86 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**check_fee_station_usage**](FeeStationApi.md#check_fee_station_usage) | **POST** /fee_station/check_fee_station_usage | fee station pre check
 [**estimate_fee_station_fee**](FeeStationApi.md#estimate_fee_station_fee) | **POST** /fee_station/transactions/estimate_fee | Estimate transaction fee
 [**get_fee_station_transaction_by_id**](FeeStationApi.md#get_fee_station_transaction_by_id) | **GET** /fee_station/transactions/{transaction_id} | Get Fee Station transaction information
 [**list_fee_station_addresses**](FeeStationApi.md#list_fee_station_addresses) | **GET** /fee_station/addresses | List Fee Station addresses
 [**list_fee_station_transactions**](FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all Fee Station transactions
 [**list_token_balances_for_fee_station**](FeeStationApi.md#list_token_balances_for_fee_station) | **GET** /fee_station/tokens | List Fee Station token balances
 
+
+# **check_fee_station_usage**
+> FeeStationCheckFeeStationUsageResponse check_fee_station_usage(fee_station_check_fee_station_usage=fee_station_check_fee_station_usage)
+
+fee station pre check
+
+This operation evaluates the fee station usage for the current transaction.   It determines whether the fee station needs to be applied, checks if the available fee station balance is sufficient,   and returns a detailed breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USDT (U).. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.fee_station_check_fee_station_usage import FeeStationCheckFeeStationUsage
+from cobo_waas2.models.fee_station_check_fee_station_usage_response import FeeStationCheckFeeStationUsageResponse
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.FeeStationApi(api_client)
+    fee_station_check_fee_station_usage = cobo_waas2.FeeStationCheckFeeStationUsage()
+
+    try:
+        # fee station pre check
+        api_response = api_instance.check_fee_station_usage(fee_station_check_fee_station_usage=fee_station_check_fee_station_usage)
+        print("The response of FeeStationApi->check_fee_station_usage:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FeeStationApi->check_fee_station_usage: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fee_station_check_fee_station_usage** | [**FeeStationCheckFeeStationUsage**](FeeStationCheckFeeStationUsage.md)| The information about a fee station pre transfer. | [optional] 
+
+### Return type
+
+[**FeeStationCheckFeeStationUsageResponse**](FeeStationCheckFeeStationUsageResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **estimate_fee_station_fee**
 > EstimatedFixedFee estimate_fee_station_fee(fee_station_transfer=fee_station_transfer)

@@ -21,6 +21,7 @@ from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.create_bank_account_request import CreateBankAccountRequest
 from cobo_waas2.models.create_crypto_address_request import CreateCryptoAddressRequest
 from cobo_waas2.models.create_merchant_request import CreateMerchantRequest
+from cobo_waas2.models.create_order_link_request import CreateOrderLinkRequest
 from cobo_waas2.models.create_payment_order_request import CreatePaymentOrderRequest
 from cobo_waas2.models.create_refund_request import CreateRefundRequest
 from cobo_waas2.models.create_settlement_request_request import CreateSettlementRequestRequest
@@ -31,6 +32,7 @@ from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
 from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
 from cobo_waas2.models.get_refunds200_response import GetRefunds200Response
 from cobo_waas2.models.get_settlement_info_by_ids200_response import GetSettlementInfoByIds200Response
+from cobo_waas2.models.link import Link
 from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
 from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBalances200Response
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
@@ -921,6 +923,175 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/merchants',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_order_link(
+        self,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> Link:
+        """Create order link
+
+        This operation creates a payment link of a pay-in order. 
+
+        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :type create_order_link_request: CreateOrderLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_order_link_serialize(
+            create_order_link_request=create_order_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_order_link_with_http_info(
+        self,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[Link]:
+        """Create order link
+
+        This operation creates a payment link of a pay-in order. 
+
+        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :type create_order_link_request: CreateOrderLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_order_link_serialize(
+            create_order_link_request=create_order_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_order_link_without_preload_content(
+        self,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create order link
+
+        This operation creates a payment link of a pay-in order. 
+
+        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :type create_order_link_request: CreateOrderLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_order_link_serialize(
+            create_order_link_request=create_order_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_order_link_serialize(
+        self,
+        create_order_link_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_order_link_request is not None:
+            _body_params = create_order_link_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/links/orders',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4793,6 +4964,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
         wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
         _request_timeout: Union[
             None,
@@ -4815,6 +4987,8 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
+        :param wallet_id: The wallet ID.
+        :type wallet_id: str
         :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
         :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
@@ -4830,6 +5004,7 @@ class PaymentApi:
             before=before,
             after=after,
             keyword=keyword,
+            wallet_id=wallet_id,
             wallet_setup=wallet_setup,
         )
 
@@ -4855,6 +5030,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
         wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
         _request_timeout: Union[
             None,
@@ -4877,6 +5053,8 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
+        :param wallet_id: The wallet ID.
+        :type wallet_id: str
         :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
         :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
@@ -4892,6 +5070,7 @@ class PaymentApi:
             before=before,
             after=after,
             keyword=keyword,
+            wallet_id=wallet_id,
             wallet_setup=wallet_setup,
         )
 
@@ -4917,6 +5096,7 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
         wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
         _request_timeout: Union[
             None,
@@ -4939,6 +5119,8 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
+        :param wallet_id: The wallet ID.
+        :type wallet_id: str
         :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
         :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
@@ -4954,6 +5136,7 @@ class PaymentApi:
             before=before,
             after=after,
             keyword=keyword,
+            wallet_id=wallet_id,
             wallet_setup=wallet_setup,
         )
 
@@ -4974,6 +5157,7 @@ class PaymentApi:
         before,
         after,
         keyword,
+        wallet_id,
         wallet_setup,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
@@ -4999,6 +5183,10 @@ class PaymentApi:
         if keyword is not None:
             
             _query_params.append(('keyword', keyword))
+            
+        if wallet_id is not None:
+            
+            _query_params.append(('wallet_id', wallet_id))
             
         if wallet_setup is not None:
             

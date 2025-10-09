@@ -77,7 +77,7 @@ class TokenizationApi:
     ) -> TokenizationOperationResponse:
         """Burn tokens
 
-        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply. 
+        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -127,7 +127,7 @@ class TokenizationApi:
     ) -> ApiResponse[TokenizationOperationResponse]:
         """Burn tokens
 
-        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply. 
+        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -177,7 +177,7 @@ class TokenizationApi:
     ) -> RESTResponseType:
         """Burn tokens
 
-        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply. 
+        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -2805,7 +2805,7 @@ class TokenizationApi:
     ) -> TokenizationOperationResponse:
         """Mint tokens
 
-        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply. 
+        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -2855,7 +2855,7 @@ class TokenizationApi:
     ) -> ApiResponse[TokenizationOperationResponse]:
         """Mint tokens
 
-        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply. 
+        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -2905,7 +2905,7 @@ class TokenizationApi:
     ) -> RESTResponseType:
         """Mint tokens
 
-        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply. 
+        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
