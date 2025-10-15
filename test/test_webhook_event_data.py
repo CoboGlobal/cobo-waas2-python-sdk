@@ -96,7 +96,8 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
-                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
+                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', 
+                    main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
                 created_timestamp = 1610445878970,
                 updated_timestamp = 1610445878970,
                 tss_request_id = '20240711114129000132315000003970',
@@ -210,6 +211,8 @@ class TestWebhookEventData(unittest.TestCase):
                 charge_merchant_fee = False,
                 merchant_fee_amount = '0.0001',
                 merchant_fee_token_id = 'ETH_USDT',
+                commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                    fee_amount = '', ),
                 settlement_request_id = 'S20250304-1001',
                 settlements = [
                     cobo_waas2.models.settlement_detail.SettlementDetail(
@@ -245,11 +248,23 @@ class TestWebhookEventData(unittest.TestCase):
                         settlement_request_id = 'S20250304-1001', 
                         order_ids = [
                             'O20250304-M1001-1001'
-                            ], )
+                            ], 
+                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                            fee_amount = '', ), 
+                        bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
+                            fee_amount = '', 
+                            received_token_id = '', 
+                            received_amount = '', ), )
                     ],
                 acquiring_type = 'Order',
                 payout_channel = 'Crypto',
                 settlement_type = 'Merchant',
+                received_amount_fiat = '500.00',
+                bank_account = cobo_waas2.models.bank_account.BankAccount(
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
+                    info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, 
+                    created_timestamp = 1744689600, 
+                    updated_timestamp = 1744689600, ),
                 payer_id = 'P20250619T0310056d7aa',
                 custom_payer_id = 'user_abc_10001',
                 chain = 'ETH',
@@ -362,7 +377,13 @@ class TestWebhookEventData(unittest.TestCase):
                         settlement_request_id = 'S20250304-1001', 
                         order_ids = [
                             'O20250304-M1001-1001'
-                            ], )
+                            ], 
+                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                            fee_amount = '', ), 
+                        bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
+                            fee_amount = '', 
+                            received_token_id = '', 
+                            received_amount = '', ), )
                     ],
                 acquiring_type = 'Order',
                 payer_id = 'P20250619T0310056d7aa',

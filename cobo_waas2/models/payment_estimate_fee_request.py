@@ -15,20 +15,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.message_sign_destination_type import MessageSignDestinationType
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.payment_estimate_fee import PaymentEstimateFee
+from cobo_waas2.models.payment_fee_type import PaymentFeeType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class BTCEIP191MessageSignDestination(BaseModel):
+class PaymentEstimateFeeRequest(BaseModel):
     """
-    The information about the destination `BTC_EIP_191_Signature`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
+    PaymentEstimateFeeRequest
     """  # noqa: E501
-    destination_type: MessageSignDestinationType
-    message: StrictStr = Field(description="The raw data of the message to be signed, encoded in Base64 format.")
-    __properties: ClassVar[List[str]] = ["destination_type", "message"]
+    fee_type: Optional[PaymentFeeType] = None
+    estimate_fees: List[PaymentEstimateFee]
+    __properties: ClassVar[List[str]] = ["fee_type", "estimate_fees"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +49,7 @@ class BTCEIP191MessageSignDestination(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of BTCEIP191MessageSignDestination from a JSON string"""
+        """Create an instance of PaymentEstimateFeeRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +70,18 @@ class BTCEIP191MessageSignDestination(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in estimate_fees (list)
+        _items = []
+        if self.estimate_fees:
+            for _item in self.estimate_fees:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['estimate_fees'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of BTCEIP191MessageSignDestination from a dict"""
+        """Create an instance of PaymentEstimateFeeRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +89,8 @@ class BTCEIP191MessageSignDestination(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "destination_type": obj.get("destination_type"),
-            "message": obj.get("message")
+            "fee_type": obj.get("fee_type"),
+            "estimate_fees": [PaymentEstimateFee.from_dict(_item) for _item in obj["estimate_fees"]] if obj.get("estimate_fees") is not None else None
         })
         return _obj
 

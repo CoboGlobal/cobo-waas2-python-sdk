@@ -10,12 +10,15 @@ Name | Type | Description | Notes
 **request_id** | **str** | The request ID provided by you when creating the settlement request. | 
 **status** | [**SettleRequestStatus**](SettleRequestStatus.md) |  | 
 **settlements** | [**List[SettlementDetail]**](SettlementDetail.md) |  | 
-**created_timestamp** | **int** | The creation time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
-**updated_timestamp** | **int** | The last update time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
-**initiator** | **str** |  The initiator of this settlement request. Can return either an API key or the Payment Management App&#39;s ID.  - Format &#x60;api_key_&lt;API_KEY&gt;&#x60;: Indicates the settlement request was initiated via the Payment API using the API key. - Format &#x60;app_&lt;APP_ID&gt;&#x60;: Indicates the settlement request was initiated through the Payment Management App using the App ID.  | [optional] 
+**created_timestamp** | **int** | The created time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
+**updated_timestamp** | **int** | The updated time of the settlement request, represented as a UNIX timestamp in seconds. | [optional] 
+**initiator** | **str** |  The initiator of this settlement request. Can return either an API key or the Payments App&#39;s ID.  - Format &#x60;api_key_&lt;API_KEY&gt;&#x60;: Indicates the settlement request was initiated via the Payments API using the API key. - Format &#x60;app_&lt;APP_ID&gt;&#x60;: Indicates the settlement request was initiated through the Payments App using the App ID.  | [optional] 
 **acquiring_type** | [**AcquiringType**](AcquiringType.md) |  | [optional] 
 **payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | [optional] 
 **settlement_type** | [**SettlementType**](SettlementType.md) |  | [optional] 
+**currency** | **str** | The fiat currency for the settlement request. | [optional] 
+**received_amount_fiat** | **str** | The received fiat amount of this settlement request.  | [optional] 
+**bank_account** | [**BankAccount**](BankAccount.md) |  | [optional] 
 
 ## Example
 

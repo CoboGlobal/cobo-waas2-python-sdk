@@ -25,12 +25,12 @@ class SwapToken(BaseModel):
     """
     SwapToken
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token id.")
-    chain_id: StrictStr = Field(description="The chain id.")
-    asset_id: StrictStr = Field(description="The asset id.")
-    token_address: Optional[StrictStr] = Field(default=None, description="The token address.")
-    min_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount.")
-    max_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount.")
+    token_id: StrictStr = Field(description="The token ID.")
+    chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain.")
+    asset_id: StrictStr = Field(description="The asset ID.")
+    token_address: Optional[StrictStr] = Field(default=None, description="The on-chain contract address of the token.")
+    min_amount: Optional[StrictStr] = Field(default=None, description="The minimum amount allowed for a swap.")
+    max_amount: Optional[StrictStr] = Field(default=None, description="The maximum amount allowed for a swap.")
     __properties: ClassVar[List[str]] = ["token_id", "chain_id", "asset_id", "token_address", "min_amount", "max_amount"]
 
     model_config = ConfigDict(

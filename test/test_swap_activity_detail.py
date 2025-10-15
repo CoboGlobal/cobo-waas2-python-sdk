@@ -60,7 +60,7 @@ class TestSwapActivityDetail(unittest.TestCase):
                     ],
                 approvers = [
                     cobo_waas2.models.swap_activity_approvers.SwapActivityApprovers(
-                        name = 'Wenyu.Xiao', 
+                        name = 'Emily Johnson', 
                         status = 'Pending', )
                     ],
                 signers = [
@@ -68,7 +68,11 @@ class TestSwapActivityDetail(unittest.TestCase):
                         signer = 'Cobo TSS', 
                         status = 'Pending', 
                         failed_reason = 'Rejected by signer Cobo TSS', )
-                    ]
+                    ],
+                receiving_transaction = cobo_waas2.models.swap_receiving_transaction.SwapReceivingTransaction(
+                    chain_id = 'ETH', 
+                    transaction_hash = '239861be9a4afe080c359b7fe4a1d035945ec46256b1a0f44d1267c71de8ec28', 
+                    is_loop = False, )
             )
         else:
             return SwapActivityDetail(

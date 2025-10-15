@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class SwapActivityStatus(str, Enum):
     """
-    The status of the swap activity. Possible values include: - `Success`: The activity is successfully completed. - `Processing`: The activity is being processed. - `Failed`: The activity has failed. 
+    The status of the swap activity. Possible values include: - `Success`: The activity completed successfully. - `Processing`: The activity is being processed. - `Failed`: The activity failed. 
     """
 
     """

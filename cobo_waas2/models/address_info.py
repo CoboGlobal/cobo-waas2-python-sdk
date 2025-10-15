@@ -36,7 +36,8 @@ class AddressInfo(BaseModel):
     root_pubkey: Optional[StrictStr] = Field(default=None, description="The root public key of the address. This property applies to MPC Wallets only.")
     taproot_script_tree_hash: Optional[StrictStr] = Field(default=None, description="The information about the new address.")
     taproot_internal_address: Optional[StrictStr] = Field(default=None, description="The Taproot address before tweaking.")
-    __properties: ClassVar[List[str]] = ["address", "chain_id", "memo", "path", "encoding", "pubkey", "x_only_pubkey", "root_pubkey", "taproot_script_tree_hash", "taproot_internal_address"]
+    stellar_trusted_token_ids: Optional[List[StrictStr]] = Field(default=None, description="The list of token IDs for which this address has already established trustlines on the Stellar network.")
+    __properties: ClassVar[List[str]] = ["address", "chain_id", "memo", "path", "encoding", "pubkey", "x_only_pubkey", "root_pubkey", "taproot_script_tree_hash", "taproot_internal_address", "stellar_trusted_token_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,7 +99,8 @@ class AddressInfo(BaseModel):
             "x_only_pubkey": obj.get("x_only_pubkey"),
             "root_pubkey": obj.get("root_pubkey"),
             "taproot_script_tree_hash": obj.get("taproot_script_tree_hash"),
-            "taproot_internal_address": obj.get("taproot_internal_address")
+            "taproot_internal_address": obj.get("taproot_internal_address"),
+            "stellar_trusted_token_ids": obj.get("stellar_trusted_token_ids")
         })
         return _obj
 

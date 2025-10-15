@@ -29,6 +29,7 @@ class SettleRequestStatus(str, Enum):
     COMPLETED = 'Completed'
     PARTIALLYCOMPLETED = 'PartiallyCompleted'
     FAILED = 'Failed'
+    CANCELED = 'Canceled'
 
     UNKNOWN = None
 

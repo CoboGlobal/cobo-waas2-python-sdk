@@ -30,10 +30,10 @@ class MerchantBalance(BaseModel):
     token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
     acquiring_type: AcquiringType
     total_received_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been received by the merchant.")
-    settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been settled from the merchant's balance.")
+    settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been paid out from the merchant's balance.")
     refunded_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been refunded from the merchant's balance.")
-    total_balance: Optional[StrictStr] = Field(default=None, description="The total balance of the token for the merchant.")
-    available_balance: Optional[StrictStr] = Field(default=None, description="The balance available for settlement or refund, in the specified cryptocurrency.")
+    total_balance: Optional[StrictStr] = Field(default=None, description=" The total balance of the token available for payout or refund for the merchant.  `total_balance` = `total_received_amount` - `settled_amount` - `refunded_amount`  For more information, please refer to [Amounts and Balances](/v2_cn/payments/amounts-and-balances) ")
+    available_balance: Optional[StrictStr] = Field(default=None, description="This field has been deprecated.")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "acquiring_type", "total_received_amount", "settled_amount", "refunded_amount", "total_balance", "available_balance"]
 
     model_config = ConfigDict(

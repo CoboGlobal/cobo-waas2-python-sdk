@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,7 +34,8 @@ class SupportedToken(BaseModel):
     chain_symbol: Optional[StrictStr] = Field(description="Symbol of the underlying blockchain")
     chain_icon_url: Optional[StrictStr] = Field(default=None, description="URL to the blockchain's icon image")
     token_icon_url: Optional[StrictStr] = Field(default=None, description="URL to the token's icon image")
-    __properties: ClassVar[List[str]] = ["token_id", "name", "symbol", "decimal", "token_address", "chain_id", "chain_symbol", "chain_icon_url", "token_icon_url"]
+    can_off_ramp: Optional[StrictBool] = Field(default=None, description="Whether the token can by off ramp settlement")
+    __properties: ClassVar[List[str]] = ["token_id", "name", "symbol", "decimal", "token_address", "chain_id", "chain_symbol", "chain_icon_url", "token_icon_url", "can_off_ramp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -115,7 +116,8 @@ class SupportedToken(BaseModel):
             "chain_id": obj.get("chain_id"),
             "chain_symbol": obj.get("chain_symbol"),
             "chain_icon_url": obj.get("chain_icon_url"),
-            "token_icon_url": obj.get("token_icon_url")
+            "token_icon_url": obj.get("token_icon_url"),
+            "can_off_ramp": obj.get("can_off_ramp")
         })
         return _obj
 

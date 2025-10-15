@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token_id** | **str** | The token id. | 
-**chain_id** | **str** | The chain id. | 
-**asset_id** | **str** | The asset id. | 
-**token_address** | **str** | The token address. | [optional] 
-**min_amount** | **str** | The minimum amount. | [optional] 
-**max_amount** | **str** | The maximum amount. | [optional] 
+**token_id** | **str** | The token ID. | 
+**chain_id** | **str** | The chain ID, which is the unique identifier of a blockchain. | 
+**asset_id** | **str** | The asset ID. | 
+**token_address** | **str** | The on-chain contract address of the token. | [optional] 
+**min_amount** | **str** | The minimum amount allowed for a swap. | [optional] 
+**max_amount** | **str** | The maximum amount allowed for a swap. | [optional] 
 
 ## Example
 

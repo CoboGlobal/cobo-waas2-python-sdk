@@ -32,21 +32,21 @@ class SwapActivity(BaseModel):
     activity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the swap activity.")
     swap_type: Optional[SwapType] = None
     status: Optional[SwapActivityStatus] = None
-    request_id: Optional[StrictStr] = Field(default=None, description="The request id of the swap activity.")
-    wallet_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the wallet.")
-    pay_token_id: Optional[StrictStr] = Field(default=None, description="The token ID to pay.")
-    receive_token_id: Optional[StrictStr] = Field(default=None, description="The token ID to receive.")
-    pay_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to bridge.")
-    receive_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to receive.")
-    fee_token_id: Optional[StrictStr] = Field(default=None, description="The fee token ID.")
-    fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of fee.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID of the swap transaction.")
+    wallet_id: Optional[StrictStr] = Field(default=None, description="The ID of the wallet used to pay.")
+    pay_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the token to pay.")
+    receive_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the token to receive.")
+    pay_amount: Optional[StrictStr] = Field(default=None, description="The amount of the token to pay.")
+    receive_amount: Optional[StrictStr] = Field(default=None, description="The amount of the token to receive.")
+    fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the token used for paying the service fee.")
+    fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of the service fee.")
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the swap activity.")
     initiator_type: Optional[TransactionInitiatorType] = None
     description: Optional[StrictStr] = Field(default=None, description="The description of the swap activity.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was last updated, in Unix timestamp format, measured in milliseconds.")
     network_fee: Optional[TransactionRequestFee] = None
-    destination_address: Optional[StrictStr] = Field(default=None, description="the destination address of web3/mpc wallets.")
+    destination_address: Optional[StrictStr] = Field(default=None, description="The address of an MPC Wallet or Web3 Wallet that receives the swapped or bridged assets.")
     __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp", "network_fee", "destination_address"]
 
     model_config = ConfigDict(

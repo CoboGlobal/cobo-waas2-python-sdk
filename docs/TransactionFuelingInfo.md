@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **request_id** | **str** | The request ID of the transaction. | [optional] 
 **transaction_id** | **str** | The transaction ID. | [optional] 
+**main_transaction_id** | **str** | The UUID of the parent (main) transaction that this record is associated with. Set only when the current record is a gas/fee transaction initiated by Fee Station; omit for main transactions. | [optional] 
 
 ## Example
 

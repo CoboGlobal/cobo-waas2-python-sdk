@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class EstimatedSOLFee(BaseModel):
     """
-    The estimated transaction fee based on the sol fee model.
+    The estimated transaction fee based on the SOL fee model.  For more details about the SOL fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models). 
     """  # noqa: E501
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token used to pay the transaction fee.")

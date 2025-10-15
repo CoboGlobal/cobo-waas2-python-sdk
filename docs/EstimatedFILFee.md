@@ -1,6 +1,6 @@
 # EstimatedFILFee
 
-The estimated transaction fee based on the fil fee model.
+The estimated transaction fee based on the FIL fee model.  For more details about the FIL fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models). 
 
 ## Properties
 
