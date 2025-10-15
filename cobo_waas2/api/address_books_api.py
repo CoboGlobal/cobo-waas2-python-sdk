@@ -55,7 +55,7 @@ class AddressBooksApi:
     ) -> CreateAddressBooks201Response:
         """Create Address Book entries
 
-        This operation adds new entries (records) to your Address Book. 
+        This operation adds new entries (records) to your Address Book. <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param create_address_books_param: The request body of the create Address Books operation.
         :type create_address_books_param: CreateAddressBooksParam
@@ -101,7 +101,7 @@ class AddressBooksApi:
     ) -> ApiResponse[CreateAddressBooks201Response]:
         """Create Address Book entries
 
-        This operation adds new entries (records) to your Address Book. 
+        This operation adds new entries (records) to your Address Book. <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param create_address_books_param: The request body of the create Address Books operation.
         :type create_address_books_param: CreateAddressBooksParam
@@ -147,7 +147,7 @@ class AddressBooksApi:
     ) -> RESTResponseType:
         """Create Address Book entries
 
-        This operation adds new entries (records) to your Address Book. 
+        This operation adds new entries (records) to your Address Book. <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param create_address_books_param: The request body of the create Address Books operation.
         :type create_address_books_param: CreateAddressBooksParam
@@ -224,7 +224,7 @@ class AddressBooksApi:
     ) -> DeleteAddressBookById201Response:
         """Delete Address Book entry
 
-        This operation deletes a specified Address Book entry (record). 
+        This operation deletes a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param entry_id: The Address Book entry ID. (required)
         :type entry_id: str
@@ -270,7 +270,7 @@ class AddressBooksApi:
     ) -> ApiResponse[DeleteAddressBookById201Response]:
         """Delete Address Book entry
 
-        This operation deletes a specified Address Book entry (record). 
+        This operation deletes a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param entry_id: The Address Book entry ID. (required)
         :type entry_id: str
@@ -316,7 +316,7 @@ class AddressBooksApi:
     ) -> RESTResponseType:
         """Delete Address Book entry
 
-        This operation deletes a specified Address Book entry (record). 
+        This operation deletes a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param entry_id: The Address Book entry ID. (required)
         :type entry_id: str
@@ -819,7 +819,7 @@ class AddressBooksApi:
     ) -> AddressBook:
         """Update Address Book entry
 
-        This operation updates the information of a specified Address Book entry (record). 
+        This operation updates the information of a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param entry_id: The Address Book entry ID. (required)
         :type entry_id: str
@@ -869,7 +869,7 @@ class AddressBooksApi:
     ) -> ApiResponse[AddressBook]:
         """Update Address Book entry
 
-        This operation updates the information of a specified Address Book entry (record). 
+        This operation updates the information of a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param entry_id: The Address Book entry ID. (required)
         :type entry_id: str
@@ -919,7 +919,7 @@ class AddressBooksApi:
     ) -> RESTResponseType:
         """Update Address Book entry
 
-        This operation updates the information of a specified Address Book entry (record). 
+        This operation updates the information of a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
         :param entry_id: The Address Book entry ID. (required)
         :type entry_id: str

@@ -29,6 +29,18 @@ class TestFeeStationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_check_fee_station_usage(self) -> None:
+        """
+        Test case for check_fee_station_usage
+
+        Check Fee Station usage
+        """
+        """
+        fee_station_check_fee_station_usage = cobo_waas2.FeeStationCheckFeeStationUsage()
+
+        api_response = self.api.check_fee_station_usage(fee_station_check_fee_station_usage=fee_station_check_fee_station_usage)
+        """
+
     def test_estimate_fee_station_fee(self) -> None:
         """
         Test case for estimate_fee_station_fee

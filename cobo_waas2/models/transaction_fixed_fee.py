@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class TransactionFixedFee(BaseModel):
     """
-    The transaction fee actually charged by the chain that uses the fixed fee model.   Switch between the tabs to display the properties for different transaction fee models. 
+    The transaction fee actually charged by the chain that uses the fixed fee model.   For more information about the fixed fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
     max_fee_amount: Optional[StrictStr] = Field(default=None, description="The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee.")
     fee_type: FeeType

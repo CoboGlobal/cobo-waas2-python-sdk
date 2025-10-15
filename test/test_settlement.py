@@ -71,14 +71,27 @@ class TestSettlement(unittest.TestCase):
                         settlement_request_id = 'S20250304-1001', 
                         order_ids = [
                             'O20250304-M1001-1001'
-                            ], )
+                            ], 
+                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                            fee_amount = '', ), 
+                        bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
+                            fee_amount = '', 
+                            received_token_id = '', 
+                            received_amount = '', ), )
                     ],
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600,
                 initiator = 'api_key_b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
                 acquiring_type = 'Order',
                 payout_channel = 'Crypto',
-                settlement_type = 'Merchant'
+                settlement_type = 'Merchant',
+                currency = 'USD',
+                received_amount_fiat = '500.00',
+                bank_account = cobo_waas2.models.bank_account.BankAccount(
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
+                    info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, 
+                    created_timestamp = 1744689600, 
+                    updated_timestamp = 1744689600, )
             )
         else:
             return Settlement(
@@ -119,7 +132,13 @@ class TestSettlement(unittest.TestCase):
                         settlement_request_id = 'S20250304-1001', 
                         order_ids = [
                             'O20250304-M1001-1001'
-                            ], )
+                            ], 
+                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                            fee_amount = '', ), 
+                        bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
+                            fee_amount = '', 
+                            received_token_id = '', 
+                            received_amount = '', ), )
                     ],
         )
         """

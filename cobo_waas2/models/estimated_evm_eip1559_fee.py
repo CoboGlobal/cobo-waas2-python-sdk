@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class EstimatedEvmEip1559Fee(BaseModel):
     """
-    The estimated transaction fee based on the EIP-1559 fee model.
+    The estimated transaction fee based on the EIP-1559 fee model.  For more details about the EIP-1559 fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models). 
     """  # noqa: E501
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token used to pay the transaction fee.")

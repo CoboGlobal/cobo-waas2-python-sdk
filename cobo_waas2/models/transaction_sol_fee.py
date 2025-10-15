@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class TransactionSOLFee(BaseModel):
     """
-    The transaction fee actually charged by the chain that uses the Solana fee model.  In this model, the fee is calculated as: fee = base fee + (compute unit price * compute unit limit) + rent (if applicable). For more details, refer to [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
+    The transaction fee actually charged by the chain that uses the Solana fee model.  For more details about the Solana fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
     base_fee: Optional[StrictStr] = Field(default=None, description="A fixed fee charged per signature. The default is 5,000 lamports per signature.")
     rent_amount: Optional[StrictStr] = Field(default=None, description="The rent fee charged by the network to store non–rent-exempt accounts on-chain. It is deducted periodically until the account maintains the minimum balance required for rent exemption.")

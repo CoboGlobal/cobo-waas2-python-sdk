@@ -40,7 +40,6 @@ class TestUpdateTopUpAddress(unittest.TestCase):
             )
         else:
             return UpdateTopUpAddress(
-                merchant_id = 'M1001',
                 token_id = 'ETH_USDT',
                 custom_payer_id = 'payer_0001',
         )

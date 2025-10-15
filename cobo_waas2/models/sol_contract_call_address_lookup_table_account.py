@@ -17,18 +17,17 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.message_sign_destination_type import MessageSignDestinationType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class RawMessageSignDestination(BaseModel):
+class SolContractCallAddressLookupTableAccount(BaseModel):
     """
-    The information about the destination `Raw_Message_Signature`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
+    The information about a Solana Address Lookup Table account.
     """  # noqa: E501
-    destination_type: MessageSignDestinationType
-    msg_hash: StrictStr = Field(description="Message hash to be signed, in hexadecimal format.")
-    __properties: ClassVar[List[str]] = ["destination_type", "msg_hash"]
+    alt_account_key: StrictStr = Field(description="The on-chain public key of the Address Lookup Table (ALT) account, identifying the specific lookup table.")
+    addresses: List[StrictStr] = Field(description="An array of stored account addresses within the lookup table, which can be referenced in transactions by index.")
+    __properties: ClassVar[List[str]] = ["alt_account_key", "addresses"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +47,7 @@ class RawMessageSignDestination(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RawMessageSignDestination from a JSON string"""
+        """Create an instance of SolContractCallAddressLookupTableAccount from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +72,7 @@ class RawMessageSignDestination(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RawMessageSignDestination from a dict"""
+        """Create an instance of SolContractCallAddressLookupTableAccount from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +80,8 @@ class RawMessageSignDestination(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "destination_type": obj.get("destination_type"),
-            "msg_hash": obj.get("msg_hash")
+            "alt_account_key": obj.get("alt_account_key"),
+            "addresses": obj.get("addresses")
         })
         return _obj
 

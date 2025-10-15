@@ -33,8 +33,9 @@ class CreatePaymentOrderRequest(BaseModel):
     merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system. The code should have a maximum length of 128 characters.")
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by you as a developer to identify this order in your system. This code must be unique across all orders in your system. The code should have a maximum length of 128 characters. ")
     expired_in: Optional[StrictInt] = Field(default=1800, description="The number of seconds until the pay-in order expires, counted from when the request is sent. For example, if set to `1800`, the order will expire in 30 minutes. Must be greater than zero and cannot exceed 3 hours (10800 seconds). After expiration:  - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
-    use_dedicated_address: Optional[StrictBool] = Field(default=None, description="Whether to allocate a dedicated address for this order.  - `true`: A dedicated address will be allocated for this order. - `false`: A shared address from the address pool will be used. ")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_in", "use_dedicated_address"]
+    use_dedicated_address: Optional[StrictBool] = Field(default=None, description="This field has been deprecated. ")
+    custom_exchange_rate: Optional[StrictStr] = Field(default=None, description="A custom exchange rate specified by the merchant.   - Only effective when `currency` is `\"USD\"`.   - Expressed as the amount of USD per 1 unit of the specified cryptocurrency.   - If not provided, the system will use the default internal rate.   Example: If the cryptocurrency is USDT and `custom_exchange_rate` = `\"0.99\"`, it means 1 USDT = 0.99 USD. ")
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_in", "use_dedicated_address", "custom_exchange_rate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +96,8 @@ class CreatePaymentOrderRequest(BaseModel):
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
             "expired_in": obj.get("expired_in") if obj.get("expired_in") is not None else 1800,
-            "use_dedicated_address": obj.get("use_dedicated_address")
+            "use_dedicated_address": obj.get("use_dedicated_address"),
+            "custom_exchange_rate": obj.get("custom_exchange_rate")
         })
         return _obj
 

@@ -24,11 +24,11 @@ from typing_extensions import Self
 
 class SwapActivitySigners(BaseModel):
     """
-    The signer data for swap activity.
+    The signer information of the swap activity.
     """  # noqa: E501
     signer: Optional[StrictStr] = Field(default=None, description="The signer name.")
     status: Optional[SwapSingingStatus] = None
-    failed_reason: Optional[StrictStr] = Field(default=None, description="Failed reason of signing process.")
+    failed_reason: Optional[StrictStr] = Field(default=None, description="The reason for the signing failure.")
     __properties: ClassVar[List[str]] = ["signer", "status", "failed_reason"]
 
     model_config = ConfigDict(

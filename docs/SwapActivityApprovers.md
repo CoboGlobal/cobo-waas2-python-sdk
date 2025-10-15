@@ -1,6 +1,6 @@
 # SwapActivityApprovers
 
-The approvers data for swap activity.
+The approver information of the swap activity.
 
 ## Properties
 

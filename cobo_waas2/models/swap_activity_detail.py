@@ -21,6 +21,7 @@ from cobo_waas2.models.swap_activity_approvers import SwapActivityApprovers
 from cobo_waas2.models.swap_activity_signers import SwapActivitySigners
 from cobo_waas2.models.swap_activity_status import SwapActivityStatus
 from cobo_waas2.models.swap_activity_timeline import SwapActivityTimeline
+from cobo_waas2.models.swap_receiving_transaction import SwapReceivingTransaction
 from cobo_waas2.models.swap_type import SwapType
 from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
@@ -35,25 +36,26 @@ class SwapActivityDetail(BaseModel):
     activity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the swap activity.")
     swap_type: Optional[SwapType] = None
     status: Optional[SwapActivityStatus] = None
-    request_id: Optional[StrictStr] = Field(default=None, description="The request id of the swap activity.")
-    wallet_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the wallet.")
-    pay_token_id: Optional[StrictStr] = Field(default=None, description="The token ID to pay.")
-    receive_token_id: Optional[StrictStr] = Field(default=None, description="The token ID to receive.")
-    pay_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to bridge.")
-    receive_amount: Optional[StrictStr] = Field(default=None, description="The amount of tokens to receive.")
-    fee_token_id: Optional[StrictStr] = Field(default=None, description="The fee token ID.")
-    fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of fee.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID of the swap transaction.")
+    wallet_id: Optional[StrictStr] = Field(default=None, description="The ID of the wallet used to pay.")
+    pay_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the token to pay.")
+    receive_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the token to receive.")
+    pay_amount: Optional[StrictStr] = Field(default=None, description="The amount of the token to pay.")
+    receive_amount: Optional[StrictStr] = Field(default=None, description="The amount of the token to receive.")
+    fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the token used for paying the service fee.")
+    fee_amount: Optional[StrictStr] = Field(default=None, description="The amount of the service fee.")
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the swap activity.")
     initiator_type: Optional[TransactionInitiatorType] = None
     description: Optional[StrictStr] = Field(default=None, description="The description of the swap activity.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was last updated, in Unix timestamp format, measured in milliseconds.")
     network_fee: Optional[TransactionRequestFee] = None
-    destination_address: Optional[StrictStr] = Field(default=None, description="the destination address of web3/mpc wallets.")
+    destination_address: Optional[StrictStr] = Field(default=None, description="The address of an MPC Wallet or Web3 Wallet that receives the swapped or bridged assets.")
     timeline: Optional[List[SwapActivityTimeline]] = None
     approvers: Optional[List[SwapActivityApprovers]] = None
     signers: Optional[List[SwapActivitySigners]] = None
-    __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp", "network_fee", "destination_address", "timeline", "approvers", "signers"]
+    receiving_transaction: Optional[SwapReceivingTransaction] = None
+    __properties: ClassVar[List[str]] = ["activity_id", "swap_type", "status", "request_id", "wallet_id", "pay_token_id", "receive_token_id", "pay_amount", "receive_amount", "fee_token_id", "fee_amount", "initiator", "initiator_type", "description", "created_timestamp", "updated_timestamp", "network_fee", "destination_address", "timeline", "approvers", "signers", "receiving_transaction"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -118,6 +120,9 @@ class SwapActivityDetail(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['signers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of receiving_transaction
+        if self.receiving_transaction:
+            _dict['receiving_transaction'] = self.receiving_transaction.to_dict()
         # set to None if initiator (nullable) is None
         # and model_fields_set contains the field
         if self.initiator is None and "initiator" in self.model_fields_set:
@@ -155,7 +160,8 @@ class SwapActivityDetail(BaseModel):
             "destination_address": obj.get("destination_address"),
             "timeline": [SwapActivityTimeline.from_dict(_item) for _item in obj["timeline"]] if obj.get("timeline") is not None else None,
             "approvers": [SwapActivityApprovers.from_dict(_item) for _item in obj["approvers"]] if obj.get("approvers") is not None else None,
-            "signers": [SwapActivitySigners.from_dict(_item) for _item in obj["signers"]] if obj.get("signers") is not None else None
+            "signers": [SwapActivitySigners.from_dict(_item) for _item in obj["signers"]] if obj.get("signers") is not None else None,
+            "receiving_transaction": SwapReceivingTransaction.from_dict(obj["receiving_transaction"]) if obj.get("receiving_transaction") is not None else None
         })
         return _obj
 

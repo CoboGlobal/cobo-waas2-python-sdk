@@ -34,12 +34,12 @@ class TestSwapActivityApprovers(unittest.TestCase):
         model = SwapActivityApprovers()
         if include_optional:
             return SwapActivityApprovers(
-                name = 'Wenyu.Xiao',
+                name = 'Emily Johnson',
                 status = 'Pending'
             )
         else:
             return SwapActivityApprovers(
-                name = 'Wenyu.Xiao',
+                name = 'Emily Johnson',
                 status = 'Pending',
         )
         """

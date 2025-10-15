@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Create Address Book entries
 
-This operation adds new entries (records) to your Address Book. 
+This operation adds new entries (records) to your Address Book. <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
 ### Example
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 Delete Address Book entry
 
-This operation deletes a specified Address Book entry (record). 
+This operation deletes a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
 ### Example
 
@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 
 Update Address Book entry
 
-This operation updates the information of a specified Address Book entry (record). 
+This operation updates the information of a specified Address Book entry (record). <Note>This operation is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note> 
 
 ### Example
 

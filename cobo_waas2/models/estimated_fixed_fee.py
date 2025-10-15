@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class EstimatedFixedFee(BaseModel):
     """
-    The estimated transaction fee based on the fixed fee model.
+    The estimated transaction fee based on the fixed fee model.  For more details about the fixed fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models). 
     """  # noqa: E501
     fee_amount: StrictStr = Field(description="The transaction fee that you need to pay for the transaction.")
     fee_type: FeeType

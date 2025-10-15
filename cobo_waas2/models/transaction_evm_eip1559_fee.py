@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class TransactionEvmEip1559Fee(BaseModel):
     """
-    The transaction fee actually charged by the chain that uses the EIP-1559 fee model.   The transaction fee is calculated by multiplying the gas price by the used gas units. This can be expressed as: Transaction fee = gas price * used gas units.  Switch between the tabs to display the properties for different transaction fee models. 
+    The transaction fee actually charged by the chain that uses the EIP-1559 fee model.   For more information about the EIP-1559 fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
     max_fee_per_gas: Optional[StrictStr] = Field(default=None, description="The maximum gas fee per gas unit used on the chain, in wei.")
     max_priority_fee_per_gas: Optional[StrictStr] = Field(default=None, description="The maximum priority fee per gas unit used, in wei. The maximum priority fee represents the highest amount of miner tips that you are willing to pay for your transaction.")

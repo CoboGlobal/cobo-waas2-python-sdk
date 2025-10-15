@@ -1,6 +1,6 @@
 # EstimatedSOLFee
 
-The estimated transaction fee based on the sol fee model.
+The estimated transaction fee based on the SOL fee model.  For more details about the SOL fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models). 
 
 ## Properties
 

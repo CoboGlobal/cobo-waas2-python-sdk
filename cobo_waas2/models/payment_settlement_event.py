@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.acquiring_type import AcquiringType
+from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.payout_channel import PayoutChannel
 from cobo_waas2.models.settle_request_status import SettleRequestStatus
 from cobo_waas2.models.settlement_detail import SettlementDetail
@@ -35,13 +36,16 @@ class PaymentSettlementEvent(BaseModel):
     request_id: StrictStr = Field(description="The request ID provided by you when creating the settlement request.")
     status: SettleRequestStatus
     settlements: List[SettlementDetail]
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the settlement request, represented as a UNIX timestamp in seconds.")
-    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the settlement request, represented as a UNIX timestamp in seconds.")
-    initiator: Optional[StrictStr] = Field(default=None, description=" The initiator of this settlement request. Can return either an API key or the Payment Management App's ID.  - Format `api_key_<API_KEY>`: Indicates the settlement request was initiated via the Payment API using the API key. - Format `app_<APP_ID>`: Indicates the settlement request was initiated through the Payment Management App using the App ID. ")
+    created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the settlement request, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the settlement request, represented as a UNIX timestamp in seconds.")
+    initiator: Optional[StrictStr] = Field(default=None, description=" The initiator of this settlement request. Can return either an API key or the Payments App's ID.  - Format `api_key_<API_KEY>`: Indicates the settlement request was initiated via the Payments API using the API key. - Format `app_<APP_ID>`: Indicates the settlement request was initiated through the Payments App using the App ID. ")
     acquiring_type: Optional[AcquiringType] = None
     payout_channel: Optional[PayoutChannel] = None
     settlement_type: Optional[SettlementType] = None
-    __properties: ClassVar[List[str]] = ["data_type", "settlement_request_id", "request_id", "status", "settlements", "created_timestamp", "updated_timestamp", "initiator", "acquiring_type", "payout_channel", "settlement_type"]
+    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the settlement request.")
+    received_amount_fiat: Optional[StrictStr] = Field(default=None, description="The received fiat amount of this settlement request. ")
+    bank_account: Optional[BankAccount] = None
+    __properties: ClassVar[List[str]] = ["data_type", "settlement_request_id", "request_id", "status", "settlements", "created_timestamp", "updated_timestamp", "initiator", "acquiring_type", "payout_channel", "settlement_type", "currency", "received_amount_fiat", "bank_account"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
@@ -96,6 +100,9 @@ class PaymentSettlementEvent(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['settlements'] = _items
+        # override the default output from pydantic by calling `to_dict()` of bank_account
+        if self.bank_account:
+            _dict['bank_account'] = self.bank_account.to_dict()
         return _dict
 
     @classmethod
@@ -118,7 +125,10 @@ class PaymentSettlementEvent(BaseModel):
             "initiator": obj.get("initiator"),
             "acquiring_type": obj.get("acquiring_type"),
             "payout_channel": obj.get("payout_channel"),
-            "settlement_type": obj.get("settlement_type")
+            "settlement_type": obj.get("settlement_type"),
+            "currency": obj.get("currency"),
+            "received_amount_fiat": obj.get("received_amount_fiat"),
+            "bank_account": BankAccount.from_dict(obj["bank_account"]) if obj.get("bank_account") is not None else None
         })
         return _obj
 

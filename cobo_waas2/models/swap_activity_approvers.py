@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class SwapActivityApprovers(BaseModel):
     """
-    The approvers data for swap activity.
+    The approver information of the swap activity.
     """  # noqa: E501
     name: StrictStr = Field(description="The approver name of the swap activity. ")
     status: SwapApproversStatus

@@ -145,11 +145,11 @@ class TestPaymentApi(unittest.TestCase):
         Get payer balance
         """
         """
-        merchant_id = 'M1001'
         payer_id = 'P20250619T0310056d7aa'
         token_id = 'ETH_USDT'
+        merchant_id = 'M1001'
 
-        api_response = self.api.get_payer_balance_by_address(merchant_id, payer_id, token_id)
+        api_response = self.api.get_payer_balance_by_address(payer_id, token_id, merchant_id=merchant_id)
         """
 
     def test_get_payment_order_detail_by_id(self) -> None:
@@ -238,11 +238,11 @@ class TestPaymentApi(unittest.TestCase):
         Get top-up address
         """
         """
-        merchant_id = 'M1001'
         token_id = 'ETH_USDT'
         custom_payer_id = 'payer_0001'
+        merchant_id = 'M1001'
 
-        api_response = self.api.get_top_up_address(merchant_id, token_id, custom_payer_id)
+        api_response = self.api.get_top_up_address(token_id, custom_payer_id, merchant_id=merchant_id)
         """
 
     def test_list_bank_accounts(self) -> None:
@@ -309,8 +309,9 @@ class TestPaymentApi(unittest.TestCase):
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         keyword = 'keyword'
         wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        wallet_setup = cobo_waas2.WalletSetup()
 
-        api_response = self.api.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_id=wallet_id)
+        api_response = self.api.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_id=wallet_id, wallet_setup=wallet_setup)
         """
 
     def test_list_payment_orders(self) -> None:
@@ -385,6 +386,22 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_settlement_requests(limit=limit, before=before, after=after, request_id=request_id)
         """
 
+    def test_list_top_up_payer_accounts(self) -> None:
+        """
+        Test case for list_top_up_payer_accounts
+
+        List top-up payer accounts
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        merchant_id = 'M1001'
+        payer_id = 'P20250619T0310056d7aa'
+
+        api_response = self.api.list_top_up_payer_accounts(limit=limit, before=before, after=after, merchant_id=merchant_id, payer_id=payer_id)
+        """
+
     def test_list_top_up_payers(self) -> None:
         """
         Test case for list_top_up_payers
@@ -392,13 +409,38 @@ class TestPaymentApi(unittest.TestCase):
         List payers
         """
         """
-        merchant_id = 'M1001'
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        merchant_id = 'M1001'
         payer_id = 'P20250619T0310056d7aa'
 
-        api_response = self.api.list_top_up_payers(merchant_id, limit=limit, before=before, after=after, payer_id=payer_id)
+        api_response = self.api.list_top_up_payers(limit=limit, before=before, after=after, merchant_id=merchant_id, payer_id=payer_id)
+        """
+
+    def test_payment_estimate_fee(self) -> None:
+        """
+        Test case for payment_estimate_fee
+
+        Payment estimate fee
+        """
+        """
+        payment_estimate_fee_request = cobo_waas2.PaymentEstimateFeeRequest()
+
+        api_response = self.api.payment_estimate_fee(payment_estimate_fee_request=payment_estimate_fee_request)
+        """
+
+    def test_update_bank_account_by_id(self) -> None:
+        """
+        Test case for update_bank_account_by_id
+
+        Update bank account
+        """
+        """
+        bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        update_bank_account_by_id_request = cobo_waas2.UpdateBankAccountByIdRequest()
+
+        api_response = self.api.update_bank_account_by_id(bank_account_id, update_bank_account_by_id_request=update_bank_account_by_id_request)
         """
 
     def test_update_merchant_by_id(self) -> None:

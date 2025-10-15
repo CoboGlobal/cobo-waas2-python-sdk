@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **root_pubkey** | **str** | The root public key of the address. This property applies to MPC Wallets only. | [optional] 
 **taproot_script_tree_hash** | **str** | The information about the new address. | [optional] 
 **taproot_internal_address** | **str** | The Taproot address before tweaking. | [optional] 
+**stellar_trusted_token_ids** | **List[str]** | The list of token IDs for which this address has already established trustlines on the Stellar network. | [optional] 
 
 ## Example
 

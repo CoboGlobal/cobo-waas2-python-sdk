@@ -42,7 +42,8 @@ class TestSupportedToken(unittest.TestCase):
                 chain_id = 'ETH',
                 chain_symbol = 'ETH',
                 chain_icon_url = 'https://example.com/icons/eth.png',
-                token_icon_url = 'https://example.com/icons/usdt.png'
+                token_icon_url = 'https://example.com/icons/usdt.png',
+                can_off_ramp = True
             )
         else:
             return SupportedToken(

@@ -13,6 +13,7 @@ from cobo_waas2.api.organizations_api import OrganizationsApi
 from cobo_waas2.api.payment_api import PaymentApi
 from cobo_waas2.api.prime_broker_api import PrimeBrokerApi
 from cobo_waas2.api.stakings_api import StakingsApi
+from cobo_waas2.api.swaps_api import SwapsApi
 from cobo_waas2.api.tokenization_api import TokenizationApi
 from cobo_waas2.api.transactions_api import TransactionsApi
 from cobo_waas2.api.travel_rule_api import TravelRuleApi
