@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class CustodialTransferDestination(BaseModel):
     """
-    The information about the transaction destination type `CustodialWallet`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  A Custodial Wallet (Asset Wallet) can only receive transfers from another Custodial Wallet (Asset Wallet) by using [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop).  <Note>This destination type is available upon request. Please contact our [customer support](mailto:help@cobo.com) to enable it.</Note>  Switch between the tabs to display the properties for different transaction destinations. 
+    The information about the transaction destination type `CustodialWallet`. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.  **Note: This destination type is deprecated and should no longer be used. Please use `Address` instead.**  Switch between the tabs to display the properties for different transaction destinations. 
     """  # noqa: E501
     destination_type: TransferDestinationType
     wallet_id: StrictStr = Field(description="The wallet ID.")

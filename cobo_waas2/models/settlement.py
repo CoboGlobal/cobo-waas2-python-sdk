@@ -41,8 +41,8 @@ class Settlement(BaseModel):
     acquiring_type: Optional[AcquiringType] = None
     payout_channel: Optional[PayoutChannel] = None
     settlement_type: Optional[SettlementType] = None
-    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the settlement request.")
-    received_amount_fiat: Optional[StrictStr] = Field(default=None, description="The received fiat amount of this settlement request. ")
+    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the off-ramp.")
+    received_amount_fiat: Optional[StrictStr] = Field(default=None, description="The estimated amount of the fiat currency to receive after off-ramping. This amount is subject to change due to bank transfer fees.")
     bank_account: Optional[BankAccount] = None
     __properties: ClassVar[List[str]] = ["settlement_request_id", "request_id", "status", "settlements", "created_timestamp", "updated_timestamp", "initiator", "acquiring_type", "payout_channel", "settlement_type", "currency", "received_amount_fiat", "bank_account"]
 

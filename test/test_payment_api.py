@@ -77,6 +77,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_merchant(create_merchant_request=create_merchant_request)
         """
 
+    def test_create_order_link(self) -> None:
+        """
+        Test case for create_order_link
+
+        Create order link
+        """
+        """
+        create_order_link_request = cobo_waas2.CreateOrderLinkRequest()
+
+        api_response = self.api.create_order_link(create_order_link_request=create_order_link_request)
+        """
+
     def test_create_payment_order(self) -> None:
         """
         Test case for create_payment_order
@@ -422,7 +434,7 @@ class TestPaymentApi(unittest.TestCase):
         """
         Test case for payment_estimate_fee
 
-        Payment estimate fee
+        Estimate fees
         """
         """
         payment_estimate_fee_request = cobo_waas2.PaymentEstimateFeeRequest()

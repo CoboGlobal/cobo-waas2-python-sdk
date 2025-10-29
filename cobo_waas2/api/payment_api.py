@@ -20,6 +20,7 @@ from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.bank_account import BankAccount
 from cobo_waas2.models.create_crypto_address_request import CreateCryptoAddressRequest
 from cobo_waas2.models.create_merchant_request import CreateMerchantRequest
+from cobo_waas2.models.create_order_link_request import CreateOrderLinkRequest
 from cobo_waas2.models.create_payment_order_request import CreatePaymentOrderRequest
 from cobo_waas2.models.create_refund_request import CreateRefundRequest
 from cobo_waas2.models.create_settlement_request_request import CreateSettlementRequestRequest
@@ -30,6 +31,7 @@ from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
 from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
 from cobo_waas2.models.get_refunds200_response import GetRefunds200Response
 from cobo_waas2.models.get_settlement_info_by_ids200_response import GetSettlementInfoByIds200Response
+from cobo_waas2.models.link import Link
 from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
 from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBalances200Response
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
@@ -595,7 +597,7 @@ class PaymentApi:
     ) -> Merchant:
         """Create merchant
 
-        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information.  If you are a merchant (directly serving the payer), you only need to create one merchant and do not need to configure the developer fee rate. The developer fee rate only applies to platforms such as payment service providers (PSPs) that charge fees to their downstream merchants. 
+        This operation creates a merchant. Upon successful creation, a merchant ID is generated and returned along with the merchant's information. For more information on merchant creation, please refer to [Preparation](https://www.cobo.com/developers/v2/payments/preparation#create-merchant). 
 
         :param create_merchant_request: The request body to create a merchant.
         :type create_merchant_request: CreateMerchantRequest
@@ -641,7 +643,7 @@ class PaymentApi:
     ) -> ApiResponse[Merchant]:
         """Create merchant
 
-        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information.  If you are a merchant (directly serving the payer), you only need to create one merchant and do not need to configure the developer fee rate. The developer fee rate only applies to platforms such as payment service providers (PSPs) that charge fees to their downstream merchants. 
+        This operation creates a merchant. Upon successful creation, a merchant ID is generated and returned along with the merchant's information. For more information on merchant creation, please refer to [Preparation](https://www.cobo.com/developers/v2/payments/preparation#create-merchant). 
 
         :param create_merchant_request: The request body to create a merchant.
         :type create_merchant_request: CreateMerchantRequest
@@ -687,7 +689,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create merchant
 
-        This operation creates a merchant and links it to a specified wallet. Payments to the merchant will be deposited into the linked wallet.  Upon successful creation, a merchant ID is generated and returned along with the merchant's information.  If you are a merchant (directly serving the payer), you only need to create one merchant and do not need to configure the developer fee rate. The developer fee rate only applies to platforms such as payment service providers (PSPs) that charge fees to their downstream merchants. 
+        This operation creates a merchant. Upon successful creation, a merchant ID is generated and returned along with the merchant's information. For more information on merchant creation, please refer to [Preparation](https://www.cobo.com/developers/v2/payments/preparation#create-merchant). 
 
         :param create_merchant_request: The request body to create a merchant.
         :type create_merchant_request: CreateMerchantRequest
@@ -741,6 +743,175 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/merchants',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_order_link(
+        self,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> Link:
+        """Create order link
+
+        This operation creates a payment link of a pay-in order. 
+
+        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :type create_order_link_request: CreateOrderLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_order_link_serialize(
+            create_order_link_request=create_order_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_order_link_with_http_info(
+        self,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[Link]:
+        """Create order link
+
+        This operation creates a payment link of a pay-in order. 
+
+        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :type create_order_link_request: CreateOrderLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_order_link_serialize(
+            create_order_link_request=create_order_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_order_link_without_preload_content(
+        self,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create order link
+
+        This operation creates a payment link of a pay-in order. 
+
+        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :type create_order_link_request: CreateOrderLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_order_link_serialize(
+            create_order_link_request=create_order_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_order_link_serialize(
+        self,
+        create_order_link_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_order_link_request is not None:
+            _body_params = create_order_link_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/links/orders',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1271,7 +1442,7 @@ class PaymentApi:
     ) -> DeleteCryptoAddress201Response:
         """Delete crypto address
 
-        This operation unregisters a crypto address from being used for crypto withdrawals. 
+        This operation unregisters a crypto address from being used for crypto payouts. 
 
         :param crypto_address_id: The crypto address ID. (required)
         :type crypto_address_id: str
@@ -1318,7 +1489,7 @@ class PaymentApi:
     ) -> ApiResponse[DeleteCryptoAddress201Response]:
         """Delete crypto address
 
-        This operation unregisters a crypto address from being used for crypto withdrawals. 
+        This operation unregisters a crypto address from being used for crypto payouts. 
 
         :param crypto_address_id: The crypto address ID. (required)
         :type crypto_address_id: str
@@ -1365,7 +1536,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Delete crypto address
 
-        This operation unregisters a crypto address from being used for crypto withdrawals. 
+        This operation unregisters a crypto address from being used for crypto payouts. 
 
         :param crypto_address_id: The crypto address ID. (required)
         :type crypto_address_id: str
@@ -1444,7 +1615,7 @@ class PaymentApi:
     ) -> GetExchangeRate200Response:
         """Get exchange rate
 
-        This operation retrieves the current exchange rate between a specified currency pair. 
+        This operation retrieves the current exchange rate between a specified currency pair. The exchange rate is updated approximately every 10 minutes.  <Note>This operation returns the exchange rate for reference only. The actual exchange rate may vary due to market fluctuations and other factors.</Note> 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -1494,7 +1665,7 @@ class PaymentApi:
     ) -> ApiResponse[GetExchangeRate200Response]:
         """Get exchange rate
 
-        This operation retrieves the current exchange rate between a specified currency pair. 
+        This operation retrieves the current exchange rate between a specified currency pair. The exchange rate is updated approximately every 10 minutes.  <Note>This operation returns the exchange rate for reference only. The actual exchange rate may vary due to market fluctuations and other factors.</Note> 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -1544,7 +1715,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Get exchange rate
 
-        This operation retrieves the current exchange rate between a specified currency pair. 
+        This operation retrieves the current exchange rate between a specified currency pair. The exchange rate is updated approximately every 10 minutes.  <Note>This operation returns the exchange rate for reference only. The actual exchange rate may vary due to market fluctuations and other factors.</Note> 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -2001,7 +2172,7 @@ class PaymentApi:
     ) -> PspBalance:
         """Get developer balance
 
-        This operation retrieves the balance information for you as the developer. The balance information is grouped by token.  For more information, please refer to [Amounts and Balances](/v2/payments/amounts-and-balances) 
+        This operation retrieves the balance information for you as the developer. The balance information is grouped by token.  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances). 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -2047,7 +2218,7 @@ class PaymentApi:
     ) -> ApiResponse[PspBalance]:
         """Get developer balance
 
-        This operation retrieves the balance information for you as the developer. The balance information is grouped by token.  For more information, please refer to [Amounts and Balances](/v2/payments/amounts-and-balances) 
+        This operation retrieves the balance information for you as the developer. The balance information is grouped by token.  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances). 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -2093,7 +2264,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Get developer balance
 
-        This operation retrieves the balance information for you as the developer. The balance information is grouped by token.  For more information, please refer to [Amounts and Balances](/v2/payments/amounts-and-balances) 
+        This operation retrieves the balance information for you as the developer. The balance information is grouped by token.  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances). 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -3128,10 +3299,6 @@ class PaymentApi:
 
         # process the path parameters
         # process the query parameters
-        if merchant_id is not None:
-            
-            _query_params.append(('merchant_id', merchant_id))
-            
         if token_id is not None:
             
             _query_params.append(('token_id', token_id))
@@ -3139,6 +3306,10 @@ class PaymentApi:
         if custom_payer_id is not None:
             
             _query_params.append(('custom_payer_id', custom_payer_id))
+            
+        if merchant_id is not None:
+            
+            _query_params.append(('merchant_id', merchant_id))
             
         # process the header parameters
         # process the form parameters
@@ -3725,7 +3896,7 @@ class PaymentApi:
     ) -> ListMerchantBalances200Response:
         """List merchant balances
 
-         This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Amounts and Balances](/v2/payments/amounts-and-balances) 
+         This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances). 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -3779,7 +3950,7 @@ class PaymentApi:
     ) -> ApiResponse[ListMerchantBalances200Response]:
         """List merchant balances
 
-         This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Amounts and Balances](/v2/payments/amounts-and-balances) 
+         This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances). 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -3833,7 +4004,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List merchant balances
 
-         This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Amounts and Balances](/v2/payments/amounts-and-balances) 
+         This operation retrieves the balance information for specified merchants. The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances). 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
@@ -3920,8 +4091,8 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
-        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
-        wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
+        wallet_id: Annotated[Optional[StrictStr], Field(description="This parameter has been deprecated.")] = None,
+        wallet_setup: Annotated[Optional[WalletSetup], Field(description="The type of wallet setup for the merchant. Each wallet contains multiple cryptocurrency addresses that serve as the merchant’s receiving addresses.  - `Shared`: Multiple merchants share the same wallet. The wallet’s addresses may be used to receive payments for multiple merchants simultaneously. - `Separate`: Create a dedicated wallet for the merchant to achieve complete fund isolation. All addresses in this wallet are only used to receive payments for this merchant. - `Default`: The default wallet automatically created by the system for the default merchant (the merchant that shares the same name as your organization). ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3943,9 +4114,9 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
-        :param wallet_id: The wallet ID.
+        :param wallet_id: This parameter has been deprecated.
         :type wallet_id: str
-        :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
+        :param wallet_setup: The type of wallet setup for the merchant. Each wallet contains multiple cryptocurrency addresses that serve as the merchant’s receiving addresses.  - `Shared`: Multiple merchants share the same wallet. The wallet’s addresses may be used to receive payments for multiple merchants simultaneously. - `Separate`: Create a dedicated wallet for the merchant to achieve complete fund isolation. All addresses in this wallet are only used to receive payments for this merchant. - `Default`: The default wallet automatically created by the system for the default merchant (the merchant that shares the same name as your organization). 
         :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3986,8 +4157,8 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
-        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
-        wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
+        wallet_id: Annotated[Optional[StrictStr], Field(description="This parameter has been deprecated.")] = None,
+        wallet_setup: Annotated[Optional[WalletSetup], Field(description="The type of wallet setup for the merchant. Each wallet contains multiple cryptocurrency addresses that serve as the merchant’s receiving addresses.  - `Shared`: Multiple merchants share the same wallet. The wallet’s addresses may be used to receive payments for multiple merchants simultaneously. - `Separate`: Create a dedicated wallet for the merchant to achieve complete fund isolation. All addresses in this wallet are only used to receive payments for this merchant. - `Default`: The default wallet automatically created by the system for the default merchant (the merchant that shares the same name as your organization). ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4009,9 +4180,9 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
-        :param wallet_id: The wallet ID.
+        :param wallet_id: This parameter has been deprecated.
         :type wallet_id: str
-        :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
+        :param wallet_setup: The type of wallet setup for the merchant. Each wallet contains multiple cryptocurrency addresses that serve as the merchant’s receiving addresses.  - `Shared`: Multiple merchants share the same wallet. The wallet’s addresses may be used to receive payments for multiple merchants simultaneously. - `Separate`: Create a dedicated wallet for the merchant to achieve complete fund isolation. All addresses in this wallet are only used to receive payments for this merchant. - `Default`: The default wallet automatically created by the system for the default merchant (the merchant that shares the same name as your organization). 
         :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4052,8 +4223,8 @@ class PaymentApi:
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
-        wallet_id: Annotated[Optional[StrictStr], Field(description="The wallet ID.")] = None,
-        wallet_setup: Annotated[Optional[WalletSetup], Field(description="WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. ")] = None,
+        wallet_id: Annotated[Optional[StrictStr], Field(description="This parameter has been deprecated.")] = None,
+        wallet_setup: Annotated[Optional[WalletSetup], Field(description="The type of wallet setup for the merchant. Each wallet contains multiple cryptocurrency addresses that serve as the merchant’s receiving addresses.  - `Shared`: Multiple merchants share the same wallet. The wallet’s addresses may be used to receive payments for multiple merchants simultaneously. - `Separate`: Create a dedicated wallet for the merchant to achieve complete fund isolation. All addresses in this wallet are only used to receive payments for this merchant. - `Default`: The default wallet automatically created by the system for the default merchant (the merchant that shares the same name as your organization). ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4075,9 +4246,9 @@ class PaymentApi:
         :type after: str
         :param keyword: A search term used for fuzzy matching of merchant names.
         :type keyword: str
-        :param wallet_id: The wallet ID.
+        :param wallet_id: This parameter has been deprecated.
         :type wallet_id: str
-        :param wallet_setup: WalletSetup defines the type of funds used in the merchant account, either \"Shared\" or \"Separate\" is allowed when creating a merchant: - `Default`: Wallet of psp owned default merchant. - `Shared`: Shared wallet of non-psp owned merchants. - `Separate`: Separate wallet of non-psp owned merchants. 
+        :param wallet_setup: The type of wallet setup for the merchant. Each wallet contains multiple cryptocurrency addresses that serve as the merchant’s receiving addresses.  - `Shared`: Multiple merchants share the same wallet. The wallet’s addresses may be used to receive payments for multiple merchants simultaneously. - `Separate`: Create a dedicated wallet for the merchant to achieve complete fund isolation. All addresses in this wallet are only used to receive payments for this merchant. - `Default`: The default wallet automatically created by the system for the default merchant (the merchant that shares the same name as your organization). 
         :type wallet_setup: WalletSetup
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5709,7 +5880,7 @@ class PaymentApi:
     @validate_call
     def payment_estimate_fee(
         self,
-        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body to create a estimated fee request.")] = None,
+        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body for fee estimation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5719,11 +5890,11 @@ class PaymentApi:
             ]
         ] = None,
     ) -> PaymentEstimateFee201Response:
-        """Payment estimate fee
+        """Estimate fees
 
-        This operation to payment estimate fee. 
+        This operation calculates fees for payment-related operations, including: - **Pay-in**: Fees for accepting payments - **Refunds**: Fees for refunding the payment - **Crypto payouts**: Fees for payouts in crypto - **Fiat off-ramp**: Fees for fiat currency transfers via off-ramp.    The returned fees represent the charges that would apply if the operation were executed immediately. Note that actual fees may vary over time based on your usage volume and applicable fee rates. 
 
-        :param payment_estimate_fee_request: The request body to create a estimated fee request.
+        :param payment_estimate_fee_request: The request body for fee estimation.
         :type payment_estimate_fee_request: PaymentEstimateFeeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5755,7 +5926,7 @@ class PaymentApi:
     @validate_call
     def payment_estimate_fee_with_http_info(
         self,
-        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body to create a estimated fee request.")] = None,
+        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body for fee estimation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5765,11 +5936,11 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[PaymentEstimateFee201Response]:
-        """Payment estimate fee
+        """Estimate fees
 
-        This operation to payment estimate fee. 
+        This operation calculates fees for payment-related operations, including: - **Pay-in**: Fees for accepting payments - **Refunds**: Fees for refunding the payment - **Crypto payouts**: Fees for payouts in crypto - **Fiat off-ramp**: Fees for fiat currency transfers via off-ramp.    The returned fees represent the charges that would apply if the operation were executed immediately. Note that actual fees may vary over time based on your usage volume and applicable fee rates. 
 
-        :param payment_estimate_fee_request: The request body to create a estimated fee request.
+        :param payment_estimate_fee_request: The request body for fee estimation.
         :type payment_estimate_fee_request: PaymentEstimateFeeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5801,7 +5972,7 @@ class PaymentApi:
     @validate_call
     def payment_estimate_fee_without_preload_content(
         self,
-        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body to create a estimated fee request.")] = None,
+        payment_estimate_fee_request: Annotated[Optional[PaymentEstimateFeeRequest], Field(description="The request body for fee estimation.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5811,11 +5982,11 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Payment estimate fee
+        """Estimate fees
 
-        This operation to payment estimate fee. 
+        This operation calculates fees for payment-related operations, including: - **Pay-in**: Fees for accepting payments - **Refunds**: Fees for refunding the payment - **Crypto payouts**: Fees for payouts in crypto - **Fiat off-ramp**: Fees for fiat currency transfers via off-ramp.    The returned fees represent the charges that would apply if the operation were executed immediately. Note that actual fees may vary over time based on your usage volume and applicable fee rates. 
 
-        :param payment_estimate_fee_request: The request body to create a estimated fee request.
+        :param payment_estimate_fee_request: The request body for fee estimation.
         :type payment_estimate_fee_request: PaymentEstimateFeeRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

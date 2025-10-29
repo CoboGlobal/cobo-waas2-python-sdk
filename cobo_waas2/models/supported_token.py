@@ -34,7 +34,7 @@ class SupportedToken(BaseModel):
     chain_symbol: Optional[StrictStr] = Field(description="Symbol of the underlying blockchain")
     chain_icon_url: Optional[StrictStr] = Field(default=None, description="URL to the blockchain's icon image")
     token_icon_url: Optional[StrictStr] = Field(default=None, description="URL to the token's icon image")
-    can_off_ramp: Optional[StrictBool] = Field(default=None, description="Whether the token can by off ramp settlement")
+    can_off_ramp: Optional[StrictBool] = Field(default=None, description="Whether the token is supported by the off-ramp service.")
     __properties: ClassVar[List[str]] = ["token_id", "name", "symbol", "decimal", "token_address", "chain_id", "chain_symbol", "chain_icon_url", "token_icon_url", "can_off_ramp"]
 
     model_config = ConfigDict(

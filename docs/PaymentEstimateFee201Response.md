@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**List[PaymentEstimatedFee]**](PaymentEstimatedFee.md) |  | [optional] 
+**data** | [**List[PaymentEstimatedFee]**](PaymentEstimatedFee.md) | A list of estimated fees for the requested operations. | [optional] 
 
 ## Example
 

@@ -25,7 +25,7 @@ class CommissionFee(BaseModel):
     """
     CommissionFee
     """  # noqa: E501
-    fee_amount: StrictStr = Field(description="The commission fee amount.")
+    fee_amount: StrictStr = Field(description="The amount of the commission fee charged by Cobo for pay-ins and payouts, in USD.")
     __properties: ClassVar[List[str]] = ["fee_amount"]
 
     model_config = ConfigDict(

@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.payment_estimated_fee import PaymentEstimatedFee
 from typing import Optional, Set
@@ -26,7 +26,7 @@ class PaymentEstimateFee201Response(BaseModel):
     """
     PaymentEstimateFee201Response
     """  # noqa: E501
-    data: Optional[List[PaymentEstimatedFee]] = None
+    data: Optional[List[PaymentEstimatedFee]] = Field(default=None, description="A list of estimated fees for the requested operations.")
     __properties: ClassVar[List[str]] = ["data"]
 
     model_config = ConfigDict(

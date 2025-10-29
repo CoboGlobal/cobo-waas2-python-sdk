@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.payment_estimate_fee import PaymentEstimateFee
 from cobo_waas2.models.payment_fee_type import PaymentFeeType
@@ -28,7 +28,7 @@ class PaymentEstimateFeeRequest(BaseModel):
     PaymentEstimateFeeRequest
     """  # noqa: E501
     fee_type: Optional[PaymentFeeType] = None
-    estimate_fees: List[PaymentEstimateFee]
+    estimate_fees: List[PaymentEstimateFee] = Field(description="A list of token IDs and amounts for which fees will be calculated.")
     __properties: ClassVar[List[str]] = ["fee_type", "estimate_fees"]
 
     model_config = ConfigDict(

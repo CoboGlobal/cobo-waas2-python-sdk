@@ -116,6 +116,7 @@ cobo_waas2/models/cobo_safe_delegate.py
 cobo_waas2/models/cobo_safe_delegate_type.py
 cobo_waas2/models/commission_fee.py
 cobo_waas2/models/compliance_disposition_update_event_data.py
+cobo_waas2/models/compliance_kyt_screenings_update_event_data.py
 cobo_waas2/models/contract_call_destination.py
 cobo_waas2/models/contract_call_destination_type.py
 cobo_waas2/models/contract_call_params.py
@@ -148,6 +149,7 @@ cobo_waas2/models/create_merchant_request.py
 cobo_waas2/models/create_mpc_project_request.py
 cobo_waas2/models/create_mpc_vault_request.py
 cobo_waas2/models/create_mpc_wallet_params.py
+cobo_waas2/models/create_order_link_request.py
 cobo_waas2/models/create_payment_order_request.py
 cobo_waas2/models/create_prime_broker_address201_response.py
 cobo_waas2/models/create_prime_broker_address_request.py
@@ -254,6 +256,7 @@ cobo_waas2/models/fixed_fee_rate.py
 cobo_waas2/models/forced_sweep.py
 cobo_waas2/models/forced_sweep_request.py
 cobo_waas2/models/forced_sweep_status.py
+cobo_waas2/models/funds_status_type.py
 cobo_waas2/models/get_api_key_info200_response.py
 cobo_waas2/models/get_exchange_rate200_response.py
 cobo_waas2/models/get_max_transferable_value_with_fee_model_request.py
@@ -277,6 +280,13 @@ cobo_waas2/models/key_share_holder_group_status.py
 cobo_waas2/models/key_share_holder_group_type.py
 cobo_waas2/models/key_share_holder_status.py
 cobo_waas2/models/key_share_holder_type.py
+cobo_waas2/models/kyt_screenings_decisions_type.py
+cobo_waas2/models/kyt_screenings_event_data.py
+cobo_waas2/models/kyt_screenings_review_type.py
+cobo_waas2/models/kyt_screenings_transaction.py
+cobo_waas2/models/kyt_screenings_transaction_type.py
+cobo_waas2/models/link.py
+cobo_waas2/models/link_display_info.py
 cobo_waas2/models/list_address_balances_by_token200_response.py
 cobo_waas2/models/list_address_books200_response.py
 cobo_waas2/models/list_addresses200_response.py
@@ -352,6 +362,8 @@ cobo_waas2/models/mpc_vault_event_data.py
 cobo_waas2/models/mpc_vault_type.py
 cobo_waas2/models/mpc_wallet_info.py
 cobo_waas2/models/order.py
+cobo_waas2/models/order_link_business_info.py
+cobo_waas2/models/order_link_business_info_custom_exchange_rates_inner.py
 cobo_waas2/models/order_status.py
 cobo_waas2/models/org_info.py
 cobo_waas2/models/otc_fee.py
@@ -397,6 +409,7 @@ cobo_waas2/models/replace_type.py
 cobo_waas2/models/request_approval.py
 cobo_waas2/models/retry_callback_message201_response.py
 cobo_waas2/models/retry_webhook_event_by_id201_response.py
+cobo_waas2/models/review_status_type.py
 cobo_waas2/models/revoke_approval_request201_response.py
 cobo_waas2/models/revoke_approval_request_request.py
 cobo_waas2/models/role_detail.py
@@ -445,6 +458,9 @@ cobo_waas2/models/stellar_contract_call_trust_line_operation_type.py
 cobo_waas2/models/stellar_contract_call_trust_line_param.py
 cobo_waas2/models/sub_wallet_asset_balance.py
 cobo_waas2/models/submit_deposit_travel_rule_info201_response.py
+cobo_waas2/models/submit_kyt_response.py
+cobo_waas2/models/submit_kyt_screenings_decisions_body.py
+cobo_waas2/models/submit_kyt_screenings_review_body.py
 cobo_waas2/models/supported_token.py
 cobo_waas2/models/suspended_token_event_data.py
 cobo_waas2/models/suspended_token_operation_type.py
@@ -810,6 +826,7 @@ docs/CoboSafeDelegateType.md
 docs/CommissionFee.md
 docs/ComplianceApi.md
 docs/ComplianceDispositionUpdateEventData.md
+docs/ComplianceKytScreeningsUpdateEventData.md
 docs/ContractCallDestination.md
 docs/ContractCallDestinationType.md
 docs/ContractCallParams.md
@@ -842,6 +859,7 @@ docs/CreateMerchantRequest.md
 docs/CreateMpcProjectRequest.md
 docs/CreateMpcVaultRequest.md
 docs/CreateMpcWalletParams.md
+docs/CreateOrderLinkRequest.md
 docs/CreatePaymentOrderRequest.md
 docs/CreatePrimeBrokerAddress201Response.md
 docs/CreatePrimeBrokerAddressRequest.md
@@ -951,6 +969,7 @@ docs/FixedFeeRate.md
 docs/ForcedSweep.md
 docs/ForcedSweepRequest.md
 docs/ForcedSweepStatus.md
+docs/FundsStatusType.md
 docs/GetApiKeyInfo200Response.md
 docs/GetExchangeRate200Response.md
 docs/GetMaxTransferableValueWithFeeModelRequest.md
@@ -974,6 +993,13 @@ docs/KeyShareHolderGroupStatus.md
 docs/KeyShareHolderGroupType.md
 docs/KeyShareHolderStatus.md
 docs/KeyShareHolderType.md
+docs/KytScreeningsDecisionsType.md
+docs/KytScreeningsEventData.md
+docs/KytScreeningsReviewType.md
+docs/KytScreeningsTransaction.md
+docs/KytScreeningsTransactionType.md
+docs/Link.md
+docs/LinkDisplayInfo.md
 docs/ListAddressBalancesByToken200Response.md
 docs/ListAddressBooks200Response.md
 docs/ListAddresses200Response.md
@@ -1050,6 +1076,8 @@ docs/MpcStakeSource.md
 docs/MpcTransferSource.md
 docs/OAuthApi.md
 docs/Order.md
+docs/OrderLinkBusinessInfo.md
+docs/OrderLinkBusinessInfoCustomExchangeRatesInner.md
 docs/OrderStatus.md
 docs/OrgInfo.md
 docs/OrganizationsApi.md
@@ -1098,6 +1126,7 @@ docs/ReplaceType.md
 docs/RequestApproval.md
 docs/RetryCallbackMessage201Response.md
 docs/RetryWebhookEventById201Response.md
+docs/ReviewStatusType.md
 docs/RevokeApprovalRequest201Response.md
 docs/RevokeApprovalRequestRequest.md
 docs/RoleDetail.md
@@ -1147,6 +1176,9 @@ docs/StellarContractCallTrustLineOperationType.md
 docs/StellarContractCallTrustLineParam.md
 docs/SubWalletAssetBalance.md
 docs/SubmitDepositTravelRuleInfo201Response.md
+docs/SubmitKytResponse.md
+docs/SubmitKytScreeningsDecisionsBody.md
+docs/SubmitKytScreeningsReviewBody.md
 docs/SupportedToken.md
 docs/SuspendedTokenEventData.md
 docs/SuspendedTokenOperationType.md
@@ -1524,6 +1556,7 @@ test/test_cobo_safe_delegate_type.py
 test/test_commission_fee.py
 test/test_compliance_api.py
 test/test_compliance_disposition_update_event_data.py
+test/test_compliance_kyt_screenings_update_event_data.py
 test/test_contract_call_destination.py
 test/test_contract_call_destination_type.py
 test/test_contract_call_params.py
@@ -1556,6 +1589,7 @@ test/test_create_merchant_request.py
 test/test_create_mpc_project_request.py
 test/test_create_mpc_vault_request.py
 test/test_create_mpc_wallet_params.py
+test/test_create_order_link_request.py
 test/test_create_payment_order_request.py
 test/test_create_prime_broker_address201_response.py
 test/test_create_prime_broker_address_request.py
@@ -1665,6 +1699,7 @@ test/test_fixed_fee_rate.py
 test/test_forced_sweep.py
 test/test_forced_sweep_request.py
 test/test_forced_sweep_status.py
+test/test_funds_status_type.py
 test/test_get_api_key_info200_response.py
 test/test_get_exchange_rate200_response.py
 test/test_get_max_transferable_value_with_fee_model_request.py
@@ -1688,6 +1723,13 @@ test/test_key_share_holder_group_status.py
 test/test_key_share_holder_group_type.py
 test/test_key_share_holder_status.py
 test/test_key_share_holder_type.py
+test/test_kyt_screenings_decisions_type.py
+test/test_kyt_screenings_event_data.py
+test/test_kyt_screenings_review_type.py
+test/test_kyt_screenings_transaction.py
+test/test_kyt_screenings_transaction_type.py
+test/test_link.py
+test/test_link_display_info.py
 test/test_list_address_balances_by_token200_response.py
 test/test_list_address_books200_response.py
 test/test_list_addresses200_response.py
@@ -1764,6 +1806,8 @@ test/test_mpc_vault_type.py
 test/test_mpc_wallet_info.py
 test/test_o_auth_api.py
 test/test_order.py
+test/test_order_link_business_info.py
+test/test_order_link_business_info_custom_exchange_rates_inner.py
 test/test_order_status.py
 test/test_org_info.py
 test/test_organizations_api.py
@@ -1812,6 +1856,7 @@ test/test_replace_type.py
 test/test_request_approval.py
 test/test_retry_callback_message201_response.py
 test/test_retry_webhook_event_by_id201_response.py
+test/test_review_status_type.py
 test/test_revoke_approval_request201_response.py
 test/test_revoke_approval_request_request.py
 test/test_role_detail.py
@@ -1861,6 +1906,9 @@ test/test_stellar_contract_call_trust_line_operation_type.py
 test/test_stellar_contract_call_trust_line_param.py
 test/test_sub_wallet_asset_balance.py
 test/test_submit_deposit_travel_rule_info201_response.py
+test/test_submit_kyt_response.py
+test/test_submit_kyt_screenings_decisions_body.py
+test/test_submit_kyt_screenings_review_body.py
 test/test_supported_token.py
 test/test_suspended_token_event_data.py
 test/test_suspended_token_operation_type.py

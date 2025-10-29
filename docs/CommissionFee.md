@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fee_amount** | **str** | The commission fee amount. | 
+**fee_amount** | **str** | The amount of the commission fee charged by Cobo for pay-ins and payouts, in USD. | 
 
 ## Example
 

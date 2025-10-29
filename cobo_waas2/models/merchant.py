@@ -28,8 +28,8 @@ class Merchant(BaseModel):
     """  # noqa: E501
     merchant_id: StrictStr = Field(description="The merchant ID.")
     name: StrictStr = Field(description="The merchant name.")
-    wallet_id: StrictStr = Field(description="The ID of the linked wallet.")
-    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Expressed as a string in decimal format where \"0.1\" represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions. If you are a merchant (directly serving the payer), you do not need to configure the developer fee rate.")
+    wallet_id: StrictStr = Field(description="This field has been deprecated.")
+    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant.")
     wallet_setup: Optional[WalletSetup] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the merchant, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the merchant, represented as a UNIX timestamp in seconds.")

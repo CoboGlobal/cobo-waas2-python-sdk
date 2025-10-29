@@ -28,8 +28,8 @@ class PaymentEstimatedFee(BaseModel):
     """
     PaymentEstimatedFee
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to payment.")
-    amount: StrictStr = Field(description="The payment amount. ")
+    token_id: StrictStr = Field(description="The token ID for which fees will be calculated.")
+    amount: StrictStr = Field(description="The transaction amount for which fees will be calculated.")
     commission_fee: Optional[CommissionFee] = None
     bridging_fee: Optional[BridgingFee] = None
     otc_fee: Optional[OtcFee] = None

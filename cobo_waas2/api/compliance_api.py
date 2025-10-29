@@ -19,7 +19,11 @@ from typing_extensions import Annotated
 from cobo_waas2.models.disposition_query_response import DispositionQueryResponse
 from cobo_waas2.models.disposition_response import DispositionResponse
 from cobo_waas2.models.isolate_disposition import IsolateDisposition
+from cobo_waas2.models.kyt_screenings_transaction import KytScreeningsTransaction
 from cobo_waas2.models.refund_disposition import RefundDisposition
+from cobo_waas2.models.submit_kyt_response import SubmitKytResponse
+from cobo_waas2.models.submit_kyt_screenings_decisions_body import SubmitKytScreeningsDecisionsBody
+from cobo_waas2.models.submit_kyt_screenings_review_body import SubmitKytScreeningsReviewBody
 from cobo_waas2.models.unfreeze_disposition import UnfreezeDisposition
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
@@ -42,7 +46,7 @@ class ComplianceApi:
     @validate_call
     def get_disposition_status(
         self,
-        transaction_id: Annotated[StrictStr, Field(description="The UUID of the transaction to query for disposition status.")],
+        transaction_id: Annotated[StrictStr, Field(description="The unique identifier (UUID) of the transaction to retrieve KYT screening status information for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -56,7 +60,7 @@ class ComplianceApi:
 
         This operation retrieves the current status of a disposition request for a specific transaction.  You can use this endpoint to check the status of any disposition operation (Refund, Isolate, or Unfreeze)  that has been initiated for a transaction. The response includes the disposition type, current status,  and the disposition transaction ID if applicable.  <Note>Use this endpoint to monitor the progress of disposition operations and verify their completion.</Note> 
 
-        :param transaction_id: The UUID of the transaction to query for disposition status. (required)
+        :param transaction_id: The unique identifier (UUID) of the transaction to retrieve KYT screening status information for. (required)
         :type transaction_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -88,7 +92,7 @@ class ComplianceApi:
     @validate_call
     def get_disposition_status_with_http_info(
         self,
-        transaction_id: Annotated[StrictStr, Field(description="The UUID of the transaction to query for disposition status.")],
+        transaction_id: Annotated[StrictStr, Field(description="The unique identifier (UUID) of the transaction to retrieve KYT screening status information for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -102,7 +106,7 @@ class ComplianceApi:
 
         This operation retrieves the current status of a disposition request for a specific transaction.  You can use this endpoint to check the status of any disposition operation (Refund, Isolate, or Unfreeze)  that has been initiated for a transaction. The response includes the disposition type, current status,  and the disposition transaction ID if applicable.  <Note>Use this endpoint to monitor the progress of disposition operations and verify their completion.</Note> 
 
-        :param transaction_id: The UUID of the transaction to query for disposition status. (required)
+        :param transaction_id: The unique identifier (UUID) of the transaction to retrieve KYT screening status information for. (required)
         :type transaction_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -134,7 +138,7 @@ class ComplianceApi:
     @validate_call
     def get_disposition_status_without_preload_content(
         self,
-        transaction_id: Annotated[StrictStr, Field(description="The UUID of the transaction to query for disposition status.")],
+        transaction_id: Annotated[StrictStr, Field(description="The unique identifier (UUID) of the transaction to retrieve KYT screening status information for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -148,7 +152,7 @@ class ComplianceApi:
 
         This operation retrieves the current status of a disposition request for a specific transaction.  You can use this endpoint to check the status of any disposition operation (Refund, Isolate, or Unfreeze)  that has been initiated for a transaction. The response includes the disposition type, current status,  and the disposition transaction ID if applicable.  <Note>Use this endpoint to monitor the progress of disposition operations and verify their completion.</Note> 
 
-        :param transaction_id: The UUID of the transaction to query for disposition status. (required)
+        :param transaction_id: The unique identifier (UUID) of the transaction to retrieve KYT screening status information for. (required)
         :type transaction_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -202,6 +206,177 @@ class ComplianceApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/compliance/funds/disposition',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_kyt_screening_status(
+        self,
+        transaction_id: Annotated[StrictStr, Field(description="The unique identifier (UUID) of the transaction to retrieve KYT screening status information for.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> KytScreeningsTransaction:
+        """Get KYT screening status
+
+        This operation retrieves the current KYT (Know Your Transaction) screening status, including review status and fund disposition status, for a specific transaction.  Use this endpoint to monitor the real-time screening progress for transactions processed through the KYT compliance system.  <Note>This endpoint provides comprehensive compliance monitoring capabilities to help maintain AML (Anti-Money Laundering) regulatory compliance and audit trail requirements.</Note> 
+
+        :param transaction_id: The unique identifier (UUID) of the transaction to retrieve KYT screening status information for. (required)
+        :type transaction_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_kyt_screening_status_serialize(
+            transaction_id=transaction_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "KytScreeningsTransaction",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_kyt_screening_status_with_http_info(
+        self,
+        transaction_id: Annotated[StrictStr, Field(description="The unique identifier (UUID) of the transaction to retrieve KYT screening status information for.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[KytScreeningsTransaction]:
+        """Get KYT screening status
+
+        This operation retrieves the current KYT (Know Your Transaction) screening status, including review status and fund disposition status, for a specific transaction.  Use this endpoint to monitor the real-time screening progress for transactions processed through the KYT compliance system.  <Note>This endpoint provides comprehensive compliance monitoring capabilities to help maintain AML (Anti-Money Laundering) regulatory compliance and audit trail requirements.</Note> 
+
+        :param transaction_id: The unique identifier (UUID) of the transaction to retrieve KYT screening status information for. (required)
+        :type transaction_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_kyt_screening_status_serialize(
+            transaction_id=transaction_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "KytScreeningsTransaction",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_kyt_screening_status_without_preload_content(
+        self,
+        transaction_id: Annotated[StrictStr, Field(description="The unique identifier (UUID) of the transaction to retrieve KYT screening status information for.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get KYT screening status
+
+        This operation retrieves the current KYT (Know Your Transaction) screening status, including review status and fund disposition status, for a specific transaction.  Use this endpoint to monitor the real-time screening progress for transactions processed through the KYT compliance system.  <Note>This endpoint provides comprehensive compliance monitoring capabilities to help maintain AML (Anti-Money Laundering) regulatory compliance and audit trail requirements.</Note> 
+
+        :param transaction_id: The unique identifier (UUID) of the transaction to retrieve KYT screening status information for. (required)
+        :type transaction_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_kyt_screening_status_serialize(
+            transaction_id=transaction_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "KytScreeningsTransaction",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_kyt_screening_status_serialize(
+        self,
+        transaction_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if transaction_id is not None:
+            
+            _query_params.append(('transaction_id', transaction_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/compliance/kyt/screenings/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -540,6 +715,344 @@ class ComplianceApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/compliance/funds/disposition/refund',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def submit_kyt_manual_review(
+        self,
+        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for KYT screening case that requires human analysis.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> SubmitKytResponse:
+        """Submit KYT manual review result
+
+        This operation submits a manual review result for a KYT (Know Your Transaction) screening case that requires human analysis.  Use this endpoint when transactions flagged for manual review have been analyzed by compliance officers and require submission of review outcomes with detailed comments and justifications.  This endpoint is specifically designed for submitting comprehensive manual review findings rather than automated screening decisions.  <Note>Submitting a manual review result will update the KYT screening status and initiate appropriate compliance workflow actions based on the review outcome.</Note> 
+
+        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for KYT screening case that requires human analysis.
+        :type submit_kyt_screenings_review_body: SubmitKytScreeningsReviewBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_kyt_manual_review_serialize(
+            submit_kyt_screenings_review_body=submit_kyt_screenings_review_body,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SubmitKytResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def submit_kyt_manual_review_with_http_info(
+        self,
+        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for KYT screening case that requires human analysis.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[SubmitKytResponse]:
+        """Submit KYT manual review result
+
+        This operation submits a manual review result for a KYT (Know Your Transaction) screening case that requires human analysis.  Use this endpoint when transactions flagged for manual review have been analyzed by compliance officers and require submission of review outcomes with detailed comments and justifications.  This endpoint is specifically designed for submitting comprehensive manual review findings rather than automated screening decisions.  <Note>Submitting a manual review result will update the KYT screening status and initiate appropriate compliance workflow actions based on the review outcome.</Note> 
+
+        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for KYT screening case that requires human analysis.
+        :type submit_kyt_screenings_review_body: SubmitKytScreeningsReviewBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_kyt_manual_review_serialize(
+            submit_kyt_screenings_review_body=submit_kyt_screenings_review_body,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SubmitKytResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def submit_kyt_manual_review_without_preload_content(
+        self,
+        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for KYT screening case that requires human analysis.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Submit KYT manual review result
+
+        This operation submits a manual review result for a KYT (Know Your Transaction) screening case that requires human analysis.  Use this endpoint when transactions flagged for manual review have been analyzed by compliance officers and require submission of review outcomes with detailed comments and justifications.  This endpoint is specifically designed for submitting comprehensive manual review findings rather than automated screening decisions.  <Note>Submitting a manual review result will update the KYT screening status and initiate appropriate compliance workflow actions based on the review outcome.</Note> 
+
+        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for KYT screening case that requires human analysis.
+        :type submit_kyt_screenings_review_body: SubmitKytScreeningsReviewBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_kyt_manual_review_serialize(
+            submit_kyt_screenings_review_body=submit_kyt_screenings_review_body,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SubmitKytResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _submit_kyt_manual_review_serialize(
+        self,
+        submit_kyt_screenings_review_body,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if submit_kyt_screenings_review_body is not None:
+            _body_params = submit_kyt_screenings_review_body
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/compliance/kyt/screenings/manual_review',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def submit_kyt_screening_decisions(
+        self,
+        submit_kyt_screenings_decisions_body: Annotated[Optional[SubmitKytScreeningsDecisionsBody], Field(description="The request body to submit a KYT screening decision for a specific transaction based on external compliance review.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> SubmitKytResponse:
+        """Submit KYT screening decision
+
+        This operation submits a KYT (Know Your Transaction) screening decision for a specific transaction based on an external compliance review.  Use this endpoint to provide a screening decision (Approval, ApprovalWithAlert, Rejection, or ManualReview) after completing the external KYT screening process.  The submitted decision will be recorded for compliance audit purposes and regulatory reporting requirements.  <Note>Submitting a screening decision will update the transaction's KYT status and may automatically trigger downstream compliance workflows or notifications depending on the decision type.</Note> 
+
+        :param submit_kyt_screenings_decisions_body: The request body to submit a KYT screening decision for a specific transaction based on external compliance review.
+        :type submit_kyt_screenings_decisions_body: SubmitKytScreeningsDecisionsBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_kyt_screening_decisions_serialize(
+            submit_kyt_screenings_decisions_body=submit_kyt_screenings_decisions_body,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SubmitKytResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def submit_kyt_screening_decisions_with_http_info(
+        self,
+        submit_kyt_screenings_decisions_body: Annotated[Optional[SubmitKytScreeningsDecisionsBody], Field(description="The request body to submit a KYT screening decision for a specific transaction based on external compliance review.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[SubmitKytResponse]:
+        """Submit KYT screening decision
+
+        This operation submits a KYT (Know Your Transaction) screening decision for a specific transaction based on an external compliance review.  Use this endpoint to provide a screening decision (Approval, ApprovalWithAlert, Rejection, or ManualReview) after completing the external KYT screening process.  The submitted decision will be recorded for compliance audit purposes and regulatory reporting requirements.  <Note>Submitting a screening decision will update the transaction's KYT status and may automatically trigger downstream compliance workflows or notifications depending on the decision type.</Note> 
+
+        :param submit_kyt_screenings_decisions_body: The request body to submit a KYT screening decision for a specific transaction based on external compliance review.
+        :type submit_kyt_screenings_decisions_body: SubmitKytScreeningsDecisionsBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_kyt_screening_decisions_serialize(
+            submit_kyt_screenings_decisions_body=submit_kyt_screenings_decisions_body,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SubmitKytResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def submit_kyt_screening_decisions_without_preload_content(
+        self,
+        submit_kyt_screenings_decisions_body: Annotated[Optional[SubmitKytScreeningsDecisionsBody], Field(description="The request body to submit a KYT screening decision for a specific transaction based on external compliance review.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Submit KYT screening decision
+
+        This operation submits a KYT (Know Your Transaction) screening decision for a specific transaction based on an external compliance review.  Use this endpoint to provide a screening decision (Approval, ApprovalWithAlert, Rejection, or ManualReview) after completing the external KYT screening process.  The submitted decision will be recorded for compliance audit purposes and regulatory reporting requirements.  <Note>Submitting a screening decision will update the transaction's KYT status and may automatically trigger downstream compliance workflows or notifications depending on the decision type.</Note> 
+
+        :param submit_kyt_screenings_decisions_body: The request body to submit a KYT screening decision for a specific transaction based on external compliance review.
+        :type submit_kyt_screenings_decisions_body: SubmitKytScreeningsDecisionsBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_kyt_screening_decisions_serialize(
+            submit_kyt_screenings_decisions_body=submit_kyt_screenings_decisions_body,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SubmitKytResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _submit_kyt_screening_decisions_serialize(
+        self,
+        submit_kyt_screenings_decisions_body,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if submit_kyt_screenings_decisions_body is not None:
+            _body_params = submit_kyt_screenings_decisions_body
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/compliance/kyt/screenings/decisions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

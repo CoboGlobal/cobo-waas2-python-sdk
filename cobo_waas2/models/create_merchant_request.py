@@ -27,8 +27,8 @@ class CreateMerchantRequest(BaseModel):
     CreateMerchantRequest
     """  # noqa: E501
     name: StrictStr = Field(description="The merchant name.")
-    wallet_id: Optional[StrictStr] = Field(default=None, description="The ID of the wallet linked to the merchant.")
-    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Expressed as a string in decimal format where \"0.1\" represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions. If you are a merchant (directly serving the payer), you do not need to configure the developer fee rate.")
+    wallet_id: Optional[StrictStr] = Field(default=None, description="This field has been deprecated.")
+    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Expressed as a string in decimal format where \"0.1\" represents 10%. For more information on developer fee rate, please refer to [Amounts and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances).")
     wallet_setup: Optional[WalletSetup] = None
     __properties: ClassVar[List[str]] = ["name", "wallet_id", "developer_fee_rate", "wallet_setup"]
 

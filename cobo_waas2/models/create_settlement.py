@@ -26,13 +26,11 @@ class CreateSettlement(BaseModel):
     CreateSettlement
     """  # noqa: E501
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID. Specify this field when `settlement_type` is set to `Merchant`.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to settle. Specify this field when `payout_channel` is set to `Crypto`. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for settling the cryptocurrency. Currently, only `USD` is supported. Specify this field when `payout_channel` is set to `OffRamp`.")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to settle. Specify this field when `payout_channel` is set to `Crypto`. Supported values: - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
     amount: Optional[StrictStr] = Field(default=None, description="The amount of cryptocurrency to be settled. When settling merchant balance from orders (`acquiring_type` is `Order` and `settlement_type` is `Merchant`), do not specify this field as the amount will be automatically calculated based on the order amounts. ")
-    bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account where the settled funds will be deposited. This field is only applicable when `payout_channel` is set to `OffRamp`. Call [List all bank accounts](https://www.cobo.com/developers/v2/api-references/payment/list-all-bank-accounts) to retrieve the IDs of registered bank accounts. ")
     crypto_address_id: Optional[StrictStr] = Field(default=None, description="The ID of the crypto address used for crypto payouts. Specify this field when `payout_channel` is set to `Crypto`.  Call [List crypto addresses](https://www.cobo.com/developers/v2/api-references/payment/list-crypto-addresses) to retrieve registered crypto addresses. ")
     order_ids: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "amount", "bank_account_id", "crypto_address_id", "order_ids"]
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "amount", "crypto_address_id", "order_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,9 +85,7 @@ class CreateSettlement(BaseModel):
         _obj = cls.model_validate({
             "merchant_id": obj.get("merchant_id"),
             "token_id": obj.get("token_id"),
-            "currency": obj.get("currency"),
             "amount": obj.get("amount"),
-            "bank_account_id": obj.get("bank_account_id"),
             "crypto_address_id": obj.get("crypto_address_id"),
             "order_ids": obj.get("order_ids")
         })
