@@ -28,7 +28,7 @@ class PaymentOrderEventData(BaseModel):
     """
     PaymentOrderEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data.")
     order_id: StrictStr = Field(description="The order ID.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
     token_id: StrictStr = Field(description=" The ID of the cryptocurrency used for payment. Supported tokens:  - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
@@ -48,13 +48,14 @@ class PaymentOrderEventData(BaseModel):
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the order, represented as a UNIX timestamp in seconds.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the pay-in process.")
     settlement_status: Optional[SettleStatus] = None
-    __properties: ClassVar[List[str]] = ["data_type", "order_id", "merchant_id", "token_id", "chain_id", "payable_amount", "receive_address", "currency", "order_amount", "fee_amount", "exchange_rate", "expired_at", "merchant_order_code", "psp_order_code", "status", "received_token_amount", "created_timestamp", "updated_timestamp", "transactions", "settlement_status"]
+    amount_tolerance: Optional[StrictStr] = Field(default=None, description="Allowed amount deviation.")
+    __properties: ClassVar[List[str]] = ["data_type", "order_id", "merchant_id", "token_id", "chain_id", "payable_amount", "receive_address", "currency", "order_amount", "fee_amount", "exchange_rate", "expired_at", "merchant_order_code", "psp_order_code", "status", "received_token_amount", "created_timestamp", "updated_timestamp", "transactions", "settlement_status", "amount_tolerance"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings')")
         return value
 
     model_config = ConfigDict(
@@ -134,7 +135,8 @@ class PaymentOrderEventData(BaseModel):
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
-            "settlement_status": obj.get("settlement_status")
+            "settlement_status": obj.get("settlement_status"),
+            "amount_tolerance": obj.get("amount_tolerance")
         })
         return _obj
 

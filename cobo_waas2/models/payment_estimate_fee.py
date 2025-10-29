@@ -25,8 +25,8 @@ class PaymentEstimateFee(BaseModel):
     """
     PaymentEstimateFee
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to OffRamp settle.")
-    amount: StrictStr = Field(description="The OffRamp settlement amount. ")
+    token_id: StrictStr = Field(description="The token ID for which fees will be calculated.")
+    amount: StrictStr = Field(description="The transaction amount for which fees will be calculated.")
     __properties: ClassVar[List[str]] = ["token_id", "amount"]
 
     model_config = ConfigDict(

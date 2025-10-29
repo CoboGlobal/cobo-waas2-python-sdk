@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.24.0"
+__version__ = "1.25.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -128,6 +128,7 @@ from cobo_waas2.models.cobo_safe_delegate import CoboSafeDelegate
 from cobo_waas2.models.cobo_safe_delegate_type import CoboSafeDelegateType
 from cobo_waas2.models.commission_fee import CommissionFee
 from cobo_waas2.models.compliance_disposition_update_event_data import ComplianceDispositionUpdateEventData
+from cobo_waas2.models.compliance_kyt_screenings_update_event_data import ComplianceKytScreeningsUpdateEventData
 from cobo_waas2.models.contract_call_destination import ContractCallDestination
 from cobo_waas2.models.contract_call_destination_type import ContractCallDestinationType
 from cobo_waas2.models.contract_call_params import ContractCallParams
@@ -160,6 +161,7 @@ from cobo_waas2.models.create_merchant_request import CreateMerchantRequest
 from cobo_waas2.models.create_mpc_project_request import CreateMpcProjectRequest
 from cobo_waas2.models.create_mpc_vault_request import CreateMpcVaultRequest
 from cobo_waas2.models.create_mpc_wallet_params import CreateMpcWalletParams
+from cobo_waas2.models.create_order_link_request import CreateOrderLinkRequest
 from cobo_waas2.models.create_payment_order_request import CreatePaymentOrderRequest
 from cobo_waas2.models.create_prime_broker_address201_response import CreatePrimeBrokerAddress201Response
 from cobo_waas2.models.create_prime_broker_address_request import CreatePrimeBrokerAddressRequest
@@ -266,6 +268,7 @@ from cobo_waas2.models.fixed_fee_rate import FixedFeeRate
 from cobo_waas2.models.forced_sweep import ForcedSweep
 from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
 from cobo_waas2.models.forced_sweep_status import ForcedSweepStatus
+from cobo_waas2.models.funds_status_type import FundsStatusType
 from cobo_waas2.models.get_api_key_info200_response import GetApiKeyInfo200Response
 from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
 from cobo_waas2.models.get_max_transferable_value_with_fee_model_request import GetMaxTransferableValueWithFeeModelRequest
@@ -289,6 +292,13 @@ from cobo_waas2.models.key_share_holder_group_status import KeyShareHolderGroupS
 from cobo_waas2.models.key_share_holder_group_type import KeyShareHolderGroupType
 from cobo_waas2.models.key_share_holder_status import KeyShareHolderStatus
 from cobo_waas2.models.key_share_holder_type import KeyShareHolderType
+from cobo_waas2.models.kyt_screenings_decisions_type import KytScreeningsDecisionsType
+from cobo_waas2.models.kyt_screenings_event_data import KytScreeningsEventData
+from cobo_waas2.models.kyt_screenings_review_type import KytScreeningsReviewType
+from cobo_waas2.models.kyt_screenings_transaction import KytScreeningsTransaction
+from cobo_waas2.models.kyt_screenings_transaction_type import KytScreeningsTransactionType
+from cobo_waas2.models.link import Link
+from cobo_waas2.models.link_display_info import LinkDisplayInfo
 from cobo_waas2.models.list_address_balances_by_token200_response import ListAddressBalancesByToken200Response
 from cobo_waas2.models.list_address_books200_response import ListAddressBooks200Response
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
@@ -364,6 +374,8 @@ from cobo_waas2.models.mpc_signing_group import MpcSigningGroup
 from cobo_waas2.models.mpc_stake_source import MpcStakeSource
 from cobo_waas2.models.mpc_transfer_source import MpcTransferSource
 from cobo_waas2.models.order import Order
+from cobo_waas2.models.order_link_business_info import OrderLinkBusinessInfo
+from cobo_waas2.models.order_link_business_info_custom_exchange_rates_inner import OrderLinkBusinessInfoCustomExchangeRatesInner
 from cobo_waas2.models.order_status import OrderStatus
 from cobo_waas2.models.org_info import OrgInfo
 from cobo_waas2.models.otc_fee import OtcFee
@@ -409,6 +421,7 @@ from cobo_waas2.models.replace_type import ReplaceType
 from cobo_waas2.models.request_approval import RequestApproval
 from cobo_waas2.models.retry_callback_message201_response import RetryCallbackMessage201Response
 from cobo_waas2.models.retry_webhook_event_by_id201_response import RetryWebhookEventById201Response
+from cobo_waas2.models.review_status_type import ReviewStatusType
 from cobo_waas2.models.revoke_approval_request201_response import RevokeApprovalRequest201Response
 from cobo_waas2.models.revoke_approval_request_request import RevokeApprovalRequestRequest
 from cobo_waas2.models.role_detail import RoleDetail
@@ -457,6 +470,9 @@ from cobo_waas2.models.stellar_contract_call_trust_line_operation_type import St
 from cobo_waas2.models.stellar_contract_call_trust_line_param import StellarContractCallTrustLineParam
 from cobo_waas2.models.sub_wallet_asset_balance import SubWalletAssetBalance
 from cobo_waas2.models.submit_deposit_travel_rule_info201_response import SubmitDepositTravelRuleInfo201Response
+from cobo_waas2.models.submit_kyt_response import SubmitKytResponse
+from cobo_waas2.models.submit_kyt_screenings_decisions_body import SubmitKytScreeningsDecisionsBody
+from cobo_waas2.models.submit_kyt_screenings_review_body import SubmitKytScreeningsReviewBody
 from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.suspended_token_event_data import SuspendedTokenEventData
 from cobo_waas2.models.suspended_token_operation_type import SuspendedTokenOperationType

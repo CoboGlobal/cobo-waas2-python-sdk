@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class WebhookEventType(str, Enum):
     """
-    The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type).
+    The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type).   **Currently, you can only trigger test webhook events with the event data types `Transaction` and `TSSRequest`.** 
     """
 
     """
@@ -53,11 +53,13 @@ class WebhookEventType(str, Enum):
     PAYMENT_DOT_TRANSACTION_DOT_LATE = 'payment.transaction.late'
     PAYMENT_DOT_TRANSACTION_DOT_COMPLETED = 'payment.transaction.completed'
     PAYMENT_DOT_TRANSACTION_DOT_HELD = 'payment.transaction.held'
+    PAYMENT_DOT_TRANSACTION_DOT_FAILED = 'payment.transaction.failed'
     PAYMENT_DOT_STATUS_DOT_UPDATED = 'payment.status.updated'
     PAYMENT_DOT_REFUND_DOT_STATUS_DOT_UPDATED = 'payment.refund.status.updated'
     PAYMENT_DOT_SETTLEMENT_DOT_STATUS_DOT_UPDATED = 'payment.settlement.status.updated'
     PAYMENT_DOT_ADDRESS_DOT_UPDATED = 'payment.address.updated'
     COMPLIANCE_DOT_DISPOSITION_DOT_STATUS_DOT_UPDATED = 'compliance.disposition.status.updated'
+    COMPLIANCE_DOT_KYT_DOT_SCREENINGS_DOT_STATUS_DOT_UPDATED = 'compliance.kyt.screenings.status.updated'
 
     UNKNOWN = None
 

@@ -42,9 +42,7 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                     cobo_waas2.models.create_settlement.CreateSettlement(
                         merchant_id = 'M1001', 
                         token_id = 'ETH_USDT', 
-                        currency = 'USD', 
                         amount = '500.00', 
-                        bank_account_id = '0123e457-e89b-12d3-a456-426614174004', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
                         order_ids = [
                             'O20250304-M1001-1001'
@@ -52,7 +50,7 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                     ],
                 bank_account_id = '0123e457-e89b-12d3-a456-426614174004',
                 currency = 'USD',
-                remark = 'Settlement request for customer 123'
+                remark = 'Request for customer 123'
             )
         else:
             return CreateSettlementRequestRequest(
@@ -61,9 +59,7 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                     cobo_waas2.models.create_settlement.CreateSettlement(
                         merchant_id = 'M1001', 
                         token_id = 'ETH_USDT', 
-                        currency = 'USD', 
                         amount = '500.00', 
-                        bank_account_id = '0123e457-e89b-12d3-a456-426614174004', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
                         order_ids = [
                             'O20250304-M1001-1001'

@@ -25,8 +25,8 @@ class OtcFee(BaseModel):
     """
     OtcFee
     """  # noqa: E501
-    fee_rate: StrictStr = Field(description="The otc fee rate.")
-    token_id: Optional[StrictStr] = Field(default=None, description="The token id in otc.")
+    fee_rate: StrictStr = Field(description="The exchange rate used to convert cryptos to fiat currencies during off-ramp. The final fiat amount is calculated using the following formula:  Final Fiat Amount = (Token Amount - Bridging Fee) × Exchange Rate  Note: The actual fiat amount received may be lower due to additional bank transfer fees. ")
+    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the token you want to off-ramp.")
     __properties: ClassVar[List[str]] = ["fee_rate", "token_id"]
 
     model_config = ConfigDict(

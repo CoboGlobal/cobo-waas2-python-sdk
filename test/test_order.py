@@ -63,7 +63,8 @@ class TestOrder(unittest.TestCase):
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
                     ],
-                settlement_status = 'Pending'
+                settlement_status = 'Pending',
+                amount_tolerance = '0.5'
             )
         else:
             return Order(

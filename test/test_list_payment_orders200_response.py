@@ -65,7 +65,8 @@ class TestListPaymentOrders200Response(unittest.TestCase):
                                 created_timestamp = 1610445878970, 
                                 updated_timestamp = 1610445878970, )
                             ], 
-                        settlement_status = 'Pending', )
+                        settlement_status = 'Pending', 
+                        amount_tolerance = '0.5', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

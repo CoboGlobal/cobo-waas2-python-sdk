@@ -43,7 +43,8 @@ class TestCreatePaymentOrderRequest(unittest.TestCase):
                 psp_order_code = 'P20240201001',
                 expired_in = 1800,
                 use_dedicated_address = False,
-                custom_exchange_rate = '1.00'
+                custom_exchange_rate = '1.00',
+                amount_tolerance = '0.5'
             )
         else:
             return CreatePaymentOrderRequest(

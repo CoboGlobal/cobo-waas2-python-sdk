@@ -204,6 +204,7 @@ class TestWebhookEventData(unittest.TestCase):
                         updated_timestamp = 1610445878970, )
                     ],
                 settlement_status = 'Pending',
+                amount_tolerance = '0.5',
                 refund_id = 'R20250304-M1001-1001',
                 amount = '0.0025',
                 to_address = '0x9876543210abcdef1234567890abcdef12345678',
@@ -273,7 +274,10 @@ class TestWebhookEventData(unittest.TestCase):
                 disposition_type = 'Refund',
                 disposition_status = 'Submitted',
                 destination_address = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb7',
-                disposition_amount = '1.5'
+                disposition_amount = '1.5',
+                transaction_type = 'Deposit',
+                review_status = 'PendingScreening',
+                funds_status = 'Frozen'
             )
         else:
             return WebhookEventData(
@@ -393,6 +397,9 @@ class TestWebhookEventData(unittest.TestCase):
                 updated_address = '0x789xyz...456',
                 disposition_type = 'Refund',
                 disposition_status = 'Submitted',
+                transaction_type = 'Deposit',
+                review_status = 'PendingScreening',
+                funds_status = 'Frozen',
         )
         """
 

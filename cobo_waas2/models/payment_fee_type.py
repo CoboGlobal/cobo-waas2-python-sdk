@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class PaymentFeeType(str, Enum):
     """
-    The current status of the force sweep request: - `Order`: The order fee type. - `Refund`: The refund fee type. - `CryptoSettlement`: The crypto settlement fee type. - `OffRampSettlement`: The off ramp settlement fee type. 
+    The type of fee to estimate: - `Order`: Fee for accepting a payment. - `Refund`: Fee for processing a refund. - `CryptoSettlement`: Fee for crypto payouts. - `OffRampSettlement`: Fee for fiat off-ramp. 
     """
 
     """

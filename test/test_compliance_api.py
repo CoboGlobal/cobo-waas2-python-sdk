@@ -41,6 +41,18 @@ class TestComplianceApi(unittest.TestCase):
         api_response = self.api.get_disposition_status(transaction_id)
         """
 
+    def test_get_kyt_screening_status(self) -> None:
+        """
+        Test case for get_kyt_screening_status
+
+        Get KYT screening status
+        """
+        """
+        transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.get_kyt_screening_status(transaction_id)
+        """
+
     def test_isolate_funds(self) -> None:
         """
         Test case for isolate_funds
@@ -63,6 +75,30 @@ class TestComplianceApi(unittest.TestCase):
         refund_disposition = cobo_waas2.RefundDisposition()
 
         api_response = self.api.refund_funds(refund_disposition=refund_disposition)
+        """
+
+    def test_submit_kyt_manual_review(self) -> None:
+        """
+        Test case for submit_kyt_manual_review
+
+        Submit KYT manual review result
+        """
+        """
+        submit_kyt_screenings_review_body = cobo_waas2.SubmitKytScreeningsReviewBody()
+
+        api_response = self.api.submit_kyt_manual_review(submit_kyt_screenings_review_body=submit_kyt_screenings_review_body)
+        """
+
+    def test_submit_kyt_screening_decisions(self) -> None:
+        """
+        Test case for submit_kyt_screening_decisions
+
+        Submit KYT screening decision
+        """
+        """
+        submit_kyt_screenings_decisions_body = cobo_waas2.SubmitKytScreeningsDecisionsBody()
+
+        api_response = self.api.submit_kyt_screening_decisions(submit_kyt_screenings_decisions_body=submit_kyt_screenings_decisions_body)
         """
 
     def test_unfreeze_funds(self) -> None:
