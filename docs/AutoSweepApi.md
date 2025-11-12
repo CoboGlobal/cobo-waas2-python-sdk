@@ -5,7 +5,7 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_auto_sweep_task**](AutoSweepApi.md#create_auto_sweep_task) | **POST** /auto_sweep/tasks | Create auto-sweep task
-[**create_wallet_sweep_to_addresses**](AutoSweepApi.md#create_wallet_sweep_to_addresses) | **POST** /auto_sweep/sweep_to_addresses | create sweep-to address
+[**create_wallet_sweep_to_addresses**](AutoSweepApi.md#create_wallet_sweep_to_addresses) | **POST** /auto_sweep/sweep_to_addresses | Create sweep-to address
 [**get_auto_sweep_task_by_id**](AutoSweepApi.md#get_auto_sweep_task_by_id) | **GET** /auto_sweep/tasks/{task_id} | Get auto-sweep task details
 [**list_auto_sweep_task**](AutoSweepApi.md#list_auto_sweep_task) | **GET** /auto_sweep/tasks | List auto-sweep tasks
 [**list_wallet_sweep_to_addresses**](AutoSweepApi.md#list_wallet_sweep_to_addresses) | **GET** /auto_sweep/sweep_to_addresses | List sweep-to addresses
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 # **create_wallet_sweep_to_addresses**
 > SweepToAddress create_wallet_sweep_to_addresses(create_sweep_to_address=create_sweep_to_address)
 
-create sweep-to address
+Create sweep-to address
 
 This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
@@ -117,7 +117,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     create_sweep_to_address = cobo_waas2.CreateSweepToAddress()
 
     try:
-        # create sweep-to address
+        # Create sweep-to address
         api_response = api_instance.create_wallet_sweep_to_addresses(create_sweep_to_address=create_sweep_to_address)
         print("The response of AutoSweepApi->create_wallet_sweep_to_addresses:\n")
         pprint(api_response)

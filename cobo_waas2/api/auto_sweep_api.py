@@ -222,7 +222,7 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> SweepToAddress:
-        """create sweep-to address
+        """Create sweep-to address
 
         This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
@@ -268,7 +268,7 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> ApiResponse[SweepToAddress]:
-        """create sweep-to address
+        """Create sweep-to address
 
         This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 
@@ -314,7 +314,7 @@ class AutoSweepApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """create sweep-to address
+        """Create sweep-to address
 
         This operation creates a new sweep-to address for the specified wallet. The previously sweep-to address for the same token becomes invalid once the new one is created.  Use this operation to change the sweep-to address when your setup changes, you switch networks, or the current address is compromised or tainted by suspicious funds. You can withdraw any remaining balances from the old sweep-to addresses to the new address or another designated destination.  <Note>Sweep-to addresses are only applicable to MPC Wallets and Web3 Wallets with the auto-sweep feature enabled.</Note> 
 

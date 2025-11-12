@@ -45,7 +45,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for estimate_fee_station_fee
 
-        Estimate fee for Fee Station transaction
+        Estimate transaction fee
         """
         """
         fee_station_transfer = cobo_waas2.FeeStationTransfer()

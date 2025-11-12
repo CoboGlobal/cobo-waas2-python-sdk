@@ -47,7 +47,7 @@ class Order(BaseModel):
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the order, represented as a UNIX timestamp in seconds.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the pay-in process.")
     settlement_status: Optional[SettleStatus] = None
-    amount_tolerance: Optional[StrictStr] = Field(default=None, description="Allowed amount deviation.")
+    amount_tolerance: Optional[StrictStr] = Field(default=None, description="The maximum allowed deviation from the payable amount in the case of underpayment, specified as a positive value with up to one decimal place. If you provide more than one decimal place, an error will occur.  When the actual received amount is within this deviation (inclusive) of the payable amount, the order status will be set to `Completed` rather than `Underpaid`. ")
     __properties: ClassVar[List[str]] = ["order_id", "merchant_id", "token_id", "chain_id", "payable_amount", "receive_address", "currency", "order_amount", "fee_amount", "exchange_rate", "expired_at", "merchant_order_code", "psp_order_code", "status", "received_token_amount", "created_timestamp", "updated_timestamp", "transactions", "settlement_status", "amount_tolerance"]
 
     model_config = ConfigDict(

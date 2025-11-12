@@ -22,6 +22,7 @@ from cobo_waas2.models.create_crypto_address_request import CreateCryptoAddressR
 from cobo_waas2.models.create_merchant_request import CreateMerchantRequest
 from cobo_waas2.models.create_order_link_request import CreateOrderLinkRequest
 from cobo_waas2.models.create_payment_order_request import CreatePaymentOrderRequest
+from cobo_waas2.models.create_refund_link_request import CreateRefundLinkRequest
 from cobo_waas2.models.create_refund_request import CreateRefundRequest
 from cobo_waas2.models.create_settlement_request_request import CreateSettlementRequestRequest
 from cobo_waas2.models.crypto_address import CryptoAddress
@@ -754,7 +755,7 @@ class PaymentApi:
     @validate_call
     def create_order_link(
         self,
-        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link for a pay-in order.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -766,9 +767,9 @@ class PaymentApi:
     ) -> Link:
         """Create order link
 
-        This operation creates a payment link of a pay-in order. 
+        This operation generates a payment link for a pay-in order. The link directs users to a hosted payment page where they can complete their payment for the order. You can share the link directly with users or embed the payment page in your website or application using an iframe.  For more details, see [Payment Link](https://www.cobo.com/developers/v2/payments/payment-link). 
 
-        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :param create_order_link_request: The request body to create a payment link for a pay-in order.
         :type create_order_link_request: CreateOrderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -800,7 +801,7 @@ class PaymentApi:
     @validate_call
     def create_order_link_with_http_info(
         self,
-        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link for a pay-in order.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -812,9 +813,9 @@ class PaymentApi:
     ) -> ApiResponse[Link]:
         """Create order link
 
-        This operation creates a payment link of a pay-in order. 
+        This operation generates a payment link for a pay-in order. The link directs users to a hosted payment page where they can complete their payment for the order. You can share the link directly with users or embed the payment page in your website or application using an iframe.  For more details, see [Payment Link](https://www.cobo.com/developers/v2/payments/payment-link). 
 
-        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :param create_order_link_request: The request body to create a payment link for a pay-in order.
         :type create_order_link_request: CreateOrderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -846,7 +847,7 @@ class PaymentApi:
     @validate_call
     def create_order_link_without_preload_content(
         self,
-        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link of a pay-in order.")] = None,
+        create_order_link_request: Annotated[Optional[CreateOrderLinkRequest], Field(description="The request body to create a payment link for a pay-in order.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -858,9 +859,9 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create order link
 
-        This operation creates a payment link of a pay-in order. 
+        This operation generates a payment link for a pay-in order. The link directs users to a hosted payment page where they can complete their payment for the order. You can share the link directly with users or embed the payment page in your website or application using an iframe.  For more details, see [Payment Link](https://www.cobo.com/developers/v2/payments/payment-link). 
 
-        :param create_order_link_request: The request body to create a payment link of a pay-in order.
+        :param create_order_link_request: The request body to create a payment link for a pay-in order.
         :type create_order_link_request: CreateOrderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1250,6 +1251,175 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/refunds',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_refund_link(
+        self,
+        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a payment link for a refund.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> Link:
+        """Create refund link
+
+        This operation creates a payment link for a refund. 
+
+        :param create_refund_link_request: The request body to create a payment link for a refund.
+        :type create_refund_link_request: CreateRefundLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_refund_link_serialize(
+            create_refund_link_request=create_refund_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_refund_link_with_http_info(
+        self,
+        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a payment link for a refund.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[Link]:
+        """Create refund link
+
+        This operation creates a payment link for a refund. 
+
+        :param create_refund_link_request: The request body to create a payment link for a refund.
+        :type create_refund_link_request: CreateRefundLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_refund_link_serialize(
+            create_refund_link_request=create_refund_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_refund_link_without_preload_content(
+        self,
+        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a payment link for a refund.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create refund link
+
+        This operation creates a payment link for a refund. 
+
+        :param create_refund_link_request: The request body to create a payment link for a refund.
+        :type create_refund_link_request: CreateRefundLinkRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_refund_link_serialize(
+            create_refund_link_request=create_refund_link_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Link",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_refund_link_serialize(
+        self,
+        create_refund_link_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_refund_link_request is not None:
+            _body_params = create_refund_link_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/links/refunds',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6797,7 +6967,7 @@ class PaymentApi:
     ) -> TopUpAddress:
         """Update top-up address
 
-        This operation updates the dedicated top-up address assigned to a specific payer under a merchant on a specified chain. 
+        This operation updates the dedicated top-up address assigned to a specific payer under a merchant on a specified chain.  <Note>   You can update the top-up address for a given payer a maximum of 10 times. If you exceed this limit, the API request will return an error. </Note> 
 
         :param update_top_up_address: The request body to update top-up address.
         :type update_top_up_address: UpdateTopUpAddress
@@ -6843,7 +7013,7 @@ class PaymentApi:
     ) -> ApiResponse[TopUpAddress]:
         """Update top-up address
 
-        This operation updates the dedicated top-up address assigned to a specific payer under a merchant on a specified chain. 
+        This operation updates the dedicated top-up address assigned to a specific payer under a merchant on a specified chain.  <Note>   You can update the top-up address for a given payer a maximum of 10 times. If you exceed this limit, the API request will return an error. </Note> 
 
         :param update_top_up_address: The request body to update top-up address.
         :type update_top_up_address: UpdateTopUpAddress
@@ -6889,7 +7059,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Update top-up address
 
-        This operation updates the dedicated top-up address assigned to a specific payer under a merchant on a specified chain. 
+        This operation updates the dedicated top-up address assigned to a specific payer under a merchant on a specified chain.  <Note>   You can update the top-up address for a given payer a maximum of 10 times. If you exceed this limit, the API request will return an error. </Note> 
 
         :param update_top_up_address: The request body to update top-up address.
         :type update_top_up_address: UpdateTopUpAddress

@@ -41,11 +41,13 @@ class TestTokenizationListTokenInfoResponse(unittest.TestCase):
                         token_address = '0x1234567890123456789012345678901234567890', 
                         token_name = 'CUSD', 
                         token_symbol = 'CUSD', 
+                        token_standard = 'ERC20', 
                         decimals = 18, 
                         token_access_activated = False, 
                         status = 'Active', 
                         total_supply = '133399', 
-                        holdings = '12399', )
+                        holdings = '12399', 
+                        archived = False, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 
@@ -61,11 +63,13 @@ class TestTokenizationListTokenInfoResponse(unittest.TestCase):
                         token_address = '0x1234567890123456789012345678901234567890', 
                         token_name = 'CUSD', 
                         token_symbol = 'CUSD', 
+                        token_standard = 'ERC20', 
                         decimals = 18, 
                         token_access_activated = False, 
                         status = 'Active', 
                         total_supply = '133399', 
-                        holdings = '12399', )
+                        holdings = '12399', 
+                        archived = False, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

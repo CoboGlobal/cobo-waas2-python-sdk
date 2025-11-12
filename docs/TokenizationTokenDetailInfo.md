@@ -10,12 +10,15 @@ Name | Type | Description | Notes
 **token_address** | **str** | The address of the token contract. | [optional] 
 **token_name** | **str** | The name of the token. | [optional] 
 **token_symbol** | **str** | The unique token symbol. | 
+**token_standard** | [**TokenizationTokenStandard**](TokenizationTokenStandard.md) |  | 
 **decimals** | **int** | The number of decimals of the token. | 
 **token_access_activated** | **bool** | Whether the allowlist feature is activated for the token. | [optional] 
 **status** | [**TokenizationStatus**](TokenizationStatus.md) |  | 
 **total_supply** | **str** | The total supply of the token. | [optional] 
 **holdings** | **str** | The amount of tokens held by the organization. | [optional] 
+**archived** | **bool** | Whether the token is archived. If the token is archived, no operations can be initiated on it. | 
 **permissions** | [**List[TokenizationAddressPermission]**](TokenizationAddressPermission.md) | List of execution addresses and their permissions. | [optional] 
+**underlying_token** | [**TokenizationTokenInfo**](TokenizationTokenInfo.md) |  | [optional] 
 
 ## Example
 

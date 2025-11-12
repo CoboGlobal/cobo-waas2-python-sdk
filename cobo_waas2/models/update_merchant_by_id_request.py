@@ -26,7 +26,7 @@ class UpdateMerchantByIdRequest(BaseModel):
     UpdateMerchantByIdRequest
     """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The merchant name.")
-    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Expressed as a string in decimal format where \"0.1\" represents 10%. This fee is deducted from the payment amount and only applies to top-up transactions. If you are a merchant (directly serving the payer), you do not need to configure the developer fee rate.")
+    developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The developer fee rate applied to this merchant. Must be a valid float between 0 and 1 (inclusive), with up to 4 decimal places. For more information on developer fee rate, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances).")
     __properties: ClassVar[List[str]] = ["name", "developer_fee_rate"]
 
     model_config = ConfigDict(

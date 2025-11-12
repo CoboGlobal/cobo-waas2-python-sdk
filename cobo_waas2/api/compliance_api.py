@@ -726,7 +726,7 @@ class ComplianceApi:
     @validate_call
     def submit_kyt_manual_review(
         self,
-        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for KYT screening case that requires human analysis.")] = None,
+        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for a KYT screening case that requires human analysis.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -740,7 +740,7 @@ class ComplianceApi:
 
         This operation submits a manual review result for a KYT (Know Your Transaction) screening case that requires human analysis.  Use this endpoint when transactions flagged for manual review have been analyzed by compliance officers and require submission of review outcomes with detailed comments and justifications.  This endpoint is specifically designed for submitting comprehensive manual review findings rather than automated screening decisions.  <Note>Submitting a manual review result will update the KYT screening status and initiate appropriate compliance workflow actions based on the review outcome.</Note> 
 
-        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for KYT screening case that requires human analysis.
+        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for a KYT screening case that requires human analysis.
         :type submit_kyt_screenings_review_body: SubmitKytScreeningsReviewBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -772,7 +772,7 @@ class ComplianceApi:
     @validate_call
     def submit_kyt_manual_review_with_http_info(
         self,
-        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for KYT screening case that requires human analysis.")] = None,
+        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for a KYT screening case that requires human analysis.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -786,7 +786,7 @@ class ComplianceApi:
 
         This operation submits a manual review result for a KYT (Know Your Transaction) screening case that requires human analysis.  Use this endpoint when transactions flagged for manual review have been analyzed by compliance officers and require submission of review outcomes with detailed comments and justifications.  This endpoint is specifically designed for submitting comprehensive manual review findings rather than automated screening decisions.  <Note>Submitting a manual review result will update the KYT screening status and initiate appropriate compliance workflow actions based on the review outcome.</Note> 
 
-        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for KYT screening case that requires human analysis.
+        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for a KYT screening case that requires human analysis.
         :type submit_kyt_screenings_review_body: SubmitKytScreeningsReviewBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -818,7 +818,7 @@ class ComplianceApi:
     @validate_call
     def submit_kyt_manual_review_without_preload_content(
         self,
-        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for KYT screening case that requires human analysis.")] = None,
+        submit_kyt_screenings_review_body: Annotated[Optional[SubmitKytScreeningsReviewBody], Field(description="The request body to submit a manual review result for a KYT screening case that requires human analysis.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -832,7 +832,7 @@ class ComplianceApi:
 
         This operation submits a manual review result for a KYT (Know Your Transaction) screening case that requires human analysis.  Use this endpoint when transactions flagged for manual review have been analyzed by compliance officers and require submission of review outcomes with detailed comments and justifications.  This endpoint is specifically designed for submitting comprehensive manual review findings rather than automated screening decisions.  <Note>Submitting a manual review result will update the KYT screening status and initiate appropriate compliance workflow actions based on the review outcome.</Note> 
 
-        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for KYT screening case that requires human analysis.
+        :param submit_kyt_screenings_review_body: The request body to submit a manual review result for a KYT screening case that requires human analysis.
         :type submit_kyt_screenings_review_body: SubmitKytScreeningsReviewBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

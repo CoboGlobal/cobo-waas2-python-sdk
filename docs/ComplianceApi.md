@@ -351,7 +351,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submit_kyt_screenings_review_body** | [**SubmitKytScreeningsReviewBody**](SubmitKytScreeningsReviewBody.md)| The request body to submit a manual review result for KYT screening case that requires human analysis. | [optional] 
+ **submit_kyt_screenings_review_body** | [**SubmitKytScreeningsReviewBody**](SubmitKytScreeningsReviewBody.md)| The request body to submit a manual review result for a KYT screening case that requires human analysis. | [optional] 
 
 ### Return type
 

@@ -113,6 +113,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_refund(create_refund_request=create_refund_request)
         """
 
+    def test_create_refund_link(self) -> None:
+        """
+        Test case for create_refund_link
+
+        Create refund link
+        """
+        """
+        create_refund_link_request = cobo_waas2.CreateRefundLinkRequest()
+
+        api_response = self.api.create_refund_link(create_refund_link_request=create_refund_link_request)
+        """
+
     def test_create_settlement_request(self) -> None:
         """
         Test case for create_settlement_request

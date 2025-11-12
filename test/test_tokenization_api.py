@@ -185,6 +185,23 @@ class TestTokenizationApi(unittest.TestCase):
         api_response = self.api.list_tokenization_holdings(token_id, limit=limit, before=before, after=after)
         """
 
+    def test_list_tokenization_permissions(self) -> None:
+        """
+        Test case for list_tokenization_permissions
+
+        List token permissions
+        """
+        """
+        token_id = 'ETH_USDT'
+        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+        limit = 10
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        direction = 'ASC'
+
+        api_response = self.api.list_tokenization_permissions(token_id, address=address, limit=limit, after=after, before=before, direction=direction)
+        """
+
     def test_list_tokenization_supported_chains(self) -> None:
         """
         Test case for list_tokenization_supported_chains
@@ -192,11 +209,12 @@ class TestTokenizationApi(unittest.TestCase):
         List supported chains for tokenization
         """
         """
+        token_standard = cobo_waas2.TokenizationTokenStandard()
         limit = 10
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
 
-        api_response = self.api.list_tokenization_supported_chains(limit=limit, after=after, before=before)
+        api_response = self.api.list_tokenization_supported_chains(token_standard=token_standard, limit=limit, after=after, before=before)
         """
 
     def test_mint_tokenization(self) -> None:
@@ -288,6 +306,19 @@ class TestTokenizationApi(unittest.TestCase):
         tokenization_update_blocklist_addresses_request = cobo_waas2.TokenizationUpdateBlocklistAddressesRequest()
 
         api_response = self.api.update_tokenization_blocklist_addresses(token_id, tokenization_update_blocklist_addresses_request=tokenization_update_blocklist_addresses_request)
+        """
+
+    def test_update_tokenization_permissions(self) -> None:
+        """
+        Test case for update_tokenization_permissions
+
+        Update token permissions
+        """
+        """
+        token_id = 'ETH_USDT'
+        tokenization_update_permissions_request = cobo_waas2.TokenizationUpdatePermissionsRequest()
+
+        api_response = self.api.update_tokenization_permissions(token_id, tokenization_update_permissions_request)
         """
 
 
