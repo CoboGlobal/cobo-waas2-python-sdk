@@ -2885,7 +2885,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Resend transaction
 
-        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
+        <Note>Resending failed transactions is not supported on the Solana network.</Note>  This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -2935,7 +2935,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Resend transaction
 
-        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
+        <Note>Resending failed transactions is not supported on the Solana network.</Note>  This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -2985,7 +2985,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Resend transaction
 
-        This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
+        <Note>Resending failed transactions is not supported on the Solana network.</Note>  This operation resends a specified transaction. Resending a transaction means retrying a previously failed transaction. For more details about resending a transaction, see [Resend a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#resend-a-transaction).  Resending a transaction is a high‑risk operation. Ensure that the original transaction has not been broadcast to the blockchain, has already expired, and will never be confirmed. Otherwise, the same transaction may be confirmed on‑chain twice.  <Note>This operation only applies to transactions from MPC Wallets in the SOL token.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str

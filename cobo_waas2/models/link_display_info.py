@@ -26,8 +26,8 @@ class LinkDisplayInfo(BaseModel):
     """
     LinkDisplayInfo
     """  # noqa: E501
-    developer_name: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(default=None, description="Optional display name for the developer/platform. This name may be shown to end users during the payment process. ")
-    logo: Optional[StrictStr] = Field(default=None, description="Optional URL to the developer's logo image. The logo may be displayed to end users during the payment process.  Supported formats: PNG, JPG, SVG. Maximum file size: 2MB. ")
+    developer_name: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(default=None, description="The brand name to display to end users during the payment process. ")
+    logo: Optional[StrictStr] = Field(default=None, description="The URL of your logo image to display to end users during the payment process. ")
     __properties: ClassVar[List[str]] = ["developer_name", "logo"]
 
     model_config = ConfigDict(

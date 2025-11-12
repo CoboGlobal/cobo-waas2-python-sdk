@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.fee_station_gas_station_type import FeeStationGasStationType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -24,17 +24,18 @@ from typing_extensions import Self
 
 class FeeStationCheckFeeStationUsageResponse(BaseModel):
     """
-    The Fee Station usage evaluation result for the transfer request.
+    The fee station evaluation result for the transfer request.
     """  # noqa: E501
     token_id: StrictStr = Field(description="The token used to pay the gas fee for this specific transaction. You can retrieve the IDs of all supported tokens by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
+    balance: StrictStr = Field(description="The current token balance available in Fee Station.")
     gas_station_type: FeeStationGasStationType
     is_fee_station_applicable: StrictBool = Field(description="Indicates whether Fee Station is applied for this transfer request.")
     is_balance_sufficient: StrictBool = Field(description="If Fee Station is used, indicates whether its balance is sufficient to cover the required gas fee.")
-    balance: StrictStr = Field(description="The current token balance available in Fee Station.")
     total_fee_amount: StrictStr = Field(description="The total gas amount required for this transfer request.")
-    is_sponsor_applicable: StrictBool = Field(description="Indicates whether USDT (U) sponsorship is applied when Fee Station balance is insufficient.")
-    sponsored_fee_amount: StrictStr = Field(description="The amount of gas fee sponsored by USDT (U) when applicable.")
-    __properties: ClassVar[List[str]] = ["token_id", "gas_station_type", "is_fee_station_applicable", "is_balance_sufficient", "balance", "total_fee_amount", "is_sponsor_applicable", "sponsored_fee_amount"]
+    is_sponsor_applicable: StrictBool = Field(description="Indicates whether USD stablecoin sponsorship is applied when the Fee Station balance is insufficient.")
+    sponsored_fee_amount: StrictStr = Field(description="The amount of gas fee sponsored by USD stablecoin when applicable.")
+    sponsored_token_id: Optional[StrictStr] = Field(default=None, description="The token ID used to sponsor the gas fee.")
+    __properties: ClassVar[List[str]] = ["token_id", "balance", "gas_station_type", "is_fee_station_applicable", "is_balance_sufficient", "total_fee_amount", "is_sponsor_applicable", "sponsored_fee_amount", "sponsored_token_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,13 +89,14 @@ class FeeStationCheckFeeStationUsageResponse(BaseModel):
 
         _obj = cls.model_validate({
             "token_id": obj.get("token_id"),
+            "balance": obj.get("balance"),
             "gas_station_type": obj.get("gas_station_type"),
             "is_fee_station_applicable": obj.get("is_fee_station_applicable"),
             "is_balance_sufficient": obj.get("is_balance_sufficient"),
-            "balance": obj.get("balance"),
             "total_fee_amount": obj.get("total_fee_amount"),
             "is_sponsor_applicable": obj.get("is_sponsor_applicable"),
-            "sponsored_fee_amount": obj.get("sponsored_fee_amount")
+            "sponsored_fee_amount": obj.get("sponsored_fee_amount"),
+            "sponsored_token_id": obj.get("sponsored_token_id")
         })
         return _obj
 

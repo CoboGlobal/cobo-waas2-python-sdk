@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class SubmitKytScreeningsReviewBody(BaseModel):
     """
-    The information about submitting a manual KYT review result for KYT screening cases that require human analysis.
+    Submission of a manual KYT review result.
     """  # noqa: E501
     transaction_id: StrictStr = Field(description="The UUID of the transaction that requires a manual KYT review.")
     result: KytScreeningsReviewType

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **token_id** | **str** | The ID of the token. | 
 **burns** | [**List[TokenizationBurnTokenParamsBurnsInner]**](TokenizationBurnTokenParamsBurnsInner.md) | Details for each token burn, including amount and address to burn from. | 
 **action** | [**TokenizationUpdateAddressAction**](TokenizationUpdateAddressAction.md) |  | 
-**addresses** | [**List[TokenizationUpdateBlocklistAddressesParamsAddressesInner]**](TokenizationUpdateBlocklistAddressesParamsAddressesInner.md) | A list of addresses to manage. For &#39;add&#39; operations, notes can be provided. For &#39;remove&#39; operations, notes are ignored. | 
+**addresses** | [**List[TokenizationUpdateAddressPermissions]**](TokenizationUpdateAddressPermissions.md) |  | 
 **activation** | **bool** | Whether to activate the allowlist feature for the token. | 
 **data** | [**TokenizationContractCallParamsData**](TokenizationContractCallParamsData.md) |  | [optional] 
 

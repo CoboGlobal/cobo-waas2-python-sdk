@@ -1,6 +1,6 @@
 # FeeStationGasStationType
 
-The Fee Station mode used for automatic gas payment: - `FeeStation`: The client uses their own Fee Station balance to cover the gas fee.  - `CoboOperationStation`: Cobo covers the gas fee on behalf of the client. 
+The Fee Station mode used for automatic gas payment: - `FeeStation`: The user uses their own Fee Station balance to cover the gas fee.  - `CoboOperationStation`: Cobo covers the gas fee on behalf of the user. 
 
 ## Properties
 

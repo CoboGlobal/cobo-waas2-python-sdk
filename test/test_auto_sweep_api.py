@@ -45,7 +45,7 @@ class TestAutoSweepApi(unittest.TestCase):
         """
         Test case for create_wallet_sweep_to_addresses
 
-        create sweep-to address
+        Create sweep-to address
         """
         """
         create_sweep_to_address = cobo_waas2.CreateSweepToAddress()

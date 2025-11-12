@@ -15,20 +15,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.tokenization_token_permission import TokenizationTokenPermission
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TokenizationTokenPermissionsResponse(BaseModel):
+class TokenizationERC20WrappedTokenPermissionParams(BaseModel):
     """
-    TokenizationTokenPermissionsResponse
+    Role-based permission settings for token contract. If not provided, all permissions will be granted to the issuing wallet by default.
     """  # noqa: E501
-    permissions: List[TokenizationTokenPermission] = Field(description="List of available token permissions.")
-    total_count: StrictInt = Field(description="Total number of permissions.")
-    __properties: ClassVar[List[str]] = ["permissions", "total_count"]
+    admin: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the admin role.")
+    minter: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the minter role.")
+    wrapper: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the wrapper role.")
+    manager: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the manager role.")
+    pauser: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the pauser role.")
+    salvager: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the salvager role.")
+    upgrader: Optional[List[StrictStr]] = Field(default=None, description="List of addresses for the upgrader role.")
+    __properties: ClassVar[List[str]] = ["admin", "minter", "wrapper", "manager", "pauser", "salvager", "upgrader"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +52,7 @@ class TokenizationTokenPermissionsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TokenizationTokenPermissionsResponse from a JSON string"""
+        """Create an instance of TokenizationERC20WrappedTokenPermissionParams from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,18 +73,11 @@ class TokenizationTokenPermissionsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in permissions (list)
-        _items = []
-        if self.permissions:
-            for _item in self.permissions:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['permissions'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TokenizationTokenPermissionsResponse from a dict"""
+        """Create an instance of TokenizationERC20WrappedTokenPermissionParams from a dict"""
         if obj is None:
             return None
 
@@ -88,8 +85,13 @@ class TokenizationTokenPermissionsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "permissions": [TokenizationTokenPermission.from_dict(_item) for _item in obj["permissions"]] if obj.get("permissions") is not None else None,
-            "total_count": obj.get("total_count")
+            "admin": obj.get("admin"),
+            "minter": obj.get("minter"),
+            "wrapper": obj.get("wrapper"),
+            "manager": obj.get("manager"),
+            "pauser": obj.get("pauser"),
+            "salvager": obj.get("salvager"),
+            "upgrader": obj.get("upgrader")
         })
         return _obj
 

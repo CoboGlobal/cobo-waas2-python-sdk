@@ -5,7 +5,7 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**check_fee_station_usage**](FeeStationApi.md#check_fee_station_usage) | **POST** /fee_station/check_fee_station_usage | Check Fee Station usage
-[**estimate_fee_station_fee**](FeeStationApi.md#estimate_fee_station_fee) | **POST** /fee_station/transactions/estimate_fee | Estimate fee for Fee Station transaction
+[**estimate_fee_station_fee**](FeeStationApi.md#estimate_fee_station_fee) | **POST** /fee_station/transactions/estimate_fee | Estimate transaction fee
 [**get_fee_station_transaction_by_id**](FeeStationApi.md#get_fee_station_transaction_by_id) | **GET** /fee_station/transactions/{transaction_id} | Get Fee Station transaction information
 [**list_fee_station_addresses**](FeeStationApi.md#list_fee_station_addresses) | **GET** /fee_station/addresses | List Fee Station addresses
 [**list_fee_station_transactions**](FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all Fee Station transactions
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Check Fee Station usage
 
-This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USDT (U). 
+This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
 ### Example
 
@@ -88,9 +88,9 @@ Name | Type | Description  | Notes
 # **estimate_fee_station_fee**
 > EstimatedFixedFee estimate_fee_station_fee(fee_station_transfer=fee_station_transfer)
 
-Estimate fee for Fee Station transaction
+Estimate transaction fee
 
-This operation estimates the gas fee required for a top-up transaction sent by [Fee Station](https://manuals.cobo.com/en/portal/fee-station/introduction) to provide gas to the sender of the original transaction.  You need to provide the token ID and transfer amount.  For more information about transaction fee models and how fees are calculated, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+<Note>This operation is **deprecated**. Please use the enhanced version [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) instead.</Note>   This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
 ### Example
 
@@ -118,7 +118,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     fee_station_transfer = cobo_waas2.FeeStationTransfer()
 
     try:
-        # Estimate fee for Fee Station transaction
+        # Estimate transaction fee
         api_response = api_instance.estimate_fee_station_fee(fee_station_transfer=fee_station_transfer)
         print("The response of FeeStationApi->estimate_fee_station_fee:\n")
         pprint(api_response)
