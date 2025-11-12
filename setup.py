@@ -28,7 +28,7 @@ REQUIRES = [
     "typing-extensions >= 4.7.1",
     "PyNaCl==1.5.0",
     "ecdsa==0.19.0",
-    "fastapi==0.103.2",
+    "fastapi >= 0.103.2",
     "uvicorn==0.22.0",
 ]
 
