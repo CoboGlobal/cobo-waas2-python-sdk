@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
+from cobo_waas2.models.exchange_rate import ExchangeRate
 
 
-class TestGetExchangeRate200Response(unittest.TestCase):
-    """GetExchangeRate200Response unit test stubs"""
+class TestExchangeRate(unittest.TestCase):
+    """ExchangeRate unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,30 +24,30 @@ class TestGetExchangeRate200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetExchangeRate200Response:
-        """Test GetExchangeRate200Response
+    def make_instance(self, include_optional) -> ExchangeRate:
+        """Test ExchangeRate
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `GetExchangeRate200Response`
+        # uncomment below to create an instance of `ExchangeRate`
         """
-        model = GetExchangeRate200Response()
+        model = ExchangeRate()
         if include_optional:
-            return GetExchangeRate200Response(
+            return ExchangeRate(
                 token_id = 'ETH_USDT',
                 currency = 'USD',
                 rate = '1.00'
             )
         else:
-            return GetExchangeRate200Response(
+            return ExchangeRate(
                 token_id = 'ETH_USDT',
                 currency = 'USD',
                 rate = '1.00',
         )
         """
 
-    def testGetExchangeRate200Response(self):
-        """Test GetExchangeRate200Response"""
+    def testExchangeRate(self):
+        """Test ExchangeRate"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

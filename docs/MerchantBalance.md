@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **refunded_amount** | **str** | The merchant total refunded amount. | [optional] 
 **total_balance** | **str** | The merchant total balance. | [optional] 
 **available_balance** | **str** | The merchant available balance. | [optional] 
+**locked_balance** | **str** | The merchant locked balance. | [optional] 
 
 ## Example
 

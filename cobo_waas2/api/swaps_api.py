@@ -800,7 +800,7 @@ class SwapsApi:
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The field used for sorting.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The field to sort the results by.   Possible values include: - `created_timestamp`: Sort by the time when the data was created. - `updated_timestamp`: Sort by the time when the data was last updated. ")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
         _request_timeout: Union[
             None,
@@ -831,7 +831,7 @@ class SwapsApi:
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
-        :param sort_by: The field used for sorting.
+        :param sort_by: The field to sort the results by.   Possible values include: - `created_timestamp`: Sort by the time when the data was created. - `updated_timestamp`: Sort by the time when the data was last updated. 
         :type sort_by: str
         :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
         :type direction: str
@@ -882,7 +882,7 @@ class SwapsApi:
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The field used for sorting.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The field to sort the results by.   Possible values include: - `created_timestamp`: Sort by the time when the data was created. - `updated_timestamp`: Sort by the time when the data was last updated. ")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
         _request_timeout: Union[
             None,
@@ -913,7 +913,7 @@ class SwapsApi:
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
-        :param sort_by: The field used for sorting.
+        :param sort_by: The field to sort the results by.   Possible values include: - `created_timestamp`: Sort by the time when the data was created. - `updated_timestamp`: Sort by the time when the data was last updated. 
         :type sort_by: str
         :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
         :type direction: str
@@ -964,7 +964,7 @@ class SwapsApi:
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The field used for sorting.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The field to sort the results by.   Possible values include: - `created_timestamp`: Sort by the time when the data was created. - `updated_timestamp`: Sort by the time when the data was last updated. ")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. ")] = None,
         _request_timeout: Union[
             None,
@@ -995,7 +995,7 @@ class SwapsApi:
         :type before: str
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
         :type after: str
-        :param sort_by: The field used for sorting.
+        :param sort_by: The field to sort the results by.   Possible values include: - `created_timestamp`: Sort by the time when the data was created. - `updated_timestamp`: Sort by the time when the data was last updated. 
         :type sort_by: str
         :param direction: The sort direction. Possible values include:   - `ASC`: Sort the results in ascending order.   - `DESC`: Sort the results in descending order. 
         :type direction: str

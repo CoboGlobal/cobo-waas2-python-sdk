@@ -68,7 +68,7 @@ class ApiClient:
         self.rest_client = rest.RESTClientObject(configuration)
         self.default_headers = {}
         # Set default User-Agent.
-        self.user_agent = 'cobo-waas2-python-sdk/1.23.0'
+        self.user_agent = 'cobo-waas2-python-sdk/1.26.0'
 
     def __enter__(self):
         return self

@@ -19,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.tokenization_address_permission import TokenizationAddressPermission
 from cobo_waas2.models.tokenization_status import TokenizationStatus
+from cobo_waas2.models.tokenization_token_info import TokenizationTokenInfo
 from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
 from typing import Optional, Set
 from typing_extensions import Self
@@ -39,8 +40,10 @@ class TokenizationTokenDetailInfo(BaseModel):
     status: TokenizationStatus
     total_supply: Optional[StrictStr] = Field(default=None, description="The total supply of the token.")
     holdings: Optional[StrictStr] = Field(default=None, description="The amount of tokens held by the organization.")
+    archived: StrictBool = Field(description="Whether the token is archived. If archived, no operations can be initiated on this token.")
     permissions: Optional[List[TokenizationAddressPermission]] = Field(default=None, description="List of execution addresses and their permissions.")
-    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "token_standard", "decimals", "token_access_activated", "status", "total_supply", "holdings", "permissions"]
+    underlying_token: Optional[TokenizationTokenInfo] = None
+    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "token_standard", "decimals", "token_access_activated", "status", "total_supply", "holdings", "archived", "permissions", "underlying_token"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +91,9 @@ class TokenizationTokenDetailInfo(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['permissions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of underlying_token
+        if self.underlying_token:
+            _dict['underlying_token'] = self.underlying_token.to_dict()
         return _dict
 
     @classmethod
@@ -111,7 +117,9 @@ class TokenizationTokenDetailInfo(BaseModel):
             "status": obj.get("status"),
             "total_supply": obj.get("total_supply"),
             "holdings": obj.get("holdings"),
-            "permissions": [TokenizationAddressPermission.from_dict(_item) for _item in obj["permissions"]] if obj.get("permissions") is not None else None
+            "archived": obj.get("archived"),
+            "permissions": [TokenizationAddressPermission.from_dict(_item) for _item in obj["permissions"]] if obj.get("permissions") is not None else None,
+            "underlying_token": TokenizationTokenInfo.from_dict(obj["underlying_token"]) if obj.get("underlying_token") is not None else None
         })
         return _obj
 

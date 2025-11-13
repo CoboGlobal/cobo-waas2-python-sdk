@@ -39,13 +39,12 @@ class TestTokenizationIssueTokenParamsTokenParams(unittest.TestCase):
                 symbol = 'MAT',
                 decimals = 18,
                 token_access_activated = False,
-                permissions = cobo_waas2.models.tokenization_sol_token_permission_params.TokenizationSolTokenPermissionParams(
-                    permanent_delegate = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
-                    minter = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
+                permissions = cobo_waas2.models.tokenization_sol_wrapped_token_permission_params.TokenizationSolWrappedTokenPermissionParams(
+                    wrapper = ["9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM","7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"], 
+                    pauser = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
                     freezer = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
-                    updater = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
-                    pauser = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', ),
-                underlying_token = '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                    updater = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', ),
+                underlying_token = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'
             )
         else:
             return TokenizationIssueTokenParamsTokenParams(
@@ -53,7 +52,7 @@ class TestTokenizationIssueTokenParamsTokenParams(unittest.TestCase):
                 name = 'My Awesome Token',
                 symbol = 'MAT',
                 decimals = 18,
-                underlying_token = '0xdac17f958d2ee523a2206206994597c13d831ec7',
+                underlying_token = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
         )
         """
 

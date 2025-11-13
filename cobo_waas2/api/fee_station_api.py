@@ -17,6 +17,8 @@ from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.estimated_fixed_fee import EstimatedFixedFee
+from cobo_waas2.models.fee_station_check_fee_station_usage import FeeStationCheckFeeStationUsage
+from cobo_waas2.models.fee_station_check_fee_station_usage_response import FeeStationCheckFeeStationUsageResponse
 from cobo_waas2.models.fee_station_transfer import FeeStationTransfer
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
 from cobo_waas2.models.list_token_balances_for_fee_station200_response import ListTokenBalancesForFeeStation200Response
@@ -41,6 +43,175 @@ class FeeStationApi:
         self.api_client = api_client
 
     @validate_call
+    def check_fee_station_usage(
+        self,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The information about a fee station pre transfer.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> FeeStationCheckFeeStationUsageResponse:
+        """fee station pre check
+
+        This operation evaluates the fee station usage for the current transaction.   It determines whether the fee station needs to be applied, checks if the available fee station balance is sufficient,   and returns a detailed breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USDT (U).. 
+
+        :param fee_station_check_fee_station_usage: The information about a fee station pre transfer.
+        :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._check_fee_station_usage_serialize(
+            fee_station_check_fee_station_usage=fee_station_check_fee_station_usage,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "FeeStationCheckFeeStationUsageResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def check_fee_station_usage_with_http_info(
+        self,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The information about a fee station pre transfer.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[FeeStationCheckFeeStationUsageResponse]:
+        """fee station pre check
+
+        This operation evaluates the fee station usage for the current transaction.   It determines whether the fee station needs to be applied, checks if the available fee station balance is sufficient,   and returns a detailed breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USDT (U).. 
+
+        :param fee_station_check_fee_station_usage: The information about a fee station pre transfer.
+        :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._check_fee_station_usage_serialize(
+            fee_station_check_fee_station_usage=fee_station_check_fee_station_usage,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "FeeStationCheckFeeStationUsageResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def check_fee_station_usage_without_preload_content(
+        self,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The information about a fee station pre transfer.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """fee station pre check
+
+        This operation evaluates the fee station usage for the current transaction.   It determines whether the fee station needs to be applied, checks if the available fee station balance is sufficient,   and returns a detailed breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USDT (U).. 
+
+        :param fee_station_check_fee_station_usage: The information about a fee station pre transfer.
+        :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._check_fee_station_usage_serialize(
+            fee_station_check_fee_station_usage=fee_station_check_fee_station_usage,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "FeeStationCheckFeeStationUsageResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _check_fee_station_usage_serialize(
+        self,
+        fee_station_check_fee_station_usage,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if fee_station_check_fee_station_usage is not None:
+            _body_params = fee_station_check_fee_station_usage
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/fee_station/check_fee_station_usage',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def estimate_fee_station_fee(
         self,
         fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a token transfer.")] = None,
@@ -55,7 +226,7 @@ class FeeStationApi:
     ) -> EstimatedFixedFee:
         """Estimate transaction fee
 
-        This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        <Note>This operation is **deprecated**. Please use the enhanced version [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) instead.</Note>   This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
         :param fee_station_transfer: The information about a token transfer.
         :type fee_station_transfer: FeeStationTransfer
@@ -101,7 +272,7 @@ class FeeStationApi:
     ) -> ApiResponse[EstimatedFixedFee]:
         """Estimate transaction fee
 
-        This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        <Note>This operation is **deprecated**. Please use the enhanced version [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) instead.</Note>   This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
         :param fee_station_transfer: The information about a token transfer.
         :type fee_station_transfer: FeeStationTransfer
@@ -147,7 +318,7 @@ class FeeStationApi:
     ) -> RESTResponseType:
         """Estimate transaction fee
 
-        This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        <Note>This operation is **deprecated**. Please use the enhanced version [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) instead.</Note>   This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
         :param fee_station_transfer: The information about a token transfer.
         :type fee_station_transfer: FeeStationTransfer

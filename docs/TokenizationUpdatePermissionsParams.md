@@ -6,9 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **source** | [**TokenizationTokenOperationSource**](TokenizationTokenOperationSource.md) |  | 
-**action** | [**TokenizationPermissionAction**](TokenizationPermissionAction.md) |  | 
-**address** | **str** | The address to manage permissions for. | 
-**permissions** | [**List[TokenizationTokenPermissionType]**](TokenizationTokenPermissionType.md) | The list of permissions to operate on. | 
+**addresses** | [**List[TokenizationUpdateAddressPermissions]**](TokenizationUpdateAddressPermissions.md) |  | 
 
 ## Example
 

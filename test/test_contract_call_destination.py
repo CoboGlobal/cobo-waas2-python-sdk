@@ -56,6 +56,11 @@ class TestContractCallDestination(unittest.TestCase):
                             'G7a1b2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9'
                             ], )
                     ],
+                cosmos_messages = [
+                    cobo_waas2.models.cosmos_message.Cosmos Message(
+                        type_url = '/babylon.btcstaking.v1.MsgCreateBTCDelegation', 
+                        message = 'eyJ0eXBlIjoiYmFiY29zZS5idGNzdGFnaW5nLnYxLk1zZ0NyZWF0ZUJUQ0RlbGVnYXRpb24iLCJtZXNzYWdlIjp7ImNvbW1hbmRfaWQiOiJjb21tYW5kX2lkIiwibWVzc2FnZV92YWx1ZSI6Im1lc3NhZ2VfdmFsdWUiLCJtZXNzYWdlX3R5cGUiOiJtZXNzYWdlX3R5cGUifX0=', )
+                    ],
                 contract_param = None
             )
         else:
@@ -73,6 +78,11 @@ class TestContractCallDestination(unittest.TestCase):
                             ], 
                         data = '37u9WtQpcm6ULa3WRQHmj49EPs4if7o9f1jSRVZpm2dvihR9C8jY4NqEwXUbLwx15HBSNcP1', 
                         program_id = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', )
+                    ],
+                cosmos_messages = [
+                    cobo_waas2.models.cosmos_message.Cosmos Message(
+                        type_url = '/babylon.btcstaking.v1.MsgCreateBTCDelegation', 
+                        message = 'eyJ0eXBlIjoiYmFiY29zZS5idGNzdGFnaW5nLnYxLk1zZ0NyZWF0ZUJUQ0RlbGVnYXRpb24iLCJtZXNzYWdlIjp7ImNvbW1hbmRfaWQiOiJjb21tYW5kX2lkIiwibWVzc2FnZV92YWx1ZSI6Im1lc3NhZ2VfdmFsdWUiLCJtZXNzYWdlX3R5cGUiOiJtZXNzYWdlX3R5cGUifX0=', )
                     ],
                 contract_param = None,
         )

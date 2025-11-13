@@ -36,7 +36,8 @@ class CreateSettlementRequestRequest(BaseModel):
     settlements: List[CreateSettlement]
     bank_account_id: Optional[StrictStr] = Field(default=None, description="｜ Only used in OffRamp payout channel. The ID of the bank account where the settled funds will be deposited.")
     currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the settlement request.")
-    __properties: ClassVar[List[str]] = ["request_id", "acquiring_type", "payout_channel", "settlement_type", "settlements", "bank_account_id", "currency"]
+    remark: Optional[StrictStr] = Field(default=None, description="The remark for the settlement request.")
+    __properties: ClassVar[List[str]] = ["request_id", "acquiring_type", "payout_channel", "settlement_type", "settlements", "bank_account_id", "currency", "remark"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,7 +103,8 @@ class CreateSettlementRequestRequest(BaseModel):
             "settlement_type": obj.get("settlement_type"),
             "settlements": [CreateSettlement.from_dict(_item) for _item in obj["settlements"]] if obj.get("settlements") is not None else None,
             "bank_account_id": obj.get("bank_account_id"),
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "remark": obj.get("remark")
         })
         return _obj
 

@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The payment address update event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The suspended token event data. - &#x60;ComplianceDisposition&#x60;: The compliance disposition event data. - &#x60;ComplianceKytScreenings&#x60;: The compliance KYT screenings event data. | 
 **transaction_id** | **str** | The transaction ID. | 
 **cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
-**request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | 
+**request_id** | **str** | The action request id. | 
 **wallet_id** | **str** | For deposit transactions, this property represents the wallet ID of the transaction destination. For transactions of other types, this property represents the wallet ID of the transaction source. | 
 **type** | [**TransactionType**](TransactionType.md) |  | [optional] 
-**status** | [**TransactionStatus**](TransactionStatus.md) |  | 
+**status** | [**PaymentSubscriptionStatus**](PaymentSubscriptionStatus.md) |  | 
 **sub_status** | [**TransactionSubStatus**](TransactionSubStatus.md) |  | [optional] 
 **failed_reason** | **str** | (This property is applicable to approval failures and signature failures only) The reason why the transaction failed. | [optional] 
 **chain_id** | **str** | The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | 
-**token_id** | **str** | The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
+**token_id** | **str** | The token_id in subscription. | 
 **asset_id** | **str** | (This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. | [optional] 
 **source** | [**TransactionSource**](TransactionSource.md) |  | 
 **destination** | [**TransactionDestination**](TransactionDestination.md) |  | 
@@ -35,7 +35,7 @@ Name | Type | Description | Notes
 **cobo_category** | **List[str]** | The transaction category defined by Cobo. Possible values include:  - &#x60;AutoSweep&#x60;: An auto-sweep transaction. - &#x60;AutoFueling&#x60;: A transaction where Fee Station pays transaction fees to an address within your wallet. - &#x60;AutoFuelingRefund&#x60;: A refund for an auto-fueling transaction. - &#x60;SafeTxMessage&#x60;: A message signing transaction to authorize a Smart Contract Wallet (Safe\\{Wallet\\}) transaction. - &#x60;BillPayment&#x60;: A transaction to pay Cobo bills through Fee Station. - &#x60;BillRefund&#x60;: A refund for a previously made bill payment. - &#x60;CommissionFeeCharge&#x60;: A transaction to charge commission fees via Fee Station. - &#x60;CommissionFeeRefund&#x60;: A refund of previously charged commission fees.  | [optional] 
 **extra** | **List[str]** | The transaction extra information. | [optional] 
 **fueling_info** | [**TransactionFuelingInfo**](TransactionFuelingInfo.md) |  | [optional] 
-**created_timestamp** | **int** | The time when the transaction was created, in Unix timestamp format, measured in milliseconds. | 
+**created_timestamp** | **int** | The created time of the subscription, represented as a UNIX timestamp in seconds. | 
 **updated_timestamp** | **int** | The time when the kyt screening was updated, in Unix timestamp format, measured in milliseconds. | 
 **tss_request_id** | **str** | The TSS request ID. | [optional] 
 **source_key_share_holder_group** | [**SourceGroup**](SourceGroup.md) |  | [optional] 
@@ -60,7 +60,7 @@ Name | Type | Description | Notes
 **token_ids** | **str** | A list of token IDs, separated by comma. | 
 **operation_type** | [**SuspendedTokenOperationType**](SuspendedTokenOperationType.md) |  | 
 **order_id** | **str** | Unique identifier of a single order | 
-**merchant_id** | **str** | The merchant ID. | [optional] 
+**merchant_id** | **str** | The merchant id in cobo. | 
 **payable_amount** | **str** | The cryptocurrency amount to be paid for this order. | 
 **receive_address** | **str** | The recipient wallet address to be used for the payment transaction. | 
 **currency** | **str** | The fiat currency for the settlement request. | 
@@ -73,6 +73,7 @@ Name | Type | Description | Notes
 **received_token_amount** | **str** | The total cryptocurrency amount received for this order. Updates until the expiration time. Precision matches the token standard (e.g., 6 decimals for USDT). | 
 **transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process. | [optional] 
 **settlement_status** | [**SettleStatus**](SettleStatus.md) |  | [optional] 
+**amount_tolerance** | **str** | Allowed amount deviation. | [optional] 
 **refund_id** | **str** | The refund order ID. | 
 **amount** | **str** | The amount in cryptocurrency to be returned for this refund order. | 
 **to_address** | **str** | The recipient&#39;s wallet address where the refund will be sent. | 
@@ -90,10 +91,23 @@ Name | Type | Description | Notes
 **bank_account** | [**BankAccount**](BankAccount.md) |  | [optional] 
 **payer_id** | **str** | Unique payer identifier on the Cobo side, auto-generated by the system.  | 
 **custom_payer_id** | **str** | Unique user identifier on the merchant side, used to assign a dedicated deposit address.  | 
-**subscription_id** | **str** | A unique identifier assigned by Cobo to track and identify subscription. | [optional] 
+**subscription_id** | **str** | The subscription id in cobo. | 
+**action_id** | **str** | The action id. | 
 **chain** | **str** | Blockchain network identifier, e.g., &#39;ETH&#39; for Ethereum, &#39;TRON&#39; for Tron.  | 
 **previous_address** | **str** | The previous deposit address that was assigned before update.  | 
 **updated_address** | **str** | The new updated deposit address assigned to the user.  | 
+**plan_id** | **str** | The plan id in cobo. | 
+**merchant_address** | **str** | The merchant address in cobo. | 
+**data** | [**PaymentSubscriptionActionData**](PaymentSubscriptionActionData.md) |  | 
+**transaction_ids** | **List[str]** |  | [optional] 
+**user_address** | **str** | The user address in subscription. | 
+**charge_amount** | **str** | The charge amount in subscription. | [optional] 
+**start_time** | **int** | The subscription start timestamp. | 
+**expiration_time** | **int** | The subscription expired timestamp. | 
+**charges_made** | **int** | The subscription charge times. | 
+**period_type** | [**PaymentSubscriptionPeriodType**](PaymentSubscriptionPeriodType.md) |  | 
+**periods** | **int** |  | 
+**interval** | **int** | The subscription charge interval. | 
 **disposition_type** | [**DispositionType**](DispositionType.md) |  | 
 **disposition_status** | [**DispositionStatus**](DispositionStatus.md) |  | 
 **destination_address** | **str** | The blockchain address where the refund/isolated funds will be sent. | [optional] 

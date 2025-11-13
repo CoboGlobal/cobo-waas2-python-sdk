@@ -37,7 +37,6 @@ class TestTokenizationERC20WrappedTokenParams(unittest.TestCase):
                 standard = 'ERC20',
                 name = 'My Awesome Token',
                 symbol = 'MAT',
-                decimals = 18,
                 permissions = cobo_waas2.models.tokenization_erc20_wrapped_token_permission_params.TokenizationERC20WrappedTokenPermissionParams(
                     admin = ["0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045","0x742d35Cc6634C0532925a3b8D4C2C4e4C7C6B5f6"], 
                     minter = ["0x742d35Cc6634C0532925a3b8D4C2C4e4C7C6B5f6","0x1FcceD80Cbc2750e0276a53038845eC541E87fa2"], 
@@ -54,7 +53,6 @@ class TestTokenizationERC20WrappedTokenParams(unittest.TestCase):
                 standard = 'ERC20',
                 name = 'My Awesome Token',
                 symbol = 'MAT',
-                decimals = 18,
                 underlying_token = '0xdac17f958d2ee523a2206206994597c13d831ec7',
         )
         """
