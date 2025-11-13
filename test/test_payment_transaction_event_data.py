@@ -96,7 +96,8 @@ class TestPaymentTransactionEventData(unittest.TestCase):
                     ],
                 fueling_info = cobo_waas2.models.transaction_fueling_info.TransactionFuelingInfo(
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
-                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
+                    transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', 
+                    main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
                 created_timestamp = 1610445878970,
                 updated_timestamp = 1610445878970,
                 acquiring_type = 'Order',
@@ -104,7 +105,8 @@ class TestPaymentTransactionEventData(unittest.TestCase):
                 psp_order_code = 'P20240201001',
                 payer_id = 'P20250619T0310056d7aa',
                 custom_payer_id = 'user_abc_10001',
-                subscription_id = '123e457-e89b-12d3-a456-426614174004'
+                subscription_id = '123e457-e89b-12d3-a456-426614174004',
+                action_id = '123e457-e89b-12d3-a456-426614174004'
             )
         else:
             return PaymentTransactionEventData(

@@ -46,7 +46,8 @@ class TestTokenizationListTokenInfoResponse(unittest.TestCase):
                         token_access_activated = False, 
                         status = 'Active', 
                         total_supply = '133399', 
-                        holdings = '12399', )
+                        holdings = '12399', 
+                        archived = False, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 
@@ -67,7 +68,8 @@ class TestTokenizationListTokenInfoResponse(unittest.TestCase):
                         token_access_activated = False, 
                         status = 'Active', 
                         total_supply = '133399', 
-                        holdings = '12399', )
+                        holdings = '12399', 
+                        archived = False, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

@@ -34,7 +34,8 @@ class TestUtxoFeeBasePrice(unittest.TestCase):
         model = UtxoFeeBasePrice()
         if include_optional:
             return UtxoFeeBasePrice(
-                fee_rate = '50'
+                fee_rate = '50',
+                fallback = True
             )
         else:
             return UtxoFeeBasePrice(

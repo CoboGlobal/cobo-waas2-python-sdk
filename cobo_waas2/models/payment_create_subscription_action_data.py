@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from cobo_waas2.models.payment_subscription_action_type import PaymentSubscriptionActionType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,10 +28,9 @@ class PaymentCreateSubscriptionActionData(BaseModel):
     """  # noqa: E501
     action_type: PaymentSubscriptionActionType
     user_address: StrictStr = Field(description="The subscription user address.")
-    amount: StrictStr = Field(description="The subscription crypto amount. ")
     token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to subscription. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC` - USDT: `ETH_USDT`, `ARBITRUM_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    discount_rate: Optional[StrictInt] = Field(default=None, description="the discount rate, discount_rate/10000")
-    __properties: ClassVar[List[str]] = ["action_type", "user_address", "amount", "token_id", "discount_rate"]
+    charge_amount: StrictStr
+    __properties: ClassVar[List[str]] = ["action_type", "user_address", "token_id", "charge_amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,9 +85,8 @@ class PaymentCreateSubscriptionActionData(BaseModel):
         _obj = cls.model_validate({
             "action_type": obj.get("action_type"),
             "user_address": obj.get("user_address"),
-            "amount": obj.get("amount"),
             "token_id": obj.get("token_id"),
-            "discount_rate": obj.get("discount_rate")
+            "charge_amount": obj.get("charge_amount")
         })
         return _obj
 

@@ -15,11 +15,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.tokenization_permission_action import TokenizationPermissionAction
 from cobo_waas2.models.tokenization_token_operation_source import TokenizationTokenOperationSource
-from cobo_waas2.models.tokenization_token_permission_type import TokenizationTokenPermissionType
+from cobo_waas2.models.tokenization_update_address_permissions import TokenizationUpdateAddressPermissions
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,10 +28,8 @@ class TokenizationUpdatePermissionsParams(BaseModel):
     TokenizationUpdatePermissionsParams
     """  # noqa: E501
     source: TokenizationTokenOperationSource
-    action: TokenizationPermissionAction
-    address: StrictStr = Field(description="The address to manage permissions for.")
-    permissions: List[TokenizationTokenPermissionType] = Field(description="The list of permissions to operate on.")
-    __properties: ClassVar[List[str]] = ["source", "action", "address", "permissions"]
+    addresses: List[TokenizationUpdateAddressPermissions]
+    __properties: ClassVar[List[str]] = ["source", "addresses"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +73,13 @@ class TokenizationUpdatePermissionsParams(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of source
         if self.source:
             _dict['source'] = self.source.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in addresses (list)
+        _items = []
+        if self.addresses:
+            for _item in self.addresses:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['addresses'] = _items
         return _dict
 
     @classmethod
@@ -89,9 +93,7 @@ class TokenizationUpdatePermissionsParams(BaseModel):
 
         _obj = cls.model_validate({
             "source": TokenizationTokenOperationSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
-            "action": obj.get("action"),
-            "address": obj.get("address"),
-            "permissions": obj.get("permissions")
+            "addresses": [TokenizationUpdateAddressPermissions.from_dict(_item) for _item in obj["addresses"]] if obj.get("addresses") is not None else None
         })
         return _obj
 

@@ -1,4 +1,4 @@
-# GetExchangeRate200Response
+# ExchangeRate
 
 
 ## Properties
@@ -12,19 +12,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
+from cobo_waas2.models.exchange_rate import ExchangeRate
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of GetExchangeRate200Response from a JSON string
-get_exchange_rate200_response_instance = GetExchangeRate200Response.from_json(json)
+# create an instance of ExchangeRate from a JSON string
+exchange_rate_instance = ExchangeRate.from_json(json)
 # print the JSON string representation of the object
-print(GetExchangeRate200Response.to_json())
+print(ExchangeRate.to_json())
 
 # convert the object into a dict
-get_exchange_rate200_response_dict = get_exchange_rate200_response_instance.to_dict()
-# create an instance of GetExchangeRate200Response from a dict
-get_exchange_rate200_response_from_dict = GetExchangeRate200Response.from_dict(get_exchange_rate200_response_dict)
+exchange_rate_dict = exchange_rate_instance.to_dict()
+# create an instance of ExchangeRate from a dict
+exchange_rate_from_dict = ExchangeRate.from_dict(exchange_rate_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

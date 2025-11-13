@@ -15,17 +15,19 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from cobo_waas2.models.payment_approve_subscription_action_data import PaymentApproveSubscriptionActionData
 from cobo_waas2.models.payment_base_subscription_action_data import PaymentBaseSubscriptionActionData
+from cobo_waas2.models.payment_charge_subscription_action_data import PaymentChargeSubscriptionActionData
 from cobo_waas2.models.payment_create_subscription_action_data import PaymentCreateSubscriptionActionData
 from cobo_waas2.models.payment_developer_subscription_action_data import PaymentDeveloperSubscriptionActionData
 from cobo_waas2.models.payment_extend_period_subscription_action_data import PaymentExtendPeriodSubscriptionActionData
+from cobo_waas2.models.payment_subscribe_and_charge_subscription_action_data import PaymentSubscribeAndChargeSubscriptionActionData
 from cobo_waas2.models.payment_update_amount_subscription_action_data import PaymentUpdateAmountSubscriptionActionData
+from cobo_waas2.models.payment_update_token_id_subscription_action_data import PaymentUpdateTokenIdSubscriptionActionData
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-PAYMENTSUBSCRIPTIONACTIONDATA_ONE_OF_SCHEMAS = ["PaymentApproveSubscriptionActionData", "PaymentBaseSubscriptionActionData", "PaymentCreateSubscriptionActionData", "PaymentDeveloperSubscriptionActionData", "PaymentExtendPeriodSubscriptionActionData", "PaymentUpdateAmountSubscriptionActionData"]
+PAYMENTSUBSCRIPTIONACTIONDATA_ONE_OF_SCHEMAS = ["PaymentBaseSubscriptionActionData", "PaymentChargeSubscriptionActionData", "PaymentCreateSubscriptionActionData", "PaymentDeveloperSubscriptionActionData", "PaymentExtendPeriodSubscriptionActionData", "PaymentSubscribeAndChargeSubscriptionActionData", "PaymentUpdateAmountSubscriptionActionData", "PaymentUpdateTokenIdSubscriptionActionData"]
 
 class PaymentSubscriptionActionData(BaseModel):
     """
@@ -33,18 +35,22 @@ class PaymentSubscriptionActionData(BaseModel):
     """
     # data type: PaymentCreateSubscriptionActionData
     oneof_schema_1_validator: Optional[PaymentCreateSubscriptionActionData] = None
-    # data type: PaymentApproveSubscriptionActionData
-    oneof_schema_2_validator: Optional[PaymentApproveSubscriptionActionData] = None
     # data type: PaymentBaseSubscriptionActionData
-    oneof_schema_3_validator: Optional[PaymentBaseSubscriptionActionData] = None
-    # data type: PaymentDeveloperSubscriptionActionData
-    oneof_schema_4_validator: Optional[PaymentDeveloperSubscriptionActionData] = None
+    oneof_schema_2_validator: Optional[PaymentBaseSubscriptionActionData] = None
+    # data type: PaymentSubscribeAndChargeSubscriptionActionData
+    oneof_schema_3_validator: Optional[PaymentSubscribeAndChargeSubscriptionActionData] = None
+    # data type: PaymentChargeSubscriptionActionData
+    oneof_schema_4_validator: Optional[PaymentChargeSubscriptionActionData] = None
     # data type: PaymentExtendPeriodSubscriptionActionData
     oneof_schema_5_validator: Optional[PaymentExtendPeriodSubscriptionActionData] = None
     # data type: PaymentUpdateAmountSubscriptionActionData
     oneof_schema_6_validator: Optional[PaymentUpdateAmountSubscriptionActionData] = None
-    actual_instance: Optional[Union[PaymentApproveSubscriptionActionData, PaymentBaseSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData]] = None
-    one_of_schemas: Set[str] = { "PaymentApproveSubscriptionActionData", "PaymentBaseSubscriptionActionData", "PaymentCreateSubscriptionActionData", "PaymentDeveloperSubscriptionActionData", "PaymentExtendPeriodSubscriptionActionData", "PaymentUpdateAmountSubscriptionActionData" }
+    # data type: PaymentUpdateTokenIdSubscriptionActionData
+    oneof_schema_7_validator: Optional[PaymentUpdateTokenIdSubscriptionActionData] = None
+    # data type: PaymentDeveloperSubscriptionActionData
+    oneof_schema_8_validator: Optional[PaymentDeveloperSubscriptionActionData] = None
+    actual_instance: Optional[Union[PaymentBaseSubscriptionActionData, PaymentChargeSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentSubscribeAndChargeSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData, PaymentUpdateTokenIdSubscriptionActionData]] = None
+    one_of_schemas: Set[str] = { "PaymentBaseSubscriptionActionData", "PaymentChargeSubscriptionActionData", "PaymentCreateSubscriptionActionData", "PaymentDeveloperSubscriptionActionData", "PaymentExtendPeriodSubscriptionActionData", "PaymentSubscribeAndChargeSubscriptionActionData", "PaymentUpdateAmountSubscriptionActionData", "PaymentUpdateTokenIdSubscriptionActionData" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -75,19 +81,19 @@ class PaymentSubscriptionActionData(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentCreateSubscriptionActionData`")
         else:
             match += 1
-        # validate data type: PaymentApproveSubscriptionActionData
-        if not isinstance(v, PaymentApproveSubscriptionActionData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentApproveSubscriptionActionData`")
-        else:
-            match += 1
         # validate data type: PaymentBaseSubscriptionActionData
         if not isinstance(v, PaymentBaseSubscriptionActionData):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentBaseSubscriptionActionData`")
         else:
             match += 1
-        # validate data type: PaymentDeveloperSubscriptionActionData
-        if not isinstance(v, PaymentDeveloperSubscriptionActionData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentDeveloperSubscriptionActionData`")
+        # validate data type: PaymentSubscribeAndChargeSubscriptionActionData
+        if not isinstance(v, PaymentSubscribeAndChargeSubscriptionActionData):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentSubscribeAndChargeSubscriptionActionData`")
+        else:
+            match += 1
+        # validate data type: PaymentChargeSubscriptionActionData
+        if not isinstance(v, PaymentChargeSubscriptionActionData):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentChargeSubscriptionActionData`")
         else:
             match += 1
         # validate data type: PaymentExtendPeriodSubscriptionActionData
@@ -100,12 +106,22 @@ class PaymentSubscriptionActionData(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentUpdateAmountSubscriptionActionData`")
         else:
             match += 1
+        # validate data type: PaymentUpdateTokenIdSubscriptionActionData
+        if not isinstance(v, PaymentUpdateTokenIdSubscriptionActionData):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentUpdateTokenIdSubscriptionActionData`")
+        else:
+            match += 1
+        # validate data type: PaymentDeveloperSubscriptionActionData
+        if not isinstance(v, PaymentDeveloperSubscriptionActionData):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentDeveloperSubscriptionActionData`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PaymentSubscriptionActionData with oneOf schemas: PaymentApproveSubscriptionActionData, PaymentBaseSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in PaymentSubscriptionActionData with oneOf schemas: PaymentBaseSubscriptionActionData, PaymentChargeSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentSubscribeAndChargeSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData, PaymentUpdateTokenIdSubscriptionActionData. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PaymentSubscriptionActionData with oneOf schemas: PaymentApproveSubscriptionActionData, PaymentBaseSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in PaymentSubscriptionActionData with oneOf schemas: PaymentBaseSubscriptionActionData, PaymentChargeSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentSubscribeAndChargeSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData, PaymentUpdateTokenIdSubscriptionActionData. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -131,8 +147,13 @@ class PaymentSubscriptionActionData(BaseModel):
             return instance
 
         # check if data type is `PaymentBaseSubscriptionActionData`
-        if _data_type == "Charge":
+        if _data_type == "Cancel":
             instance.actual_instance = PaymentBaseSubscriptionActionData.from_json(json_str)
+            return instance
+
+        # check if data type is `PaymentChargeSubscriptionActionData`
+        if _data_type == "Charge":
+            instance.actual_instance = PaymentChargeSubscriptionActionData.from_json(json_str)
             return instance
 
         # check if data type is `PaymentCreateSubscriptionActionData`
@@ -165,9 +186,14 @@ class PaymentSubscriptionActionData(BaseModel):
             instance.actual_instance = PaymentBaseSubscriptionActionData.from_json(json_str)
             return instance
 
-        # check if data type is `PaymentBaseSubscriptionActionData`
+        # check if data type is `PaymentSubscribeAndChargeSubscriptionActionData`
         if _data_type == "SubscribeAndCharge":
-            instance.actual_instance = PaymentBaseSubscriptionActionData.from_json(json_str)
+            instance.actual_instance = PaymentSubscribeAndChargeSubscriptionActionData.from_json(json_str)
+            return instance
+
+        # check if data type is `PaymentUpdateTokenIdSubscriptionActionData`
+        if _data_type == "UpdateTokenId":
+            instance.actual_instance = PaymentUpdateTokenIdSubscriptionActionData.from_json(json_str)
             return instance
 
         # check if data type is `PaymentUpdateAmountSubscriptionActionData`
@@ -175,14 +201,14 @@ class PaymentSubscriptionActionData(BaseModel):
             instance.actual_instance = PaymentUpdateAmountSubscriptionActionData.from_json(json_str)
             return instance
 
-        # check if data type is `PaymentApproveSubscriptionActionData`
-        if _data_type == "PaymentApproveSubscriptionActionData":
-            instance.actual_instance = PaymentApproveSubscriptionActionData.from_json(json_str)
-            return instance
-
         # check if data type is `PaymentBaseSubscriptionActionData`
         if _data_type == "PaymentBaseSubscriptionActionData":
             instance.actual_instance = PaymentBaseSubscriptionActionData.from_json(json_str)
+            return instance
+
+        # check if data type is `PaymentChargeSubscriptionActionData`
+        if _data_type == "PaymentChargeSubscriptionActionData":
+            instance.actual_instance = PaymentChargeSubscriptionActionData.from_json(json_str)
             return instance
 
         # check if data type is `PaymentCreateSubscriptionActionData`
@@ -200,9 +226,19 @@ class PaymentSubscriptionActionData(BaseModel):
             instance.actual_instance = PaymentExtendPeriodSubscriptionActionData.from_json(json_str)
             return instance
 
+        # check if data type is `PaymentSubscribeAndChargeSubscriptionActionData`
+        if _data_type == "PaymentSubscribeAndChargeSubscriptionActionData":
+            instance.actual_instance = PaymentSubscribeAndChargeSubscriptionActionData.from_json(json_str)
+            return instance
+
         # check if data type is `PaymentUpdateAmountSubscriptionActionData`
         if _data_type == "PaymentUpdateAmountSubscriptionActionData":
             instance.actual_instance = PaymentUpdateAmountSubscriptionActionData.from_json(json_str)
+            return instance
+
+        # check if data type is `PaymentUpdateTokenIdSubscriptionActionData`
+        if _data_type == "PaymentUpdateTokenIdSubscriptionActionData":
+            instance.actual_instance = PaymentUpdateTokenIdSubscriptionActionData.from_json(json_str)
             return instance
 
         return instance
@@ -212,21 +248,21 @@ class PaymentSubscriptionActionData(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PaymentApproveSubscriptionActionData
-        try:
-            instance.actual_instance = PaymentApproveSubscriptionActionData.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
         # deserialize data into PaymentBaseSubscriptionActionData
         try:
             instance.actual_instance = PaymentBaseSubscriptionActionData.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PaymentDeveloperSubscriptionActionData
+        # deserialize data into PaymentSubscribeAndChargeSubscriptionActionData
         try:
-            instance.actual_instance = PaymentDeveloperSubscriptionActionData.from_json(json_str)
+            instance.actual_instance = PaymentSubscribeAndChargeSubscriptionActionData.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into PaymentChargeSubscriptionActionData
+        try:
+            instance.actual_instance = PaymentChargeSubscriptionActionData.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -242,14 +278,26 @@ class PaymentSubscriptionActionData(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into PaymentUpdateTokenIdSubscriptionActionData
+        try:
+            instance.actual_instance = PaymentUpdateTokenIdSubscriptionActionData.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into PaymentDeveloperSubscriptionActionData
+        try:
+            instance.actual_instance = PaymentDeveloperSubscriptionActionData.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PaymentSubscriptionActionData with oneOf schemas: PaymentApproveSubscriptionActionData, PaymentBaseSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into PaymentSubscriptionActionData with oneOf schemas: PaymentBaseSubscriptionActionData, PaymentChargeSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentSubscribeAndChargeSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData, PaymentUpdateTokenIdSubscriptionActionData. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into PaymentSubscriptionActionData with oneOf schemas: PaymentApproveSubscriptionActionData, PaymentBaseSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into PaymentSubscriptionActionData with oneOf schemas: PaymentBaseSubscriptionActionData, PaymentChargeSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentSubscribeAndChargeSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData, PaymentUpdateTokenIdSubscriptionActionData. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -263,7 +311,7 @@ class PaymentSubscriptionActionData(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], PaymentApproveSubscriptionActionData, PaymentBaseSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], PaymentBaseSubscriptionActionData, PaymentChargeSubscriptionActionData, PaymentCreateSubscriptionActionData, PaymentDeveloperSubscriptionActionData, PaymentExtendPeriodSubscriptionActionData, PaymentSubscribeAndChargeSubscriptionActionData, PaymentUpdateAmountSubscriptionActionData, PaymentUpdateTokenIdSubscriptionActionData]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

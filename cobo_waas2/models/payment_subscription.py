@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.payment_subscription_period_type import PaymentSubscriptionPeriodType
 from cobo_waas2.models.payment_subscription_status import PaymentSubscriptionStatus
 from typing import Optional, Set
@@ -33,7 +33,7 @@ class PaymentSubscription(BaseModel):
     merchant_address: StrictStr = Field(description="The merchant address in cobo.")
     user_address: StrictStr = Field(description="The user address in subscription.")
     token_id: StrictStr = Field(description="The token_id in subscription.")
-    amount: StrictStr = Field(description="The amount in subscription.")
+    charge_amount: Optional[StrictStr] = Field(default=None, description="The charge amount in subscription.")
     start_time: StrictInt = Field(description="The subscription start timestamp.")
     expiration_time: StrictInt = Field(description="The subscription expired timestamp.")
     charges_made: StrictInt = Field(description="The subscription charge times.")
@@ -43,7 +43,7 @@ class PaymentSubscription(BaseModel):
     status: PaymentSubscriptionStatus
     created_timestamp: StrictInt = Field(description="The created time of the subscription, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the subscription, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["plan_id", "subscription_id", "merchant_id", "merchant_address", "user_address", "token_id", "amount", "start_time", "expiration_time", "charges_made", "period_type", "periods", "interval", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["plan_id", "subscription_id", "merchant_id", "merchant_address", "user_address", "token_id", "charge_amount", "start_time", "expiration_time", "charges_made", "period_type", "periods", "interval", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,7 +102,7 @@ class PaymentSubscription(BaseModel):
             "merchant_address": obj.get("merchant_address"),
             "user_address": obj.get("user_address"),
             "token_id": obj.get("token_id"),
-            "amount": obj.get("amount"),
+            "charge_amount": obj.get("charge_amount"),
             "start_time": obj.get("start_time"),
             "expiration_time": obj.get("expiration_time"),
             "charges_made": obj.get("charges_made"),

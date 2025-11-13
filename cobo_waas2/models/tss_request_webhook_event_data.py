@@ -41,8 +41,8 @@ class TSSRequestWebhookEventData(BaseModel):
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentSubscriptionUpdate', 'PaymentChargeUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentSubscriptionUpdate', 'PaymentChargeUpdate', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings')")
         return value
 
     model_config = ConfigDict(

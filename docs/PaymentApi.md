@@ -4,17 +4,34 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batch_get_exchange_rates**](PaymentApi.md#batch_get_exchange_rates) | **GET** /payments/exchange_rates | Batch get exchange rates
 [**cancel_refund_by_id**](PaymentApi.md#cancel_refund_by_id) | **PUT** /payments/refunds/{refund_id}/cancel | Cancel refund order
 [**create_bank_account**](PaymentApi.md#create_bank_account) | **POST** /payments/bank_accounts | Create bank account
+[**create_counterparty**](PaymentApi.md#create_counterparty) | **POST** /payments/counterparty | Create counterparty
+[**create_counterparty_wallet_address**](PaymentApi.md#create_counterparty_wallet_address) | **POST** /payments/counterparty/wallet_address | Create counterparty wallet address
 [**create_crypto_address**](PaymentApi.md#create_crypto_address) | **POST** /payments/crypto_addresses | Create crypto address
+[**create_destination**](PaymentApi.md#create_destination) | **POST** /payments/destination | Create destination
+[**create_destination_bank_account**](PaymentApi.md#create_destination_bank_account) | **POST** /payments/destination/bank_account | Create destination bank account
+[**create_destination_wallet_address**](PaymentApi.md#create_destination_wallet_address) | **POST** /payments/destination/wallet_address | Create destination wallet address
 [**create_forced_sweep_request**](PaymentApi.md#create_forced_sweep_request) | **POST** /payments/force_sweep_requests | Create force sweep request
 [**create_merchant**](PaymentApi.md#create_merchant) | **POST** /payments/merchants | Create merchant
+[**create_order_link**](PaymentApi.md#create_order_link) | **POST** /payments/links/orders | Create order link
 [**create_payment_order**](PaymentApi.md#create_payment_order) | **POST** /payments/orders | Create pay-in order
 [**create_refund**](PaymentApi.md#create_refund) | **POST** /payments/refunds | Create refund order
+[**create_refund_link**](PaymentApi.md#create_refund_link) | **POST** /payments/links/refunds | Create refund link
 [**create_settlement_request**](PaymentApi.md#create_settlement_request) | **POST** /payments/settlement_requests | Create settlement request
 [**create_subscription_action**](PaymentApi.md#create_subscription_action) | **POST** /payments/subscription_actions | Create a subscription action
 [**create_subscription_plan**](PaymentApi.md#create_subscription_plan) | **POST** /payments/subscription_plans | Create subscription plan
+[**delete_counterparty**](PaymentApi.md#delete_counterparty) | **PUT** /payments/counterparty/{counterparty_id}/delete | Delete counterparty
+[**delete_counterparty_wallet_address**](PaymentApi.md#delete_counterparty_wallet_address) | **PUT** /payments/counterparty/wallet_address/{wallet_address_id}/delete | Delete counterparty wallet address
 [**delete_crypto_address**](PaymentApi.md#delete_crypto_address) | **POST** /payments/crypto_addresses/{crypto_address_id}/delete | Delete crypto address
+[**delete_destination**](PaymentApi.md#delete_destination) | **PUT** /payments/destination/{destination_id}/delete | Delete destination
+[**delete_destination_bank_account**](PaymentApi.md#delete_destination_bank_account) | **PUT** /payments/destination/bank_account/{bank_account_id}/delete | Delete destination bank account
+[**delete_destination_wallet_address**](PaymentApi.md#delete_destination_wallet_address) | **PUT** /payments/destination/wallet_address/{wallet_address_id}/delete | Delete destination wallet address
+[**enable_destination_whitelist**](PaymentApi.md#enable_destination_whitelist) | **POST** /payments/destination/enable_whitelist | Enable or disable destination whitelist
+[**get_counterparty_detail_by_id**](PaymentApi.md#get_counterparty_detail_by_id) | **GET** /payments/counterparty/{counterparty_id}/detail | Get counterparty information
+[**get_destination_bank_account_detail_by_id**](PaymentApi.md#get_destination_bank_account_detail_by_id) | **GET** /payments/destination/bank_account/{bank_account_id}/detail | Get destination bank account information
+[**get_destination_detail_by_id**](PaymentApi.md#get_destination_detail_by_id) | **GET** /payments/destination/{destination_id}/detail | Get destination information
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
 [**get_payer_balance_by_address**](PaymentApi.md#get_payer_balance_by_address) | **GET** /payments/balance/payer/address | Get payer balance by address
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
@@ -23,11 +40,14 @@ Method | HTTP request | Description
 [**get_refunds**](PaymentApi.md#get_refunds) | **GET** /payments/refunds | List all refund orders
 [**get_settlement_by_id**](PaymentApi.md#get_settlement_by_id) | **GET** /payments/settlement_requests/{settlement_request_id} | Get settlement request information
 [**get_settlement_info_by_ids**](PaymentApi.md#get_settlement_info_by_ids) | **GET** /payments/settlement_info | Get withdrawable balances
+[**get_subscription_action_by_id**](PaymentApi.md#get_subscription_action_by_id) | **GET** /payments/subscription_actions/{action_id} | Get subscription action by id
 [**get_subscription_by_id**](PaymentApi.md#get_subscription_by_id) | **GET** /payments/subscriptions/{subscription_id} | Get subscription by id
 [**get_subscription_plan_by_id**](PaymentApi.md#get_subscription_plan_by_id) | **GET** /payments/subscription_plans/{plan_id} | Get subscription plan by id
 [**get_top_up_address**](PaymentApi.md#get_top_up_address) | **GET** /payments/topup/address | Get top-up address
 [**list_bank_accounts**](PaymentApi.md#list_bank_accounts) | **GET** /payments/bank_accounts | List all bank accounts
+[**list_counterparties**](PaymentApi.md#list_counterparties) | **GET** /payments/counterparty | List all counterparties
 [**list_crypto_addresses**](PaymentApi.md#list_crypto_addresses) | **GET** /payments/crypto_addresses | List crypto addresses
+[**list_destinations**](PaymentApi.md#list_destinations) | **GET** /payments/destination | List all destinations
 [**list_forced_sweep_requests**](PaymentApi.md#list_forced_sweep_requests) | **GET** /payments/force_sweep_requests | List force sweep requests
 [**list_merchant_balances**](PaymentApi.md#list_merchant_balances) | **GET** /payments/balance/merchants | List merchant balances
 [**list_merchants**](PaymentApi.md#list_merchants) | **GET** /payments/merchants | List all merchants
@@ -42,12 +62,89 @@ Method | HTTP request | Description
 [**list_top_up_payer_accounts**](PaymentApi.md#list_top_up_payer_accounts) | **GET** /payments/topup/payer_accounts | List top-up payer accounts
 [**list_top_up_payers**](PaymentApi.md#list_top_up_payers) | **GET** /payments/topup/payers | List top-up payers
 [**payment_estimate_fee**](PaymentApi.md#payment_estimate_fee) | **POST** /payments/estimate_fee | Payment estimate fee
+[**query_destination_whitelist_enabled**](PaymentApi.md#query_destination_whitelist_enabled) | **GET** /payments/destination/enable_whitelist | Query destination whitelist enabled status
 [**update_bank_account_by_id**](PaymentApi.md#update_bank_account_by_id) | **PUT** /payments/bank_accounts/{bank_account_id} | Update bank account
+[**update_counterparty_by_id**](PaymentApi.md#update_counterparty_by_id) | **PUT** /payments/counterparty/{counterparty_id}/update | Update counterparty
+[**update_destination_bank_account_by_id**](PaymentApi.md#update_destination_bank_account_by_id) | **PUT** /payments/destination/bank_account/{bank_account_id}/update | Update destination bank account
+[**update_destination_by_id**](PaymentApi.md#update_destination_by_id) | **PUT** /payments/destination/{destination_id}/update | Update destination
 [**update_merchant_by_id**](PaymentApi.md#update_merchant_by_id) | **PUT** /payments/merchants/{merchant_id} | Update merchant
 [**update_payment_order**](PaymentApi.md#update_payment_order) | **PUT** /payments/orders/{order_id} | Update pay-in order
 [**update_refund_by_id**](PaymentApi.md#update_refund_by_id) | **PUT** /payments/refunds/{refund_id} | Update refund order information
 [**update_top_up_address**](PaymentApi.md#update_top_up_address) | **PUT** /payments/topup/address | Update top-up address
 
+
+# **batch_get_exchange_rates**
+> List[ExchangeRate] batch_get_exchange_rates(token_ids, currencies)
+
+Batch get exchange rates
+
+This operation retrieves the current exchange rates between a specified currency and a list of token IDs. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.exchange_rate import ExchangeRate
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    token_ids = 'ETH_USDT,ETH_USDC,BTC_USDT'
+    currencies = 'USD'
+
+    try:
+        # Batch get exchange rates
+        api_response = api_instance.batch_get_exchange_rates(token_ids, currencies)
+        print("The response of PaymentApi->batch_get_exchange_rates:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->batch_get_exchange_rates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_ids** | **str**| A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  | 
+ **currencies** | **str**| List of the fiat currencies, separated by comma. Currently, only &#x60;USD&#x60; is supported.  | 
+
+### Return type
+
+[**List[ExchangeRate]**](ExchangeRate.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cancel_refund_by_id**
 > Refund cancel_refund_by_id(refund_id)
@@ -194,6 +291,152 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_counterparty**
+> CounterpartyDetail create_counterparty(create_counterparty_request=create_counterparty_request)
+
+Create counterparty
+
+This operation creates a counterparty. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.counterparty_detail import CounterpartyDetail
+from cobo_waas2.models.create_counterparty_request import CreateCounterpartyRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_counterparty_request = cobo_waas2.CreateCounterpartyRequest()
+
+    try:
+        # Create counterparty
+        api_response = api_instance.create_counterparty(create_counterparty_request=create_counterparty_request)
+        print("The response of PaymentApi->create_counterparty:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_counterparty: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_counterparty_request** | [**CreateCounterpartyRequest**](CreateCounterpartyRequest.md)| The request body to create a counterparty. | [optional] 
+
+### Return type
+
+[**CounterpartyDetail**](CounterpartyDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_counterparty_wallet_address**
+> WalletAddress create_counterparty_wallet_address(create_counterparty_wallet_address_request=create_counterparty_wallet_address_request)
+
+Create counterparty wallet address
+
+This operation creates a counterparty wallet address. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_counterparty_wallet_address_request import CreateCounterpartyWalletAddressRequest
+from cobo_waas2.models.wallet_address import WalletAddress
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_counterparty_wallet_address_request = cobo_waas2.CreateCounterpartyWalletAddressRequest()
+
+    try:
+        # Create counterparty wallet address
+        api_response = api_instance.create_counterparty_wallet_address(create_counterparty_wallet_address_request=create_counterparty_wallet_address_request)
+        print("The response of PaymentApi->create_counterparty_wallet_address:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_counterparty_wallet_address: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_counterparty_wallet_address_request** | [**CreateCounterpartyWalletAddressRequest**](CreateCounterpartyWalletAddressRequest.md)| The request body to create a counterparty wallet address. | [optional] 
+
+### Return type
+
+[**WalletAddress**](WalletAddress.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_crypto_address**
 > CryptoAddress create_crypto_address(create_crypto_address_request=create_crypto_address_request)
 
@@ -262,6 +505,225 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Crypto address created successfully. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_destination**
+> DestinationDetail create_destination(create_destination_request=create_destination_request)
+
+Create destination
+
+This operation creates a destination. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_destination_request import CreateDestinationRequest
+from cobo_waas2.models.destination_detail import DestinationDetail
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_destination_request = cobo_waas2.CreateDestinationRequest()
+
+    try:
+        # Create destination
+        api_response = api_instance.create_destination(create_destination_request=create_destination_request)
+        print("The response of PaymentApi->create_destination:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_destination: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_destination_request** | [**CreateDestinationRequest**](CreateDestinationRequest.md)| The request body to create a destination. | [optional] 
+
+### Return type
+
+[**DestinationDetail**](DestinationDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_destination_bank_account**
+> DestinationBankAccount create_destination_bank_account(create_destination_bank_account_request=create_destination_bank_account_request)
+
+Create destination bank account
+
+This operation creates a destination bank account. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_destination_bank_account_request import CreateDestinationBankAccountRequest
+from cobo_waas2.models.destination_bank_account import DestinationBankAccount
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_destination_bank_account_request = cobo_waas2.CreateDestinationBankAccountRequest()
+
+    try:
+        # Create destination bank account
+        api_response = api_instance.create_destination_bank_account(create_destination_bank_account_request=create_destination_bank_account_request)
+        print("The response of PaymentApi->create_destination_bank_account:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_destination_bank_account: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_destination_bank_account_request** | [**CreateDestinationBankAccountRequest**](CreateDestinationBankAccountRequest.md)| The request body to create a destination bank account. | [optional] 
+
+### Return type
+
+[**DestinationBankAccount**](DestinationBankAccount.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_destination_wallet_address**
+> WalletAddress create_destination_wallet_address(create_destination_wallet_address_request=create_destination_wallet_address_request)
+
+Create destination wallet address
+
+This operation creates a destination wallet address. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_destination_wallet_address_request import CreateDestinationWalletAddressRequest
+from cobo_waas2.models.wallet_address import WalletAddress
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_destination_wallet_address_request = cobo_waas2.CreateDestinationWalletAddressRequest()
+
+    try:
+        # Create destination wallet address
+        api_response = api_instance.create_destination_wallet_address(create_destination_wallet_address_request=create_destination_wallet_address_request)
+        print("The response of PaymentApi->create_destination_wallet_address:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_destination_wallet_address: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_destination_wallet_address_request** | [**CreateDestinationWalletAddressRequest**](CreateDestinationWalletAddressRequest.md)| The request body to create a destination wallet address. | [optional] 
+
+### Return type
+
+[**WalletAddress**](WalletAddress.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -413,6 +875,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_order_link**
+> Link create_order_link(create_order_link_request=create_order_link_request)
+
+Create order link
+
+This operation creates a payment link of a pay-in order. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_order_link_request import CreateOrderLinkRequest
+from cobo_waas2.models.link import Link
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_order_link_request = cobo_waas2.CreateOrderLinkRequest()
+
+    try:
+        # Create order link
+        api_response = api_instance.create_order_link(create_order_link_request=create_order_link_request)
+        print("The response of PaymentApi->create_order_link:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_order_link: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_order_link_request** | [**CreateOrderLinkRequest**](CreateOrderLinkRequest.md)| The request body to create a payment link of a pay-in order. | [optional] 
+
+### Return type
+
+[**Link**](Link.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Infos of a newly initiated payment link. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_payment_order**
 > Order create_payment_order(create_payment_order_request=create_payment_order_request)
 
@@ -554,6 +1088,78 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Refund transaction created successfully. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_refund_link**
+> Link create_refund_link(create_refund_link_request=create_refund_link_request)
+
+Create refund link
+
+This operation creates a payment link for a refund. 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_refund_link_request import CreateRefundLinkRequest
+from cobo_waas2.models.link import Link
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_refund_link_request = cobo_waas2.CreateRefundLinkRequest()
+
+    try:
+        # Create refund link
+        api_response = api_instance.create_refund_link(create_refund_link_request=create_refund_link_request)
+        print("The response of PaymentApi->create_refund_link:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_refund_link: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_refund_link_request** | [**CreateRefundLinkRequest**](CreateRefundLinkRequest.md)| The request body to create a payment link for a refund. | [optional] 
+
+### Return type
+
+[**Link**](Link.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Infos of a newly initiated payment link. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -778,6 +1384,152 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_counterparty**
+> DeleteCounterparty200Response delete_counterparty(counterparty_id)
+
+Delete counterparty
+
+This operation deletes a counterparty. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.delete_counterparty200_response import DeleteCounterparty200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
+
+    try:
+        # Delete counterparty
+        api_response = api_instance.delete_counterparty(counterparty_id)
+        print("The response of PaymentApi->delete_counterparty:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->delete_counterparty: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **counterparty_id** | **str**| The counterparty ID. | 
+
+### Return type
+
+[**DeleteCounterparty200Response**](DeleteCounterparty200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**401** | Unauthorized. Please provide valid credentials. |  -  |
+**403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_counterparty_wallet_address**
+> DeleteCounterpartyWalletAddress200Response delete_counterparty_wallet_address(wallet_address_id)
+
+Delete counterparty wallet address
+
+This operation deletes a counterparty wallet address. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.delete_counterparty_wallet_address200_response import DeleteCounterpartyWalletAddress200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    wallet_address_id = '445bac57-7428-4d25-bce1-b3cd017f47a1'
+
+    try:
+        # Delete counterparty wallet address
+        api_response = api_instance.delete_counterparty_wallet_address(wallet_address_id)
+        print("The response of PaymentApi->delete_counterparty_wallet_address:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->delete_counterparty_wallet_address: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **wallet_address_id** | **str**| The wallet address ID. | 
+
+### Return type
+
+[**DeleteCounterpartyWalletAddress200Response**](DeleteCounterpartyWalletAddress200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**401** | Unauthorized. Please provide valid credentials. |  -  |
+**403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_crypto_address**
 > DeleteCryptoAddress201Response delete_crypto_address(crypto_address_id)
 
@@ -851,8 +1603,516 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_destination**
+> DeleteDestination200Response delete_destination(destination_id)
+
+Delete destination
+
+This operation deletes a destination. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.delete_destination200_response import DeleteDestination200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
+
+    try:
+        # Delete destination
+        api_response = api_instance.delete_destination(destination_id)
+        print("The response of PaymentApi->delete_destination:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->delete_destination: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **destination_id** | **str**| The destination ID. | 
+
+### Return type
+
+[**DeleteDestination200Response**](DeleteDestination200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**401** | Unauthorized. Please provide valid credentials. |  -  |
+**403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_destination_bank_account**
+> DeleteDestinationBankAccount200Response delete_destination_bank_account(bank_account_id)
+
+Delete destination bank account
+
+This operation deletes a destination bank account. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.delete_destination_bank_account200_response import DeleteDestinationBankAccount200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+    try:
+        # Delete destination bank account
+        api_response = api_instance.delete_destination_bank_account(bank_account_id)
+        print("The response of PaymentApi->delete_destination_bank_account:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->delete_destination_bank_account: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bank_account_id** | **str**| The bank account ID. | 
+
+### Return type
+
+[**DeleteDestinationBankAccount200Response**](DeleteDestinationBankAccount200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**401** | Unauthorized. Please provide valid credentials. |  -  |
+**403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_destination_wallet_address**
+> DeleteDestinationWalletAddress200Response delete_destination_wallet_address(wallet_address_id)
+
+Delete destination wallet address
+
+This operation deletes a destination wallet address. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.delete_destination_wallet_address200_response import DeleteDestinationWalletAddress200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    wallet_address_id = '445bac57-7428-4d25-bce1-b3cd017f47a1'
+
+    try:
+        # Delete destination wallet address
+        api_response = api_instance.delete_destination_wallet_address(wallet_address_id)
+        print("The response of PaymentApi->delete_destination_wallet_address:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->delete_destination_wallet_address: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **wallet_address_id** | **str**| The wallet address ID. | 
+
+### Return type
+
+[**DeleteDestinationWalletAddress200Response**](DeleteDestinationWalletAddress200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**401** | Unauthorized. Please provide valid credentials. |  -  |
+**403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **enable_destination_whitelist**
+> QueryDestinationWhitelistEnabled200Response enable_destination_whitelist(enable_destination_whitelist_request=enable_destination_whitelist_request)
+
+Enable or disable destination whitelist
+
+This operation enables or disables the whitelist for a destination. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.enable_destination_whitelist_request import EnableDestinationWhitelistRequest
+from cobo_waas2.models.query_destination_whitelist_enabled200_response import QueryDestinationWhitelistEnabled200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    enable_destination_whitelist_request = cobo_waas2.EnableDestinationWhitelistRequest()
+
+    try:
+        # Enable or disable destination whitelist
+        api_response = api_instance.enable_destination_whitelist(enable_destination_whitelist_request=enable_destination_whitelist_request)
+        print("The response of PaymentApi->enable_destination_whitelist:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->enable_destination_whitelist: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **enable_destination_whitelist_request** | [**EnableDestinationWhitelistRequest**](EnableDestinationWhitelistRequest.md)| The request body to enable or disable the destination whitelist. | [optional] 
+
+### Return type
+
+[**QueryDestinationWhitelistEnabled200Response**](QueryDestinationWhitelistEnabled200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_counterparty_detail_by_id**
+> CounterpartyDetail get_counterparty_detail_by_id(counterparty_id)
+
+Get counterparty information
+
+This operation retrieves the detailed information about a specified counterparty. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.counterparty_detail import CounterpartyDetail
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
+
+    try:
+        # Get counterparty information
+        api_response = api_instance.get_counterparty_detail_by_id(counterparty_id)
+        print("The response of PaymentApi->get_counterparty_detail_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_counterparty_detail_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **counterparty_id** | **str**| The counterparty ID. | 
+
+### Return type
+
+[**CounterpartyDetail**](CounterpartyDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_destination_bank_account_detail_by_id**
+> GetDestinationBankAccountDetailById200Response get_destination_bank_account_detail_by_id(bank_account_id)
+
+Get destination bank account information
+
+This operation retrieves the detailed information about a specified destination bank account. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.get_destination_bank_account_detail_by_id200_response import GetDestinationBankAccountDetailById200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+    try:
+        # Get destination bank account information
+        api_response = api_instance.get_destination_bank_account_detail_by_id(bank_account_id)
+        print("The response of PaymentApi->get_destination_bank_account_detail_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_destination_bank_account_detail_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bank_account_id** | **str**| The bank account ID. | 
+
+### Return type
+
+[**GetDestinationBankAccountDetailById200Response**](GetDestinationBankAccountDetailById200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_destination_detail_by_id**
+> DestinationDetail get_destination_detail_by_id(destination_id)
+
+Get destination information
+
+This operation retrieves the detailed information about a specified destination. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.destination_detail import DestinationDetail
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
+
+    try:
+        # Get destination information
+        api_response = api_instance.get_destination_detail_by_id(destination_id)
+        print("The response of PaymentApi->get_destination_detail_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_destination_detail_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **destination_id** | **str**| The destination ID. | 
+
+### Return type
+
+[**DestinationDetail**](DestinationDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_exchange_rate**
-> GetExchangeRate200Response get_exchange_rate(token_id, currency)
+> ExchangeRate get_exchange_rate(token_id, currency)
 
 Get exchange rate
 
@@ -864,7 +2124,7 @@ This operation retrieves the current exchange rate between a specified currency 
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
+from cobo_waas2.models.exchange_rate import ExchangeRate
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -903,7 +2163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetExchangeRate200Response**](GetExchangeRate200Response.md)
+[**ExchangeRate**](ExchangeRate.md)
 
 ### Authorization
 
@@ -1447,6 +2707,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_subscription_action_by_id**
+> PaymentSubscriptionActionDetail get_subscription_action_by_id(action_id)
+
+Get subscription action by id
+
+This operation retrieves the information of subscription plan detail. You can filter the result by action_id. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.payment_subscription_action_detail import PaymentSubscriptionActionDetail
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    action_id = '123e457-e89b-12d3-a456-426614174004'
+
+    try:
+        # Get subscription action by id
+        api_response = api_instance.get_subscription_action_by_id(action_id)
+        print("The response of PaymentApi->get_subscription_action_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_subscription_action_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **action_id** | **str**| A unique identifier subscription action. | 
+
+### Return type
+
+[**PaymentSubscriptionActionDetail**](PaymentSubscriptionActionDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_subscription_by_id**
 > PaymentSubscriptionDetail get_subscription_by_id(subscription_id)
 
@@ -1737,6 +3069,84 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_counterparties**
+> ListCounterparties200Response list_counterparties(limit=limit, before=before, after=after, keyword=keyword)
+
+List all counterparties
+
+This operation retrieves the information of all counterparties.   You can filter the results by using a keyword for fuzzy search on counterparty names. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_counterparties200_response import ListCounterparties200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    keyword = 'keyword'
+
+    try:
+        # List all counterparties
+        api_response = api_instance.list_counterparties(limit=limit, before=before, after=after, keyword=keyword)
+        print("The response of PaymentApi->list_counterparties:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_counterparties: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **keyword** | **str**| A search term used for fuzzy matching of merchant names. | [optional] 
+
+### Return type
+
+[**ListCounterparties200Response**](ListCounterparties200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_crypto_addresses**
 > List[CryptoAddress] list_crypto_addresses(token_id=token_id)
 
@@ -1789,6 +3199,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List[CryptoAddress]**](CryptoAddress.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_destinations**
+> ListDestinations200Response list_destinations(limit=limit, before=before, after=after, keyword=keyword)
+
+List all destinations
+
+This operation retrieves the information of all destinations.   You can filter the results by using a keyword for fuzzy search on destination names. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_destinations200_response import ListDestinations200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    keyword = 'keyword'
+
+    try:
+        # List all destinations
+        api_response = api_instance.list_destinations(limit=limit, before=before, after=after, keyword=keyword)
+        print("The response of PaymentApi->list_destinations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_destinations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
+ **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
+ **keyword** | **str**| A search term used for fuzzy matching of merchant names. | [optional] 
+
+### Return type
+
+[**ListDestinations200Response**](ListDestinations200Response.md)
 
 ### Authorization
 
@@ -1888,7 +3376,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_merchant_balances**
-> ListMerchantBalances200Response list_merchant_balances(token_id, acquiring_type, merchant_ids=merchant_ids)
+> ListMerchantBalances200Response list_merchant_balances(token_id, merchant_ids=merchant_ids, acquiring_type=acquiring_type)
 
 List merchant balances
 
@@ -1918,12 +3406,12 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.PaymentApi(api_client)
     token_id = 'ETH_USDT'
-    acquiring_type = cobo_waas2.AcquiringType()
     merchant_ids = 'M1001,M1002,M1003'
+    acquiring_type = cobo_waas2.AcquiringType()
 
     try:
         # List merchant balances
-        api_response = api_instance.list_merchant_balances(token_id, acquiring_type, merchant_ids=merchant_ids)
+        api_response = api_instance.list_merchant_balances(token_id, merchant_ids=merchant_ids, acquiring_type=acquiring_type)
         print("The response of PaymentApi->list_merchant_balances:\n")
         pprint(api_response)
     except Exception as e:
@@ -1938,8 +3426,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which identifies the cryptocurrency. Supported values:    - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDC&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
- **acquiring_type** | [**AcquiringType**](.md)| AcquiringType defines the acquisition logic used in the payment flow: - &#x60;Order&#x60;: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - &#x60;TopUp&#x60;: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  | 
  **merchant_ids** | **str**| A list of merchant IDs to query. | [optional] 
+ **acquiring_type** | [**AcquiringType**](.md)| AcquiringType defines the acquisition logic used in the payment flow: - &#x60;Order&#x60;: Each order is created with a specific amount and associated payment request. Funds are settled on a per-order basis. - &#x60;TopUp&#x60;: Recharge-style flow where funds are topped up to a payer balance or account. Useful for flexible or usage-based payment models.  | [optional] 
 
 ### Return type
 
@@ -1965,7 +3453,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_merchants**
-> ListMerchants200Response list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_setup=wallet_setup)
+> ListMerchants200Response list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_id=wallet_id, wallet_setup=wallet_setup)
 
 List all merchants
 
@@ -1998,11 +3486,12 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
     keyword = 'keyword'
+    wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
     wallet_setup = cobo_waas2.WalletSetup()
 
     try:
         # List all merchants
-        api_response = api_instance.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_setup=wallet_setup)
+        api_response = api_instance.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_id=wallet_id, wallet_setup=wallet_setup)
         print("The response of PaymentApi->list_merchants:\n")
         pprint(api_response)
     except Exception as e:
@@ -2020,6 +3509,7 @@ Name | Type | Description  | Notes
  **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
  **keyword** | **str**| A search term used for fuzzy matching of merchant names. | [optional] 
+ **wallet_id** | **str**| The wallet ID. | [optional] 
  **wallet_setup** | [**WalletSetup**](.md)| WalletSetup defines the type of funds used in the merchant account, either \&quot;Shared\&quot; or \&quot;Separate\&quot; is allowed when creating a merchant: - &#x60;Default&#x60;: Wallet of psp owned default merchant. - &#x60;Shared&#x60;: Shared wallet of non-psp owned merchants. - &#x60;Separate&#x60;: Separate wallet of non-psp owned merchants.  | [optional] 
 
 ### Return type
@@ -2907,6 +4397,74 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **query_destination_whitelist_enabled**
+> QueryDestinationWhitelistEnabled200Response query_destination_whitelist_enabled()
+
+Query destination whitelist enabled status
+
+This operation retrieves the information of whether the destination whitelist is enabled. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.query_destination_whitelist_enabled200_response import QueryDestinationWhitelistEnabled200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+
+    try:
+        # Query destination whitelist enabled status
+        api_response = api_instance.query_destination_whitelist_enabled()
+        print("The response of PaymentApi->query_destination_whitelist_enabled:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->query_destination_whitelist_enabled: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**QueryDestinationWhitelistEnabled200Response**](QueryDestinationWhitelistEnabled200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_bank_account_by_id**
 > BankAccount update_bank_account_by_id(bank_account_id, update_bank_account_by_id_request=update_bank_account_by_id_request)
 
@@ -2962,6 +4520,231 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BankAccount**](BankAccount.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_counterparty_by_id**
+> Counterparty update_counterparty_by_id(counterparty_id, update_counterparty_by_id_request=update_counterparty_by_id_request)
+
+Update counterparty
+
+This operation updates the information of a specified counterparty. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.counterparty import Counterparty
+from cobo_waas2.models.update_counterparty_by_id_request import UpdateCounterpartyByIdRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
+    update_counterparty_by_id_request = cobo_waas2.UpdateCounterpartyByIdRequest()
+
+    try:
+        # Update counterparty
+        api_response = api_instance.update_counterparty_by_id(counterparty_id, update_counterparty_by_id_request=update_counterparty_by_id_request)
+        print("The response of PaymentApi->update_counterparty_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->update_counterparty_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **counterparty_id** | **str**| The counterparty ID. | 
+ **update_counterparty_by_id_request** | [**UpdateCounterpartyByIdRequest**](UpdateCounterpartyByIdRequest.md)| The request body to update a counterparty. | [optional] 
+
+### Return type
+
+[**Counterparty**](Counterparty.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_destination_bank_account_by_id**
+> DestinationBankAccount update_destination_bank_account_by_id(bank_account_id, update_destination_bank_account=update_destination_bank_account)
+
+Update destination bank account
+
+This operation updates the information of a specified destination bank account. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.destination_bank_account import DestinationBankAccount
+from cobo_waas2.models.update_destination_bank_account import UpdateDestinationBankAccount
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    update_destination_bank_account = cobo_waas2.UpdateDestinationBankAccount()
+
+    try:
+        # Update destination bank account
+        api_response = api_instance.update_destination_bank_account_by_id(bank_account_id, update_destination_bank_account=update_destination_bank_account)
+        print("The response of PaymentApi->update_destination_bank_account_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->update_destination_bank_account_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bank_account_id** | **str**| The bank account ID. | 
+ **update_destination_bank_account** | [**UpdateDestinationBankAccount**](UpdateDestinationBankAccount.md)| The request body to update a destination bank account. | [optional] 
+
+### Return type
+
+[**DestinationBankAccount**](DestinationBankAccount.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_destination_by_id**
+> Destination update_destination_by_id(destination_id, update_destination_by_id_request=update_destination_by_id_request)
+
+Update destination
+
+This operation updates the information of a specified destination. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.destination import Destination
+from cobo_waas2.models.update_destination_by_id_request import UpdateDestinationByIdRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
+    update_destination_by_id_request = cobo_waas2.UpdateDestinationByIdRequest()
+
+    try:
+        # Update destination
+        api_response = api_instance.update_destination_by_id(destination_id, update_destination_by_id_request=update_destination_by_id_request)
+        print("The response of PaymentApi->update_destination_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->update_destination_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **destination_id** | **str**| The destination ID. | 
+ **update_destination_by_id_request** | [**UpdateDestinationByIdRequest**](UpdateDestinationByIdRequest.md)| The request body to create a destination. | [optional] 
+
+### Return type
+
+[**Destination**](Destination.md)
 
 ### Authorization
 

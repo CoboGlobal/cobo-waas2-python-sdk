@@ -5,10 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**new_plan_id** | **str** | The new plan id in cobo. | 
 **action_type** | [**PaymentSubscriptionActionType**](PaymentSubscriptionActionType.md) |  | 
 **subscription_id** | **str** | The subscription id in cobo. | 
-**signature** | **str** | The signature for transaction. | 
+**new_plan_id** | **str** | The new plan id in cobo. | 
+**charge_amount** | **str** | The subscription plan crypto amount with input token_id.  | 
+**signature** | **str** | The signature for transaction. charge action is not required. | 
+**deadline** | **int** | The signature deadline for transaction. charge action is not required. | 
 
 ## Example
 

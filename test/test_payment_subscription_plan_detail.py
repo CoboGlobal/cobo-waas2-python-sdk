@@ -34,15 +34,17 @@ class TestPaymentSubscriptionPlanDetail(unittest.TestCase):
         model = PaymentSubscriptionPlanDetail()
         if include_optional:
             return PaymentSubscriptionPlanDetail(
-                blockchain_plan_id = '',
                 plan_id = '123e457-e89b-12d3-a456-426614174004',
                 developer_plan_id = '123e457-e89b-12d3-a456-426614174004',
                 period_type = 'Yearly',
                 periods = 12,
                 interval = 2592000,
+                trial_period = 604800,
                 amount = '500.00',
                 token_id = 'ETH_USDT',
-                currency = 'USD'
+                currency = 'USD',
+                charge_amount = '500.00',
+                contract_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc'
             )
         else:
             return PaymentSubscriptionPlanDetail(

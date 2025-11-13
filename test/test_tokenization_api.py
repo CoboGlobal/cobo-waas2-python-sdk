@@ -29,6 +29,19 @@ class TestTokenizationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_archive_tokenization(self) -> None:
+        """
+        Test case for archive_tokenization
+
+        Archive token
+        """
+        """
+        token_id = 'ETH_USDT'
+        tokenization_archive_token_request = cobo_waas2.TokenizationArchiveTokenRequest()
+
+        api_response = self.api.archive_tokenization(token_id, tokenization_archive_token_request=tokenization_archive_token_request)
+        """
+
     def test_burn_tokenization(self) -> None:
         """
         Test case for burn_tokenization
@@ -209,11 +222,12 @@ class TestTokenizationApi(unittest.TestCase):
         List supported chains for tokenization
         """
         """
+        token_standard = cobo_waas2.TokenizationTokenStandard()
         limit = 10
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
 
-        api_response = self.api.list_tokenization_supported_chains(limit=limit, after=after, before=before)
+        api_response = self.api.list_tokenization_supported_chains(token_standard=token_standard, limit=limit, after=after, before=before)
         """
 
     def test_mint_tokenization(self) -> None:
@@ -253,6 +267,19 @@ class TestTokenizationApi(unittest.TestCase):
         tokenization_contract_call_request = cobo_waas2.TokenizationContractCallRequest()
 
         api_response = self.api.tokenization_contract_call(token_id, tokenization_contract_call_request=tokenization_contract_call_request)
+        """
+
+    def test_unarchive_tokenization(self) -> None:
+        """
+        Test case for unarchive_tokenization
+
+        Unarchive token
+        """
+        """
+        token_id = 'ETH_USDT'
+        tokenization_unarchive_token_request = cobo_waas2.TokenizationUnarchiveTokenRequest()
+
+        api_response = self.api.unarchive_tokenization(token_id, tokenization_unarchive_token_request=tokenization_unarchive_token_request)
         """
 
     def test_unpause_tokenization(self) -> None:

@@ -34,7 +34,9 @@ class CreatePaymentOrderRequest(BaseModel):
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
     expired_in: Optional[StrictInt] = Field(default=None, description="The pay-in order will expire after approximately a certain number of seconds: - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
     use_dedicated_address: Optional[StrictBool] = Field(default=None, description="Indicates whether to allocate a dedicated address for this order.  If false, a shared address from the address pool will be used. ")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_in", "use_dedicated_address"]
+    custom_exchange_rate: Optional[StrictStr] = Field(default=None, description="A custom exchange rate specified by the merchant.   - Only effective when `currency` is `\"USD\"`.   - Expressed as the amount of USD per 1 unit of the specified cryptocurrency.   - If not provided, the system will use the default internal rate.   Example: If the cryptocurrency is USDT and `custom_exchange_rate` = `\"0.99\"`, it means 1 USDT = 0.99 USD. ")
+    amount_tolerance: Optional[StrictStr] = Field(default=None, description="Allowed amount deviation, precision to 1 decimal place.")
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_in", "use_dedicated_address", "custom_exchange_rate", "amount_tolerance"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +97,9 @@ class CreatePaymentOrderRequest(BaseModel):
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
             "expired_in": obj.get("expired_in"),
-            "use_dedicated_address": obj.get("use_dedicated_address")
+            "use_dedicated_address": obj.get("use_dedicated_address"),
+            "custom_exchange_rate": obj.get("custom_exchange_rate"),
+            "amount_tolerance": obj.get("amount_tolerance")
         })
         return _obj
 

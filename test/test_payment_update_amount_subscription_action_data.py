@@ -34,17 +34,21 @@ class TestPaymentUpdateAmountSubscriptionActionData(unittest.TestCase):
         model = PaymentUpdateAmountSubscriptionActionData()
         if include_optional:
             return PaymentUpdateAmountSubscriptionActionData(
-                new_plan_id = '123e457-e89b-12d3-a456-426614174004',
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
-                signature = ''
+                new_plan_id = '123e457-e89b-12d3-a456-426614174004',
+                charge_amount = '500.00',
+                signature = '',
+                deadline = 56
             )
         else:
             return PaymentUpdateAmountSubscriptionActionData(
-                new_plan_id = '123e457-e89b-12d3-a456-426614174004',
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
+                new_plan_id = '123e457-e89b-12d3-a456-426614174004',
+                charge_amount = '500.00',
                 signature = '',
+                deadline = 56,
         )
         """
 

@@ -15,21 +15,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.payment_subscription_action_type import PaymentSubscriptionActionType
+from cobo_waas2.models.counterparty import Counterparty
+from cobo_waas2.models.pagination import Pagination
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class PaymentApproveSubscriptionActionData(BaseModel):
+class ListCounterparties200Response(BaseModel):
     """
-    PaymentApproveSubscriptionActionData
+    ListCounterparties200Response
     """  # noqa: E501
-    action_type: PaymentSubscriptionActionType
-    subscription_id: StrictStr = Field(description="The subscription id in cobo.")
-    permit_data: Optional[StrictStr] = Field(default=None, description="The signature of permit.")
-    __properties: ClassVar[List[str]] = ["action_type", "subscription_id", "permit_data"]
+    data: Optional[List[Counterparty]] = None
+    pagination: Optional[Pagination] = None
+    __properties: ClassVar[List[str]] = ["data", "pagination"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +49,7 @@ class PaymentApproveSubscriptionActionData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentApproveSubscriptionActionData from a JSON string"""
+        """Create an instance of ListCounterparties200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,11 +70,21 @@ class PaymentApproveSubscriptionActionData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        _items = []
+        if self.data:
+            for _item in self.data:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['data'] = _items
+        # override the default output from pydantic by calling `to_dict()` of pagination
+        if self.pagination:
+            _dict['pagination'] = self.pagination.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentApproveSubscriptionActionData from a dict"""
+        """Create an instance of ListCounterparties200Response from a dict"""
         if obj is None:
             return None
 
@@ -82,9 +92,8 @@ class PaymentApproveSubscriptionActionData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "action_type": obj.get("action_type"),
-            "subscription_id": obj.get("subscription_id"),
-            "permit_data": obj.get("permit_data")
+            "data": [Counterparty.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
+            "pagination": Pagination.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
         })
         return _obj
 

@@ -43,6 +43,9 @@ class TestListSubscriptionActions200Response(unittest.TestCase):
                         merchant_id = '123e457-e89b-12d3-a456-426614174004', 
                         merchant_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc', 
                         data = null, 
+                        transaction_ids = [
+                            ''
+                            ], 
                         status = 'Pending', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )

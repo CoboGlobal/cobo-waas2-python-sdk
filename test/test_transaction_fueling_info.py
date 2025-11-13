@@ -35,7 +35,8 @@ class TestTransactionFuelingInfo(unittest.TestCase):
         if include_optional:
             return TransactionFuelingInfo(
                 request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051',
-                transaction_id = 'b0530b27-104f-4338-87de-de01500326ea'
+                transaction_id = 'b0530b27-104f-4338-87de-de01500326ea',
+                main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea'
             )
         else:
             return TransactionFuelingInfo(

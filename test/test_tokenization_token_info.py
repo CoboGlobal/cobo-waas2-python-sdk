@@ -44,7 +44,8 @@ class TestTokenizationTokenInfo(unittest.TestCase):
                 token_access_activated = False,
                 status = 'Active',
                 total_supply = '133399',
-                holdings = '12399'
+                holdings = '12399',
+                archived = False
             )
         else:
             return TokenizationTokenInfo(
@@ -54,6 +55,7 @@ class TestTokenizationTokenInfo(unittest.TestCase):
                 token_standard = 'ERC20',
                 decimals = 18,
                 status = 'Active',
+                archived = False,
         )
         """
 

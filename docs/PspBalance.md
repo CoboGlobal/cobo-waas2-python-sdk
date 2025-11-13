@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **refunded_amount** | **str** | The psp total refunded amount. | [optional] 
 **total_balance** | **str** | The psp total balance. | [optional] 
 **available_balance** | **str** | The psp available balance. | [optional] 
+**locked_balance** | **str** | The psp locked balance. | [optional] 
 
 ## Example
 

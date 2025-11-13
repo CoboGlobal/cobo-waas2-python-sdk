@@ -7,13 +7,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action_type** | [**PaymentSubscriptionActionType**](PaymentSubscriptionActionType.md) |  | 
 **user_address** | **str** | The subscription user address. | 
-**amount** | **str** | The subscription crypto amount.  | 
 **token_id** | **str** | The ID of the cryptocurrency you want to subscription. Supported values:  - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDCOIN&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC2&#x60;, &#x60;BSC_USDC&#x60; - USDT: &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
-**discount_rate** | **int** | the discount rate, discount_rate/10000 | [optional] 
+**charge_amount** | **str** | The subscription plan crypto amount with input token_id.  | 
 **subscription_id** | **str** | The subscription id in cobo. | 
-**permit_data** | **str** | The signature of permit. | [optional] 
-**signature** | **str** | The signature for transaction. | 
-**periods** | **int** | The periods needed updated. | [optional] 
+**signature** | **str** | The signature for transaction. charge action is not required. | 
+**deadline** | **int** | The signature deadline for transaction. charge action is not required. | 
+**periods** | **int** | The periods needed updated. | 
 **new_plan_id** | **str** | The new plan id in cobo. | 
 
 ## Example

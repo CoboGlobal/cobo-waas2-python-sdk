@@ -39,6 +39,7 @@ class TestPaymentSubscriptionPlan(unittest.TestCase):
                 period_type = 'Yearly',
                 periods = 12,
                 interval = 2592000,
+                trial_period = 604800,
                 amount = '500.00',
                 token_id = 'ETH_USDT',
                 currency = 'USD'

@@ -29,11 +29,12 @@ from cobo_waas2.models.transaction_sol_contract_destination import TransactionSo
 from cobo_waas2.models.transaction_stellar_destination import TransactionStellarDestination
 from cobo_waas2.models.transaction_transfer_to_address_destination import TransactionTransferToAddressDestination
 from cobo_waas2.models.transaction_transfer_to_wallet_destination import TransactionTransferToWalletDestination
+from cobo_waas2.models.transaction_tron_contract_destination import TransactionTronContractDestination
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSACTIONDESTINATION_ONE_OF_SCHEMAS = ["TransactionBIP137Destination", "TransactionBIP322Destination", "TransactionCosmosAdr36Destination", "TransactionCosmosContractDestination", "TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionRawMessageSignDestination", "TransactionSolContractDestination", "TransactionStellarDestination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination"]
+TRANSACTIONDESTINATION_ONE_OF_SCHEMAS = ["TransactionBIP137Destination", "TransactionBIP322Destination", "TransactionCosmosAdr36Destination", "TransactionCosmosContractDestination", "TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionRawMessageSignDestination", "TransactionSolContractDestination", "TransactionStellarDestination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination", "TransactionTronContractDestination"]
 
 class TransactionDestination(BaseModel):
     """
@@ -67,8 +68,10 @@ class TransactionDestination(BaseModel):
     oneof_schema_13_validator: Optional[TransactionCosmosAdr36Destination] = None
     # data type: TransactionStellarDestination
     oneof_schema_14_validator: Optional[TransactionStellarDestination] = None
-    actual_instance: Optional[Union[TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination]] = None
-    one_of_schemas: Set[str] = { "TransactionBIP137Destination", "TransactionBIP322Destination", "TransactionCosmosAdr36Destination", "TransactionCosmosContractDestination", "TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionRawMessageSignDestination", "TransactionSolContractDestination", "TransactionStellarDestination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination" }
+    # data type: TransactionTronContractDestination
+    oneof_schema_15_validator: Optional[TransactionTronContractDestination] = None
+    actual_instance: Optional[Union[TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination, TransactionTronContractDestination]] = None
+    one_of_schemas: Set[str] = { "TransactionBIP137Destination", "TransactionBIP322Destination", "TransactionCosmosAdr36Destination", "TransactionCosmosContractDestination", "TransactionDepositToAddressDestination", "TransactionDepositToWalletDestination", "TransactionEvmContractDestination", "TransactionMessageSignEIP191Destination", "TransactionMessageSignEIP712Destination", "TransactionRawMessageSignDestination", "TransactionSolContractDestination", "TransactionStellarDestination", "TransactionTransferToAddressDestination", "TransactionTransferToWalletDestination", "TransactionTronContractDestination" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -164,12 +167,17 @@ class TransactionDestination(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionStellarDestination`")
         else:
             match += 1
+        # validate data type: TransactionTronContractDestination
+        if not isinstance(v, TransactionTronContractDestination):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionTronContractDestination`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination, TransactionTronContractDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination, TransactionTronContractDestination. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -264,6 +272,11 @@ class TransactionDestination(BaseModel):
             instance.actual_instance = TransactionStellarDestination.from_json(json_str)
             return instance
 
+        # check if data type is `TransactionTronContractDestination`
+        if _data_type == "TRON_Contract":
+            instance.actual_instance = TransactionTronContractDestination.from_json(json_str)
+            return instance
+
         # check if data type is `TransactionBIP137Destination`
         if _data_type == "TransactionBIP137Destination":
             instance.actual_instance = TransactionBIP137Destination.from_json(json_str)
@@ -332,6 +345,11 @@ class TransactionDestination(BaseModel):
         # check if data type is `TransactionTransferToWalletDestination`
         if _data_type == "TransactionTransferToWalletDestination":
             instance.actual_instance = TransactionTransferToWalletDestination.from_json(json_str)
+            return instance
+
+        # check if data type is `TransactionTronContractDestination`
+        if _data_type == "TransactionTronContractDestination":
+            instance.actual_instance = TransactionTronContractDestination.from_json(json_str)
             return instance
 
         return instance
@@ -419,14 +437,20 @@ class TransactionDestination(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TransactionTronContractDestination
+        try:
+            instance.actual_instance = TransactionTronContractDestination.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination, TransactionTronContractDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransactionDestination with oneOf schemas: TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination, TransactionTronContractDestination. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -440,7 +464,7 @@ class TransactionDestination(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionBIP137Destination, TransactionBIP322Destination, TransactionCosmosAdr36Destination, TransactionCosmosContractDestination, TransactionDepositToAddressDestination, TransactionDepositToWalletDestination, TransactionEvmContractDestination, TransactionMessageSignEIP191Destination, TransactionMessageSignEIP712Destination, TransactionRawMessageSignDestination, TransactionSolContractDestination, TransactionStellarDestination, TransactionTransferToAddressDestination, TransactionTransferToWalletDestination, TransactionTronContractDestination]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

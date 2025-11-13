@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **merchant_address** | **str** | The merchant address in cobo. | 
 **user_address** | **str** | The user address in subscription. | 
 **token_id** | **str** | The token_id in subscription. | 
-**amount** | **str** | The amount in subscription. | 
+**charge_amount** | **str** | The charge amount in subscription. | [optional] 
 **start_time** | **int** | The subscription start timestamp. | 
 **expiration_time** | **int** | The subscription expired timestamp. | 
 **charges_made** | **int** | The subscription charge times. | 

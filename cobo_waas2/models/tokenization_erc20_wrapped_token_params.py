@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.tokenization_erc20_wrapped_token_permission_params import TokenizationERC20WrappedTokenPermissionParams
 from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
@@ -30,11 +30,10 @@ class TokenizationERC20WrappedTokenParams(BaseModel):
     standard: TokenizationTokenStandard
     name: StrictStr = Field(description="The name of the token.")
     symbol: StrictStr = Field(description="The symbol of the token.")
-    decimals: StrictInt = Field(description="The number of decimals for the token.")
     permissions: Optional[TokenizationERC20WrappedTokenPermissionParams] = None
     token_access_activated: Optional[StrictBool] = Field(default=False, description="Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations.")
     underlying_token: StrictStr = Field(description="The address of the underlying token that this tokenized asset represents.")
-    __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "decimals", "permissions", "token_access_activated", "underlying_token"]
+    __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "permissions", "token_access_activated", "underlying_token"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +92,6 @@ class TokenizationERC20WrappedTokenParams(BaseModel):
             "standard": obj.get("standard"),
             "name": obj.get("name"),
             "symbol": obj.get("symbol"),
-            "decimals": obj.get("decimals"),
             "permissions": TokenizationERC20WrappedTokenPermissionParams.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
             "token_access_activated": obj.get("token_access_activated") if obj.get("token_access_activated") is not None else False,
             "underlying_token": obj.get("underlying_token")

@@ -26,16 +26,18 @@ class PaymentSubscriptionPlanDetail(BaseModel):
     """
     PaymentSubscriptionPlanDetail
     """  # noqa: E501
-    blockchain_plan_id: Optional[StrictStr] = Field(default=None, description="The subscription plan id in blockchain.")
     plan_id: StrictStr = Field(description="The plan id in cobo.")
     developer_plan_id: StrictStr = Field(description="The developer plan id.")
     period_type: PaymentSubscriptionPeriodType
     periods: StrictInt
     interval: StrictInt
+    trial_period: Optional[StrictInt] = Field(default=None, description="probation period")
     amount: StrictStr = Field(description="The subscription plan amount.  - If `currency` is set, this represents the subscription amount in the specified fiat currency. - If `currency` isn't set, this represents the settlement amount in the specified cryptocurrency. ")
     token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency you want to subscription. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC` - USDT: `ETH_USDT`, `ARBITRUM_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
     currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for settling the cryptocurrency. Currently, only `USD` is supported. Specify this field when `payout_channel` is set to `OffRamp`.")
-    __properties: ClassVar[List[str]] = ["plan_id", "developer_plan_id", "period_type", "periods", "interval", "amount", "token_id", "currency"]
+    charge_amount: Optional[StrictStr] = Field(default=None, description="The subscription plan crypto amount with input token_id. ")
+    contract_address: Optional[StrictStr] = Field(default=None, description="The subscription contract address in cobo.")
+    __properties: ClassVar[List[str]] = ["plan_id", "developer_plan_id", "period_type", "periods", "interval", "trial_period", "amount", "token_id", "currency", "charge_amount", "contract_address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,9 +95,12 @@ class PaymentSubscriptionPlanDetail(BaseModel):
             "period_type": obj.get("period_type"),
             "periods": obj.get("periods"),
             "interval": obj.get("interval"),
+            "trial_period": obj.get("trial_period"),
             "amount": obj.get("amount"),
             "token_id": obj.get("token_id"),
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "charge_amount": obj.get("charge_amount"),
+            "contract_address": obj.get("contract_address")
         })
         return _obj
 

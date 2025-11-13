@@ -35,10 +35,13 @@ class TestTokenizationUpdatePermissionsRequest(unittest.TestCase):
         if include_optional:
             return TokenizationUpdatePermissionsRequest(
                 source = None,
-                action = 'add',
-                address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-                permissions = [
-                    'MintTokens'
+                addresses = [
+                    cobo_waas2.models.tokenization_update_address_permissions.TokenizationUpdateAddressPermissions(
+                        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', 
+                        action = 'add', 
+                        permissions = [
+                            'MintTokens'
+                            ], )
                     ],
                 app_initiator = 'steve@example.com',
                 fee = None,
@@ -47,10 +50,13 @@ class TestTokenizationUpdatePermissionsRequest(unittest.TestCase):
         else:
             return TokenizationUpdatePermissionsRequest(
                 source = None,
-                action = 'add',
-                address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-                permissions = [
-                    'MintTokens'
+                addresses = [
+                    cobo_waas2.models.tokenization_update_address_permissions.TokenizationUpdateAddressPermissions(
+                        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', 
+                        action = 'add', 
+                        permissions = [
+                            'MintTokens'
+                            ], )
                     ],
                 fee = None,
         )

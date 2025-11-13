@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.payment_approve_subscription_action_data import PaymentApproveSubscriptionActionData
+from cobo_waas2.models.payment_charge_subscription_action_data import PaymentChargeSubscriptionActionData
 
 
-class TestPaymentApproveSubscriptionActionData(unittest.TestCase):
-    """PaymentApproveSubscriptionActionData unit test stubs"""
+class TestPaymentChargeSubscriptionActionData(unittest.TestCase):
+    """PaymentChargeSubscriptionActionData unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,29 +24,30 @@ class TestPaymentApproveSubscriptionActionData(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> PaymentApproveSubscriptionActionData:
-        """Test PaymentApproveSubscriptionActionData
+    def make_instance(self, include_optional) -> PaymentChargeSubscriptionActionData:
+        """Test PaymentChargeSubscriptionActionData
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `PaymentApproveSubscriptionActionData`
+        # uncomment below to create an instance of `PaymentChargeSubscriptionActionData`
         """
-        model = PaymentApproveSubscriptionActionData()
+        model = PaymentChargeSubscriptionActionData()
         if include_optional:
-            return PaymentApproveSubscriptionActionData(
+            return PaymentChargeSubscriptionActionData(
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
-                permit_data = ''
+                charge_amount = '500.00'
             )
         else:
-            return PaymentApproveSubscriptionActionData(
+            return PaymentChargeSubscriptionActionData(
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
+                charge_amount = '500.00',
         )
         """
 
-    def testPaymentApproveSubscriptionActionData(self):
-        """Test PaymentApproveSubscriptionActionData"""
+    def testPaymentChargeSubscriptionActionData(self):
+        """Test PaymentChargeSubscriptionActionData"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

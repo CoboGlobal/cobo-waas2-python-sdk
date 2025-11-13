@@ -21,14 +21,14 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetExchangeRate200Response(BaseModel):
+class IntermediaryBankInfo(BaseModel):
     """
-    GetExchangeRate200Response
+    IntermediaryBankInfo
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token ID, which identifies the cryptocurrency.")
-    currency: StrictStr = Field(description="The fiat currency.")
-    rate: StrictStr = Field(description="The current exchange rate between the specified currency pair. Expressed as the amount of fiat currency per one unit of cryptocurrency. For example, if the cryptocurrency is USDT and the fiat currency is USD, a rate of \"0.99\" means 1 USDT = 0.99 USD.")
-    __properties: ClassVar[List[str]] = ["token_id", "currency", "rate"]
+    bank_name: StrictStr = Field(description="The name of the intermediary bank.")
+    bank_address: StrictStr = Field(description="The address of the intermediary bank.")
+    bank_swift_code: StrictStr = Field(description="The SWIFT or BIC code of the intermediary bank.")
+    __properties: ClassVar[List[str]] = ["bank_name", "bank_address", "bank_swift_code"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class GetExchangeRate200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetExchangeRate200Response from a JSON string"""
+        """Create an instance of IntermediaryBankInfo from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class GetExchangeRate200Response(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetExchangeRate200Response from a dict"""
+        """Create an instance of IntermediaryBankInfo from a dict"""
         if obj is None:
             return None
 
@@ -81,9 +81,9 @@ class GetExchangeRate200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "token_id": obj.get("token_id"),
-            "currency": obj.get("currency"),
-            "rate": obj.get("rate")
+            "bank_name": obj.get("bank_name"),
+            "bank_address": obj.get("bank_address"),
+            "bank_swift_code": obj.get("bank_swift_code")
         })
         return _obj
 

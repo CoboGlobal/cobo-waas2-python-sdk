@@ -35,6 +35,7 @@ class TestEstimatedUtxoFeeSlow(unittest.TestCase):
         if include_optional:
             return EstimatedUtxoFeeSlow(
                 fee_rate = '50',
+                fallback = True,
                 fee_amount = '0.1'
             )
         else:

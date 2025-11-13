@@ -18,11 +18,12 @@ from typing import Any, List, Optional
 from cobo_waas2.models.tokenization_erc20_token_params import TokenizationERC20TokenParams
 from cobo_waas2.models.tokenization_erc20_wrapped_token_params import TokenizationERC20WrappedTokenParams
 from cobo_waas2.models.tokenization_sol_token_params import TokenizationSOLTokenParams
+from cobo_waas2.models.tokenization_sol_wrapped_token_params import TokenizationSOLWrappedTokenParams
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TOKENIZATIONISSUETOKENPARAMSTOKENPARAMS_ONE_OF_SCHEMAS = ["TokenizationERC20TokenParams", "TokenizationERC20WrappedTokenParams", "TokenizationSOLTokenParams"]
+TOKENIZATIONISSUETOKENPARAMSTOKENPARAMS_ONE_OF_SCHEMAS = ["TokenizationERC20TokenParams", "TokenizationERC20WrappedTokenParams", "TokenizationSOLTokenParams", "TokenizationSOLWrappedTokenParams"]
 
 class TokenizationIssueTokenParamsTokenParams(BaseModel):
     """
@@ -34,8 +35,10 @@ class TokenizationIssueTokenParamsTokenParams(BaseModel):
     oneof_schema_2_validator: Optional[TokenizationERC20WrappedTokenParams] = None
     # data type: TokenizationSOLTokenParams
     oneof_schema_3_validator: Optional[TokenizationSOLTokenParams] = None
-    actual_instance: Optional[Union[TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams]] = None
-    one_of_schemas: Set[str] = { "TokenizationERC20TokenParams", "TokenizationERC20WrappedTokenParams", "TokenizationSOLTokenParams" }
+    # data type: TokenizationSOLWrappedTokenParams
+    oneof_schema_4_validator: Optional[TokenizationSOLWrappedTokenParams] = None
+    actual_instance: Optional[Union[TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams, TokenizationSOLWrappedTokenParams]] = None
+    one_of_schemas: Set[str] = { "TokenizationERC20TokenParams", "TokenizationERC20WrappedTokenParams", "TokenizationSOLTokenParams", "TokenizationSOLWrappedTokenParams" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -76,12 +79,17 @@ class TokenizationIssueTokenParamsTokenParams(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TokenizationSOLTokenParams`")
         else:
             match += 1
+        # validate data type: TokenizationSOLWrappedTokenParams
+        if not isinstance(v, TokenizationSOLWrappedTokenParams):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TokenizationSOLWrappedTokenParams`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams, TokenizationSOLWrappedTokenParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams, TokenizationSOLWrappedTokenParams. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -111,6 +119,11 @@ class TokenizationIssueTokenParamsTokenParams(BaseModel):
             instance.actual_instance = TokenizationERC20WrappedTokenParams.from_json(json_str)
             return instance
 
+        # check if data type is `TokenizationSOLWrappedTokenParams`
+        if _data_type == "SOLWrapper":
+            instance.actual_instance = TokenizationSOLWrappedTokenParams.from_json(json_str)
+            return instance
+
         # check if data type is `TokenizationSOLTokenParams`
         if _data_type == "SPLToken2022":
             instance.actual_instance = TokenizationSOLTokenParams.from_json(json_str)
@@ -129,6 +142,11 @@ class TokenizationIssueTokenParamsTokenParams(BaseModel):
         # check if data type is `TokenizationSOLTokenParams`
         if _data_type == "TokenizationSOLTokenParams":
             instance.actual_instance = TokenizationSOLTokenParams.from_json(json_str)
+            return instance
+
+        # check if data type is `TokenizationSOLWrappedTokenParams`
+        if _data_type == "TokenizationSOLWrappedTokenParams":
+            instance.actual_instance = TokenizationSOLWrappedTokenParams.from_json(json_str)
             return instance
 
         return instance
@@ -150,14 +168,20 @@ class TokenizationIssueTokenParamsTokenParams(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TokenizationSOLWrappedTokenParams
+        try:
+            instance.actual_instance = TokenizationSOLWrappedTokenParams.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams, TokenizationSOLWrappedTokenParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TokenizationIssueTokenParamsTokenParams with oneOf schemas: TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams, TokenizationSOLWrappedTokenParams. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -171,7 +195,7 @@ class TokenizationIssueTokenParamsTokenParams(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TokenizationERC20TokenParams, TokenizationERC20WrappedTokenParams, TokenizationSOLTokenParams, TokenizationSOLWrappedTokenParams]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class AutoFuelType(str, Enum):
     """
-    The mode of transaction fee payment using Fee Station. Currently, Fee Station supports EVM-compatible and TRON transactions initiated from MPC Wallets (Organization-Controlled). For more details, refer to [Fee Station](https://manuals.cobo.com/en/portal/fee-station/introduction). - `ProActiveAutoFuel`: Always use Fee Station to pay transaction fees. - `PassiveAutoFuel`: Use Fee Station only when the source address balance is insufficient to cover the transaction fees. - `UsePortalPreference`: Use fueling strategy based on Portal configuration.  Please note that the TRON chain does not support `PassiveAutoFuel` due to its fee delegation mechanism. 
+    The mode of transaction fee payment using Fee Station. Currently, Fee Station supports transactions made with MPC Wallets on EVM-compatible chains, TRON, and Solana. For more details, refer to [Fee Station](https://manuals.cobo.com/en/portal/fee-station/introduction).  - `ProActiveAutoFuel`: Always use Fee Station to pay transaction fees.   - `PassiveAutoFuel`: Use Fee Station only when the source address balance is insufficient to cover transaction fees.   - `UsePortalPreference`: Use fueling strategy based on the Portal configuration.   - `DisableAutoFuel`: Do not use Fee Station for transaction fee payment under any circumstances.    If this parameter is **not specified**, it defaults to the behavior of `UsePortalPreference`.  **Note**: TRON and Solana does not support `PassiveAutoFuel` due to its fee delegation mechanism. 
     """
 
     """
@@ -27,6 +27,7 @@ class AutoFuelType(str, Enum):
     PASSIVEAUTOFUEL = 'PassiveAutoFuel'
     PROACTIVEAUTOFUEL = 'ProActiveAutoFuel'
     USEPORTALPREFERENCE = 'UsePortalPreference'
+    DISABLEAUTOFUEL = 'DisableAutoFuel'
 
     UNKNOWN = None
 
