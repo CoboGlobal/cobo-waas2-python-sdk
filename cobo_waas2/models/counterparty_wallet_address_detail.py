@@ -15,19 +15,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
+from cobo_waas2.models.counterparty_type import CounterpartyType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ReceivedAmountPerAddress(BaseModel):
+class CounterpartyWalletAddressDetail(BaseModel):
     """
-    The total amount of the token that has been received at a given address.
+    CounterpartyWalletAddressDetail
     """  # noqa: E501
-    address: StrictStr = Field(description="The receiving address.")
-    total_received_amount: StrictStr = Field(description="The total amount of the token that has been received at this address.")
-    __properties: ClassVar[List[str]] = ["address", "total_received_amount"]
+    counterparty_id: StrictStr = Field(description="The counterparty ID.")
+    counterparty_name: StrictStr = Field(description="The name of the counterparty.")
+    counterparty_type: CounterpartyType
+    wallet_address_id: StrictStr = Field(description="The wallet address ID.")
+    address: StrictStr = Field(description="The wallet address.")
+    chain_id: StrictStr = Field(description="The chain ID of the cryptocurrency.")
+    updated_timestamp: StrictInt = Field(description="The updated time of the wallet address, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["counterparty_id", "counterparty_name", "counterparty_type", "wallet_address_id", "address", "chain_id", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +53,7 @@ class ReceivedAmountPerAddress(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ReceivedAmountPerAddress from a JSON string"""
+        """Create an instance of CounterpartyWalletAddressDetail from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,7 +78,7 @@ class ReceivedAmountPerAddress(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ReceivedAmountPerAddress from a dict"""
+        """Create an instance of CounterpartyWalletAddressDetail from a dict"""
         if obj is None:
             return None
 
@@ -80,8 +86,13 @@ class ReceivedAmountPerAddress(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "counterparty_id": obj.get("counterparty_id"),
+            "counterparty_name": obj.get("counterparty_name"),
+            "counterparty_type": obj.get("counterparty_type"),
+            "wallet_address_id": obj.get("wallet_address_id"),
             "address": obj.get("address"),
-            "total_received_amount": obj.get("total_received_amount")
+            "chain_id": obj.get("chain_id"),
+            "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj
 

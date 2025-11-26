@@ -35,12 +35,12 @@ class TestCustodialTransferSource(unittest.TestCase):
         if include_optional:
             return CustodialTransferSource(
                 source_type = 'Asset',
-                wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+                wallet_id = 'd3fcfaef-f415-4210-9e5c-fbed0e090495'
             )
         else:
             return CustodialTransferSource(
                 source_type = 'Asset',
-                wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                wallet_id = 'd3fcfaef-f415-4210-9e5c-fbed0e090495',
         )
         """
 

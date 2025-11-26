@@ -34,12 +34,12 @@ class TestLink(unittest.TestCase):
         model = Link()
         if include_optional:
             return Link(
-                url = 'https://checkout.cobo.com/payment',
+                url = 'https://payment-link.dev.cobo.com/payment',
                 token = '01EJ5QW8KtSBesqnRZsmadPgihYf754OnVnNhimKKBi6QQO5PNyr9EXPyFRJGGOF'
             )
         else:
             return Link(
-                url = 'https://checkout.cobo.com/payment',
+                url = 'https://payment-link.dev.cobo.com/payment',
                 token = '01EJ5QW8KtSBesqnRZsmadPgihYf754OnVnNhimKKBi6QQO5PNyr9EXPyFRJGGOF',
         )
         """

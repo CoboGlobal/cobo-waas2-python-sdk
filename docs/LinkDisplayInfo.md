@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**developer_name** | **str** | The brand name to display to end users during the payment process.  | [optional] 
-**logo** | **str** | The URL of your logo image to display to end users during the payment process.  | [optional] 
+**developer_name** | **str** | The brand name to display to end users on the page. This helps users identify who is providing the payment service.  | [optional] 
+**logo** | **str** | The URL of the logo image to display to end users on the page.  | [optional] 
 
 ## Example
 

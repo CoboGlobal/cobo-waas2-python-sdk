@@ -44,6 +44,7 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
+                        crypto_address = '0xabc123456789def0000000000000000000000000', 
                         order_ids = [
                             'O20250304-M1001-1001'
                             ], )
@@ -61,6 +62,7 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
+                        crypto_address = '0xabc123456789def0000000000000000000000000', 
                         order_ids = [
                             'O20250304-M1001-1001'
                             ], )

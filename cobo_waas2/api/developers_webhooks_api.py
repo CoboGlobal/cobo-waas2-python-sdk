@@ -1651,7 +1651,7 @@ class DevelopersWebhooksApi:
     ) -> TriggerTestWebhookEvent201Response:
         """Trigger test event
 
-        This operation tests the functionality of your webhook endpoint by triggering a test webhook event. The test event will be sent to all the endpoints you have registered on Cobo Portal.  You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  <Note>Currently, you can only trigger test webhook events with the event data types `Transaction` and `TSSRequest`.</Note> 
+        This operation tests the functionality of your webhook endpoint by triggering a test webhook event. The test event will be sent to all the endpoints you have registered on Cobo Portal.  You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  <Note>Currently, you can only trigger test webhook events with the event data types [`Transaction`](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type#transaction-events-deposits%2Fwithdrawals%2Fcontract-calls%2Fmessage-signing) and [`TSSRequest`](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type#mpc-tss-request-events).</Note> 
 
         :param trigger_test_webhook_event_request: The request body used to trigger a test webhook event. 
         :type trigger_test_webhook_event_request: TriggerTestWebhookEventRequest
@@ -1697,7 +1697,7 @@ class DevelopersWebhooksApi:
     ) -> ApiResponse[TriggerTestWebhookEvent201Response]:
         """Trigger test event
 
-        This operation tests the functionality of your webhook endpoint by triggering a test webhook event. The test event will be sent to all the endpoints you have registered on Cobo Portal.  You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  <Note>Currently, you can only trigger test webhook events with the event data types `Transaction` and `TSSRequest`.</Note> 
+        This operation tests the functionality of your webhook endpoint by triggering a test webhook event. The test event will be sent to all the endpoints you have registered on Cobo Portal.  You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  <Note>Currently, you can only trigger test webhook events with the event data types [`Transaction`](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type#transaction-events-deposits%2Fwithdrawals%2Fcontract-calls%2Fmessage-signing) and [`TSSRequest`](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type#mpc-tss-request-events).</Note> 
 
         :param trigger_test_webhook_event_request: The request body used to trigger a test webhook event. 
         :type trigger_test_webhook_event_request: TriggerTestWebhookEventRequest
@@ -1743,7 +1743,7 @@ class DevelopersWebhooksApi:
     ) -> RESTResponseType:
         """Trigger test event
 
-        This operation tests the functionality of your webhook endpoint by triggering a test webhook event. The test event will be sent to all the endpoints you have registered on Cobo Portal.  You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  <Note>Currently, you can only trigger test webhook events with the event data types `Transaction` and `TSSRequest`.</Note> 
+        This operation tests the functionality of your webhook endpoint by triggering a test webhook event. The test event will be sent to all the endpoints you have registered on Cobo Portal.  You only need to provide the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  <Note>Currently, you can only trigger test webhook events with the event data types [`Transaction`](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type#transaction-events-deposits%2Fwithdrawals%2Fcontract-calls%2Fmessage-signing) and [`TSSRequest`](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type#mpc-tss-request-events).</Note> 
 
         :param trigger_test_webhook_event_request: The request body used to trigger a test webhook event. 
         :type trigger_test_webhook_event_request: TriggerTestWebhookEventRequest

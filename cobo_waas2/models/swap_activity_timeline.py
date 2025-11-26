@@ -27,7 +27,7 @@ class SwapActivityTimeline(BaseModel):
     """  # noqa: E501
     action: StrictStr = Field(description="The action in the swap activity. Possible values include:   - `Submitted`: The swap request has been submitted.   - `Pending Authorization`: The swap request is pending authorization.   - `Bridge {Token}`: The token is being bridged to the destination chain.   - `Swap {Token}`: The token is being exchanged to the destination token.   - `Cobo Confirmation`: The swap result is pending Cobo's final confirmation. ")
     status: StrictStr = Field(description="The status of the action. Possible values include:   - `Success`: The action completed successfully.   - `Processing`: The action is being processed.   - `Failed`: The action failed. ")
-    timestamp: Optional[StrictInt] = Field(default=None, description="The time when the action occurred, in Unix timestamp format, measured in milliseconds.  ")
+    timestamp: Optional[StrictInt] = Field(default=None, description="The time when the action occurred, in Unix timestamp format, measured in milliseconds. ")
     __properties: ClassVar[List[str]] = ["action", "status", "timestamp"]
 
     model_config = ConfigDict(
