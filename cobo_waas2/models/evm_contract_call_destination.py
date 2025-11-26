@@ -27,7 +27,7 @@ class EvmContractCallDestination(BaseModel):
     The information about the transaction destination. Refer to [Transaction sources and destinations](https://www.cobo.com/developers/v2/guides/transactions/sources-and-destinations) for a detailed introduction about the supported sources and destinations for each transaction type.
     """  # noqa: E501
     destination_type: ContractCallDestinationType
-    address: StrictStr = Field(description="The destination address.")
+    address: StrictStr = Field(description="The destination address.  If you are deploying a new contract on an EVM chain, set this address to `0x0000000000000000000000000000000000000000`. ")
     value: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
     calldata: StrictStr = Field(description="The data used to invoke a specific function or method within the specified contract at the destination address, with a maximum length of 65,000 characters. ")
     __properties: ClassVar[List[str]] = ["destination_type", "address", "value", "calldata"]

@@ -18,7 +18,16 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.bank_account import BankAccount
+from cobo_waas2.models.bank_account_status import BankAccountStatus
+from cobo_waas2.models.counterparty import Counterparty
+from cobo_waas2.models.counterparty_detail import CounterpartyDetail
+from cobo_waas2.models.counterparty_type import CounterpartyType
+from cobo_waas2.models.create_counterparty_request import CreateCounterpartyRequest
+from cobo_waas2.models.create_counterparty_wallet_address_request import CreateCounterpartyWalletAddressRequest
 from cobo_waas2.models.create_crypto_address_request import CreateCryptoAddressRequest
+from cobo_waas2.models.create_destination_bank_account_request import CreateDestinationBankAccountRequest
+from cobo_waas2.models.create_destination_request import CreateDestinationRequest
+from cobo_waas2.models.create_destination_wallet_address_request import CreateDestinationWalletAddressRequest
 from cobo_waas2.models.create_merchant_request import CreateMerchantRequest
 from cobo_waas2.models.create_order_link_request import CreateOrderLinkRequest
 from cobo_waas2.models.create_payment_order_request import CreatePaymentOrderRequest
@@ -26,13 +35,30 @@ from cobo_waas2.models.create_refund_link_request import CreateRefundLinkRequest
 from cobo_waas2.models.create_refund_request import CreateRefundRequest
 from cobo_waas2.models.create_settlement_request_request import CreateSettlementRequestRequest
 from cobo_waas2.models.crypto_address import CryptoAddress
+from cobo_waas2.models.delete_counterparty200_response import DeleteCounterparty200Response
+from cobo_waas2.models.delete_counterparty_wallet_address200_response import DeleteCounterpartyWalletAddress200Response
 from cobo_waas2.models.delete_crypto_address201_response import DeleteCryptoAddress201Response
+from cobo_waas2.models.delete_destination200_response import DeleteDestination200Response
+from cobo_waas2.models.delete_destination_bank_account200_response import DeleteDestinationBankAccount200Response
+from cobo_waas2.models.delete_destination_wallet_address200_response import DeleteDestinationWalletAddress200Response
+from cobo_waas2.models.destination import Destination
+from cobo_waas2.models.destination_bank_account import DestinationBankAccount
+from cobo_waas2.models.destination_bank_account_detail import DestinationBankAccountDetail
+from cobo_waas2.models.destination_detail import DestinationDetail
+from cobo_waas2.models.destination_type import DestinationType
+from cobo_waas2.models.enable_destination_whitelist_request import EnableDestinationWhitelistRequest
+from cobo_waas2.models.exchange_rate import ExchangeRate
 from cobo_waas2.models.forced_sweep import ForcedSweep
 from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
 from cobo_waas2.models.get_exchange_rate200_response import GetExchangeRate200Response
 from cobo_waas2.models.get_refunds200_response import GetRefunds200Response
 from cobo_waas2.models.get_settlement_info_by_ids200_response import GetSettlementInfoByIds200Response
 from cobo_waas2.models.link import Link
+from cobo_waas2.models.list_counterparties200_response import ListCounterparties200Response
+from cobo_waas2.models.list_counterparty_wallet_address200_response import ListCounterpartyWalletAddress200Response
+from cobo_waas2.models.list_destination_bank_accounts200_response import ListDestinationBankAccounts200Response
+from cobo_waas2.models.list_destination_wallet_addresses200_response import ListDestinationWalletAddresses200Response
+from cobo_waas2.models.list_destinations200_response import ListDestinations200Response
 from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
 from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBalances200Response
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
@@ -47,16 +73,20 @@ from cobo_waas2.models.order import Order
 from cobo_waas2.models.payment_estimate_fee201_response import PaymentEstimateFee201Response
 from cobo_waas2.models.payment_estimate_fee_request import PaymentEstimateFeeRequest
 from cobo_waas2.models.psp_balance import PspBalance
-from cobo_waas2.models.received_amount_per_address import ReceivedAmountPerAddress
+from cobo_waas2.models.query_destination_whitelist_enabled200_response import QueryDestinationWhitelistEnabled200Response
 from cobo_waas2.models.refund import Refund
 from cobo_waas2.models.settlement import Settlement
 from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.top_up_address import TopUpAddress
 from cobo_waas2.models.update_bank_account_by_id_request import UpdateBankAccountByIdRequest
+from cobo_waas2.models.update_counterparty_by_id_request import UpdateCounterpartyByIdRequest
+from cobo_waas2.models.update_destination_bank_account import UpdateDestinationBankAccount
+from cobo_waas2.models.update_destination_by_id_request import UpdateDestinationByIdRequest
 from cobo_waas2.models.update_merchant_by_id_request import UpdateMerchantByIdRequest
 from cobo_waas2.models.update_payment_order_request import UpdatePaymentOrderRequest
 from cobo_waas2.models.update_refund_by_id_request import UpdateRefundByIdRequest
 from cobo_waas2.models.update_top_up_address import UpdateTopUpAddress
+from cobo_waas2.models.wallet_address import WalletAddress
 from cobo_waas2.models.wallet_setup import WalletSetup
 
 from cobo_waas2.api_client import ApiClient, RequestSerialized
@@ -75,6 +105,194 @@ class PaymentApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def batch_get_exchange_rates(
+        self,
+        token_ids: Annotated[StrictStr, Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). ")],
+        currencies: Annotated[StrictStr, Field(description="List of the fiat currencies, separated by comma. Currently, only `USD` is supported. ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> List[ExchangeRate]:
+        """Batch get exchange rates
+
+        This operation retrieves the current exchange rates between a specified currency and a list of token IDs. 
+
+        :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  (required)
+        :type token_ids: str
+        :param currencies: List of the fiat currencies, separated by comma. Currently, only `USD` is supported.  (required)
+        :type currencies: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._batch_get_exchange_rates_serialize(
+            token_ids=token_ids,
+            currencies=currencies,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ExchangeRate]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def batch_get_exchange_rates_with_http_info(
+        self,
+        token_ids: Annotated[StrictStr, Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). ")],
+        currencies: Annotated[StrictStr, Field(description="List of the fiat currencies, separated by comma. Currently, only `USD` is supported. ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[List[ExchangeRate]]:
+        """Batch get exchange rates
+
+        This operation retrieves the current exchange rates between a specified currency and a list of token IDs. 
+
+        :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  (required)
+        :type token_ids: str
+        :param currencies: List of the fiat currencies, separated by comma. Currently, only `USD` is supported.  (required)
+        :type currencies: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._batch_get_exchange_rates_serialize(
+            token_ids=token_ids,
+            currencies=currencies,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ExchangeRate]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def batch_get_exchange_rates_without_preload_content(
+        self,
+        token_ids: Annotated[StrictStr, Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). ")],
+        currencies: Annotated[StrictStr, Field(description="List of the fiat currencies, separated by comma. Currently, only `USD` is supported. ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Batch get exchange rates
+
+        This operation retrieves the current exchange rates between a specified currency and a list of token IDs. 
+
+        :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  (required)
+        :type token_ids: str
+        :param currencies: List of the fiat currencies, separated by comma. Currently, only `USD` is supported.  (required)
+        :type currencies: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._batch_get_exchange_rates_serialize(
+            token_ids=token_ids,
+            currencies=currencies,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ExchangeRate]",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _batch_get_exchange_rates_serialize(
+        self,
+        token_ids,
+        currencies,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if token_ids is not None:
+            
+            _query_params.append(('token_ids', token_ids))
+            
+        if currencies is not None:
+            
+            _query_params.append(('currencies', currencies))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/exchange_rates',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
 
     @validate_call
     def cancel_refund_by_id(
@@ -246,6 +464,344 @@ class PaymentApi:
         )
 
     @validate_call
+    def create_counterparty(
+        self,
+        create_counterparty_request: Annotated[Optional[CreateCounterpartyRequest], Field(description="The request body to create a counterparty.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CounterpartyDetail:
+        """Create counterparty
+
+        This operation creates a counterparty. 
+
+        :param create_counterparty_request: The request body to create a counterparty.
+        :type create_counterparty_request: CreateCounterpartyRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_counterparty_serialize(
+            create_counterparty_request=create_counterparty_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CounterpartyDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_counterparty_with_http_info(
+        self,
+        create_counterparty_request: Annotated[Optional[CreateCounterpartyRequest], Field(description="The request body to create a counterparty.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CounterpartyDetail]:
+        """Create counterparty
+
+        This operation creates a counterparty. 
+
+        :param create_counterparty_request: The request body to create a counterparty.
+        :type create_counterparty_request: CreateCounterpartyRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_counterparty_serialize(
+            create_counterparty_request=create_counterparty_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CounterpartyDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_counterparty_without_preload_content(
+        self,
+        create_counterparty_request: Annotated[Optional[CreateCounterpartyRequest], Field(description="The request body to create a counterparty.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create counterparty
+
+        This operation creates a counterparty. 
+
+        :param create_counterparty_request: The request body to create a counterparty.
+        :type create_counterparty_request: CreateCounterpartyRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_counterparty_serialize(
+            create_counterparty_request=create_counterparty_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CounterpartyDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_counterparty_serialize(
+        self,
+        create_counterparty_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_counterparty_request is not None:
+            _body_params = create_counterparty_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/counterparty',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_counterparty_wallet_address(
+        self,
+        create_counterparty_wallet_address_request: Annotated[Optional[CreateCounterpartyWalletAddressRequest], Field(description="The request body to create a counterparty wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> WalletAddress:
+        """Create counterparty wallet address
+
+        This operation creates a counterparty wallet address. 
+
+        :param create_counterparty_wallet_address_request: The request body to create a counterparty wallet address.
+        :type create_counterparty_wallet_address_request: CreateCounterpartyWalletAddressRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_counterparty_wallet_address_serialize(
+            create_counterparty_wallet_address_request=create_counterparty_wallet_address_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "WalletAddress",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_counterparty_wallet_address_with_http_info(
+        self,
+        create_counterparty_wallet_address_request: Annotated[Optional[CreateCounterpartyWalletAddressRequest], Field(description="The request body to create a counterparty wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[WalletAddress]:
+        """Create counterparty wallet address
+
+        This operation creates a counterparty wallet address. 
+
+        :param create_counterparty_wallet_address_request: The request body to create a counterparty wallet address.
+        :type create_counterparty_wallet_address_request: CreateCounterpartyWalletAddressRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_counterparty_wallet_address_serialize(
+            create_counterparty_wallet_address_request=create_counterparty_wallet_address_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "WalletAddress",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_counterparty_wallet_address_without_preload_content(
+        self,
+        create_counterparty_wallet_address_request: Annotated[Optional[CreateCounterpartyWalletAddressRequest], Field(description="The request body to create a counterparty wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create counterparty wallet address
+
+        This operation creates a counterparty wallet address. 
+
+        :param create_counterparty_wallet_address_request: The request body to create a counterparty wallet address.
+        :type create_counterparty_wallet_address_request: CreateCounterpartyWalletAddressRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_counterparty_wallet_address_serialize(
+            create_counterparty_wallet_address_request=create_counterparty_wallet_address_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "WalletAddress",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_counterparty_wallet_address_serialize(
+        self,
+        create_counterparty_wallet_address_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_counterparty_wallet_address_request is not None:
+            _body_params = create_counterparty_wallet_address_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/counterparty/wallet_address',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def create_crypto_address(
         self,
         create_crypto_address_request: Annotated[Optional[CreateCryptoAddressRequest], Field(description="The request body to register a crypto address.")] = None,
@@ -406,6 +962,513 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/crypto_addresses',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_destination(
+        self,
+        create_destination_request: Annotated[Optional[CreateDestinationRequest], Field(description="The request body to create a destination.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DestinationDetail:
+        """Create destination
+
+        This operation creates a destination. 
+
+        :param create_destination_request: The request body to create a destination.
+        :type create_destination_request: CreateDestinationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_serialize(
+            create_destination_request=create_destination_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DestinationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_destination_with_http_info(
+        self,
+        create_destination_request: Annotated[Optional[CreateDestinationRequest], Field(description="The request body to create a destination.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DestinationDetail]:
+        """Create destination
+
+        This operation creates a destination. 
+
+        :param create_destination_request: The request body to create a destination.
+        :type create_destination_request: CreateDestinationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_serialize(
+            create_destination_request=create_destination_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DestinationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_destination_without_preload_content(
+        self,
+        create_destination_request: Annotated[Optional[CreateDestinationRequest], Field(description="The request body to create a destination.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create destination
+
+        This operation creates a destination. 
+
+        :param create_destination_request: The request body to create a destination.
+        :type create_destination_request: CreateDestinationRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_serialize(
+            create_destination_request=create_destination_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DestinationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_destination_serialize(
+        self,
+        create_destination_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_destination_request is not None:
+            _body_params = create_destination_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/destination',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_destination_bank_account(
+        self,
+        create_destination_bank_account_request: Annotated[Optional[CreateDestinationBankAccountRequest], Field(description="The request body to create a destination bank account.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DestinationBankAccount:
+        """Create destination bank account
+
+        This operation creates a destination bank account. 
+
+        :param create_destination_bank_account_request: The request body to create a destination bank account.
+        :type create_destination_bank_account_request: CreateDestinationBankAccountRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_bank_account_serialize(
+            create_destination_bank_account_request=create_destination_bank_account_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DestinationBankAccount",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_destination_bank_account_with_http_info(
+        self,
+        create_destination_bank_account_request: Annotated[Optional[CreateDestinationBankAccountRequest], Field(description="The request body to create a destination bank account.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DestinationBankAccount]:
+        """Create destination bank account
+
+        This operation creates a destination bank account. 
+
+        :param create_destination_bank_account_request: The request body to create a destination bank account.
+        :type create_destination_bank_account_request: CreateDestinationBankAccountRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_bank_account_serialize(
+            create_destination_bank_account_request=create_destination_bank_account_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DestinationBankAccount",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_destination_bank_account_without_preload_content(
+        self,
+        create_destination_bank_account_request: Annotated[Optional[CreateDestinationBankAccountRequest], Field(description="The request body to create a destination bank account.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create destination bank account
+
+        This operation creates a destination bank account. 
+
+        :param create_destination_bank_account_request: The request body to create a destination bank account.
+        :type create_destination_bank_account_request: CreateDestinationBankAccountRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_bank_account_serialize(
+            create_destination_bank_account_request=create_destination_bank_account_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DestinationBankAccount",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_destination_bank_account_serialize(
+        self,
+        create_destination_bank_account_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_destination_bank_account_request is not None:
+            _body_params = create_destination_bank_account_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/destination/bank_account',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_destination_wallet_address(
+        self,
+        create_destination_wallet_address_request: Annotated[Optional[CreateDestinationWalletAddressRequest], Field(description="The request body to create a destination wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> WalletAddress:
+        """Create destination wallet address
+
+        This operation creates a destination wallet address. 
+
+        :param create_destination_wallet_address_request: The request body to create a destination wallet address.
+        :type create_destination_wallet_address_request: CreateDestinationWalletAddressRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_wallet_address_serialize(
+            create_destination_wallet_address_request=create_destination_wallet_address_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "WalletAddress",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_destination_wallet_address_with_http_info(
+        self,
+        create_destination_wallet_address_request: Annotated[Optional[CreateDestinationWalletAddressRequest], Field(description="The request body to create a destination wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[WalletAddress]:
+        """Create destination wallet address
+
+        This operation creates a destination wallet address. 
+
+        :param create_destination_wallet_address_request: The request body to create a destination wallet address.
+        :type create_destination_wallet_address_request: CreateDestinationWalletAddressRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_wallet_address_serialize(
+            create_destination_wallet_address_request=create_destination_wallet_address_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "WalletAddress",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_destination_wallet_address_without_preload_content(
+        self,
+        create_destination_wallet_address_request: Annotated[Optional[CreateDestinationWalletAddressRequest], Field(description="The request body to create a destination wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create destination wallet address
+
+        This operation creates a destination wallet address. 
+
+        :param create_destination_wallet_address_request: The request body to create a destination wallet address.
+        :type create_destination_wallet_address_request: CreateDestinationWalletAddressRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_destination_wallet_address_serialize(
+            create_destination_wallet_address_request=create_destination_wallet_address_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "WalletAddress",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_destination_wallet_address_serialize(
+        self,
+        create_destination_wallet_address_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_destination_wallet_address_request is not None:
+            _body_params = create_destination_wallet_address_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/destination/wallet_address',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1262,7 +2325,7 @@ class PaymentApi:
     @validate_call
     def create_refund_link(
         self,
-        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a payment link for a refund.")] = None,
+        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a refund link.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1274,9 +2337,9 @@ class PaymentApi:
     ) -> Link:
         """Create refund link
 
-        This operation creates a payment link for a refund. 
+        This operation creates a link that points to a Cobo-hosted refund page. The user can submit their desired refund address on the page.  Once the address is submitted, Cobo will automatically create a refund order and initiate the refund process according to your configuration.  For details, see [Create refund link](https://www.cobo.com/developers/v2/payments/create-refund-link). 
 
-        :param create_refund_link_request: The request body to create a payment link for a refund.
+        :param create_refund_link_request: The request body to create a refund link.
         :type create_refund_link_request: CreateRefundLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1308,7 +2371,7 @@ class PaymentApi:
     @validate_call
     def create_refund_link_with_http_info(
         self,
-        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a payment link for a refund.")] = None,
+        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a refund link.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1320,9 +2383,9 @@ class PaymentApi:
     ) -> ApiResponse[Link]:
         """Create refund link
 
-        This operation creates a payment link for a refund. 
+        This operation creates a link that points to a Cobo-hosted refund page. The user can submit their desired refund address on the page.  Once the address is submitted, Cobo will automatically create a refund order and initiate the refund process according to your configuration.  For details, see [Create refund link](https://www.cobo.com/developers/v2/payments/create-refund-link). 
 
-        :param create_refund_link_request: The request body to create a payment link for a refund.
+        :param create_refund_link_request: The request body to create a refund link.
         :type create_refund_link_request: CreateRefundLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1354,7 +2417,7 @@ class PaymentApi:
     @validate_call
     def create_refund_link_without_preload_content(
         self,
-        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a payment link for a refund.")] = None,
+        create_refund_link_request: Annotated[Optional[CreateRefundLinkRequest], Field(description="The request body to create a refund link.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1366,9 +2429,9 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create refund link
 
-        This operation creates a payment link for a refund. 
+        This operation creates a link that points to a Cobo-hosted refund page. The user can submit their desired refund address on the page.  Once the address is submitted, Cobo will automatically create a refund order and initiate the refund process according to your configuration.  For details, see [Create refund link](https://www.cobo.com/developers/v2/payments/create-refund-link). 
 
-        :param create_refund_link_request: The request body to create a payment link for a refund.
+        :param create_refund_link_request: The request body to create a refund link.
         :type create_refund_link_request: CreateRefundLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1598,6 +2661,350 @@ class PaymentApi:
         )
 
     @validate_call
+    def delete_counterparty(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DeleteCounterparty200Response:
+        """Delete counterparty
+
+        This operation deletes a counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_counterparty_serialize(
+            counterparty_id=counterparty_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteCounterparty200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_counterparty_with_http_info(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DeleteCounterparty200Response]:
+        """Delete counterparty
+
+        This operation deletes a counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_counterparty_serialize(
+            counterparty_id=counterparty_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteCounterparty200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_counterparty_without_preload_content(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Delete counterparty
+
+        This operation deletes a counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_counterparty_serialize(
+            counterparty_id=counterparty_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteCounterparty200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_counterparty_serialize(
+        self,
+        counterparty_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if counterparty_id is not None:
+            _path_params['counterparty_id'] = counterparty_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/counterparty/{counterparty_id}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def delete_counterparty_wallet_address(
+        self,
+        wallet_address_id: Annotated[StrictStr, Field(description="The wallet address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DeleteCounterpartyWalletAddress200Response:
+        """Delete counterparty wallet address
+
+        This operation deletes a counterparty wallet address. 
+
+        :param wallet_address_id: The wallet address ID. (required)
+        :type wallet_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_counterparty_wallet_address_serialize(
+            wallet_address_id=wallet_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteCounterpartyWalletAddress200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_counterparty_wallet_address_with_http_info(
+        self,
+        wallet_address_id: Annotated[StrictStr, Field(description="The wallet address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DeleteCounterpartyWalletAddress200Response]:
+        """Delete counterparty wallet address
+
+        This operation deletes a counterparty wallet address. 
+
+        :param wallet_address_id: The wallet address ID. (required)
+        :type wallet_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_counterparty_wallet_address_serialize(
+            wallet_address_id=wallet_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteCounterpartyWalletAddress200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_counterparty_wallet_address_without_preload_content(
+        self,
+        wallet_address_id: Annotated[StrictStr, Field(description="The wallet address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Delete counterparty wallet address
+
+        This operation deletes a counterparty wallet address. 
+
+        :param wallet_address_id: The wallet address ID. (required)
+        :type wallet_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_counterparty_wallet_address_serialize(
+            wallet_address_id=wallet_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteCounterpartyWalletAddress200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_counterparty_wallet_address_serialize(
+        self,
+        wallet_address_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if wallet_address_id is not None:
+            _path_params['wallet_address_id'] = wallet_address_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/counterparty/wallet_address/{wallet_address_id}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def delete_crypto_address(
         self,
         crypto_address_id: Annotated[StrictStr, Field(description="The crypto address ID.")],
@@ -1761,6 +3168,1198 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/crypto_addresses/{crypto_address_id}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def delete_destination(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DeleteDestination200Response:
+        """Delete destination
+
+        This operation deletes a destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_serialize(
+            destination_id=destination_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestination200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_destination_with_http_info(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DeleteDestination200Response]:
+        """Delete destination
+
+        This operation deletes a destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_serialize(
+            destination_id=destination_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestination200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_destination_without_preload_content(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Delete destination
+
+        This operation deletes a destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_serialize(
+            destination_id=destination_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestination200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_destination_serialize(
+        self,
+        destination_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if destination_id is not None:
+            _path_params['destination_id'] = destination_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/destination/{destination_id}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def delete_destination_bank_account(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DeleteDestinationBankAccount200Response:
+        """Delete destination bank account
+
+        This operation deletes a destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_bank_account_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestinationBankAccount200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_destination_bank_account_with_http_info(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DeleteDestinationBankAccount200Response]:
+        """Delete destination bank account
+
+        This operation deletes a destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_bank_account_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestinationBankAccount200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_destination_bank_account_without_preload_content(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Delete destination bank account
+
+        This operation deletes a destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_bank_account_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestinationBankAccount200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_destination_bank_account_serialize(
+        self,
+        bank_account_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bank_account_id is not None:
+            _path_params['bank_account_id'] = bank_account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/destination/bank_account/{bank_account_id}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def delete_destination_wallet_address(
+        self,
+        wallet_address_id: Annotated[StrictStr, Field(description="The wallet address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DeleteDestinationWalletAddress200Response:
+        """Delete destination wallet address
+
+        This operation deletes a destination wallet address. 
+
+        :param wallet_address_id: The wallet address ID. (required)
+        :type wallet_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_wallet_address_serialize(
+            wallet_address_id=wallet_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestinationWalletAddress200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_destination_wallet_address_with_http_info(
+        self,
+        wallet_address_id: Annotated[StrictStr, Field(description="The wallet address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DeleteDestinationWalletAddress200Response]:
+        """Delete destination wallet address
+
+        This operation deletes a destination wallet address. 
+
+        :param wallet_address_id: The wallet address ID. (required)
+        :type wallet_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_wallet_address_serialize(
+            wallet_address_id=wallet_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestinationWalletAddress200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_destination_wallet_address_without_preload_content(
+        self,
+        wallet_address_id: Annotated[StrictStr, Field(description="The wallet address ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Delete destination wallet address
+
+        This operation deletes a destination wallet address. 
+
+        :param wallet_address_id: The wallet address ID. (required)
+        :type wallet_address_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_destination_wallet_address_serialize(
+            wallet_address_id=wallet_address_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteDestinationWalletAddress200Response",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_destination_wallet_address_serialize(
+        self,
+        wallet_address_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if wallet_address_id is not None:
+            _path_params['wallet_address_id'] = wallet_address_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/destination/wallet_address/{wallet_address_id}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def enable_destination_whitelist(
+        self,
+        enable_destination_whitelist_request: Annotated[Optional[EnableDestinationWhitelistRequest], Field(description="The request body to enable or disable the destination whitelist.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> QueryDestinationWhitelistEnabled200Response:
+        """Enable or disable destination whitelist
+
+        This operation enables or disables the whitelist for a destination. 
+
+        :param enable_destination_whitelist_request: The request body to enable or disable the destination whitelist.
+        :type enable_destination_whitelist_request: EnableDestinationWhitelistRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._enable_destination_whitelist_serialize(
+            enable_destination_whitelist_request=enable_destination_whitelist_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "QueryDestinationWhitelistEnabled200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def enable_destination_whitelist_with_http_info(
+        self,
+        enable_destination_whitelist_request: Annotated[Optional[EnableDestinationWhitelistRequest], Field(description="The request body to enable or disable the destination whitelist.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[QueryDestinationWhitelistEnabled200Response]:
+        """Enable or disable destination whitelist
+
+        This operation enables or disables the whitelist for a destination. 
+
+        :param enable_destination_whitelist_request: The request body to enable or disable the destination whitelist.
+        :type enable_destination_whitelist_request: EnableDestinationWhitelistRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._enable_destination_whitelist_serialize(
+            enable_destination_whitelist_request=enable_destination_whitelist_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "QueryDestinationWhitelistEnabled200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def enable_destination_whitelist_without_preload_content(
+        self,
+        enable_destination_whitelist_request: Annotated[Optional[EnableDestinationWhitelistRequest], Field(description="The request body to enable or disable the destination whitelist.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Enable or disable destination whitelist
+
+        This operation enables or disables the whitelist for a destination. 
+
+        :param enable_destination_whitelist_request: The request body to enable or disable the destination whitelist.
+        :type enable_destination_whitelist_request: EnableDestinationWhitelistRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._enable_destination_whitelist_serialize(
+            enable_destination_whitelist_request=enable_destination_whitelist_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "QueryDestinationWhitelistEnabled200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _enable_destination_whitelist_serialize(
+        self,
+        enable_destination_whitelist_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if enable_destination_whitelist_request is not None:
+            _body_params = enable_destination_whitelist_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/destination/enable_whitelist',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_counterparty_detail_by_id(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CounterpartyDetail:
+        """Get counterparty information
+
+        This operation retrieves the detailed information about a specified counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_counterparty_detail_by_id_serialize(
+            counterparty_id=counterparty_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CounterpartyDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_counterparty_detail_by_id_with_http_info(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CounterpartyDetail]:
+        """Get counterparty information
+
+        This operation retrieves the detailed information about a specified counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_counterparty_detail_by_id_serialize(
+            counterparty_id=counterparty_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CounterpartyDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_counterparty_detail_by_id_without_preload_content(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get counterparty information
+
+        This operation retrieves the detailed information about a specified counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_counterparty_detail_by_id_serialize(
+            counterparty_id=counterparty_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CounterpartyDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_counterparty_detail_by_id_serialize(
+        self,
+        counterparty_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if counterparty_id is not None:
+            _path_params['counterparty_id'] = counterparty_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/counterparty/{counterparty_id}/detail',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_destination_bank_account_detail_by_id(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DestinationBankAccountDetail:
+        """Get destination bank account information
+
+        This operation retrieves the detailed information about a specified destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_destination_bank_account_detail_by_id_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationBankAccountDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_destination_bank_account_detail_by_id_with_http_info(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DestinationBankAccountDetail]:
+        """Get destination bank account information
+
+        This operation retrieves the detailed information about a specified destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_destination_bank_account_detail_by_id_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationBankAccountDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_destination_bank_account_detail_by_id_without_preload_content(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get destination bank account information
+
+        This operation retrieves the detailed information about a specified destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_destination_bank_account_detail_by_id_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationBankAccountDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_destination_bank_account_detail_by_id_serialize(
+        self,
+        bank_account_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bank_account_id is not None:
+            _path_params['bank_account_id'] = bank_account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/destination/bank_account/{bank_account_id}/detail',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_destination_detail_by_id(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DestinationDetail:
+        """Get destination information
+
+        This operation retrieves the detailed information about a specified destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_destination_detail_by_id_serialize(
+            destination_id=destination_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_destination_detail_by_id_with_http_info(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DestinationDetail]:
+        """Get destination information
+
+        This operation retrieves the detailed information about a specified destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_destination_detail_by_id_serialize(
+            destination_id=destination_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_destination_detail_by_id_without_preload_content(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get destination information
+
+        This operation retrieves the detailed information about a specified destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_destination_detail_by_id_serialize(
+            destination_id=destination_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_destination_detail_by_id_serialize(
+        self,
+        destination_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if destination_id is not None:
+            _path_params['destination_id'] = destination_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/destination/{destination_id}/detail',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1945,211 +4544,6 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/exchange_rates/{token_id}/{currency}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-        )
-
-    @validate_call
-    def get_payer_balance_by_address(
-        self,
-        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> List[ReceivedAmountPerAddress]:
-        """Get payer balance
-
-        This operation retrieves the total amount received for a specific payer. The information is grouped by token and receiving address. 
-
-        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
-        :type payer_id: str
-        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
-        :type token_id: str
-        :param merchant_id: The merchant ID.
-        :type merchant_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_payer_balance_by_address_serialize(
-            payer_id=payer_id,
-            token_id=token_id,
-            merchant_id=merchant_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[ReceivedAmountPerAddress]",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_payer_balance_by_address_with_http_info(
-        self,
-        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ApiResponse[List[ReceivedAmountPerAddress]]:
-        """Get payer balance
-
-        This operation retrieves the total amount received for a specific payer. The information is grouped by token and receiving address. 
-
-        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
-        :type payer_id: str
-        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
-        :type token_id: str
-        :param merchant_id: The merchant ID.
-        :type merchant_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_payer_balance_by_address_serialize(
-            payer_id=payer_id,
-            token_id=token_id,
-            merchant_id=merchant_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[ReceivedAmountPerAddress]",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_payer_balance_by_address_without_preload_content(
-        self,
-        payer_id: Annotated[StrictStr, Field(description="Unique payer identifier on the Cobo side, auto-generated by the system.")],
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> RESTResponseType:
-        """Get payer balance
-
-        This operation retrieves the total amount received for a specific payer. The information is grouped by token and receiving address. 
-
-        :param payer_id: Unique payer identifier on the Cobo side, auto-generated by the system. (required)
-        :type payer_id: str
-        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
-        :type token_id: str
-        :param merchant_id: The merchant ID.
-        :type merchant_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_payer_balance_by_address_serialize(
-            payer_id=payer_id,
-            token_id=token_id,
-            merchant_id=merchant_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[ReceivedAmountPerAddress]",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_payer_balance_by_address_serialize(
-        self,
-        payer_id,
-        token_id,
-        merchant_id,
-    ) -> RequestSerialized:
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if merchant_id is not None:
-            
-            _query_params.append(('merchant_id', merchant_id))
-            
-        if payer_id is not None:
-            
-            _query_params.append(('payer_id', payer_id))
-            
-        if token_id is not None:
-            
-            _query_params.append(('token_id', token_id))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/payments/balance/payer/address',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3301,7 +5695,7 @@ class PaymentApi:
     def get_top_up_address(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        custom_payer_id: Annotated[StrictStr, Field(description="A unique identifier assigned by the developer to track and identify individual payers in their system.")],
+        custom_payer_id: Annotated[StrictStr, Field(description="A unique identifier to track and identify individual payers in your system.")],
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         _request_timeout: Union[
             None,
@@ -3312,13 +5706,13 @@ class PaymentApi:
             ]
         ] = None,
     ) -> TopUpAddress:
-        """Get top-up address
+        """Create/Get top-up address
 
-        This operation retrieves the information of the dedicated top-up address assigned to a specific payer under a merchant on a specified chain. 
+        This operation creates or retrieves a unique top-up address for a payer.   In the request, you need to provide the `custom_payer_id` parameter to identify the payer in your system and link them to the top-up address.  - If no address exists for the payer on the specified chain, a new address will be created and returned. - If an address already exists for the payer on the specified chain, the existing address details will be returned.  You can also provide the `merchant_id` parameter to specify the merchant to which the payer belongs. If not provided, the default merchant will be used. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
-        :param custom_payer_id: A unique identifier assigned by the developer to track and identify individual payers in their system. (required)
+        :param custom_payer_id: A unique identifier to track and identify individual payers in your system. (required)
         :type custom_payer_id: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
@@ -3355,7 +5749,7 @@ class PaymentApi:
     def get_top_up_address_with_http_info(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        custom_payer_id: Annotated[StrictStr, Field(description="A unique identifier assigned by the developer to track and identify individual payers in their system.")],
+        custom_payer_id: Annotated[StrictStr, Field(description="A unique identifier to track and identify individual payers in your system.")],
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         _request_timeout: Union[
             None,
@@ -3366,13 +5760,13 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[TopUpAddress]:
-        """Get top-up address
+        """Create/Get top-up address
 
-        This operation retrieves the information of the dedicated top-up address assigned to a specific payer under a merchant on a specified chain. 
+        This operation creates or retrieves a unique top-up address for a payer.   In the request, you need to provide the `custom_payer_id` parameter to identify the payer in your system and link them to the top-up address.  - If no address exists for the payer on the specified chain, a new address will be created and returned. - If an address already exists for the payer on the specified chain, the existing address details will be returned.  You can also provide the `merchant_id` parameter to specify the merchant to which the payer belongs. If not provided, the default merchant will be used. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
-        :param custom_payer_id: A unique identifier assigned by the developer to track and identify individual payers in their system. (required)
+        :param custom_payer_id: A unique identifier to track and identify individual payers in your system. (required)
         :type custom_payer_id: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
@@ -3409,7 +5803,7 @@ class PaymentApi:
     def get_top_up_address_without_preload_content(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        custom_payer_id: Annotated[StrictStr, Field(description="A unique identifier assigned by the developer to track and identify individual payers in their system.")],
+        custom_payer_id: Annotated[StrictStr, Field(description="A unique identifier to track and identify individual payers in your system.")],
         merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
         _request_timeout: Union[
             None,
@@ -3420,13 +5814,13 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get top-up address
+        """Create/Get top-up address
 
-        This operation retrieves the information of the dedicated top-up address assigned to a specific payer under a merchant on a specified chain. 
+        This operation creates or retrieves a unique top-up address for a payer.   In the request, you need to provide the `custom_payer_id` parameter to identify the payer in your system and link them to the top-up address.  - If no address exists for the payer on the specified chain, a new address will be created and returned. - If an address already exists for the payer on the specified chain, the existing address details will be returned.  You can also provide the `merchant_id` parameter to specify the merchant to which the payer belongs. If not provided, the default merchant will be used. 
 
         :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
         :type token_id: str
-        :param custom_payer_id: A unique identifier assigned by the developer to track and identify individual payers in their system. (required)
+        :param custom_payer_id: A unique identifier to track and identify individual payers in your system. (required)
         :type custom_payer_id: str
         :param merchant_id: The merchant ID.
         :type merchant_id: str
@@ -3657,6 +6051,518 @@ class PaymentApi:
         )
 
     @validate_call
+    def list_counterparties(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        counterparty_type: Annotated[Optional[CounterpartyType], Field(description="CounterpartyType defines the type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. ")] = None,
+        country: Annotated[Optional[StrictStr], Field(description="The country of the destination, in ISO 3166-1 alpha-3 format.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListCounterparties200Response:
+        """List all counterparties
+
+        This operation retrieves the information of all counterparties.   You can filter the results by using a keyword for fuzzy search on counterparty names. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param counterparty_type: CounterpartyType defines the type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. 
+        :type counterparty_type: CounterpartyType
+        :param country: The country of the destination, in ISO 3166-1 alpha-3 format.
+        :type country: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_counterparties_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            counterparty_type=counterparty_type,
+            country=country,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCounterparties200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_counterparties_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        counterparty_type: Annotated[Optional[CounterpartyType], Field(description="CounterpartyType defines the type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. ")] = None,
+        country: Annotated[Optional[StrictStr], Field(description="The country of the destination, in ISO 3166-1 alpha-3 format.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListCounterparties200Response]:
+        """List all counterparties
+
+        This operation retrieves the information of all counterparties.   You can filter the results by using a keyword for fuzzy search on counterparty names. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param counterparty_type: CounterpartyType defines the type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. 
+        :type counterparty_type: CounterpartyType
+        :param country: The country of the destination, in ISO 3166-1 alpha-3 format.
+        :type country: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_counterparties_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            counterparty_type=counterparty_type,
+            country=country,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCounterparties200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_counterparties_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        counterparty_type: Annotated[Optional[CounterpartyType], Field(description="CounterpartyType defines the type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. ")] = None,
+        country: Annotated[Optional[StrictStr], Field(description="The country of the destination, in ISO 3166-1 alpha-3 format.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List all counterparties
+
+        This operation retrieves the information of all counterparties.   You can filter the results by using a keyword for fuzzy search on counterparty names. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param counterparty_type: CounterpartyType defines the type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. 
+        :type counterparty_type: CounterpartyType
+        :param country: The country of the destination, in ISO 3166-1 alpha-3 format.
+        :type country: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_counterparties_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            counterparty_type=counterparty_type,
+            country=country,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCounterparties200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_counterparties_serialize(
+        self,
+        limit,
+        before,
+        after,
+        keyword,
+        counterparty_type,
+        country,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if keyword is not None:
+            
+            _query_params.append(('keyword', keyword))
+            
+        if counterparty_type is not None:
+            
+            _query_params.append(('counterparty_type', counterparty_type.value))
+            
+        if country is not None:
+            
+            _query_params.append(('country', country))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/counterparty',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_counterparty_wallet_address(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        counterparty_id: Annotated[Optional[StrictStr], Field(description="The counterparty ID.")] = None,
+        chain_ids: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
+        wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListCounterpartyWalletAddress200Response:
+        """List counterparty wallet addresses
+
+        This operation retrieves the information of counterparty wallet addresses. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param counterparty_id: The counterparty ID.
+        :type counterparty_id: str
+        :param chain_ids: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
+        :type chain_ids: str
+        :param wallet_address: The wallet address.
+        :type wallet_address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_counterparty_wallet_address_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            counterparty_id=counterparty_id,
+            chain_ids=chain_ids,
+            wallet_address=wallet_address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCounterpartyWalletAddress200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_counterparty_wallet_address_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        counterparty_id: Annotated[Optional[StrictStr], Field(description="The counterparty ID.")] = None,
+        chain_ids: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
+        wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListCounterpartyWalletAddress200Response]:
+        """List counterparty wallet addresses
+
+        This operation retrieves the information of counterparty wallet addresses. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param counterparty_id: The counterparty ID.
+        :type counterparty_id: str
+        :param chain_ids: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
+        :type chain_ids: str
+        :param wallet_address: The wallet address.
+        :type wallet_address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_counterparty_wallet_address_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            counterparty_id=counterparty_id,
+            chain_ids=chain_ids,
+            wallet_address=wallet_address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCounterpartyWalletAddress200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_counterparty_wallet_address_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        counterparty_id: Annotated[Optional[StrictStr], Field(description="The counterparty ID.")] = None,
+        chain_ids: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
+        wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List counterparty wallet addresses
+
+        This operation retrieves the information of counterparty wallet addresses. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param counterparty_id: The counterparty ID.
+        :type counterparty_id: str
+        :param chain_ids: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
+        :type chain_ids: str
+        :param wallet_address: The wallet address.
+        :type wallet_address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_counterparty_wallet_address_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            counterparty_id=counterparty_id,
+            chain_ids=chain_ids,
+            wallet_address=wallet_address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListCounterpartyWalletAddress200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_counterparty_wallet_address_serialize(
+        self,
+        limit,
+        before,
+        after,
+        counterparty_id,
+        chain_ids,
+        wallet_address,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if counterparty_id is not None:
+            
+            _query_params.append(('counterparty_id', counterparty_id))
+            
+        if chain_ids is not None:
+            
+            _query_params.append(('chain_ids', chain_ids))
+            
+        if wallet_address is not None:
+            
+            _query_params.append(('wallet_address', wallet_address))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/counterparty/wallet_address',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_crypto_addresses(
         self,
         token_id: Annotated[Optional[StrictStr], Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")] = None,
@@ -3819,6 +6725,791 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/crypto_addresses',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_destination_bank_accounts(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        destination_id: Annotated[Optional[StrictStr], Field(description="The destination ID.")] = None,
+        bank_account_status: Annotated[Optional[BankAccountStatus], Field(description="BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListDestinationBankAccounts200Response:
+        """List destination bank accounts
+
+        This operation retrieves the information of destination bank accounts. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param destination_id: The destination ID.
+        :type destination_id: str
+        :param bank_account_status: BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. 
+        :type bank_account_status: BankAccountStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destination_bank_accounts_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            destination_id=destination_id,
+            bank_account_status=bank_account_status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinationBankAccounts200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_destination_bank_accounts_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        destination_id: Annotated[Optional[StrictStr], Field(description="The destination ID.")] = None,
+        bank_account_status: Annotated[Optional[BankAccountStatus], Field(description="BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListDestinationBankAccounts200Response]:
+        """List destination bank accounts
+
+        This operation retrieves the information of destination bank accounts. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param destination_id: The destination ID.
+        :type destination_id: str
+        :param bank_account_status: BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. 
+        :type bank_account_status: BankAccountStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destination_bank_accounts_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            destination_id=destination_id,
+            bank_account_status=bank_account_status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinationBankAccounts200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_destination_bank_accounts_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        destination_id: Annotated[Optional[StrictStr], Field(description="The destination ID.")] = None,
+        bank_account_status: Annotated[Optional[BankAccountStatus], Field(description="BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List destination bank accounts
+
+        This operation retrieves the information of destination bank accounts. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param destination_id: The destination ID.
+        :type destination_id: str
+        :param bank_account_status: BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. 
+        :type bank_account_status: BankAccountStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destination_bank_accounts_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            destination_id=destination_id,
+            bank_account_status=bank_account_status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinationBankAccounts200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_destination_bank_accounts_serialize(
+        self,
+        limit,
+        before,
+        after,
+        keyword,
+        destination_id,
+        bank_account_status,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if keyword is not None:
+            
+            _query_params.append(('keyword', keyword))
+            
+        if destination_id is not None:
+            
+            _query_params.append(('destination_id', destination_id))
+            
+        if bank_account_status is not None:
+            
+            _query_params.append(('bank_account_status', bank_account_status.value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/destination/bank_account',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_destination_wallet_addresses(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        destination_id: Annotated[Optional[StrictStr], Field(description="The destination ID.")] = None,
+        chain_ids: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
+        wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListDestinationWalletAddresses200Response:
+        """List destination wallet addresses
+
+        This operation retrieves the information of destination wallet addresses. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param destination_id: The destination ID.
+        :type destination_id: str
+        :param chain_ids: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
+        :type chain_ids: str
+        :param wallet_address: The wallet address.
+        :type wallet_address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destination_wallet_addresses_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            destination_id=destination_id,
+            chain_ids=chain_ids,
+            wallet_address=wallet_address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinationWalletAddresses200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_destination_wallet_addresses_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        destination_id: Annotated[Optional[StrictStr], Field(description="The destination ID.")] = None,
+        chain_ids: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
+        wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListDestinationWalletAddresses200Response]:
+        """List destination wallet addresses
+
+        This operation retrieves the information of destination wallet addresses. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param destination_id: The destination ID.
+        :type destination_id: str
+        :param chain_ids: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
+        :type chain_ids: str
+        :param wallet_address: The wallet address.
+        :type wallet_address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destination_wallet_addresses_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            destination_id=destination_id,
+            chain_ids=chain_ids,
+            wallet_address=wallet_address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinationWalletAddresses200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_destination_wallet_addresses_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        destination_id: Annotated[Optional[StrictStr], Field(description="The destination ID.")] = None,
+        chain_ids: Annotated[Optional[StrictStr], Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
+        wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List destination wallet addresses
+
+        This operation retrieves the information of destination wallet addresses. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param destination_id: The destination ID.
+        :type destination_id: str
+        :param chain_ids: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
+        :type chain_ids: str
+        :param wallet_address: The wallet address.
+        :type wallet_address: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destination_wallet_addresses_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            destination_id=destination_id,
+            chain_ids=chain_ids,
+            wallet_address=wallet_address,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinationWalletAddresses200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_destination_wallet_addresses_serialize(
+        self,
+        limit,
+        before,
+        after,
+        destination_id,
+        chain_ids,
+        wallet_address,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if destination_id is not None:
+            
+            _query_params.append(('destination_id', destination_id))
+            
+        if chain_ids is not None:
+            
+            _query_params.append(('chain_ids', chain_ids))
+            
+        if wallet_address is not None:
+            
+            _query_params.append(('wallet_address', wallet_address))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/destination/wallet_address',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_destinations(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        destination_type: Annotated[Optional[DestinationType], Field(description="DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. ")] = None,
+        country: Annotated[Optional[StrictStr], Field(description="The country of the destination, in ISO 3166-1 alpha-3 format.")] = None,
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListDestinations200Response:
+        """List all destinations
+
+        This operation retrieves the information of all destinations.   You can filter the results by using a keyword for fuzzy search on destination names. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param destination_type: DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. 
+        :type destination_type: DestinationType
+        :param country: The country of the destination, in ISO 3166-1 alpha-3 format.
+        :type country: str
+        :param merchant_ids: A list of merchant IDs to query.
+        :type merchant_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destinations_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            destination_type=destination_type,
+            country=country,
+            merchant_ids=merchant_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_destinations_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        destination_type: Annotated[Optional[DestinationType], Field(description="DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. ")] = None,
+        country: Annotated[Optional[StrictStr], Field(description="The country of the destination, in ISO 3166-1 alpha-3 format.")] = None,
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListDestinations200Response]:
+        """List all destinations
+
+        This operation retrieves the information of all destinations.   You can filter the results by using a keyword for fuzzy search on destination names. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param destination_type: DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. 
+        :type destination_type: DestinationType
+        :param country: The country of the destination, in ISO 3166-1 alpha-3 format.
+        :type country: str
+        :param merchant_ids: A list of merchant IDs to query.
+        :type merchant_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destinations_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            destination_type=destination_type,
+            country=country,
+            merchant_ids=merchant_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_destinations_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        keyword: Annotated[Optional[StrictStr], Field(description="A search term used for fuzzy matching of merchant names.")] = None,
+        destination_type: Annotated[Optional[DestinationType], Field(description="DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. ")] = None,
+        country: Annotated[Optional[StrictStr], Field(description="The country of the destination, in ISO 3166-1 alpha-3 format.")] = None,
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List all destinations
+
+        This operation retrieves the information of all destinations.   You can filter the results by using a keyword for fuzzy search on destination names. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param keyword: A search term used for fuzzy matching of merchant names.
+        :type keyword: str
+        :param destination_type: DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. 
+        :type destination_type: DestinationType
+        :param country: The country of the destination, in ISO 3166-1 alpha-3 format.
+        :type country: str
+        :param merchant_ids: A list of merchant IDs to query.
+        :type merchant_ids: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_destinations_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            keyword=keyword,
+            destination_type=destination_type,
+            country=country,
+            merchant_ids=merchant_ids,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDestinations200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_destinations_serialize(
+        self,
+        limit,
+        before,
+        after,
+        keyword,
+        destination_type,
+        country,
+        merchant_ids,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if keyword is not None:
+            
+            _query_params.append(('keyword', keyword))
+            
+        if destination_type is not None:
+            
+            _query_params.append(('destination_type', destination_type.value))
+            
+        if country is not None:
+            
+            _query_params.append(('country', country))
+            
+        if merchant_ids is not None:
+            
+            _query_params.append(('merchant_ids', merchant_ids))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/destination',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6217,6 +9908,160 @@ class PaymentApi:
         )
 
     @validate_call
+    def query_destination_whitelist_enabled(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> QueryDestinationWhitelistEnabled200Response:
+        """Query destination whitelist enabled status
+
+        This operation retrieves the information of whether the destination whitelist is enabled. 
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._query_destination_whitelist_enabled_serialize(
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "QueryDestinationWhitelistEnabled200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def query_destination_whitelist_enabled_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[QueryDestinationWhitelistEnabled200Response]:
+        """Query destination whitelist enabled status
+
+        This operation retrieves the information of whether the destination whitelist is enabled. 
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._query_destination_whitelist_enabled_serialize(
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "QueryDestinationWhitelistEnabled200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def query_destination_whitelist_enabled_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Query destination whitelist enabled status
+
+        This operation retrieves the information of whether the destination whitelist is enabled. 
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._query_destination_whitelist_enabled_serialize(
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "QueryDestinationWhitelistEnabled200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _query_destination_whitelist_enabled_serialize(
+        self,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/destination/enable_whitelist',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def update_bank_account_by_id(
         self,
         bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
@@ -6392,6 +10237,558 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/payments/bank_accounts/{bank_account_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def update_counterparty_by_id(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        update_counterparty_by_id_request: Annotated[Optional[UpdateCounterpartyByIdRequest], Field(description="The request body to update a counterparty.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> Counterparty:
+        """Update counterparty
+
+        This operation updates the information of a specified counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param update_counterparty_by_id_request: The request body to update a counterparty.
+        :type update_counterparty_by_id_request: UpdateCounterpartyByIdRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_counterparty_by_id_serialize(
+            counterparty_id=counterparty_id,
+            update_counterparty_by_id_request=update_counterparty_by_id_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Counterparty",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def update_counterparty_by_id_with_http_info(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        update_counterparty_by_id_request: Annotated[Optional[UpdateCounterpartyByIdRequest], Field(description="The request body to update a counterparty.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[Counterparty]:
+        """Update counterparty
+
+        This operation updates the information of a specified counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param update_counterparty_by_id_request: The request body to update a counterparty.
+        :type update_counterparty_by_id_request: UpdateCounterpartyByIdRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_counterparty_by_id_serialize(
+            counterparty_id=counterparty_id,
+            update_counterparty_by_id_request=update_counterparty_by_id_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Counterparty",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def update_counterparty_by_id_without_preload_content(
+        self,
+        counterparty_id: Annotated[StrictStr, Field(description="The counterparty ID.")],
+        update_counterparty_by_id_request: Annotated[Optional[UpdateCounterpartyByIdRequest], Field(description="The request body to update a counterparty.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Update counterparty
+
+        This operation updates the information of a specified counterparty. 
+
+        :param counterparty_id: The counterparty ID. (required)
+        :type counterparty_id: str
+        :param update_counterparty_by_id_request: The request body to update a counterparty.
+        :type update_counterparty_by_id_request: UpdateCounterpartyByIdRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_counterparty_by_id_serialize(
+            counterparty_id=counterparty_id,
+            update_counterparty_by_id_request=update_counterparty_by_id_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Counterparty",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _update_counterparty_by_id_serialize(
+        self,
+        counterparty_id,
+        update_counterparty_by_id_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if counterparty_id is not None:
+            _path_params['counterparty_id'] = counterparty_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_counterparty_by_id_request is not None:
+            _body_params = update_counterparty_by_id_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/counterparty/{counterparty_id}/update',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def update_destination_bank_account_by_id(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        update_destination_bank_account: Annotated[Optional[UpdateDestinationBankAccount], Field(description="The request body to update a destination bank account.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> DestinationBankAccount:
+        """Update destination bank account
+
+        This operation updates the information of a specified destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param update_destination_bank_account: The request body to update a destination bank account.
+        :type update_destination_bank_account: UpdateDestinationBankAccount
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_destination_bank_account_by_id_serialize(
+            bank_account_id=bank_account_id,
+            update_destination_bank_account=update_destination_bank_account,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationBankAccount",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def update_destination_bank_account_by_id_with_http_info(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        update_destination_bank_account: Annotated[Optional[UpdateDestinationBankAccount], Field(description="The request body to update a destination bank account.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[DestinationBankAccount]:
+        """Update destination bank account
+
+        This operation updates the information of a specified destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param update_destination_bank_account: The request body to update a destination bank account.
+        :type update_destination_bank_account: UpdateDestinationBankAccount
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_destination_bank_account_by_id_serialize(
+            bank_account_id=bank_account_id,
+            update_destination_bank_account=update_destination_bank_account,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationBankAccount",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def update_destination_bank_account_by_id_without_preload_content(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The bank account ID.")],
+        update_destination_bank_account: Annotated[Optional[UpdateDestinationBankAccount], Field(description="The request body to update a destination bank account.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Update destination bank account
+
+        This operation updates the information of a specified destination bank account. 
+
+        :param bank_account_id: The bank account ID. (required)
+        :type bank_account_id: str
+        :param update_destination_bank_account: The request body to update a destination bank account.
+        :type update_destination_bank_account: UpdateDestinationBankAccount
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_destination_bank_account_by_id_serialize(
+            bank_account_id=bank_account_id,
+            update_destination_bank_account=update_destination_bank_account,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DestinationBankAccount",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _update_destination_bank_account_by_id_serialize(
+        self,
+        bank_account_id,
+        update_destination_bank_account,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bank_account_id is not None:
+            _path_params['bank_account_id'] = bank_account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_destination_bank_account is not None:
+            _body_params = update_destination_bank_account
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/destination/bank_account/{bank_account_id}/update',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def update_destination_by_id(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        update_destination_by_id_request: Annotated[Optional[UpdateDestinationByIdRequest], Field(description="The request body to create a destination.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> Destination:
+        """Update destination
+
+        This operation updates the information of a specified destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param update_destination_by_id_request: The request body to create a destination.
+        :type update_destination_by_id_request: UpdateDestinationByIdRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_destination_by_id_serialize(
+            destination_id=destination_id,
+            update_destination_by_id_request=update_destination_by_id_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Destination",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def update_destination_by_id_with_http_info(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        update_destination_by_id_request: Annotated[Optional[UpdateDestinationByIdRequest], Field(description="The request body to create a destination.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[Destination]:
+        """Update destination
+
+        This operation updates the information of a specified destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param update_destination_by_id_request: The request body to create a destination.
+        :type update_destination_by_id_request: UpdateDestinationByIdRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_destination_by_id_serialize(
+            destination_id=destination_id,
+            update_destination_by_id_request=update_destination_by_id_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Destination",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def update_destination_by_id_without_preload_content(
+        self,
+        destination_id: Annotated[StrictStr, Field(description="The destination ID.")],
+        update_destination_by_id_request: Annotated[Optional[UpdateDestinationByIdRequest], Field(description="The request body to create a destination.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Update destination
+
+        This operation updates the information of a specified destination. 
+
+        :param destination_id: The destination ID. (required)
+        :type destination_id: str
+        :param update_destination_by_id_request: The request body to create a destination.
+        :type update_destination_by_id_request: UpdateDestinationByIdRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_destination_by_id_serialize(
+            destination_id=destination_id,
+            update_destination_by_id_request=update_destination_by_id_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Destination",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _update_destination_by_id_serialize(
+        self,
+        destination_id,
+        update_destination_by_id_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if destination_id is not None:
+            _path_params['destination_id'] = destination_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_destination_by_id_request is not None:
+            _body_params = update_destination_by_id_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/destination/{destination_id}/update',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

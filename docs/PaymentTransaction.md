@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **to_address** | **str** | The destination address of the transaction. | 
 **amount** | **str** | The amount of cryptocurrency transferred, as a decimal string. | 
 **status** | [**TransactionStatus**](TransactionStatus.md) |  | 
+**counterparty** | [**Counterparty**](Counterparty.md) |  | [optional] 
+**destination** | [**Destination**](Destination.md) |  | [optional] 
 **created_timestamp** | **int** | The time when the transaction was created, in Unix timestamp format, measured in milliseconds. | 
 **updated_timestamp** | **int** | The time when the transaction was updated, in Unix timestamp format, measured in milliseconds. | 
 
