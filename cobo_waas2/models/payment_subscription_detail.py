@@ -29,15 +29,13 @@ class PaymentSubscriptionDetail(BaseModel):
     """
     PaymentSubscriptionDetail
     """  # noqa: E501
-    actions: Optional[List[PaymentSubscriptionAction]] = Field(default=None, description="An array of subscription actions.")
-    transactions: Optional[List[Transaction]] = Field(default=None, description="An array of subscription transactions.")
     plan_id: StrictStr = Field(description="The plan id in cobo.")
     subscription_id: StrictStr = Field(description="The subscription id in cobo.")
     merchant_id: StrictStr = Field(description="The merchant id in cobo.")
     merchant_address: StrictStr = Field(description="The merchant address in cobo.")
     user_address: StrictStr = Field(description="The user address in subscription.")
     token_id: StrictStr = Field(description="The token_id in subscription.")
-    amount: StrictStr = Field(description="The amount in subscription.")
+    charge_amount: Optional[StrictStr] = Field(default=None, description="The charge amount in subscription.")
     start_time: StrictInt = Field(description="The subscription start timestamp.")
     expiration_time: StrictInt = Field(description="The subscription expired timestamp.")
     charges_made: StrictInt = Field(description="The subscription charge times.")
@@ -47,7 +45,9 @@ class PaymentSubscriptionDetail(BaseModel):
     status: PaymentSubscriptionStatus
     created_timestamp: StrictInt = Field(description="The created time of the subscription, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the subscription, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["plan_id", "subscription_id", "merchant_id", "merchant_address", "user_address", "token_id", "amount", "start_time", "expiration_time", "charges_made", "period_type", "periods", "interval", "status", "created_timestamp", "updated_timestamp"]
+    actions: Optional[List[PaymentSubscriptionAction]] = Field(default=None, description="An array of subscription actions.")
+    transactions: Optional[List[Transaction]] = Field(default=None, description="An array of subscription transactions.")
+    __properties: ClassVar[List[str]] = ["plan_id", "subscription_id", "merchant_id", "merchant_address", "user_address", "token_id", "charge_amount", "start_time", "expiration_time", "charges_made", "period_type", "periods", "interval", "status", "created_timestamp", "updated_timestamp", "actions", "transactions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +88,20 @@ class PaymentSubscriptionDetail(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in actions (list)
+        _items = []
+        if self.actions:
+            for _item in self.actions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['actions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in transactions (list)
+        _items = []
+        if self.transactions:
+            for _item in self.transactions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['transactions'] = _items
         return _dict
 
     @classmethod
@@ -106,7 +120,7 @@ class PaymentSubscriptionDetail(BaseModel):
             "merchant_address": obj.get("merchant_address"),
             "user_address": obj.get("user_address"),
             "token_id": obj.get("token_id"),
-            "amount": obj.get("amount"),
+            "charge_amount": obj.get("charge_amount"),
             "start_time": obj.get("start_time"),
             "expiration_time": obj.get("expiration_time"),
             "charges_made": obj.get("charges_made"),
@@ -115,7 +129,9 @@ class PaymentSubscriptionDetail(BaseModel):
             "interval": obj.get("interval"),
             "status": obj.get("status"),
             "created_timestamp": obj.get("created_timestamp"),
-            "updated_timestamp": obj.get("updated_timestamp")
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "actions": [PaymentSubscriptionAction.from_dict(_item) for _item in obj["actions"]] if obj.get("actions") is not None else None,
+            "transactions": [Transaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None
         })
         return _obj
 

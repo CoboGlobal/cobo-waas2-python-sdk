@@ -34,10 +34,11 @@ class PaymentSubscriptionAction(BaseModel):
     merchant_id: StrictStr = Field(description="The merchant id in cobo.")
     merchant_address: StrictStr = Field(description="The merchant address in cobo.")
     data: PaymentSubscriptionActionData
+    transaction_ids: Optional[List[StrictStr]] = None
     status: PaymentSubscriptionActionStatus
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the subscription action, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the subscription action, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["request_id", "action_id", "plan_id", "subscription_id", "merchant_id", "merchant_address", "data", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["request_id", "action_id", "plan_id", "subscription_id", "merchant_id", "merchant_address", "data", "transaction_ids", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +101,7 @@ class PaymentSubscriptionAction(BaseModel):
             "merchant_id": obj.get("merchant_id"),
             "merchant_address": obj.get("merchant_address"),
             "data": PaymentSubscriptionActionData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "transaction_ids": obj.get("transaction_ids"),
             "status": obj.get("status"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")

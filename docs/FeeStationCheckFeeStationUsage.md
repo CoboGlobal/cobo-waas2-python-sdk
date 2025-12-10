@@ -7,11 +7,13 @@ The information about a check fee station usage.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | 
-**amount** | **str** | The amount of tokens to be transferred in this request. | 
-**token_id** | **str** | The token ID of the transferred token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
+**amount** | **str** | Applicable to transfer requests only. The amount of tokens to be transferred in this request. | [optional] 
+**token_id** | **str** | Applicable to transfer requests only. The token ID of the asset to be transferred.   You can retrieve available token IDs by calling   [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  | [optional] 
+**fee_token_id** | **str** | The token ID used to pay the gas fee for the main transaction. You can retrieve available token IDs by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | [optional] 
 **estimated_fee_amount** | **str** | The estimated transaction fee required for this transfer, before applying any fee station rules. | 
 **from_address** | **str** | The blockchain address that initiates the transfer. | 
 **from_wallet_id** | **str** | The wallet ID. | 
+**auto_fuel** | [**AutoFuelType**](AutoFuelType.md) |  | [optional] 
 
 ## Example
 

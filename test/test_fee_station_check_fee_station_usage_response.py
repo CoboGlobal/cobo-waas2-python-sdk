@@ -35,21 +35,22 @@ class TestFeeStationCheckFeeStationUsageResponse(unittest.TestCase):
         if include_optional:
             return FeeStationCheckFeeStationUsageResponse(
                 token_id = 'ETH',
+                balance = '0.0021',
                 gas_station_type = 'CoboOperationStation',
                 is_fee_station_applicable = True,
                 is_balance_sufficient = False,
-                balance = '0.0021',
                 total_fee_amount = '0.0021',
                 is_sponsor_applicable = True,
-                sponsored_fee_amount = '0.0021'
+                sponsored_fee_amount = '0.0021',
+                sponsored_token_id = 'ETH_USDT'
             )
         else:
             return FeeStationCheckFeeStationUsageResponse(
                 token_id = 'ETH',
+                balance = '0.0021',
                 gas_station_type = 'CoboOperationStation',
                 is_fee_station_applicable = True,
                 is_balance_sufficient = False,
-                balance = '0.0021',
                 total_fee_amount = '0.0021',
                 is_sponsor_applicable = True,
                 sponsored_fee_amount = '0.0021',

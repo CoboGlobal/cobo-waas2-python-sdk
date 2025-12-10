@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,8 +26,9 @@ class EstimatedUtxoFeeSlow(BaseModel):
     EstimatedUtxoFeeSlow
     """  # noqa: E501
     fee_rate: StrictStr = Field(description="The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain.")
+    fallback: Optional[StrictBool] = Field(default=None, description="Indicates whether the estimated fee is generated from Cobo’s fallback mechanism. When the estimated transaction belongs to a UTXO-based chain and the specified address does not have sufficient balance to cover the on-chain fee, this field will be set to `true`. In this case, the returned fee value is estimated by Cobo’s internal fallback strategy, which is typically higher than the actual on-chain fee. When `fallback` is `true`, please use the estimated fee value with caution.")
     fee_amount: StrictStr = Field(description="The transaction fee that you need to pay for the transaction.")
-    __properties: ClassVar[List[str]] = ["fee_rate", "fee_amount"]
+    __properties: ClassVar[List[str]] = ["fee_rate", "fallback", "fee_amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +82,7 @@ class EstimatedUtxoFeeSlow(BaseModel):
 
         _obj = cls.model_validate({
             "fee_rate": obj.get("fee_rate"),
+            "fallback": obj.get("fallback"),
             "fee_amount": obj.get("fee_amount")
         })
         return _obj

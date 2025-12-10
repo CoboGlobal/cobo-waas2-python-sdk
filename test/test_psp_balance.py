@@ -37,9 +37,11 @@ class TestPspBalance(unittest.TestCase):
                 token_id = 'ETH_USDT',
                 developer_fee_amount = '1.23',
                 settled_amount = '1.23',
+                payout_amount = '1.23',
                 refunded_amount = '1.23',
                 total_balance = '1.23',
-                available_balance = '1.23'
+                available_balance = '1.23',
+                locked_balance = '1.23'
             )
         else:
             return PspBalance(

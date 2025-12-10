@@ -28,7 +28,8 @@ class LinkDisplayInfo(BaseModel):
     """  # noqa: E501
     developer_name: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(default=None, description="Optional display name for the developer/platform. This name may be shown to end users during the payment process. ")
     logo: Optional[StrictStr] = Field(default=None, description="Optional URL to the developer's logo image. The logo may be displayed to end users during the payment process.  Supported formats: PNG, JPG, SVG. Maximum file size: 2MB. ")
-    __properties: ClassVar[List[str]] = ["developer_name", "logo"]
+    return_url: Optional[StrictStr] = Field(default=None, description="The URL to redirect to after the operation completes.")
+    __properties: ClassVar[List[str]] = ["developer_name", "logo", "return_url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +83,8 @@ class LinkDisplayInfo(BaseModel):
 
         _obj = cls.model_validate({
             "developer_name": obj.get("developer_name"),
-            "logo": obj.get("logo")
+            "logo": obj.get("logo"),
+            "return_url": obj.get("return_url")
         })
         return _obj
 

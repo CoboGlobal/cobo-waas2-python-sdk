@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.fee_type import FeeType
 from typing import Optional, Set
@@ -27,10 +27,11 @@ class TransactionRequestUtxoFee(BaseModel):
     The preset properties to limit transaction fee.  In the UTXO fee model, the transaction fee is calculated by multiplying the fee rate by the transaction size. This can be expressed as: Transaction fee = fee rate * transaction size. For more information about the UTXO fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  You can specify the maximum fee amount to limit the transaction fee. The transaction will fail if the transaction fee exceeds the specified maximum fee amount.  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
     fee_rate: Optional[StrictStr] = Field(default=None, description="The fee rate in sat/vByte. The fee rate represents the satoshis you are willing to pay for each byte of data that your transaction will consume on the blockchain.")
+    fallback: Optional[StrictBool] = Field(default=None, description="Indicates whether the estimated fee is generated from Cobo’s fallback mechanism. When the estimated transaction belongs to a UTXO-based chain and the specified address does not have sufficient balance to cover the on-chain fee, this field will be set to `true`. In this case, the returned fee value is estimated by Cobo’s internal fallback strategy, which is typically higher than the actual on-chain fee. When `fallback` is `true`, please use the estimated fee value with caution.")
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token ID of the transaction fee.")
     max_fee_amount: Optional[StrictStr] = Field(default=None, description="The maximum fee that you are willing to pay for the transaction. Provide the value without applying precision. The transaction will fail if the transaction fee exceeds the maximum fee.")
-    __properties: ClassVar[List[str]] = ["fee_rate", "fee_type", "token_id", "max_fee_amount"]
+    __properties: ClassVar[List[str]] = ["fee_rate", "fallback", "fee_type", "token_id", "max_fee_amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +85,7 @@ class TransactionRequestUtxoFee(BaseModel):
 
         _obj = cls.model_validate({
             "fee_rate": obj.get("fee_rate"),
+            "fallback": obj.get("fallback"),
             "fee_type": obj.get("fee_type"),
             "token_id": obj.get("token_id"),
             "max_fee_amount": obj.get("max_fee_amount")

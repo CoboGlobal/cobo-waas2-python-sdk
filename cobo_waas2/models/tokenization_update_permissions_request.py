@@ -17,9 +17,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.tokenization_permission_action import TokenizationPermissionAction
 from cobo_waas2.models.tokenization_token_operation_source import TokenizationTokenOperationSource
-from cobo_waas2.models.tokenization_token_permission_type import TokenizationTokenPermissionType
+from cobo_waas2.models.tokenization_update_address_permissions import TokenizationUpdateAddressPermissions
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,13 +29,11 @@ class TokenizationUpdatePermissionsRequest(BaseModel):
     TokenizationUpdatePermissionsRequest
     """  # noqa: E501
     source: TokenizationTokenOperationSource
-    action: TokenizationPermissionAction
-    address: StrictStr = Field(description="The address to manage permissions for.")
-    permissions: List[TokenizationTokenPermissionType] = Field(description="The list of permissions to operate on.")
+    addresses: List[TokenizationUpdateAddressPermissions]
     app_initiator: Optional[StrictStr] = Field(default=None, description="The initiator of the tokenization activity. If you do not specify this property, the WaaS service will automatically designate the API key as the initiator.")
     fee: TransactionRequestFee
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
-    __properties: ClassVar[List[str]] = ["source", "action", "address", "permissions", "app_initiator", "fee", "request_id"]
+    __properties: ClassVar[List[str]] = ["source", "addresses", "app_initiator", "fee", "request_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +77,13 @@ class TokenizationUpdatePermissionsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of source
         if self.source:
             _dict['source'] = self.source.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in addresses (list)
+        _items = []
+        if self.addresses:
+            for _item in self.addresses:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['addresses'] = _items
         # override the default output from pydantic by calling `to_dict()` of fee
         if self.fee:
             _dict['fee'] = self.fee.to_dict()
@@ -96,9 +100,7 @@ class TokenizationUpdatePermissionsRequest(BaseModel):
 
         _obj = cls.model_validate({
             "source": TokenizationTokenOperationSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
-            "action": obj.get("action"),
-            "address": obj.get("address"),
-            "permissions": obj.get("permissions"),
+            "addresses": [TokenizationUpdateAddressPermissions.from_dict(_item) for _item in obj["addresses"]] if obj.get("addresses") is not None else None,
             "app_initiator": obj.get("app_initiator"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
             "request_id": obj.get("request_id")

@@ -16,7 +16,9 @@ Name | Type | Description | Notes
 **status** | [**TokenizationStatus**](TokenizationStatus.md) |  | 
 **total_supply** | **str** | The total supply of the token. | [optional] 
 **holdings** | **str** | The amount of tokens held by the organization. | [optional] 
+**archived** | **bool** | Whether the token is archived. If archived, no operations can be initiated on this token. | 
 **permissions** | [**List[TokenizationAddressPermission]**](TokenizationAddressPermission.md) | List of execution addresses and their permissions. | [optional] 
+**underlying_token** | [**TokenizationTokenInfo**](TokenizationTokenInfo.md) |  | [optional] 
 
 ## Example
 

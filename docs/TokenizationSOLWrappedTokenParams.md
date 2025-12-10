@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **standard** | [**TokenizationTokenStandard**](TokenizationTokenStandard.md) |  | 
 **name** | **str** | The name of the token. | 
 **symbol** | **str** | The symbol of the token. | 
-**permissions** | [**TokenizationSolWrappedTokenPermissionParams**](TokenizationSolWrappedTokenPermissionParams.md) |  | [optional] 
 **underlying_token** | **str** | The address of the underlying token that this tokenized asset represents. | 
+**token_access_activated** | **bool** | Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations. | [optional] [default to False]
+**permissions** | [**TokenizationSolWrappedTokenPermissionParams**](TokenizationSolWrappedTokenPermissionParams.md) |  | [optional] 
 
 ## Example
 

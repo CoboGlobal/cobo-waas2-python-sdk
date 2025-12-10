@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.tokenization_sol_wrapped_token_permission_params import TokenizationSolWrappedTokenPermissionParams
 from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
@@ -30,9 +30,10 @@ class TokenizationSOLWrappedTokenParams(BaseModel):
     standard: TokenizationTokenStandard
     name: StrictStr = Field(description="The name of the token.")
     symbol: StrictStr = Field(description="The symbol of the token.")
-    permissions: Optional[TokenizationSolWrappedTokenPermissionParams] = None
     underlying_token: StrictStr = Field(description="The address of the underlying token that this tokenized asset represents.")
-    __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "permissions", "underlying_token"]
+    token_access_activated: Optional[StrictBool] = Field(default=False, description="Whether the allowlist feature is activated for the token. When activated, only addresses in the allowlist can perform token operations.")
+    permissions: Optional[TokenizationSolWrappedTokenPermissionParams] = None
+    __properties: ClassVar[List[str]] = ["standard", "name", "symbol", "underlying_token", "token_access_activated", "permissions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,8 +92,9 @@ class TokenizationSOLWrappedTokenParams(BaseModel):
             "standard": obj.get("standard"),
             "name": obj.get("name"),
             "symbol": obj.get("symbol"),
-            "permissions": TokenizationSolWrappedTokenPermissionParams.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
-            "underlying_token": obj.get("underlying_token")
+            "underlying_token": obj.get("underlying_token"),
+            "token_access_activated": obj.get("token_access_activated") if obj.get("token_access_activated") is not None else False,
+            "permissions": TokenizationSolWrappedTokenPermissionParams.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         return _obj
 

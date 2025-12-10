@@ -50,14 +50,17 @@ class TestTokenizationEstimateFeeRequestOperationParams(unittest.TestCase):
                         amount = '0.99', 
                         from_address = '0x051A924H4dCb264226d7B036C2893a0D344', )
                     ],
-                action = 'add',
-                addresses = [{"address":"0x789abc...","note":"reason for blocklisting"},{"address":"0xdef012..."}],
+                action = 'Grant',
+                addresses = [
+                    cobo_waas2.models.tokenization_update_address_permissions.TokenizationUpdateAddressPermissions(
+                        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', 
+                        action = 'add', 
+                        permissions = [
+                            'MintTokens'
+                            ], )
+                    ],
                 activation = True,
-                data = None,
-                address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-                permissions = [
-                    'MintTokens'
-                    ]
+                data = None
             )
         else:
             return TokenizationEstimateFeeRequestOperationParams(
@@ -76,13 +79,16 @@ class TestTokenizationEstimateFeeRequestOperationParams(unittest.TestCase):
                         amount = '0.99', 
                         from_address = '0x051A924H4dCb264226d7B036C2893a0D344', )
                     ],
-                action = 'add',
-                addresses = [{"address":"0x789abc...","note":"reason for blocklisting"},{"address":"0xdef012..."}],
-                activation = True,
-                address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-                permissions = [
-                    'MintTokens'
+                action = 'Grant',
+                addresses = [
+                    cobo_waas2.models.tokenization_update_address_permissions.TokenizationUpdateAddressPermissions(
+                        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', 
+                        action = 'add', 
+                        permissions = [
+                            'MintTokens'
+                            ], )
                     ],
+                activation = True,
         )
         """
 

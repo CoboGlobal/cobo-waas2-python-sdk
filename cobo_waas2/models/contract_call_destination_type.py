@@ -26,7 +26,9 @@ class ContractCallDestinationType(str, Enum):
     """
     EVM_CONTRACT = 'EVM_Contract'
     SOL_CONTRACT = 'SOL_Contract'
+    COSMOS_CONTRACT = 'COSMOS_Contract'
     STELLAR_CONTRACT = 'STELLAR_Contract'
+    TRON_CONTRACT = 'TRON_Contract'
 
     UNKNOWN = None
 

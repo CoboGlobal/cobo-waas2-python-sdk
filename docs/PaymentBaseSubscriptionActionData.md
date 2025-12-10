@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action_type** | [**PaymentSubscriptionActionType**](PaymentSubscriptionActionType.md) |  | 
 **subscription_id** | **str** | The subscription id in cobo. | 
-**signature** | **str** | The signature for transaction. | 
+**signature** | **str** | The signature for transaction. charge action is not required. | 
+**deadline** | **int** | The signature deadline for transaction. charge action is not required. | 
 
 ## Example
 

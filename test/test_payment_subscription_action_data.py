@@ -36,12 +36,11 @@ class TestPaymentSubscriptionActionData(unittest.TestCase):
             return PaymentSubscriptionActionData(
                 action_type = 'Create',
                 user_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
-                amount = '500.00',
                 token_id = 'ETH_USDT',
-                discount_rate = 99000,
+                charge_amount = '500.00',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
-                permit_data = '',
                 signature = '',
+                deadline = 56,
                 periods = 18,
                 new_plan_id = '123e457-e89b-12d3-a456-426614174004'
             )
@@ -49,10 +48,12 @@ class TestPaymentSubscriptionActionData(unittest.TestCase):
             return PaymentSubscriptionActionData(
                 action_type = 'Create',
                 user_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
-                amount = '500.00',
                 token_id = 'ETH_USDT',
+                charge_amount = '500.00',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
                 signature = '',
+                deadline = 56,
+                periods = 18,
                 new_plan_id = '123e457-e89b-12d3-a456-426614174004',
         )
         """

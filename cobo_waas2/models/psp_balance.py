@@ -28,10 +28,12 @@ class PspBalance(BaseModel):
     token_id: StrictStr = Field(description="The ID of the cryptocurrency.")
     developer_fee_amount: Optional[StrictStr] = Field(default=None, description="The psp developer fee amount.")
     settled_amount: Optional[StrictStr] = Field(default=None, description="The psp settled amount.")
+    payout_amount: Optional[StrictStr] = Field(default=None, description="The psp payout amount.")
     refunded_amount: Optional[StrictStr] = Field(default=None, description="The psp total refunded amount.")
     total_balance: Optional[StrictStr] = Field(default=None, description="The psp total balance.")
     available_balance: Optional[StrictStr] = Field(default=None, description="The psp available balance.")
-    __properties: ClassVar[List[str]] = ["token_id", "developer_fee_amount", "settled_amount", "refunded_amount", "total_balance", "available_balance"]
+    locked_balance: Optional[StrictStr] = Field(default=None, description="The psp locked balance.")
+    __properties: ClassVar[List[str]] = ["token_id", "developer_fee_amount", "settled_amount", "payout_amount", "refunded_amount", "total_balance", "available_balance", "locked_balance"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,9 +89,11 @@ class PspBalance(BaseModel):
             "token_id": obj.get("token_id"),
             "developer_fee_amount": obj.get("developer_fee_amount"),
             "settled_amount": obj.get("settled_amount"),
+            "payout_amount": obj.get("payout_amount"),
             "refunded_amount": obj.get("refunded_amount"),
             "total_balance": obj.get("total_balance"),
-            "available_balance": obj.get("available_balance")
+            "available_balance": obj.get("available_balance"),
+            "locked_balance": obj.get("locked_balance")
         })
         return _obj
 

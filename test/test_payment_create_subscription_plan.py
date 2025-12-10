@@ -39,7 +39,8 @@ class TestPaymentCreateSubscriptionPlan(unittest.TestCase):
                 periods = 12,
                 amount = '500.00',
                 token_id = 'ETH_USDT',
-                currency = 'USD'
+                currency = 'USD',
+                trial_period = 604800
             )
         else:
             return PaymentCreateSubscriptionPlan(

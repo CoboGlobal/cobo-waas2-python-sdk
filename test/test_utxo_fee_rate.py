@@ -37,18 +37,22 @@ class TestUtxoFeeRate(unittest.TestCase):
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'BTC',
                 slow = cobo_waas2.models.utxo_fee_base_price.UtxoFeeBasePrice(
-                    fee_rate = '50', ),
+                    fee_rate = '50', 
+                    fallback = True, ),
                 recommended = cobo_waas2.models.utxo_fee_base_price.UtxoFeeBasePrice(
-                    fee_rate = '50', ),
+                    fee_rate = '50', 
+                    fallback = True, ),
                 fast = cobo_waas2.models.utxo_fee_base_price.UtxoFeeBasePrice(
-                    fee_rate = '50', )
+                    fee_rate = '50', 
+                    fallback = True, )
             )
         else:
             return UtxoFeeRate(
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'BTC',
                 recommended = cobo_waas2.models.utxo_fee_base_price.UtxoFeeBasePrice(
-                    fee_rate = '50', ),
+                    fee_rate = '50', 
+                    fallback = True, ),
         )
         """
 

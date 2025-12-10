@@ -26,8 +26,10 @@ class TokenizationSolWrappedTokenPermissionParams(BaseModel):
     Role-based permission settings for Solana wrapped token. The owner is automatically set to the address that calls the initialize function (typically the issuance wallet) and cannot be specified here. Only wrapper and pauser roles can be configured during initialization.
     """  # noqa: E501
     wrapper: Optional[List[StrictStr]] = Field(default=None, description="List of Solana wallet addresses that can perform wrap/unwrap operations. Multiple addresses can be assigned this role.")
-    pauser: Optional[List[StrictStr]] = Field(default=None, description="List of Solana wallet addresses that can pause/unpause the contract. Multiple addresses can be assigned this role.")
-    __properties: ClassVar[List[str]] = ["wrapper", "pauser"]
+    pauser: Optional[StrictStr] = Field(default=None, description="Solana wallet address that acts as a pauser authority for the token. This authority can pause token transfers.")
+    freezer: Optional[StrictStr] = Field(default=None, description="Solana wallet address that acts as a freezer authority for the token. This authority can freeze token accounts.")
+    updater: Optional[StrictStr] = Field(default=None, description="Solana wallet address that acts as an updater authority for the token. This authority can update token metadata.")
+    __properties: ClassVar[List[str]] = ["wrapper", "pauser", "freezer", "updater"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +83,9 @@ class TokenizationSolWrappedTokenPermissionParams(BaseModel):
 
         _obj = cls.model_validate({
             "wrapper": obj.get("wrapper"),
-            "pauser": obj.get("pauser")
+            "pauser": obj.get("pauser"),
+            "freezer": obj.get("freezer"),
+            "updater": obj.get("updater")
         })
         return _obj
 

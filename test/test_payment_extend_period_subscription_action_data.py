@@ -34,16 +34,19 @@ class TestPaymentExtendPeriodSubscriptionActionData(unittest.TestCase):
         model = PaymentExtendPeriodSubscriptionActionData()
         if include_optional:
             return PaymentExtendPeriodSubscriptionActionData(
-                periods = 18,
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
-                signature = ''
+                signature = '',
+                deadline = 56,
+                periods = 18
             )
         else:
             return PaymentExtendPeriodSubscriptionActionData(
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
                 signature = '',
+                deadline = 56,
+                periods = 18,
         )
         """
 

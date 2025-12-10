@@ -35,23 +35,26 @@ class TestCreatePaymentOrderRequest(unittest.TestCase):
         if include_optional:
             return CreatePaymentOrderRequest(
                 merchant_id = '1001',
-                token_id = 'ETH_USDT',
-                currency = '',
-                order_amount = '100.00',
-                fee_amount = '2.00',
                 merchant_order_code = 'M20240201001',
                 psp_order_code = 'P20240201001',
+                pricing_currency = 'ETH_USDT',
+                pricing_amount = '100.00',
+                fee_amount = '2.00',
+                payable_currency = 'ETH_USDT',
+                payable_amount = '103.03',
                 expired_in = 1800,
+                amount_tolerance = '0.5',
+                currency = '',
+                order_amount = '100.00',
+                token_id = 'ETH_USDT',
                 use_dedicated_address = False,
                 custom_exchange_rate = '1.00'
             )
         else:
             return CreatePaymentOrderRequest(
                 merchant_id = '1001',
-                token_id = 'ETH_USDT',
-                order_amount = '100.00',
-                fee_amount = '2.00',
                 psp_order_code = 'P20240201001',
+                fee_amount = '2.00',
         )
         """
 
