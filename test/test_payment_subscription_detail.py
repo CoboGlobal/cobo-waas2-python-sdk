@@ -34,6 +34,22 @@ class TestPaymentSubscriptionDetail(unittest.TestCase):
         model = PaymentSubscriptionDetail()
         if include_optional:
             return PaymentSubscriptionDetail(
+                plan_id = '123e457-e89b-12d3-a456-426614174004',
+                subscription_id = '123e457-e89b-12d3-a456-426614174004',
+                merchant_id = '123e457-e89b-12d3-a456-426614174004',
+                merchant_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
+                user_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
+                token_id = 'ETH_USDT',
+                charge_amount = '100.00',
+                start_time = 1610445878970,
+                expiration_time = 1610445878970,
+                charges_made = 2,
+                period_type = 'Yearly',
+                periods = 12,
+                interval = 2592000,
+                status = 'Pending',
+                created_timestamp = 1744689600,
+                updated_timestamp = 1744689600,
                 actions = [
                     cobo_waas2.models.payment_subscription_action.PaymentSubscriptionAction(
                         request_id = '123e457-e89b-12d3-a456-426614174004', 
@@ -43,6 +59,9 @@ class TestPaymentSubscriptionDetail(unittest.TestCase):
                         merchant_id = '123e457-e89b-12d3-a456-426614174004', 
                         merchant_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc', 
                         data = null, 
+                        transaction_ids = [
+                            ''
+                            ], 
                         status = 'Pending', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )
@@ -114,23 +133,7 @@ class TestPaymentSubscriptionDetail(unittest.TestCase):
                             main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ), 
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
-                    ],
-                plan_id = '123e457-e89b-12d3-a456-426614174004',
-                subscription_id = '123e457-e89b-12d3-a456-426614174004',
-                merchant_id = '123e457-e89b-12d3-a456-426614174004',
-                merchant_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
-                user_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
-                token_id = 'ETH_USDT',
-                amount = '100.00',
-                start_time = 1610445878970,
-                expiration_time = 1610445878970,
-                charges_made = 2,
-                period_type = 'Yearly',
-                periods = 12,
-                interval = 2592000,
-                status = 'Pending',
-                created_timestamp = 1744689600,
-                updated_timestamp = 1744689600
+                    ]
             )
         else:
             return PaymentSubscriptionDetail(
@@ -140,7 +143,6 @@ class TestPaymentSubscriptionDetail(unittest.TestCase):
                 merchant_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
                 user_address = '0x8a73abedb3053b17204b887af6231a8ac35fc2cc',
                 token_id = 'ETH_USDT',
-                amount = '100.00',
                 start_time = 1610445878970,
                 expiration_time = 1610445878970,
                 charges_made = 2,

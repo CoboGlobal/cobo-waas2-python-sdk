@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.order_link_business_info_custom_exchange_rates_inner import OrderLinkBusinessInfoCustomExchangeRatesInner
+from cobo_waas2.models.order_link_business_info_payable_amounts_inner import OrderLinkBusinessInfoPayableAmountsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,17 +27,22 @@ class OrderLinkBusinessInfo(BaseModel):
     """
     OrderLinkBusinessInfo
     """  # noqa: E501
-    token_ids: List[StrictStr] = Field(description="List of supported cryptocurrency token IDs for this payment. Each token ID must be from the supported values. ")
-    custom_exchange_rates: Optional[List[OrderLinkBusinessInfoCustomExchangeRatesInner]] = Field(default=None, description="Optional list of final exchange rates for different tokens. If provided, these rates will be used instead of real-time market rates. ")
-    currency: Optional[StrictStr] = Field(default='', description="The fiat currency for the base order amount and the developer fee. Currently, only `USD` is supported.  If left empty, both `order_amount` and `fee_amount` will be denominated in the cryptocurrency specified by `token_id` ")
-    fee_amount: StrictStr = Field(description="The developer fee for the order, in the currency specified by `currency`. If `currency` is not specified, the fee is in the cryptocurrency specified by `token_id`.  If you are a merchant directly serving payers, set this field to `0`. Developer fees are only relevant for platforms like payment service providers (PSPs) that charge fees to their downstream merchants.  The developer fee is added to the base amount (`order_amount`) to determine the final charge. For example: - Base amount (`order_amount`): \"100.00\" - Developer fee (`fee_amount`): \"2.00\"  - Total charged to customer: \"102.00\"  Values can contain up to two decimal places. ")
     merchant_id: StrictStr = Field(description="The merchant ID.")
-    order_amount: StrictStr = Field(description="The base amount of the order, excluding the developer fee (specified in `fee_amount`), in the currency specified by `currency`. If `currency` is not specified, the amount is in the cryptocurrency specified by `token_id`.   Values must be greater than `0` and contain two decimal places.  ")
     merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system. The code should have a maximum length of 128 characters.")
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by you as a developer to identify this order in your system. This code must be unique across all orders in your system. The code should have a maximum length of 128 characters. ")
+    pricing_currency: Optional[StrictStr] = Field(default=None, description="The currency for the base order amount and the developer fee. Currently, only `USD`/`USDT`/`USDC` are supported. ")
+    pricing_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order, excluding the developer fee (specified in `fee_amount`), in the currency specified by `currency`. If `currency` is not specified, the amount is in the cryptocurrency specified by `token_id`.  Values must be greater than `0` and contain two decimal places. ")
+    fee_amount: StrictStr = Field(description="The developer fee for the order, in the currency specified by `currency`. If `currency` is not specified, the fee is in the cryptocurrency specified by `token_id`.  If you are a merchant directly serving payers, set this field to `0`. Developer fees are only relevant for platforms like payment service providers (PSPs) that charge fees to their downstream merchants.  The developer fee is added to the base amount (`order_amount`) to determine the final charge. For example: - Base amount (`order_amount`): \"100.00\" - Developer fee (`fee_amount`): \"2.00\" - Total charged to customer: \"102.00\"  Values can contain up to two decimal places. ")
+    payable_currencies: Optional[List[StrictStr]] = Field(default=None, description="List of supported cryptocurrency token IDs for this payment. Each token ID must be from the supported values. ")
+    payable_amounts: Optional[List[OrderLinkBusinessInfoPayableAmountsInner]] = Field(default=None, description="Optional list of payable amounts for different tokens. If provided, these amounts will be used instead of calculating the amounts based on the exchange rate. ")
     expired_in: Optional[StrictInt] = Field(default=1800, description="The number of seconds until the pay-in order expires, counted from when the request is sent. For example, if set to `1800`, the order will expire in 30 minutes. Must be greater than zero and cannot exceed 3 hours (10800 seconds). After expiration:  - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
+    amount_tolerance: Optional[StrictStr] = Field(default=None, description="Allowed amount deviation, precision to 1 decimal place.")
+    currency: Optional[StrictStr] = Field(default=None, description="The currency for the base order amount and the developer fee. Currently, only `USD`/`USDT`/`USDC` are supported. ")
+    order_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order, excluding the developer fee (specified in `fee_amount`), in the currency specified by `currency`. If `currency` is not specified, the amount is in the cryptocurrency specified by `token_id`.  Values must be greater than `0` and contain two decimal places. ")
+    token_ids: Optional[List[StrictStr]] = Field(default=None, description="List of supported cryptocurrency token IDs for this payment. Each token ID must be from the supported values. ")
+    custom_exchange_rates: Optional[List[OrderLinkBusinessInfoCustomExchangeRatesInner]] = Field(default=None, description="Optional list of final exchange rates for different tokens. If provided, these rates will be used instead of real-time market rates. ")
     use_dedicated_address: Optional[StrictBool] = Field(default=None, description="Whether to allocate a dedicated address for this order.  - `true`: A dedicated address will be allocated for this order. - `false`: A shared address from the address pool will be used. ")
-    __properties: ClassVar[List[str]] = ["token_ids", "custom_exchange_rates", "currency", "fee_amount", "merchant_id", "order_amount", "merchant_order_code", "psp_order_code", "expired_in", "use_dedicated_address"]
+    __properties: ClassVar[List[str]] = ["merchant_id", "merchant_order_code", "psp_order_code", "pricing_currency", "pricing_amount", "fee_amount", "payable_currencies", "payable_amounts", "expired_in", "amount_tolerance", "currency", "order_amount", "token_ids", "custom_exchange_rates", "use_dedicated_address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +83,13 @@ class OrderLinkBusinessInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in payable_amounts (list)
+        _items = []
+        if self.payable_amounts:
+            for _item in self.payable_amounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['payable_amounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in custom_exchange_rates (list)
         _items = []
         if self.custom_exchange_rates:
@@ -96,15 +109,20 @@ class OrderLinkBusinessInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "token_ids": obj.get("token_ids"),
-            "custom_exchange_rates": [OrderLinkBusinessInfoCustomExchangeRatesInner.from_dict(_item) for _item in obj["custom_exchange_rates"]] if obj.get("custom_exchange_rates") is not None else None,
-            "currency": obj.get("currency") if obj.get("currency") is not None else '',
-            "fee_amount": obj.get("fee_amount"),
             "merchant_id": obj.get("merchant_id"),
-            "order_amount": obj.get("order_amount"),
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
+            "pricing_currency": obj.get("pricing_currency"),
+            "pricing_amount": obj.get("pricing_amount"),
+            "fee_amount": obj.get("fee_amount"),
+            "payable_currencies": obj.get("payable_currencies"),
+            "payable_amounts": [OrderLinkBusinessInfoPayableAmountsInner.from_dict(_item) for _item in obj["payable_amounts"]] if obj.get("payable_amounts") is not None else None,
             "expired_in": obj.get("expired_in") if obj.get("expired_in") is not None else 1800,
+            "amount_tolerance": obj.get("amount_tolerance"),
+            "currency": obj.get("currency"),
+            "order_amount": obj.get("order_amount"),
+            "token_ids": obj.get("token_ids"),
+            "custom_exchange_rates": [OrderLinkBusinessInfoCustomExchangeRatesInner.from_dict(_item) for _item in obj["custom_exchange_rates"]] if obj.get("custom_exchange_rates") is not None else None,
             "use_dedicated_address": obj.get("use_dedicated_address")
         })
         return _obj

@@ -30,7 +30,8 @@ class CreateMerchantRequest(BaseModel):
     wallet_id: Optional[StrictStr] = Field(default=None, description="The ID of the wallet linked to the merchant.")
     developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The fee rate applied when topping up the merchant account. Represented as a string percentage (e.g., \"0.1\" means 10%).")
     wallet_setup: Optional[WalletSetup] = None
-    __properties: ClassVar[List[str]] = ["name", "wallet_id", "developer_fee_rate", "wallet_setup"]
+    subscription_developer_fee_rate: Optional[StrictStr] = Field(default=None, description="The fee rate applied when subscribe the merchant account. Represented as a string percentage (e.g., \"0.1\" means 10%).")
+    __properties: ClassVar[List[str]] = ["name", "wallet_id", "developer_fee_rate", "wallet_setup", "subscription_developer_fee_rate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,7 +87,8 @@ class CreateMerchantRequest(BaseModel):
             "name": obj.get("name"),
             "wallet_id": obj.get("wallet_id"),
             "developer_fee_rate": obj.get("developer_fee_rate"),
-            "wallet_setup": obj.get("wallet_setup")
+            "wallet_setup": obj.get("wallet_setup"),
+            "subscription_developer_fee_rate": obj.get("subscription_developer_fee_rate")
         })
         return _obj
 

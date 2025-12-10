@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **merchant_id** | **str** | The merchant id in cobo. | 
 **merchant_address** | **str** | The merchant address in cobo. | 
 **data** | [**PaymentSubscriptionActionData**](PaymentSubscriptionActionData.md) |  | 
+**transaction_ids** | **List[str]** |  | [optional] 
 **status** | [**PaymentSubscriptionActionStatus**](PaymentSubscriptionActionStatus.md) |  | 
 **created_timestamp** | **int** | The created time of the subscription action, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The updated time of the subscription action, represented as a UNIX timestamp in seconds. | [optional] 

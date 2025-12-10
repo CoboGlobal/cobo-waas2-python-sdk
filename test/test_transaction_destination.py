@@ -51,7 +51,7 @@ class TestTransactionDestination(unittest.TestCase):
                 trading_account_type = 'Asset',
                 exchange_id = 'binance',
                 amount = '1.5',
-                address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
+                address = '0x0406db8351aa6839169bb363f63c2c808fee8f99',
                 value = '1.5',
                 calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
                 calldata_info = cobo_waas2.models.transaction_evm_calldata_info.TransactionEvmCalldataInfo(
@@ -148,7 +148,7 @@ class TestTransactionDestination(unittest.TestCase):
                 destination_type = 'Address',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 amount = '1.5',
-                address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
+                address = '0x0406db8351aa6839169bb363f63c2c808fee8f99',
                 calldata = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO',
                 cosmos_messages = [
                     cobo_waas2.models.cosmos_message.Cosmos Message(

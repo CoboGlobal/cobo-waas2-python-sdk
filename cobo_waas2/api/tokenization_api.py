@@ -23,6 +23,7 @@ from cobo_waas2.models.tokenization_activity_info import TokenizationActivityInf
 from cobo_waas2.models.tokenization_activity_status import TokenizationActivityStatus
 from cobo_waas2.models.tokenization_allowlist_activation_request import TokenizationAllowlistActivationRequest
 from cobo_waas2.models.tokenization_allowlist_addresses_response import TokenizationAllowlistAddressesResponse
+from cobo_waas2.models.tokenization_archive_token_request import TokenizationArchiveTokenRequest
 from cobo_waas2.models.tokenization_burn_token_request import TokenizationBurnTokenRequest
 from cobo_waas2.models.tokenization_contract_call_request import TokenizationContractCallRequest
 from cobo_waas2.models.tokenization_estimate_fee_request import TokenizationEstimateFeeRequest
@@ -39,6 +40,7 @@ from cobo_waas2.models.tokenization_pause_token_request import TokenizationPause
 from cobo_waas2.models.tokenization_status import TokenizationStatus
 from cobo_waas2.models.tokenization_token_detail_info import TokenizationTokenDetailInfo
 from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
+from cobo_waas2.models.tokenization_unarchive_token_request import TokenizationUnarchiveTokenRequest
 from cobo_waas2.models.tokenization_unpause_token_request import TokenizationUnpauseTokenRequest
 from cobo_waas2.models.tokenization_update_allowlist_addresses_request import TokenizationUpdateAllowlistAddressesRequest
 from cobo_waas2.models.tokenization_update_blocklist_addresses_request import TokenizationUpdateBlocklistAddressesRequest
@@ -62,6 +64,190 @@ class TokenizationApi:
         self.api_client = api_client
 
     @validate_call
+    def archive_tokenization(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_archive_token_request: Annotated[Optional[TokenizationArchiveTokenRequest], Field(description="The request body for archiving tokens.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TokenizationTokenDetailInfo:
+        """Archive token
+
+        This operation marks the token as archived. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_archive_token_request: The request body for archiving tokens.
+        :type tokenization_archive_token_request: TokenizationArchiveTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._archive_tokenization_serialize(
+            token_id=token_id,
+            tokenization_archive_token_request=tokenization_archive_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationTokenDetailInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def archive_tokenization_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_archive_token_request: Annotated[Optional[TokenizationArchiveTokenRequest], Field(description="The request body for archiving tokens.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TokenizationTokenDetailInfo]:
+        """Archive token
+
+        This operation marks the token as archived. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_archive_token_request: The request body for archiving tokens.
+        :type tokenization_archive_token_request: TokenizationArchiveTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._archive_tokenization_serialize(
+            token_id=token_id,
+            tokenization_archive_token_request=tokenization_archive_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationTokenDetailInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def archive_tokenization_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_archive_token_request: Annotated[Optional[TokenizationArchiveTokenRequest], Field(description="The request body for archiving tokens.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Archive token
+
+        This operation marks the token as archived. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_archive_token_request: The request body for archiving tokens.
+        :type tokenization_archive_token_request: TokenizationArchiveTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._archive_tokenization_serialize(
+            token_id=token_id,
+            tokenization_archive_token_request=tokenization_archive_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationTokenDetailInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _archive_tokenization_serialize(
+        self,
+        token_id,
+        tokenization_archive_token_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if token_id is not None:
+            _path_params['token_id'] = token_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if tokenization_archive_token_request is not None:
+            _body_params = tokenization_archive_token_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/tokenization/tokens/{token_id}/archive',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def burn_tokenization(
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
@@ -77,7 +263,7 @@ class TokenizationApi:
     ) -> TokenizationOperationResponse:
         """Burn tokens
 
-        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -127,7 +313,7 @@ class TokenizationApi:
     ) -> ApiResponse[TokenizationOperationResponse]:
         """Burn tokens
 
-        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -177,7 +363,7 @@ class TokenizationApi:
     ) -> RESTResponseType:
         """Burn tokens
 
-        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+        This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -2587,6 +2773,7 @@ class TokenizationApi:
     @validate_call
     def list_tokenization_supported_chains(
         self,
+        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2603,6 +2790,8 @@ class TokenizationApi:
 
         This operation retrieves a list of tokenization supported chains. 
 
+        :param token_standard: Filter by token standard.
+        :type token_standard: TokenizationTokenStandard
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
@@ -2618,6 +2807,7 @@ class TokenizationApi:
         """  # noqa: E501
 
         _param = self._list_tokenization_supported_chains_serialize(
+            token_standard=token_standard,
             limit=limit,
             after=after,
             before=before,
@@ -2641,6 +2831,7 @@ class TokenizationApi:
     @validate_call
     def list_tokenization_supported_chains_with_http_info(
         self,
+        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2657,6 +2848,8 @@ class TokenizationApi:
 
         This operation retrieves a list of tokenization supported chains. 
 
+        :param token_standard: Filter by token standard.
+        :type token_standard: TokenizationTokenStandard
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
@@ -2672,6 +2865,7 @@ class TokenizationApi:
         """  # noqa: E501
 
         _param = self._list_tokenization_supported_chains_serialize(
+            token_standard=token_standard,
             limit=limit,
             after=after,
             before=before,
@@ -2695,6 +2889,7 @@ class TokenizationApi:
     @validate_call
     def list_tokenization_supported_chains_without_preload_content(
         self,
+        token_standard: Annotated[Optional[TokenizationTokenStandard], Field(description="Filter by token standard.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         after: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. ")] = None,
         before: Annotated[Optional[StrictStr], Field(description="This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set `before` to the ID of Object C (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object A.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. - If you set it to `infinity`, the last page of data is returned. ")] = None,
@@ -2711,6 +2906,8 @@ class TokenizationApi:
 
         This operation retrieves a list of tokenization supported chains. 
 
+        :param token_standard: Filter by token standard.
+        :type token_standard: TokenizationTokenStandard
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
         :param after: This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set `after` to the ID of Object A (`RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk`), the response will include Object B and Object C.    **Notes**:   - If you set both `after` and `before`, an error will occur. - If you leave both `before` and `after` empty, the first page of data is returned. 
@@ -2726,6 +2923,7 @@ class TokenizationApi:
         """  # noqa: E501
 
         _param = self._list_tokenization_supported_chains_serialize(
+            token_standard=token_standard,
             limit=limit,
             after=after,
             before=before,
@@ -2744,6 +2942,7 @@ class TokenizationApi:
 
     def _list_tokenization_supported_chains_serialize(
         self,
+        token_standard,
         limit,
         after,
         before,
@@ -2756,6 +2955,10 @@ class TokenizationApi:
 
         # process the path parameters
         # process the query parameters
+        if token_standard is not None:
+            
+            _query_params.append(('token_standard', token_standard.value))
+            
         if limit is not None:
             
             _query_params.append(('limit', limit))
@@ -2805,7 +3008,7 @@ class TokenizationApi:
     ) -> TokenizationOperationResponse:
         """Mint tokens
 
-        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -2855,7 +3058,7 @@ class TokenizationApi:
     ) -> ApiResponse[TokenizationOperationResponse]:
         """Mint tokens
 
-        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -2905,7 +3108,7 @@ class TokenizationApi:
     ) -> RESTResponseType:
         """Mint tokens
 
-        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+        This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -3333,6 +3536,190 @@ class TokenizationApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/tokenization/tokens/{token_id}/contract_call',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def unarchive_tokenization(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_unarchive_token_request: Annotated[Optional[TokenizationUnarchiveTokenRequest], Field(description="The request body for unarchiving tokens.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TokenizationTokenDetailInfo:
+        """Unarchive token
+
+        This operation removes the archived flag from the token. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_unarchive_token_request: The request body for unarchiving tokens.
+        :type tokenization_unarchive_token_request: TokenizationUnarchiveTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._unarchive_tokenization_serialize(
+            token_id=token_id,
+            tokenization_unarchive_token_request=tokenization_unarchive_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationTokenDetailInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def unarchive_tokenization_with_http_info(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_unarchive_token_request: Annotated[Optional[TokenizationUnarchiveTokenRequest], Field(description="The request body for unarchiving tokens.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TokenizationTokenDetailInfo]:
+        """Unarchive token
+
+        This operation removes the archived flag from the token. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_unarchive_token_request: The request body for unarchiving tokens.
+        :type tokenization_unarchive_token_request: TokenizationUnarchiveTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._unarchive_tokenization_serialize(
+            token_id=token_id,
+            tokenization_unarchive_token_request=tokenization_unarchive_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationTokenDetailInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def unarchive_tokenization_without_preload_content(
+        self,
+        token_id: Annotated[StrictStr, Field(description="The token ID, which is the unique identifier of a token.")],
+        tokenization_unarchive_token_request: Annotated[Optional[TokenizationUnarchiveTokenRequest], Field(description="The request body for unarchiving tokens.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Unarchive token
+
+        This operation removes the archived flag from the token. 
+
+        :param token_id: The token ID, which is the unique identifier of a token. (required)
+        :type token_id: str
+        :param tokenization_unarchive_token_request: The request body for unarchiving tokens.
+        :type tokenization_unarchive_token_request: TokenizationUnarchiveTokenRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._unarchive_tokenization_serialize(
+            token_id=token_id,
+            tokenization_unarchive_token_request=tokenization_unarchive_token_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TokenizationTokenDetailInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _unarchive_tokenization_serialize(
+        self,
+        token_id,
+        tokenization_unarchive_token_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if token_id is not None:
+            _path_params['token_id'] = token_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if tokenization_unarchive_token_request is not None:
+            _body_params = tokenization_unarchive_token_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/tokenization/tokens/{token_id}/unarchive',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4093,7 +4480,7 @@ class TokenizationApi:
     ) -> TokenizationOperationResponse:
         """Update permissions of the token
 
-        This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+        This operation updates permissions for tokenization contracts. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -4143,7 +4530,7 @@ class TokenizationApi:
     ) -> ApiResponse[TokenizationOperationResponse]:
         """Update permissions of the token
 
-        This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+        This operation updates permissions for tokenization contracts. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str
@@ -4193,7 +4580,7 @@ class TokenizationApi:
     ) -> RESTResponseType:
         """Update permissions of the token
 
-        This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+        This operation updates permissions for tokenization contracts. 
 
         :param token_id: The token ID, which is the unique identifier of a token. (required)
         :type token_id: str

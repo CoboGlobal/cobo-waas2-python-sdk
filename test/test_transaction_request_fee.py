@@ -42,6 +42,7 @@ class TestTransactionRequestFee(unittest.TestCase):
                 max_priority_fee_per_gas = '1000000000000',
                 gas_price = '100000000',
                 fee_rate = '50',
+                fallback = True,
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
                 gas_premium = '0.0001',

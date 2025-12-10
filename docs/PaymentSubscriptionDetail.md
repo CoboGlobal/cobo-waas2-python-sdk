@@ -5,15 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actions** | [**List[PaymentSubscriptionAction]**](PaymentSubscriptionAction.md) | An array of subscription actions. | [optional] 
-**transactions** | [**List[Transaction]**](Transaction.md) | An array of subscription transactions. | [optional] 
 **plan_id** | **str** | The plan id in cobo. | 
 **subscription_id** | **str** | The subscription id in cobo. | 
 **merchant_id** | **str** | The merchant id in cobo. | 
 **merchant_address** | **str** | The merchant address in cobo. | 
 **user_address** | **str** | The user address in subscription. | 
 **token_id** | **str** | The token_id in subscription. | 
-**amount** | **str** | The amount in subscription. | 
+**charge_amount** | **str** | The charge amount in subscription. | [optional] 
 **start_time** | **int** | The subscription start timestamp. | 
 **expiration_time** | **int** | The subscription expired timestamp. | 
 **charges_made** | **int** | The subscription charge times. | 
@@ -23,6 +21,8 @@ Name | Type | Description | Notes
 **status** | [**PaymentSubscriptionStatus**](PaymentSubscriptionStatus.md) |  | 
 **created_timestamp** | **int** | The created time of the subscription, represented as a UNIX timestamp in seconds. | 
 **updated_timestamp** | **int** | The updated time of the subscription, represented as a UNIX timestamp in seconds. | 
+**actions** | [**List[PaymentSubscriptionAction]**](PaymentSubscriptionAction.md) | An array of subscription actions. | [optional] 
+**transactions** | [**List[Transaction]**](Transaction.md) | An array of subscription transactions. | [optional] 
 
 ## Example
 

@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
 from cobo_waas2.models.payment_subscription_action_type import PaymentSubscriptionActionType
 from typing import Optional, Set
@@ -26,11 +26,13 @@ class PaymentUpdateAmountSubscriptionActionData(BaseModel):
     """
     PaymentUpdateAmountSubscriptionActionData
     """  # noqa: E501
-    new_plan_id: StrictStr = Field(description="The new plan id in cobo.")
     action_type: PaymentSubscriptionActionType
     subscription_id: StrictStr = Field(description="The subscription id in cobo.")
-    signature: StrictStr = Field(description="The signature for transaction.")
-    __properties: ClassVar[List[str]] = ["action_type", "subscription_id", "signature"]
+    new_plan_id: StrictStr = Field(description="The new plan id in cobo.")
+    charge_amount: StrictStr = Field(description="The subscription plan crypto amount with input token_id. ")
+    signature: StrictStr = Field(description="The signature for transaction. charge action is not required.")
+    deadline: StrictInt = Field(description="The signature deadline for transaction. charge action is not required.")
+    __properties: ClassVar[List[str]] = ["action_type", "subscription_id", "new_plan_id", "charge_amount", "signature", "deadline"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +87,10 @@ class PaymentUpdateAmountSubscriptionActionData(BaseModel):
         _obj = cls.model_validate({
             "action_type": obj.get("action_type"),
             "subscription_id": obj.get("subscription_id"),
-            "signature": obj.get("signature")
+            "new_plan_id": obj.get("new_plan_id"),
+            "charge_amount": obj.get("charge_amount"),
+            "signature": obj.get("signature"),
+            "deadline": obj.get("deadline")
         })
         return _obj
 

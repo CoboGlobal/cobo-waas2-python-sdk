@@ -45,12 +45,26 @@ class TestTokenizationTokenDetailInfo(unittest.TestCase):
                 status = 'Active',
                 total_supply = '133399',
                 holdings = '12399',
+                archived = False,
                 permissions = [
                     cobo_waas2.models.tokenization_address_permission.TokenizationAddressPermission(
                         execution_address = '0x0406db8351aa6839169bb363f63c2c808fee8f99', 
                         permissions = ["UpgradeContract","PauseContract"], 
                         created_timestamp = 1610445878970, )
-                    ]
+                    ],
+                underlying_token = cobo_waas2.models.tokenization_token_info.TokenizationTokenInfo(
+                    token_id = 'ETH_CUSD2', 
+                    chain_id = 'ETH', 
+                    token_address = '0x1234567890123456789012345678901234567890', 
+                    token_name = 'CUSD', 
+                    token_symbol = 'CUSD', 
+                    token_standard = 'ERC20', 
+                    decimals = 18, 
+                    token_access_activated = False, 
+                    status = 'Active', 
+                    total_supply = '133399', 
+                    holdings = '12399', 
+                    archived = False, )
             )
         else:
             return TokenizationTokenDetailInfo(
@@ -60,6 +74,7 @@ class TestTokenizationTokenDetailInfo(unittest.TestCase):
                 token_standard = 'ERC20',
                 decimals = 18,
                 status = 'Active',
+                archived = False,
         )
         """
 

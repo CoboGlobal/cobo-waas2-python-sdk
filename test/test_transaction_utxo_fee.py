@@ -35,6 +35,7 @@ class TestTransactionUtxoFee(unittest.TestCase):
         if include_optional:
             return TransactionUtxoFee(
                 fee_rate = '50',
+                fallback = True,
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'BTC',
                 fee_used = '0.1',

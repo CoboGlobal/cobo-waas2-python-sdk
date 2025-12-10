@@ -35,7 +35,9 @@ class TestTokenizationSolWrappedTokenPermissionParams(unittest.TestCase):
         if include_optional:
             return TokenizationSolWrappedTokenPermissionParams(
                 wrapper = ["9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM","7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"],
-                pauser = ["9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM"]
+                pauser = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
+                freezer = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
+                updater = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'
             )
         else:
             return TokenizationSolWrappedTokenPermissionParams(

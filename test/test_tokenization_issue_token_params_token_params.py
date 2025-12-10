@@ -41,7 +41,9 @@ class TestTokenizationIssueTokenParamsTokenParams(unittest.TestCase):
                 token_access_activated = False,
                 permissions = cobo_waas2.models.tokenization_sol_wrapped_token_permission_params.TokenizationSolWrappedTokenPermissionParams(
                     wrapper = ["9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM","7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"], 
-                    pauser = ["9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM"], ),
+                    pauser = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
+                    freezer = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
+                    updater = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', ),
                 underlying_token = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'
             )
         else:

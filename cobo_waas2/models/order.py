@@ -30,24 +30,28 @@ class Order(BaseModel):
     """  # noqa: E501
     order_id: StrictStr = Field(description="The order ID.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment.")
-    chain_id: StrictStr = Field(description="The ID of the blockchain network where the payment transaction should be made.")
-    payable_amount: StrictStr = Field(description="The cryptocurrency amount to be paid for this order.")
-    receive_address: StrictStr = Field(description="The recipient wallet address to be used for the payment transaction.")
-    currency: StrictStr = Field(description="The fiat currency of the order.")
-    order_amount: StrictStr = Field(description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`).")
-    fee_amount: StrictStr = Field(description="The developer fee for the order in fiat currency. It is added to the base amount (`order_amount`) to determine the final charge.")
-    exchange_rate: StrictStr = Field(description="The exchange rate between a currency pair. Expressed as the amount of fiat currency per one unit of cryptocurrency. For example, if the cryptocurrency is USDT and the fiat currency is USD, a rate of \"0.99\" means 1 USDT = 0.99 USD.")
-    expired_at: Optional[StrictInt] = Field(default=None, description="The expiration time of the pay-in order, represented as a UNIX timestamp in seconds.")
     merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system.")
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
+    pricing_currency: Optional[StrictStr] = Field(default=None, description="The fiat currency of the order.")
+    pricing_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`).")
+    fee_amount: StrictStr = Field(description="The developer fee for the order in fiat currency. It is added to the base amount (`order_amount`) to determine the final charge.")
+    payable_currency: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment.")
+    chain_id: StrictStr = Field(description="The ID of the blockchain network where the payment transaction should be made.")
+    payable_amount: StrictStr = Field(description="The cryptocurrency amount to be paid for this order.")
+    exchange_rate: StrictStr = Field(description="The exchange rate between a currency pair. Expressed as the amount of fiat currency per one unit of cryptocurrency. For example, if the cryptocurrency is USDT and the fiat currency is USD, a rate of \"0.99\" means 1 USDT = 0.99 USD.")
+    amount_tolerance: Optional[StrictStr] = Field(default=None, description="Allowed amount deviation.")
+    receive_address: StrictStr = Field(description="The recipient wallet address to be used for the payment transaction.")
     status: OrderStatus
     received_token_amount: StrictStr = Field(description="The total cryptocurrency amount received for this order. Updates until the expiration time. Precision matches the token standard (e.g., 6 decimals for USDT).")
+    expired_at: Optional[StrictInt] = Field(default=None, description="The expiration time of the pay-in order, represented as a UNIX timestamp in seconds.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the order, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the order, represented as a UNIX timestamp in seconds.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the settlement process.")
+    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency of the order.")
+    order_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`).")
+    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment.")
     settlement_status: Optional[SettleStatus] = None
-    __properties: ClassVar[List[str]] = ["order_id", "merchant_id", "token_id", "chain_id", "payable_amount", "receive_address", "currency", "order_amount", "fee_amount", "exchange_rate", "expired_at", "merchant_order_code", "psp_order_code", "status", "received_token_amount", "created_timestamp", "updated_timestamp", "transactions", "settlement_status"]
+    __properties: ClassVar[List[str]] = ["order_id", "merchant_id", "merchant_order_code", "psp_order_code", "pricing_currency", "pricing_amount", "fee_amount", "payable_currency", "chain_id", "payable_amount", "exchange_rate", "amount_tolerance", "receive_address", "status", "received_token_amount", "expired_at", "created_timestamp", "updated_timestamp", "transactions", "currency", "order_amount", "token_id", "settlement_status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,22 +113,26 @@ class Order(BaseModel):
         _obj = cls.model_validate({
             "order_id": obj.get("order_id"),
             "merchant_id": obj.get("merchant_id"),
-            "token_id": obj.get("token_id"),
-            "chain_id": obj.get("chain_id"),
-            "payable_amount": obj.get("payable_amount"),
-            "receive_address": obj.get("receive_address"),
-            "currency": obj.get("currency"),
-            "order_amount": obj.get("order_amount"),
-            "fee_amount": obj.get("fee_amount"),
-            "exchange_rate": obj.get("exchange_rate"),
-            "expired_at": obj.get("expired_at"),
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
+            "pricing_currency": obj.get("pricing_currency"),
+            "pricing_amount": obj.get("pricing_amount"),
+            "fee_amount": obj.get("fee_amount"),
+            "payable_currency": obj.get("payable_currency"),
+            "chain_id": obj.get("chain_id"),
+            "payable_amount": obj.get("payable_amount"),
+            "exchange_rate": obj.get("exchange_rate"),
+            "amount_tolerance": obj.get("amount_tolerance"),
+            "receive_address": obj.get("receive_address"),
             "status": obj.get("status"),
             "received_token_amount": obj.get("received_token_amount"),
+            "expired_at": obj.get("expired_at"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "transactions": [PaymentTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
+            "currency": obj.get("currency"),
+            "order_amount": obj.get("order_amount"),
+            "token_id": obj.get("token_id"),
             "settlement_status": obj.get("settlement_status")
         })
         return _obj

@@ -42,10 +42,9 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                     cobo_waas2.models.create_settlement.CreateSettlement(
                         merchant_id = 'M1001', 
                         token_id = 'ETH_USDT', 
-                        currency = 'USD', 
                         amount = '500.00', 
-                        bank_account_id = '0123e457-e89b-12d3-a456-426614174004', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
+                        crypto_address = '0xabc123456789def0000000000000000000000000', 
                         order_ids = [
                             'O20250304-M1001-1001'
                             ], )
@@ -61,10 +60,9 @@ class TestCreateSettlementRequestRequest(unittest.TestCase):
                     cobo_waas2.models.create_settlement.CreateSettlement(
                         merchant_id = 'M1001', 
                         token_id = 'ETH_USDT', 
-                        currency = 'USD', 
                         amount = '500.00', 
-                        bank_account_id = '0123e457-e89b-12d3-a456-426614174004', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
+                        crypto_address = '0xabc123456789def0000000000000000000000000', 
                         order_ids = [
                             'O20250304-M1001-1001'
                             ], )

@@ -4,6 +4,7 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**archive_tokenization**](TokenizationApi.md#archive_tokenization) | **POST** /tokenization/tokens/{token_id}/archive | Archive token
 [**burn_tokenization**](TokenizationApi.md#burn_tokenization) | **POST** /tokenization/tokens/{token_id}/burn | Burn tokens
 [**estimate_tokenization_fee**](TokenizationApi.md#estimate_tokenization_fee) | **POST** /tokenization/estimate_fee | Estimate tokenization operation fee
 [**get_tokenization_activity**](TokenizationApi.md#get_tokenization_activity) | **GET** /tokenization/activities/{activity_id} | Get tokenization activity details
@@ -20,6 +21,7 @@ Method | HTTP request | Description
 [**mint_tokenization**](TokenizationApi.md#mint_tokenization) | **POST** /tokenization/tokens/{token_id}/mint | Mint tokens
 [**pause_tokenization**](TokenizationApi.md#pause_tokenization) | **POST** /tokenization/tokens/{token_id}/pause | Pause token contract
 [**tokenization_contract_call**](TokenizationApi.md#tokenization_contract_call) | **POST** /tokenization/tokens/{token_id}/contract_call | Call token contract
+[**unarchive_tokenization**](TokenizationApi.md#unarchive_tokenization) | **POST** /tokenization/tokens/{token_id}/unarchive | Unarchive token
 [**unpause_tokenization**](TokenizationApi.md#unpause_tokenization) | **POST** /tokenization/tokens/{token_id}/unpause | Unpause token contract
 [**update_tokenization_allowlist_activation**](TokenizationApi.md#update_tokenization_allowlist_activation) | **POST** /tokenization/tokens/{token_id}/allowlist/activation | Activate or deactivate the allowlist
 [**update_tokenization_allowlist_addresses**](TokenizationApi.md#update_tokenization_allowlist_addresses) | **POST** /tokenization/tokens/{token_id}/allowlist/addresses | Update allowlist addresses
@@ -27,12 +29,87 @@ Method | HTTP request | Description
 [**update_tokenization_permissions**](TokenizationApi.md#update_tokenization_permissions) | **POST** /tokenization/tokens/{token_id}/permissions | Update permissions of the token
 
 
+# **archive_tokenization**
+> TokenizationTokenDetailInfo archive_tokenization(token_id, tokenization_archive_token_request=tokenization_archive_token_request)
+
+Archive token
+
+This operation marks the token as archived. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.tokenization_archive_token_request import TokenizationArchiveTokenRequest
+from cobo_waas2.models.tokenization_token_detail_info import TokenizationTokenDetailInfo
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_id = 'ETH_USDT'
+    tokenization_archive_token_request = cobo_waas2.TokenizationArchiveTokenRequest()
+
+    try:
+        # Archive token
+        api_response = api_instance.archive_tokenization(token_id, tokenization_archive_token_request=tokenization_archive_token_request)
+        print("The response of TokenizationApi->archive_tokenization:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TokenizationApi->archive_tokenization: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **tokenization_archive_token_request** | [**TokenizationArchiveTokenRequest**](TokenizationArchiveTokenRequest.md)| The request body for archiving tokens. | [optional] 
+
+### Return type
+
+[**TokenizationTokenDetailInfo**](TokenizationTokenDetailInfo.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successfully retrieved token information. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **burn_tokenization**
 > TokenizationOperationResponse burn_tokenization(token_id, tokenization_burn_token_request=tokenization_burn_token_request)
 
 Burn tokens
 
-This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+This operation burns tokens from a specified address. Creates a burn transaction that will decrease the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
 ### Example
 
@@ -957,7 +1034,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_tokenization_supported_chains**
-> TokenizationListEnabledChainsResponse list_tokenization_supported_chains(limit=limit, after=after, before=before)
+> TokenizationListEnabledChainsResponse list_tokenization_supported_chains(token_standard=token_standard, limit=limit, after=after, before=before)
 
 List supported chains for tokenization
 
@@ -971,6 +1048,7 @@ This operation retrieves a list of tokenization supported chains.
 ```python
 import cobo_waas2
 from cobo_waas2.models.tokenization_list_enabled_chains_response import TokenizationListEnabledChainsResponse
+from cobo_waas2.models.tokenization_token_standard import TokenizationTokenStandard
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -985,13 +1063,14 @@ configuration = cobo_waas2.Configuration(
 with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_standard = cobo_waas2.TokenizationTokenStandard()
     limit = 10
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
 
     try:
         # List supported chains for tokenization
-        api_response = api_instance.list_tokenization_supported_chains(limit=limit, after=after, before=before)
+        api_response = api_instance.list_tokenization_supported_chains(token_standard=token_standard, limit=limit, after=after, before=before)
         print("The response of TokenizationApi->list_tokenization_supported_chains:\n")
         pprint(api_response)
     except Exception as e:
@@ -1005,6 +1084,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **token_standard** | [**TokenizationTokenStandard**](.md)| Filter by token standard. | [optional] 
  **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
  **after** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data after the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C. If you set &#x60;after&#x60; to the ID of Object A (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object C.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned.  | [optional] 
  **before** | **str**| This parameter specifies an object ID as a starting point for pagination, retrieving data before the specified object relative to the current dataset.    Suppose the current data is ordered as Object A, Object B, and Object C.  If you set &#x60;before&#x60; to the ID of Object C (&#x60;RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk&#x60;), the response will include Object B and Object A.    **Notes**:   - If you set both &#x60;after&#x60; and &#x60;before&#x60;, an error will occur. - If you leave both &#x60;before&#x60; and &#x60;after&#x60; empty, the first page of data is returned. - If you set it to &#x60;infinity&#x60;, the last page of data is returned.  | [optional] 
@@ -1037,7 +1117,7 @@ Name | Type | Description  | Notes
 
 Mint tokens
 
-This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper tokens. 
+This operation mints new tokens to a specified address. Creates a mint transaction that will increase the token supply.  **Note**: This operation is not supported for CoboERC20Wrapper and SOLWrapper tokens. 
 
 ### Example
 
@@ -1252,6 +1332,81 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Tokenization operation transaction created successfully |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **unarchive_tokenization**
+> TokenizationTokenDetailInfo unarchive_tokenization(token_id, tokenization_unarchive_token_request=tokenization_unarchive_token_request)
+
+Unarchive token
+
+This operation removes the archived flag from the token. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.tokenization_token_detail_info import TokenizationTokenDetailInfo
+from cobo_waas2.models.tokenization_unarchive_token_request import TokenizationUnarchiveTokenRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.TokenizationApi(api_client)
+    token_id = 'ETH_USDT'
+    tokenization_unarchive_token_request = cobo_waas2.TokenizationUnarchiveTokenRequest()
+
+    try:
+        # Unarchive token
+        api_response = api_instance.unarchive_tokenization(token_id, tokenization_unarchive_token_request=tokenization_unarchive_token_request)
+        print("The response of TokenizationApi->unarchive_tokenization:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TokenizationApi->unarchive_tokenization: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **str**| The token ID, which is the unique identifier of a token. | 
+ **tokenization_unarchive_token_request** | [**TokenizationUnarchiveTokenRequest**](TokenizationUnarchiveTokenRequest.md)| The request body for unarchiving tokens. | [optional] 
+
+### Return type
+
+[**TokenizationTokenDetailInfo**](TokenizationTokenDetailInfo.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successfully retrieved token information. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -1562,7 +1717,7 @@ Name | Type | Description  | Notes
 
 Update permissions of the token
 
-This operation updates permissions for tokenization contracts.  **For Ethereum-based tokens:** Use `add` to grant permissions or `remove` to revoke permissions. Multiple permissions can be assigned to the same address.  **For Solana tokens:** Use `set` to define the complete list of permissions for an address. This replaces any existing permissions. 
+This operation updates permissions for tokenization contracts. 
 
 ### Example
 

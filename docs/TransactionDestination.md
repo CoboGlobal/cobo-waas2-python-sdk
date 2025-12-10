@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **exchange_id** | [**ExchangeId**](ExchangeId.md) |  | [optional] 
 **amount** | **str** | The transfer amount. For example, if you trade 1.5 BTC, then the value is &#x60;1.5&#x60;.  | 
 **address** | **str** | The destination address. | 
-**value** | **str** | The transfer amount. For example, if you trade 1.5 ETH, then the value is &#x60;1.5&#x60;.  | [optional] 
+**value** | **str** | The transfer amount. For example, if you trade 1.5 TRON, then the value is &#x60;1.5&#x60;.  | [optional] 
 **calldata** | **str** | The data that is used to invoke a specific function or method within the specified contract at the destination address.  | 
 **calldata_info** | [**TransactionEvmCalldataInfo**](TransactionEvmCalldataInfo.md) |  | [optional] 
 **instructions** | [**List[TransactionSolContractInstruction]**](TransactionSolContractInstruction.md) |  | [optional] 

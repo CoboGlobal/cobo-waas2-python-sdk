@@ -38,7 +38,8 @@ class TokenizationTokenInfo(BaseModel):
     status: TokenizationStatus
     total_supply: Optional[StrictStr] = Field(default=None, description="The total supply of the token.")
     holdings: Optional[StrictStr] = Field(default=None, description="The amount of tokens held by the organization.")
-    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "token_standard", "decimals", "token_access_activated", "status", "total_supply", "holdings"]
+    archived: StrictBool = Field(description="Whether the token is archived. If archived, no operations can be initiated on this token.")
+    __properties: ClassVar[List[str]] = ["token_id", "chain_id", "token_address", "token_name", "token_symbol", "token_standard", "decimals", "token_access_activated", "status", "total_supply", "holdings", "archived"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,7 +102,8 @@ class TokenizationTokenInfo(BaseModel):
             "token_access_activated": obj.get("token_access_activated"),
             "status": obj.get("status"),
             "total_supply": obj.get("total_supply"),
-            "holdings": obj.get("holdings")
+            "holdings": obj.get("holdings"),
+            "archived": obj.get("archived")
         })
         return _obj
 

@@ -36,13 +36,15 @@ class TestPaymentBaseSubscriptionActionData(unittest.TestCase):
             return PaymentBaseSubscriptionActionData(
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
-                signature = ''
+                signature = '',
+                deadline = 56
             )
         else:
             return PaymentBaseSubscriptionActionData(
                 action_type = 'Create',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
                 signature = '',
+                deadline = 56,
         )
         """
 

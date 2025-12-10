@@ -39,8 +39,7 @@ class TestTransactionCosmosContractDestination(unittest.TestCase):
                     cobo_waas2.models.cosmos_message.Cosmos Message(
                         type_url = '/babylon.btcstaking.v1.MsgCreateBTCDelegation', 
                         message = 'eyJ0eXBlIjoiYmFiY29zZS5idGNzdGFnaW5nLnYxLk1zZ0NyZWF0ZUJUQ0RlbGVnYXRpb24iLCJtZXNzYWdlIjp7ImNvbW1hbmRfaWQiOiJjb21tYW5kX2lkIiwibWVzc2FnZV92YWx1ZSI6Im1lc3NhZ2VfdmFsdWUiLCJtZXNzYWdlX3R5cGUiOiJtZXNzYWdlX3R5cGUifX0=', )
-                    ],
-                value = '1.5'
+                    ]
             )
         else:
             return TransactionCosmosContractDestination(

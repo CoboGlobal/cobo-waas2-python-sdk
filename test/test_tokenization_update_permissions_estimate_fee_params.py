@@ -35,10 +35,13 @@ class TestTokenizationUpdatePermissionsEstimateFeeParams(unittest.TestCase):
         if include_optional:
             return TokenizationUpdatePermissionsEstimateFeeParams(
                 source = None,
-                action = 'add',
-                address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-                permissions = [
-                    'MintTokens'
+                addresses = [
+                    cobo_waas2.models.tokenization_update_address_permissions.TokenizationUpdateAddressPermissions(
+                        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', 
+                        action = 'add', 
+                        permissions = [
+                            'MintTokens'
+                            ], )
                     ],
                 operation_type = 'Issue',
                 token_id = '8a4f9324-ef2a-43cf-9f0e-d7f99999d3e8',
@@ -47,10 +50,13 @@ class TestTokenizationUpdatePermissionsEstimateFeeParams(unittest.TestCase):
         else:
             return TokenizationUpdatePermissionsEstimateFeeParams(
                 source = None,
-                action = 'add',
-                address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-                permissions = [
-                    'MintTokens'
+                addresses = [
+                    cobo_waas2.models.tokenization_update_address_permissions.TokenizationUpdateAddressPermissions(
+                        address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', 
+                        action = 'add', 
+                        permissions = [
+                            'MintTokens'
+                            ], )
                     ],
                 operation_type = 'Issue',
                 token_id = '8a4f9324-ef2a-43cf-9f0e-d7f99999d3e8',

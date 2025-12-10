@@ -37,15 +37,15 @@ class TestFeeStationCheckFeeStationUsage(unittest.TestCase):
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 amount = '100.5',
                 token_id = 'ETH_USDT',
+                fee_token_id = 'ETH',
                 estimated_fee_amount = '0.0021',
                 from_address = '0x1234567890abcdef1234567890abcdef12345678',
-                from_wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+                from_wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                auto_fuel = 'PassiveAutoFuel'
             )
         else:
             return FeeStationCheckFeeStationUsage(
                 request_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                amount = '100.5',
-                token_id = 'ETH_USDT',
                 estimated_fee_amount = '0.0021',
                 from_address = '0x1234567890abcdef1234567890abcdef12345678',
                 from_wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
