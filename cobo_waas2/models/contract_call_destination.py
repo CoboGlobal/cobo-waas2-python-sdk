@@ -15,6 +15,7 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from cobo_waas2.models.cosmos_contract_call_destination import CosmosContractCallDestination
 from cobo_waas2.models.evm_contract_call_destination import EvmContractCallDestination
 from cobo_waas2.models.sol_contract_call_destination import SolContractCallDestination
 from cobo_waas2.models.stellar_contract_call_destination import StellarContractCallDestination
@@ -23,7 +24,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-CONTRACTCALLDESTINATION_ONE_OF_SCHEMAS = ["EvmContractCallDestination", "SolContractCallDestination", "StellarContractCallDestination", "TronContractCallDestination"]
+CONTRACTCALLDESTINATION_ONE_OF_SCHEMAS = ["CosmosContractCallDestination", "EvmContractCallDestination", "SolContractCallDestination", "StellarContractCallDestination", "TronContractCallDestination"]
 
 class ContractCallDestination(BaseModel):
     """
@@ -37,8 +38,10 @@ class ContractCallDestination(BaseModel):
     oneof_schema_3_validator: Optional[StellarContractCallDestination] = None
     # data type: TronContractCallDestination
     oneof_schema_4_validator: Optional[TronContractCallDestination] = None
-    actual_instance: Optional[Union[EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination]] = None
-    one_of_schemas: Set[str] = { "EvmContractCallDestination", "SolContractCallDestination", "StellarContractCallDestination", "TronContractCallDestination" }
+    # data type: CosmosContractCallDestination
+    oneof_schema_5_validator: Optional[CosmosContractCallDestination] = None
+    actual_instance: Optional[Union[CosmosContractCallDestination, EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination]] = None
+    one_of_schemas: Set[str] = { "CosmosContractCallDestination", "EvmContractCallDestination", "SolContractCallDestination", "StellarContractCallDestination", "TronContractCallDestination" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -84,12 +87,17 @@ class ContractCallDestination(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TronContractCallDestination`")
         else:
             match += 1
+        # validate data type: CosmosContractCallDestination
+        if not isinstance(v, CosmosContractCallDestination):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CosmosContractCallDestination`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ContractCallDestination with oneOf schemas: EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ContractCallDestination with oneOf schemas: CosmosContractCallDestination, EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ContractCallDestination with oneOf schemas: EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ContractCallDestination with oneOf schemas: CosmosContractCallDestination, EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -109,6 +117,11 @@ class ContractCallDestination(BaseModel):
         if not _data_type:
             raise ValueError("Failed to lookup data type from the field `destination_type` in the input.")
 
+        # check if data type is `CosmosContractCallDestination`
+        if _data_type == "COSMOS_Contract":
+            instance.actual_instance = CosmosContractCallDestination.from_json(json_str)
+            return instance
+
         # check if data type is `EvmContractCallDestination`
         if _data_type == "EVM_Contract":
             instance.actual_instance = EvmContractCallDestination.from_json(json_str)
@@ -127,6 +140,11 @@ class ContractCallDestination(BaseModel):
         # check if data type is `TronContractCallDestination`
         if _data_type == "TRON_Contract":
             instance.actual_instance = TronContractCallDestination.from_json(json_str)
+            return instance
+
+        # check if data type is `CosmosContractCallDestination`
+        if _data_type == "CosmosContractCallDestination":
+            instance.actual_instance = CosmosContractCallDestination.from_json(json_str)
             return instance
 
         # check if data type is `EvmContractCallDestination`
@@ -174,14 +192,20 @@ class ContractCallDestination(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CosmosContractCallDestination
+        try:
+            instance.actual_instance = CosmosContractCallDestination.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ContractCallDestination with oneOf schemas: EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ContractCallDestination with oneOf schemas: CosmosContractCallDestination, EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into ContractCallDestination with oneOf schemas: EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into ContractCallDestination with oneOf schemas: CosmosContractCallDestination, EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -195,7 +219,7 @@ class ContractCallDestination(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CosmosContractCallDestination, EvmContractCallDestination, SolContractCallDestination, StellarContractCallDestination, TronContractCallDestination]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 Estimate swap fee
 
-This operation estimates the network fee of a swap activity. You can use this operation to estimate the network fee before initiating swap activities from MPC Wallets or Web3 Wallets.  It requires a valid `wallet_id` and `quote_id`, so you need to [get a swap quote](https://www.cobo.com/developers/v2/api-references/swaps/get-swap-quote) first. 
+This operation estimates the network fee of a swap activity. You can use this operation to estimate the network fee before initiating swap activities from MPC Wallets or Custodial Wallets (Web3 Wallets).  It requires a valid `wallet_id` and `quote_id`, so you need to [get a swap quote](https://www.cobo.com/developers/v2/api-references/swaps/get-swap-quote) first. 
 
 ### Example
 

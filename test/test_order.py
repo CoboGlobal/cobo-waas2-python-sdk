@@ -36,19 +36,20 @@ class TestOrder(unittest.TestCase):
             return Order(
                 order_id = '5001',
                 merchant_id = '1001',
-                token_id = 'ETH_USDT',
-                chain_id = 'ETH',
-                payable_amount = '103.03',
-                receive_address = '0x1234567890abcdef1234567890abcdef12345678',
-                currency = 'USD',
-                order_amount = '100.00',
-                fee_amount = '2.00',
-                exchange_rate = '0.99',
-                expired_at = 1711324800,
                 merchant_order_code = 'M20240201001',
                 psp_order_code = 'P20240201001',
+                pricing_currency = 'USD',
+                pricing_amount = '100.00',
+                fee_amount = '2.00',
+                payable_currency = 'ETH_USDT',
+                chain_id = 'ETH',
+                payable_amount = '103.03',
+                exchange_rate = '0.99',
+                amount_tolerance = '0.5',
+                receive_address = '0x1234567890abcdef1234567890abcdef12345678',
                 status = 'Pending',
                 received_token_amount = '103.0305',
+                expired_at = 1711324800,
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600,
                 transactions = [
@@ -82,21 +83,20 @@ class TestOrder(unittest.TestCase):
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
                     ],
-                settlement_status = 'Pending',
-                amount_tolerance = '0.5'
+                currency = 'USD',
+                order_amount = '100.00',
+                token_id = 'ETH_USDT',
+                settlement_status = 'Pending'
             )
         else:
             return Order(
                 order_id = '5001',
-                token_id = 'ETH_USDT',
+                psp_order_code = 'P20240201001',
+                fee_amount = '2.00',
                 chain_id = 'ETH',
                 payable_amount = '103.03',
-                receive_address = '0x1234567890abcdef1234567890abcdef12345678',
-                currency = 'USD',
-                order_amount = '100.00',
-                fee_amount = '2.00',
                 exchange_rate = '0.99',
-                psp_order_code = 'P20240201001',
+                receive_address = '0x1234567890abcdef1234567890abcdef12345678',
                 status = 'Pending',
                 received_token_amount = '103.0305',
         )

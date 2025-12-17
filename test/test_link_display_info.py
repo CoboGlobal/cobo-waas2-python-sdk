@@ -35,7 +35,8 @@ class TestLinkDisplayInfo(unittest.TestCase):
         if include_optional:
             return LinkDisplayInfo(
                 developer_name = 'Acme Payment Solutions',
-                logo = 'https://example.com/logo.png'
+                logo = 'https://example.com/logo.png',
+                return_url = 'https://example.com/return'
             )
         else:
             return LinkDisplayInfo(

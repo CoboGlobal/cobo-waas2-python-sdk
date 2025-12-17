@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **instructions** | [**List[SolContractCallInstruction]**](SolContractCallInstruction.md) |  | 
 **address_lookup_table_accounts** | [**List[SolContractCallAddressLookupTableAccount]**](SolContractCallAddressLookupTableAccount.md) |  | [optional] 
 **contract_param** | [**StellarContractCallContractParam**](StellarContractCallContractParam.md) |  | 
+**cosmos_messages** | [**List[CosmosContractCallMessage]**](CosmosContractCallMessage.md) |  | 
 
 ## Example
 

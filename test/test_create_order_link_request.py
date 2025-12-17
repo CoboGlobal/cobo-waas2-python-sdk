@@ -35,35 +35,44 @@ class TestCreateOrderLinkRequest(unittest.TestCase):
         if include_optional:
             return CreateOrderLinkRequest(
                 business_info = cobo_waas2.models.order_link_business_info.OrderLinkBusinessInfo(
-                    token_ids = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
-                    custom_exchange_rates = [{"token_id":"ETH_USDT","exchange_rate":"0.99"},{"token_id":"SOL_USDC","exchange_rate":"1.02"}], 
-                    currency = 'USD', 
-                    fee_amount = '2.00', 
                     merchant_id = '1001', 
-                    order_amount = '100.00', 
                     merchant_order_code = 'M20240201001', 
                     psp_order_code = 'P20240201001', 
+                    pricing_currency = 'USD', 
+                    pricing_amount = '100.00', 
+                    fee_amount = '2.00', 
+                    payable_currencies = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
+                    payable_amounts = [{"token_id":"ETH_USDT","amount":"103.03"},{"token_id":"SOL_USDC","amount":"105.05"}], 
                     expired_in = 1800, 
-                    use_dedicated_address = False, 
-                    amount_tolerance = '0.5', ),
+                    amount_tolerance = '0.5', 
+                    currency = 'USD', 
+                    order_amount = '100.00', 
+                    token_ids = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
+                    custom_exchange_rates = [{"token_id":"ETH_USDT","exchange_rate":"0.99"},{"token_id":"SOL_USDC","exchange_rate":"1.02"}], 
+                    use_dedicated_address = False, ),
                 display_info = cobo_waas2.models.link_display_info.LinkDisplayInfo(
                     developer_name = 'Acme Payment Solutions', 
-                    logo = 'https://example.com/logo.png', )
+                    logo = 'https://example.com/logo.png', 
+                    return_url = 'https://example.com/return', )
             )
         else:
             return CreateOrderLinkRequest(
                 business_info = cobo_waas2.models.order_link_business_info.OrderLinkBusinessInfo(
-                    token_ids = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
-                    custom_exchange_rates = [{"token_id":"ETH_USDT","exchange_rate":"0.99"},{"token_id":"SOL_USDC","exchange_rate":"1.02"}], 
-                    currency = 'USD', 
-                    fee_amount = '2.00', 
                     merchant_id = '1001', 
-                    order_amount = '100.00', 
                     merchant_order_code = 'M20240201001', 
                     psp_order_code = 'P20240201001', 
+                    pricing_currency = 'USD', 
+                    pricing_amount = '100.00', 
+                    fee_amount = '2.00', 
+                    payable_currencies = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
+                    payable_amounts = [{"token_id":"ETH_USDT","amount":"103.03"},{"token_id":"SOL_USDC","amount":"105.05"}], 
                     expired_in = 1800, 
-                    use_dedicated_address = False, 
-                    amount_tolerance = '0.5', ),
+                    amount_tolerance = '0.5', 
+                    currency = 'USD', 
+                    order_amount = '100.00', 
+                    token_ids = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
+                    custom_exchange_rates = [{"token_id":"ETH_USDT","exchange_rate":"0.99"},{"token_id":"SOL_USDC","exchange_rate":"1.02"}], 
+                    use_dedicated_address = False, ),
         )
         """
 

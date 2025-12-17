@@ -25,18 +25,22 @@ class CreatePaymentOrderRequest(BaseModel):
     """
     CreatePaymentOrderRequest
     """  # noqa: E501
-    merchant_id: StrictStr = Field(description="The merchant ID. This ID is assigned by Cobo when you create the merchant.")
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment. Supported values:    - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    currency: Optional[StrictStr] = Field(default='', description="The fiat currency for the base order amount and the developer fee. If left empty, both `order_amount` and `fee_amount` will be denominated in the cryptocurrency specified by `token_id`  Currently, only `USD` is supported. ")
-    order_amount: StrictStr = Field(description=" The base amount of the order, excluding the developer fee (specified in `fee_amount`). The denomination of the amount depends on if `currency` is specified: - If `currency` is specified, the amount is in the currency specified by `currency`, e.g. \"USD\". - If `currency` is not specified, the amount is in the cryptocurrency specified by `token_id`, e.g. \"ETH_USDT\".   Values must be greater than `0` and contain two decimal places. ")
-    fee_amount: StrictStr = Field(description=" The developer fee for the order.  - **When to set:**     If you are a merchant serving payers directly, set this field to `0`.     Developer fees are only relevant for platforms like payment service providers (PSPs) that charge fees to their downstream merchants.   For details, see [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances).  - **Denomination:**     The denomination of `fee_amount` depends on the presence of `currency`:       - If `currency` is set, the amount is denominated in that currency (e.g., \"USD\").       - If `currency` is not set, the amount is denominated in the cryptocurrency specified by `token_id` (e.g., \"ETH_USDT\").  - **Calculation:**     The developer fee is added to the base order amount (`order_amount`) to determine the final amount charged to the customer.     For example:       - Base amount (`order_amount`): \"100.00\"       - Developer fee (`fee_amount`): \"2.00\"       - **Total charged:** \"102.00\"  - **Formatting:**     The value can contain up to two decimal places. ")
-    merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system. The code should have a maximum length of 128 characters.")
-    psp_order_code: StrictStr = Field(description="A unique reference code assigned by you as a developer to identify this order in your system. This code must be unique across all orders in your system. The code should have a maximum length of 128 characters. ")
-    expired_in: Optional[StrictInt] = Field(default=1800, description="The number of seconds until the pay-in order expires, counted from when the request is sent. For example, if set to `1800`, the order will expire in 30 minutes. Must be greater than zero and cannot exceed 3 hours (10800 seconds). After expiration:  - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
-    use_dedicated_address: Optional[StrictBool] = Field(default=None, description="This field has been deprecated. ")
-    custom_exchange_rate: Optional[StrictStr] = Field(default=None, description=" A custom exchange rate that defines how much fiat currency equals 1 unit of cryptocurrency. If not provided, the system's default exchange rate will be used.  For example, if the fiat currency is USD and the cryptocurrency is USDT, setting `custom_exchange_rate` to `\"0.99\"` means that 1 USDT will be valued at 0.99 USD. ")
-    amount_tolerance: Optional[StrictStr] = Field(default=None, description="The maximum allowed deviation from the payable amount in the case of underpayment, specified as a positive value with up to one decimal place. If you provide more than one decimal place, an error will occur.  When the actual received amount is within this deviation (inclusive) of the payable amount, the order status will be set to `Completed` rather than `Underpaid`. ")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "currency", "order_amount", "fee_amount", "merchant_order_code", "psp_order_code", "expired_in", "use_dedicated_address", "custom_exchange_rate", "amount_tolerance"]
+    merchant_id: StrictStr = Field(description="The merchant ID.")
+    merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system.")
+    psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
+    pricing_currency: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment. Supported values:   - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    pricing_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`). Values must be greater than `0` and contain two decimal places.")
+    fee_amount: StrictStr = Field(description="The developer fee for the order in fiat currency. It is added to the base amount (`order_amount`) to determine the final charge. For example, if order_amount is \"100.00\" and fee_amount is \"2.00\", the customer will be charged \"102.00\" in total, with \"100.00\" being settled to the merchant and \"2.00\" settled to the developer. Values must be greater than 0 and contain two decimal places.")
+    payable_currency: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment. Supported values:   - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    payable_amount: Optional[StrictStr] = Field(default=None, description="The actual payable amount of the order in the cryptocurrency.")
+    expired_in: Optional[StrictInt] = Field(default=None, description="The pay-in order will expire after approximately a certain number of seconds: - The order status becomes final and cannot be changed - The `received_token_amount` field will no longer be updated - Funds received after expiration will be categorized as late payments and can only be settled from the developer balance. - A late payment will trigger a `transactionLate` webhook event. ")
+    amount_tolerance: Optional[StrictStr] = Field(default=None, description="Allowed amount deviation, precision to 1 decimal place.")
+    currency: Optional[StrictStr] = Field(default='', description="The fiat currency of the order.")
+    order_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`). Values must be greater than `0` and contain two decimal places.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment. Supported values:   - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    use_dedicated_address: Optional[StrictBool] = Field(default=None, description="Indicates whether to allocate a dedicated address for this order.  If false, a shared address from the address pool will be used. ")
+    custom_exchange_rate: Optional[StrictStr] = Field(default=None, description="A custom exchange rate specified by the merchant.   - Only effective when `currency` is `\"USD\"`.   - Expressed as the amount of USD per 1 unit of the specified cryptocurrency.   - If not provided, the system will use the default internal rate.   Example: If the cryptocurrency is USDT and `custom_exchange_rate` = `\"0.99\"`, it means 1 USDT = 0.99 USD. ")
+    __properties: ClassVar[List[str]] = ["merchant_id", "merchant_order_code", "psp_order_code", "pricing_currency", "pricing_amount", "fee_amount", "payable_currency", "payable_amount", "expired_in", "amount_tolerance", "currency", "order_amount", "token_id", "use_dedicated_address", "custom_exchange_rate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,16 +94,20 @@ class CreatePaymentOrderRequest(BaseModel):
 
         _obj = cls.model_validate({
             "merchant_id": obj.get("merchant_id"),
-            "token_id": obj.get("token_id"),
-            "currency": obj.get("currency") if obj.get("currency") is not None else '',
-            "order_amount": obj.get("order_amount"),
-            "fee_amount": obj.get("fee_amount"),
             "merchant_order_code": obj.get("merchant_order_code"),
             "psp_order_code": obj.get("psp_order_code"),
-            "expired_in": obj.get("expired_in") if obj.get("expired_in") is not None else 1800,
+            "pricing_currency": obj.get("pricing_currency"),
+            "pricing_amount": obj.get("pricing_amount"),
+            "fee_amount": obj.get("fee_amount"),
+            "payable_currency": obj.get("payable_currency"),
+            "payable_amount": obj.get("payable_amount"),
+            "expired_in": obj.get("expired_in"),
+            "amount_tolerance": obj.get("amount_tolerance"),
+            "currency": obj.get("currency") if obj.get("currency") is not None else '',
+            "order_amount": obj.get("order_amount"),
+            "token_id": obj.get("token_id"),
             "use_dedicated_address": obj.get("use_dedicated_address"),
-            "custom_exchange_rate": obj.get("custom_exchange_rate"),
-            "amount_tolerance": obj.get("amount_tolerance")
+            "custom_exchange_rate": obj.get("custom_exchange_rate")
         })
         return _obj
 

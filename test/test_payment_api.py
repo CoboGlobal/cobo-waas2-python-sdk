@@ -54,6 +54,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.cancel_refund_by_id(refund_id)
         """
 
+    def test_create_batch_allocation(self) -> None:
+        """
+        Test case for create_batch_allocation
+
+        Create batch allocation
+        """
+        """
+        create_batch_allocation_request = cobo_waas2.CreateBatchAllocationRequest()
+
+        api_response = self.api.create_batch_allocation(create_batch_allocation_request=create_batch_allocation_request)
+        """
+
     def test_create_counterparty(self) -> None:
         """
         Test case for create_counterparty
@@ -172,6 +184,18 @@ class TestPaymentApi(unittest.TestCase):
         create_payment_order_request = cobo_waas2.CreatePaymentOrderRequest()
 
         api_response = self.api.create_payment_order(create_payment_order_request=create_payment_order_request)
+        """
+
+    def test_create_payout(self) -> None:
+        """
+        Test case for create_payout
+
+        Create payout
+        """
+        """
+        create_payout_request = cobo_waas2.CreatePayoutRequest()
+
+        api_response = self.api.create_payout(create_payout_request=create_payout_request)
         """
 
     def test_create_refund(self) -> None:
@@ -294,6 +318,32 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.enable_destination_whitelist(enable_destination_whitelist_request=enable_destination_whitelist_request)
         """
 
+    def test_get_available_allocation_amount(self) -> None:
+        """
+        Test case for get_available_allocation_amount
+
+        Get available allocation amount
+        """
+        """
+        token_id = 'ETH_USDT'
+        source_account = 'source_account_example'
+        destination_account = 'destination_account_example'
+
+        api_response = self.api.get_available_allocation_amount(token_id, source_account, destination_account)
+        """
+
+    def test_get_batch_allocation_by_id(self) -> None:
+        """
+        Test case for get_batch_allocation_by_id
+
+        Get batch allocation by id
+        """
+        """
+        batch_allocation_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
+
+        api_response = self.api.get_batch_allocation_by_id(batch_allocation_id)
+        """
+
     def test_get_counterparty_detail_by_id(self) -> None:
         """
         Test case for get_counterparty_detail_by_id
@@ -353,6 +403,18 @@ class TestPaymentApi(unittest.TestCase):
         order_id = 'O20250304-M1001-1001'
 
         api_response = self.api.get_payment_order_detail_by_id(order_id)
+        """
+
+    def test_get_payout_by_id(self) -> None:
+        """
+        Test case for get_payout_by_id
+
+        Get payout information
+        """
+        """
+        payout_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f'
+
+        api_response = self.api.get_payout_by_id(payout_id)
         """
 
     def test_get_psp_balance(self) -> None:
@@ -436,6 +498,24 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_top_up_address(token_id, custom_payer_id, merchant_id=merchant_id)
         """
 
+    def test_list_allocations(self) -> None:
+        """
+        Test case for list_allocations
+
+        List all allocations
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        source_account = 'source_account_example'
+        destination_account = 'destination_account_example'
+        token_id = 'ETH_USDT'
+        batch_allocation_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
+
+        api_response = self.api.list_allocations(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
+        """
+
     def test_list_bank_accounts(self) -> None:
         """
         Test case for list_bank_accounts
@@ -445,6 +525,21 @@ class TestPaymentApi(unittest.TestCase):
         """
 
         api_response = self.api.list_bank_accounts()
+        """
+
+    def test_list_batch_allocations(self) -> None:
+        """
+        Test case for list_batch_allocations
+
+        List all batch allocations
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        request_id = 'random_request_id'
+
+        api_response = self.api.list_batch_allocations(limit=limit, before=before, after=after, request_id=request_id)
         """
 
     def test_list_counterparties(self) -> None:
@@ -475,7 +570,7 @@ class TestPaymentApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
-        chain_ids = 'BTC,ETH'
+        chain_ids = 'ETH'
         wallet_address = '0x1234567890abcdef...'
 
         api_response = self.api.list_counterparty_wallet_address(limit=limit, before=before, after=after, counterparty_id=counterparty_id, chain_ids=chain_ids, wallet_address=wallet_address)
@@ -521,7 +616,7 @@ class TestPaymentApi(unittest.TestCase):
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
         destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
-        chain_ids = 'BTC,ETH'
+        chain_ids = 'ETH'
         wallet_address = '0x1234567890abcdef...'
 
         api_response = self.api.list_destination_wallet_addresses(limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address)
@@ -568,10 +663,10 @@ class TestPaymentApi(unittest.TestCase):
         """
         """
         token_id = 'ETH_USDT'
-        acquiring_type = cobo_waas2.AcquiringType()
         merchant_ids = 'M1001,M1002,M1003'
+        acquiring_type = cobo_waas2.AcquiringType()
 
-        api_response = self.api.list_merchant_balances(token_id, acquiring_type, merchant_ids=merchant_ids)
+        api_response = self.api.list_merchant_balances(token_id, merchant_ids=merchant_ids, acquiring_type=acquiring_type)
         """
 
     def test_list_merchants(self) -> None:
@@ -630,6 +725,37 @@ class TestPaymentApi(unittest.TestCase):
         wallet_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d472'
 
         api_response = self.api.list_payment_wallet_balances(token_id, wallet_ids=wallet_ids)
+        """
+
+    def test_list_payout_items(self) -> None:
+        """
+        Test case for list_payout_items
+
+        List all payout items
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        source_account = 'source_account_example'
+        statuses = 'Pending,Processing'
+
+        api_response = self.api.list_payout_items(limit=limit, before=before, after=after, source_account=source_account, statuses=statuses)
+        """
+
+    def test_list_payouts(self) -> None:
+        """
+        Test case for list_payouts
+
+        List all payouts
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        request_id = 'random_request_id'
+
+        api_response = self.api.list_payouts(limit=limit, before=before, after=after, request_id=request_id)
         """
 
     def test_list_settlement_details(self) -> None:

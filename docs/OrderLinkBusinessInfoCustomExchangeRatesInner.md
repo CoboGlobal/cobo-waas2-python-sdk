@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token_id** | **str** | The token ID. | 
-**exchange_rate** | **str** | The exchange rate to use for this token. | 
+**token_id** | **str** | The cryptocurrency token ID | 
+**exchange_rate** | **str** | The fixed exchange rate to use for this token | 
 
 ## Example
 

@@ -31,10 +31,12 @@ class MerchantBalance(BaseModel):
     acquiring_type: AcquiringType
     total_received_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been received by the merchant.")
     settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been paid out from the merchant's balance.")
+    payout_amount: Optional[StrictStr] = Field(default=None, description="The merchant payout amount.")
     refunded_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been refunded from the merchant's balance.")
-    total_balance: Optional[StrictStr] = Field(default=None, description=" The total balance of the token available for payout or refund for the merchant.  `total_balance` = `total_received_amount` - `settled_amount` - `refunded_amount`  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances) ")
-    available_balance: Optional[StrictStr] = Field(default=None, description="This field has been deprecated.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "acquiring_type", "total_received_amount", "settled_amount", "refunded_amount", "total_balance", "available_balance"]
+    total_balance: Optional[StrictStr] = Field(default=None, description=" The current balance of this token available to the merchant for payouts or refunds.  `total_balance` = `total_received_amount` - `settled_amount` - `refunded_amount`  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/payments/en/guides/amounts-and-balances) ")
+    available_balance: Optional[StrictStr] = Field(default=None, description="The merchant available balance.")
+    locked_balance: Optional[StrictStr] = Field(default=None, description="The merchant locked balance.")
+    __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "acquiring_type", "total_received_amount", "settled_amount", "payout_amount", "refunded_amount", "total_balance", "available_balance", "locked_balance"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,9 +94,11 @@ class MerchantBalance(BaseModel):
             "acquiring_type": obj.get("acquiring_type"),
             "total_received_amount": obj.get("total_received_amount"),
             "settled_amount": obj.get("settled_amount"),
+            "payout_amount": obj.get("payout_amount"),
             "refunded_amount": obj.get("refunded_amount"),
             "total_balance": obj.get("total_balance"),
-            "available_balance": obj.get("available_balance")
+            "available_balance": obj.get("available_balance"),
+            "locked_balance": obj.get("locked_balance")
         })
         return _obj
 

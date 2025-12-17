@@ -42,7 +42,8 @@ class TestCreateRefundLinkRequest(unittest.TestCase):
                     fee_amount = '0.0001', ),
                 display_info = cobo_waas2.models.link_display_info.LinkDisplayInfo(
                     developer_name = 'Acme Payment Solutions', 
-                    logo = 'https://example.com/logo.png', )
+                    logo = 'https://example.com/logo.png', 
+                    return_url = 'https://example.com/return', )
             )
         else:
             return CreateRefundLinkRequest(

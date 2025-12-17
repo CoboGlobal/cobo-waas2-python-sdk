@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.staking_pool_type import StakingPoolType
@@ -30,10 +30,12 @@ class BabylonStakeExtra(BaseModel):
     """  # noqa: E501
     pool_type: StakingPoolType
     finality_provider_public_key: Annotated[str, Field(strict=True)] = Field(description="The public key of the finality provider.")
+    finality_provider_public_keys: Optional[List[Annotated[str, Field(strict=True)]]] = Field(default=None, description="The public keys of the finality providers, with each key corresponding to a BSN chain.")
     stake_block_time: StrictInt = Field(description="The number of blocks that need to be processed before the locked tokens are unlocked and become accessible.")
     auto_broadcast: Optional[StrictBool] = Field(default=None, description="Whether to automatically broadcast the transaction. The default value is `true`.  - `true`: Automatically broadcast the transaction. - `false`: The transaction will not be submitted to the blockchain automatically. You can call [Broadcast signed transactions](https://www.cobo.com/developers/v2/api-references/transactions/broadcast-signed-transactions) to broadcast the transaction to the blockchain, or retrieve the signed raw transaction data `raw_tx` by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information) and broadcast it yourself. ")
     babylon_address: Optional[StakingSource] = None
-    __properties: ClassVar[List[str]] = ["pool_type", "finality_provider_public_key", "stake_block_time", "auto_broadcast", "babylon_address"]
+    original_staking_id: Optional[StrictStr] = Field(default=None, description="The original staking ID to expand. Only set this when you want to expand existing staking.")
+    __properties: ClassVar[List[str]] = ["pool_type", "finality_provider_public_key", "finality_provider_public_keys", "stake_block_time", "auto_broadcast", "babylon_address", "original_staking_id"]
 
     @field_validator('finality_provider_public_key')
     def finality_provider_public_key_validate_regular_expression(cls, value):
@@ -98,9 +100,11 @@ class BabylonStakeExtra(BaseModel):
         _obj = cls.model_validate({
             "pool_type": obj.get("pool_type"),
             "finality_provider_public_key": obj.get("finality_provider_public_key"),
+            "finality_provider_public_keys": obj.get("finality_provider_public_keys"),
             "stake_block_time": obj.get("stake_block_time"),
             "auto_broadcast": obj.get("auto_broadcast"),
-            "babylon_address": StakingSource.from_dict(obj["babylon_address"]) if obj.get("babylon_address") is not None else None
+            "babylon_address": StakingSource.from_dict(obj["babylon_address"]) if obj.get("babylon_address") is not None else None,
+            "original_staking_id": obj.get("original_staking_id")
         })
         return _obj
 
