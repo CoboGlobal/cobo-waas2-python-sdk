@@ -50,7 +50,7 @@ class SwapActivityDetail(BaseModel):
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the swap activity was last updated, in Unix timestamp format, measured in milliseconds.")
     network_fee: Optional[TransactionRequestFee] = None
-    destination_address: Optional[StrictStr] = Field(default=None, description="The address of an MPC Wallet or Web3 Wallet that receives the swapped or bridged assets.")
+    destination_address: Optional[StrictStr] = Field(default=None, description="The address of an MPC Wallet or Custodial Wallet (Web3 Wallet) that receives the swapped or bridged assets.")
     timeline: Optional[List[SwapActivityTimeline]] = None
     approvers: Optional[List[SwapActivityApprovers]] = None
     signers: Optional[List[SwapActivitySigners]] = None

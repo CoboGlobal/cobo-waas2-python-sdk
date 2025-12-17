@@ -25,8 +25,8 @@ class OrderLinkBusinessInfoCustomExchangeRatesInner(BaseModel):
     """
     OrderLinkBusinessInfoCustomExchangeRatesInner
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token ID.")
-    exchange_rate: StrictStr = Field(description="The exchange rate to use for this token.")
+    token_id: StrictStr = Field(description="The cryptocurrency token ID")
+    exchange_rate: StrictStr = Field(description="The fixed exchange rate to use for this token")
     __properties: ClassVar[List[str]] = ["token_id", "exchange_rate"]
 
     model_config = ConfigDict(

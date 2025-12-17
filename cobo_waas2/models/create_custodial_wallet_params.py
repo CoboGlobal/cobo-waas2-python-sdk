@@ -30,7 +30,7 @@ class CreateCustodialWalletParams(BaseModel):
     name: StrictStr = Field(description="The wallet name.")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
-    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto-sweep feature for the wallet. This parameter only applies to MPC Wallets and Web3 Wallets.")
+    enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto-sweep feature for the wallet. This parameter only applies to MPC Wallets and Custodial Wallets (Web3 Wallets).")
     __properties: ClassVar[List[str]] = ["name", "wallet_type", "wallet_subtype", "enable_auto_sweep"]
 
     model_config = ConfigDict(

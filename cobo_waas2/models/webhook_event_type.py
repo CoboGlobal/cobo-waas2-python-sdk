@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class WebhookEventType(str, Enum):
     """
-    The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type). 
+    The event type. To learn the trigger condition of each event type, refer to [Webhook event types and event data](https://www.cobo.com/developers/v2/guides/webhooks-callbacks/webhook-event-type).  
     """
 
     """
@@ -57,7 +57,9 @@ class WebhookEventType(str, Enum):
     PAYMENT_DOT_STATUS_DOT_UPDATED = 'payment.status.updated'
     PAYMENT_DOT_REFUND_DOT_STATUS_DOT_UPDATED = 'payment.refund.status.updated'
     PAYMENT_DOT_SETTLEMENT_DOT_STATUS_DOT_UPDATED = 'payment.settlement.status.updated'
+    PAYMENT_DOT_PAYOUT_DOT_STATUS_DOT_UPDATED = 'payment.payout.status.updated'
     PAYMENT_DOT_ADDRESS_DOT_UPDATED = 'payment.address.updated'
+    PAYMENT_DOT_SUBSCRIPTION_DOT_STATUS_DOT_UPDATED = 'payment.subscription.status.updated'
     COMPLIANCE_DOT_DISPOSITION_DOT_STATUS_DOT_UPDATED = 'compliance.disposition.status.updated'
     COMPLIANCE_DOT_KYT_DOT_SCREENINGS_DOT_STATUS_DOT_UPDATED = 'compliance.kyt.screenings.status.updated'
 

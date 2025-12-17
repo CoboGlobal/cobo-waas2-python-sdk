@@ -25,7 +25,7 @@ class GetExchangeRate200Response(BaseModel):
     """
     GetExchangeRate200Response
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
+    token_id: StrictStr = Field(description="The token ID, which identifies the cryptocurrency.")
     currency: StrictStr = Field(description="The fiat currency.")
     rate: StrictStr = Field(description="The current exchange rate between the specified currency pair. Expressed as the amount of fiat currency per one unit of cryptocurrency. For example, if the cryptocurrency is USDT and the fiat currency is USD, a rate of \"0.99\" means 1 USDT = 0.99 USD.")
     __properties: ClassVar[List[str]] = ["token_id", "currency", "rate"]

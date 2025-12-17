@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **developer_name** | **str** | The brand name to display to end users on the page. This helps users identify who is providing the payment service.  | [optional] 
 **logo** | **str** | The URL of the logo image to display to end users on the page.  | [optional] 
+**return_url** | **str** | The URL to redirect to after the operation completes. | [optional] 
 
 ## Example
 

@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class BabylonStakingRegistration(BaseModel):
     """
-    The details of aBabylon Phase-2 registration.
+    The details of a Babylon Phase-2 registration.
     """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The registration ID, a unique identifier for tracking the staking registration.")
     staking_id: Optional[StrictStr] = Field(default=None, description="The ID of the Phase-1 BTC staking position.")

@@ -19,10 +19,10 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "cobo-waas2"
-VERSION = "1.27.0"
-PYTHON_REQUIRES = ">=3.7"
+VERSION = "1.28.0"
+PYTHON_REQUIRES = ">=3.9"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
+    "urllib3 >= 2.6.0",
     "python-dateutil",
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",

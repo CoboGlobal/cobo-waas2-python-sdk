@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cobo_waas2"
-version = "1.27.0"
+version = "1.28.0"
 description = "Cobo Wallet as a Service 2.0"
 authors = ["Cobo WaaS <help@cobo.com>"]
 license = "Apache 2.0"
@@ -10,9 +10,9 @@ keywords = ["OpenAPI", "OpenAPI-Generator", "Cobo Wallet as a Service 2.0"]
 include = ["cobo_waas2/py.typed"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 
-urllib3 = ">= 1.25.3"
+urllib3 = ">= 2.6.0"
 python-dateutil = ">=2.8.2"
 pydantic = ">=2"
 typing-extensions = ">=4.7.1"

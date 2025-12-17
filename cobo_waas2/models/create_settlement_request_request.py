@@ -34,7 +34,7 @@ class CreateSettlementRequestRequest(BaseModel):
     payout_channel: Optional[PayoutChannel] = None
     settlement_type: Optional[SettlementType] = None
     settlements: List[CreateSettlement]
-    bank_account_id: Optional[StrictStr] = Field(default=None, description=" The ID of the bank account where the funds will be deposited. You can call [List all bank accounts](https://www.cobo.com/developers/v2/api-references/payment/list-all-bank-accounts) to retrieve the IDs of registered bank accounts.  This field is only applicable for off-ramp. ")
+    bank_account_id: Optional[StrictStr] = Field(default=None, description=" The ID of the bank account where the funds will be deposited. You can call [List all bank accounts](https://www.cobo.com/payments/en/api-references/payment/list-all-bank-accounts) to retrieve the IDs of registered bank accounts.  This field is only applicable for off-ramp. ")
     currency: Optional[StrictStr] = Field(default=None, description="The fiat currency to receive after off-ramping. Currently, only `USD` is supported. Specify this field when `payout_channel` is set to `OffRamp`.")
     remark: Optional[StrictStr] = Field(default=None, description="The remark for the payout request.")
     __properties: ClassVar[List[str]] = ["request_id", "acquiring_type", "payout_channel", "settlement_type", "settlements", "bank_account_id", "currency", "remark"]

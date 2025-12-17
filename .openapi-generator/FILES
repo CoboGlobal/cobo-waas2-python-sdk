@@ -54,6 +54,8 @@ cobo_waas2/models/address_transfer_destination_account_output.py
 cobo_waas2/models/address_transfer_destination_utxo_outputs_inner.py
 cobo_waas2/models/addresses_event_data.py
 cobo_waas2/models/addresses_event_data_all_of_addresses.py
+cobo_waas2/models/allocation_record.py
+cobo_waas2/models/allocation_request.py
 cobo_waas2/models/amount_details_inner.py
 cobo_waas2/models/amount_status.py
 cobo_waas2/models/api_log_details.py
@@ -79,6 +81,7 @@ cobo_waas2/models/auto_sweep_task.py
 cobo_waas2/models/auto_sweep_task_status.py
 cobo_waas2/models/babylon_airdrop_pop.py
 cobo_waas2/models/babylon_airdrop_registration.py
+cobo_waas2/models/babylon_create_staking_expansion.py
 cobo_waas2/models/babylon_eligible_airdrop.py
 cobo_waas2/models/babylon_registration_request_status.py
 cobo_waas2/models/babylon_registration_status.py
@@ -97,6 +100,8 @@ cobo_waas2/models/base_contract_call_source.py
 cobo_waas2/models/base_estimate_staking_fee.py
 cobo_waas2/models/base_stake_extra.py
 cobo_waas2/models/base_stake_source.py
+cobo_waas2/models/batch_allocation.py
+cobo_waas2/models/batch_allocation_detail.py
 cobo_waas2/models/batch_check_utxo201_response.py
 cobo_waas2/models/batch_check_utxo_request.py
 cobo_waas2/models/batch_utxo_param.py
@@ -143,6 +148,7 @@ cobo_waas2/models/create_babylon_airdrop_registration201_response.py
 cobo_waas2/models/create_babylon_airdrop_registration_request.py
 cobo_waas2/models/create_babylon_staking_registration201_response.py
 cobo_waas2/models/create_babylon_staking_registration_request.py
+cobo_waas2/models/create_batch_allocation_request.py
 cobo_waas2/models/create_claim_activity.py
 cobo_waas2/models/create_claim_activity_request.py
 cobo_waas2/models/create_counterparty_request.py
@@ -162,6 +168,7 @@ cobo_waas2/models/create_mpc_vault_request.py
 cobo_waas2/models/create_mpc_wallet_params.py
 cobo_waas2/models/create_order_link_request.py
 cobo_waas2/models/create_payment_order_request.py
+cobo_waas2/models/create_payout_request.py
 cobo_waas2/models/create_prime_broker_address201_response.py
 cobo_waas2/models/create_prime_broker_address_request.py
 cobo_waas2/models/create_refund_link_request.py
@@ -318,6 +325,7 @@ cobo_waas2/models/link_display_info.py
 cobo_waas2/models/list_address_balances_by_token200_response.py
 cobo_waas2/models/list_address_books200_response.py
 cobo_waas2/models/list_addresses200_response.py
+cobo_waas2/models/list_allocations200_response.py
 cobo_waas2/models/list_approval_requests200_response.py
 cobo_waas2/models/list_asset_balances_for_exchange_wallet200_response.py
 cobo_waas2/models/list_auto_sweep_task200_response.py
@@ -326,6 +334,7 @@ cobo_waas2/models/list_babylon_eligible_airdrops200_response.py
 cobo_waas2/models/list_babylon_eligible_stakings200_response.py
 cobo_waas2/models/list_babylon_eligible_stakings200_response_data_inner.py
 cobo_waas2/models/list_babylon_staking_registrations200_response.py
+cobo_waas2/models/list_batch_allocations200_response.py
 cobo_waas2/models/list_callback_messages200_response.py
 cobo_waas2/models/list_counterparties200_response.py
 cobo_waas2/models/list_counterparty_wallet_address200_response.py
@@ -342,6 +351,8 @@ cobo_waas2/models/list_mpc_projects200_response.py
 cobo_waas2/models/list_mpc_vaults200_response.py
 cobo_waas2/models/list_payment_orders200_response.py
 cobo_waas2/models/list_payment_wallet_balances200_response.py
+cobo_waas2/models/list_payout_items200_response.py
+cobo_waas2/models/list_payouts200_response.py
 cobo_waas2/models/list_settlement_details200_response.py
 cobo_waas2/models/list_settlement_requests200_response.py
 cobo_waas2/models/list_staking_activities200_response.py
@@ -397,20 +408,31 @@ cobo_waas2/models/mpc_wallet_info.py
 cobo_waas2/models/order.py
 cobo_waas2/models/order_link_business_info.py
 cobo_waas2/models/order_link_business_info_custom_exchange_rates_inner.py
+cobo_waas2/models/order_link_business_info_payable_amounts_inner.py
 cobo_waas2/models/order_status.py
 cobo_waas2/models/org_info.py
 cobo_waas2/models/otc_fee.py
 cobo_waas2/models/pagination.py
 cobo_waas2/models/payer_account.py
 cobo_waas2/models/payment_address_update_event_data.py
+cobo_waas2/models/payment_allocation_amount.py
 cobo_waas2/models/payment_estimate_fee.py
 cobo_waas2/models/payment_estimate_fee201_response.py
 cobo_waas2/models/payment_estimate_fee_request.py
 cobo_waas2/models/payment_estimated_fee.py
 cobo_waas2/models/payment_fee_type.py
 cobo_waas2/models/payment_order_event_data.py
+cobo_waas2/models/payment_payout.py
+cobo_waas2/models/payment_payout_detail.py
+cobo_waas2/models/payment_payout_event.py
+cobo_waas2/models/payment_payout_item.py
+cobo_waas2/models/payment_payout_item_detail.py
+cobo_waas2/models/payment_payout_item_status.py
+cobo_waas2/models/payment_payout_param.py
+cobo_waas2/models/payment_payout_status.py
 cobo_waas2/models/payment_refund_event_data.py
 cobo_waas2/models/payment_settlement_event.py
+cobo_waas2/models/payment_source_type.py
 cobo_waas2/models/payment_transaction.py
 cobo_waas2/models/payment_transaction_event_data.py
 cobo_waas2/models/payment_wallet_balance.py
@@ -811,6 +833,8 @@ docs/AddressTransferDestinationAccountOutput.md
 docs/AddressTransferDestinationUtxoOutputsInner.md
 docs/AddressesEventData.md
 docs/AddressesEventDataAllOfAddresses.md
+docs/AllocationRecord.md
+docs/AllocationRequest.md
 docs/AmountDetailsInner.md
 docs/AmountStatus.md
 docs/ApiLogDetails.md
@@ -840,6 +864,7 @@ docs/BTCBIP137MessageSignDestination.md
 docs/BTCBIP322MessageSignDestination.md
 docs/BabylonAirdropPop.md
 docs/BabylonAirdropRegistration.md
+docs/BabylonCreateStakingExpansion.md
 docs/BabylonEligibleAirdrop.md
 docs/BabylonRegistrationRequestStatus.md
 docs/BabylonRegistrationStatus.md
@@ -858,6 +883,8 @@ docs/BaseContractCallSource.md
 docs/BaseEstimateStakingFee.md
 docs/BaseStakeExtra.md
 docs/BaseStakeSource.md
+docs/BatchAllocation.md
+docs/BatchAllocationDetail.md
 docs/BatchCheckUtxo201Response.md
 docs/BatchCheckUtxoRequest.md
 docs/BatchUTXOParam.md
@@ -903,6 +930,7 @@ docs/CreateBabylonAirdropRegistration201Response.md
 docs/CreateBabylonAirdropRegistrationRequest.md
 docs/CreateBabylonStakingRegistration201Response.md
 docs/CreateBabylonStakingRegistrationRequest.md
+docs/CreateBatchAllocationRequest.md
 docs/CreateClaimActivity.md
 docs/CreateClaimActivityRequest.md
 docs/CreateCounterpartyRequest.md
@@ -922,6 +950,7 @@ docs/CreateMpcVaultRequest.md
 docs/CreateMpcWalletParams.md
 docs/CreateOrderLinkRequest.md
 docs/CreatePaymentOrderRequest.md
+docs/CreatePayoutRequest.md
 docs/CreatePrimeBrokerAddress201Response.md
 docs/CreatePrimeBrokerAddressRequest.md
 docs/CreateRefundLinkRequest.md
@@ -1081,6 +1110,7 @@ docs/LinkDisplayInfo.md
 docs/ListAddressBalancesByToken200Response.md
 docs/ListAddressBooks200Response.md
 docs/ListAddresses200Response.md
+docs/ListAllocations200Response.md
 docs/ListApprovalRequests200Response.md
 docs/ListAssetBalancesForExchangeWallet200Response.md
 docs/ListAutoSweepTask200Response.md
@@ -1089,6 +1119,7 @@ docs/ListBabylonEligibleAirdrops200Response.md
 docs/ListBabylonEligibleStakings200Response.md
 docs/ListBabylonEligibleStakings200ResponseDataInner.md
 docs/ListBabylonStakingRegistrations200Response.md
+docs/ListBatchAllocations200Response.md
 docs/ListCallbackMessages200Response.md
 docs/ListCounterparties200Response.md
 docs/ListCounterpartyWalletAddress200Response.md
@@ -1105,6 +1136,8 @@ docs/ListMpcProjects200Response.md
 docs/ListMpcVaults200Response.md
 docs/ListPaymentOrders200Response.md
 docs/ListPaymentWalletBalances200Response.md
+docs/ListPayoutItems200Response.md
+docs/ListPayouts200Response.md
 docs/ListSettlementDetails200Response.md
 docs/ListSettlementRequests200Response.md
 docs/ListStakingActivities200Response.md
@@ -1161,6 +1194,7 @@ docs/OAuthApi.md
 docs/Order.md
 docs/OrderLinkBusinessInfo.md
 docs/OrderLinkBusinessInfoCustomExchangeRatesInner.md
+docs/OrderLinkBusinessInfoPayableAmountsInner.md
 docs/OrderStatus.md
 docs/OrgInfo.md
 docs/OrganizationsApi.md
@@ -1168,6 +1202,7 @@ docs/OtcFee.md
 docs/Pagination.md
 docs/PayerAccount.md
 docs/PaymentAddressUpdateEventData.md
+docs/PaymentAllocationAmount.md
 docs/PaymentApi.md
 docs/PaymentEstimateFee.md
 docs/PaymentEstimateFee201Response.md
@@ -1175,8 +1210,17 @@ docs/PaymentEstimateFeeRequest.md
 docs/PaymentEstimatedFee.md
 docs/PaymentFeeType.md
 docs/PaymentOrderEventData.md
+docs/PaymentPayout.md
+docs/PaymentPayoutDetail.md
+docs/PaymentPayoutEvent.md
+docs/PaymentPayoutItem.md
+docs/PaymentPayoutItemDetail.md
+docs/PaymentPayoutItemStatus.md
+docs/PaymentPayoutParam.md
+docs/PaymentPayoutStatus.md
 docs/PaymentRefundEventData.md
 docs/PaymentSettlementEvent.md
+docs/PaymentSourceType.md
 docs/PaymentTransaction.md
 docs/PaymentTransactionEventData.md
 docs/PaymentWalletBalance.md
@@ -1591,6 +1635,8 @@ test/test_address_transfer_destination_account_output.py
 test/test_address_transfer_destination_utxo_outputs_inner.py
 test/test_addresses_event_data.py
 test/test_addresses_event_data_all_of_addresses.py
+test/test_allocation_record.py
+test/test_allocation_request.py
 test/test_amount_details_inner.py
 test/test_amount_status.py
 test/test_api_log_details.py
@@ -1618,6 +1664,7 @@ test/test_auto_sweep_task.py
 test/test_auto_sweep_task_status.py
 test/test_babylon_airdrop_pop.py
 test/test_babylon_airdrop_registration.py
+test/test_babylon_create_staking_expansion.py
 test/test_babylon_eligible_airdrop.py
 test/test_babylon_registration_request_status.py
 test/test_babylon_registration_status.py
@@ -1636,6 +1683,8 @@ test/test_base_contract_call_source.py
 test/test_base_estimate_staking_fee.py
 test/test_base_stake_extra.py
 test/test_base_stake_source.py
+test/test_batch_allocation.py
+test/test_batch_allocation_detail.py
 test/test_batch_check_utxo201_response.py
 test/test_batch_check_utxo_request.py
 test/test_batch_utxo_param.py
@@ -1683,6 +1732,7 @@ test/test_create_babylon_airdrop_registration201_response.py
 test/test_create_babylon_airdrop_registration_request.py
 test/test_create_babylon_staking_registration201_response.py
 test/test_create_babylon_staking_registration_request.py
+test/test_create_batch_allocation_request.py
 test/test_create_claim_activity.py
 test/test_create_claim_activity_request.py
 test/test_create_counterparty_request.py
@@ -1702,6 +1752,7 @@ test/test_create_mpc_vault_request.py
 test/test_create_mpc_wallet_params.py
 test/test_create_order_link_request.py
 test/test_create_payment_order_request.py
+test/test_create_payout_request.py
 test/test_create_prime_broker_address201_response.py
 test/test_create_prime_broker_address_request.py
 test/test_create_refund_link_request.py
@@ -1861,6 +1912,7 @@ test/test_link_display_info.py
 test/test_list_address_balances_by_token200_response.py
 test/test_list_address_books200_response.py
 test/test_list_addresses200_response.py
+test/test_list_allocations200_response.py
 test/test_list_approval_requests200_response.py
 test/test_list_asset_balances_for_exchange_wallet200_response.py
 test/test_list_auto_sweep_task200_response.py
@@ -1869,6 +1921,7 @@ test/test_list_babylon_eligible_airdrops200_response.py
 test/test_list_babylon_eligible_stakings200_response.py
 test/test_list_babylon_eligible_stakings200_response_data_inner.py
 test/test_list_babylon_staking_registrations200_response.py
+test/test_list_batch_allocations200_response.py
 test/test_list_callback_messages200_response.py
 test/test_list_counterparties200_response.py
 test/test_list_counterparty_wallet_address200_response.py
@@ -1885,6 +1938,8 @@ test/test_list_mpc_projects200_response.py
 test/test_list_mpc_vaults200_response.py
 test/test_list_payment_orders200_response.py
 test/test_list_payment_wallet_balances200_response.py
+test/test_list_payout_items200_response.py
+test/test_list_payouts200_response.py
 test/test_list_settlement_details200_response.py
 test/test_list_settlement_requests200_response.py
 test/test_list_staking_activities200_response.py
@@ -1941,6 +1996,7 @@ test/test_o_auth_api.py
 test/test_order.py
 test/test_order_link_business_info.py
 test/test_order_link_business_info_custom_exchange_rates_inner.py
+test/test_order_link_business_info_payable_amounts_inner.py
 test/test_order_status.py
 test/test_org_info.py
 test/test_organizations_api.py
@@ -1948,6 +2004,7 @@ test/test_otc_fee.py
 test/test_pagination.py
 test/test_payer_account.py
 test/test_payment_address_update_event_data.py
+test/test_payment_allocation_amount.py
 test/test_payment_api.py
 test/test_payment_estimate_fee.py
 test/test_payment_estimate_fee201_response.py
@@ -1955,8 +2012,17 @@ test/test_payment_estimate_fee_request.py
 test/test_payment_estimated_fee.py
 test/test_payment_fee_type.py
 test/test_payment_order_event_data.py
+test/test_payment_payout.py
+test/test_payment_payout_detail.py
+test/test_payment_payout_event.py
+test/test_payment_payout_item.py
+test/test_payment_payout_item_detail.py
+test/test_payment_payout_item_status.py
+test/test_payment_payout_param.py
+test/test_payment_payout_status.py
 test/test_payment_refund_event_data.py
 test/test_payment_settlement_event.py
+test/test_payment_source_type.py
 test/test_payment_transaction.py
 test/test_payment_transaction_event_data.py
 test/test_payment_wallet_balance.py

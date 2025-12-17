@@ -28,10 +28,12 @@ class PspBalance(BaseModel):
     token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
     developer_fee_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been received as developer fee.")
     settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been paid out from the developer's balance.")
+    payout_amount: Optional[StrictStr] = Field(default=None, description="The psp payout amount.")
     refunded_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been refunded from the developer's balance.")
-    total_balance: Optional[StrictStr] = Field(default=None, description=" The total balance of the token available for payout or refund for the developer.  `total_balance` = `developer_fee_amount` - `settled_amount` - `refunded_amount`  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/developers/v2/payments/amounts-and-balances) ")
-    available_balance: Optional[StrictStr] = Field(default=None, description="This field has been deprecated.")
-    __properties: ClassVar[List[str]] = ["token_id", "developer_fee_amount", "settled_amount", "refunded_amount", "total_balance", "available_balance"]
+    total_balance: Optional[StrictStr] = Field(default=None, description=" The total balance of the token available for payout or refund for the developer.  `total_balance` = `developer_fee_amount` - `settled_amount` - `refunded_amount`  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/payments/en/guides/amounts-and-balances) ")
+    available_balance: Optional[StrictStr] = Field(default=None, description="The psp available balance.")
+    locked_balance: Optional[StrictStr] = Field(default=None, description="The psp locked balance.")
+    __properties: ClassVar[List[str]] = ["token_id", "developer_fee_amount", "settled_amount", "payout_amount", "refunded_amount", "total_balance", "available_balance", "locked_balance"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,9 +89,11 @@ class PspBalance(BaseModel):
             "token_id": obj.get("token_id"),
             "developer_fee_amount": obj.get("developer_fee_amount"),
             "settled_amount": obj.get("settled_amount"),
+            "payout_amount": obj.get("payout_amount"),
             "refunded_amount": obj.get("refunded_amount"),
             "total_balance": obj.get("total_balance"),
-            "available_balance": obj.get("available_balance")
+            "available_balance": obj.get("available_balance"),
+            "locked_balance": obj.get("locked_balance")
         })
         return _obj
 

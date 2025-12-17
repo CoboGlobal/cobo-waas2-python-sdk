@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
 from cobo_waas2.models.transaction_cosmos_message import TransactionCosmosMessage
 from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
 from typing import Optional, Set
@@ -29,8 +29,7 @@ class TransactionCosmosContractDestination(BaseModel):
     """  # noqa: E501
     destination_type: TransactionDestinationType
     cosmos_messages: List[TransactionCosmosMessage]
-    value: Optional[StrictStr] = Field(default=None, description="The transfer amount. For example, if you trade 1.5 ETH, then the value is `1.5`. ")
-    __properties: ClassVar[List[str]] = ["destination_type", "cosmos_messages", "value"]
+    __properties: ClassVar[List[str]] = ["destination_type", "cosmos_messages"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,8 +90,7 @@ class TransactionCosmosContractDestination(BaseModel):
 
         _obj = cls.model_validate({
             "destination_type": obj.get("destination_type"),
-            "cosmos_messages": [TransactionCosmosMessage.from_dict(_item) for _item in obj["cosmos_messages"]] if obj.get("cosmos_messages") is not None else None,
-            "value": obj.get("value")
+            "cosmos_messages": [TransactionCosmosMessage.from_dict(_item) for _item in obj["cosmos_messages"]] if obj.get("cosmos_messages") is not None else None
         })
         return _obj
 
