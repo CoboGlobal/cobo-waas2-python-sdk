@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wallet_address_id** | **str** | The wallet address ID. | 
 **address** | **str** | The wallet address. | 
-**chain_id** | **str** | The chain ID of the cryptocurrency. | 
+**chain_id** | **str** | The chain ID of the address. | 
+**risk_level** | [**AddressRiskLevel**](AddressRiskLevel.md) |  | [optional] 
+**screening_timestamp** | **int** | UNIX timestamp (in seconds) when the address was last screened for compliance. | [optional] 
 **updated_timestamp** | **int** | The updated time of the wallet address, represented as a UNIX timestamp in seconds. | 
 
 ## Example

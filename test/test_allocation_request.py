@@ -36,17 +36,17 @@ class TestAllocationRequest(unittest.TestCase):
             return AllocationRequest(
                 token_id = 'ETH_USDT',
                 amount = '500.00',
-                source_account = '',
-                destination_account = '',
-                description = ''
+                source_account = 'M1001',
+                destination_account = 'M1001',
+                description = 'Allocation for merchant M1001'
             )
         else:
             return AllocationRequest(
                 token_id = 'ETH_USDT',
                 amount = '500.00',
-                source_account = '',
-                destination_account = '',
-                description = '',
+                source_account = 'M1001',
+                destination_account = 'M1001',
+                description = 'Allocation for merchant M1001',
         )
         """
 

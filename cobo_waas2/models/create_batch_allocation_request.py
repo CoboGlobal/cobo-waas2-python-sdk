@@ -26,7 +26,7 @@ class CreateBatchAllocationRequest(BaseModel):
     """
     CreateBatchAllocationRequest
     """  # noqa: E501
-    request_id: StrictStr = Field(description="The request ID that is used to track a allocation request. The request ID is provided by you and must be unique.")
+    request_id: StrictStr = Field(description="The request ID that is used to track a batch allocation request. The request ID is provided by you and must be unique.")
     allocation_requests: List[AllocationRequest]
     __properties: ClassVar[List[str]] = ["request_id", "allocation_requests"]
 

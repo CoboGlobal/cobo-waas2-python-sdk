@@ -60,7 +60,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fee_station_check_fee_station_usage** | [**FeeStationCheckFeeStationUsage**](FeeStationCheckFeeStationUsage.md)| The information for evaluating Fee Station usage. | [optional] 
+ **fee_station_check_fee_station_usage** | [**FeeStationCheckFeeStationUsage**](FeeStationCheckFeeStationUsage.md)| The request body for evaluating Fee Station usage. | [optional] 
 
 ### Return type
 

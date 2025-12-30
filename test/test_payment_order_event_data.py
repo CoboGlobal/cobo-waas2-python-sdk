@@ -84,9 +84,9 @@ class TestPaymentOrderEventData(unittest.TestCase):
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
                     ],
-                currency = 'USD',
-                order_amount = '100.00',
-                token_id = 'ETH_USDT',
+                currency = '',
+                order_amount = '',
+                token_id = '',
                 settlement_status = 'Pending'
             )
         else:

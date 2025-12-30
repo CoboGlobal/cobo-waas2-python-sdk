@@ -5,23 +5,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The top-up address update event data. - &#x60;PaymentPayout&#x60;: The payment payout event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The token suspension event data. - &#x60;ComplianceDisposition&#x60;: The compliance disposition event data. - &#x60;ComplianceKytScreenings&#x60;: The compliance KYT screenings event data. | 
+**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The top-up address update event data. - &#x60;PaymentPayout&#x60;: The payment payout event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The token suspension event data. - &#x60;ComplianceDisposition&#x60;: The compliance disposition event data. - &#x60;ComplianceKytScreenings&#x60;: The compliance KYT screenings event data. - &#x60;ComplianceKyaScreenings&#x60;: The compliance KYA screenings event data. | 
 **transaction_id** | **str** | The transaction ID. | 
 **cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
 **request_id** | **str** | The request ID provided by you when creating the payout. | 
 **wallet_id** | **str** | For deposit transactions, this property represents the wallet ID of the transaction destination. For transactions of other types, this property represents the wallet ID of the transaction source. | 
 **type** | [**TransactionType**](TransactionType.md) |  | [optional] 
-**status** | [**PaymentPayoutStatus**](PaymentPayoutStatus.md) |  | 
+**status** | [**KyaScreeningStatus**](KyaScreeningStatus.md) |  | 
 **sub_status** | [**TransactionSubStatus**](TransactionSubStatus.md) |  | [optional] 
 **failed_reason** | **str** | (This property is applicable to approval failures and signature failures only) The reason why the transaction failed. | [optional] 
-**chain_id** | **str** | The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | 
+**chain_id** | **str** | The chain identifier. | 
 **token_id** | **str** | The token ID, which is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | 
 **asset_id** | **str** | (This concept applies to Exchange Wallets only) The asset ID. An asset ID is the unique identifier of the asset held within your linked exchange account. | [optional] 
 **source** | [**TransactionSource**](TransactionSource.md) |  | 
 **destination** | [**TransactionDestination**](TransactionDestination.md) |  | 
 **result** | [**TransactionResult**](TransactionResult.md) |  | [optional] 
 **fee** | [**TransactionFee**](TransactionFee.md) |  | [optional] 
-**initiator** | **str** | The initiator of this payout, usually the user&#39;s API key. | [optional] 
+**initiator** | **str** | The initiator of this payout, usually the API key used to create the payout. | [optional] 
 **initiator_type** | [**TransactionInitiatorType**](TransactionInitiatorType.md) |  | 
 **confirmed_num** | **int** | The number of confirmations this transaction has received. | [optional] 
 **confirming_threshold** | **int** | The minimum number of confirmations required to deem a transaction secure. The common threshold is 6 for a Bitcoin transaction. | [optional] 
@@ -35,8 +35,8 @@ Name | Type | Description | Notes
 **cobo_category** | **List[str]** | The transaction category defined by Cobo. For more details, refer to [Cobo-defined categories](/v2/guides/transactions/manage-transactions#cobo-defined-categories).  | [optional] 
 **extra** | **List[str]** | A list of JSON-encoded strings containing structured, business-specific extra information for the transaction. Each item corresponds to a specific data type, indicated by the &#x60;extra_type&#x60; field in the JSON object (for example, \&quot;BabylonBusinessInfo\&quot;, \&quot;BtcAddressInfo\&quot;).  | [optional] 
 **fueling_info** | [**TransactionFuelingInfo**](TransactionFuelingInfo.md) |  | [optional] 
-**created_timestamp** | **int** | The created time of the payout, represented as a UNIX timestamp in seconds. | 
-**updated_timestamp** | **int** | The time when the KYT screening information was updated, in Unix timestamp format, measured in milliseconds. | 
+**created_timestamp** | **int** | The time when the screening request was created, in Unix timestamp format, measured in milliseconds. | 
+**updated_timestamp** | **int** | The time when the screening status was updated, in Unix timestamp format, measured in milliseconds. | 
 **tss_request_id** | **str** | The TSS request ID. | [optional] 
 **source_key_share_holder_group** | [**SourceGroup**](SourceGroup.md) |  | [optional] 
 **target_key_share_holder_group_id** | **str** | The target key share holder group ID. | [optional] 
@@ -54,7 +54,7 @@ Name | Type | Description | Notes
 **wallet_subtype** | [**WalletSubtype**](WalletSubtype.md) |  | 
 **token** | [**TokenInfo**](TokenInfo.md) |  | [optional] 
 **feedback** | **str** | The feedback provided by Cobo when a token listing request is rejected. | [optional] 
-**address** | **str** | The wallet address. | 
+**address** | **str** | The screened blockchain address. | 
 **wallet_uuid** | **str** | The wallet ID. | 
 **balance** | [**Balance**](Balance.md) |  | 
 **token_ids** | **str** | A list of token IDs, separated by comma. | 
@@ -63,19 +63,19 @@ Name | Type | Description | Notes
 **merchant_id** | **str** | The merchant ID. | [optional] 
 **merchant_order_code** | **str** | A unique reference code assigned by the merchant to identify this order in their system. | [optional] 
 **psp_order_code** | **str** | A unique reference code assigned by the developer to identify this order in their system. | 
-**pricing_currency** | **str** | The fiat currency of the order. | [optional] 
-**pricing_amount** | **str** | The base amount of the order in fiat currency, excluding the developer fee (specified in &#x60;fee_amount&#x60;). | [optional] 
-**fee_amount** | **str** | The developer fee for the order in fiat currency. It is added to the base amount (&#x60;order_amount&#x60;) to determine the final charge. | 
+**pricing_currency** | **str** | The pricing currency of the order. | [optional] 
+**pricing_amount** | **str** | The base amount of the order, excluding the developer fee (specified in &#x60;fee_amount&#x60;). | [optional] 
+**fee_amount** | **str** | The developer fee for the order. It is added to the base amount to determine the final charge. | 
 **payable_currency** | **str** | The ID of the cryptocurrency used for payment. | [optional] 
 **payable_amount** | **str** | The cryptocurrency amount to be paid for this order. | 
-**exchange_rate** | **str** | The exchange rate between a currency pair. Expressed as the amount of fiat currency per one unit of cryptocurrency. For example, if the cryptocurrency is USDT and the fiat currency is USD, a rate of \&quot;0.99\&quot; means 1 USDT &#x3D; 0.99 USD. | 
-**amount_tolerance** | **str** | Allowed amount deviation. | [optional] 
+**exchange_rate** | **str** | The exchange rate between &#x60;payable_currency&#x60; and &#x60;pricing_currency&#x60;, calculated as (&#x60;pricing_amount&#x60; + &#x60;fee_amount&#x60;) / &#x60;payable_amount&#x60;.    &lt;Note&gt;This field is only returned when &#x60;payable_amount&#x60; was not provided in the order creation request. &lt;/Note&gt;  | 
+**amount_tolerance** | **str** | The allowed amount deviation, with precision up to 1 decimal place.  For example, if &#x60;payable_amount&#x60; is &#x60;100.00&#x60; and &#x60;amount_tolerance&#x60; is &#x60;0.50&#x60;: - Payer pays 99.55 → Success (difference of 0.45 ≤ 0.5) - Payer pays 99.40 → Underpaid (difference of 0.60 &gt; 0.5)  | [optional] 
 **receive_address** | **str** | The recipient wallet address to be used for the payment transaction. | 
 **received_token_amount** | **str** | The total cryptocurrency amount received for this order. Updates until the expiration time. Precision matches the token standard (e.g., 6 decimals for USDT). | 
 **expired_at** | **int** | The expiration time of the pay-in order, represented as a UNIX timestamp in seconds. | [optional] 
 **transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process. | [optional] 
-**currency** | **str** | The fiat currency for the payout. | [optional] 
-**order_amount** | **str** | The base amount of the order in fiat currency, excluding the developer fee (specified in &#x60;fee_amount&#x60;). | [optional] 
+**currency** | **str** | The fiat currency you will receive from the payout. | [optional] 
+**order_amount** | **str** | This field has been deprecated. Please use &#x60;pricing_amount&#x60; instead. | [optional] 
 **settlement_status** | [**SettleStatus**](SettleStatus.md) |  | [optional] 
 **refund_id** | **str** | The refund order ID. | 
 **amount** | **str** | The amount in cryptocurrency to be returned for this refund order. | 
@@ -99,7 +99,7 @@ Name | Type | Description | Notes
 **updated_address** | **str** | The new top-up address that has been assigned to the payer. | 
 **payout_id** | **str** | The payout ID generated by Cobo. | 
 **payout_item_details** | [**List[PaymentPayoutItemDetail]**](PaymentPayoutItemDetail.md) |  | [optional] 
-**actual_payout_amount** | **str** | The actual amount of this payout.  | [optional] 
+**actual_payout_amount** | **str** | The total amount of cryptocurrency actually paid out for this payout.  | [optional] 
 **disposition_type** | [**DispositionType**](DispositionType.md) |  | 
 **disposition_status** | [**DispositionStatus**](DispositionStatus.md) |  | 
 **destination_address** | **str** | The blockchain address to receive the refunded/isolated funds. | [optional] 
@@ -107,6 +107,7 @@ Name | Type | Description | Notes
 **transaction_type** | [**KytScreeningsTransactionType**](KytScreeningsTransactionType.md) |  | 
 **review_status** | [**ReviewStatusType**](ReviewStatusType.md) |  | 
 **funds_status** | [**FundsStatusType**](FundsStatusType.md) |  | 
+**screening_id** | **str** | The unique system-generated identifier for this screening request (UUID format, fixed 36 characters). | 
 
 ## Example
 

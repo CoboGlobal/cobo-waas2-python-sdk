@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class PaymentPayoutStatus(str, Enum):
     """
-    The current status of the payout: - `Pending`: The payout has been created and is awaiting processing. - `Processing`: The payout is currently being processed, with at least one payout in progress. - `Completed`: All requested payouts have been completed. - `PartiallyCompleted`: Some requested payouts have been completed successfully, while others have failed. - `Failed`: All requested payouts have failed. 
+    The current status of the payout: - `Pending`: The payout has been created and is awaiting processing. - `Processing`: The payout is currently being processed, with at least one payout item in progress. - `Completed`: All requested payout items have been completed. - `PartiallyCompleted`: Some requested payout items have been completed successfully, while others have failed. - `Failed`: All requested payout items have failed. 
     """
 
     """

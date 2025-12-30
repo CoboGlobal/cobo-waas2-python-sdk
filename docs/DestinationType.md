@@ -1,6 +1,6 @@
 # DestinationType
 
-DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. 
+The type of the destination. - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. 
 
 ## Properties
 

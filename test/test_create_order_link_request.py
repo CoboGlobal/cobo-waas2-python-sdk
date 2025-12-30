@@ -45,10 +45,16 @@ class TestCreateOrderLinkRequest(unittest.TestCase):
                     payable_amounts = [{"token_id":"ETH_USDT","amount":"103.03"},{"token_id":"SOL_USDC","amount":"105.05"}], 
                     expired_in = 1800, 
                     amount_tolerance = '0.5', 
-                    currency = 'USD', 
-                    order_amount = '100.00', 
-                    token_ids = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
-                    custom_exchange_rates = [{"token_id":"ETH_USDT","exchange_rate":"0.99"},{"token_id":"SOL_USDC","exchange_rate":"1.02"}], 
+                    currency = '', 
+                    order_amount = '', 
+                    token_ids = [
+                        ''
+                        ], 
+                    custom_exchange_rates = [
+                        cobo_waas2.models.order_link_business_info_custom_exchange_rates_inner.OrderLinkBusinessInfo_custom_exchange_rates_inner(
+                            token_id = '', 
+                            exchange_rate = '', )
+                        ], 
                     use_dedicated_address = False, ),
                 display_info = cobo_waas2.models.link_display_info.LinkDisplayInfo(
                     developer_name = 'Acme Payment Solutions', 
@@ -68,10 +74,16 @@ class TestCreateOrderLinkRequest(unittest.TestCase):
                     payable_amounts = [{"token_id":"ETH_USDT","amount":"103.03"},{"token_id":"SOL_USDC","amount":"105.05"}], 
                     expired_in = 1800, 
                     amount_tolerance = '0.5', 
-                    currency = 'USD', 
-                    order_amount = '100.00', 
-                    token_ids = ["ETH_USDT","SOL_USDC","TRON_USDT"], 
-                    custom_exchange_rates = [{"token_id":"ETH_USDT","exchange_rate":"0.99"},{"token_id":"SOL_USDC","exchange_rate":"1.02"}], 
+                    currency = '', 
+                    order_amount = '', 
+                    token_ids = [
+                        ''
+                        ], 
+                    custom_exchange_rates = [
+                        cobo_waas2.models.order_link_business_info_custom_exchange_rates_inner.OrderLinkBusinessInfo_custom_exchange_rates_inner(
+                            token_id = '', 
+                            exchange_rate = '', )
+                        ], 
                     use_dedicated_address = False, ),
         )
         """

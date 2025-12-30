@@ -26,7 +26,7 @@ class CreateWalletAddress(BaseModel):
     CreateWalletAddress
     """  # noqa: E501
     address: StrictStr = Field(description="The wallet address.")
-    chain_id: StrictStr = Field(description="The chain ID of the cryptocurrency.")
+    chain_id: StrictStr = Field(description="The chain ID of the address.")
     __properties: ClassVar[List[str]] = ["address", "chain_id"]
 
     model_config = ConfigDict(

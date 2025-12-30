@@ -27,12 +27,12 @@ class CreatePayoutRequest(BaseModel):
     """
     CreatePayoutRequest
     """  # noqa: E501
-    request_id: StrictStr = Field(description="The request ID that is used to track a settlement request. The request ID is provided by you and must be unique.")
+    request_id: StrictStr = Field(description="The request ID that is used to track a payout request. The request ID is provided by you and must be unique.")
     payout_channel: PayoutChannel
     payout_params: List[PaymentPayoutParam]
-    bank_account_id: Optional[StrictStr] = Field(default=None, description="｜ Only used in OffRamp payout channel. The ID of the bank account where the settled funds will be deposited.")
-    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the create payouts.")
-    remark: Optional[StrictStr] = Field(default=None, description="The remark for the create payouts.")
+    bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account where the funds will be deposited. Specify this field when `payout_channel` is set to `OffRamp`.  You can call [List all bank accounts](https://www.cobo.com/payments/en/api-references/payment/list-all-bank-accounts) to retrieve the IDs of registered bank accounts. To add a new bank account, refer to [Destinations](https://www.cobo.com/payments/en/guides/destinations). ")
+    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency you will receive from the payout. - Required when `payout_channel` is set to `OffRamp`. - Currently, only `USD` is supported. ")
+    remark: Optional[StrictStr] = Field(default=None, description="The remark for the payout.")
     __properties: ClassVar[List[str]] = ["request_id", "payout_channel", "payout_params", "bank_account_id", "currency", "remark"]
 
     model_config = ConfigDict(

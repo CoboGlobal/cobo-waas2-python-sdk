@@ -29,6 +29,18 @@ class TestComplianceApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_kya_screenings(self) -> None:
+        """
+        Test case for create_kya_screenings
+
+        Create KYA address screening requests
+        """
+        """
+        create_kya_screenings_body = cobo_waas2.CreateKyaScreeningsBody()
+
+        api_response = self.api.create_kya_screenings(create_kya_screenings_body=create_kya_screenings_body)
+        """
+
     def test_get_disposition_status(self) -> None:
         """
         Test case for get_disposition_status
@@ -39,6 +51,18 @@ class TestComplianceApi(unittest.TestCase):
         transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
         api_response = self.api.get_disposition_status(transaction_id)
+        """
+
+    def test_get_kya_screening(self) -> None:
+        """
+        Test case for get_kya_screening
+
+        Get KYA address screening result
+        """
+        """
+        screening_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.get_kya_screening(screening_id)
         """
 
     def test_get_kyt_screening_status(self) -> None:
@@ -63,6 +87,21 @@ class TestComplianceApi(unittest.TestCase):
         isolate_disposition = cobo_waas2.IsolateDisposition()
 
         api_response = self.api.isolate_funds(isolate_disposition=isolate_disposition)
+        """
+
+    def test_list_kya_screenings(self) -> None:
+        """
+        Test case for list_kya_screenings
+
+        List KYA address screening results
+        """
+        """
+        screening_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,a1b2c3d4-e5f6-4321-8765-fedcba987654'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_kya_screenings(screening_ids=screening_ids, limit=limit, before=before, after=after)
         """
 
     def test_refund_funds(self) -> None:

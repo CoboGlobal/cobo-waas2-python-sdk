@@ -34,13 +34,13 @@ class TestOrderLinkBusinessInfoCustomExchangeRatesInner(unittest.TestCase):
         model = OrderLinkBusinessInfoCustomExchangeRatesInner()
         if include_optional:
             return OrderLinkBusinessInfoCustomExchangeRatesInner(
-                token_id = 'ETH_USDT',
-                exchange_rate = '0.99'
+                token_id = '',
+                exchange_rate = ''
             )
         else:
             return OrderLinkBusinessInfoCustomExchangeRatesInner(
-                token_id = 'ETH_USDT',
-                exchange_rate = '0.99',
+                token_id = '',
+                exchange_rate = '',
         )
         """
 

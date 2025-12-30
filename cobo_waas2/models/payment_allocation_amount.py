@@ -26,7 +26,7 @@ class PaymentAllocationAmount(BaseModel):
     PaymentAllocationAmount
     """  # noqa: E501
     token_id: StrictStr = Field(description="The ID of the cryptocurrency.")
-    allocation_amount: StrictStr = Field(description="The allocation amount.")
+    allocation_amount: StrictStr = Field(description="The available amount that can be allocated from the source account to the destination account for the given cryptocurrency.")
     __properties: ClassVar[List[str]] = ["token_id", "allocation_amount"]
 
     model_config = ConfigDict(

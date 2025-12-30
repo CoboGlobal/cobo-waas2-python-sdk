@@ -34,7 +34,7 @@ class TestPaymentPayoutParam(unittest.TestCase):
         model = PaymentPayoutParam()
         if include_optional:
             return PaymentPayoutParam(
-                source_account = '',
+                source_account = 'M1001',
                 token_id = 'ETH_USDT',
                 amount = '500.00',
                 crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd',
@@ -42,7 +42,7 @@ class TestPaymentPayoutParam(unittest.TestCase):
             )
         else:
             return PaymentPayoutParam(
-                source_account = '',
+                source_account = 'M1001',
                 token_id = 'ETH_USDT',
                 amount = '500.00',
         )

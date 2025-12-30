@@ -28,19 +28,19 @@ class PaymentOrderEventData(BaseModel):
     """
     PaymentOrderEventData
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `PaymentPayout`: The payment payout event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `PaymentPayout`: The payment payout event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data. - `ComplianceKyaScreenings`: The compliance KYA screenings event data.")
     order_id: StrictStr = Field(description="The order ID.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
     merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system.")
     psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
-    pricing_currency: Optional[StrictStr] = Field(default=None, description="The fiat currency of the order.")
-    pricing_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`).")
-    fee_amount: StrictStr = Field(description="The developer fee for the order in fiat currency. It is added to the base amount (`order_amount`) to determine the final charge.")
+    pricing_currency: Optional[StrictStr] = Field(default=None, description="The pricing currency of the order.")
+    pricing_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order, excluding the developer fee (specified in `fee_amount`).")
+    fee_amount: StrictStr = Field(description="The developer fee for the order. It is added to the base amount to determine the final charge.")
     payable_currency: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment.")
     chain_id: StrictStr = Field(description="The ID of the blockchain network where the payment transaction should be made.")
     payable_amount: StrictStr = Field(description="The cryptocurrency amount to be paid for this order.")
-    exchange_rate: StrictStr = Field(description="The exchange rate between a currency pair. Expressed as the amount of fiat currency per one unit of cryptocurrency. For example, if the cryptocurrency is USDT and the fiat currency is USD, a rate of \"0.99\" means 1 USDT = 0.99 USD.")
-    amount_tolerance: Optional[StrictStr] = Field(default=None, description="Allowed amount deviation.")
+    exchange_rate: StrictStr = Field(description="The exchange rate between `payable_currency` and `pricing_currency`, calculated as (`pricing_amount` + `fee_amount`) / `payable_amount`.    <Note>This field is only returned when `payable_amount` was not provided in the order creation request. </Note> ")
+    amount_tolerance: Optional[StrictStr] = Field(default=None, description="The allowed amount deviation, with precision up to 1 decimal place.  For example, if `payable_amount` is `100.00` and `amount_tolerance` is `0.50`: - Payer pays 99.55 → Success (difference of 0.45 ≤ 0.5) - Payer pays 99.40 → Underpaid (difference of 0.60 > 0.5) ")
     receive_address: StrictStr = Field(description="The recipient wallet address to be used for the payment transaction.")
     status: OrderStatus
     received_token_amount: StrictStr = Field(description="The total cryptocurrency amount received for this order. Updates until the expiration time. Precision matches the token standard (e.g., 6 decimals for USDT).")
@@ -48,17 +48,17 @@ class PaymentOrderEventData(BaseModel):
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the order, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the order, represented as a UNIX timestamp in seconds.")
     transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this pay-in order. Each transaction represents a separate blockchain operation related to the settlement process.")
-    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency of the order.")
-    order_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order in fiat currency, excluding the developer fee (specified in `fee_amount`).")
-    token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment.")
+    currency: Optional[StrictStr] = Field(default=None, description="This field has been deprecated. Please use `pricing_currency` instead.")
+    order_amount: Optional[StrictStr] = Field(default=None, description="This field has been deprecated. Please use `pricing_amount` instead.")
+    token_id: Optional[StrictStr] = Field(default=None, description="This field has been deprecated. Please use `payable_currency` instead.")
     settlement_status: Optional[SettleStatus] = None
     __properties: ClassVar[List[str]] = ["data_type", "order_id", "merchant_id", "merchant_order_code", "psp_order_code", "pricing_currency", "pricing_amount", "fee_amount", "payable_currency", "chain_id", "payable_amount", "exchange_rate", "amount_tolerance", "receive_address", "status", "received_token_amount", "expired_at", "created_timestamp", "updated_timestamp", "transactions", "currency", "order_amount", "token_id", "settlement_status"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings', 'ComplianceKyaScreenings']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings', 'ComplianceKyaScreenings')")
         return value
 
     model_config = ConfigDict(

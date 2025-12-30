@@ -45,7 +45,7 @@ class FeeStationApi:
     @validate_call
     def check_fee_station_usage(
         self,
-        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The information for evaluating Fee Station usage.")] = None,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Fee Station usage.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,7 +59,7 @@ class FeeStationApi:
 
         This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
-        :param fee_station_check_fee_station_usage: The information for evaluating Fee Station usage.
+        :param fee_station_check_fee_station_usage: The request body for evaluating Fee Station usage.
         :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -91,7 +91,7 @@ class FeeStationApi:
     @validate_call
     def check_fee_station_usage_with_http_info(
         self,
-        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The information for evaluating Fee Station usage.")] = None,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Fee Station usage.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -105,7 +105,7 @@ class FeeStationApi:
 
         This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
-        :param fee_station_check_fee_station_usage: The information for evaluating Fee Station usage.
+        :param fee_station_check_fee_station_usage: The request body for evaluating Fee Station usage.
         :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -137,7 +137,7 @@ class FeeStationApi:
     @validate_call
     def check_fee_station_usage_without_preload_content(
         self,
-        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The information for evaluating Fee Station usage.")] = None,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Fee Station usage.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -151,7 +151,7 @@ class FeeStationApi:
 
         This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
-        :param fee_station_check_fee_station_usage: The information for evaluating Fee Station usage.
+        :param fee_station_check_fee_station_usage: The request body for evaluating Fee Station usage.
         :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
