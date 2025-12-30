@@ -31,11 +31,11 @@ class MerchantBalance(BaseModel):
     acquiring_type: AcquiringType
     total_received_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been received by the merchant.")
     settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been paid out from the merchant's balance.")
-    payout_amount: Optional[StrictStr] = Field(default=None, description="The merchant payout amount.")
+    payout_amount: Optional[StrictStr] = Field(default=None, description="This field is reserved for future use.")
     refunded_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been refunded from the merchant's balance.")
-    total_balance: Optional[StrictStr] = Field(default=None, description=" The current balance of this token available to the merchant for payouts or refunds.  `total_balance` = `total_received_amount` - `settled_amount` - `refunded_amount`  For more information, please refer to [Funds allocation and balances](https://www.cobo.com/payments/en/guides/amounts-and-balances) ")
-    available_balance: Optional[StrictStr] = Field(default=None, description="The merchant available balance.")
-    locked_balance: Optional[StrictStr] = Field(default=None, description="The merchant locked balance.")
+    total_balance: Optional[StrictStr] = Field(default=None, description=" The current balance of this token available to the merchant for payouts or refunds.  For more information, please refer to [Accounts and fund allocation](https://www.cobo.com/payments/en/guides/amounts-and-balances) ")
+    available_balance: Optional[StrictStr] = Field(default=None, description="This field has been deprecated. ")
+    locked_balance: Optional[StrictStr] = Field(default=None, description="This field is reserved for future use.")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "acquiring_type", "total_received_amount", "settled_amount", "payout_amount", "refunded_amount", "total_balance", "available_balance", "locked_balance"]
 
     model_config = ConfigDict(

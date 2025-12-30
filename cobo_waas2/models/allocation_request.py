@@ -25,11 +25,11 @@ class AllocationRequest(BaseModel):
     """
     AllocationRequest
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to allocation. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    amount: StrictStr = Field(description="The allocation amount. ")
-    source_account: StrictStr
-    destination_account: StrictStr
-    description: StrictStr
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to allocate. Supported values:  - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    amount: StrictStr = Field(description="The amount of the cryptocurrency you want to allocate. ")
+    source_account: StrictStr = Field(description="The source account.  - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
+    destination_account: StrictStr = Field(description="The destination account.  - If the destination account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the destination account is the developer account, use the string `\"developer\"`. ")
+    description: StrictStr = Field(description="The description of the allocation request.")
     __properties: ClassVar[List[str]] = ["token_id", "amount", "source_account", "destination_account", "description"]
 
     model_config = ConfigDict(

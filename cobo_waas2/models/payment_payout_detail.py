@@ -35,10 +35,10 @@ class PaymentPayoutDetail(BaseModel):
     payout_item_details: Optional[List[PaymentPayoutItemDetail]] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the payout, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the payout, represented as a UNIX timestamp in seconds.")
-    initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this payout, usually the user's API key.")
+    initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this payout, usually the API key used to create the payout.")
     payout_channel: Optional[PayoutChannel] = None
-    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency for the payout.")
-    actual_payout_amount: Optional[StrictStr] = Field(default=None, description="The actual amount of this payout. ")
+    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency you will receive from the payout.")
+    actual_payout_amount: Optional[StrictStr] = Field(default=None, description="The total amount of cryptocurrency actually paid out for this payout. ")
     bank_account: Optional[BankAccount] = None
     __properties: ClassVar[List[str]] = ["payout_id", "request_id", "status", "payout_item_details", "created_timestamp", "updated_timestamp", "initiator", "payout_channel", "currency", "actual_payout_amount", "bank_account"]
 

@@ -40,7 +40,7 @@ class TestWebhookEventData(unittest.TestCase):
                 request_id = '123e457-e89b-12d3-a456-426614174004',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 type = 'Deposit',
-                status = 'Pending',
+                status = 'Screened',
                 sub_status = 'PendingDoubleCheck',
                 failed_reason = 'Rejected by signer Cobo TSS',
                 chain_id = 'ETH',
@@ -98,8 +98,8 @@ class TestWebhookEventData(unittest.TestCase):
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
                     transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', 
                     main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
-                created_timestamp = 1744689600,
-                updated_timestamp = 1610445878970,
+                created_timestamp = 1721530814236,
+                updated_timestamp = 1721530899876,
                 tss_request_id = '20240711114129000132315000003970',
                 source_key_share_holder_group = cobo_waas2.models.source_group.SourceGroup(
                     key_share_holder_group_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
@@ -170,7 +170,7 @@ class TestWebhookEventData(unittest.TestCase):
                     custodial_minimum_deposit_threshold = '0.0001', 
                     asset_model_type = 'Account', ),
                 feedback = 'Token has been added to the system',
-                address = '0x0000000000000000000000000000000000000000',
+                address = '0x1234567890abcdef1234567890abcdef12345678',
                 wallet_uuid = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 balance = cobo_waas2.models.balance.Balance(
                     total = '100.0', 
@@ -225,7 +225,7 @@ class TestWebhookEventData(unittest.TestCase):
                         updated_timestamp = 1610445878970, )
                     ],
                 currency = 'USD',
-                order_amount = '100.00',
+                order_amount = '',
                 settlement_status = 'Pending',
                 refund_id = 'R20250304-M1001-1001',
                 amount = '0.0025',
@@ -320,7 +320,7 @@ class TestWebhookEventData(unittest.TestCase):
                         payout_id = '123e457-e89b-12d3-a456-426614174004', 
                         token_id = 'ETH_USDT', 
                         chain_id = 'ETH', 
-                        source_account = '', 
+                        source_account = 'M1001', 
                         amount = '500.00', 
                         status = 'Pending', 
                         transactions = [
@@ -372,7 +372,8 @@ class TestWebhookEventData(unittest.TestCase):
                 disposition_amount = '1.5',
                 transaction_type = 'Deposit',
                 review_status = 'PendingScreening',
-                funds_status = 'Frozen'
+                funds_status = 'Frozen',
+                screening_id = 'a7b8c9d0-e1f2-4a5b-a23c-7890abcdef12'
             )
         else:
             return WebhookEventData(
@@ -380,14 +381,14 @@ class TestWebhookEventData(unittest.TestCase):
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                status = 'Pending',
+                status = 'Screened',
                 chain_id = 'ETH',
                 token_id = 'ETH_USDT',
                 source = None,
                 destination = None,
                 initiator_type = 'API',
-                created_timestamp = 1744689600,
-                updated_timestamp = 1610445878970,
+                created_timestamp = 1721530814236,
+                updated_timestamp = 1721530899876,
                 chains = [
                     cobo_waas2.models.chain_info.ChainInfo(
                         chain_id = 'ETH', 
@@ -420,7 +421,7 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 contract_address = '0x6B175474E89094C44Da98b954EedeAC495271d0F',
                 wallet_subtype = 'Asset',
-                address = '0x0000000000000000000000000000000000000000',
+                address = '0x1234567890abcdef1234567890abcdef12345678',
                 wallet_uuid = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 balance = cobo_waas2.models.balance.Balance(
                     total = '100.0', 
@@ -514,6 +515,7 @@ class TestWebhookEventData(unittest.TestCase):
                 transaction_type = 'Deposit',
                 review_status = 'PendingScreening',
                 funds_status = 'Frozen',
+                screening_id = 'a7b8c9d0-e1f2-4a5b-a23c-7890abcdef12',
         )
         """
 

@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class CounterpartyType(str, Enum):
     """
-    CounterpartyType defines the type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. 
+    The type of the counterparty: - `Individual`: The counterparty is an individual. - `Organization`: The counterparty is an organization. 
     """
 
     """

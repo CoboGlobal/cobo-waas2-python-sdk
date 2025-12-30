@@ -25,8 +25,8 @@ class OrderLinkBusinessInfoPayableAmountsInner(BaseModel):
     """
     OrderLinkBusinessInfoPayableAmountsInner
     """  # noqa: E501
-    token_id: StrictStr = Field(description="The cryptocurrency token ID")
-    amount: StrictStr = Field(description="The actual payable amount of the order in the cryptocurrency.")
+    token_id: StrictStr = Field(description="The ID of the cryptocurrency used for payment. Supported values: - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
+    amount: StrictStr = Field(description="The payable amount in the specified currency.")
     __properties: ClassVar[List[str]] = ["token_id", "amount"]
 
     model_config = ConfigDict(

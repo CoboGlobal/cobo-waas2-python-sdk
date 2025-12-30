@@ -16,7 +16,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.address_risk_level import AddressRiskLevel
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,9 +28,11 @@ class WalletAddress(BaseModel):
     """  # noqa: E501
     wallet_address_id: StrictStr = Field(description="The wallet address ID.")
     address: StrictStr = Field(description="The wallet address.")
-    chain_id: StrictStr = Field(description="The chain ID of the cryptocurrency.")
+    chain_id: StrictStr = Field(description="The chain ID of the address.")
+    risk_level: Optional[AddressRiskLevel] = None
+    screening_timestamp: Optional[StrictInt] = Field(default=None, description="UNIX timestamp (in seconds) when the address was last screened for compliance.")
     updated_timestamp: StrictInt = Field(description="The updated time of the wallet address, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["wallet_address_id", "address", "chain_id", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["wallet_address_id", "address", "chain_id", "risk_level", "screening_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +88,8 @@ class WalletAddress(BaseModel):
             "wallet_address_id": obj.get("wallet_address_id"),
             "address": obj.get("address"),
             "chain_id": obj.get("chain_id"),
+            "risk_level": obj.get("risk_level"),
+            "screening_timestamp": obj.get("screening_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj

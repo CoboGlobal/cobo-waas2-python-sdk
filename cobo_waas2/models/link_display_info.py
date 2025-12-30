@@ -28,7 +28,7 @@ class LinkDisplayInfo(BaseModel):
     """  # noqa: E501
     developer_name: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(default=None, description="The brand name to display to end users on the page. This helps users identify who is providing the payment service. ")
     logo: Optional[StrictStr] = Field(default=None, description="The URL of the logo image to display to end users on the page. ")
-    return_url: Optional[StrictStr] = Field(default=None, description="The URL to redirect to after the operation completes.")
+    return_url: Optional[StrictStr] = Field(default=None, description="The product page URL where end users will be redirected after the payment process ends.  This URL is embedded in a \"Return to Merchant\" button displayed on the following result pages: - Payment success - Payment timeout - Payment rejected - Payment error ")
     __properties: ClassVar[List[str]] = ["developer_name", "logo", "return_url"]
 
     model_config = ConfigDict(

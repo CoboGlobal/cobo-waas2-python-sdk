@@ -45,6 +45,8 @@ class TestDestinationDetail(unittest.TestCase):
                         wallet_address_id = '123e4567-e89b-12d3-a456-426614174003', 
                         address = '0x1234567890abcdef...', 
                         chain_id = 'TRON', 
+                        risk_level = 'Low', 
+                        screening_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )
                     ],
                 bank_accounts = [

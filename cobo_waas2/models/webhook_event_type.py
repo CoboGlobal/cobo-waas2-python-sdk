@@ -62,6 +62,7 @@ class WebhookEventType(str, Enum):
     PAYMENT_DOT_SUBSCRIPTION_DOT_STATUS_DOT_UPDATED = 'payment.subscription.status.updated'
     COMPLIANCE_DOT_DISPOSITION_DOT_STATUS_DOT_UPDATED = 'compliance.disposition.status.updated'
     COMPLIANCE_DOT_KYT_DOT_SCREENINGS_DOT_STATUS_DOT_UPDATED = 'compliance.kyt.screenings.status.updated'
+    COMPLIANCE_DOT_KYA_DOT_SCREENINGS_DOT_STATUS_DOT_UPDATED = 'compliance.kya.screenings.status.updated'
 
     UNKNOWN = None
 

@@ -31,7 +31,7 @@ class CounterpartyWalletAddressDetail(BaseModel):
     counterparty_type: CounterpartyType
     wallet_address_id: StrictStr = Field(description="The wallet address ID.")
     address: StrictStr = Field(description="The wallet address.")
-    chain_id: StrictStr = Field(description="The chain ID of the cryptocurrency.")
+    chain_id: StrictStr = Field(description="The chain ID of the address.")
     updated_timestamp: StrictInt = Field(description="The updated time of the wallet address, represented as a UNIX timestamp in seconds.")
     __properties: ClassVar[List[str]] = ["counterparty_id", "counterparty_name", "counterparty_type", "wallet_address_id", "address", "chain_id", "updated_timestamp"]
 

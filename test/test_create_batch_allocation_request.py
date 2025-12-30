@@ -39,9 +39,9 @@ class TestCreateBatchAllocationRequest(unittest.TestCase):
                     cobo_waas2.models.allocation_request.AllocationRequest(
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
-                        source_account = '', 
-                        destination_account = '', 
-                        description = '', )
+                        source_account = 'M1001', 
+                        destination_account = 'M1001', 
+                        description = 'Allocation for merchant M1001', )
                     ]
             )
         else:
@@ -51,9 +51,9 @@ class TestCreateBatchAllocationRequest(unittest.TestCase):
                     cobo_waas2.models.allocation_request.AllocationRequest(
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
-                        source_account = '', 
-                        destination_account = '', 
-                        description = '', )
+                        source_account = 'M1001', 
+                        destination_account = 'M1001', 
+                        description = 'Allocation for merchant M1001', )
                     ],
         )
         """

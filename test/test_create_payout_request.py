@@ -38,7 +38,7 @@ class TestCreatePayoutRequest(unittest.TestCase):
                 payout_channel = 'Crypto',
                 payout_params = [
                     cobo_waas2.models.payment_payout_param.PaymentPayoutParam(
-                        source_account = '', 
+                        source_account = 'M1001', 
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
@@ -54,7 +54,7 @@ class TestCreatePayoutRequest(unittest.TestCase):
                 payout_channel = 'Crypto',
                 payout_params = [
                     cobo_waas2.models.payment_payout_param.PaymentPayoutParam(
-                        source_account = '', 
+                        source_account = 'M1001', 
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
                         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 

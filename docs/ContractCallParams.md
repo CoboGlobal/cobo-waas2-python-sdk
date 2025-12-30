@@ -6,7 +6,7 @@ The information about a transaction that interacts with a smart contract
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_id** | **str** | The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | 
+**request_id** | **str** | A client-defined unique request identifier (idempotency key) used to prevent duplicate contract call requests. It must be unique within the same organization. Requests with the same request ID will be rejected with an error. | 
 **chain_id** | **str** | The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | 
 **source** | [**ContractCallSource**](ContractCallSource.md) |  | 
 **destination** | [**ContractCallDestination**](ContractCallDestination.md) |  | 

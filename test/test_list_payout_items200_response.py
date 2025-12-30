@@ -42,7 +42,7 @@ class TestListPayoutItems200Response(unittest.TestCase):
                         chain_id = 'ETH', 
                         amount = '500.00', 
                         status = 'Pending', 
-                        source_account = '', 
+                        source_account = 'M1001', 
                         transactions = [
                             cobo_waas2.models.payment_transaction.PaymentTransaction(
                                 tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
