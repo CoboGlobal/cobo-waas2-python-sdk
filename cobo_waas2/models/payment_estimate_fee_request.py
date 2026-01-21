@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.payment_estimate_fee import PaymentEstimateFee
 from cobo_waas2.models.payment_fee_type import PaymentFeeType
@@ -29,7 +29,8 @@ class PaymentEstimateFeeRequest(BaseModel):
     """  # noqa: E501
     fee_type: Optional[PaymentFeeType] = None
     estimate_fees: List[PaymentEstimateFee] = Field(description="A list of token IDs and amounts for which fees will be calculated.")
-    __properties: ClassVar[List[str]] = ["fee_type", "estimate_fees"]
+    recipient_token_id: Optional[StrictStr] = Field(default=None, description="The token ID that the recipient will receive. Required only when `fee_type` is `CryptoPayoutBridge`.")
+    __properties: ClassVar[List[str]] = ["fee_type", "estimate_fees", "recipient_token_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,7 +91,8 @@ class PaymentEstimateFeeRequest(BaseModel):
 
         _obj = cls.model_validate({
             "fee_type": obj.get("fee_type"),
-            "estimate_fees": [PaymentEstimateFee.from_dict(_item) for _item in obj["estimate_fees"]] if obj.get("estimate_fees") is not None else None
+            "estimate_fees": [PaymentEstimateFee.from_dict(_item) for _item in obj["estimate_fees"]] if obj.get("estimate_fees") is not None else None,
+            "recipient_token_id": obj.get("recipient_token_id")
         })
         return _obj
 

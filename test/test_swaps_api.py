@@ -88,6 +88,7 @@ class TestSwapsApi(unittest.TestCase):
         List swap activities
         """
         """
+        request_id = 'web_send_by_user_327_1610444045047'
         type = cobo_waas2.SwapType()
         status = cobo_waas2.SwapActivityStatus()
         min_updated_timestamp = 1635744000000
@@ -99,7 +100,7 @@ class TestSwapsApi(unittest.TestCase):
         sort_by = 'created_timestamp'
         direction = 'ASC'
 
-        api_response = self.api.list_swap_activities(type=type, status=status, min_updated_timestamp=min_updated_timestamp, max_updated_timestamp=max_updated_timestamp, initiator=initiator, limit=limit, before=before, after=after, sort_by=sort_by, direction=direction)
+        api_response = self.api.list_swap_activities(request_id=request_id, type=type, status=status, min_updated_timestamp=min_updated_timestamp, max_updated_timestamp=max_updated_timestamp, initiator=initiator, limit=limit, before=before, after=after, sort_by=sort_by, direction=direction)
         """
 
     def test_list_swap_enabled_tokens(self) -> None:

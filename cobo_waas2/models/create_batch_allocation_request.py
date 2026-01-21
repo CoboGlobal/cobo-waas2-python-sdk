@@ -17,7 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
-from cobo_waas2.models.allocation_request import AllocationRequest
+from cobo_waas2.models.allocation_param import AllocationParam
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +27,8 @@ class CreateBatchAllocationRequest(BaseModel):
     CreateBatchAllocationRequest
     """  # noqa: E501
     request_id: StrictStr = Field(description="The request ID that is used to track a batch allocation request. The request ID is provided by you and must be unique.")
-    allocation_requests: List[AllocationRequest]
-    __properties: ClassVar[List[str]] = ["request_id", "allocation_requests"]
+    allocation_params: List[AllocationParam]
+    __properties: ClassVar[List[str]] = ["request_id", "allocation_params"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,13 +69,13 @@ class CreateBatchAllocationRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in allocation_requests (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in allocation_params (list)
         _items = []
-        if self.allocation_requests:
-            for _item in self.allocation_requests:
+        if self.allocation_params:
+            for _item in self.allocation_params:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['allocation_requests'] = _items
+            _dict['allocation_params'] = _items
         return _dict
 
     @classmethod
@@ -89,7 +89,7 @@ class CreateBatchAllocationRequest(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
-            "allocation_requests": [AllocationRequest.from_dict(_item) for _item in obj["allocation_requests"]] if obj.get("allocation_requests") is not None else None
+            "allocation_params": [AllocationParam.from_dict(_item) for _item in obj["allocation_params"]] if obj.get("allocation_params") is not None else None
         })
         return _obj
 

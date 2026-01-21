@@ -36,9 +36,9 @@ class TestBatchAllocationDetail(unittest.TestCase):
             return BatchAllocationDetail(
                 batch_allocation_id = '123e457-e89b-12d3-a456-426614174004',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
-                allocation_records = [
-                    cobo_waas2.models.allocation_record.AllocationRecord(
-                        allocation_record_id = '123e457-e89b-12d3-a456-426614174004', 
+                allocation_items = [
+                    cobo_waas2.models.allocation_item.AllocationItem(
+                        allocation_item_id = '123e457-e89b-12d3-a456-426614174004', 
                         batch_allocation_id = '123e457-e89b-12d3-a456-426614174004', 
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
@@ -54,16 +54,6 @@ class TestBatchAllocationDetail(unittest.TestCase):
             return BatchAllocationDetail(
                 batch_allocation_id = '123e457-e89b-12d3-a456-426614174004',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
-                allocation_records = [
-                    cobo_waas2.models.allocation_record.AllocationRecord(
-                        allocation_record_id = '123e457-e89b-12d3-a456-426614174004', 
-                        batch_allocation_id = '123e457-e89b-12d3-a456-426614174004', 
-                        token_id = 'ETH_USDT', 
-                        amount = '500.00', 
-                        source_account = '', 
-                        destination_account = '', 
-                        description = '', )
-                    ],
         )
         """
 

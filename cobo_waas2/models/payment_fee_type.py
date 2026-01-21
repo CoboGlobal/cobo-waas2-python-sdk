@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class PaymentFeeType(str, Enum):
     """
-    The type of fee to estimate: - `Order`: Fee for accepting a payment. - `Refund`: Fee for processing a refund. - `CryptoSettlement`: Fee for crypto payouts. - `OffRampSettlement`: Fee for fiat off-ramp. 
+    The fee type. Possible values include: - `Order`: Fees for order processing. - `Refund`: Fees for refund processing. - `CryptoSettlement`: This fee type is deprecated. Please use `CryptoPayout` instead. - `OffRampSettlement`: This fee type is deprecated. Please use `OffRampPayout` instead. - `CryptoPayout`: Fees for crypto payouts. - `CryptoPayoutBridge`: Fees for crypto payouts with cross-chain bridging. - `OffRampPayout`: Fees for fiat off-ramp payouts. 
     """
 
     """
@@ -28,6 +28,9 @@ class PaymentFeeType(str, Enum):
     REFUND = 'Refund'
     CRYPTOSETTLEMENT = 'CryptoSettlement'
     OFFRAMPSETTLEMENT = 'OffRampSettlement'
+    CRYPTOPAYOUT = 'CryptoPayout'
+    CRYPTOPAYOUTBRIDGE = 'CryptoPayoutBridge'
+    OFFRAMPPAYOUT = 'OffRampPayout'
 
     UNKNOWN = None
 

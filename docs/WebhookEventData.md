@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The top-up address update event data. - &#x60;PaymentPayout&#x60;: The payment payout event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The token suspension event data. - &#x60;ComplianceDisposition&#x60;: The compliance disposition event data. - &#x60;ComplianceKytScreenings&#x60;: The compliance KYT screenings event data. - &#x60;ComplianceKyaScreenings&#x60;: The compliance KYA screenings event data. | 
+**data_type** | **str** |  The data type of the event. - &#x60;Transaction&#x60;: The transaction event data. - &#x60;TSSRequest&#x60;: The TSS request event data. - &#x60;Addresses&#x60;: The addresses event data. - &#x60;WalletInfo&#x60;: The wallet information event data. - &#x60;MPCVault&#x60;: The MPC vault event data. - &#x60;Chains&#x60;: The enabled chain event data. - &#x60;Tokens&#x60;: The enabled token event data. - &#x60;TokenListing&#x60;: The token listing event data.        - &#x60;PaymentOrder&#x60;: The payment order event data. - &#x60;PaymentRefund&#x60;: The payment refund event data. - &#x60;PaymentSettlement&#x60;: The payment settlement event data. - &#x60;PaymentTransaction&#x60;: The payment transaction event data. - &#x60;PaymentAddressUpdate&#x60;: The top-up address update event data. - &#x60;PaymentPayout&#x60;: The payment payout event data. - &#x60;PaymentBulkSend&#x60;: The payment bulk send event data. - &#x60;BalanceUpdateInfo&#x60;: The balance update event data. - &#x60;SuspendedToken&#x60;: The token suspension event data. - &#x60;ComplianceDisposition&#x60;: The compliance disposition event data. - &#x60;ComplianceKytScreenings&#x60;: The compliance KYT screenings event data. - &#x60;ComplianceKyaScreenings&#x60;: The compliance KYA screenings event data. | 
 **transaction_id** | **str** | The transaction ID. | 
 **cobo_id** | **str** | The Cobo ID, which can be used to track a transaction. | [optional] 
 **request_id** | **str** | The request ID provided by you when creating the payout. | 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **destination** | [**TransactionDestination**](TransactionDestination.md) |  | 
 **result** | [**TransactionResult**](TransactionResult.md) |  | [optional] 
 **fee** | [**TransactionFee**](TransactionFee.md) |  | [optional] 
-**initiator** | **str** | The initiator of this payout, usually the API key used to create the payout. | [optional] 
+**initiator** | **str** | The initiator of this payout, usually the user&#39;s API key. | [optional] 
 **initiator_type** | [**TransactionInitiatorType**](TransactionInitiatorType.md) |  | 
 **confirmed_num** | **int** | The number of confirmations this transaction has received. | [optional] 
 **confirming_threshold** | **int** | The minimum number of confirmations required to deem a transaction secure. The common threshold is 6 for a Bitcoin transaction. | [optional] 
@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 **raw_tx_info** | [**TransactionRawTxInfo**](TransactionRawTxInfo.md) |  | [optional] 
 **replacement** | [**TransactionReplacement**](TransactionReplacement.md) |  | [optional] 
 **category** | **List[str]** | A custom transaction category for you to identify your transfers more easily. | [optional] 
-**description** | **str** | The description for your transaction. | [optional] 
+**description** | **str** | The description for the entire bulk send batch. | [optional] 
 **is_loop** | **bool** | Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - &#x60;true&#x60;: The transaction was executed as a Cobo Loop transfer. - &#x60;false&#x60;: The transaction was not executed as a Cobo Loop transfer.  | [optional] 
 **cobo_category** | **List[str]** | The transaction category defined by Cobo. For more details, refer to [Cobo-defined categories](/v2/guides/transactions/manage-transactions#cobo-defined-categories).  | [optional] 
 **extra** | **List[str]** | A list of JSON-encoded strings containing structured, business-specific extra information for the transaction. Each item corresponds to a specific data type, indicated by the &#x60;extra_type&#x60; field in the JSON object (for example, \&quot;BabylonBusinessInfo\&quot;, \&quot;BtcAddressInfo\&quot;).  | [optional] 
@@ -73,8 +73,8 @@ Name | Type | Description | Notes
 **receive_address** | **str** | The recipient wallet address to be used for the payment transaction. | 
 **received_token_amount** | **str** | The total cryptocurrency amount received for this order. Updates until the expiration time. Precision matches the token standard (e.g., 6 decimals for USDT). | 
 **expired_at** | **int** | The expiration time of the pay-in order, represented as a UNIX timestamp in seconds. | [optional] 
-**transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of transactions associated with this refund order. Each transaction represents a separate blockchain operation related to the refund process. | [optional] 
-**currency** | **str** | The fiat currency you will receive from the payout. | [optional] 
+**transactions** | [**List[PaymentTransaction]**](PaymentTransaction.md) | An array of payout transactions. | [optional] 
+**currency** | **str** | The fiat currency for the off-ramp. | [optional] 
 **order_amount** | **str** | This field has been deprecated. Please use &#x60;pricing_amount&#x60; instead. | [optional] 
 **settlement_status** | [**SettleStatus**](SettleStatus.md) |  | [optional] 
 **refund_id** | **str** | The refund order ID. | 
@@ -88,7 +88,7 @@ Name | Type | Description | Notes
 **settlement_request_id** | **str** | The settlement request ID generated by Cobo. | 
 **settlements** | [**List[SettlementDetail]**](SettlementDetail.md) |  | 
 **acquiring_type** | [**AcquiringType**](AcquiringType.md) |  | 
-**payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | [optional] 
+**payout_channel** | [**PayoutChannel**](PayoutChannel.md) |  | 
 **settlement_type** | [**SettlementType**](SettlementType.md) |  | [optional] 
 **received_amount_fiat** | **str** | The estimated amount of the fiat currency to receive after off-ramping. This amount is subject to change due to bank transfer fees. | [optional] 
 **bank_account** | [**BankAccount**](BankAccount.md) |  | [optional] 
@@ -98,8 +98,13 @@ Name | Type | Description | Notes
 **previous_address** | **str** | The previous top-up address that was assigned to the payer. | 
 **updated_address** | **str** | The new top-up address that has been assigned to the payer. | 
 **payout_id** | **str** | The payout ID generated by Cobo. | 
-**payout_item_details** | [**List[PaymentPayoutItemDetail]**](PaymentPayoutItemDetail.md) |  | [optional] 
-**actual_payout_amount** | **str** | The total amount of cryptocurrency actually paid out for this payout.  | [optional] 
+**source_account** | **str** | The source account from which the bulk send will be made. - If the source account is a merchant account, provide the merchant&#39;s ID (e.g., \&quot;M1001\&quot;). - If the source account is the developer account, use the string &#x60;\&quot;developer\&quot;&#x60;.  | 
+**payout_items** | [**List[PaymentPayoutItem]**](PaymentPayoutItem.md) | required | [optional] 
+**recipient_info** | [**PaymentPayoutRecipientInfo**](PaymentPayoutRecipientInfo.md) |  | [optional] 
+**actual_payout_amount** | **str** | - For &#x60;Crypto&#x60; payouts: The amount of cryptocurrency sent to the recipient&#39;s address, denominated in the token specified in &#x60;recipient_info.token_id&#x60;. - For &#x60;OffRamp&#x60; payouts: The amount of fiat currency sent to the recipient&#39;s bank account, denominated in the currency specified in &#x60;recipient_info.currency&#x60;. (Note: The actual amount received may be lower due to additional bank transfer fees.)  | [optional] 
+**remark** | **str** | A note or comment about the payout. | [optional] 
+**bulk_send_id** | **str** | The bulk send ID. | 
+**execution_mode** | [**PaymentBulkSendExecutionMode**](PaymentBulkSendExecutionMode.md) |  | 
 **disposition_type** | [**DispositionType**](DispositionType.md) |  | 
 **disposition_status** | [**DispositionStatus**](DispositionStatus.md) |  | 
 **destination_address** | **str** | The blockchain address to receive the refunded/isolated funds. | [optional] 

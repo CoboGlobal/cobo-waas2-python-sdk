@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **request_id** | **str** | The request ID that is used to track a batch allocation request. The request ID is provided by you and must be unique. | 
-**allocation_requests** | [**List[AllocationRequest]**](AllocationRequest.md) |  | 
+**allocation_params** | [**List[AllocationParam]**](AllocationParam.md) |  | 
 
 ## Example
 

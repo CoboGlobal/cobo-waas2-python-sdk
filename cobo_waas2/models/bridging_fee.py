@@ -25,9 +25,9 @@ class BridgingFee(BaseModel):
     """
     BridgingFee
     """  # noqa: E501
-    fee_amount: StrictStr = Field(description="The fee charged for bridging tokens to another blockchain during an off-ramp operation. Bridging fees apply when tokens are on a blockchain not directly supported by the off-ramp service. ")
+    fee_amount: StrictStr = Field(description="The fee charged for bridging tokens to another chain. ")
     received_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the destination token received after bridging.")
-    received_amount: Optional[StrictStr] = Field(default=None, description="The final amount of destination tokens received after bridging.")
+    received_amount: Optional[StrictStr] = Field(default=None, description="The final amount of the token received after bridging.")
     __properties: ClassVar[List[str]] = ["fee_amount", "received_token_id", "received_amount"]
 
     model_config = ConfigDict(

@@ -34,50 +34,8 @@ class TestPaymentPayoutItem(unittest.TestCase):
         model = PaymentPayoutItem()
         if include_optional:
             return PaymentPayoutItem(
-                payout_item_id = '123e457-e89b-12d3-a456-426614174004',
-                payout_id = '123e457-e89b-12d3-a456-426614174004',
                 token_id = 'ETH_USDT',
-                chain_id = 'ETH',
                 amount = '500.00',
-                status = 'Pending',
-                source_account = 'M1001',
-                transactions = [
-                    cobo_waas2.models.payment_transaction.PaymentTransaction(
-                        tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
-                        tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
-                        token_id = 'ETH_USDT', 
-                        from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
-                        to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
-                        amount = '0.15', 
-                        status = 'Submitted', 
-                        counterparty = cobo_waas2.models.counterparty.Counterparty(
-                            counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
-                            counterparty_type = 'Individual', 
-                            counterparty_name = 'Counterparty A', 
-                            country = 'USA', 
-                            email = 'counterparty@example.com', 
-                            contact_address = '123 Main St, Anytown, USA', 
-                            created_timestamp = 1744689600, 
-                            updated_timestamp = 1744689600, ), 
-                        destination = cobo_waas2.models.destination.Destination(
-                            destination_id = '123e4567-e89b-12d3-a456-426614174003', 
-                            destination_type = 'Individual', 
-                            destination_name = 'Destination A', 
-                            country = 'USA', 
-                            email = 'destination@example.com', 
-                            contact_address = '123 Main St, Anytown, USA', 
-                            merchant_id = 'M1001', 
-                            created_timestamp = 1744689600, 
-                            updated_timestamp = 1744689600, ), 
-                        created_timestamp = 1610445878970, 
-                        updated_timestamp = 1610445878970, )
-                    ],
-                created_timestamp = 1744689600,
-                updated_timestamp = 1744689600,
-                crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f',
-                crypto_address = '0xabc123456789def0000000000000000000000000',
-                commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
-                    fee_amount = '', ),
                 bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                     fee_amount = '', 
                     received_token_id = '', 
@@ -85,11 +43,8 @@ class TestPaymentPayoutItem(unittest.TestCase):
             )
         else:
             return PaymentPayoutItem(
-                payout_item_id = '123e457-e89b-12d3-a456-426614174004',
-                payout_id = '123e457-e89b-12d3-a456-426614174004',
+                token_id = 'ETH_USDT',
                 amount = '500.00',
-                status = 'Pending',
-                source_account = 'M1001',
         )
         """
 

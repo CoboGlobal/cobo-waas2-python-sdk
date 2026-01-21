@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.payment_payout_param import PaymentPayoutParam
+from cobo_waas2.models.payment_payout_recipient_info import PaymentPayoutRecipientInfo
 from cobo_waas2.models.payout_channel import PayoutChannel
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,12 +29,12 @@ class CreatePayoutRequest(BaseModel):
     CreatePayoutRequest
     """  # noqa: E501
     request_id: StrictStr = Field(description="The request ID that is used to track a payout request. The request ID is provided by you and must be unique.")
+    source_account: StrictStr = Field(description="The source account from which the payout will be made. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
     payout_channel: PayoutChannel
     payout_params: List[PaymentPayoutParam]
-    bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account where the funds will be deposited. Specify this field when `payout_channel` is set to `OffRamp`.  You can call [List all bank accounts](https://www.cobo.com/payments/en/api-references/payment/list-all-bank-accounts) to retrieve the IDs of registered bank accounts. To add a new bank account, refer to [Destinations](https://www.cobo.com/payments/en/guides/destinations). ")
-    currency: Optional[StrictStr] = Field(default=None, description="The fiat currency you will receive from the payout. - Required when `payout_channel` is set to `OffRamp`. - Currently, only `USD` is supported. ")
-    remark: Optional[StrictStr] = Field(default=None, description="The remark for the payout.")
-    __properties: ClassVar[List[str]] = ["request_id", "payout_channel", "payout_params", "bank_account_id", "currency", "remark"]
+    recipient_info: PaymentPayoutRecipientInfo
+    remark: Optional[StrictStr] = Field(default=None, description="An optional note or comment about the payout for your internal reference.")
+    __properties: ClassVar[List[str]] = ["request_id", "source_account", "payout_channel", "payout_params", "recipient_info", "remark"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +82,9 @@ class CreatePayoutRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['payout_params'] = _items
+        # override the default output from pydantic by calling `to_dict()` of recipient_info
+        if self.recipient_info:
+            _dict['recipient_info'] = self.recipient_info.to_dict()
         return _dict
 
     @classmethod
@@ -94,10 +98,10 @@ class CreatePayoutRequest(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
+            "source_account": obj.get("source_account"),
             "payout_channel": obj.get("payout_channel"),
             "payout_params": [PaymentPayoutParam.from_dict(_item) for _item in obj["payout_params"]] if obj.get("payout_params") is not None else None,
-            "bank_account_id": obj.get("bank_account_id"),
-            "currency": obj.get("currency"),
+            "recipient_info": PaymentPayoutRecipientInfo.from_dict(obj["recipient_info"]) if obj.get("recipient_info") is not None else None,
             "remark": obj.get("remark")
         })
         return _obj

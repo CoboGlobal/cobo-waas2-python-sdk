@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_swap_activities**
-> ListSwapActivities200Response list_swap_activities(type=type, status=status, min_updated_timestamp=min_updated_timestamp, max_updated_timestamp=max_updated_timestamp, initiator=initiator, limit=limit, before=before, after=after, sort_by=sort_by, direction=direction)
+> ListSwapActivities200Response list_swap_activities(request_id=request_id, type=type, status=status, min_updated_timestamp=min_updated_timestamp, max_updated_timestamp=max_updated_timestamp, initiator=initiator, limit=limit, before=before, after=after, sort_by=sort_by, direction=direction)
 
 List swap activities
 
@@ -338,6 +338,7 @@ configuration = cobo_waas2.Configuration(
 with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.SwapsApi(api_client)
+    request_id = 'web_send_by_user_327_1610444045047'
     type = cobo_waas2.SwapType()
     status = cobo_waas2.SwapActivityStatus()
     min_updated_timestamp = 1635744000000
@@ -351,7 +352,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
     try:
         # List swap activities
-        api_response = api_instance.list_swap_activities(type=type, status=status, min_updated_timestamp=min_updated_timestamp, max_updated_timestamp=max_updated_timestamp, initiator=initiator, limit=limit, before=before, after=after, sort_by=sort_by, direction=direction)
+        api_response = api_instance.list_swap_activities(request_id=request_id, type=type, status=status, min_updated_timestamp=min_updated_timestamp, max_updated_timestamp=max_updated_timestamp, initiator=initiator, limit=limit, before=before, after=after, sort_by=sort_by, direction=direction)
         print("The response of SwapsApi->list_swap_activities:\n")
         pprint(api_response)
     except Exception as e:
@@ -365,6 +366,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **request_id** | **str**| The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization. | [optional] 
  **type** | [**SwapType**](.md)|  | [optional] 
  **status** | [**SwapActivityStatus**](.md)|  | [optional] 
  **min_updated_timestamp** | **int**| The start time of the query. All swap activities updated after the specified time will be retrieved. The time is in Unix timestamp format, measured in milliseconds. | [optional] 

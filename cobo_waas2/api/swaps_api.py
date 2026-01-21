@@ -792,6 +792,7 @@ class SwapsApi:
     @validate_call
     def list_swap_activities(
         self,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")] = None,
         type: Optional[SwapType] = None,
         status: Optional[SwapActivityStatus] = None,
         min_updated_timestamp: Annotated[Optional[StrictInt], Field(description="The start time of the query. All swap activities updated after the specified time will be retrieved. The time is in Unix timestamp format, measured in milliseconds.")] = None,
@@ -815,6 +816,8 @@ class SwapsApi:
 
         This operation retrieves a list of swap activities. You can filter the results by swap type, status, initiator, and time range. 
 
+        :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
+        :type request_id: str
         :param type:
         :type type: SwapType
         :param status:
@@ -844,6 +847,7 @@ class SwapsApi:
         """  # noqa: E501
 
         _param = self._list_swap_activities_serialize(
+            request_id=request_id,
             type=type,
             status=status,
             min_updated_timestamp=min_updated_timestamp,
@@ -874,6 +878,7 @@ class SwapsApi:
     @validate_call
     def list_swap_activities_with_http_info(
         self,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")] = None,
         type: Optional[SwapType] = None,
         status: Optional[SwapActivityStatus] = None,
         min_updated_timestamp: Annotated[Optional[StrictInt], Field(description="The start time of the query. All swap activities updated after the specified time will be retrieved. The time is in Unix timestamp format, measured in milliseconds.")] = None,
@@ -897,6 +902,8 @@ class SwapsApi:
 
         This operation retrieves a list of swap activities. You can filter the results by swap type, status, initiator, and time range. 
 
+        :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
+        :type request_id: str
         :param type:
         :type type: SwapType
         :param status:
@@ -926,6 +933,7 @@ class SwapsApi:
         """  # noqa: E501
 
         _param = self._list_swap_activities_serialize(
+            request_id=request_id,
             type=type,
             status=status,
             min_updated_timestamp=min_updated_timestamp,
@@ -956,6 +964,7 @@ class SwapsApi:
     @validate_call
     def list_swap_activities_without_preload_content(
         self,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")] = None,
         type: Optional[SwapType] = None,
         status: Optional[SwapActivityStatus] = None,
         min_updated_timestamp: Annotated[Optional[StrictInt], Field(description="The start time of the query. All swap activities updated after the specified time will be retrieved. The time is in Unix timestamp format, measured in milliseconds.")] = None,
@@ -979,6 +988,8 @@ class SwapsApi:
 
         This operation retrieves a list of swap activities. You can filter the results by swap type, status, initiator, and time range. 
 
+        :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
+        :type request_id: str
         :param type:
         :type type: SwapType
         :param status:
@@ -1008,6 +1019,7 @@ class SwapsApi:
         """  # noqa: E501
 
         _param = self._list_swap_activities_serialize(
+            request_id=request_id,
             type=type,
             status=status,
             min_updated_timestamp=min_updated_timestamp,
@@ -1033,6 +1045,7 @@ class SwapsApi:
 
     def _list_swap_activities_serialize(
         self,
+        request_id,
         type,
         status,
         min_updated_timestamp,
@@ -1052,6 +1065,10 @@ class SwapsApi:
 
         # process the path parameters
         # process the query parameters
+        if request_id is not None:
+            
+            _query_params.append(('request_id', request_id))
+            
         if type is not None:
             
             _query_params.append(('type', type.value))

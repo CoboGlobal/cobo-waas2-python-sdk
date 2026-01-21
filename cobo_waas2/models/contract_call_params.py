@@ -34,7 +34,7 @@ class ContractCallParams(BaseModel):
     chain_id: StrictStr = Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")
     source: ContractCallSource
     destination: ContractCallDestination
-    description: Optional[StrictStr] = Field(default=None, description="The description of the contract call transaction.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the contract call transaction. Maximum length is 2048 characters for MPC Wallets and Custodial Wallets (Web3 Wallets), and 1000 characters for Custodial Wallets (Asset Wallets).")
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     fee: Optional[TransactionRequestFee] = None
     transaction_process_type: Optional[TransactionProcessType] = None

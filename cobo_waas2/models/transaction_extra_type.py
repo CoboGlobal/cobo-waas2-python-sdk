@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class TransactionExtraType(str, Enum):
     """
-    The transaction extra information type. Possible values include:   - `BabylonBusinessInfo`: The extra information related to Babylon business logic.   - `BabylonTxParameters`: The extra information for Babylon transaction parameters.   - `CoreStakeInfo`: The extra information related to core staking operations. 
+    The transaction extra information type. Possible values include:   - `BabylonBusinessInfo`: The extra information of Babylon business.   - `BabylonTxParameters`: The extra information of Babylon transaction parameters.   - `CoreStakeInfo`: The extra information of core stake.   - `WalletConnectInfo`: The extra information of transaction initiated by walletconnect. 
     """
 
     """
@@ -27,6 +27,7 @@ class TransactionExtraType(str, Enum):
     BABYLONBUSINESSINFO = 'BabylonBusinessInfo'
     BABYLONTXPARAMETERS = 'BabylonTxParameters'
     CORESTAKEINFO = 'CoreStakeInfo'
+    WALLETCONNECTINFO = 'WalletConnectInfo'
 
     UNKNOWN = None
 

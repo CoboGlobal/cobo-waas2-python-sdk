@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.payment_payout_item_status import PaymentPayoutItemStatus
+from cobo_waas2.models.payment_bulk_send_item_status import PaymentBulkSendItemStatus
 
 
-class TestPaymentPayoutItemStatus(unittest.TestCase):
-    """PaymentPayoutItemStatus unit test stubs"""
+class TestPaymentBulkSendItemStatus(unittest.TestCase):
+    """PaymentBulkSendItemStatus unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,9 +24,9 @@ class TestPaymentPayoutItemStatus(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testPaymentPayoutItemStatus(self):
-        """Test PaymentPayoutItemStatus"""
-        # inst = PaymentPayoutItemStatus()
+    def testPaymentBulkSendItemStatus(self):
+        """Test PaymentBulkSendItemStatus"""
+        # inst = PaymentBulkSendItemStatus()
 
 
 if __name__ == '__main__':
