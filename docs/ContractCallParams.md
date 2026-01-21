@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **chain_id** | **str** | The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | 
 **source** | [**ContractCallSource**](ContractCallSource.md) |  | 
 **destination** | [**ContractCallDestination**](ContractCallDestination.md) |  | 
-**description** | **str** | The description of the contract call transaction. | [optional] 
+**description** | **str** | The description of the contract call transaction. Maximum length is 2048 characters for MPC Wallets and Custodial Wallets (Web3 Wallets), and 1000 characters for Custodial Wallets (Asset Wallets). | [optional] 
 **category_names** | **List[str]** | The custom category for you to identify your transactions. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
 **transaction_process_type** | [**TransactionProcessType**](TransactionProcessType.md) |  | [optional] 

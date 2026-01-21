@@ -15,21 +15,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.pagination import Pagination
-from cobo_waas2.models.payment_payout_item import PaymentPayoutItem
+from cobo_waas2.models.transaction_extra_type import TransactionExtraType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListPayoutItems200Response(BaseModel):
+class TransactionWalletConnectInfo(BaseModel):
     """
-    ListPayoutItems200Response
+    The extra information of transaction initiated by walletconnect.
     """  # noqa: E501
-    data: Optional[List[PaymentPayoutItem]] = None
-    pagination: Optional[Pagination] = None
-    __properties: ClassVar[List[str]] = ["data", "pagination"]
+    extra_type: TransactionExtraType
+    dapp_name: Optional[StrictStr] = Field(default=None, description="The dapp name that initiated this transaction.")
+    dapp_domain: Optional[StrictStr] = Field(default=None, description="The dapp domain that initiated this transaction")
+    session_id: Optional[StrictStr] = Field(default=None, description="The session id that initiated this transaction")
+    __properties: ClassVar[List[str]] = ["extra_type", "dapp_name", "dapp_domain", "session_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +50,7 @@ class ListPayoutItems200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListPayoutItems200Response from a JSON string"""
+        """Create an instance of TransactionWalletConnectInfo from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,21 +71,11 @@ class ListPayoutItems200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
-        # override the default output from pydantic by calling `to_dict()` of pagination
-        if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListPayoutItems200Response from a dict"""
+        """Create an instance of TransactionWalletConnectInfo from a dict"""
         if obj is None:
             return None
 
@@ -92,8 +83,10 @@ class ListPayoutItems200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data": [PaymentPayoutItem.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
-            "pagination": Pagination.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
+            "extra_type": obj.get("extra_type"),
+            "dapp_name": obj.get("dapp_name"),
+            "dapp_domain": obj.get("dapp_domain"),
+            "session_id": obj.get("session_id")
         })
         return _obj
 

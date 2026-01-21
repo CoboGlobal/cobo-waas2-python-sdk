@@ -55,6 +55,7 @@ class TestCreatePaymentOrderRequest(unittest.TestCase):
                 merchant_id = '1001',
                 psp_order_code = 'P20240201001',
                 fee_amount = '2.00',
+                payable_currency = 'ETH_USDT',
         )
         """
 

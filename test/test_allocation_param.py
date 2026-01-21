@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.allocation_record import AllocationRecord
+from cobo_waas2.models.allocation_param import AllocationParam
 
 
-class TestAllocationRecord(unittest.TestCase):
-    """AllocationRecord unit test stubs"""
+class TestAllocationParam(unittest.TestCase):
+    """AllocationParam unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,18 +24,16 @@ class TestAllocationRecord(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> AllocationRecord:
-        """Test AllocationRecord
+    def make_instance(self, include_optional) -> AllocationParam:
+        """Test AllocationParam
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `AllocationRecord`
+        # uncomment below to create an instance of `AllocationParam`
         """
-        model = AllocationRecord()
+        model = AllocationParam()
         if include_optional:
-            return AllocationRecord(
-                allocation_record_id = '123e457-e89b-12d3-a456-426614174004',
-                batch_allocation_id = '123e457-e89b-12d3-a456-426614174004',
+            return AllocationParam(
                 token_id = 'ETH_USDT',
                 amount = '500.00',
                 source_account = '',
@@ -43,17 +41,17 @@ class TestAllocationRecord(unittest.TestCase):
                 description = ''
             )
         else:
-            return AllocationRecord(
-                allocation_record_id = '123e457-e89b-12d3-a456-426614174004',
-                batch_allocation_id = '123e457-e89b-12d3-a456-426614174004',
+            return AllocationParam(
                 token_id = 'ETH_USDT',
                 amount = '500.00',
+                source_account = '',
+                destination_account = '',
                 description = '',
         )
         """
 
-    def testAllocationRecord(self):
-        """Test AllocationRecord"""
+    def testAllocationParam(self):
+        """Test AllocationParam"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

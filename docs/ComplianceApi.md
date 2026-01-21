@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 Create KYA address screening requests
 
-This operation submits up to 50 address screening requests in one request to assess address compliance and risk levels.  <Note>This endpoint supports cross-chain address screening with independent idempotency for each address, enabling flexible error handling and partial retries.</Note> 
+This operation submits up to 50 address screening requests in one call to assess address compliance and risk levels.  <Note>This endpoint supports cross-chain address screening with independent idempotency for each address, enabling flexible error handling and partial retries.</Note> 
 
 ### Example
 

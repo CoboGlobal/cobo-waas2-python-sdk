@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fee_amount** | **str** | The fee charged for bridging tokens to another blockchain during an off-ramp operation. Bridging fees apply when tokens are on a blockchain not directly supported by the off-ramp service.  | 
+**fee_amount** | **str** | The fee charged for bridging tokens to another chain.  | 
 **received_token_id** | **str** | The ID of the destination token received after bridging. | [optional] 
-**received_amount** | **str** | The final amount of destination tokens received after bridging. | [optional] 
+**received_amount** | **str** | The final amount of the token received after bridging. | [optional] 
 
 ## Example
 

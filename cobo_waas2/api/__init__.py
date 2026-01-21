@@ -8,6 +8,7 @@ from cobo_waas2.api.compliance_api import ComplianceApi
 from cobo_waas2.api.developers_api import DevelopersApi
 from cobo_waas2.api.developers_webhooks_api import DevelopersWebhooksApi
 from cobo_waas2.api.fee_station_api import FeeStationApi
+from cobo_waas2.api.graph_ql_api import GraphQLApi
 from cobo_waas2.api.o_auth_api import OAuthApi
 from cobo_waas2.api.organizations_api import OrganizationsApi
 from cobo_waas2.api.payment_api import PaymentApi

@@ -35,31 +35,35 @@ class TestCreatePayoutRequest(unittest.TestCase):
         if include_optional:
             return CreatePayoutRequest(
                 request_id = '123e457-e89b-12d3-a456-426614174004',
+                source_account = '',
                 payout_channel = 'Crypto',
                 payout_params = [
                     cobo_waas2.models.payment_payout_param.PaymentPayoutParam(
-                        source_account = 'M1001', 
                         token_id = 'ETH_USDT', 
-                        amount = '500.00', 
-                        crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
-                        crypto_address = '0xabc123456789def0000000000000000000000000', )
+                        amount = '500.00', )
                     ],
-                bank_account_id = '0123e457-e89b-12d3-a456-426614174004',
-                currency = 'USD',
+                recipient_info = cobo_waas2.models.payment_payout_recipient_info.PaymentPayoutRecipientInfo(
+                    address = '0x9876543210abcdef1234567890abcdef12345678', 
+                    token_id = 'TRON_USDT', 
+                    currency = 'USD', 
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
                 remark = 'Create payouts for customer 123'
             )
         else:
             return CreatePayoutRequest(
                 request_id = '123e457-e89b-12d3-a456-426614174004',
+                source_account = '',
                 payout_channel = 'Crypto',
                 payout_params = [
                     cobo_waas2.models.payment_payout_param.PaymentPayoutParam(
-                        source_account = 'M1001', 
                         token_id = 'ETH_USDT', 
-                        amount = '500.00', 
-                        crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd', 
-                        crypto_address = '0xabc123456789def0000000000000000000000000', )
+                        amount = '500.00', )
                     ],
+                recipient_info = cobo_waas2.models.payment_payout_recipient_info.PaymentPayoutRecipientInfo(
+                    address = '0x9876543210abcdef1234567890abcdef12345678', 
+                    token_id = 'TRON_USDT', 
+                    currency = 'USD', 
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
         )
         """
 

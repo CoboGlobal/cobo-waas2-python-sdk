@@ -60,7 +60,10 @@ class TestOrderLinkBusinessInfo(unittest.TestCase):
             return OrderLinkBusinessInfo(
                 merchant_id = '1001',
                 psp_order_code = 'P20240201001',
+                pricing_currency = 'USD',
+                pricing_amount = '100.00',
                 fee_amount = '2.00',
+                payable_currencies = ["ETH_USDT","SOL_USDC","TRON_USDT"],
         )
         """
 

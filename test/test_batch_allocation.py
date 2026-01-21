@@ -36,13 +36,13 @@ class TestBatchAllocation(unittest.TestCase):
             return BatchAllocation(
                 batch_allocation_id = '123e457-e89b-12d3-a456-426614174004',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
-                allocation_requests = [
-                    cobo_waas2.models.allocation_request.AllocationRequest(
+                allocation_params = [
+                    cobo_waas2.models.allocation_param.AllocationParam(
                         token_id = 'ETH_USDT', 
                         amount = '500.00', 
-                        source_account = 'M1001', 
-                        destination_account = 'M1001', 
-                        description = 'Allocation for merchant M1001', )
+                        source_account = '', 
+                        destination_account = '', 
+                        description = '', )
                     ],
                 initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
                 created_timestamp = 1744689600,

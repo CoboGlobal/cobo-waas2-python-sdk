@@ -25,9 +25,9 @@ from typing_extensions import Self
 
 class CreateKyaScreeningsBody(BaseModel):
     """
-    Request body for batch creating address screening requests.
+    Information about address screening requests.
     """  # noqa: E501
-    screenings: Annotated[List[KyaScreeningRequest], Field(min_length=1, max_length=50)] = Field(description="List of address screening requests. Maximum 50 addresses per request.")
+    screenings: Annotated[List[KyaScreeningRequest], Field(min_length=1, max_length=50)] = Field(description="List of address screening requests. Maximum 50 addresses per call.")
     __properties: ClassVar[List[str]] = ["screenings"]
 
     model_config = ConfigDict(

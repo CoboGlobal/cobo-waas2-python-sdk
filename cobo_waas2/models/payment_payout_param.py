@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,12 +25,9 @@ class PaymentPayoutParam(BaseModel):
     """
     PaymentPayoutParam
     """  # noqa: E501
-    source_account: StrictStr = Field(description="The source account from which the payout will be made. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
     token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to pay out. Specify this field when `payout_channel` is set to `Crypto`. Supported values: - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    amount: StrictStr = Field(description="The amount of the cryptocurrency to pay out. ")
-    crypto_address_id: Optional[StrictStr] = Field(default=None, description="The ID of the crypto address used for crypto payouts. Specify this field when `payout_channel` is set to `Crypto`.  Call [List crypto addresses](https://www.cobo.com/payments/en/api-references/payment/list-crypto-addresses) to retrieve registered crypto addresses. ")
-    crypto_address: Optional[StrictStr] = Field(default=None, description="The actual blockchain address to which funds will be transferred. Specify this field when `payout_channel` is set to `Crypto`. <Note>   If you have enabled the *Use Destinations as Payout Whitelist* toggle in *Destinations*, you can only transfer to registered destinations. For more details, see [Destinations](https://www.cobo.com/payments/en/guides/destinations). </Note> ")
-    __properties: ClassVar[List[str]] = ["source_account", "token_id", "amount", "crypto_address_id", "crypto_address"]
+    amount: StrictStr = Field(description="The payout cryptocurrency amount. ")
+    __properties: ClassVar[List[str]] = ["token_id", "amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,11 +80,8 @@ class PaymentPayoutParam(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "source_account": obj.get("source_account"),
             "token_id": obj.get("token_id"),
-            "amount": obj.get("amount"),
-            "crypto_address_id": obj.get("crypto_address_id"),
-            "crypto_address": obj.get("crypto_address")
+            "amount": obj.get("amount")
         })
         return _obj
 

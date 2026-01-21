@@ -39,7 +39,8 @@ class TestPaymentEstimateFeeRequest(unittest.TestCase):
                     cobo_waas2.models.payment_estimate_fee.PaymentEstimateFee(
                         token_id = '', 
                         amount = '500.00', )
-                    ]
+                    ],
+                recipient_token_id = ''
             )
         else:
             return PaymentEstimateFeeRequest(

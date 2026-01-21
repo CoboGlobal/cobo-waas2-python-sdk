@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.list_allocations200_response import ListAllocations200Response
+from cobo_waas2.models.list_bulk_send_items200_response import ListBulkSendItems200Response
 
 
-class TestListAllocations200Response(unittest.TestCase):
-    """ListAllocations200Response unit test stubs"""
+class TestListBulkSendItems200Response(unittest.TestCase):
+    """ListBulkSendItems200Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,25 +24,25 @@ class TestListAllocations200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ListAllocations200Response:
-        """Test ListAllocations200Response
+    def make_instance(self, include_optional) -> ListBulkSendItems200Response:
+        """Test ListBulkSendItems200Response
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ListAllocations200Response`
+        # uncomment below to create an instance of `ListBulkSendItems200Response`
         """
-        model = ListAllocations200Response()
+        model = ListBulkSendItems200Response()
         if include_optional:
-            return ListAllocations200Response(
+            return ListBulkSendItems200Response(
                 data = [
-                    cobo_waas2.models.allocation_record.AllocationRecord(
-                        allocation_record_id = '123e457-e89b-12d3-a456-426614174004', 
-                        batch_allocation_id = '123e457-e89b-12d3-a456-426614174004', 
+                    cobo_waas2.models.payment_bulk_send_item.PaymentBulkSendItem(
+                        bulk_send_item_id = '123e4567-e89b-12d3-a456-426614174003', 
                         token_id = 'ETH_USDT', 
+                        receiving_address = '0xabc123456789def0000000000000000000000000', 
                         amount = '500.00', 
-                        source_account = '', 
-                        destination_account = '', 
-                        description = '', )
+                        description = 'Invoice #INV-2024-001', 
+                        status = 'Pending', 
+                        validation_status = 'Pending', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 
@@ -50,12 +50,12 @@ class TestListAllocations200Response(unittest.TestCase):
                     total_count = 10000, )
             )
         else:
-            return ListAllocations200Response(
+            return ListBulkSendItems200Response(
         )
         """
 
-    def testListAllocations200Response(self):
-        """Test ListAllocations200Response"""
+    def testListBulkSendItems200Response(self):
+        """Test ListBulkSendItems200Response"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

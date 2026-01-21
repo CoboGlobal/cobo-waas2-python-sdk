@@ -85,7 +85,7 @@ class TestWebhookEventData(unittest.TestCase):
                 category = [
                     'Payment'
                     ],
-                description = 'withdrawal to exchange trading account',
+                description = 'Monthly vendor payments - January 2024',
                 is_loop = False,
                 cobo_category = [
                     'AutoFueling'
@@ -314,58 +314,25 @@ class TestWebhookEventData(unittest.TestCase):
                 previous_address = '0xAbC123...DEF',
                 updated_address = '0x789xyz...456',
                 payout_id = '123e457-e89b-12d3-a456-426614174004',
-                payout_item_details = [
-                    cobo_waas2.models.payment_payout_item_detail.PaymentPayoutItemDetail(
-                        payout_item_id = '123e457-e89b-12d3-a456-426614174004', 
-                        payout_id = '123e457-e89b-12d3-a456-426614174004', 
+                source_account = 'M1001',
+                payout_items = [
+                    cobo_waas2.models.payment_payout_item.PaymentPayoutItem(
                         token_id = 'ETH_USDT', 
-                        chain_id = 'ETH', 
-                        source_account = 'M1001', 
                         amount = '500.00', 
-                        status = 'Pending', 
-                        transactions = [
-                            cobo_waas2.models.payment_transaction.PaymentTransaction(
-                                tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
-                                tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
-                                token_id = 'ETH_USDT', 
-                                from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
-                                to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
-                                amount = '0.15', 
-                                status = 'Submitted', 
-                                counterparty = cobo_waas2.models.counterparty.Counterparty(
-                                    counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
-                                    counterparty_type = 'Individual', 
-                                    counterparty_name = 'Counterparty A', 
-                                    country = 'USA', 
-                                    email = 'counterparty@example.com', 
-                                    contact_address = '123 Main St, Anytown, USA', 
-                                    created_timestamp = 1744689600, 
-                                    updated_timestamp = 1744689600, ), 
-                                destination = cobo_waas2.models.destination.Destination(
-                                    destination_id = '123e4567-e89b-12d3-a456-426614174003', 
-                                    destination_type = 'Individual', 
-                                    destination_name = 'Destination A', 
-                                    country = 'USA', 
-                                    email = 'destination@example.com', 
-                                    contact_address = '123 Main St, Anytown, USA', 
-                                    merchant_id = 'M1001', 
-                                    created_timestamp = 1744689600, 
-                                    updated_timestamp = 1744689600, ), 
-                                created_timestamp = 1610445878970, 
-                                updated_timestamp = 1610445878970, )
-                            ], 
-                        created_timestamp = 1744689600, 
-                        updated_timestamp = 1744689600, 
-                        crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
-                        crypto_address = '0xabc123456789def0000000000000000000000000', 
-                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
-                            fee_amount = '', ), 
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
                             received_amount = '', ), )
                     ],
+                recipient_info = cobo_waas2.models.payment_payout_recipient_info.PaymentPayoutRecipientInfo(
+                    address = '0x9876543210abcdef1234567890abcdef12345678', 
+                    token_id = 'TRON_USDT', 
+                    currency = 'USD', 
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
                 actual_payout_amount = '500.00',
+                remark = 'Payout for customer 123',
+                bulk_send_id = '123e4567-e89b-12d3-a456-426614174003',
+                execution_mode = 'Strict',
                 disposition_type = 'Refund',
                 disposition_status = 'Submitted',
                 destination_address = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb7',
@@ -504,12 +471,16 @@ class TestWebhookEventData(unittest.TestCase):
                             received_amount = '', ), )
                     ],
                 acquiring_type = 'Order',
+                payout_channel = 'Crypto',
                 payer_id = 'P20250619T0310056d7aa',
                 custom_payer_id = 'user_abc_10001',
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
                 updated_address = '0x789xyz...456',
                 payout_id = '123e457-e89b-12d3-a456-426614174004',
+                source_account = 'M1001',
+                bulk_send_id = '123e4567-e89b-12d3-a456-426614174003',
+                execution_mode = 'Strict',
                 disposition_type = 'Refund',
                 disposition_status = 'Submitted',
                 transaction_type = 'Deposit',

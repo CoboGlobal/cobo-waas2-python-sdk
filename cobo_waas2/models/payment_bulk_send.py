@@ -15,21 +15,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.allocation_record import AllocationRecord
-from cobo_waas2.models.pagination import Pagination
+from cobo_waas2.models.payment_bulk_send_execution_mode import PaymentBulkSendExecutionMode
+from cobo_waas2.models.payment_bulk_send_status import PaymentBulkSendStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListAllocations200Response(BaseModel):
+class PaymentBulkSend(BaseModel):
     """
-    ListAllocations200Response
+    PaymentBulkSend
     """  # noqa: E501
-    data: Optional[List[AllocationRecord]] = None
-    pagination: Optional[Pagination] = None
-    __properties: ClassVar[List[str]] = ["data", "pagination"]
+    bulk_send_id: StrictStr = Field(description="The bulk send ID.")
+    source_account: StrictStr = Field(description="The source account from which the bulk send will be made. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
+    description: Optional[StrictStr] = Field(default=None, description="The description for the entire bulk send batch.")
+    execution_mode: PaymentBulkSendExecutionMode
+    status: PaymentBulkSendStatus
+    created_timestamp: StrictInt = Field(description="The created time of the bulk send, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: StrictInt = Field(description="The updated time of the bulk send, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["bulk_send_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +54,7 @@ class ListAllocations200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListAllocations200Response from a JSON string"""
+        """Create an instance of PaymentBulkSend from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,21 +75,11 @@ class ListAllocations200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
-        # override the default output from pydantic by calling `to_dict()` of pagination
-        if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListAllocations200Response from a dict"""
+        """Create an instance of PaymentBulkSend from a dict"""
         if obj is None:
             return None
 
@@ -92,8 +87,13 @@ class ListAllocations200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data": [AllocationRecord.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
-            "pagination": Pagination.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
+            "bulk_send_id": obj.get("bulk_send_id"),
+            "source_account": obj.get("source_account"),
+            "description": obj.get("description"),
+            "execution_mode": obj.get("execution_mode"),
+            "status": obj.get("status"),
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj
 

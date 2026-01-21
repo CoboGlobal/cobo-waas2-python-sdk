@@ -25,6 +25,7 @@ from cobo_waas2.models.counterparty import Counterparty
 from cobo_waas2.models.counterparty_detail import CounterpartyDetail
 from cobo_waas2.models.counterparty_type import CounterpartyType
 from cobo_waas2.models.create_batch_allocation_request import CreateBatchAllocationRequest
+from cobo_waas2.models.create_bulk_send_request import CreateBulkSendRequest
 from cobo_waas2.models.create_counterparty_entry201_response import CreateCounterpartyEntry201Response
 from cobo_waas2.models.create_counterparty_entry_request import CreateCounterpartyEntryRequest
 from cobo_waas2.models.create_counterparty_request import CreateCounterpartyRequest
@@ -43,6 +44,8 @@ from cobo_waas2.models.create_refund_link_request import CreateRefundLinkRequest
 from cobo_waas2.models.create_refund_request import CreateRefundRequest
 from cobo_waas2.models.create_report_request import CreateReportRequest
 from cobo_waas2.models.create_settlement_request_request import CreateSettlementRequestRequest
+from cobo_waas2.models.create_top_up_addresses import CreateTopUpAddresses
+from cobo_waas2.models.create_top_up_addresses201_response import CreateTopUpAddresses201Response
 from cobo_waas2.models.crypto_address import CryptoAddress
 from cobo_waas2.models.delete_counterparty200_response import DeleteCounterparty200Response
 from cobo_waas2.models.delete_counterparty_by_id200_response import DeleteCounterpartyById200Response
@@ -71,8 +74,9 @@ from cobo_waas2.models.get_refunds200_response import GetRefunds200Response
 from cobo_waas2.models.get_reports200_response import GetReports200Response
 from cobo_waas2.models.get_settlement_info_by_ids200_response import GetSettlementInfoByIds200Response
 from cobo_waas2.models.link import Link
-from cobo_waas2.models.list_allocations200_response import ListAllocations200Response
+from cobo_waas2.models.list_allocation_items200_response import ListAllocationItems200Response
 from cobo_waas2.models.list_batch_allocations200_response import ListBatchAllocations200Response
+from cobo_waas2.models.list_bulk_send_items200_response import ListBulkSendItems200Response
 from cobo_waas2.models.list_counterparties200_response import ListCounterparties200Response
 from cobo_waas2.models.list_counterparty_entries200_response import ListCounterpartyEntries200Response
 from cobo_waas2.models.list_counterparty_wallet_address200_response import ListCounterpartyWalletAddress200Response
@@ -85,7 +89,6 @@ from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBal
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
 from cobo_waas2.models.list_payment_orders200_response import ListPaymentOrders200Response
 from cobo_waas2.models.list_payment_wallet_balances200_response import ListPaymentWalletBalances200Response
-from cobo_waas2.models.list_payout_items200_response import ListPayoutItems200Response
 from cobo_waas2.models.list_payouts200_response import ListPayouts200Response
 from cobo_waas2.models.list_settlement_details200_response import ListSettlementDetails200Response
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
@@ -94,6 +97,7 @@ from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200R
 from cobo_waas2.models.merchant import Merchant
 from cobo_waas2.models.order import Order
 from cobo_waas2.models.payment_allocation_amount import PaymentAllocationAmount
+from cobo_waas2.models.payment_bulk_send import PaymentBulkSend
 from cobo_waas2.models.payment_estimate_fee201_response import PaymentEstimateFee201Response
 from cobo_waas2.models.payment_estimate_fee_request import PaymentEstimateFeeRequest
 from cobo_waas2.models.payment_payout import PaymentPayout
@@ -657,6 +661,175 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/batch_allocations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_bulk_send(
+        self,
+        create_bulk_send_request: Annotated[Optional[CreateBulkSendRequest], Field(description="The request body to create a bulk send.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentBulkSend:
+        """Create bulk send
+
+        This operation creates a bulk send to transfer funds to multiple recipients in a single request. 
+
+        :param create_bulk_send_request: The request body to create a bulk send.
+        :type create_bulk_send_request: CreateBulkSendRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_bulk_send_serialize(
+            create_bulk_send_request=create_bulk_send_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentBulkSend",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_bulk_send_with_http_info(
+        self,
+        create_bulk_send_request: Annotated[Optional[CreateBulkSendRequest], Field(description="The request body to create a bulk send.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentBulkSend]:
+        """Create bulk send
+
+        This operation creates a bulk send to transfer funds to multiple recipients in a single request. 
+
+        :param create_bulk_send_request: The request body to create a bulk send.
+        :type create_bulk_send_request: CreateBulkSendRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_bulk_send_serialize(
+            create_bulk_send_request=create_bulk_send_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentBulkSend",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_bulk_send_without_preload_content(
+        self,
+        create_bulk_send_request: Annotated[Optional[CreateBulkSendRequest], Field(description="The request body to create a bulk send.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create bulk send
+
+        This operation creates a bulk send to transfer funds to multiple recipients in a single request. 
+
+        :param create_bulk_send_request: The request body to create a bulk send.
+        :type create_bulk_send_request: CreateBulkSendRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_bulk_send_serialize(
+            create_bulk_send_request=create_bulk_send_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentBulkSend",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_bulk_send_serialize(
+        self,
+        create_bulk_send_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_bulk_send_request is not None:
+            _body_params = create_bulk_send_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/bulk_sends',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2708,7 +2881,7 @@ class PaymentApi:
     ) -> PaymentPayout:
         """Create payout
 
-        This operation initiates a payout, distributing funds either to cryptocurrency addresses or to bank accounts as fiat currency. 
+        This operation creates a payout to withdraw available balances. 
 
         :param create_payout_request: The request body to create a payout.
         :type create_payout_request: CreatePayoutRequest
@@ -2754,7 +2927,7 @@ class PaymentApi:
     ) -> ApiResponse[PaymentPayout]:
         """Create payout
 
-        This operation initiates a payout, distributing funds either to cryptocurrency addresses or to bank accounts as fiat currency. 
+        This operation creates a payout to withdraw available balances. 
 
         :param create_payout_request: The request body to create a payout.
         :type create_payout_request: CreatePayoutRequest
@@ -2800,7 +2973,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create payout
 
-        This operation initiates a payout, distributing funds either to cryptocurrency addresses or to bank accounts as fiat currency. 
+        This operation creates a payout to withdraw available balances. 
 
         :param create_payout_request: The request body to create a payout.
         :type create_payout_request: CreatePayoutRequest
@@ -3384,7 +3557,7 @@ class PaymentApi:
     ) -> Settlement:
         """Create settlement request
 
-        This operation creates a settlement request to withdraw available balances. 
+        <Note>This operation has been deprecated. Please use [Create payout](https://www.cobo.com/payments/en/api-references/payment/create-payout) instead.</Note>  You can include multiple merchants and cryptocurrencies in a single settlement request. 
 
         :param create_settlement_request_request: The request body to create a settlement request.
         :type create_settlement_request_request: CreateSettlementRequestRequest
@@ -3430,7 +3603,7 @@ class PaymentApi:
     ) -> ApiResponse[Settlement]:
         """Create settlement request
 
-        This operation creates a settlement request to withdraw available balances. 
+        <Note>This operation has been deprecated. Please use [Create payout](https://www.cobo.com/payments/en/api-references/payment/create-payout) instead.</Note>  You can include multiple merchants and cryptocurrencies in a single settlement request. 
 
         :param create_settlement_request_request: The request body to create a settlement request.
         :type create_settlement_request_request: CreateSettlementRequestRequest
@@ -3476,7 +3649,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create settlement request
 
-        This operation creates a settlement request to withdraw available balances. 
+        <Note>This operation has been deprecated. Please use [Create payout](https://www.cobo.com/payments/en/api-references/payment/create-payout) instead.</Note>  You can include multiple merchants and cryptocurrencies in a single settlement request. 
 
         :param create_settlement_request_request: The request body to create a settlement request.
         :type create_settlement_request_request: CreateSettlementRequestRequest
@@ -3530,6 +3703,175 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/settlement_requests',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_top_up_addresses(
+        self,
+        create_top_up_addresses: Annotated[Optional[CreateTopUpAddresses], Field(description="The request body of the create top-up addresses operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> CreateTopUpAddresses201Response:
+        """Batch create top-up addresses
+
+        This operation creates top-up addresses for multiple payers under a specific merchant and token in a single request.  <Note>This operation supports batch processing of up to 50 payers per request.</Note> 
+
+        :param create_top_up_addresses: The request body of the create top-up addresses operation.
+        :type create_top_up_addresses: CreateTopUpAddresses
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_top_up_addresses_serialize(
+            create_top_up_addresses=create_top_up_addresses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateTopUpAddresses201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_top_up_addresses_with_http_info(
+        self,
+        create_top_up_addresses: Annotated[Optional[CreateTopUpAddresses], Field(description="The request body of the create top-up addresses operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[CreateTopUpAddresses201Response]:
+        """Batch create top-up addresses
+
+        This operation creates top-up addresses for multiple payers under a specific merchant and token in a single request.  <Note>This operation supports batch processing of up to 50 payers per request.</Note> 
+
+        :param create_top_up_addresses: The request body of the create top-up addresses operation.
+        :type create_top_up_addresses: CreateTopUpAddresses
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_top_up_addresses_serialize(
+            create_top_up_addresses=create_top_up_addresses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateTopUpAddresses201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_top_up_addresses_without_preload_content(
+        self,
+        create_top_up_addresses: Annotated[Optional[CreateTopUpAddresses], Field(description="The request body of the create top-up addresses operation.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Batch create top-up addresses
+
+        This operation creates top-up addresses for multiple payers under a specific merchant and token in a single request.  <Note>This operation supports batch processing of up to 50 payers per request.</Note> 
+
+        :param create_top_up_addresses: The request body of the create top-up addresses operation.
+        :type create_top_up_addresses: CreateTopUpAddresses
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_top_up_addresses_serialize(
+            create_top_up_addresses=create_top_up_addresses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CreateTopUpAddresses201Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_top_up_addresses_serialize(
+        self,
+        create_top_up_addresses,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_top_up_addresses is not None:
+            _body_params = create_top_up_addresses
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/topup/address',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5861,6 +6203,175 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/batch_allocations/{batch_allocation_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_bulk_send_by_id(
+        self,
+        bulk_send_id: Annotated[StrictStr, Field(description="The bulk send ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentBulkSend:
+        """Get bulk send information
+
+        This operation retrieves the information of a specific bulk send. 
+
+        :param bulk_send_id: The bulk send ID. (required)
+        :type bulk_send_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_bulk_send_by_id_serialize(
+            bulk_send_id=bulk_send_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBulkSend",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_bulk_send_by_id_with_http_info(
+        self,
+        bulk_send_id: Annotated[StrictStr, Field(description="The bulk send ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentBulkSend]:
+        """Get bulk send information
+
+        This operation retrieves the information of a specific bulk send. 
+
+        :param bulk_send_id: The bulk send ID. (required)
+        :type bulk_send_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_bulk_send_by_id_serialize(
+            bulk_send_id=bulk_send_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBulkSend",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_bulk_send_by_id_without_preload_content(
+        self,
+        bulk_send_id: Annotated[StrictStr, Field(description="The bulk send ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get bulk send information
+
+        This operation retrieves the information of a specific bulk send. 
+
+        :param bulk_send_id: The bulk send ID. (required)
+        :type bulk_send_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_bulk_send_by_id_serialize(
+            bulk_send_id=bulk_send_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBulkSend",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_bulk_send_by_id_serialize(
+        self,
+        bulk_send_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bulk_send_id is not None:
+            _path_params['bulk_send_id'] = bulk_send_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/bulk_sends/{bulk_send_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8464,7 +8975,7 @@ class PaymentApi:
     ) -> Settlement:
         """Get settlement request information
 
-        This operation retrieves the information of a specific settlement request. 
+        <Note>This operation has been deprecated. Please use [Get payout information](https://www.cobo.com/payments/en/api-references/payment/get-payout-information) instead.</Note>  This operation retrieves the information of a specific settlement request. 
 
         :param settlement_request_id: The settlement request ID. (required)
         :type settlement_request_id: str
@@ -8510,7 +9021,7 @@ class PaymentApi:
     ) -> ApiResponse[Settlement]:
         """Get settlement request information
 
-        This operation retrieves the information of a specific settlement request. 
+        <Note>This operation has been deprecated. Please use [Get payout information](https://www.cobo.com/payments/en/api-references/payment/get-payout-information) instead.</Note>  This operation retrieves the information of a specific settlement request. 
 
         :param settlement_request_id: The settlement request ID. (required)
         :type settlement_request_id: str
@@ -8556,7 +9067,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Get settlement request information
 
-        This operation retrieves the information of a specific settlement request. 
+        <Note>This operation has been deprecated. Please use [Get payout information](https://www.cobo.com/payments/en/api-references/payment/get-payout-information) instead.</Note>  This operation retrieves the information of a specific settlement request. 
 
         :param settlement_request_id: The settlement request ID. (required)
         :type settlement_request_id: str
@@ -8623,7 +9134,7 @@ class PaymentApi:
         self,
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
         currency: Annotated[Optional[StrictStr], Field(description="The currency for the operation. Currently, only `USD` is supported.")] = None,
-        acquiring_type: Optional[AcquiringType] = None,
+        acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8641,7 +9152,7 @@ class PaymentApi:
         :type merchant_ids: str
         :param currency: The currency for the operation. Currently, only `USD` is supported.
         :type currency: str
-        :param acquiring_type:
+        :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8677,7 +9188,7 @@ class PaymentApi:
         self,
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
         currency: Annotated[Optional[StrictStr], Field(description="The currency for the operation. Currently, only `USD` is supported.")] = None,
-        acquiring_type: Optional[AcquiringType] = None,
+        acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8695,7 +9206,7 @@ class PaymentApi:
         :type merchant_ids: str
         :param currency: The currency for the operation. Currently, only `USD` is supported.
         :type currency: str
-        :param acquiring_type:
+        :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8731,7 +9242,7 @@ class PaymentApi:
         self,
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
         currency: Annotated[Optional[StrictStr], Field(description="The currency for the operation. Currently, only `USD` is supported.")] = None,
-        acquiring_type: Optional[AcquiringType] = None,
+        acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8749,7 +9260,7 @@ class PaymentApi:
         :type merchant_ids: str
         :param currency: The currency for the operation. Currently, only `USD` is supported.
         :type currency: str
-        :param acquiring_type:
+        :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9029,7 +9540,7 @@ class PaymentApi:
         )
 
     @validate_call
-    def list_allocations(
+    def list_allocation_items(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
@@ -9046,10 +9557,10 @@ class PaymentApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ListAllocations200Response:
-        """List all allocation records
+    ) -> ListAllocationItems200Response:
+        """List all allocation items
 
-        This operation retrieves the information of all allocation records.   One allocation record corresponds to one allocation request in a batch allocation. 
+        This operation retrieves the information of all allocations. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -9073,7 +9584,7 @@ class PaymentApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._list_allocations_serialize(
+        _param = self._list_allocation_items_serialize(
             limit=limit,
             before=before,
             after=after,
@@ -9084,7 +9595,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListAllocations200Response",
+            '200': "ListAllocationItems200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -9099,7 +9610,7 @@ class PaymentApi:
         ).data
 
     @validate_call
-    def list_allocations_with_http_info(
+    def list_allocation_items_with_http_info(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
@@ -9116,10 +9627,10 @@ class PaymentApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[ListAllocations200Response]:
-        """List all allocation records
+    ) -> ApiResponse[ListAllocationItems200Response]:
+        """List all allocation items
 
-        This operation retrieves the information of all allocation records.   One allocation record corresponds to one allocation request in a batch allocation. 
+        This operation retrieves the information of all allocations. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -9143,7 +9654,7 @@ class PaymentApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._list_allocations_serialize(
+        _param = self._list_allocation_items_serialize(
             limit=limit,
             before=before,
             after=after,
@@ -9154,7 +9665,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListAllocations200Response",
+            '200': "ListAllocationItems200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -9169,7 +9680,7 @@ class PaymentApi:
         )
 
     @validate_call
-    def list_allocations_without_preload_content(
+    def list_allocation_items_without_preload_content(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
@@ -9187,9 +9698,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List all allocation records
+        """List all allocation items
 
-        This operation retrieves the information of all allocation records.   One allocation record corresponds to one allocation request in a batch allocation. 
+        This operation retrieves the information of all allocations. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -9213,7 +9724,7 @@ class PaymentApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._list_allocations_serialize(
+        _param = self._list_allocation_items_serialize(
             limit=limit,
             before=before,
             after=after,
@@ -9224,7 +9735,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListAllocations200Response",
+            '200': "ListAllocationItems200Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -9234,7 +9745,7 @@ class PaymentApi:
         )
         return response_data.response
 
-    def _list_allocations_serialize(
+    def _list_allocation_items_serialize(
         self,
         limit,
         before,
@@ -9292,7 +9803,7 @@ class PaymentApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/payments/allocation_records',
+            resource_path='/payments/allocation_items',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9315,7 +9826,7 @@ class PaymentApi:
     ) -> List[BankAccount]:
         """List all bank accounts
 
-         <Note>This operation has been deprecated.</Note> This operation retrieves the information of all bank accounts you have registered for payment settlement. Contact our support team at [help@cobo.com](mailto:help@cobo.com) to register a new bank account. 
+        <Note>This operation has been deprecated. Please use [List counterparty entries](https://www.cobo.com/payments/en/api-references/payment/list-counterparty-entries) instead.</Note> This operation retrieves the information of all bank accounts registered. 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9357,7 +9868,7 @@ class PaymentApi:
     ) -> ApiResponse[List[BankAccount]]:
         """List all bank accounts
 
-         <Note>This operation has been deprecated.</Note> This operation retrieves the information of all bank accounts you have registered for payment settlement. Contact our support team at [help@cobo.com](mailto:help@cobo.com) to register a new bank account. 
+        <Note>This operation has been deprecated. Please use [List counterparty entries](https://www.cobo.com/payments/en/api-references/payment/list-counterparty-entries) instead.</Note> This operation retrieves the information of all bank accounts registered. 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9399,7 +9910,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List all bank accounts
 
-         <Note>This operation has been deprecated.</Note> This operation retrieves the information of all bank accounts you have registered for payment settlement. Contact our support team at [help@cobo.com](mailto:help@cobo.com) to register a new bank account. 
+        <Note>This operation has been deprecated. Please use [List counterparty entries](https://www.cobo.com/payments/en/api-references/payment/list-counterparty-entries) instead.</Note> This operation retrieves the information of all bank accounts registered. 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9669,6 +10180,226 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/batch_allocations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_bulk_send_items(
+        self,
+        bulk_send_id: Annotated[StrictStr, Field(description="The bulk send ID.")],
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListBulkSendItems200Response:
+        """List bulk send items
+
+        This operation retrieves the list of items for a specific bulk send. 
+
+        :param bulk_send_id: The bulk send ID. (required)
+        :type bulk_send_id: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_bulk_send_items_serialize(
+            bulk_send_id=bulk_send_id,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBulkSendItems200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_bulk_send_items_with_http_info(
+        self,
+        bulk_send_id: Annotated[StrictStr, Field(description="The bulk send ID.")],
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListBulkSendItems200Response]:
+        """List bulk send items
+
+        This operation retrieves the list of items for a specific bulk send. 
+
+        :param bulk_send_id: The bulk send ID. (required)
+        :type bulk_send_id: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_bulk_send_items_serialize(
+            bulk_send_id=bulk_send_id,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBulkSendItems200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_bulk_send_items_without_preload_content(
+        self,
+        bulk_send_id: Annotated[StrictStr, Field(description="The bulk send ID.")],
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List bulk send items
+
+        This operation retrieves the list of items for a specific bulk send. 
+
+        :param bulk_send_id: The bulk send ID. (required)
+        :type bulk_send_id: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_bulk_send_items_serialize(
+            bulk_send_id=bulk_send_id,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBulkSendItems200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_bulk_send_items_serialize(
+        self,
+        bulk_send_id,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bulk_send_id is not None:
+            _path_params['bulk_send_id'] = bulk_send_id
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/bulk_sends/{bulk_send_id}/items',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11952,7 +12683,7 @@ class PaymentApi:
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
-        acquiring_type: Optional[AcquiringType] = None,
+        acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11970,7 +12701,7 @@ class PaymentApi:
         :type token_id: str
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
-        :param acquiring_type:
+        :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -12006,7 +12737,7 @@ class PaymentApi:
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
-        acquiring_type: Optional[AcquiringType] = None,
+        acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12024,7 +12755,7 @@ class PaymentApi:
         :type token_id: str
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
-        :param acquiring_type:
+        :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -12060,7 +12791,7 @@ class PaymentApi:
         self,
         token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
-        acquiring_type: Optional[AcquiringType] = None,
+        acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12078,7 +12809,7 @@ class PaymentApi:
         :type token_id: str
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
-        :param acquiring_type:
+        :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -13007,245 +13738,6 @@ class PaymentApi:
         )
 
     @validate_call
-    def list_payout_items(
-        self,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
-        source_account: Annotated[Optional[StrictStr], Field(description="The source account.  - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or payout item statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/payments/en/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/payments/en/api-references/payment/get-refund-order-information)  - [List all payout items](https://www.cobo.com/payments/en/api-references/payment/list-all-payout-items) ")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ListPayoutItems200Response:
-        """List all payout items
-
-        This operation retrieves the information of all payout items. You can filter the result by source account or status. 
-
-        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
-        :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
-        :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
-        :type after: str
-        :param source_account: The source account.  - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. 
-        :type source_account: str
-        :param statuses: A list of order, refund or payout item statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/payments/en/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/payments/en/api-references/payment/get-refund-order-information)  - [List all payout items](https://www.cobo.com/payments/en/api-references/payment/list-all-payout-items) 
-        :type statuses: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_payout_items_serialize(
-            limit=limit,
-            before=before,
-            after=after,
-            source_account=source_account,
-            statuses=statuses,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListPayoutItems200Response",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def list_payout_items_with_http_info(
-        self,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
-        source_account: Annotated[Optional[StrictStr], Field(description="The source account.  - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or payout item statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/payments/en/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/payments/en/api-references/payment/get-refund-order-information)  - [List all payout items](https://www.cobo.com/payments/en/api-references/payment/list-all-payout-items) ")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ApiResponse[ListPayoutItems200Response]:
-        """List all payout items
-
-        This operation retrieves the information of all payout items. You can filter the result by source account or status. 
-
-        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
-        :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
-        :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
-        :type after: str
-        :param source_account: The source account.  - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. 
-        :type source_account: str
-        :param statuses: A list of order, refund or payout item statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/payments/en/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/payments/en/api-references/payment/get-refund-order-information)  - [List all payout items](https://www.cobo.com/payments/en/api-references/payment/list-all-payout-items) 
-        :type statuses: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_payout_items_serialize(
-            limit=limit,
-            before=before,
-            after=after,
-            source_account=source_account,
-            statuses=statuses,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListPayoutItems200Response",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def list_payout_items_without_preload_content(
-        self,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
-        source_account: Annotated[Optional[StrictStr], Field(description="The source account.  - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")] = None,
-        statuses: Annotated[Optional[StrictStr], Field(description="A list of order, refund or payout item statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/payments/en/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/payments/en/api-references/payment/get-refund-order-information)  - [List all payout items](https://www.cobo.com/payments/en/api-references/payment/list-all-payout-items) ")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> RESTResponseType:
-        """List all payout items
-
-        This operation retrieves the information of all payout items. You can filter the result by source account or status. 
-
-        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
-        :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
-        :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
-        :type after: str
-        :param source_account: The source account.  - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. 
-        :type source_account: str
-        :param statuses: A list of order, refund or payout item statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/payments/en/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/payments/en/api-references/payment/get-refund-order-information)  - [List all payout items](https://www.cobo.com/payments/en/api-references/payment/list-all-payout-items) 
-        :type statuses: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_payout_items_serialize(
-            limit=limit,
-            before=before,
-            after=after,
-            source_account=source_account,
-            statuses=statuses,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListPayoutItems200Response",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _list_payout_items_serialize(
-        self,
-        limit,
-        before,
-        after,
-        source_account,
-        statuses,
-    ) -> RequestSerialized:
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
-        if before is not None:
-            
-            _query_params.append(('before', before))
-            
-        if after is not None:
-            
-            _query_params.append(('after', after))
-            
-        if source_account is not None:
-            
-            _query_params.append(('source_account', source_account))
-            
-        if statuses is not None:
-            
-            _query_params.append(('statuses', statuses))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/payments/payout_items',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-        )
-
-    @validate_call
     def list_payouts(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -13486,7 +13978,7 @@ class PaymentApi:
     ) -> ListSettlementDetails200Response:
         """List all settlement details
 
-        This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+        <Note>This operation has been deprecated.</Note>  This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -13548,7 +14040,7 @@ class PaymentApi:
     ) -> ApiResponse[ListSettlementDetails200Response]:
         """List all settlement details
 
-        This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+        <Note>This operation has been deprecated.</Note>  This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -13610,7 +14102,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List all settlement details
 
-        This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+        <Note>This operation has been deprecated.</Note>  This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -13724,7 +14216,7 @@ class PaymentApi:
     ) -> ListSettlementRequests200Response:
         """List all settlement requests
 
-        This operation retrieves the information of all settlement requests. 
+        <Note>This operation has been deprecated. Please use [List all payouts](https://www.cobo.com/payments/en/api-references/payment/list-all-payouts) instead.</Note>  This operation retrieves the information of all settlement requests. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -13782,7 +14274,7 @@ class PaymentApi:
     ) -> ApiResponse[ListSettlementRequests200Response]:
         """List all settlement requests
 
-        This operation retrieves the information of all settlement requests. 
+        <Note>This operation has been deprecated. Please use [List all payouts](https://www.cobo.com/payments/en/api-references/payment/list-all-payouts) instead.</Note>  This operation retrieves the information of all settlement requests. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -13840,7 +14332,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List all settlement requests
 
-        This operation retrieves the information of all settlement requests. 
+        <Note>This operation has been deprecated. Please use [List all payouts](https://www.cobo.com/payments/en/api-references/payment/list-all-payouts) instead.</Note>  This operation retrieves the information of all settlement requests. 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int

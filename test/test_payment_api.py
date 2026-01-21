@@ -66,6 +66,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_batch_allocation(create_batch_allocation_request=create_batch_allocation_request)
         """
 
+    def test_create_bulk_send(self) -> None:
+        """
+        Test case for create_bulk_send
+
+        Create bulk send
+        """
+        """
+        create_bulk_send_request = cobo_waas2.CreateBulkSendRequest()
+
+        api_response = self.api.create_bulk_send(create_bulk_send_request=create_bulk_send_request)
+        """
+
     def test_create_counterparty(self) -> None:
         """
         Test case for create_counterparty
@@ -270,6 +282,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_settlement_request(create_settlement_request_request=create_settlement_request_request)
         """
 
+    def test_create_top_up_addresses(self) -> None:
+        """
+        Test case for create_top_up_addresses
+
+        Batch create top-up addresses
+        """
+        """
+        create_top_up_addresses = cobo_waas2.CreateTopUpAddresses()
+
+        api_response = self.api.create_top_up_addresses(create_top_up_addresses=create_top_up_addresses)
+        """
+
     def test_delete_counterparty(self) -> None:
         """
         Test case for delete_counterparty
@@ -430,6 +454,18 @@ class TestPaymentApi(unittest.TestCase):
         batch_allocation_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
 
         api_response = self.api.get_batch_allocation_by_id(batch_allocation_id)
+        """
+
+    def test_get_bulk_send_by_id(self) -> None:
+        """
+        Test case for get_bulk_send_by_id
+
+        Get bulk send information
+        """
+        """
+        bulk_send_id = '123e4567-e89b-12d3-a456-426614174003'
+
+        api_response = self.api.get_bulk_send_by_id(bulk_send_id)
         """
 
     def test_get_counterparty(self) -> None:
@@ -652,11 +688,11 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_top_up_address(token_id, custom_payer_id, merchant_id=merchant_id)
         """
 
-    def test_list_allocations(self) -> None:
+    def test_list_allocation_items(self) -> None:
         """
-        Test case for list_allocations
+        Test case for list_allocation_items
 
-        List all allocation records
+        List all allocation items
         """
         """
         limit = 10
@@ -667,7 +703,7 @@ class TestPaymentApi(unittest.TestCase):
         token_id = 'ETH_USDT'
         batch_allocation_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
 
-        api_response = self.api.list_allocations(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
+        api_response = self.api.list_allocation_items(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
         """
 
     def test_list_bank_accounts(self) -> None:
@@ -694,6 +730,21 @@ class TestPaymentApi(unittest.TestCase):
         request_id = 'random_request_id'
 
         api_response = self.api.list_batch_allocations(limit=limit, before=before, after=after, request_id=request_id)
+        """
+
+    def test_list_bulk_send_items(self) -> None:
+        """
+        Test case for list_bulk_send_items
+
+        List bulk send items
+        """
+        """
+        bulk_send_id = '123e4567-e89b-12d3-a456-426614174003'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_bulk_send_items(bulk_send_id, limit=limit, before=before, after=after)
         """
 
     def test_list_counterparties(self) -> None:
@@ -917,22 +968,6 @@ class TestPaymentApi(unittest.TestCase):
         wallet_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,f47ac10b-58cc-4372-a567-0e02b2c3d472'
 
         api_response = self.api.list_payment_wallet_balances(token_id, wallet_ids=wallet_ids)
-        """
-
-    def test_list_payout_items(self) -> None:
-        """
-        Test case for list_payout_items
-
-        List all payout items
-        """
-        """
-        limit = 10
-        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-        source_account = 'source_account_example'
-        statuses = 'Pending,Processing'
-
-        api_response = self.api.list_payout_items(limit=limit, before=before, after=after, source_account=source_account, statuses=statuses)
         """
 
     def test_list_payouts(self) -> None:

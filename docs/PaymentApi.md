@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**batch_get_exchange_rates**](PaymentApi.md#batch_get_exchange_rates) | **GET** /payments/exchange_rates | Batch get exchange rates
 [**cancel_refund_by_id**](PaymentApi.md#cancel_refund_by_id) | **PUT** /payments/refunds/{refund_id}/cancel | Cancel refund order
 [**create_batch_allocation**](PaymentApi.md#create_batch_allocation) | **POST** /payments/batch_allocations | Create batch allocation
+[**create_bulk_send**](PaymentApi.md#create_bulk_send) | **POST** /payments/bulk_sends | Create bulk send
 [**create_counterparty**](PaymentApi.md#create_counterparty) | **POST** /payments/counterparty | Create counterparty
 [**create_counterparty_entry**](PaymentApi.md#create_counterparty_entry) | **POST** /payments/counterparty_entry | Create counterparty entry
 [**create_counterparty_wallet_address**](PaymentApi.md#create_counterparty_wallet_address) | **POST** /payments/counterparty/wallet_address | Create counterparty wallet address
@@ -24,6 +25,7 @@ Method | HTTP request | Description
 [**create_refund_link**](PaymentApi.md#create_refund_link) | **POST** /payments/links/refunds | Create refund link
 [**create_report**](PaymentApi.md#create_report) | **POST** /payments/reports | Generate reports
 [**create_settlement_request**](PaymentApi.md#create_settlement_request) | **POST** /payments/settlement_requests | Create settlement request
+[**create_top_up_addresses**](PaymentApi.md#create_top_up_addresses) | **POST** /payments/topup/address | Batch create top-up addresses
 [**delete_counterparty**](PaymentApi.md#delete_counterparty) | **PUT** /payments/counterparty/{counterparty_id}/delete | Delete counterparty (Deprecated)
 [**delete_counterparty_by_id**](PaymentApi.md#delete_counterparty_by_id) | **DELETE** /payments/counterparty/{counterparty_id} | Delete counterparty
 [**delete_counterparty_entry**](PaymentApi.md#delete_counterparty_entry) | **DELETE** /payments/counterparty_entry/{counterparty_entry_id} | Delete counterparty entry
@@ -37,6 +39,7 @@ Method | HTTP request | Description
 [**enable_destination_whitelist**](PaymentApi.md#enable_destination_whitelist) | **POST** /payments/destination/enable_whitelist | Enable or disable destination whitelist
 [**get_available_allocation_amount**](PaymentApi.md#get_available_allocation_amount) | **GET** /payments/allocation_amount | Get available allocation amount
 [**get_batch_allocation_by_id**](PaymentApi.md#get_batch_allocation_by_id) | **GET** /payments/batch_allocations/{batch_allocation_id} | Get batch allocation information
+[**get_bulk_send_by_id**](PaymentApi.md#get_bulk_send_by_id) | **GET** /payments/bulk_sends/{bulk_send_id} | Get bulk send information
 [**get_counterparty**](PaymentApi.md#get_counterparty) | **GET** /payments/counterparty/{counterparty_id} | Get counterparty information
 [**get_counterparty_detail_by_id**](PaymentApi.md#get_counterparty_detail_by_id) | **GET** /payments/counterparty/{counterparty_id}/detail | Get counterparty information (Deprecated)
 [**get_counterparty_entry**](PaymentApi.md#get_counterparty_entry) | **GET** /payments/counterparty_entry/{counterparty_entry_id} | Get counterparty entry information
@@ -54,9 +57,10 @@ Method | HTTP request | Description
 [**get_settlement_by_id**](PaymentApi.md#get_settlement_by_id) | **GET** /payments/settlement_requests/{settlement_request_id} | Get settlement request information
 [**get_settlement_info_by_ids**](PaymentApi.md#get_settlement_info_by_ids) | **GET** /payments/settlement_info | Get withdrawable balances
 [**get_top_up_address**](PaymentApi.md#get_top_up_address) | **GET** /payments/topup/address | Create/Get top-up address
-[**list_allocations**](PaymentApi.md#list_allocations) | **GET** /payments/allocation_records | List all allocation records
+[**list_allocation_items**](PaymentApi.md#list_allocation_items) | **GET** /payments/allocation_items | List all allocation items
 [**list_bank_accounts**](PaymentApi.md#list_bank_accounts) | **GET** /payments/bank_accounts | List all bank accounts
 [**list_batch_allocations**](PaymentApi.md#list_batch_allocations) | **GET** /payments/batch_allocations | List all batch allocations
+[**list_bulk_send_items**](PaymentApi.md#list_bulk_send_items) | **GET** /payments/bulk_sends/{bulk_send_id}/items | List bulk send items
 [**list_counterparties**](PaymentApi.md#list_counterparties) | **GET** /payments/counterparty | List all counterparties
 [**list_counterparty_entries**](PaymentApi.md#list_counterparty_entries) | **GET** /payments/counterparty_entry | List counterparty entries
 [**list_counterparty_wallet_address**](PaymentApi.md#list_counterparty_wallet_address) | **GET** /payments/counterparty/wallet_address | List counterparty wallet addresses
@@ -71,7 +75,6 @@ Method | HTTP request | Description
 [**list_payment_orders**](PaymentApi.md#list_payment_orders) | **GET** /payments/orders | List all pay-in orders
 [**list_payment_supported_tokens**](PaymentApi.md#list_payment_supported_tokens) | **GET** /payments/supported_tokens | List all supported tokens
 [**list_payment_wallet_balances**](PaymentApi.md#list_payment_wallet_balances) | **GET** /payments/balance/payment_wallets | List payment wallet balances
-[**list_payout_items**](PaymentApi.md#list_payout_items) | **GET** /payments/payout_items | List all payout items
 [**list_payouts**](PaymentApi.md#list_payouts) | **GET** /payments/payouts | List all payouts
 [**list_settlement_details**](PaymentApi.md#list_settlement_details) | **GET** /payments/settlement_details | List all settlement details
 [**list_settlement_requests**](PaymentApi.md#list_settlement_requests) | **GET** /payments/settlement_requests | List all settlement requests
@@ -305,6 +308,79 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The allocation request was successfully created. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_bulk_send**
+> PaymentBulkSend create_bulk_send(create_bulk_send_request=create_bulk_send_request)
+
+Create bulk send
+
+This operation creates a bulk send to transfer funds to multiple recipients in a single request. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_bulk_send_request import CreateBulkSendRequest
+from cobo_waas2.models.payment_bulk_send import PaymentBulkSend
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_bulk_send_request = cobo_waas2.CreateBulkSendRequest()
+
+    try:
+        # Create bulk send
+        api_response = api_instance.create_bulk_send(create_bulk_send_request=create_bulk_send_request)
+        print("The response of PaymentApi->create_bulk_send:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_bulk_send: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_bulk_send_request** | [**CreateBulkSendRequest**](CreateBulkSendRequest.md)| The request body to create a bulk send. | [optional] 
+
+### Return type
+
+[**PaymentBulkSend**](PaymentBulkSend.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The bulk send was successfully created. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -1190,7 +1266,7 @@ Name | Type | Description  | Notes
 
 Create payout
 
-This operation initiates a payout, distributing funds either to cryptocurrency addresses or to bank accounts as fiat currency. 
+This operation creates a payout to withdraw available balances. 
 
 ### Example
 
@@ -1252,7 +1328,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The create payout was successfully created. |  -  |
+**201** | The payout request was successfully created. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -1481,7 +1557,7 @@ Name | Type | Description  | Notes
 
 Create settlement request
 
-This operation creates a settlement request to withdraw available balances. 
+<Note>This operation has been deprecated. Please use [Create payout](https://www.cobo.com/payments/en/api-references/payment/create-payout) instead.</Note>  You can include multiple merchants and cryptocurrencies in a single settlement request. 
 
 ### Example
 
@@ -1544,6 +1620,79 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The settlement request was successfully created. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_top_up_addresses**
+> CreateTopUpAddresses201Response create_top_up_addresses(create_top_up_addresses=create_top_up_addresses)
+
+Batch create top-up addresses
+
+This operation creates top-up addresses for multiple payers under a specific merchant and token in a single request.  <Note>This operation supports batch processing of up to 50 payers per request.</Note> 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_top_up_addresses import CreateTopUpAddresses
+from cobo_waas2.models.create_top_up_addresses201_response import CreateTopUpAddresses201Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_top_up_addresses = cobo_waas2.CreateTopUpAddresses()
+
+    try:
+        # Batch create top-up addresses
+        api_response = api_instance.create_top_up_addresses(create_top_up_addresses=create_top_up_addresses)
+        print("The response of PaymentApi->create_top_up_addresses:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_top_up_addresses: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_top_up_addresses** | [**CreateTopUpAddresses**](CreateTopUpAddresses.md)| The request body of the create top-up addresses operation. | [optional] 
+
+### Return type
+
+[**CreateTopUpAddresses201Response**](CreateTopUpAddresses201Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The information about created top-up addresses. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -2505,6 +2654,78 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The details of a batch allocation were successfully retrieved. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_bulk_send_by_id**
+> PaymentBulkSend get_bulk_send_by_id(bulk_send_id)
+
+Get bulk send information
+
+This operation retrieves the information of a specific bulk send. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.payment_bulk_send import PaymentBulkSend
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    bulk_send_id = '123e4567-e89b-12d3-a456-426614174003'
+
+    try:
+        # Get bulk send information
+        api_response = api_instance.get_bulk_send_by_id(bulk_send_id)
+        print("The response of PaymentApi->get_bulk_send_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_bulk_send_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_send_id** | **str**| The bulk send ID. | 
+
+### Return type
+
+[**PaymentBulkSend**](PaymentBulkSend.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -3552,7 +3773,7 @@ Name | Type | Description  | Notes
 
 Get settlement request information
 
-This operation retrieves the information of a specific settlement request. 
+<Note>This operation has been deprecated. Please use [Get payout information](https://www.cobo.com/payments/en/api-references/payment/get-payout-information) instead.</Note>  This operation retrieves the information of a specific settlement request. 
 
 ### Example
 
@@ -3671,7 +3892,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **merchant_ids** | **str**| A list of merchant IDs to query. | [optional] 
  **currency** | **str**| The currency for the operation. Currently, only &#x60;USD&#x60; is supported. | [optional] [default to &#39;USD&#39;]
- **acquiring_type** | [**AcquiringType**](.md)|  | [optional] 
+ **acquiring_type** | [**AcquiringType**](.md)| This parameter has been deprecated | [optional] 
 
 ### Return type
 
@@ -3772,12 +3993,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_allocations**
-> ListAllocations200Response list_allocations(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
+# **list_allocation_items**
+> ListAllocationItems200Response list_allocation_items(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
 
-List all allocation records
+List all allocation items
 
-This operation retrieves the information of all allocation records.   One allocation record corresponds to one allocation request in a batch allocation. 
+This operation retrieves the information of all allocations. 
 
 ### Example
 
@@ -3786,7 +4007,7 @@ This operation retrieves the information of all allocation records.   One alloca
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.list_allocations200_response import ListAllocations200Response
+from cobo_waas2.models.list_allocation_items200_response import ListAllocationItems200Response
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -3810,12 +4031,12 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     batch_allocation_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
 
     try:
-        # List all allocation records
-        api_response = api_instance.list_allocations(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
-        print("The response of PaymentApi->list_allocations:\n")
+        # List all allocation items
+        api_response = api_instance.list_allocation_items(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
+        print("The response of PaymentApi->list_allocation_items:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PaymentApi->list_allocations: %s\n" % e)
+        print("Exception when calling PaymentApi->list_allocation_items: %s\n" % e)
 ```
 
 
@@ -3835,7 +4056,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListAllocations200Response**](ListAllocations200Response.md)
+[**ListAllocationItems200Response**](ListAllocationItems200Response.md)
 
 ### Authorization
 
@@ -3850,7 +4071,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The allocation records were successfully retrieved. |  -  |
+**200** | The request was successful. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -3861,7 +4082,7 @@ Name | Type | Description  | Notes
 
 List all bank accounts
 
- <Note>This operation has been deprecated.</Note> This operation retrieves the information of all bank accounts you have registered for payment settlement. Contact our support team at [help@cobo.com](mailto:help@cobo.com) to register a new bank account. 
+<Note>This operation has been deprecated. Please use [List counterparty entries](https://www.cobo.com/payments/en/api-references/payment/list-counterparty-entries) instead.</Note> This operation retrieves the information of all bank accounts registered. 
 
 ### Example
 
@@ -3982,6 +4203,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListBatchAllocations200Response**](ListBatchAllocations200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_bulk_send_items**
+> ListBulkSendItems200Response list_bulk_send_items(bulk_send_id, limit=limit, before=before, after=after)
+
+List bulk send items
+
+This operation retrieves the list of items for a specific bulk send. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_bulk_send_items200_response import ListBulkSendItems200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    bulk_send_id = '123e4567-e89b-12d3-a456-426614174003'
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+    try:
+        # List bulk send items
+        api_response = api_instance.list_bulk_send_items(bulk_send_id, limit=limit, before=before, after=after)
+        print("The response of PaymentApi->list_bulk_send_items:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_bulk_send_items: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_send_id** | **str**| The bulk send ID. | 
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+
+### Return type
+
+[**ListBulkSendItems200Response**](ListBulkSendItems200Response.md)
 
 ### Authorization
 
@@ -4794,7 +5093,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format &#x60;{CHAIN}_{TOKEN}&#x60;. Supported values include:   - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDCOIN&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC2&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
  **merchant_ids** | **str**| A list of merchant IDs to query. | [optional] 
- **acquiring_type** | [**AcquiringType**](.md)|  | [optional] 
+ **acquiring_type** | [**AcquiringType**](.md)| This parameter has been deprecated | [optional] 
 
 ### Return type
 
@@ -5126,86 +5425,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_payout_items**
-> ListPayoutItems200Response list_payout_items(limit=limit, before=before, after=after, source_account=source_account, statuses=statuses)
-
-List all payout items
-
-This operation retrieves the information of all payout items. You can filter the result by source account or status. 
-
-### Example
-
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.list_payout_items200_response import ListPayoutItems200Response
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.PaymentApi(api_client)
-    limit = 10
-    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-    source_account = 'source_account_example'
-    statuses = 'Pending,Processing'
-
-    try:
-        # List all payout items
-        api_response = api_instance.list_payout_items(limit=limit, before=before, after=after, source_account=source_account, statuses=statuses)
-        print("The response of PaymentApi->list_payout_items:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->list_payout_items: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
- **source_account** | **str**| The source account.  - If the source account is a merchant account, provide the merchant&#39;s ID (e.g., \&quot;M1001\&quot;). - If the source account is the developer account, use the string &#x60;\&quot;developer\&quot;&#x60;.  | [optional] 
- **statuses** | **str**| A list of order, refund or payout item statuses. You can refer to the following operations for the possible status values:  - [Get pay-in order information](https://www.cobo.com/payments/en/api-references/payment/get-pay-in-order-information)  - [Get refund order information](https://www.cobo.com/payments/en/api-references/payment/get-refund-order-information)  - [List all payout items](https://www.cobo.com/payments/en/api-references/payment/list-all-payout-items)  | [optional] 
-
-### Return type
-
-[**ListPayoutItems200Response**](ListPayoutItems200Response.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **list_payouts**
 > ListPayouts200Response list_payouts(limit=limit, before=before, after=after, request_id=request_id)
 
@@ -5289,7 +5508,7 @@ Name | Type | Description  | Notes
 
 List all settlement details
 
-This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
+<Note>This operation has been deprecated.</Note>  This operation retrieves the information of all settlement details. You can filter the result by merchant ID or status. 
 
 ### Example
 
@@ -5369,7 +5588,7 @@ Name | Type | Description  | Notes
 
 List all settlement requests
 
-This operation retrieves the information of all settlement requests. 
+<Note>This operation has been deprecated. Please use [List all payouts](https://www.cobo.com/payments/en/api-references/payment/list-all-payouts) instead.</Note>  This operation retrieves the information of all settlement requests. 
 
 ### Example
 

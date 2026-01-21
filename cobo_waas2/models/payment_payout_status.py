@@ -18,18 +18,19 @@ from typing_extensions import Self
 
 class PaymentPayoutStatus(str, Enum):
     """
-    The current status of the payout: - `Pending`: The payout has been created and is awaiting processing. - `Processing`: The payout is currently being processed, with at least one payout item in progress. - `Completed`: All requested payout items have been completed. - `PartiallyCompleted`: Some requested payout items have been completed successfully, while others have failed. - `Failed`: All requested payout items have failed. 
+    The current status of the payout. Possible values include: - `Pending`: The payout has been created and is awaiting processing. - `Preparing`: The payout is being prepared for transfer. - `Transferring`: The payout is currently being transferred to the recipient's destination. - `Completed`: The payout has been successfully completed and all transactions have been processed. - `PartiallyCompleted`: The payout has been partially completed, with some transactions succeeding and others failing. - `Failed`: The payout has failed and no transactions were completed successfully. - `RejectedByBank`: The payout was rejected by the recipient's bank (applicable to OffRamp payouts only). 
     """
 
     """
     allowed enum values
     """
     PENDING = 'Pending'
-    PROCESSING = 'Processing'
+    PREPARING = 'Preparing'
+    TRANSFERRING = 'Transferring'
     COMPLETED = 'Completed'
     PARTIALLYCOMPLETED = 'PartiallyCompleted'
     FAILED = 'Failed'
-    CANCELED = 'Canceled'
+    REJECTEDBYBANK = 'RejectedByBank'
 
     UNKNOWN = None
 

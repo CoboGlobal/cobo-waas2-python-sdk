@@ -37,76 +37,69 @@ class TestPaymentPayoutEvent(unittest.TestCase):
                 data_type = 'Transaction',
                 payout_id = '123e457-e89b-12d3-a456-426614174004',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
-                status = 'Pending',
-                payout_item_details = [
-                    cobo_waas2.models.payment_payout_item_detail.PaymentPayoutItemDetail(
-                        payout_item_id = '123e457-e89b-12d3-a456-426614174004', 
-                        payout_id = '123e457-e89b-12d3-a456-426614174004', 
+                payout_channel = 'Crypto',
+                source_account = '',
+                payout_items = [
+                    cobo_waas2.models.payment_payout_item.PaymentPayoutItem(
                         token_id = 'ETH_USDT', 
-                        chain_id = 'ETH', 
-                        source_account = 'M1001', 
                         amount = '500.00', 
-                        status = 'Pending', 
-                        transactions = [
-                            cobo_waas2.models.payment_transaction.PaymentTransaction(
-                                tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
-                                tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
-                                token_id = 'ETH_USDT', 
-                                from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
-                                to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
-                                amount = '0.15', 
-                                status = 'Submitted', 
-                                counterparty = cobo_waas2.models.counterparty.Counterparty(
-                                    counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
-                                    counterparty_type = 'Individual', 
-                                    counterparty_name = 'Counterparty A', 
-                                    country = 'USA', 
-                                    email = 'counterparty@example.com', 
-                                    contact_address = '123 Main St, Anytown, USA', 
-                                    created_timestamp = 1744689600, 
-                                    updated_timestamp = 1744689600, ), 
-                                destination = cobo_waas2.models.destination.Destination(
-                                    destination_id = '123e4567-e89b-12d3-a456-426614174003', 
-                                    destination_type = 'Individual', 
-                                    destination_name = 'Destination A', 
-                                    country = 'USA', 
-                                    email = 'destination@example.com', 
-                                    contact_address = '123 Main St, Anytown, USA', 
-                                    merchant_id = 'M1001', 
-                                    created_timestamp = 1744689600, 
-                                    updated_timestamp = 1744689600, ), 
-                                created_timestamp = 1610445878970, 
-                                updated_timestamp = 1610445878970, )
-                            ], 
-                        created_timestamp = 1744689600, 
-                        updated_timestamp = 1744689600, 
-                        crypto_address_id = 'addr_ethusdt_20250429T134512_a8c31f', 
-                        crypto_address = '0xabc123456789def0000000000000000000000000', 
-                        commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
-                            fee_amount = '', ), 
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
                             received_amount = '', ), )
                     ],
+                recipient_info = cobo_waas2.models.payment_payout_recipient_info.PaymentPayoutRecipientInfo(
+                    address = '0x9876543210abcdef1234567890abcdef12345678', 
+                    token_id = 'TRON_USDT', 
+                    currency = 'USD', 
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
+                initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
+                actual_payout_amount = '500.00',
+                status = 'Pending',
+                remark = 'Payout for customer 123',
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600,
-                initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
-                payout_channel = 'Crypto',
-                currency = 'USD',
-                actual_payout_amount = '500.00',
-                bank_account = cobo_waas2.models.bank_account.BankAccount(
-                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
-                    info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, 
-                    created_timestamp = 1744689600, 
-                    updated_timestamp = 1744689600, )
+                transactions = [
+                    cobo_waas2.models.payment_transaction.PaymentTransaction(
+                        tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
+                        tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
+                        token_id = 'ETH_USDT', 
+                        from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
+                        to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
+                        amount = '0.15', 
+                        status = 'Submitted', 
+                        counterparty = cobo_waas2.models.counterparty.Counterparty(
+                            counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
+                            counterparty_type = 'Individual', 
+                            counterparty_name = 'Counterparty A', 
+                            country = 'USA', 
+                            email = 'counterparty@example.com', 
+                            contact_address = '123 Main St, Anytown, USA', 
+                            created_timestamp = 1744689600, 
+                            updated_timestamp = 1744689600, ), 
+                        destination = cobo_waas2.models.destination.Destination(
+                            destination_id = '123e4567-e89b-12d3-a456-426614174003', 
+                            destination_type = 'Individual', 
+                            destination_name = 'Destination A', 
+                            country = 'USA', 
+                            email = 'destination@example.com', 
+                            contact_address = '123 Main St, Anytown, USA', 
+                            merchant_id = 'M1001', 
+                            created_timestamp = 1744689600, 
+                            updated_timestamp = 1744689600, ), 
+                        created_timestamp = 1610445878970, 
+                        updated_timestamp = 1610445878970, )
+                    ]
             )
         else:
             return PaymentPayoutEvent(
                 data_type = 'Transaction',
                 payout_id = '123e457-e89b-12d3-a456-426614174004',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
+                payout_channel = 'Crypto',
                 status = 'Pending',
+                created_timestamp = 1744689600,
+                updated_timestamp = 1744689600,
         )
         """
 
