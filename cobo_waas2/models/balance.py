@@ -29,7 +29,8 @@ class Balance(BaseModel):
     available: StrictStr = Field(description="The amount of tokens ready to be spent. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
     pending: Optional[StrictStr] = Field(default='0', description="The total amount being sent in a transaction, which is calculated as the withdrawal amount plus the transaction fee. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
     locked: Optional[StrictStr] = Field(default='0', description="For UTXO chains, this is the combined value of the selected UTXOs for the transaction. For other chains, it is equal to the Pending amount. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
-    __properties: ClassVar[List[str]] = ["total", "available", "pending", "locked"]
+    frozen: Optional[StrictStr] = Field(default='0', description="Amount frozen due to compliance inspection. To learn more, see [Balances and transaction amounts for MPC Wallets](https://www.cobo.com/developers/v2/guides/mpc-wallets/balance-amounts) for more details.")
+    __properties: ClassVar[List[str]] = ["total", "available", "pending", "locked", "frozen"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +86,8 @@ class Balance(BaseModel):
             "total": obj.get("total"),
             "available": obj.get("available"),
             "pending": obj.get("pending") if obj.get("pending") is not None else '0',
-            "locked": obj.get("locked") if obj.get("locked") is not None else '0'
+            "locked": obj.get("locked") if obj.get("locked") is not None else '0',
+            "frozen": obj.get("frozen") if obj.get("frozen") is not None else '0'
         })
         return _obj
 

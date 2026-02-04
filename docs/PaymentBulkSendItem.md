@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bulk_send_item_id** | **str** | The payout item ID. | 
-**token_id** | **str** | The token ID of the payout item. | 
-**receiving_address** | **str** | The receiving address of the payout item. | 
-**amount** | **str** | The amount of the payout item. | 
-**description** | **str** | The note of the payout item. | [optional] 
+**bulk_send_item_id** | **str** | The bulk send item ID. | 
+**token_id** | **str** | The token ID of the cryptocurrency to be sent to the recipient. | 
+**receiving_address** | **str** | The receiving address. | 
+**amount** | **str** | The amount of the cryptocurrency to be sent to the recipient. | 
+**description** | **str** | A note or comment about the bulk send item. | [optional] 
 **status** | [**PaymentBulkSendItemStatus**](PaymentBulkSendItemStatus.md) |  | 
 **validation_status** | [**PaymentBulkSendItemValidationStatus**](PaymentBulkSendItemValidationStatus.md) |  | 
 

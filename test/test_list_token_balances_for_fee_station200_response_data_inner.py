@@ -40,7 +40,8 @@ class TestListTokenBalancesForFeeStation200ResponseDataInner(unittest.TestCase):
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
-                    locked = '0', )
+                    locked = '0', 
+                    frozen = '0', )
             )
         else:
             return ListTokenBalancesForFeeStation200ResponseDataInner(
@@ -49,7 +50,8 @@ class TestListTokenBalancesForFeeStation200ResponseDataInner(unittest.TestCase):
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
-                    locked = '0', ),
+                    locked = '0', 
+                    frozen = '0', ),
         )
         """
 

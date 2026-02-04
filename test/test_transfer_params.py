@@ -44,7 +44,11 @@ class TestTransferParams(unittest.TestCase):
                 description = 'Transfer from wallet',
                 fee = None,
                 transaction_process_type = 'AutoProcess',
-                auto_fuel = 'PassiveAutoFuel'
+                auto_fuel = 'PassiveAutoFuel',
+                pre_check = cobo_waas2.models.pre_check.PreCheck(
+                    skip_checks = [
+                        'OnchainFeeBalance'
+                        ], )
             )
         else:
             return TransferParams(

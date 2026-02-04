@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.bridging_fee import BridgingFee
+from cobo_waas2.models.pre_check import PreCheck
 
 
-class TestBridgingFee(unittest.TestCase):
-    """BridgingFee unit test stubs"""
+class TestPreCheck(unittest.TestCase):
+    """PreCheck unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,29 +24,27 @@ class TestBridgingFee(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> BridgingFee:
-        """Test BridgingFee
+    def make_instance(self, include_optional) -> PreCheck:
+        """Test PreCheck
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `BridgingFee`
+        # uncomment below to create an instance of `PreCheck`
         """
-        model = BridgingFee()
+        model = PreCheck()
         if include_optional:
-            return BridgingFee(
-                fee_amount = '',
-                received_token_id = '',
-                received_amount = '',
-                bridge_status = 'Completed'
+            return PreCheck(
+                skip_checks = [
+                    'OnchainFeeBalance'
+                    ]
             )
         else:
-            return BridgingFee(
-                fee_amount = '',
+            return PreCheck(
         )
         """
 
-    def testBridgingFee(self):
-        """Test BridgingFee"""
+    def testPreCheck(self):
+        """Test PreCheck"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

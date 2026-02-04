@@ -25,16 +25,16 @@ class SupportedToken(BaseModel):
     """
     SupportedToken
     """  # noqa: E501
-    token_id: StrictStr = Field(description="Unique identifier of the token")
-    name: StrictStr = Field(description="Full name of the token")
-    symbol: StrictStr = Field(description="Symbol representation of the token")
-    decimal: StrictInt = Field(description="Number of decimal places for the token")
-    token_address: Optional[StrictStr] = Field(description="Contract address of the token (may be null for native coins)")
-    chain_id: StrictStr = Field(description="Identifier of the blockchain where the token exists")
-    chain_symbol: Optional[StrictStr] = Field(description="Symbol of the underlying blockchain")
-    chain_icon_url: Optional[StrictStr] = Field(default=None, description="URL to the blockchain's icon image")
-    token_icon_url: Optional[StrictStr] = Field(default=None, description="URL to the token's icon image")
-    can_off_ramp: Optional[StrictBool] = Field(default=None, description="Whether the token is supported by the off-ramp service.")
+    token_id: StrictStr = Field(description="The unique identifier of the token, in the format of `{chain_id}_{token_symbol}`.")
+    name: StrictStr = Field(description="The full name of the token.")
+    symbol: StrictStr = Field(description="The symbol of the token.")
+    decimal: StrictInt = Field(description="The number of decimal places for the token. This value is used to convert  between the token's smallest unit and its display value. ")
+    token_address: Optional[StrictStr] = Field(description="The contract address of the token. This is `null` for native coins (e.g., ETH on Ethereum). ")
+    chain_id: StrictStr = Field(description="The ID of the chain on which the token exists.")
+    chain_symbol: Optional[StrictStr] = Field(description="The symbol of the chain on which the token exists.")
+    chain_icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the chain icon image.")
+    token_icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the token icon image.")
+    can_off_ramp: Optional[StrictBool] = Field(default=None, description="Whether the token supports fiat off-ramp. - `true`: The token can be used for fiat off-ramp. - `false`: The token cannot be used for fiat off-ramp. ")
     __properties: ClassVar[List[str]] = ["token_id", "name", "symbol", "decimal", "token_address", "chain_id", "chain_symbol", "chain_icon_url", "token_icon_url", "can_off_ramp"]
 
     model_config = ConfigDict(

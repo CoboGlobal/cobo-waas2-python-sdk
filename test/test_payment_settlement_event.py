@@ -98,7 +98,8 @@ class TestPaymentSettlementEvent(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), )
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), )
                     ],
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600,
@@ -180,7 +181,8 @@ class TestPaymentSettlementEvent(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), )
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), )
                     ],
         )
         """

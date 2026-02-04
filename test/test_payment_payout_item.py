@@ -39,7 +39,8 @@ class TestPaymentPayoutItem(unittest.TestCase):
                 bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                     fee_amount = '', 
                     received_token_id = '', 
-                    received_amount = '', )
+                    received_amount = '', 
+                    bridge_status = 'Completed', )
             )
         else:
             return PaymentPayoutItem(

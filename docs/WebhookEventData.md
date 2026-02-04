@@ -102,6 +102,7 @@ Name | Type | Description | Notes
 **payout_items** | [**List[PaymentPayoutItem]**](PaymentPayoutItem.md) | required | [optional] 
 **recipient_info** | [**PaymentPayoutRecipientInfo**](PaymentPayoutRecipientInfo.md) |  | [optional] 
 **actual_payout_amount** | **str** | - For &#x60;Crypto&#x60; payouts: The amount of cryptocurrency sent to the recipient&#39;s address, denominated in the token specified in &#x60;recipient_info.token_id&#x60;. - For &#x60;OffRamp&#x60; payouts: The amount of fiat currency sent to the recipient&#39;s bank account, denominated in the currency specified in &#x60;recipient_info.currency&#x60;. (Note: The actual amount received may be lower due to additional bank transfer fees.)  | [optional] 
+**commission_fees** | [**List[CommissionFee]**](CommissionFee.md) | The commission fees of the payout. | [optional] 
 **remark** | **str** | A note or comment about the payout. | [optional] 
 **bulk_send_id** | **str** | The bulk send ID. | 
 **execution_mode** | [**PaymentBulkSendExecutionMode**](PaymentBulkSendExecutionMode.md) |  | 

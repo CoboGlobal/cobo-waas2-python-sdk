@@ -28,7 +28,7 @@ class CreateTopUpAddresses(BaseModel):
     """  # noqa: E501
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID. If not provided, the default merchant created during organization initialization will be used.")
     token_id: StrictStr = Field(description="The token ID, which identifies the cryptocurrency. ")
-    custom_payer_ids: Annotated[List[StrictStr], Field(max_length=50)] = Field(description="A list of unique custom payer IDs required to create top-up addresses. The maximum number of items is 50. ")
+    custom_payer_ids: Annotated[List[StrictStr], Field(max_length=50)] = Field(description="A list of unique custom payer IDs required to create top-up addresses. ")
     __properties: ClassVar[List[str]] = ["merchant_id", "token_id", "custom_payer_ids"]
 
     model_config = ConfigDict(

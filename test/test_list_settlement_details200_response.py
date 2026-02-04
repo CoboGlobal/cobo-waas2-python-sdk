@@ -94,7 +94,8 @@ class TestListSettlementDetails200Response(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), )
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

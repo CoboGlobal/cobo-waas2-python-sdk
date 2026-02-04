@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.commission_fee import CommissionFee
 from cobo_waas2.models.payment_payout_item import PaymentPayoutItem
 from cobo_waas2.models.payment_payout_recipient_info import PaymentPayoutRecipientInfo
 from cobo_waas2.models.payment_payout_status import PaymentPayoutStatus
@@ -37,11 +38,12 @@ class PaymentPayout(BaseModel):
     recipient_info: Optional[PaymentPayoutRecipientInfo] = None
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this payout, usually the user's API key.")
     actual_payout_amount: Optional[StrictStr] = Field(default=None, description="- For `Crypto` payouts: The amount of cryptocurrency sent to the recipient's address, denominated in the token specified in `recipient_info.token_id`. - For `OffRamp` payouts: The amount of fiat currency sent to the recipient's bank account, denominated in the currency specified in `recipient_info.currency`. (Note: The actual amount received may be lower due to additional bank transfer fees.) ")
-    status: PaymentPayoutStatus
+    commission_fees: Optional[List[CommissionFee]] = Field(default=None, description="The commission fees of the payout.")
     remark: Optional[StrictStr] = Field(default=None, description="A note or comment about the payout.")
+    status: PaymentPayoutStatus
     created_timestamp: StrictInt = Field(description="The created time of the payout, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the payout, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["payout_id", "request_id", "payout_channel", "source_account", "payout_items", "recipient_info", "initiator", "actual_payout_amount", "status", "remark", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["payout_id", "request_id", "payout_channel", "source_account", "payout_items", "recipient_info", "initiator", "actual_payout_amount", "commission_fees", "remark", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +94,13 @@ class PaymentPayout(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of recipient_info
         if self.recipient_info:
             _dict['recipient_info'] = self.recipient_info.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in commission_fees (list)
+        _items = []
+        if self.commission_fees:
+            for _item in self.commission_fees:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['commission_fees'] = _items
         return _dict
 
     @classmethod
@@ -112,8 +121,9 @@ class PaymentPayout(BaseModel):
             "recipient_info": PaymentPayoutRecipientInfo.from_dict(obj["recipient_info"]) if obj.get("recipient_info") is not None else None,
             "initiator": obj.get("initiator"),
             "actual_payout_amount": obj.get("actual_payout_amount"),
-            "status": obj.get("status"),
+            "commission_fees": [CommissionFee.from_dict(_item) for _item in obj["commission_fees"]] if obj.get("commission_fees") is not None else None,
             "remark": obj.get("remark"),
+            "status": obj.get("status"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

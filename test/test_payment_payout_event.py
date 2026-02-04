@@ -46,7 +46,8 @@ class TestPaymentPayoutEvent(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), )
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), )
                     ],
                 recipient_info = cobo_waas2.models.payment_payout_recipient_info.PaymentPayoutRecipientInfo(
                     address = '0x9876543210abcdef1234567890abcdef12345678', 
@@ -55,8 +56,12 @@ class TestPaymentPayoutEvent(unittest.TestCase):
                     bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
                 initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
                 actual_payout_amount = '500.00',
-                status = 'Pending',
+                commission_fees = [
+                    cobo_waas2.models.commission_fee.CommissionFee(
+                        fee_amount = '', )
+                    ],
                 remark = 'Payout for customer 123',
+                status = 'Pending',
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600,
                 transactions = [
