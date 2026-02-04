@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.auto_fuel_type import AutoFuelType
+from cobo_waas2.models.pre_check import PreCheck
 from cobo_waas2.models.transaction_process_type import TransactionProcessType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from cobo_waas2.models.transfer_destination import TransferDestination
@@ -39,7 +40,8 @@ class TransferParams(BaseModel):
     fee: Optional[TransactionRequestFee] = None
     transaction_process_type: Optional[TransactionProcessType] = None
     auto_fuel: Optional[AutoFuelType] = None
-    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee", "transaction_process_type", "auto_fuel"]
+    pre_check: Optional[PreCheck] = None
+    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee", "transaction_process_type", "auto_fuel", "pre_check"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +91,9 @@ class TransferParams(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fee
         if self.fee:
             _dict['fee'] = self.fee.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pre_check
+        if self.pre_check:
+            _dict['pre_check'] = self.pre_check.to_dict()
         return _dict
 
     @classmethod
@@ -109,7 +114,8 @@ class TransferParams(BaseModel):
             "description": obj.get("description"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
             "transaction_process_type": obj.get("transaction_process_type"),
-            "auto_fuel": obj.get("auto_fuel")
+            "auto_fuel": obj.get("auto_fuel"),
+            "pre_check": PreCheck.from_dict(obj["pre_check"]) if obj.get("pre_check") is not None else None
         })
         return _obj
 

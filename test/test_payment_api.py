@@ -102,18 +102,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_counterparty_entry(create_counterparty_entry_request=create_counterparty_entry_request)
         """
 
-    def test_create_counterparty_wallet_address(self) -> None:
-        """
-        Test case for create_counterparty_wallet_address
-
-        Create counterparty wallet address
-        """
-        """
-        create_counterparty_wallet_address_request = cobo_waas2.CreateCounterpartyWalletAddressRequest()
-
-        api_response = self.api.create_counterparty_wallet_address(create_counterparty_wallet_address_request=create_counterparty_wallet_address_request)
-        """
-
     def test_create_crypto_address(self) -> None:
         """
         Test case for create_crypto_address
@@ -138,18 +126,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_destination(create_destination_request=create_destination_request)
         """
 
-    def test_create_destination_bank_account(self) -> None:
-        """
-        Test case for create_destination_bank_account
-
-        Create destination bank account
-        """
-        """
-        create_destination_bank_account_request = cobo_waas2.CreateDestinationBankAccountRequest()
-
-        api_response = self.api.create_destination_bank_account(create_destination_bank_account_request=create_destination_bank_account_request)
-        """
-
     def test_create_destination_entry(self) -> None:
         """
         Test case for create_destination_entry
@@ -160,18 +136,6 @@ class TestPaymentApi(unittest.TestCase):
         create_destination_entry_request = cobo_waas2.CreateDestinationEntryRequest()
 
         api_response = self.api.create_destination_entry(create_destination_entry_request=create_destination_entry_request)
-        """
-
-    def test_create_destination_wallet_address(self) -> None:
-        """
-        Test case for create_destination_wallet_address
-
-        Create destination wallet address
-        """
-        """
-        create_destination_wallet_address_request = cobo_waas2.CreateDestinationWalletAddressRequest()
-
-        api_response = self.api.create_destination_wallet_address(create_destination_wallet_address_request=create_destination_wallet_address_request)
         """
 
     def test_create_forced_sweep_request(self) -> None:
@@ -294,18 +258,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_top_up_addresses(create_top_up_addresses=create_top_up_addresses)
         """
 
-    def test_delete_counterparty(self) -> None:
-        """
-        Test case for delete_counterparty
-
-        Delete counterparty (Deprecated)
-        """
-        """
-        counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
-
-        api_response = self.api.delete_counterparty(counterparty_id)
-        """
-
     def test_delete_counterparty_by_id(self) -> None:
         """
         Test case for delete_counterparty_by_id
@@ -332,18 +284,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.delete_counterparty_entry(counterparty_entry_id, counterparty_id, entry_type=entry_type)
         """
 
-    def test_delete_counterparty_wallet_address(self) -> None:
-        """
-        Test case for delete_counterparty_wallet_address
-
-        Delete counterparty wallet address
-        """
-        """
-        wallet_address_id = '445bac57-7428-4d25-bce1-b3cd017f47a1'
-
-        api_response = self.api.delete_counterparty_wallet_address(wallet_address_id)
-        """
-
     def test_delete_crypto_address(self) -> None:
         """
         Test case for delete_crypto_address
@@ -354,30 +294,6 @@ class TestPaymentApi(unittest.TestCase):
         crypto_address_id = 'addr_ethusdt_20250506T123456_ab12cd'
 
         api_response = self.api.delete_crypto_address(crypto_address_id)
-        """
-
-    def test_delete_destination(self) -> None:
-        """
-        Test case for delete_destination
-
-        Delete destination (Deprecated)
-        """
-        """
-        destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
-
-        api_response = self.api.delete_destination(destination_id)
-        """
-
-    def test_delete_destination_bank_account(self) -> None:
-        """
-        Test case for delete_destination_bank_account
-
-        Delete destination bank account
-        """
-        """
-        bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-
-        api_response = self.api.delete_destination_bank_account(bank_account_id)
         """
 
     def test_delete_destination_by_id(self) -> None:
@@ -404,30 +320,6 @@ class TestPaymentApi(unittest.TestCase):
         entry_type = cobo_waas2.EntryType()
 
         api_response = self.api.delete_destination_entry(destination_entry_id, destination_id, entry_type)
-        """
-
-    def test_delete_destination_wallet_address(self) -> None:
-        """
-        Test case for delete_destination_wallet_address
-
-        Delete destination wallet address
-        """
-        """
-        wallet_address_id = '445bac57-7428-4d25-bce1-b3cd017f47a1'
-
-        api_response = self.api.delete_destination_wallet_address(wallet_address_id)
-        """
-
-    def test_enable_destination_whitelist(self) -> None:
-        """
-        Test case for enable_destination_whitelist
-
-        Enable or disable destination whitelist
-        """
-        """
-        enable_destination_whitelist_request = cobo_waas2.EnableDestinationWhitelistRequest()
-
-        api_response = self.api.enable_destination_whitelist(enable_destination_whitelist_request=enable_destination_whitelist_request)
         """
 
     def test_get_available_allocation_amount(self) -> None:
@@ -480,18 +372,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_counterparty(counterparty_id)
         """
 
-    def test_get_counterparty_detail_by_id(self) -> None:
-        """
-        Test case for get_counterparty_detail_by_id
-
-        Get counterparty information (Deprecated)
-        """
-        """
-        counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
-
-        api_response = self.api.get_counterparty_detail_by_id(counterparty_id)
-        """
-
     def test_get_counterparty_entry(self) -> None:
         """
         Test case for get_counterparty_entry
@@ -515,30 +395,6 @@ class TestPaymentApi(unittest.TestCase):
         destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
 
         api_response = self.api.get_destination(destination_id)
-        """
-
-    def test_get_destination_bank_account_detail_by_id(self) -> None:
-        """
-        Test case for get_destination_bank_account_detail_by_id
-
-        Get destination bank account information
-        """
-        """
-        bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-
-        api_response = self.api.get_destination_bank_account_detail_by_id(bank_account_id)
-        """
-
-    def test_get_destination_detail_by_id(self) -> None:
-        """
-        Test case for get_destination_detail_by_id
-
-        Get destination information (Deprecated)
-        """
-        """
-        destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
-
-        api_response = self.api.get_destination_detail_by_id(destination_id)
         """
 
     def test_get_destination_entry(self) -> None:
@@ -782,23 +638,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_counterparty_entries(limit=limit, before=before, after=after, entry_type=entry_type, counterparty_id=counterparty_id, chain_ids=chain_ids, wallet_address=wallet_address)
         """
 
-    def test_list_counterparty_wallet_address(self) -> None:
-        """
-        Test case for list_counterparty_wallet_address
-
-        List counterparty wallet addresses
-        """
-        """
-        limit = 10
-        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-        counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
-        chain_ids = 'ETH'
-        wallet_address = '0x1234567890abcdef...'
-
-        api_response = self.api.list_counterparty_wallet_address(limit=limit, before=before, after=after, counterparty_id=counterparty_id, chain_ids=chain_ids, wallet_address=wallet_address)
-        """
-
     def test_list_crypto_addresses(self) -> None:
         """
         Test case for list_crypto_addresses
@@ -809,23 +648,6 @@ class TestPaymentApi(unittest.TestCase):
         token_id = 'ETH_USDT'
 
         api_response = self.api.list_crypto_addresses(token_id=token_id)
-        """
-
-    def test_list_destination_bank_accounts(self) -> None:
-        """
-        Test case for list_destination_bank_accounts
-
-        List destination bank accounts
-        """
-        """
-        limit = 10
-        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-        keyword = 'keyword'
-        destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
-        bank_account_status = cobo_waas2.BankAccountStatus()
-
-        api_response = self.api.list_destination_bank_accounts(limit=limit, before=before, after=after, keyword=keyword, destination_id=destination_id, bank_account_status=bank_account_status)
         """
 
     def test_list_destination_entries(self) -> None:
@@ -846,23 +668,6 @@ class TestPaymentApi(unittest.TestCase):
         bank_account_status = cobo_waas2.BankAccountStatus()
 
         api_response = self.api.list_destination_entries(entry_type, limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address, keyword=keyword, bank_account_status=bank_account_status)
-        """
-
-    def test_list_destination_wallet_addresses(self) -> None:
-        """
-        Test case for list_destination_wallet_addresses
-
-        List destination wallet addresses
-        """
-        """
-        limit = 10
-        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-        destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
-        chain_ids = 'ETH'
-        wallet_address = '0x1234567890abcdef...'
-
-        api_response = self.api.list_destination_wallet_addresses(limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address)
         """
 
     def test_list_destinations(self) -> None:
@@ -950,7 +755,7 @@ class TestPaymentApi(unittest.TestCase):
         """
         Test case for list_payment_supported_tokens
 
-        List all supported tokens
+        List supported tokens
         """
         """
 
@@ -1060,17 +865,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.payment_estimate_fee(payment_estimate_fee_request=payment_estimate_fee_request)
         """
 
-    def test_query_destination_whitelist_enabled(self) -> None:
-        """
-        Test case for query_destination_whitelist_enabled
-
-        Query destination whitelist enabled status
-        """
-        """
-
-        api_response = self.api.query_destination_whitelist_enabled()
-        """
-
     def test_update_bank_account_by_id(self) -> None:
         """
         Test case for update_bank_account_by_id
@@ -1097,19 +891,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.update_counterparty(counterparty_id, update_counterparty_request=update_counterparty_request)
         """
 
-    def test_update_counterparty_by_id(self) -> None:
-        """
-        Test case for update_counterparty_by_id
-
-        Update counterparty (Deprecated)
-        """
-        """
-        counterparty_id = '5b0ed293-f728-40b4-b1f6-86b88cd51384'
-        update_counterparty_by_id_request = cobo_waas2.UpdateCounterpartyByIdRequest()
-
-        api_response = self.api.update_counterparty_by_id(counterparty_id, update_counterparty_by_id_request=update_counterparty_by_id_request)
-        """
-
     def test_update_destination(self) -> None:
         """
         Test case for update_destination
@@ -1121,32 +902,6 @@ class TestPaymentApi(unittest.TestCase):
         update_destination_request = cobo_waas2.UpdateDestinationRequest()
 
         api_response = self.api.update_destination(destination_id, update_destination_request=update_destination_request)
-        """
-
-    def test_update_destination_bank_account_by_id(self) -> None:
-        """
-        Test case for update_destination_bank_account_by_id
-
-        Update destination bank account
-        """
-        """
-        bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-        update_destination_bank_account = cobo_waas2.UpdateDestinationBankAccount()
-
-        api_response = self.api.update_destination_bank_account_by_id(bank_account_id, update_destination_bank_account=update_destination_bank_account)
-        """
-
-    def test_update_destination_by_id(self) -> None:
-        """
-        Test case for update_destination_by_id
-
-        Update destination (Deprecated)
-        """
-        """
-        destination_id = '46beeab4-6a8e-476e-bc69-99b89aacbc6f'
-        update_destination_by_id_request = cobo_waas2.UpdateDestinationByIdRequest()
-
-        api_response = self.api.update_destination_by_id(destination_id, update_destination_by_id_request=update_destination_by_id_request)
         """
 
     def test_update_destination_entry(self) -> None:

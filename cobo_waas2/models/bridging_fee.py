@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.payment_bridge_status import PaymentBridgeStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,8 @@ class BridgingFee(BaseModel):
     fee_amount: StrictStr = Field(description="The fee charged for bridging tokens to another chain. ")
     received_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the destination token received after bridging.")
     received_amount: Optional[StrictStr] = Field(default=None, description="The final amount of the token received after bridging.")
-    __properties: ClassVar[List[str]] = ["fee_amount", "received_token_id", "received_amount"]
+    bridge_status: Optional[PaymentBridgeStatus] = None
+    __properties: ClassVar[List[str]] = ["fee_amount", "received_token_id", "received_amount", "bridge_status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +85,8 @@ class BridgingFee(BaseModel):
         _obj = cls.model_validate({
             "fee_amount": obj.get("fee_amount"),
             "received_token_id": obj.get("received_token_id"),
-            "received_amount": obj.get("received_amount")
+            "received_amount": obj.get("received_amount"),
+            "bridge_status": obj.get("bridge_status")
         })
         return _obj
 

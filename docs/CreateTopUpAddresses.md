@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **merchant_id** | **str** | The merchant ID. If not provided, the default merchant created during organization initialization will be used. | [optional] 
 **token_id** | **str** | The token ID, which identifies the cryptocurrency.  | 
-**custom_payer_ids** | **List[str]** | A list of unique custom payer IDs required to create top-up addresses. The maximum number of items is 50.  | 
+**custom_payer_ids** | **List[str]** | A list of unique custom payer IDs required to create top-up addresses.  | 
 
 ## Example
 

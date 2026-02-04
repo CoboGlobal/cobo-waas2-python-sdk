@@ -26,7 +26,7 @@ class CreateWalletAddress(BaseModel):
     CreateWalletAddress
     """  # noqa: E501
     address: StrictStr = Field(description="The wallet address.")
-    chain_id: StrictStr = Field(description="The chain ID of the address.")
+    chain_id: StrictStr = Field(description="The chain ID of the cryptocurrency.  Supported values in the development environment:   - Counterparty: `ARBITRUM_ETH`, `BASE_ETH`, `BSC_BNB`, `ETH`, `TRON`, `MATIC`, `SOL`, `TTRON`, `SOLDEV_SOL`, `SETH`   - Destination: `All EVM Networks`, `SOL`, `TRON`, `TTRON`, `SOLDEV_SOL` Supported values in the production environment:   - Counterparty: `ARBITRUM_ETH`, `BASE_ETH`, `BSC_BNB`, `ETH`, `TRON`, `MATIC`, `SOL`   - Destination: `All EVM Networks`, `SOL`, `TRON` ")
     __properties: ClassVar[List[str]] = ["address", "chain_id"]
 
     model_config = ConfigDict(

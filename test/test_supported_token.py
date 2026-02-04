@@ -41,8 +41,8 @@ class TestSupportedToken(unittest.TestCase):
                 token_address = '0xdac17f958d2ee523a2206206994597c13d831ec7',
                 chain_id = 'ETH',
                 chain_symbol = 'ETH',
-                chain_icon_url = 'https://example.com/icons/eth.png',
-                token_icon_url = 'https://example.com/icons/usdt.png',
+                chain_icon_url = 'https://d.cobo.com/public/logos/ETH.png',
+                token_icon_url = 'https://d.cobo.com/public/logos/USDT.png',
                 can_off_ramp = True
             )
         else:

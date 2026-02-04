@@ -42,7 +42,8 @@ class TestBalanceUpdateInfo(unittest.TestCase):
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
-                    locked = '0', )
+                    locked = '0', 
+                    frozen = '0', )
             )
         else:
             return BalanceUpdateInfo(
@@ -54,7 +55,8 @@ class TestBalanceUpdateInfo(unittest.TestCase):
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
-                    locked = '0', ),
+                    locked = '0', 
+                    frozen = '0', ),
         )
         """
 

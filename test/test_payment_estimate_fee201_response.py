@@ -43,7 +43,8 @@ class TestPaymentEstimateFee201Response(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), 
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), 
                         otc_fee = cobo_waas2.models.otc_fee.OtcFee(
                             fee_rate = '', 
                             token_id = '', ), )

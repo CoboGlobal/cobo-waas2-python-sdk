@@ -34,33 +34,13 @@ class TestGraphQLRequest(unittest.TestCase):
         model = GraphQLRequest()
         if include_optional:
             return GraphQLRequest(
-                query = 'query {
-  wallets {
-    edges {
-      node {
-        id
-        name
-      }
-    }
-  }
-}
-',
+                query = 'query { wallets { edges { node { id name } } } }',
                 variables = { },
                 operation_name = 'getWallets'
             )
         else:
             return GraphQLRequest(
-                query = 'query {
-  wallets {
-    edges {
-      node {
-        id
-        name
-      }
-    }
-  }
-}
-',
+                query = 'query { wallets { edges { node { id name } } } }',
         )
         """
 

@@ -20,6 +20,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.auto_fuel_type import AutoFuelType
 from cobo_waas2.models.contract_call_destination import ContractCallDestination
 from cobo_waas2.models.contract_call_source import ContractCallSource
+from cobo_waas2.models.pre_check import PreCheck
 from cobo_waas2.models.transaction_process_type import TransactionProcessType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
 from typing import Optional, Set
@@ -39,7 +40,8 @@ class ContractCallParams(BaseModel):
     fee: Optional[TransactionRequestFee] = None
     transaction_process_type: Optional[TransactionProcessType] = None
     auto_fuel: Optional[AutoFuelType] = None
-    __properties: ClassVar[List[str]] = ["request_id", "chain_id", "source", "destination", "description", "category_names", "fee", "transaction_process_type", "auto_fuel"]
+    pre_check: Optional[PreCheck] = None
+    __properties: ClassVar[List[str]] = ["request_id", "chain_id", "source", "destination", "description", "category_names", "fee", "transaction_process_type", "auto_fuel", "pre_check"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +91,9 @@ class ContractCallParams(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fee
         if self.fee:
             _dict['fee'] = self.fee.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pre_check
+        if self.pre_check:
+            _dict['pre_check'] = self.pre_check.to_dict()
         return _dict
 
     @classmethod
@@ -109,7 +114,8 @@ class ContractCallParams(BaseModel):
             "category_names": obj.get("category_names"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
             "transaction_process_type": obj.get("transaction_process_type"),
-            "auto_fuel": obj.get("auto_fuel")
+            "auto_fuel": obj.get("auto_fuel"),
+            "pre_check": PreCheck.from_dict(obj["pre_check"]) if obj.get("pre_check") is not None else None
         })
         return _obj
 

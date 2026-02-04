@@ -15,21 +15,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.counterparty_wallet_address_detail import CounterpartyWalletAddressDetail
-from cobo_waas2.models.pagination import Pagination
+from cobo_waas2.models.skip_check_type import SkipCheckType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListCounterpartyWalletAddress200Response(BaseModel):
+class PreCheck(BaseModel):
     """
-    ListCounterpartyWalletAddress200Response
+    Some validation settings for creating a transaction.
     """  # noqa: E501
-    data: Optional[List[CounterpartyWalletAddressDetail]] = None
-    pagination: Optional[Pagination] = None
-    __properties: ClassVar[List[str]] = ["data", "pagination"]
+    skip_checks: Optional[List[SkipCheckType]] = Field(default=None, description="Selection to skip verification.")
+    __properties: ClassVar[List[str]] = ["skip_checks"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +47,7 @@ class ListCounterpartyWalletAddress200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListCounterpartyWalletAddress200Response from a JSON string"""
+        """Create an instance of PreCheck from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,21 +68,11 @@ class ListCounterpartyWalletAddress200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
-        # override the default output from pydantic by calling `to_dict()` of pagination
-        if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListCounterpartyWalletAddress200Response from a dict"""
+        """Create an instance of PreCheck from a dict"""
         if obj is None:
             return None
 
@@ -92,8 +80,7 @@ class ListCounterpartyWalletAddress200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data": [CounterpartyWalletAddressDetail.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
-            "pagination": Pagination.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
+            "skip_checks": obj.get("skip_checks")
         })
         return _obj
 

@@ -176,7 +176,8 @@ class TestWebhookEventData(unittest.TestCase):
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
-                    locked = '0', ),
+                    locked = '0', 
+                    frozen = '0', ),
                 token_ids = '',
                 operation_type = 'Added',
                 order_id = 'O20250304-M1001-1001',
@@ -297,7 +298,8 @@ class TestWebhookEventData(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), )
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), )
                     ],
                 acquiring_type = 'Order',
                 payout_channel = 'Crypto',
@@ -322,7 +324,8 @@ class TestWebhookEventData(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), )
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), )
                     ],
                 recipient_info = cobo_waas2.models.payment_payout_recipient_info.PaymentPayoutRecipientInfo(
                     address = '0x9876543210abcdef1234567890abcdef12345678', 
@@ -330,6 +333,10 @@ class TestWebhookEventData(unittest.TestCase):
                     currency = 'USD', 
                     bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
                 actual_payout_amount = '500.00',
+                commission_fees = [
+                    cobo_waas2.models.commission_fee.CommissionFee(
+                        fee_amount = '', )
+                    ],
                 remark = 'Payout for customer 123',
                 bulk_send_id = '123e4567-e89b-12d3-a456-426614174003',
                 execution_mode = 'Strict',
@@ -394,7 +401,8 @@ class TestWebhookEventData(unittest.TestCase):
                     total = '100.0', 
                     available = '80.5', 
                     pending = '0', 
-                    locked = '0', ),
+                    locked = '0', 
+                    frozen = '0', ),
                 token_ids = '',
                 operation_type = 'Added',
                 order_id = 'O20250304-M1001-1001',
@@ -468,7 +476,8 @@ class TestWebhookEventData(unittest.TestCase):
                         bridging_fee = cobo_waas2.models.bridging_fee.BridgingFee(
                             fee_amount = '', 
                             received_token_id = '', 
-                            received_amount = '', ), )
+                            received_amount = '', 
+                            bridge_status = 'Completed', ), )
                     ],
                 acquiring_type = 'Order',
                 payout_channel = 'Crypto',

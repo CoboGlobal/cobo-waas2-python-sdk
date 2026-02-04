@@ -41,7 +41,8 @@ class TestListAddressBalancesByToken200Response(unittest.TestCase):
                             total = '100.0', 
                             available = '80.5', 
                             pending = '0', 
-                            locked = '0', ), )
+                            locked = '0', 
+                            frozen = '0', ), )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

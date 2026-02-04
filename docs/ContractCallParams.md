@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
 **transaction_process_type** | [**TransactionProcessType**](TransactionProcessType.md) |  | [optional] 
 **auto_fuel** | [**AutoFuelType**](AutoFuelType.md) |  | [optional] 
+**pre_check** | [**PreCheck**](PreCheck.md) |  | [optional] 
 
 ## Example
 
