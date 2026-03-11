@@ -66,6 +66,7 @@ Method | HTTP request | Description
 [**list_top_up_payer_accounts**](PaymentApi.md#list_top_up_payer_accounts) | **GET** /payments/topup/payer_accounts | List top-up payer accounts
 [**list_top_up_payers**](PaymentApi.md#list_top_up_payers) | **GET** /payments/topup/payers | List payers
 [**payment_estimate_fee**](PaymentApi.md#payment_estimate_fee) | **POST** /payments/estimate_fee | Estimate fees
+[**trigger_test_payments_webhook_event**](PaymentApi.md#trigger_test_payments_webhook_event) | **POST** /payments/webhooks/trigger | Trigger test webhook event
 [**update_bank_account_by_id**](PaymentApi.md#update_bank_account_by_id) | **PUT** /payments/bank_accounts/{bank_account_id} | Update bank account
 [**update_counterparty**](PaymentApi.md#update_counterparty) | **PUT** /payments/counterparty/{counterparty_id} | Update counterparty
 [**update_destination**](PaymentApi.md#update_destination) | **PUT** /payments/destination/{destination_id} | Update destination
@@ -3903,11 +3904,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_merchant_balances**
-> ListMerchantBalances200Response list_merchant_balances(token_id, merchant_ids=merchant_ids, acquiring_type=acquiring_type)
+> ListMerchantBalances200Response list_merchant_balances(merchant_ids=merchant_ids, token_id=token_id, acquiring_type=acquiring_type)
 
 List merchant balances
 
- This operation retrieves the balance information for specified merchants.   The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Accounts and fund allocation](https://www.cobo.com/payments/en/guides/amounts-and-balances). 
+This operation retrieves merchant balance information.  You need to specify at least one of `merchant_ids` or `token_id` to filter the results.  <Note>Do not pass `acquiring_type` for this operation.</Note>  For more information, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
 
 ### Example
 
@@ -3932,13 +3933,13 @@ configuration = cobo_waas2.Configuration(
 with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.PaymentApi(api_client)
-    token_id = 'ETH_USDT'
     merchant_ids = 'M1001,M1002,M1003'
+    token_id = 'ETH_USDT'
     acquiring_type = cobo_waas2.AcquiringType()
 
     try:
         # List merchant balances
-        api_response = api_instance.list_merchant_balances(token_id, merchant_ids=merchant_ids, acquiring_type=acquiring_type)
+        api_response = api_instance.list_merchant_balances(merchant_ids=merchant_ids, token_id=token_id, acquiring_type=acquiring_type)
         print("The response of PaymentApi->list_merchant_balances:\n")
         pprint(api_response)
     except Exception as e:
@@ -3952,8 +3953,8 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **token_id** | **str**| The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format &#x60;{CHAIN}_{TOKEN}&#x60;. Supported values include:   - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDCOIN&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC2&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
- **merchant_ids** | **str**| A list of merchant IDs to query. | [optional] 
+ **merchant_ids** | **str**| The comma-separated list of merchant IDs to filter by.  At least one of &#x60;merchant_ids&#x60; or &#x60;token_id&#x60; must be provided.  For more information about merchants, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview).  | [optional] 
+ **token_id** | **str**| The token ID that identifies the cryptocurrency.  At least one of &#x60;merchant_ids&#x60; or &#x60;token_id&#x60; must be provided.  For a complete list of supported tokens, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview).  | [optional] 
  **acquiring_type** | [**AcquiringType**](.md)| This parameter has been deprecated | [optional] 
 
 ### Return type
@@ -4739,6 +4740,78 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **trigger_test_payments_webhook_event**
+> TriggerTestPaymentWebhookEventResponse trigger_test_payments_webhook_event(trigger_test_payments_webhook_event_request=trigger_test_payments_webhook_event_request)
+
+Trigger test webhook event
+
+This operation tests the functionality of your Payments webhook endpoint by triggering a test webhook event. The test event is sent to all endpoints you have registered on Cobo Portal.  You need to specify the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  For more information about Payments webhooks, see [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). For webhook event types and payload structure, refer to [List all webhook events](https://www.cobo.com/developers/v2/api-references/developers--webhooks/list-all-webhook-events). 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.trigger_test_payment_webhook_event_response import TriggerTestPaymentWebhookEventResponse
+from cobo_waas2.models.trigger_test_payments_webhook_event_request import TriggerTestPaymentsWebhookEventRequest
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    trigger_test_payments_webhook_event_request = cobo_waas2.TriggerTestPaymentsWebhookEventRequest()
+
+    try:
+        # Trigger test webhook event
+        api_response = api_instance.trigger_test_payments_webhook_event(trigger_test_payments_webhook_event_request=trigger_test_payments_webhook_event_request)
+        print("The response of PaymentApi->trigger_test_payments_webhook_event:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->trigger_test_payments_webhook_event: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trigger_test_payments_webhook_event_request** | [**TriggerTestPaymentsWebhookEventRequest**](TriggerTestPaymentsWebhookEventRequest.md)| The request body used to trigger a test Payments webhook event.  You need to specify the event type. You can optionally include the &#x60;override_data&#x60; property to customize the payload. The provided fields must match the webhook event data structure for the specified event type.  | [optional] 
+
+### Return type
+
+[**TriggerTestPaymentWebhookEventResponse**](TriggerTestPaymentWebhookEventResponse.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
 
 ### HTTP request headers
 

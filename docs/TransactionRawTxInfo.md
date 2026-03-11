@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **selected_utxos** | [**List[TransactionSelectedUtxo]**](TransactionSelectedUtxo.md) | The selected UTXOs to be consumed in the transaction. | [optional] 
 **raw_tx** | **str** | The raw transaction data. | [optional] 
 **unsigned_raw_tx** | **str** | The unsigned raw transaction data. | [optional] 
-**utxo_change** | [**TransactionUtxoChange**](TransactionUtxoChange.md) |  | [optional] 
+**utxo_change** | [**TransactionUtxoChange**](TransactionUtxoChange.md) | Deprecated. Use &#x60;utxo_changes&#x60; instead. | [optional] 
+**utxo_changes** | [**List[TransactionUtxoChange]**](TransactionUtxoChange.md) | The UTXO change outputs in the transaction. | [optional] 
 
 ## Example
 

@@ -74,16 +74,23 @@ class TestListCallbackMessages200Response(unittest.TestCase):
                                     cobo_waas2.models.transaction_selected_utxo.TransactionSelectedUtxo(
                                         tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
                                         vout_n = 0, 
+                                        token_id = 'BTC', 
                                         address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
                                         value = '0.5', 
                                         redeem_script = '0x1cc56cbbac4622082221a8768d1d0901', 
-                                        revealed_script = '0x1cc56cbbac4622082221a8768d1d0901', )
+                                        revealed_script = '0x1cc56cbbac4622082221a8768d1d0901', 
+                                        object_id = '0x11af4b844ff94b3fbef6e36b518da3ad4c5856fa686464524a876b463d129760', 
+                                        version = '1', )
                                     ], 
                                 raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
                                 unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
-                                utxo_change = cobo_waas2.models.transaction_utxo_change.TransactionUtxoChange(
-                                    address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
-                                    value = '0.5', ), ), 
+                                utxo_change = null, 
+                                utxo_changes = [
+                                    cobo_waas2.models.transaction_utxo_change.TransactionUtxoChange(
+                                        address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
+                                        value = '0.5', 
+                                        token_id = 'BTC', )
+                                    ], ), 
                             replacement = cobo_waas2.models.transaction_replacement.Transaction_replacement(
                                 replaced_by_type = 'Resend', 
                                 replaced_by_transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
@@ -159,16 +166,23 @@ class TestListCallbackMessages200Response(unittest.TestCase):
                                     cobo_waas2.models.transaction_selected_utxo.TransactionSelectedUtxo(
                                         tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
                                         vout_n = 0, 
+                                        token_id = 'BTC', 
                                         address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
                                         value = '0.5', 
                                         redeem_script = '0x1cc56cbbac4622082221a8768d1d0901', 
-                                        revealed_script = '0x1cc56cbbac4622082221a8768d1d0901', )
+                                        revealed_script = '0x1cc56cbbac4622082221a8768d1d0901', 
+                                        object_id = '0x11af4b844ff94b3fbef6e36b518da3ad4c5856fa686464524a876b463d129760', 
+                                        version = '1', )
                                     ], 
                                 raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
                                 unsigned_raw_tx = '0xa22cb4650000000000000000000000001e0049783f008a0085193e00003d00cd54003c71000000000000000000000000000000000000000000000000000000000000DEMO', 
-                                utxo_change = cobo_waas2.models.transaction_utxo_change.TransactionUtxoChange(
-                                    address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
-                                    value = '0.5', ), ), 
+                                utxo_change = null, 
+                                utxo_changes = [
+                                    cobo_waas2.models.transaction_utxo_change.TransactionUtxoChange(
+                                        address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE', 
+                                        value = '0.5', 
+                                        token_id = 'BTC', )
+                                    ], ), 
                             replacement = cobo_waas2.models.transaction_replacement.Transaction_replacement(
                                 replaced_by_type = 'Resend', 
                                 replaced_by_transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 

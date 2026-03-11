@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bank_name** | **str** | The name of the intermediary bank. | 
-**bank_address** | **str** | The address of the intermediary bank. | 
+**bank_address** | **str** | The address of the intermediary bank. | [optional] 
 **bank_swift_code** | **str** | The SWIFT or BIC code of the intermediary bank. | 
 
 ## Example

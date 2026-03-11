@@ -28,7 +28,7 @@ class MerchantBalance(BaseModel):
     """  # noqa: E501
     merchant_id: StrictStr = Field(description="The merchant ID.")
     token_id: StrictStr = Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`.")
-    acquiring_type: AcquiringType
+    acquiring_type: Optional[AcquiringType] = None
     total_received_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been received by the merchant.")
     settled_amount: Optional[StrictStr] = Field(default=None, description="The total amount of the token that has been paid out from the merchant's balance.")
     payout_amount: Optional[StrictStr] = Field(default=None, description="This field is reserved for future use.")

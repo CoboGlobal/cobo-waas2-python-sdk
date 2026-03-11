@@ -51,7 +51,9 @@ class TestDestinationBankAccount(unittest.TestCase):
                     bank_swift_code = 'BOFAUS33', ),
                 bank_account_status = 'Pending',
                 created_timestamp = 1744689600,
-                updated_timestamp = 1744689600
+                updated_timestamp = 1744689600,
+                country = 'USA',
+                city = 'New York'
             )
         else:
             return DestinationBankAccount(

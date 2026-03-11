@@ -65,6 +65,8 @@ class WebhookEventType(str, Enum):
     PAYMENT_DOT_BULK_SEND_DOT_STATUS_DOT_UPDATED = 'payment.bulk_send.status.updated'
     PAYMENT_DOT_TRANSACTION_DOT_EXTERNAL_DOT_CREATED = 'payment.transaction.external.created'
     PAYMENT_DOT_TRANSACTION_DOT_EXTERNAL_DOT_COMPLETED = 'payment.transaction.external.completed'
+    PAYMENT_DOT_TRANSACTION_DOT_SETTLEMENT_NETWORK_DOT_CREATED = 'payment.transaction.settlement_network.created'
+    PAYMENT_DOT_TRANSACTION_DOT_SETTLEMENT_NETWORK_DOT_COMPLETED = 'payment.transaction.settlement_network.completed'
     COMPLIANCE_DOT_DISPOSITION_DOT_STATUS_DOT_UPDATED = 'compliance.disposition.status.updated'
     COMPLIANCE_DOT_KYT_DOT_SCREENINGS_DOT_STATUS_DOT_UPDATED = 'compliance.kyt.screenings.status.updated'
     COMPLIANCE_DOT_KYA_DOT_SCREENINGS_DOT_STATUS_DOT_UPDATED = 'compliance.kya.screenings.status.updated'

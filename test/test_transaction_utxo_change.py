@@ -35,7 +35,8 @@ class TestTransactionUtxoChange(unittest.TestCase):
         if include_optional:
             return TransactionUtxoChange(
                 address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE',
-                value = '0.5'
+                value = '0.5',
+                token_id = 'BTC'
             )
         else:
             return TransactionUtxoChange(

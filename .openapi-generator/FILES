@@ -763,6 +763,8 @@ cobo_waas2/models/travel_rule_withdraw_legal_entity.py
 cobo_waas2/models/travel_rule_withdraw_natural_entity.py
 cobo_waas2/models/travel_rule_withdraw_request.py
 cobo_waas2/models/travel_rule_withdraw_request_travel_rule_info.py
+cobo_waas2/models/trigger_test_payment_webhook_event_response.py
+cobo_waas2/models/trigger_test_payments_webhook_event_request.py
 cobo_waas2/models/trigger_test_webhook_event201_response.py
 cobo_waas2/models/trigger_test_webhook_event_request.py
 cobo_waas2/models/tron_contract_call_destination.py
@@ -1632,6 +1634,8 @@ docs/TravelRuleWithdrawLegalEntity.md
 docs/TravelRuleWithdrawNaturalEntity.md
 docs/TravelRuleWithdrawRequest.md
 docs/TravelRuleWithdrawRequestTravelRuleInfo.md
+docs/TriggerTestPaymentWebhookEventResponse.md
+docs/TriggerTestPaymentsWebhookEventRequest.md
 docs/TriggerTestWebhookEvent201Response.md
 docs/TriggerTestWebhookEventRequest.md
 docs/TronContractCallDestination.md
@@ -2429,6 +2433,8 @@ test/test_travel_rule_withdraw_legal_entity.py
 test/test_travel_rule_withdraw_natural_entity.py
 test/test_travel_rule_withdraw_request.py
 test/test_travel_rule_withdraw_request_travel_rule_info.py
+test/test_trigger_test_payment_webhook_event_response.py
+test/test_trigger_test_payments_webhook_event_request.py
 test/test_trigger_test_webhook_event201_response.py
 test/test_trigger_test_webhook_event_request.py
 test/test_tron_contract_call_destination.py

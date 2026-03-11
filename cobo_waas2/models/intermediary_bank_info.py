@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +26,7 @@ class IntermediaryBankInfo(BaseModel):
     IntermediaryBankInfo
     """  # noqa: E501
     bank_name: StrictStr = Field(description="The name of the intermediary bank.")
-    bank_address: StrictStr = Field(description="The address of the intermediary bank.")
+    bank_address: Optional[StrictStr] = Field(default=None, description="The address of the intermediary bank.")
     bank_swift_code: StrictStr = Field(description="The SWIFT or BIC code of the intermediary bank.")
     __properties: ClassVar[List[str]] = ["bank_name", "bank_address", "bank_swift_code"]
 

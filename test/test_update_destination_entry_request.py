@@ -50,7 +50,9 @@ class TestUpdateDestinationEntryRequest(unittest.TestCase):
                     intermediary_bank_info = cobo_waas2.models.intermediary_bank_info.IntermediaryBankInfo(
                         bank_name = 'Intermediary Bank', 
                         bank_address = '456 Bank Ave, Cityville, USA', 
-                        bank_swift_code = 'BOFAUS33', ), )
+                        bank_swift_code = 'BOFAUS33', ), 
+                    country = 'USA', 
+                    city = 'New York', )
             )
         else:
             return UpdateDestinationEntryRequest(

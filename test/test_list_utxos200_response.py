@@ -44,7 +44,11 @@ class TestListUtxos200Response(unittest.TestCase):
                         is_coinbase = False, 
                         is_locked = False, 
                         confirmed_number = 66716, 
-                        is_frozen = False, )
+                        is_frozen = False, 
+                        is_change = False, 
+                        chain_id = 'BTC', 
+                        object_id = '0x11af4b844ff94b3fbef6e36b518da3ad4c5856fa686464524a876b463d129760', 
+                        version = '1', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

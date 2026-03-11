@@ -15,20 +15,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.webhook_event_type import WebhookEventType
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TransactionDepositToAddressDestinationTxInfo(BaseModel):
+class TriggerTestPaymentsWebhookEventRequest(BaseModel):
     """
-    TransactionDepositToAddressDestinationTxInfo
+    TriggerTestPaymentsWebhookEventRequest
     """  # noqa: E501
-    vout_n: Optional[StrictInt] = Field(default=None, description="The output index of the UTXO.")
-    object_id: Optional[StrictStr] = Field(default=None, description="The ID of the blockchain object to spend (e.g., SUI Coin object).")
-    version: Optional[StrictStr] = Field(default=None, description="Object version number.")
-    __properties: ClassVar[List[str]] = ["vout_n", "object_id", "version"]
+    event_type: WebhookEventType
+    override_data: Optional[Dict[str, Any]] = Field(default=None, description="An optional object to customize the webhook event payload. Include only the fields you want to override.  The provided fields must match the webhook event data structure for the specified event type. For the full event data structure, refer to the `data.data` property in the response of [List all webhook events](https://www.cobo.com/developers/v2/api-references/developers--webhooks/list-all-webhook-events).  If this property is omitted, a default payload is returned. ")
+    __properties: ClassVar[List[str]] = ["event_type", "override_data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class TransactionDepositToAddressDestinationTxInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TransactionDepositToAddressDestinationTxInfo from a JSON string"""
+        """Create an instance of TriggerTestPaymentsWebhookEventRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class TransactionDepositToAddressDestinationTxInfo(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TransactionDepositToAddressDestinationTxInfo from a dict"""
+        """Create an instance of TriggerTestPaymentsWebhookEventRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,9 +81,8 @@ class TransactionDepositToAddressDestinationTxInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "vout_n": obj.get("vout_n"),
-            "object_id": obj.get("object_id"),
-            "version": obj.get("version")
+            "event_type": obj.get("event_type"),
+            "override_data": obj.get("override_data")
         })
         return _obj
 

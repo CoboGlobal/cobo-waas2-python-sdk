@@ -42,7 +42,9 @@ class DestinationBankAccount(BaseModel):
     bank_account_status: BankAccountStatus
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the bank account, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the bank account, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["bank_account_id", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "created_timestamp", "updated_timestamp"]
+    country: Optional[StrictStr] = Field(default=None, description="Beneficiary's country, in ISO 3166-1 alpha-3 format.")
+    city: Optional[StrictStr] = Field(default=None, description="Beneficiary's city.")
+    __properties: ClassVar[List[str]] = ["bank_account_id", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "created_timestamp", "updated_timestamp", "country", "city"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -112,7 +114,9 @@ class DestinationBankAccount(BaseModel):
             "intermediary_bank_info": IntermediaryBankInfo.from_dict(obj["intermediary_bank_info"]) if obj.get("intermediary_bank_info") is not None else None,
             "bank_account_status": obj.get("bank_account_status"),
             "created_timestamp": obj.get("created_timestamp"),
-            "updated_timestamp": obj.get("updated_timestamp")
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "country": obj.get("country"),
+            "city": obj.get("city")
         })
         return _obj
 
