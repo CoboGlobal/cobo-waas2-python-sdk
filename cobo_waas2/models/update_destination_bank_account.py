@@ -37,7 +37,9 @@ class UpdateDestinationBankAccount(BaseModel):
     iban_code: Optional[StrictStr] = Field(default=None, description="The IBAN code of the bank account.")
     further_credit: Optional[StrictStr] = Field(default=None, description="The further credit of the bank account.")
     intermediary_bank_info: Optional[IntermediaryBankInfo] = None
-    __properties: ClassVar[List[str]] = ["account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info"]
+    country: Optional[StrictStr] = Field(default=None, description="Beneficiary's country, in ISO 3166-1 alpha-3 format.")
+    city: Optional[StrictStr] = Field(default=None, description="Beneficiary's city.")
+    __properties: ClassVar[List[str]] = ["account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "country", "city"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +105,9 @@ class UpdateDestinationBankAccount(BaseModel):
             "bank_address": obj.get("bank_address"),
             "iban_code": obj.get("iban_code"),
             "further_credit": obj.get("further_credit"),
-            "intermediary_bank_info": IntermediaryBankInfo.from_dict(obj["intermediary_bank_info"]) if obj.get("intermediary_bank_info") is not None else None
+            "intermediary_bank_info": IntermediaryBankInfo.from_dict(obj["intermediary_bank_info"]) if obj.get("intermediary_bank_info") is not None else None,
+            "country": obj.get("country"),
+            "city": obj.get("city")
         })
         return _obj
 

@@ -48,9 +48,11 @@ class DestinationBankAccountDetail(BaseModel):
     further_credit: Optional[StrictStr] = Field(default=None, description="The further credit of the bank account.")
     intermediary_bank_info: Optional[IntermediaryBankInfo] = None
     bank_account_status: BankAccountStatus
+    country: Optional[StrictStr] = Field(default=None, description="Beneficiary's country, in ISO 3166-1 alpha-3 format.")
+    city: Optional[StrictStr] = Field(default=None, description="Beneficiary's city.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the bank account, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the bank account, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["destination_id", "destination_name", "destination_type", "destination_email", "destination_country", "destination_contact_address", "destination_merchant_id", "bank_account_id", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["destination_id", "destination_name", "destination_type", "destination_email", "destination_country", "destination_contact_address", "destination_merchant_id", "bank_account_id", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "country", "city", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -126,6 +128,8 @@ class DestinationBankAccountDetail(BaseModel):
             "further_credit": obj.get("further_credit"),
             "intermediary_bank_info": IntermediaryBankInfo.from_dict(obj["intermediary_bank_info"]) if obj.get("intermediary_bank_info") is not None else None,
             "bank_account_status": obj.get("bank_account_status"),
+            "country": obj.get("country"),
+            "city": obj.get("city"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

@@ -49,7 +49,6 @@ class TestMerchantBalance(unittest.TestCase):
             return MerchantBalance(
                 merchant_id = '1',
                 token_id = 'ETH_USDT',
-                acquiring_type = 'Order',
         )
         """
 

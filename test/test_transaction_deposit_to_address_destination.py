@@ -42,7 +42,9 @@ class TestTransactionDepositToAddressDestination(unittest.TestCase):
                 memo = '82840924',
                 amount = '1.5',
                 tx_info = cobo_waas2.models.transaction_deposit_to_address_destination_tx_info.TransactionDepositToAddressDestination_tx_info(
-                    vout_n = 0, )
+                    vout_n = 0, 
+                    object_id = '0x11af4b844ff94b3fbef6e36b518da3ad4c5856fa686464524a876b463d129760', 
+                    version = '1', )
             )
         else:
             return TransactionDepositToAddressDestination(

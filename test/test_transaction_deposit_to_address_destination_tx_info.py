@@ -34,7 +34,9 @@ class TestTransactionDepositToAddressDestinationTxInfo(unittest.TestCase):
         model = TransactionDepositToAddressDestinationTxInfo()
         if include_optional:
             return TransactionDepositToAddressDestinationTxInfo(
-                vout_n = 0
+                vout_n = 0,
+                object_id = '0x11af4b844ff94b3fbef6e36b518da3ad4c5856fa686464524a876b463d129760',
+                version = '1'
             )
         else:
             return TransactionDepositToAddressDestinationTxInfo(

@@ -15,20 +15,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TransactionDepositToAddressDestinationTxInfo(BaseModel):
+class TriggerTestPaymentWebhookEventResponse(BaseModel):
     """
-    TransactionDepositToAddressDestinationTxInfo
+    TriggerTestPaymentWebhookEventResponse
     """  # noqa: E501
-    vout_n: Optional[StrictInt] = Field(default=None, description="The output index of the UTXO.")
-    object_id: Optional[StrictStr] = Field(default=None, description="The ID of the blockchain object to spend (e.g., SUI Coin object).")
-    version: Optional[StrictStr] = Field(default=None, description="Object version number.")
-    __properties: ClassVar[List[str]] = ["vout_n", "object_id", "version"]
+    triggered: Optional[StrictBool] = Field(default=None, description="Whether a test webhook event was successfully triggered. - `true`: The test webhook event was successfully triggered. - `false`: The test webhook event could not be triggered. ")
+    __properties: ClassVar[List[str]] = ["triggered"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +46,7 @@ class TransactionDepositToAddressDestinationTxInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TransactionDepositToAddressDestinationTxInfo from a JSON string"""
+        """Create an instance of TriggerTestPaymentWebhookEventResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +71,7 @@ class TransactionDepositToAddressDestinationTxInfo(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TransactionDepositToAddressDestinationTxInfo from a dict"""
+        """Create an instance of TriggerTestPaymentWebhookEventResponse from a dict"""
         if obj is None:
             return None
 
@@ -81,9 +79,7 @@ class TransactionDepositToAddressDestinationTxInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "vout_n": obj.get("vout_n"),
-            "object_id": obj.get("object_id"),
-            "version": obj.get("version")
+            "triggered": obj.get("triggered")
         })
         return _obj
 

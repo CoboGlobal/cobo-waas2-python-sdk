@@ -27,7 +27,8 @@ class TransactionUtxoChange(BaseModel):
     """  # noqa: E501
     address: Optional[StrictStr] = Field(default=None, description="The receiving address of the UTXO change output.")
     value: Optional[StrictStr] = Field(default=None, description="The amount of the UTXO change output.")
-    __properties: ClassVar[List[str]] = ["address", "value"]
+    token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the UTXO change output.")
+    __properties: ClassVar[List[str]] = ["address", "value", "token_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +82,8 @@ class TransactionUtxoChange(BaseModel):
 
         _obj = cls.model_validate({
             "address": obj.get("address"),
-            "value": obj.get("value")
+            "value": obj.get("value"),
+            "token_id": obj.get("token_id")
         })
         return _obj
 

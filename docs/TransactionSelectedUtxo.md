@@ -8,10 +8,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tx_hash** | **str** | The transaction hash of the UTXO. | [optional] 
 **vout_n** | **int** | The output index of the UTXO. | [optional] 
+**token_id** | **str** | The token ID of the UTXO. | [optional] 
 **address** | **str** | The address of the UTXO. | [optional] 
 **value** | **str** | The value of the UTXO. | [optional] 
 **redeem_script** | **str** | The redeem script used in P2SH and P2WSH transactions. | [optional] 
 **revealed_script** | **str** | The revealed script used for Taproot script-path spend transaction. | [optional] 
+**object_id** | **str** | The ID of the blockchain object to spend (e.g., SUI Coin object). | [optional] 
+**version** | **str** | Object version number. | [optional] 
 
 ## Example
 

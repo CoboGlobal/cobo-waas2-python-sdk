@@ -34,7 +34,11 @@ class UTXO(BaseModel):
     is_locked: Optional[StrictBool] = Field(default=None, description="Whether the UTXO is locked.")
     confirmed_number: Optional[StrictInt] = Field(default=None, description="The number of confirmations for the UTXO.")
     is_frozen: Optional[StrictBool] = Field(default=None, description="Whether the UTXO is frozen.")
-    __properties: ClassVar[List[str]] = ["tx_hash", "vout_n", "address", "token_id", "value", "is_coinbase", "is_locked", "confirmed_number", "is_frozen"]
+    is_change: Optional[StrictBool] = Field(default=None, description="Whether the UTXO is a change output of a transaction.")
+    chain_id: Optional[StrictStr] = Field(default=None, description="The chain ID, which is the unique identifier of a blockchain.")
+    object_id: Optional[StrictStr] = Field(default=None, description="The ID of the blockchain object to spend (e.g., SUI Coin object).")
+    version: Optional[StrictStr] = Field(default=None, description="Object version number.")
+    __properties: ClassVar[List[str]] = ["tx_hash", "vout_n", "address", "token_id", "value", "is_coinbase", "is_locked", "confirmed_number", "is_frozen", "is_change", "chain_id", "object_id", "version"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +99,11 @@ class UTXO(BaseModel):
             "is_coinbase": obj.get("is_coinbase"),
             "is_locked": obj.get("is_locked"),
             "confirmed_number": obj.get("confirmed_number"),
-            "is_frozen": obj.get("is_frozen")
+            "is_frozen": obj.get("is_frozen"),
+            "is_change": obj.get("is_change"),
+            "chain_id": obj.get("chain_id"),
+            "object_id": obj.get("object_id"),
+            "version": obj.get("version")
         })
         return _obj
 

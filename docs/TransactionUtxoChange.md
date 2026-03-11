@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **address** | **str** | The receiving address of the UTXO change output. | [optional] 
 **value** | **str** | The amount of the UTXO change output. | [optional] 
+**token_id** | **str** | The token ID of the UTXO change output. | [optional] 
 
 ## Example
 

@@ -710,11 +710,11 @@ class TestPaymentApi(unittest.TestCase):
         List merchant balances
         """
         """
-        token_id = 'ETH_USDT'
         merchant_ids = 'M1001,M1002,M1003'
+        token_id = 'ETH_USDT'
         acquiring_type = cobo_waas2.AcquiringType()
 
-        api_response = self.api.list_merchant_balances(token_id, merchant_ids=merchant_ids, acquiring_type=acquiring_type)
+        api_response = self.api.list_merchant_balances(merchant_ids=merchant_ids, token_id=token_id, acquiring_type=acquiring_type)
         """
 
     def test_list_merchants(self) -> None:
@@ -863,6 +863,18 @@ class TestPaymentApi(unittest.TestCase):
         payment_estimate_fee_request = cobo_waas2.PaymentEstimateFeeRequest()
 
         api_response = self.api.payment_estimate_fee(payment_estimate_fee_request=payment_estimate_fee_request)
+        """
+
+    def test_trigger_test_payments_webhook_event(self) -> None:
+        """
+        Test case for trigger_test_payments_webhook_event
+
+        Trigger test webhook event
+        """
+        """
+        trigger_test_payments_webhook_event_request = cobo_waas2.TriggerTestPaymentsWebhookEventRequest()
+
+        api_response = self.api.trigger_test_payments_webhook_event(trigger_test_payments_webhook_event_request=trigger_test_payments_webhook_event_request)
         """
 
     def test_update_bank_account_by_id(self) -> None:

@@ -36,10 +36,13 @@ class TestTransactionSelectedUtxo(unittest.TestCase):
             return TransactionSelectedUtxo(
                 tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo',
                 vout_n = 0,
+                token_id = 'BTC',
                 address = '2N2xFZtbCFB6Nb3Pj9Sxsx5mX2fxX3yEgkE',
                 value = '0.5',
                 redeem_script = '0x1cc56cbbac4622082221a8768d1d0901',
-                revealed_script = '0x1cc56cbbac4622082221a8768d1d0901'
+                revealed_script = '0x1cc56cbbac4622082221a8768d1d0901',
+                object_id = '0x11af4b844ff94b3fbef6e36b518da3ad4c5856fa686464524a876b463d129760',
+                version = '1'
             )
         else:
             return TransactionSelectedUtxo(

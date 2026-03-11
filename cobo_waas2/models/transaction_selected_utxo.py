@@ -27,11 +27,14 @@ class TransactionSelectedUtxo(BaseModel):
     """  # noqa: E501
     tx_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash of the UTXO.")
     vout_n: Optional[StrictInt] = Field(default=None, description="The output index of the UTXO.")
+    token_id: Optional[StrictStr] = Field(default=None, description="The token ID of the UTXO.")
     address: Optional[StrictStr] = Field(default=None, description="The address of the UTXO.")
     value: Optional[StrictStr] = Field(default=None, description="The value of the UTXO.")
     redeem_script: Optional[StrictStr] = Field(default=None, description="The redeem script used in P2SH and P2WSH transactions.")
     revealed_script: Optional[StrictStr] = Field(default=None, description="The revealed script used for Taproot script-path spend transaction.")
-    __properties: ClassVar[List[str]] = ["tx_hash", "vout_n", "address", "value", "redeem_script", "revealed_script"]
+    object_id: Optional[StrictStr] = Field(default=None, description="The ID of the blockchain object to spend (e.g., SUI Coin object).")
+    version: Optional[StrictStr] = Field(default=None, description="Object version number.")
+    __properties: ClassVar[List[str]] = ["tx_hash", "vout_n", "token_id", "address", "value", "redeem_script", "revealed_script", "object_id", "version"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,10 +89,13 @@ class TransactionSelectedUtxo(BaseModel):
         _obj = cls.model_validate({
             "tx_hash": obj.get("tx_hash"),
             "vout_n": obj.get("vout_n"),
+            "token_id": obj.get("token_id"),
             "address": obj.get("address"),
             "value": obj.get("value"),
             "redeem_script": obj.get("redeem_script"),
-            "revealed_script": obj.get("revealed_script")
+            "revealed_script": obj.get("revealed_script"),
+            "object_id": obj.get("object_id"),
+            "version": obj.get("version")
         })
         return _obj
 

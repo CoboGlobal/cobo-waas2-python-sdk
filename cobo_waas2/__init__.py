@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.31.0"
+__version__ = "1.32.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -815,6 +815,8 @@ from cobo_waas2.models.travel_rule_withdraw_legal_entity import TravelRuleWithdr
 from cobo_waas2.models.travel_rule_withdraw_natural_entity import TravelRuleWithdrawNaturalEntity
 from cobo_waas2.models.travel_rule_withdraw_request import TravelRuleWithdrawRequest
 from cobo_waas2.models.travel_rule_withdraw_request_travel_rule_info import TravelRuleWithdrawRequestTravelRuleInfo
+from cobo_waas2.models.trigger_test_payment_webhook_event_response import TriggerTestPaymentWebhookEventResponse
+from cobo_waas2.models.trigger_test_payments_webhook_event_request import TriggerTestPaymentsWebhookEventRequest
 from cobo_waas2.models.trigger_test_webhook_event201_response import TriggerTestWebhookEvent201Response
 from cobo_waas2.models.trigger_test_webhook_event_request import TriggerTestWebhookEventRequest
 from cobo_waas2.models.tron_contract_call_destination import TronContractCallDestination

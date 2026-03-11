@@ -31,8 +31,9 @@ class TransactionRawTxInfo(BaseModel):
     selected_utxos: Optional[List[TransactionSelectedUtxo]] = Field(default=None, description="The selected UTXOs to be consumed in the transaction.")
     raw_tx: Optional[StrictStr] = Field(default=None, description="The raw transaction data.")
     unsigned_raw_tx: Optional[StrictStr] = Field(default=None, description="The unsigned raw transaction data.")
-    utxo_change: Optional[TransactionUtxoChange] = None
-    __properties: ClassVar[List[str]] = ["used_nonce", "selected_utxos", "raw_tx", "unsigned_raw_tx", "utxo_change"]
+    utxo_change: Optional[TransactionUtxoChange] = Field(default=None, description="Deprecated. Use `utxo_changes` instead.")
+    utxo_changes: Optional[List[TransactionUtxoChange]] = Field(default=None, description="The UTXO change outputs in the transaction.")
+    __properties: ClassVar[List[str]] = ["used_nonce", "selected_utxos", "raw_tx", "unsigned_raw_tx", "utxo_change", "utxo_changes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +84,13 @@ class TransactionRawTxInfo(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of utxo_change
         if self.utxo_change:
             _dict['utxo_change'] = self.utxo_change.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in utxo_changes (list)
+        _items = []
+        if self.utxo_changes:
+            for _item in self.utxo_changes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['utxo_changes'] = _items
         return _dict
 
     @classmethod
@@ -99,7 +107,8 @@ class TransactionRawTxInfo(BaseModel):
             "selected_utxos": [TransactionSelectedUtxo.from_dict(_item) for _item in obj["selected_utxos"]] if obj.get("selected_utxos") is not None else None,
             "raw_tx": obj.get("raw_tx"),
             "unsigned_raw_tx": obj.get("unsigned_raw_tx"),
-            "utxo_change": TransactionUtxoChange.from_dict(obj["utxo_change"]) if obj.get("utxo_change") is not None else None
+            "utxo_change": TransactionUtxoChange.from_dict(obj["utxo_change"]) if obj.get("utxo_change") is not None else None,
+            "utxo_changes": [TransactionUtxoChange.from_dict(_item) for _item in obj["utxo_changes"]] if obj.get("utxo_changes") is not None else None
         })
         return _obj
 

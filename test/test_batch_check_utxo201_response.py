@@ -44,7 +44,11 @@ class TestBatchCheckUtxo201Response(unittest.TestCase):
                         is_coinbase = False, 
                         is_locked = False, 
                         confirmed_number = 66716, 
-                        is_frozen = False, )
+                        is_frozen = False, 
+                        is_change = False, 
+                        chain_id = 'BTC', 
+                        object_id = '0x11af4b844ff94b3fbef6e36b518da3ad4c5856fa686464524a876b463d129760', 
+                        version = '1', )
                     ]
             )
         else:

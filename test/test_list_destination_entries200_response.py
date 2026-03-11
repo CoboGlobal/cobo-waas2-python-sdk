@@ -70,6 +70,8 @@ class TestListDestinationEntries200Response(unittest.TestCase):
                             bank_address = '456 Bank Ave, Cityville, USA', 
                             bank_swift_code = 'BOFAUS33', ), 
                         bank_account_status = 'Pending', 
+                        country = 'USA', 
+                        city = 'New York', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )
                     ],

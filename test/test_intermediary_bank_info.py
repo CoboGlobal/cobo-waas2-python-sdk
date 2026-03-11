@@ -41,7 +41,6 @@ class TestIntermediaryBankInfo(unittest.TestCase):
         else:
             return IntermediaryBankInfo(
                 bank_name = 'Intermediary Bank',
-                bank_address = '456 Bank Ave, Cityville, USA',
                 bank_swift_code = 'BOFAUS33',
         )
         """

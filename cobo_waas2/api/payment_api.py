@@ -96,6 +96,8 @@ from cobo_waas2.models.report_type import ReportType
 from cobo_waas2.models.settlement import Settlement
 from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.top_up_address import TopUpAddress
+from cobo_waas2.models.trigger_test_payment_webhook_event_response import TriggerTestPaymentWebhookEventResponse
+from cobo_waas2.models.trigger_test_payments_webhook_event_request import TriggerTestPaymentsWebhookEventRequest
 from cobo_waas2.models.update_bank_account_by_id_request import UpdateBankAccountByIdRequest
 from cobo_waas2.models.update_counterparty_request import UpdateCounterpartyRequest
 from cobo_waas2.models.update_destination_entry200_response import UpdateDestinationEntry200Response
@@ -9851,8 +9853,8 @@ class PaymentApi:
     @validate_call
     def list_merchant_balances(
         self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="The comma-separated list of merchant IDs to filter by.  At least one of `merchant_ids` or `token_id` must be provided.  For more information about merchants, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). ")] = None,
+        token_id: Annotated[Optional[StrictStr], Field(description="The token ID that identifies the cryptocurrency.  At least one of `merchant_ids` or `token_id` must be provided.  For a complete list of supported tokens, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). ")] = None,
         acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
@@ -9865,12 +9867,12 @@ class PaymentApi:
     ) -> ListMerchantBalances200Response:
         """List merchant balances
 
-         This operation retrieves the balance information for specified merchants.   The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Accounts and fund allocation](https://www.cobo.com/payments/en/guides/amounts-and-balances). 
+        This operation retrieves merchant balance information.  You need to specify at least one of `merchant_ids` or `token_id` to filter the results.  <Note>Do not pass `acquiring_type` for this operation.</Note>  For more information, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
 
-        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
-        :type token_id: str
-        :param merchant_ids: A list of merchant IDs to query.
+        :param merchant_ids: The comma-separated list of merchant IDs to filter by.  At least one of `merchant_ids` or `token_id` must be provided.  For more information about merchants, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
         :type merchant_ids: str
+        :param token_id: The token ID that identifies the cryptocurrency.  At least one of `merchant_ids` or `token_id` must be provided.  For a complete list of supported tokens, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
+        :type token_id: str
         :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
@@ -9882,8 +9884,8 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._list_merchant_balances_serialize(
-            token_id=token_id,
             merchant_ids=merchant_ids,
+            token_id=token_id,
             acquiring_type=acquiring_type,
         )
 
@@ -9905,8 +9907,8 @@ class PaymentApi:
     @validate_call
     def list_merchant_balances_with_http_info(
         self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="The comma-separated list of merchant IDs to filter by.  At least one of `merchant_ids` or `token_id` must be provided.  For more information about merchants, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). ")] = None,
+        token_id: Annotated[Optional[StrictStr], Field(description="The token ID that identifies the cryptocurrency.  At least one of `merchant_ids` or `token_id` must be provided.  For a complete list of supported tokens, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). ")] = None,
         acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
@@ -9919,12 +9921,12 @@ class PaymentApi:
     ) -> ApiResponse[ListMerchantBalances200Response]:
         """List merchant balances
 
-         This operation retrieves the balance information for specified merchants.   The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Accounts and fund allocation](https://www.cobo.com/payments/en/guides/amounts-and-balances). 
+        This operation retrieves merchant balance information.  You need to specify at least one of `merchant_ids` or `token_id` to filter the results.  <Note>Do not pass `acquiring_type` for this operation.</Note>  For more information, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
 
-        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
-        :type token_id: str
-        :param merchant_ids: A list of merchant IDs to query.
+        :param merchant_ids: The comma-separated list of merchant IDs to filter by.  At least one of `merchant_ids` or `token_id` must be provided.  For more information about merchants, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
         :type merchant_ids: str
+        :param token_id: The token ID that identifies the cryptocurrency.  At least one of `merchant_ids` or `token_id` must be provided.  For a complete list of supported tokens, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
+        :type token_id: str
         :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
@@ -9936,8 +9938,8 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._list_merchant_balances_serialize(
-            token_id=token_id,
             merchant_ids=merchant_ids,
+            token_id=token_id,
             acquiring_type=acquiring_type,
         )
 
@@ -9959,8 +9961,8 @@ class PaymentApi:
     @validate_call
     def list_merchant_balances_without_preload_content(
         self,
-        token_id: Annotated[StrictStr, Field(description="The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")],
-        merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        merchant_ids: Annotated[Optional[StrictStr], Field(description="The comma-separated list of merchant IDs to filter by.  At least one of `merchant_ids` or `token_id` must be provided.  For more information about merchants, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). ")] = None,
+        token_id: Annotated[Optional[StrictStr], Field(description="The token ID that identifies the cryptocurrency.  At least one of `merchant_ids` or `token_id` must be provided.  For a complete list of supported tokens, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). ")] = None,
         acquiring_type: Annotated[Optional[AcquiringType], Field(description="This parameter has been deprecated")] = None,
         _request_timeout: Union[
             None,
@@ -9973,12 +9975,12 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List merchant balances
 
-         This operation retrieves the balance information for specified merchants.   The balance information is grouped by token and acquiring type. If you do not specify the `merchant_ids` parameter, the balance information for all merchants will be returned.  For more information, please refer to [Accounts and fund allocation](https://www.cobo.com/payments/en/guides/amounts-and-balances). 
+        This operation retrieves merchant balance information.  You need to specify at least one of `merchant_ids` or `token_id` to filter the results.  <Note>Do not pass `acquiring_type` for this operation.</Note>  For more information, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
 
-        :param token_id: The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format `{CHAIN}_{TOKEN}`. Supported values include:   - USDC: `ETH_USDC`, `ARBITRUM_USDCOIN`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC2`, `BSC_USDC`   - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT`  (required)
-        :type token_id: str
-        :param merchant_ids: A list of merchant IDs to query.
+        :param merchant_ids: The comma-separated list of merchant IDs to filter by.  At least one of `merchant_ids` or `token_id` must be provided.  For more information about merchants, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
         :type merchant_ids: str
+        :param token_id: The token ID that identifies the cryptocurrency.  At least one of `merchant_ids` or `token_id` must be provided.  For a complete list of supported tokens, refer to [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
+        :type token_id: str
         :param acquiring_type: This parameter has been deprecated
         :type acquiring_type: AcquiringType
         :param _request_timeout: timeout setting for this request. If one
@@ -9990,8 +9992,8 @@ class PaymentApi:
         """  # noqa: E501
 
         _param = self._list_merchant_balances_serialize(
-            token_id=token_id,
             merchant_ids=merchant_ids,
+            token_id=token_id,
             acquiring_type=acquiring_type,
         )
 
@@ -10008,8 +10010,8 @@ class PaymentApi:
 
     def _list_merchant_balances_serialize(
         self,
-        token_id,
         merchant_ids,
+        token_id,
         acquiring_type,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
@@ -12229,6 +12231,175 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/estimate_fee',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def trigger_test_payments_webhook_event(
+        self,
+        trigger_test_payments_webhook_event_request: Annotated[Optional[TriggerTestPaymentsWebhookEventRequest], Field(description="The request body used to trigger a test Payments webhook event.  You need to specify the event type. You can optionally include the `override_data` property to customize the payload. The provided fields must match the webhook event data structure for the specified event type. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TriggerTestPaymentWebhookEventResponse:
+        """Trigger test webhook event
+
+        This operation tests the functionality of your Payments webhook endpoint by triggering a test webhook event. The test event is sent to all endpoints you have registered on Cobo Portal.  You need to specify the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  For more information about Payments webhooks, see [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). For webhook event types and payload structure, refer to [List all webhook events](https://www.cobo.com/developers/v2/api-references/developers--webhooks/list-all-webhook-events). 
+
+        :param trigger_test_payments_webhook_event_request: The request body used to trigger a test Payments webhook event.  You need to specify the event type. You can optionally include the `override_data` property to customize the payload. The provided fields must match the webhook event data structure for the specified event type. 
+        :type trigger_test_payments_webhook_event_request: TriggerTestPaymentsWebhookEventRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._trigger_test_payments_webhook_event_serialize(
+            trigger_test_payments_webhook_event_request=trigger_test_payments_webhook_event_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TriggerTestPaymentWebhookEventResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def trigger_test_payments_webhook_event_with_http_info(
+        self,
+        trigger_test_payments_webhook_event_request: Annotated[Optional[TriggerTestPaymentsWebhookEventRequest], Field(description="The request body used to trigger a test Payments webhook event.  You need to specify the event type. You can optionally include the `override_data` property to customize the payload. The provided fields must match the webhook event data structure for the specified event type. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TriggerTestPaymentWebhookEventResponse]:
+        """Trigger test webhook event
+
+        This operation tests the functionality of your Payments webhook endpoint by triggering a test webhook event. The test event is sent to all endpoints you have registered on Cobo Portal.  You need to specify the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  For more information about Payments webhooks, see [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). For webhook event types and payload structure, refer to [List all webhook events](https://www.cobo.com/developers/v2/api-references/developers--webhooks/list-all-webhook-events). 
+
+        :param trigger_test_payments_webhook_event_request: The request body used to trigger a test Payments webhook event.  You need to specify the event type. You can optionally include the `override_data` property to customize the payload. The provided fields must match the webhook event data structure for the specified event type. 
+        :type trigger_test_payments_webhook_event_request: TriggerTestPaymentsWebhookEventRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._trigger_test_payments_webhook_event_serialize(
+            trigger_test_payments_webhook_event_request=trigger_test_payments_webhook_event_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TriggerTestPaymentWebhookEventResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def trigger_test_payments_webhook_event_without_preload_content(
+        self,
+        trigger_test_payments_webhook_event_request: Annotated[Optional[TriggerTestPaymentsWebhookEventRequest], Field(description="The request body used to trigger a test Payments webhook event.  You need to specify the event type. You can optionally include the `override_data` property to customize the payload. The provided fields must match the webhook event data structure for the specified event type. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Trigger test webhook event
+
+        This operation tests the functionality of your Payments webhook endpoint by triggering a test webhook event. The test event is sent to all endpoints you have registered on Cobo Portal.  You need to specify the event type. By default, the payload contains dummy data with no impact on your real business transactions or activities. You can optionally provide the `override_data` property to customize the payload.  For more information about Payments webhooks, see [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). For webhook event types and payload structure, refer to [List all webhook events](https://www.cobo.com/developers/v2/api-references/developers--webhooks/list-all-webhook-events). 
+
+        :param trigger_test_payments_webhook_event_request: The request body used to trigger a test Payments webhook event.  You need to specify the event type. You can optionally include the `override_data` property to customize the payload. The provided fields must match the webhook event data structure for the specified event type. 
+        :type trigger_test_payments_webhook_event_request: TriggerTestPaymentsWebhookEventRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._trigger_test_payments_webhook_event_serialize(
+            trigger_test_payments_webhook_event_request=trigger_test_payments_webhook_event_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "TriggerTestPaymentWebhookEventResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _trigger_test_payments_webhook_event_serialize(
+        self,
+        trigger_test_payments_webhook_event_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if trigger_test_payments_webhook_event_request is not None:
+            _body_params = trigger_test_payments_webhook_event_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/webhooks/trigger',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -6,6 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **vout_n** | **int** | The output index of the UTXO. | [optional] 
+**object_id** | **str** | The ID of the blockchain object to spend (e.g., SUI Coin object). | [optional] 
+**version** | **str** | Object version number. | [optional] 
 
 ## Example
 
