@@ -72,7 +72,10 @@ class TestTransactionExtra(unittest.TestCase):
                 timelock = 56,
                 change_address = '',
                 validator_address = '',
-                reward_address = ''
+                reward_address = '',
+                dapp_name = '',
+                dapp_domain = '',
+                session_id = ''
             )
         else:
             return TransactionExtra(

@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**create_refund**](PaymentApi.md#create_refund) | **POST** /payments/refunds | Create refund order
 [**create_refund_link**](PaymentApi.md#create_refund_link) | **POST** /payments/links/refunds | Create refund link
 [**create_report**](PaymentApi.md#create_report) | **POST** /payments/reports | Generate reports
+[**create_sdk_link**](PaymentApi.md#create_sdk_link) | **POST** /payments/links/sdk | Create SDK link
 [**create_settlement_request**](PaymentApi.md#create_settlement_request) | **POST** /payments/settlement_requests | Create settlement request
 [**create_top_up_addresses**](PaymentApi.md#create_top_up_addresses) | **POST** /payments/topup/address | Batch create top-up addresses
 [**delete_counterparty_by_id**](PaymentApi.md#delete_counterparty_by_id) | **DELETE** /payments/counterparty/{counterparty_id} | Delete counterparty
@@ -1310,6 +1311,73 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Payment report created successfully. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_sdk_link**
+> Link create_sdk_link()
+
+Create SDK link
+
+This operation creates a payment link for use with the front-end SDK integration.  The returned URL and token can be used to initialize the Cobo payment SDK in your front-end application.  For more information, see [Cobo Payment Guide](https://www.cobo.com/payments/en/guides/overview). 
+
+### Example
+
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.link import Link
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+
+    try:
+        # Create SDK link
+        api_response = api_instance.create_sdk_link()
+        print("The response of PaymentApi->create_sdk_link:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_sdk_link: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Link**](Link.md)
+
+### Authorization
+
+[CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Link created successfully. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

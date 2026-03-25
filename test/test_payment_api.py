@@ -234,6 +234,17 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_report(create_report_request=create_report_request)
         """
 
+    def test_create_sdk_link(self) -> None:
+        """
+        Test case for create_sdk_link
+
+        Create SDK link
+        """
+        """
+
+        api_response = self.api.create_sdk_link()
+        """
+
     def test_create_settlement_request(self) -> None:
         """
         Test case for create_settlement_request

@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **change_address** | **str** | The change address on the Bitcoin chain. If not provided, the source wallet&#39;s address will be used as the change address. | [optional] 
 **validator_address** | **str** | The validator&#39;s EVM address. | [optional] 
 **reward_address** | **str** | The EVM address used to receive staking rewards. | [optional] 
+**dapp_name** | **str** | The dapp name that initiated this transaction. | [optional] 
+**dapp_domain** | **str** | The dapp domain that initiated this transaction | [optional] 
+**session_id** | **str** | The session id that initiated this transaction | [optional] 
 
 ## Example
 

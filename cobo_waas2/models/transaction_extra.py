@@ -18,11 +18,12 @@ from typing import Any, List, Optional
 from cobo_waas2.models.transaction_babylon_business_info import TransactionBabylonBusinessInfo
 from cobo_waas2.models.transaction_babylon_tx_parameters import TransactionBabylonTxParameters
 from cobo_waas2.models.transaction_core_stake_info import TransactionCoreStakeInfo
+from cobo_waas2.models.transaction_wallet_connect_info import TransactionWalletConnectInfo
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSACTIONEXTRA_ONE_OF_SCHEMAS = ["TransactionBabylonBusinessInfo", "TransactionBabylonTxParameters", "TransactionCoreStakeInfo"]
+TRANSACTIONEXTRA_ONE_OF_SCHEMAS = ["TransactionBabylonBusinessInfo", "TransactionBabylonTxParameters", "TransactionCoreStakeInfo", "TransactionWalletConnectInfo"]
 
 class TransactionExtra(BaseModel):
     """
@@ -34,8 +35,10 @@ class TransactionExtra(BaseModel):
     oneof_schema_2_validator: Optional[TransactionBabylonTxParameters] = None
     # data type: TransactionCoreStakeInfo
     oneof_schema_3_validator: Optional[TransactionCoreStakeInfo] = None
-    actual_instance: Optional[Union[TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo]] = None
-    one_of_schemas: Set[str] = { "TransactionBabylonBusinessInfo", "TransactionBabylonTxParameters", "TransactionCoreStakeInfo" }
+    # data type: TransactionWalletConnectInfo
+    oneof_schema_4_validator: Optional[TransactionWalletConnectInfo] = None
+    actual_instance: Optional[Union[TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo, TransactionWalletConnectInfo]] = None
+    one_of_schemas: Set[str] = { "TransactionBabylonBusinessInfo", "TransactionBabylonTxParameters", "TransactionCoreStakeInfo", "TransactionWalletConnectInfo" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -76,12 +79,17 @@ class TransactionExtra(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionCoreStakeInfo`")
         else:
             match += 1
+        # validate data type: TransactionWalletConnectInfo
+        if not isinstance(v, TransactionWalletConnectInfo):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionWalletConnectInfo`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo, TransactionWalletConnectInfo. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo, TransactionWalletConnectInfo. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -116,6 +124,11 @@ class TransactionExtra(BaseModel):
             instance.actual_instance = TransactionCoreStakeInfo.from_json(json_str)
             return instance
 
+        # check if data type is `TransactionWalletConnectInfo`
+        if _data_type == "WalletConnectInfo":
+            instance.actual_instance = TransactionWalletConnectInfo.from_json(json_str)
+            return instance
+
         # check if data type is `TransactionBabylonBusinessInfo`
         if _data_type == "TransactionBabylonBusinessInfo":
             instance.actual_instance = TransactionBabylonBusinessInfo.from_json(json_str)
@@ -129,6 +142,11 @@ class TransactionExtra(BaseModel):
         # check if data type is `TransactionCoreStakeInfo`
         if _data_type == "TransactionCoreStakeInfo":
             instance.actual_instance = TransactionCoreStakeInfo.from_json(json_str)
+            return instance
+
+        # check if data type is `TransactionWalletConnectInfo`
+        if _data_type == "TransactionWalletConnectInfo":
+            instance.actual_instance = TransactionWalletConnectInfo.from_json(json_str)
             return instance
 
         return instance
@@ -150,14 +168,20 @@ class TransactionExtra(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TransactionWalletConnectInfo
+        try:
+            instance.actual_instance = TransactionWalletConnectInfo.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo, TransactionWalletConnectInfo. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransactionExtra with oneOf schemas: TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo, TransactionWalletConnectInfo. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -171,7 +195,7 @@ class TransactionExtra(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionBabylonBusinessInfo, TransactionBabylonTxParameters, TransactionCoreStakeInfo, TransactionWalletConnectInfo]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
