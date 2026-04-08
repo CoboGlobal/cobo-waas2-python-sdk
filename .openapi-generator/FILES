@@ -288,6 +288,8 @@ cobo_waas2/models/fee_reserved.py
 cobo_waas2/models/fee_station_check_fee_station_usage.py
 cobo_waas2/models/fee_station_check_fee_station_usage_response.py
 cobo_waas2/models/fee_station_destination.py
+cobo_waas2/models/fee_station_fiat_transaction.py
+cobo_waas2/models/fee_station_fiat_transaction_type.py
 cobo_waas2/models/fee_station_gas_station_type.py
 cobo_waas2/models/fee_station_sponsor_transaction_description.py
 cobo_waas2/models/fee_station_transaction_type.py
@@ -362,6 +364,7 @@ cobo_waas2/models/list_counterparty_entries200_response.py
 cobo_waas2/models/list_destination_entries200_response.py
 cobo_waas2/models/list_destinations200_response.py
 cobo_waas2/models/list_exchanges200_response_inner.py
+cobo_waas2/models/list_fee_station_fiat_transactions200_response.py
 cobo_waas2/models/list_forced_sweep_requests200_response.py
 cobo_waas2/models/list_key_share_holder_groups200_response.py
 cobo_waas2/models/list_key_share_holders200_response.py
@@ -1111,6 +1114,8 @@ docs/FeeStationApi.md
 docs/FeeStationCheckFeeStationUsage.md
 docs/FeeStationCheckFeeStationUsageResponse.md
 docs/FeeStationDestination.md
+docs/FeeStationFiatTransaction.md
+docs/FeeStationFiatTransactionType.md
 docs/FeeStationGasStationType.md
 docs/FeeStationSponsorTransactionDescription.md
 docs/FeeStationTransactionType.md
@@ -1184,6 +1189,7 @@ docs/ListCounterpartyEntries200Response.md
 docs/ListDestinationEntries200Response.md
 docs/ListDestinations200Response.md
 docs/ListExchanges200ResponseInner.md
+docs/ListFeeStationFiatTransactions200Response.md
 docs/ListForcedSweepRequests200Response.md
 docs/ListKeyShareHolderGroups200Response.md
 docs/ListKeyShareHolders200Response.md
@@ -1948,6 +1954,8 @@ test/test_fee_station_api.py
 test/test_fee_station_check_fee_station_usage.py
 test/test_fee_station_check_fee_station_usage_response.py
 test/test_fee_station_destination.py
+test/test_fee_station_fiat_transaction.py
+test/test_fee_station_fiat_transaction_type.py
 test/test_fee_station_gas_station_type.py
 test/test_fee_station_sponsor_transaction_description.py
 test/test_fee_station_transaction_type.py
@@ -2023,6 +2031,7 @@ test/test_list_counterparty_entries200_response.py
 test/test_list_destination_entries200_response.py
 test/test_list_destinations200_response.py
 test/test_list_exchanges200_response_inner.py
+test/test_list_fee_station_fiat_transactions200_response.py
 test/test_list_forced_sweep_requests200_response.py
 test/test_list_key_share_holder_groups200_response.py
 test/test_list_key_share_holders200_response.py

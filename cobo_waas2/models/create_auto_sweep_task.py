@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,8 @@ class CreateAutoSweepTask(BaseModel):
     """  # noqa: E501
     wallet_id: StrictStr = Field(description="ID of the wallet where the token will be swept.")
     token_id: StrictStr = Field(description="ID of the token to be swept. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
-    __properties: ClassVar[List[str]] = ["wallet_id", "token_id"]
+    min_balance_threshold: Optional[StrictStr] = Field(default=None, description="The minimum token balance threshold for auto sweep. If the token balance of an address is less than this threshold, the address will not be swept. ")
+    __properties: ClassVar[List[str]] = ["wallet_id", "token_id", "min_balance_threshold"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +82,8 @@ class CreateAutoSweepTask(BaseModel):
 
         _obj = cls.model_validate({
             "wallet_id": obj.get("wallet_id"),
-            "token_id": obj.get("token_id")
+            "token_id": obj.get("token_id"),
+            "min_balance_threshold": obj.get("min_balance_threshold")
         })
         return _obj
 

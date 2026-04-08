@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transaction_id** | **str** | The transaction ID of the original order payment or top-up.  On the refund page, the from address of this transaction will be pre-filled as the default refund address.  The refund will be processed in the same token and on the same blockchain as this transaction.  | 
+**order_id** | **str** | The id of the order to refund. Specify either &#x60;order_id&#x60; or &#x60;transaction_id&#x60;, but not both.  | [optional] 
+**transaction_id** | **str** | The transaction ID of the original order payment or top-up. Specify either &#x60;order_id&#x60; or &#x60;transaction_id&#x60;, but not both. On the refund page, the from address of this transaction will be pre-filled as the default refund address. The refund will be processed in the same token and on the same blockchain as this transaction.  | [optional] 
 **amount** | **str** | The amount to refund, denominated in the cryptocurrency of the original payment transaction. The amount must be a positive number and can have up to two decimal places. | 
 **refund_source** | [**RefundType**](RefundType.md) |  | 
 **merchant_id** | **str** | The merchant ID, required if &#x60;refund_source&#x60; is &#x60;Merchant&#x60;. The fund will be deducted from the specified merchant&#39;s balance. | [optional] 

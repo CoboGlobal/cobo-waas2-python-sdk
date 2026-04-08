@@ -35,7 +35,8 @@ class TestCreateAutoSweepTask(unittest.TestCase):
         if include_optional:
             return CreateAutoSweepTask(
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                token_id = 'ETH_USDT'
+                token_id = 'ETH_USDT',
+                min_balance_threshold = '0.01'
             )
         else:
             return CreateAutoSweepTask(

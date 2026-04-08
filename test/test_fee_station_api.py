@@ -81,6 +81,24 @@ class TestFeeStationApi(unittest.TestCase):
         api_response = self.api.list_fee_station_addresses(chain_ids=chain_ids, addresses=addresses, limit=limit, before=before, after=after)
         """
 
+    def test_list_fee_station_fiat_transactions(self) -> None:
+        """
+        Test case for list_fee_station_fiat_transactions
+
+        List Fee Station fiat transactions
+        """
+        """
+        transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
+        transaction_type = cobo_waas2.FeeStationFiatTransactionType()
+        min_created_timestamp = 1635744000000
+        max_created_timestamp = 1635744000000
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        limit = 10
+
+        api_response = self.api.list_fee_station_fiat_transactions(transaction_ids=transaction_ids, transaction_type=transaction_type, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, before=before, after=after, limit=limit)
+        """
+
     def test_list_fee_station_transactions(self) -> None:
         """
         Test case for list_fee_station_transactions

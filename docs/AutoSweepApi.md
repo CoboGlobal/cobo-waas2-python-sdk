@@ -4,12 +4,85 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**cancel_auto_sweep_task_by_id**](AutoSweepApi.md#cancel_auto_sweep_task_by_id) | **POST** /auto_sweep/tasks/{task_id}/cancel | Cancel auto sweep task
 [**create_auto_sweep_task**](AutoSweepApi.md#create_auto_sweep_task) | **POST** /auto_sweep/tasks | Create auto-sweep task
 [**create_wallet_sweep_to_addresses**](AutoSweepApi.md#create_wallet_sweep_to_addresses) | **POST** /auto_sweep/sweep_to_addresses | Create sweep-to address
 [**get_auto_sweep_task_by_id**](AutoSweepApi.md#get_auto_sweep_task_by_id) | **GET** /auto_sweep/tasks/{task_id} | Get auto-sweep task details
 [**list_auto_sweep_task**](AutoSweepApi.md#list_auto_sweep_task) | **GET** /auto_sweep/tasks | List auto-sweep tasks
 [**list_wallet_sweep_to_addresses**](AutoSweepApi.md#list_wallet_sweep_to_addresses) | **GET** /auto_sweep/sweep_to_addresses | List sweep-to addresses
 
+
+# **cancel_auto_sweep_task_by_id**
+> AutoSweepTask cancel_auto_sweep_task_by_id(task_id)
+
+Cancel auto sweep task
+
+This operation cancels an in-progress auto sweep task by its ID.  Only tasks with the `Submitted` status can be cancelled. Tasks that have already been processed (status `TransactionCreated`) cannot be cancelled. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.auto_sweep_task import AutoSweepTask
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.AutoSweepApi(api_client)
+    task_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+    try:
+        # Cancel auto sweep task
+        api_response = api_instance.cancel_auto_sweep_task_by_id(task_id)
+        print("The response of AutoSweepApi->cancel_auto_sweep_task_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AutoSweepApi->cancel_auto_sweep_task_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **task_id** | **str**| The auto sweep task ID. | 
+
+### Return type
+
+[**AutoSweepTask**](AutoSweepTask.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully cancelled the auto sweep task. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_auto_sweep_task**
 > AutoSweepTask create_auto_sweep_task(create_auto_sweep_task=create_auto_sweep_task)

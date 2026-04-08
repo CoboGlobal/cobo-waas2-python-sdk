@@ -52,7 +52,8 @@ class TestPaymentPayoutDetail(unittest.TestCase):
                     address = '0x9876543210abcdef1234567890abcdef12345678', 
                     token_id = 'TRON_USDT', 
                     currency = 'USD', 
-                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
+                    transfer_via_va = False, ),
                 initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
                 actual_payout_amount = '500.00',
                 commission_fees = [

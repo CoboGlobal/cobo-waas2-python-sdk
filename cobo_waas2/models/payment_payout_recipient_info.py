@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,8 @@ class PaymentPayoutRecipientInfo(BaseModel):
     token_id: Optional[StrictStr] = Field(default=None, description="The token ID for the cryptocurrency to be sent to the recipient.  If `recipient_info.token_id` is on a different chain than `payout_param.token_id`, the token will be automatically bridged to the chain specified in `recipient_info.token_id`. ")
     currency: Optional[StrictStr] = Field(default=None, description="The fiat currency of the bank account to which the payout will be sent.")
     bank_account_id: Optional[StrictStr] = Field(default=None, description="The ID of the bank account to which the payout will be sent. You can retrieve the bank account ID by calling [List destination entries](https://www.cobo.com/payments/en/api-references/payment/list-destination-entries).")
-    __properties: ClassVar[List[str]] = ["address", "token_id", "currency", "bank_account_id"]
+    transfer_via_va: Optional[StrictBool] = Field(default=None, description="For OffRamp payout, whether the payout is transferred to a registered bank account via a virtual account (VA) or directly. - `true`: The payout is transferred to a registered bank account via a VA (virtual account). - `false`: The payout is transferred directly to a registered bank account. ")
+    __properties: ClassVar[List[str]] = ["address", "token_id", "currency", "bank_account_id", "transfer_via_va"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +86,8 @@ class PaymentPayoutRecipientInfo(BaseModel):
             "address": obj.get("address"),
             "token_id": obj.get("token_id"),
             "currency": obj.get("currency"),
-            "bank_account_id": obj.get("bank_account_id")
+            "bank_account_id": obj.get("bank_account_id"),
+            "transfer_via_va": obj.get("transfer_via_va")
         })
         return _obj
 

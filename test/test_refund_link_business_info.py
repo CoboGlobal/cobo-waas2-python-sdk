@@ -34,6 +34,7 @@ class TestRefundLinkBusinessInfo(unittest.TestCase):
         model = RefundLinkBusinessInfo()
         if include_optional:
             return RefundLinkBusinessInfo(
+                order_id = 'O20250304-M1001-1001',
                 transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 amount = '0.0025',
                 refund_source = 'Merchant',
@@ -42,7 +43,6 @@ class TestRefundLinkBusinessInfo(unittest.TestCase):
             )
         else:
             return RefundLinkBusinessInfo(
-                transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
                 amount = '0.0025',
                 refund_source = 'Merchant',
         )

@@ -40,7 +40,8 @@ class TestPaymentEstimateFeeRequest(unittest.TestCase):
                         token_id = '', 
                         amount = '500.00', )
                     ],
-                recipient_token_id = ''
+                recipient_token_id = '',
+                transfer_via_va = False
             )
         else:
             return PaymentEstimateFeeRequest(

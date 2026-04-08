@@ -35,6 +35,7 @@ class TestCreateRefundLinkRequest(unittest.TestCase):
         if include_optional:
             return CreateRefundLinkRequest(
                 business_info = cobo_waas2.models.refund_link_business_info.RefundLinkBusinessInfo(
+                    order_id = 'O20250304-M1001-1001', 
                     transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
                     amount = '0.0025', 
                     refund_source = 'Merchant', 
@@ -48,6 +49,7 @@ class TestCreateRefundLinkRequest(unittest.TestCase):
         else:
             return CreateRefundLinkRequest(
                 business_info = cobo_waas2.models.refund_link_business_info.RefundLinkBusinessInfo(
+                    order_id = 'O20250304-M1001-1001', 
                     transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 
                     amount = '0.0025', 
                     refund_source = 'Merchant', 

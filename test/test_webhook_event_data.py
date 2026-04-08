@@ -338,7 +338,8 @@ class TestWebhookEventData(unittest.TestCase):
                     address = '0x9876543210abcdef1234567890abcdef12345678', 
                     token_id = 'TRON_USDT', 
                     currency = 'USD', 
-                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', ),
+                    bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
+                    transfer_via_va = False, ),
                 actual_payout_amount = '500.00',
                 commission_fees = [
                     cobo_waas2.models.commission_fee.CommissionFee(

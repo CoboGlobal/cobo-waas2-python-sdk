@@ -29,6 +29,18 @@ class TestAutoSweepApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_cancel_auto_sweep_task_by_id(self) -> None:
+        """
+        Test case for cancel_auto_sweep_task_by_id
+
+        Cancel auto sweep task
+        """
+        """
+        task_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.cancel_auto_sweep_task_by_id(task_id)
+        """
+
     def test_create_auto_sweep_task(self) -> None:
         """
         Test case for create_auto_sweep_task

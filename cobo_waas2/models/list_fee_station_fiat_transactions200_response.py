@@ -15,23 +15,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.payment_estimate_fee import PaymentEstimateFee
-from cobo_waas2.models.payment_fee_type import PaymentFeeType
+from cobo_waas2.models.fee_station_fiat_transaction import FeeStationFiatTransaction
+from cobo_waas2.models.pagination import Pagination
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class PaymentEstimateFeeRequest(BaseModel):
+class ListFeeStationFiatTransactions200Response(BaseModel):
     """
-    PaymentEstimateFeeRequest
+    ListFeeStationFiatTransactions200Response
     """  # noqa: E501
-    fee_type: Optional[PaymentFeeType] = None
-    estimate_fees: List[PaymentEstimateFee] = Field(description="A list of token IDs and amounts for which fees will be calculated.")
-    recipient_token_id: Optional[StrictStr] = Field(default=None, description="The token ID that the recipient will receive. Required only when `fee_type` is `CryptoPayoutBridge`.")
-    transfer_via_va: Optional[StrictBool] = Field(default=None, description="For OffRamp payout, whether the payout is transferred to a registered bank account via a virtual account (VA) or directly. - `true`: The payout is transferred to a registered bank account via a VA (virtual account). - `false`: The payout is transferred directly to a registered bank account. ")
-    __properties: ClassVar[List[str]] = ["fee_type", "estimate_fees", "recipient_token_id", "transfer_via_va"]
+    data: Optional[List[FeeStationFiatTransaction]] = None
+    pagination: Optional[Pagination] = None
+    __properties: ClassVar[List[str]] = ["data", "pagination"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +49,7 @@ class PaymentEstimateFeeRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentEstimateFeeRequest from a JSON string"""
+        """Create an instance of ListFeeStationFiatTransactions200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,18 +70,21 @@ class PaymentEstimateFeeRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in estimate_fees (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
         _items = []
-        if self.estimate_fees:
-            for _item in self.estimate_fees:
+        if self.data:
+            for _item in self.data:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['estimate_fees'] = _items
+            _dict['data'] = _items
+        # override the default output from pydantic by calling `to_dict()` of pagination
+        if self.pagination:
+            _dict['pagination'] = self.pagination.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentEstimateFeeRequest from a dict"""
+        """Create an instance of ListFeeStationFiatTransactions200Response from a dict"""
         if obj is None:
             return None
 
@@ -91,10 +92,8 @@ class PaymentEstimateFeeRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "fee_type": obj.get("fee_type"),
-            "estimate_fees": [PaymentEstimateFee.from_dict(_item) for _item in obj["estimate_fees"]] if obj.get("estimate_fees") is not None else None,
-            "recipient_token_id": obj.get("recipient_token_id"),
-            "transfer_via_va": obj.get("transfer_via_va")
+            "data": [FeeStationFiatTransaction.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
+            "pagination": Pagination.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
         })
         return _obj
 

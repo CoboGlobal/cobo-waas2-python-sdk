@@ -41,6 +41,175 @@ class AutoSweepApi:
         self.api_client = api_client
 
     @validate_call
+    def cancel_auto_sweep_task_by_id(
+        self,
+        task_id: Annotated[StrictStr, Field(description="The auto sweep task ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> AutoSweepTask:
+        """Cancel auto sweep task
+
+        This operation cancels an in-progress auto sweep task by its ID.  Only tasks with the `Submitted` status can be cancelled. Tasks that have already been processed (status `TransactionCreated`) cannot be cancelled. 
+
+        :param task_id: The auto sweep task ID. (required)
+        :type task_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._cancel_auto_sweep_task_by_id_serialize(
+            task_id=task_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AutoSweepTask",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def cancel_auto_sweep_task_by_id_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(description="The auto sweep task ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[AutoSweepTask]:
+        """Cancel auto sweep task
+
+        This operation cancels an in-progress auto sweep task by its ID.  Only tasks with the `Submitted` status can be cancelled. Tasks that have already been processed (status `TransactionCreated`) cannot be cancelled. 
+
+        :param task_id: The auto sweep task ID. (required)
+        :type task_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._cancel_auto_sweep_task_by_id_serialize(
+            task_id=task_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AutoSweepTask",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def cancel_auto_sweep_task_by_id_without_preload_content(
+        self,
+        task_id: Annotated[StrictStr, Field(description="The auto sweep task ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Cancel auto sweep task
+
+        This operation cancels an in-progress auto sweep task by its ID.  Only tasks with the `Submitted` status can be cancelled. Tasks that have already been processed (status `TransactionCreated`) cannot be cancelled. 
+
+        :param task_id: The auto sweep task ID. (required)
+        :type task_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._cancel_auto_sweep_task_by_id_serialize(
+            task_id=task_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AutoSweepTask",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _cancel_auto_sweep_task_by_id_serialize(
+        self,
+        task_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if task_id is not None:
+            _path_params['task_id'] = task_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/auto_sweep/tasks/{task_id}/cancel',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def create_auto_sweep_task(
         self,
         create_auto_sweep_task: Annotated[Optional[CreateAutoSweepTask], Field(description="The request body to create an auto-sweep task.")] = None,

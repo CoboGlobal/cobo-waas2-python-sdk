@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.33.0"
+__version__ = "1.34.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -302,6 +302,8 @@ from cobo_waas2.models.fee_reserved import FeeReserved
 from cobo_waas2.models.fee_station_check_fee_station_usage import FeeStationCheckFeeStationUsage
 from cobo_waas2.models.fee_station_check_fee_station_usage_response import FeeStationCheckFeeStationUsageResponse
 from cobo_waas2.models.fee_station_destination import FeeStationDestination
+from cobo_waas2.models.fee_station_fiat_transaction import FeeStationFiatTransaction
+from cobo_waas2.models.fee_station_fiat_transaction_type import FeeStationFiatTransactionType
 from cobo_waas2.models.fee_station_gas_station_type import FeeStationGasStationType
 from cobo_waas2.models.fee_station_sponsor_transaction_description import FeeStationSponsorTransactionDescription
 from cobo_waas2.models.fee_station_transaction_type import FeeStationTransactionType
@@ -374,6 +376,7 @@ from cobo_waas2.models.list_counterparty_entries200_response import ListCounterp
 from cobo_waas2.models.list_destination_entries200_response import ListDestinationEntries200Response
 from cobo_waas2.models.list_destinations200_response import ListDestinations200Response
 from cobo_waas2.models.list_exchanges200_response_inner import ListExchanges200ResponseInner
+from cobo_waas2.models.list_fee_station_fiat_transactions200_response import ListFeeStationFiatTransactions200Response
 from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
 from cobo_waas2.models.list_key_share_holder_groups200_response import ListKeyShareHolderGroups200Response
 from cobo_waas2.models.list_key_share_holders200_response import ListKeyShareHolders200Response
