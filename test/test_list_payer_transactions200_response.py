@@ -12,11 +12,11 @@
 
 import unittest
 
-from cobo_waas2.models.list_top_up_payers200_response_data_inner import ListTopUpPayers200ResponseDataInner
+from cobo_waas2.models.list_payer_transactions200_response import ListPayerTransactions200Response
 
 
-class TestListTopUpPayers200ResponseDataInner(unittest.TestCase):
-    """ListTopUpPayers200ResponseDataInner unit test stubs"""
+class TestListPayerTransactions200Response(unittest.TestCase):
+    """ListPayerTransactions200Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,23 +24,17 @@ class TestListTopUpPayers200ResponseDataInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ListTopUpPayers200ResponseDataInner:
-        """Test ListTopUpPayers200ResponseDataInner
+    def make_instance(self, include_optional) -> ListPayerTransactions200Response:
+        """Test ListPayerTransactions200Response
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ListTopUpPayers200ResponseDataInner`
+        # uncomment below to create an instance of `ListPayerTransactions200Response`
         """
-        model = ListTopUpPayers200ResponseDataInner()
+        model = ListPayerTransactions200Response()
         if include_optional:
-            return ListTopUpPayers200ResponseDataInner(
-                merchant_id = 'M1001',
-                payer_id = 'P20250619T0310056d7aa',
-                custom_payer_id = 'user_abc_10001',
-                developer_fee_rate = '0.01',
-                created_timestamp = 1744689600,
-                updated_timestamp = 1744693200,
-                transactions = [
+            return ListPayerTransactions200Response(
+                data = [
                     cobo_waas2.models.payment_transaction.PaymentTransaction(
                         tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
                         tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
@@ -70,18 +64,19 @@ class TestListTopUpPayers200ResponseDataInner(unittest.TestCase):
                             updated_timestamp = 1744689600, ), 
                         created_timestamp = 1610445878970, 
                         updated_timestamp = 1610445878970, )
-                    ]
+                    ],
+                pagination = cobo_waas2.models.pagination.Pagination(
+                    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 
+                    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk', 
+                    total_count = 10000, )
             )
         else:
-            return ListTopUpPayers200ResponseDataInner(
-                merchant_id = 'M1001',
-                payer_id = 'P20250619T0310056d7aa',
-                developer_fee_rate = '0.01',
+            return ListPayerTransactions200Response(
         )
         """
 
-    def testListTopUpPayers200ResponseDataInner(self):
-        """Test ListTopUpPayers200ResponseDataInner"""
+    def testListPayerTransactions200Response(self):
+        """Test ListPayerTransactions200Response"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

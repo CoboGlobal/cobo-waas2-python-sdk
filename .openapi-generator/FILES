@@ -373,6 +373,7 @@ cobo_waas2/models/list_merchant_balances200_response.py
 cobo_waas2/models/list_merchants200_response.py
 cobo_waas2/models/list_mpc_projects200_response.py
 cobo_waas2/models/list_mpc_vaults200_response.py
+cobo_waas2/models/list_payer_transactions200_response.py
 cobo_waas2/models/list_payment_orders200_response.py
 cobo_waas2/models/list_payment_wallet_balances200_response.py
 cobo_waas2/models/list_payouts200_response.py
@@ -434,6 +435,7 @@ cobo_waas2/models/order_link_business_info_custom_exchange_rates_inner.py
 cobo_waas2/models/order_link_business_info_payable_amounts_inner.py
 cobo_waas2/models/order_status.py
 cobo_waas2/models/org_info.py
+cobo_waas2/models/original_main_group_handling.py
 cobo_waas2/models/otc_fee.py
 cobo_waas2/models/pagination.py
 cobo_waas2/models/payer_account.py
@@ -813,7 +815,6 @@ cobo_waas2/models/tss_signatures.py
 cobo_waas2/models/tss_status.py
 cobo_waas2/models/unfreeze_disposition.py
 cobo_waas2/models/update_address_book_param.py
-cobo_waas2/models/update_bank_account_by_id_request.py
 cobo_waas2/models/update_counterparty_request.py
 cobo_waas2/models/update_custodial_wallet_params.py
 cobo_waas2/models/update_destination_bank_account.py
@@ -1198,6 +1199,7 @@ docs/ListMerchantBalances200Response.md
 docs/ListMerchants200Response.md
 docs/ListMpcProjects200Response.md
 docs/ListMpcVaults200Response.md
+docs/ListPayerTransactions200Response.md
 docs/ListPaymentOrders200Response.md
 docs/ListPaymentWalletBalances200Response.md
 docs/ListPayouts200Response.md
@@ -1261,6 +1263,7 @@ docs/OrderLinkBusinessInfoPayableAmountsInner.md
 docs/OrderStatus.md
 docs/OrgInfo.md
 docs/OrganizationsApi.md
+docs/OriginalMainGroupHandling.md
 docs/OtcFee.md
 docs/Pagination.md
 docs/PayerAccount.md
@@ -1648,7 +1651,6 @@ docs/TronContractCallDestination.md
 docs/UTXO.md
 docs/UnfreezeDisposition.md
 docs/UpdateAddressBookParam.md
-docs/UpdateBankAccountByIdRequest.md
 docs/UpdateCounterpartyRequest.md
 docs/UpdateCustodialWalletParams.md
 docs/UpdateDestinationBankAccount.md
@@ -2040,6 +2042,7 @@ test/test_list_merchant_balances200_response.py
 test/test_list_merchants200_response.py
 test/test_list_mpc_projects200_response.py
 test/test_list_mpc_vaults200_response.py
+test/test_list_payer_transactions200_response.py
 test/test_list_payment_orders200_response.py
 test/test_list_payment_wallet_balances200_response.py
 test/test_list_payouts200_response.py
@@ -2103,6 +2106,7 @@ test/test_order_link_business_info_payable_amounts_inner.py
 test/test_order_status.py
 test/test_org_info.py
 test/test_organizations_api.py
+test/test_original_main_group_handling.py
 test/test_otc_fee.py
 test/test_pagination.py
 test/test_payer_account.py
@@ -2489,7 +2493,6 @@ test/test_tss_signatures.py
 test/test_tss_status.py
 test/test_unfreeze_disposition.py
 test/test_update_address_book_param.py
-test/test_update_bank_account_by_id_request.py
 test/test_update_counterparty_request.py
 test/test_update_custodial_wallet_params.py
 test/test_update_destination_bank_account.py

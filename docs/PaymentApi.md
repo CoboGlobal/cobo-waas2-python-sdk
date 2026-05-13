@@ -47,7 +47,6 @@ Method | HTTP request | Description
 [**get_settlement_info_by_ids**](PaymentApi.md#get_settlement_info_by_ids) | **GET** /payments/settlement_info | Get withdrawable balances
 [**get_top_up_address**](PaymentApi.md#get_top_up_address) | **GET** /payments/topup/address | Create/Get top-up address
 [**list_allocation_items**](PaymentApi.md#list_allocation_items) | **GET** /payments/allocation_items | List all allocation items
-[**list_bank_accounts**](PaymentApi.md#list_bank_accounts) | **GET** /payments/bank_accounts | List all bank accounts
 [**list_batch_allocations**](PaymentApi.md#list_batch_allocations) | **GET** /payments/batch_allocations | List all batch allocations
 [**list_bulk_send_items**](PaymentApi.md#list_bulk_send_items) | **GET** /payments/bulk_sends/{bulk_send_id}/items | List bulk send items
 [**list_counterparties**](PaymentApi.md#list_counterparties) | **GET** /payments/counterparty | List all counterparties
@@ -58,6 +57,7 @@ Method | HTTP request | Description
 [**list_forced_sweep_requests**](PaymentApi.md#list_forced_sweep_requests) | **GET** /payments/force_sweep_requests | List forced sweeps
 [**list_merchant_balances**](PaymentApi.md#list_merchant_balances) | **GET** /payments/balance/merchants | List merchant balances
 [**list_merchants**](PaymentApi.md#list_merchants) | **GET** /payments/merchants | List all merchants
+[**list_payer_transactions**](PaymentApi.md#list_payer_transactions) | **GET** /payments/topup/payers/transactions | List payer transactions
 [**list_payment_orders**](PaymentApi.md#list_payment_orders) | **GET** /payments/orders | List all pay-in orders
 [**list_payment_supported_tokens**](PaymentApi.md#list_payment_supported_tokens) | **GET** /payments/supported_tokens | List supported tokens
 [**list_payment_wallet_balances**](PaymentApi.md#list_payment_wallet_balances) | **GET** /payments/balance/payment_wallets | List payment wallet balances
@@ -68,7 +68,6 @@ Method | HTTP request | Description
 [**list_top_up_payers**](PaymentApi.md#list_top_up_payers) | **GET** /payments/topup/payers | List payers
 [**payment_estimate_fee**](PaymentApi.md#payment_estimate_fee) | **POST** /payments/estimate_fee | Estimate fees
 [**trigger_test_payments_webhook_event**](PaymentApi.md#trigger_test_payments_webhook_event) | **POST** /payments/webhooks/trigger | Trigger test webhook event
-[**update_bank_account_by_id**](PaymentApi.md#update_bank_account_by_id) | **PUT** /payments/bank_accounts/{bank_account_id} | Update bank account
 [**update_counterparty**](PaymentApi.md#update_counterparty) | **PUT** /payments/counterparty/{counterparty_id} | Update counterparty
 [**update_destination**](PaymentApi.md#update_destination) | **PUT** /payments/destination/{destination_id} | Update destination
 [**update_destination_entry**](PaymentApi.md#update_destination_entry) | **PUT** /payments/destination_entry/{destination_entry_id} | Update destination entry
@@ -3144,7 +3143,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token_id** | **str**| The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format &#x60;{CHAIN}_{TOKEN}&#x60;. Supported values include:   - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDCOIN&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC2&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | 
- **custom_payer_id** | **str**| A unique identifier to track and identify individual payers in your system. | 
+ **custom_payer_id** | **str**| Unique customer identifier on the merchant side, used to allocate a dedicated top-up address  | 
  **merchant_id** | **str**| The merchant ID. | [optional] 
 
 ### Return type
@@ -3234,74 +3233,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListAllocationItems200Response**](ListAllocationItems200Response.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **list_bank_accounts**
-> List[BankAccount] list_bank_accounts()
-
-List all bank accounts
-
-<Note>This operation has been deprecated. Please use [List counterparty entries](https://www.cobo.com/payments/en/api-references/payment/list-counterparty-entries) instead.</Note> This operation retrieves the information of all bank accounts registered. 
-
-### Example
-
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.bank_account import BankAccount
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.PaymentApi(api_client)
-
-    try:
-        # List all bank accounts
-        api_response = api_instance.list_bank_accounts()
-        print("The response of PaymentApi->list_bank_accounts:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->list_bank_accounts: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**List[BankAccount]**](BankAccount.md)
 
 ### Authorization
 
@@ -4131,6 +4062,92 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_payer_transactions**
+> ListPayerTransactions200Response list_payer_transactions(custom_payer_id, limit=limit, before=before, after=after, merchant_id=merchant_id, token_id=token_id, transaction_hashes=transaction_hashes, transaction_ids=transaction_ids)
+
+List payer transactions
+
+This operation retrieves on-chain transactions related to a specific top-up payer.  You need to specify `custom_payer_id`, which is the merchant-defined customer identifier used when creating top-up addresses.  <Note>This operation is applicable to the top-up scenario only.</Note>  For more information, see [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_payer_transactions200_response import ListPayerTransactions200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    custom_payer_id = 'payer_0001'
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    merchant_id = 'M1001'
+    token_id = 'ETH_USDT'
+    transaction_hashes = '239861be9a4afe080c359b7fe4a1d035945ec46256b1a0f44d1267c71de8ec28'
+    transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
+
+    try:
+        # List payer transactions
+        api_response = api_instance.list_payer_transactions(custom_payer_id, limit=limit, before=before, after=after, merchant_id=merchant_id, token_id=token_id, transaction_hashes=transaction_hashes, transaction_ids=transaction_ids)
+        print("The response of PaymentApi->list_payer_transactions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_payer_transactions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **custom_payer_id** | **str**| Unique customer identifier on the merchant side, used to allocate a dedicated top-up address  | 
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **merchant_id** | **str**| The merchant ID. | [optional] 
+ **token_id** | **str**| The token ID, which is a unique identifier that specifies both the blockchain network and cryptocurrency token in the format &#x60;{CHAIN}_{TOKEN}&#x60;. Supported values include:   - USDC: &#x60;ETH_USDC&#x60;, &#x60;ARBITRUM_USDCOIN&#x60;, &#x60;SOL_USDC&#x60;, &#x60;BASE_USDC&#x60;, &#x60;MATIC_USDC2&#x60;, &#x60;BSC_USDC&#x60;   - USDT: &#x60;TRON_USDT&#x60;, &#x60;ETH_USDT&#x60;, &#x60;ARBITRUM_USDT&#x60;, &#x60;SOL_USDT&#x60;, &#x60;BASE_USDT&#x60;, &#x60;MATIC_USDT&#x60;, &#x60;BSC_USDT&#x60;  | [optional] 
+ **transaction_hashes** | **str**| A list of transaction hashes, separated by comma. | [optional] 
+ **transaction_ids** | **str**| A list of transaction IDs, separated by comma. | [optional] 
+
+### Return type
+
+[**ListPayerTransactions200Response**](ListPayerTransactions200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_payment_orders**
 > ListPaymentOrders200Response list_payment_orders(limit=limit, before=before, after=after, merchant_id=merchant_id, psp_order_id=psp_order_id, statuses=statuses)
 
@@ -4676,7 +4693,7 @@ Name | Type | Description  | Notes
 
 List payers
 
-This operation retrieves the information of all payers under a merchant.   You can filter the result by the payer ID. 
+This operation retrieves the information of all payers. You can filter the result by merchant ID and payer_id.  <Note>The `transactions` field in the response returns up to the latest 200 transactions only. This field will be removed in a future version. To paginate through payer transactions, use [List payer transactions](https://www.cobo.com/payments/en/guides/overview).</Note> 
 
 ### Example
 
@@ -4891,81 +4908,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The request was successful. |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_bank_account_by_id**
-> BankAccount update_bank_account_by_id(bank_account_id, update_bank_account_by_id_request=update_bank_account_by_id_request)
-
-Update bank account
-
-<Note>This operation has been deprecated.</Note> This operation updates the information of an existing bank account. 
-
-### Example
-
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.bank_account import BankAccount
-from cobo_waas2.models.update_bank_account_by_id_request import UpdateBankAccountByIdRequest
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.PaymentApi(api_client)
-    bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-    update_bank_account_by_id_request = cobo_waas2.UpdateBankAccountByIdRequest()
-
-    try:
-        # Update bank account
-        api_response = api_instance.update_bank_account_by_id(bank_account_id, update_bank_account_by_id_request=update_bank_account_by_id_request)
-        print("The response of PaymentApi->update_bank_account_by_id:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->update_bank_account_by_id: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **bank_account_id** | **str**| The bank account ID. | 
- **update_bank_account_by_id_request** | [**UpdateBankAccountByIdRequest**](UpdateBankAccountByIdRequest.md)| The request body for updating an existing bank account. | [optional] 
-
-### Return type
-
-[**BankAccount**](BankAccount.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

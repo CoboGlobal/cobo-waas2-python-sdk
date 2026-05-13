@@ -16,7 +16,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.original_main_group_handling import OriginalMainGroupHandling
 from cobo_waas2.models.update_group_action import UpdateGroupAction
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,8 @@ class UpdateKeyShareHolderGroupByIdRequest(BaseModel):
     UpdateKeyShareHolderGroupByIdRequest
     """  # noqa: E501
     update_key_share_holder_group_action: UpdateGroupAction
-    __properties: ClassVar[List[str]] = ["update_key_share_holder_group_action"]
+    original_main_group_handling: Optional[OriginalMainGroupHandling] = None
+    __properties: ClassVar[List[str]] = ["update_key_share_holder_group_action", "original_main_group_handling"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,7 +82,8 @@ class UpdateKeyShareHolderGroupByIdRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "update_key_share_holder_group_action": obj.get("update_key_share_holder_group_action")
+            "update_key_share_holder_group_action": obj.get("update_key_share_holder_group_action"),
+            "original_main_group_handling": obj.get("original_main_group_handling")
         })
         return _obj
 

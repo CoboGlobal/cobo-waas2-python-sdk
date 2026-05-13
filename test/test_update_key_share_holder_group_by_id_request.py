@@ -34,7 +34,8 @@ class TestUpdateKeyShareHolderGroupByIdRequest(unittest.TestCase):
         model = UpdateKeyShareHolderGroupByIdRequest()
         if include_optional:
             return UpdateKeyShareHolderGroupByIdRequest(
-                update_key_share_holder_group_action = 'UpgradeToMainGroup'
+                update_key_share_holder_group_action = 'UpgradeToMainGroup',
+                original_main_group_handling = 'Invalidate'
             )
         else:
             return UpdateKeyShareHolderGroupByIdRequest(
