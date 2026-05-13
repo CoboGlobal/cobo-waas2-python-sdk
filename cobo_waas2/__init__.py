@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.34.0"
+__version__ = "1.35.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -385,6 +385,7 @@ from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBal
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
 from cobo_waas2.models.list_mpc_projects200_response import ListMpcProjects200Response
 from cobo_waas2.models.list_mpc_vaults200_response import ListMpcVaults200Response
+from cobo_waas2.models.list_payer_transactions200_response import ListPayerTransactions200Response
 from cobo_waas2.models.list_payment_orders200_response import ListPaymentOrders200Response
 from cobo_waas2.models.list_payment_wallet_balances200_response import ListPaymentWalletBalances200Response
 from cobo_waas2.models.list_payouts200_response import ListPayouts200Response
@@ -446,6 +447,7 @@ from cobo_waas2.models.order_link_business_info_custom_exchange_rates_inner impo
 from cobo_waas2.models.order_link_business_info_payable_amounts_inner import OrderLinkBusinessInfoPayableAmountsInner
 from cobo_waas2.models.order_status import OrderStatus
 from cobo_waas2.models.org_info import OrgInfo
+from cobo_waas2.models.original_main_group_handling import OriginalMainGroupHandling
 from cobo_waas2.models.otc_fee import OtcFee
 from cobo_waas2.models.pagination import Pagination
 from cobo_waas2.models.payer_account import PayerAccount
@@ -826,7 +828,6 @@ from cobo_waas2.models.tron_contract_call_destination import TronContractCallDes
 from cobo_waas2.models.utxo import UTXO
 from cobo_waas2.models.unfreeze_disposition import UnfreezeDisposition
 from cobo_waas2.models.update_address_book_param import UpdateAddressBookParam
-from cobo_waas2.models.update_bank_account_by_id_request import UpdateBankAccountByIdRequest
 from cobo_waas2.models.update_counterparty_request import UpdateCounterpartyRequest
 from cobo_waas2.models.update_custodial_wallet_params import UpdateCustodialWalletParams
 from cobo_waas2.models.update_destination_bank_account import UpdateDestinationBankAccount

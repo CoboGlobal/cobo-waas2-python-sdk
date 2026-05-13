@@ -68,7 +68,7 @@ class ApiClient:
         self.rest_client = rest.RESTClientObject(configuration)
         self.default_headers = {}
         # Set default User-Agent.
-        self.user_agent = 'cobo-waas2-python-sdk/1.34.0'
+        self.user_agent = 'cobo-waas2-python-sdk/1.35.0'
 
     def __enter__(self):
         return self
@@ -247,10 +247,27 @@ class ApiClient:
         :param response_types_map: dict of response types.
         :return: ApiResponse
         """
+        msg = "RESTResponse.read() must be called before passing it to response_deserialize()"
+        assert response_data.data is not None, msg
+
         headers = response_data.getheaders()
         sig = headers.get('biz-resp-signature')
         timestamp = headers.get('biz-timestamp')
         if not sig or not timestamp:
+            # Responses from proxy (e.g. nginx) may lack signature headers
+            # since the request never reaches the business server.
+            proxy_errors = {
+                414: "Request-URI Too Large",
+                429: "Too Many Requests",
+                502: "Bad Gateway",
+                503: "Service Unavailable",
+            }
+            if response_data.status in proxy_errors:
+                raise ApiException(
+                    status=response_data.status,
+                    reason=proxy_errors[response_data.status],
+                    http_resp=response_data,
+                )
             raise ApiException("Missing resp signature or timestamp")
         verified = SignHelper.verify(
             pub_key=self.configuration.resp_pubkey,
@@ -259,9 +276,6 @@ class ApiClient:
         )
         if not verified:
             raise ApiException("Invalid resp signature")
-
-        msg = "RESTResponse.read() must be called before passing it to response_deserialize()"
-        assert response_data.data is not None, msg
 
         response_type = response_types_map.get(str(response_data.status), None)
         if not response_type and isinstance(response_data.status, int) and 100 <= response_data.status <= 599:

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **require_memo** | **bool** | Whether the chain requires a memo. | [optional] 
 **confirming_threshold** | **int** | The number of confirmations required for an on-chain transaction, such as 64 for Ethereum. | [optional] 
 **coinbase_maturity** | **int** | The number of confirmations required before a coinbase transaction is considered mature and can be spent, for example, 100 confirmations for BTC. | [optional] 
+**caip2_chain_id** | **str** | A standardized, unique identifier for blockchain networks (like eip155:1 for Ethereum) that combines a namespace and a reference to ensure cross-chain compatibility. | [optional] 
 
 ## Example
 

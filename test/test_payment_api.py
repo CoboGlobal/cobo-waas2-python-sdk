@@ -573,17 +573,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_allocation_items(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
         """
 
-    def test_list_bank_accounts(self) -> None:
-        """
-        Test case for list_bank_accounts
-
-        List all bank accounts
-        """
-        """
-
-        api_response = self.api.list_bank_accounts()
-        """
-
     def test_list_batch_allocations(self) -> None:
         """
         Test case for list_batch_allocations
@@ -745,6 +734,25 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_merchants(limit=limit, before=before, after=after, keyword=keyword, wallet_id=wallet_id, wallet_setup=wallet_setup)
         """
 
+    def test_list_payer_transactions(self) -> None:
+        """
+        Test case for list_payer_transactions
+
+        List payer transactions
+        """
+        """
+        custom_payer_id = 'payer_0001'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        merchant_id = 'M1001'
+        token_id = 'ETH_USDT'
+        transaction_hashes = '239861be9a4afe080c359b7fe4a1d035945ec46256b1a0f44d1267c71de8ec28'
+        transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
+
+        api_response = self.api.list_payer_transactions(custom_payer_id, limit=limit, before=before, after=after, merchant_id=merchant_id, token_id=token_id, transaction_hashes=transaction_hashes, transaction_ids=transaction_ids)
+        """
+
     def test_list_payment_orders(self) -> None:
         """
         Test case for list_payment_orders
@@ -886,19 +894,6 @@ class TestPaymentApi(unittest.TestCase):
         trigger_test_payments_webhook_event_request = cobo_waas2.TriggerTestPaymentsWebhookEventRequest()
 
         api_response = self.api.trigger_test_payments_webhook_event(trigger_test_payments_webhook_event_request=trigger_test_payments_webhook_event_request)
-        """
-
-    def test_update_bank_account_by_id(self) -> None:
-        """
-        Test case for update_bank_account_by_id
-
-        Update bank account
-        """
-        """
-        bank_account_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
-        update_bank_account_by_id_request = cobo_waas2.UpdateBankAccountByIdRequest()
-
-        api_response = self.api.update_bank_account_by_id(bank_account_id, update_bank_account_by_id_request=update_bank_account_by_id_request)
         """
 
     def test_update_counterparty(self) -> None:

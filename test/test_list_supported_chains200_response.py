@@ -44,7 +44,8 @@ class TestListSupportedChains200Response(unittest.TestCase):
                         explorer_address_url = 'https://etherscan.io/address/{address}', 
                         require_memo = False, 
                         confirming_threshold = 15, 
-                        coinbase_maturity = 15, )
+                        coinbase_maturity = 15, 
+                        caip2_chain_id = 'eip155:1', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

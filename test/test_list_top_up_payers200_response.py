@@ -38,6 +38,7 @@ class TestListTopUpPayers200Response(unittest.TestCase):
                     cobo_waas2.models.list_top_up_payers_200_response_data_inner.list_top_up_payers_200_response_data_inner(
                         merchant_id = 'M1001', 
                         payer_id = 'P20250619T0310056d7aa', 
+                        custom_payer_id = 'user_abc_10001', 
                         developer_fee_rate = '0.01', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744693200, 

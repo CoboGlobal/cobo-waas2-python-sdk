@@ -28,11 +28,12 @@ class ListTopUpPayers200ResponseDataInner(BaseModel):
     """  # noqa: E501
     merchant_id: StrictStr = Field(description="The merchant ID.")
     payer_id: StrictStr = Field(description="A unique identifier assigned by Cobo to track and identify individual payers.")
+    custom_payer_id: Optional[StrictStr] = Field(default=None, description="Unique user identifier on the merchant side, used to assign a dedicated deposit address. ")
     developer_fee_rate: StrictStr = Field(description="The developer fee rate applied to top-up transactions made by this payer. Expressed as a decimal string where \"0.1\" represents 10%.")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the payer, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the payer, represented as a UNIX timestamp in seconds.")
-    transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of top-up transactions associated with this payer.")
-    __properties: ClassVar[List[str]] = ["merchant_id", "payer_id", "developer_fee_rate", "created_timestamp", "updated_timestamp", "transactions"]
+    transactions: Optional[List[PaymentTransaction]] = Field(default=None, description="An array of transactions associated with this payer.  <Note>This field returns up to the latest 200 transactions only and will be removed in a future version. Use the dedicated payer transactions API to paginate through transactions.</Note> ")
+    __properties: ClassVar[List[str]] = ["merchant_id", "payer_id", "custom_payer_id", "developer_fee_rate", "created_timestamp", "updated_timestamp", "transactions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,7 @@ class ListTopUpPayers200ResponseDataInner(BaseModel):
         _obj = cls.model_validate({
             "merchant_id": obj.get("merchant_id"),
             "payer_id": obj.get("payer_id"),
+            "custom_payer_id": obj.get("custom_payer_id"),
             "developer_fee_rate": obj.get("developer_fee_rate"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
