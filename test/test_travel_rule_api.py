@@ -29,6 +29,67 @@ class TestTravelRuleApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_cancel_satoshi_test_challenge(self) -> None:
+        """
+        Test case for cancel_satoshi_test_challenge
+
+        Cancel Satoshi Test challenge
+        """
+        """
+        cancel_satoshi_test_challenge_request = cobo_waas2.CancelSatoshiTestChallengeRequest()
+
+        api_response = self.api.cancel_satoshi_test_challenge(cancel_satoshi_test_challenge_request=cancel_satoshi_test_challenge_request)
+        """
+
+    def test_create_satoshi_test_challenge(self) -> None:
+        """
+        Test case for create_satoshi_test_challenge
+
+        Create Satoshi Test challenge
+        """
+        """
+        create_satoshi_test_challenge_request = cobo_waas2.CreateSatoshiTestChallengeRequest()
+
+        api_response = self.api.create_satoshi_test_challenge(create_satoshi_test_challenge_request=create_satoshi_test_challenge_request)
+        """
+
+    def test_get_address_verification(self) -> None:
+        """
+        Test case for get_address_verification
+
+        Get address verification
+        """
+        """
+        verification_id = 'fb377ea5-a97a-49b4-955d-23f8fdd5177a'
+
+        api_response = self.api.get_address_verification(verification_id)
+        """
+
+    def test_get_satoshi_test_challenge(self) -> None:
+        """
+        Test case for get_satoshi_test_challenge
+
+        Get Satoshi Test challenge
+        """
+        """
+        challenge_id = 'a1b2c3d4-e5f6-7890-abcd-ef1234567890'
+
+        api_response = self.api.get_satoshi_test_challenge(challenge_id)
+        """
+
+    def test_get_signature_challenge(self) -> None:
+        """
+        Test case for get_signature_challenge
+
+        Get self-custody signature challenge
+        """
+        """
+        transaction_type = 'DEPOSIT'
+        transaction_id = '123e4567-e89b-12d3-a456-426614174000'
+
+        api_response = self.api.get_signature_challenge(transaction_type, transaction_id)
+        """
+
     def test_get_transaction_limitation(self) -> None:
         """
         Test case for get_transaction_limitation
@@ -40,6 +101,23 @@ class TestTravelRuleApi(unittest.TestCase):
         transaction_id = '123e4567-e89b-12d3-a456-426614174000'
 
         api_response = self.api.get_transaction_limitation(transaction_type, transaction_id)
+        """
+
+    def test_list_address_verifications(self) -> None:
+        """
+        Test case for list_address_verifications
+
+        List address verifications
+        """
+        """
+        status = cobo_waas2.AddressVerificationStatus()
+        chain_id = 'ETH'
+        address = '0x1234567890abcdef1234567890abcdef12345678'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+
+        api_response = self.api.list_address_verifications(status=status, chain_id=chain_id, address=address, limit=limit, before=before, after=after)
         """
 
     def test_list_supported_countries(self) -> None:

@@ -34,6 +34,7 @@ class TestCreateBulkSendRequest(unittest.TestCase):
         model = CreateBulkSendRequest()
         if include_optional:
             return CreateBulkSendRequest(
+                request_id = '123e457-e89b-12d3-a456-426614174004',
                 source_account = 'M1001',
                 execution_mode = 'Strict',
                 description = 'Monthly vendor payments - January 2024',

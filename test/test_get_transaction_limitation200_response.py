@@ -49,7 +49,8 @@ The transfer can only proceed after signing.
 ',
                 connect_wallet_list = [
                     'metamask'
-                    ]
+                    ],
+                satoshi_test_supported = True
             )
         else:
             return GetTransactionLimitation200Response(

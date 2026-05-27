@@ -54,6 +54,12 @@ cobo_waas2/models/address_risk_level.py
 cobo_waas2/models/address_transfer_destination.py
 cobo_waas2/models/address_transfer_destination_account_output.py
 cobo_waas2/models/address_transfer_destination_utxo_outputs_inner.py
+cobo_waas2/models/address_verification.py
+cobo_waas2/models/address_verification_detail.py
+cobo_waas2/models/address_verification_detail_satoshi_test_detail.py
+cobo_waas2/models/address_verification_detail_signature_detail.py
+cobo_waas2/models/address_verification_method.py
+cobo_waas2/models/address_verification_status.py
 cobo_waas2/models/addresses_event_data.py
 cobo_waas2/models/addresses_event_data_all_of_addresses.py
 cobo_waas2/models/allocation_item.py
@@ -113,6 +119,7 @@ cobo_waas2/models/broadcast_signed_transactions_request.py
 cobo_waas2/models/btcbip137_message_sign_destination.py
 cobo_waas2/models/btcbip322_message_sign_destination.py
 cobo_waas2/models/callback_message.py
+cobo_waas2/models/cancel_satoshi_test_challenge_request.py
 cobo_waas2/models/chain_info.py
 cobo_waas2/models/chains_event_data.py
 cobo_waas2/models/change_guard_pubkey200_response.py
@@ -182,6 +189,7 @@ cobo_waas2/models/create_refund_link_request.py
 cobo_waas2/models/create_refund_request.py
 cobo_waas2/models/create_report_request.py
 cobo_waas2/models/create_safe_wallet_params.py
+cobo_waas2/models/create_satoshi_test_challenge_request.py
 cobo_waas2/models/create_settlement.py
 cobo_waas2/models/create_settlement_request_request.py
 cobo_waas2/models/create_smart_contract_wallet_params.py
@@ -346,6 +354,7 @@ cobo_waas2/models/link.py
 cobo_waas2/models/link_display_info.py
 cobo_waas2/models/list_address_balances_by_token200_response.py
 cobo_waas2/models/list_address_books200_response.py
+cobo_waas2/models/list_address_verifications200_response.py
 cobo_waas2/models/list_addresses200_response.py
 cobo_waas2/models/list_allocation_items200_response.py
 cobo_waas2/models/list_approval_requests200_response.py
@@ -358,6 +367,7 @@ cobo_waas2/models/list_babylon_eligible_stakings200_response_data_inner.py
 cobo_waas2/models/list_babylon_staking_registrations200_response.py
 cobo_waas2/models/list_batch_allocations200_response.py
 cobo_waas2/models/list_bulk_send_items200_response.py
+cobo_waas2/models/list_bulk_sends200_response.py
 cobo_waas2/models/list_callback_messages200_response.py
 cobo_waas2/models/list_counterparties200_response.py
 cobo_waas2/models/list_counterparty_entries200_response.py
@@ -517,6 +527,10 @@ cobo_waas2/models/safe_wallet.py
 cobo_waas2/models/safe_wallet_delegates.py
 cobo_waas2/models/safe_wallet_delegates_contract_call.py
 cobo_waas2/models/safe_wallet_delegates_transfer.py
+cobo_waas2/models/satoshi_test_cancel_result.py
+cobo_waas2/models/satoshi_test_challenge.py
+cobo_waas2/models/satoshi_test_challenge_action.py
+cobo_waas2/models/satoshi_test_challenge_status.py
 cobo_waas2/models/scopes.py
 cobo_waas2/models/selected_entity_type.py
 cobo_waas2/models/self_custody_wallet.py
@@ -526,6 +540,8 @@ cobo_waas2/models/settlement.py
 cobo_waas2/models/settlement_detail.py
 cobo_waas2/models/settlement_info.py
 cobo_waas2/models/settlement_type.py
+cobo_waas2/models/signature_challenge.py
+cobo_waas2/models/signature_detail.py
 cobo_waas2/models/skip_check_type.py
 cobo_waas2/models/smart_contract_initiator.py
 cobo_waas2/models/smart_contract_wallet_info.py
@@ -762,6 +778,7 @@ cobo_waas2/models/travel_rule_deposit_legal_entity.py
 cobo_waas2/models/travel_rule_deposit_natural_entity.py
 cobo_waas2/models/travel_rule_deposit_request.py
 cobo_waas2/models/travel_rule_deposit_request_travel_rule_info.py
+cobo_waas2/models/travel_rule_transaction_type.py
 cobo_waas2/models/travel_rule_withdraw_exchanges_or_vasp.py
 cobo_waas2/models/travel_rule_withdraw_exchanges_or_vasp_entity_info.py
 cobo_waas2/models/travel_rule_withdraw_legal_entity.py
@@ -873,6 +890,12 @@ docs/AddressRiskLevel.md
 docs/AddressTransferDestination.md
 docs/AddressTransferDestinationAccountOutput.md
 docs/AddressTransferDestinationUtxoOutputsInner.md
+docs/AddressVerification.md
+docs/AddressVerificationDetail.md
+docs/AddressVerificationDetailSatoshiTestDetail.md
+docs/AddressVerificationDetailSignatureDetail.md
+docs/AddressVerificationMethod.md
+docs/AddressVerificationStatus.md
 docs/AddressesEventData.md
 docs/AddressesEventDataAllOfAddresses.md
 docs/AllocationItem.md
@@ -934,6 +957,7 @@ docs/BridgingFee.md
 docs/BroadcastSignedTransactions201ResponseInner.md
 docs/BroadcastSignedTransactionsRequest.md
 docs/CallbackMessage.md
+docs/CancelSatoshiTestChallengeRequest.md
 docs/ChainInfo.md
 docs/ChainsEventData.md
 docs/ChangeGuardPubkey200Response.md
@@ -1004,6 +1028,7 @@ docs/CreateRefundLinkRequest.md
 docs/CreateRefundRequest.md
 docs/CreateReportRequest.md
 docs/CreateSafeWalletParams.md
+docs/CreateSatoshiTestChallengeRequest.md
 docs/CreateSettlement.md
 docs/CreateSettlementRequestRequest.md
 docs/CreateSmartContractWalletParams.md
@@ -1172,6 +1197,7 @@ docs/Link.md
 docs/LinkDisplayInfo.md
 docs/ListAddressBalancesByToken200Response.md
 docs/ListAddressBooks200Response.md
+docs/ListAddressVerifications200Response.md
 docs/ListAddresses200Response.md
 docs/ListAllocationItems200Response.md
 docs/ListApprovalRequests200Response.md
@@ -1184,6 +1210,7 @@ docs/ListBabylonEligibleStakings200ResponseDataInner.md
 docs/ListBabylonStakingRegistrations200Response.md
 docs/ListBatchAllocations200Response.md
 docs/ListBulkSendItems200Response.md
+docs/ListBulkSends200Response.md
 docs/ListCallbackMessages200Response.md
 docs/ListCounterparties200Response.md
 docs/ListCounterpartyEntries200Response.md
@@ -1349,6 +1376,10 @@ docs/SafeWallet.md
 docs/SafeWalletDelegates.md
 docs/SafeWalletDelegatesContractCall.md
 docs/SafeWalletDelegatesTransfer.md
+docs/SatoshiTestCancelResult.md
+docs/SatoshiTestChallenge.md
+docs/SatoshiTestChallengeAction.md
+docs/SatoshiTestChallengeStatus.md
 docs/Scopes.md
 docs/SelectedEntityType.md
 docs/SelfCustodyWallet.md
@@ -1358,6 +1389,8 @@ docs/Settlement.md
 docs/SettlementDetail.md
 docs/SettlementInfo.md
 docs/SettlementType.md
+docs/SignatureChallenge.md
+docs/SignatureDetail.md
 docs/SkipCheckType.md
 docs/SmartContractInitiator.md
 docs/SmartContractWalletInfo.md
@@ -1637,6 +1670,7 @@ docs/TravelRuleDepositLegalEntity.md
 docs/TravelRuleDepositNaturalEntity.md
 docs/TravelRuleDepositRequest.md
 docs/TravelRuleDepositRequestTravelRuleInfo.md
+docs/TravelRuleTransactionType.md
 docs/TravelRuleWithdrawExchangesOrVASP.md
 docs/TravelRuleWithdrawExchangesOrVASPEntityInfo.md
 docs/TravelRuleWithdrawLegalEntity.md
@@ -1716,6 +1750,12 @@ test/test_address_risk_level.py
 test/test_address_transfer_destination.py
 test/test_address_transfer_destination_account_output.py
 test/test_address_transfer_destination_utxo_outputs_inner.py
+test/test_address_verification.py
+test/test_address_verification_detail.py
+test/test_address_verification_detail_satoshi_test_detail.py
+test/test_address_verification_detail_signature_detail.py
+test/test_address_verification_method.py
+test/test_address_verification_status.py
 test/test_addresses_event_data.py
 test/test_addresses_event_data_all_of_addresses.py
 test/test_allocation_item.py
@@ -1777,6 +1817,7 @@ test/test_broadcast_signed_transactions_request.py
 test/test_btcbip137_message_sign_destination.py
 test/test_btcbip322_message_sign_destination.py
 test/test_callback_message.py
+test/test_cancel_satoshi_test_challenge_request.py
 test/test_chain_info.py
 test/test_chains_event_data.py
 test/test_change_guard_pubkey200_response.py
@@ -1847,6 +1888,7 @@ test/test_create_refund_link_request.py
 test/test_create_refund_request.py
 test/test_create_report_request.py
 test/test_create_safe_wallet_params.py
+test/test_create_satoshi_test_challenge_request.py
 test/test_create_settlement.py
 test/test_create_settlement_request_request.py
 test/test_create_smart_contract_wallet_params.py
@@ -2015,6 +2057,7 @@ test/test_link.py
 test/test_link_display_info.py
 test/test_list_address_balances_by_token200_response.py
 test/test_list_address_books200_response.py
+test/test_list_address_verifications200_response.py
 test/test_list_addresses200_response.py
 test/test_list_allocation_items200_response.py
 test/test_list_approval_requests200_response.py
@@ -2027,6 +2070,7 @@ test/test_list_babylon_eligible_stakings200_response_data_inner.py
 test/test_list_babylon_staking_registrations200_response.py
 test/test_list_batch_allocations200_response.py
 test/test_list_bulk_send_items200_response.py
+test/test_list_bulk_sends200_response.py
 test/test_list_callback_messages200_response.py
 test/test_list_counterparties200_response.py
 test/test_list_counterparty_entries200_response.py
@@ -2190,6 +2234,10 @@ test/test_safe_wallet.py
 test/test_safe_wallet_delegates.py
 test/test_safe_wallet_delegates_contract_call.py
 test/test_safe_wallet_delegates_transfer.py
+test/test_satoshi_test_cancel_result.py
+test/test_satoshi_test_challenge.py
+test/test_satoshi_test_challenge_action.py
+test/test_satoshi_test_challenge_status.py
 test/test_scopes.py
 test/test_selected_entity_type.py
 test/test_self_custody_wallet.py
@@ -2199,6 +2247,8 @@ test/test_settlement.py
 test/test_settlement_detail.py
 test/test_settlement_info.py
 test/test_settlement_type.py
+test/test_signature_challenge.py
+test/test_signature_detail.py
 test/test_skip_check_type.py
 test/test_smart_contract_initiator.py
 test/test_smart_contract_wallet_info.py
@@ -2440,6 +2490,7 @@ test/test_travel_rule_deposit_legal_entity.py
 test/test_travel_rule_deposit_natural_entity.py
 test/test_travel_rule_deposit_request.py
 test/test_travel_rule_deposit_request_travel_rule_info.py
+test/test_travel_rule_transaction_type.py
 test/test_travel_rule_withdraw_exchanges_or_vasp.py
 test/test_travel_rule_withdraw_exchanges_or_vasp_entity_info.py
 test/test_travel_rule_withdraw_legal_entity.py

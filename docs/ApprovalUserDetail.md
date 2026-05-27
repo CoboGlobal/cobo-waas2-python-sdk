@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **result** | [**ApprovalResult**](ApprovalResult.md) |  | [optional] 
 **approval_result_code** | **int** | Integer value representing the result of the approval. | [optional] 
 **created_time** | **int** | Timestamp when the approval was created. | [optional] 
+**expired_time** | **int** | The timestamp when the approval was expired. | [optional] 
 **template_version** | **str** | Version of the template used for the transaction approval. | [optional] 
 **header_title** | **str** | Display title used in the transaction approval. | [optional] 
 **is_for_sign** | **bool** | Indicates whether this approval requires signing: - &#x60;true&#x60;: The user must sign the transaction. - &#x60;false&#x60;: The user only needs to approve or reject without signing.  | [optional] 
