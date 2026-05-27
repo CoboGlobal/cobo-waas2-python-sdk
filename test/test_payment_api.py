@@ -603,6 +603,21 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_bulk_send_items(bulk_send_id, limit=limit, before=before, after=after)
         """
 
+    def test_list_bulk_sends(self) -> None:
+        """
+        Test case for list_bulk_sends
+
+        List bulk sends
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        request_id = 'random_request_id'
+
+        api_response = self.api.list_bulk_sends(limit=limit, before=before, after=after, request_id=request_id)
+        """
+
     def test_list_counterparties(self) -> None:
         """
         Test case for list_counterparties

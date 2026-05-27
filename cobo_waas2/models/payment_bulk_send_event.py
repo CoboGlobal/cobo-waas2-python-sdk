@@ -29,13 +29,14 @@ class PaymentBulkSendEvent(BaseModel):
     """  # noqa: E501
     data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `PaymentPayout`: The payment payout event data. - `PaymentBulkSend`: The payment bulk send event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data. - `ComplianceKyaScreenings`: The compliance KYA screenings event data.")
     bulk_send_id: StrictStr = Field(description="The bulk send ID.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID.")
     source_account: StrictStr = Field(description="The source account from which the bulk send will be made. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
     description: Optional[StrictStr] = Field(default=None, description="The description for the entire bulk send batch.")
     execution_mode: PaymentBulkSendExecutionMode
     status: PaymentBulkSendStatus
     created_timestamp: StrictInt = Field(description="The created time of the bulk send, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the bulk send, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["data_type", "bulk_send_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["data_type", "bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
@@ -97,6 +98,7 @@ class PaymentBulkSendEvent(BaseModel):
         _obj = cls.model_validate({
             "data_type": obj.get("data_type"),
             "bulk_send_id": obj.get("bulk_send_id"),
+            "request_id": obj.get("request_id"),
             "source_account": obj.get("source_account"),
             "description": obj.get("description"),
             "execution_mode": obj.get("execution_mode"),

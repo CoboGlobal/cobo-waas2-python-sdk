@@ -36,6 +36,7 @@ class TestPaymentBulkSendEvent(unittest.TestCase):
             return PaymentBulkSendEvent(
                 data_type = 'Transaction',
                 bulk_send_id = '123e4567-e89b-12d3-a456-426614174003',
+                request_id = '123e457-e89b-12d3-a456-426614174004',
                 source_account = 'M1001',
                 description = 'Monthly vendor payments - January 2024',
                 execution_mode = 'Strict',

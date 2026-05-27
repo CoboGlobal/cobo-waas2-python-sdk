@@ -28,9 +28,10 @@ class GetTransactionLimitation200Response(BaseModel):
     """  # noqa: E501
     vasp_list: Optional[List[Vasp]] = Field(default=None, description="A list of virtual asset service providers (VASP) you can select as the transaction source or destination.")
     is_threshold_reached: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction amount exceeds a predefined threshold. If exceeded, additional information is required when filling Travel Rule details. - `true`: Threshold exceeded. - `false`: Threshold not exceeded. ")
-    self_custody_wallet_challenge: Optional[StrictStr] = Field(default=None, description="A human-readable, time-sensitive message to be signed by the wallet owner. The message contains key information including the wallet address, a unique nonce, and a timestamp. Signing this message confirms ownership of the wallet and allows the operation to proceed. ")
+    self_custody_wallet_challenge: Optional[StrictStr] = Field(default=None, description="**Deprecated.** Use [Get self-custody signature challenge](#operation/get_signature_challenge) instead. This field will be removed in a future release.  A human-readable, time-sensitive message to be signed by the wallet owner. The message contains key information including the wallet address, a unique nonce, and a timestamp. Signing this message confirms ownership of the wallet and allows the operation to proceed. ")
     connect_wallet_list: Optional[List[StrictStr]] = Field(default=None, description="A list of self-custody wallet providers you can select as the transaction source or destination.")
-    __properties: ClassVar[List[str]] = ["vasp_list", "is_threshold_reached", "self_custody_wallet_challenge", "connect_wallet_list"]
+    satoshi_test_supported: Optional[StrictBool] = Field(default=None, description="Indicates whether Satoshi Test (on-chain micro-deposit verification) is supported for the transaction's chain. - `true`: You can initiate a Satoshi Test challenge to verify the counterparty address. - `false`: The chain does not support Satoshi Test; use signature verification instead. ")
+    __properties: ClassVar[List[str]] = ["vasp_list", "is_threshold_reached", "self_custody_wallet_challenge", "connect_wallet_list", "satoshi_test_supported"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +94,8 @@ class GetTransactionLimitation200Response(BaseModel):
             "vasp_list": [Vasp.from_dict(_item) for _item in obj["vasp_list"]] if obj.get("vasp_list") is not None else None,
             "is_threshold_reached": obj.get("is_threshold_reached"),
             "self_custody_wallet_challenge": obj.get("self_custody_wallet_challenge"),
-            "connect_wallet_list": obj.get("connect_wallet_list")
+            "connect_wallet_list": obj.get("connect_wallet_list"),
+            "satoshi_test_supported": obj.get("satoshi_test_supported")
         })
         return _obj
 

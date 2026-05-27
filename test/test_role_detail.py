@@ -49,6 +49,7 @@ class TestRoleDetail(unittest.TestCase):
                         result = 'Approved', 
                         approval_result_code = 1, 
                         created_time = 1610444045, 
+                        expired_time = 1610444165, 
                         template_version = '1.0.0', 
                         header_title = 'Transaction Approval', 
                         is_for_sign = True, 

@@ -28,13 +28,14 @@ class PaymentBulkSend(BaseModel):
     PaymentBulkSend
     """  # noqa: E501
     bulk_send_id: StrictStr = Field(description="The bulk send ID.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID.")
     source_account: StrictStr = Field(description="The source account from which the bulk send will be made. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
     description: Optional[StrictStr] = Field(default=None, description="The description for the entire bulk send batch.")
     execution_mode: PaymentBulkSendExecutionMode
     status: PaymentBulkSendStatus
     created_timestamp: StrictInt = Field(description="The created time of the bulk send, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the bulk send, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["bulk_send_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +89,7 @@ class PaymentBulkSend(BaseModel):
 
         _obj = cls.model_validate({
             "bulk_send_id": obj.get("bulk_send_id"),
+            "request_id": obj.get("request_id"),
             "source_account": obj.get("source_account"),
             "description": obj.get("description"),
             "execution_mode": obj.get("execution_mode"),

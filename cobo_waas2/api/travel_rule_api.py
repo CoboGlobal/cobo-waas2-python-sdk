@@ -13,11 +13,19 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr, field_validator
+from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from cobo_waas2.models.address_verification_detail import AddressVerificationDetail
+from cobo_waas2.models.address_verification_status import AddressVerificationStatus
+from cobo_waas2.models.cancel_satoshi_test_challenge_request import CancelSatoshiTestChallengeRequest
+from cobo_waas2.models.create_satoshi_test_challenge_request import CreateSatoshiTestChallengeRequest
 from cobo_waas2.models.get_transaction_limitation200_response import GetTransactionLimitation200Response
+from cobo_waas2.models.list_address_verifications200_response import ListAddressVerifications200Response
 from cobo_waas2.models.list_supported_countries200_response_inner import ListSupportedCountries200ResponseInner
+from cobo_waas2.models.satoshi_test_cancel_result import SatoshiTestCancelResult
+from cobo_waas2.models.satoshi_test_challenge import SatoshiTestChallenge
+from cobo_waas2.models.signature_challenge import SignatureChallenge
 from cobo_waas2.models.submit_deposit_travel_rule_info201_response import SubmitDepositTravelRuleInfo201Response
 from cobo_waas2.models.travel_rule_deposit_request import TravelRuleDepositRequest
 from cobo_waas2.models.travel_rule_withdraw_request import TravelRuleWithdrawRequest
@@ -40,6 +48,872 @@ class TravelRuleApi:
         self.api_client = api_client
 
     @validate_call
+    def cancel_satoshi_test_challenge(
+        self,
+        cancel_satoshi_test_challenge_request: Optional[CancelSatoshiTestChallengeRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> SatoshiTestCancelResult:
+        """Cancel Satoshi Test challenge
+
+        This operation cancels a Satoshi Test challenge that is currently in `PREPARE` or `PENDING` status. Typical use case: the counterparty decides to switch verification methods before transferring.  Once cancelled, the challenge status becomes `DELETED` and the on-chain match will no longer be observed. Challenges already in `MATCHED`, `VERIFIED`, `EXPIRED`, or `DELETED` state cannot be cancelled. 
+
+        :param cancel_satoshi_test_challenge_request:
+        :type cancel_satoshi_test_challenge_request: CancelSatoshiTestChallengeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._cancel_satoshi_test_challenge_serialize(
+            cancel_satoshi_test_challenge_request=cancel_satoshi_test_challenge_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SatoshiTestCancelResult",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def cancel_satoshi_test_challenge_with_http_info(
+        self,
+        cancel_satoshi_test_challenge_request: Optional[CancelSatoshiTestChallengeRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[SatoshiTestCancelResult]:
+        """Cancel Satoshi Test challenge
+
+        This operation cancels a Satoshi Test challenge that is currently in `PREPARE` or `PENDING` status. Typical use case: the counterparty decides to switch verification methods before transferring.  Once cancelled, the challenge status becomes `DELETED` and the on-chain match will no longer be observed. Challenges already in `MATCHED`, `VERIFIED`, `EXPIRED`, or `DELETED` state cannot be cancelled. 
+
+        :param cancel_satoshi_test_challenge_request:
+        :type cancel_satoshi_test_challenge_request: CancelSatoshiTestChallengeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._cancel_satoshi_test_challenge_serialize(
+            cancel_satoshi_test_challenge_request=cancel_satoshi_test_challenge_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SatoshiTestCancelResult",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def cancel_satoshi_test_challenge_without_preload_content(
+        self,
+        cancel_satoshi_test_challenge_request: Optional[CancelSatoshiTestChallengeRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Cancel Satoshi Test challenge
+
+        This operation cancels a Satoshi Test challenge that is currently in `PREPARE` or `PENDING` status. Typical use case: the counterparty decides to switch verification methods before transferring.  Once cancelled, the challenge status becomes `DELETED` and the on-chain match will no longer be observed. Challenges already in `MATCHED`, `VERIFIED`, `EXPIRED`, or `DELETED` state cannot be cancelled. 
+
+        :param cancel_satoshi_test_challenge_request:
+        :type cancel_satoshi_test_challenge_request: CancelSatoshiTestChallengeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._cancel_satoshi_test_challenge_serialize(
+            cancel_satoshi_test_challenge_request=cancel_satoshi_test_challenge_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SatoshiTestCancelResult",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _cancel_satoshi_test_challenge_serialize(
+        self,
+        cancel_satoshi_test_challenge_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if cancel_satoshi_test_challenge_request is not None:
+            _body_params = cancel_satoshi_test_challenge_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/travel_rule/satoshi_test/challenge/cancel',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_satoshi_test_challenge(
+        self,
+        create_satoshi_test_challenge_request: Optional[CreateSatoshiTestChallengeRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> SatoshiTestChallenge:
+        """Create Satoshi Test challenge
+
+        This operation creates a Satoshi Test challenge for self-custody address verification. Satoshi Test verifies address ownership by having the counterparty transfer a small, uniquely-generated amount from their wallet to a Cobo-controlled verification address.  A single endpoint covers both flows via the `action` parameter: - **Two-step flow** (`action=PREPARE` then `action=SUBMIT`): Preview the verification details first, then activate. The 180-minute countdown only starts on `SUBMIT`. The server uses `(chain_id, from_address)` as the idempotency key, so the second call automatically targets the prepared challenge. For extra safety, pass the `challenge_id` returned by `PREPARE` in the subsequent `SUBMIT` call — it pins the activation to that specific challenge. - **One-shot flow** (`action=SUBMIT` directly, without `challenge_id`): Prepare and submit in a single call. The challenge is created directly in `PENDING` state with the countdown started.  If the counterparty address has already been verified, the operation returns HTTP 400 `ADDRESS_ALREADY_VERIFIED`. Call [List address verifications](#operation/list_address_verifications) with `chain_id`, `address`, and `status=VERIFIED` first to pre-check.  Supported chains: `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`. 
+
+        :param create_satoshi_test_challenge_request:
+        :type create_satoshi_test_challenge_request: CreateSatoshiTestChallengeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_satoshi_test_challenge_serialize(
+            create_satoshi_test_challenge_request=create_satoshi_test_challenge_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SatoshiTestChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_satoshi_test_challenge_with_http_info(
+        self,
+        create_satoshi_test_challenge_request: Optional[CreateSatoshiTestChallengeRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[SatoshiTestChallenge]:
+        """Create Satoshi Test challenge
+
+        This operation creates a Satoshi Test challenge for self-custody address verification. Satoshi Test verifies address ownership by having the counterparty transfer a small, uniquely-generated amount from their wallet to a Cobo-controlled verification address.  A single endpoint covers both flows via the `action` parameter: - **Two-step flow** (`action=PREPARE` then `action=SUBMIT`): Preview the verification details first, then activate. The 180-minute countdown only starts on `SUBMIT`. The server uses `(chain_id, from_address)` as the idempotency key, so the second call automatically targets the prepared challenge. For extra safety, pass the `challenge_id` returned by `PREPARE` in the subsequent `SUBMIT` call — it pins the activation to that specific challenge. - **One-shot flow** (`action=SUBMIT` directly, without `challenge_id`): Prepare and submit in a single call. The challenge is created directly in `PENDING` state with the countdown started.  If the counterparty address has already been verified, the operation returns HTTP 400 `ADDRESS_ALREADY_VERIFIED`. Call [List address verifications](#operation/list_address_verifications) with `chain_id`, `address`, and `status=VERIFIED` first to pre-check.  Supported chains: `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`. 
+
+        :param create_satoshi_test_challenge_request:
+        :type create_satoshi_test_challenge_request: CreateSatoshiTestChallengeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_satoshi_test_challenge_serialize(
+            create_satoshi_test_challenge_request=create_satoshi_test_challenge_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SatoshiTestChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_satoshi_test_challenge_without_preload_content(
+        self,
+        create_satoshi_test_challenge_request: Optional[CreateSatoshiTestChallengeRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create Satoshi Test challenge
+
+        This operation creates a Satoshi Test challenge for self-custody address verification. Satoshi Test verifies address ownership by having the counterparty transfer a small, uniquely-generated amount from their wallet to a Cobo-controlled verification address.  A single endpoint covers both flows via the `action` parameter: - **Two-step flow** (`action=PREPARE` then `action=SUBMIT`): Preview the verification details first, then activate. The 180-minute countdown only starts on `SUBMIT`. The server uses `(chain_id, from_address)` as the idempotency key, so the second call automatically targets the prepared challenge. For extra safety, pass the `challenge_id` returned by `PREPARE` in the subsequent `SUBMIT` call — it pins the activation to that specific challenge. - **One-shot flow** (`action=SUBMIT` directly, without `challenge_id`): Prepare and submit in a single call. The challenge is created directly in `PENDING` state with the countdown started.  If the counterparty address has already been verified, the operation returns HTTP 400 `ADDRESS_ALREADY_VERIFIED`. Call [List address verifications](#operation/list_address_verifications) with `chain_id`, `address`, and `status=VERIFIED` first to pre-check.  Supported chains: `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`. 
+
+        :param create_satoshi_test_challenge_request:
+        :type create_satoshi_test_challenge_request: CreateSatoshiTestChallengeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_satoshi_test_challenge_serialize(
+            create_satoshi_test_challenge_request=create_satoshi_test_challenge_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "SatoshiTestChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_satoshi_test_challenge_serialize(
+        self,
+        create_satoshi_test_challenge_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_satoshi_test_challenge_request is not None:
+            _body_params = create_satoshi_test_challenge_request
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/travel_rule/satoshi_test/challenge',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_address_verification(
+        self,
+        verification_id: Annotated[StrictStr, Field(description="The unique identifier of the address verification record.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> AddressVerificationDetail:
+        """Get address verification
+
+        Retrieve a single self-custody address verification record by its `verification_id`, including method-specific provenance:  - `verification_method=SIGNATURE` → `signature_detail` is populated. - `verification_method=SATOSHI_TEST` → `satoshi_test_detail` carries the latest challenge state (`status`, `remaining_seconds`, `matched_txid`).  Use [List address verifications](#operation/list_address_verifications) to discover `verification_id` values. 
+
+        :param verification_id: The unique identifier of the address verification record. (required)
+        :type verification_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_address_verification_serialize(
+            verification_id=verification_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressVerificationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_address_verification_with_http_info(
+        self,
+        verification_id: Annotated[StrictStr, Field(description="The unique identifier of the address verification record.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[AddressVerificationDetail]:
+        """Get address verification
+
+        Retrieve a single self-custody address verification record by its `verification_id`, including method-specific provenance:  - `verification_method=SIGNATURE` → `signature_detail` is populated. - `verification_method=SATOSHI_TEST` → `satoshi_test_detail` carries the latest challenge state (`status`, `remaining_seconds`, `matched_txid`).  Use [List address verifications](#operation/list_address_verifications) to discover `verification_id` values. 
+
+        :param verification_id: The unique identifier of the address verification record. (required)
+        :type verification_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_address_verification_serialize(
+            verification_id=verification_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressVerificationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_address_verification_without_preload_content(
+        self,
+        verification_id: Annotated[StrictStr, Field(description="The unique identifier of the address verification record.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get address verification
+
+        Retrieve a single self-custody address verification record by its `verification_id`, including method-specific provenance:  - `verification_method=SIGNATURE` → `signature_detail` is populated. - `verification_method=SATOSHI_TEST` → `satoshi_test_detail` carries the latest challenge state (`status`, `remaining_seconds`, `matched_txid`).  Use [List address verifications](#operation/list_address_verifications) to discover `verification_id` values. 
+
+        :param verification_id: The unique identifier of the address verification record. (required)
+        :type verification_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_address_verification_serialize(
+            verification_id=verification_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AddressVerificationDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_address_verification_serialize(
+        self,
+        verification_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if verification_id is not None:
+            _path_params['verification_id'] = verification_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/travel_rule/address_verifications/{verification_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_satoshi_test_challenge(
+        self,
+        challenge_id: Annotated[StrictStr, Field(description="The Satoshi Test challenge ID returned by the `prepare` or `submit` operation.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> SatoshiTestChallenge:
+        """Get Satoshi Test challenge
+
+        This operation returns the current state of a Satoshi Test challenge — useful for polling after submission. The response contains the challenge `status` and `remaining_seconds`.  Recommended polling interval: 10–30 seconds. The challenge will transition through `PENDING` → `MATCHED` → `VERIFIED` once the counterparty's transfer is observed and confirmed on chain. If the challenge is not matched within 180 minutes, the status becomes `EXPIRED`. 
+
+        :param challenge_id: The Satoshi Test challenge ID returned by the `prepare` or `submit` operation. (required)
+        :type challenge_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_satoshi_test_challenge_serialize(
+            challenge_id=challenge_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SatoshiTestChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_satoshi_test_challenge_with_http_info(
+        self,
+        challenge_id: Annotated[StrictStr, Field(description="The Satoshi Test challenge ID returned by the `prepare` or `submit` operation.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[SatoshiTestChallenge]:
+        """Get Satoshi Test challenge
+
+        This operation returns the current state of a Satoshi Test challenge — useful for polling after submission. The response contains the challenge `status` and `remaining_seconds`.  Recommended polling interval: 10–30 seconds. The challenge will transition through `PENDING` → `MATCHED` → `VERIFIED` once the counterparty's transfer is observed and confirmed on chain. If the challenge is not matched within 180 minutes, the status becomes `EXPIRED`. 
+
+        :param challenge_id: The Satoshi Test challenge ID returned by the `prepare` or `submit` operation. (required)
+        :type challenge_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_satoshi_test_challenge_serialize(
+            challenge_id=challenge_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SatoshiTestChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_satoshi_test_challenge_without_preload_content(
+        self,
+        challenge_id: Annotated[StrictStr, Field(description="The Satoshi Test challenge ID returned by the `prepare` or `submit` operation.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get Satoshi Test challenge
+
+        This operation returns the current state of a Satoshi Test challenge — useful for polling after submission. The response contains the challenge `status` and `remaining_seconds`.  Recommended polling interval: 10–30 seconds. The challenge will transition through `PENDING` → `MATCHED` → `VERIFIED` once the counterparty's transfer is observed and confirmed on chain. If the challenge is not matched within 180 minutes, the status becomes `EXPIRED`. 
+
+        :param challenge_id: The Satoshi Test challenge ID returned by the `prepare` or `submit` operation. (required)
+        :type challenge_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_satoshi_test_challenge_serialize(
+            challenge_id=challenge_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SatoshiTestChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_satoshi_test_challenge_serialize(
+        self,
+        challenge_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if challenge_id is not None:
+            
+            _query_params.append(('challenge_id', challenge_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/travel_rule/satoshi_test/challenge/status',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_signature_challenge(
+        self,
+        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        transaction_id: Annotated[StrictStr, Field(description="The transaction ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> SignatureChallenge:
+        """Get self-custody signature challenge
+
+        This operation issues a one-time, time-bounded message for a self-custody wallet address to sign, in order to prove wallet ownership. The signature is then submitted via [Submit Travel Rule information for deposits](#operation/submit_deposit_travel_rule_info) or [withdrawals](#operation/submit_withdraw_travel_rule_info).  Use this endpoint when you want to verify the counterparty's self-custody address via off-chain signature. For address verification via on-chain micro-deposit, use the Satoshi Test endpoints (`/travel_rule/satoshi_test/...`) instead.  The challenge is valid for a short window (returned as `expires_in`, currently 30 seconds). Calling this endpoint again for the same transaction rotates the challenge — only the latest issued value will verify. 
+
+        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
+        :type transaction_type: str
+        :param transaction_id: The transaction ID. (required)
+        :type transaction_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_signature_challenge_serialize(
+            transaction_type=transaction_type,
+            transaction_id=transaction_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SignatureChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_signature_challenge_with_http_info(
+        self,
+        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        transaction_id: Annotated[StrictStr, Field(description="The transaction ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[SignatureChallenge]:
+        """Get self-custody signature challenge
+
+        This operation issues a one-time, time-bounded message for a self-custody wallet address to sign, in order to prove wallet ownership. The signature is then submitted via [Submit Travel Rule information for deposits](#operation/submit_deposit_travel_rule_info) or [withdrawals](#operation/submit_withdraw_travel_rule_info).  Use this endpoint when you want to verify the counterparty's self-custody address via off-chain signature. For address verification via on-chain micro-deposit, use the Satoshi Test endpoints (`/travel_rule/satoshi_test/...`) instead.  The challenge is valid for a short window (returned as `expires_in`, currently 30 seconds). Calling this endpoint again for the same transaction rotates the challenge — only the latest issued value will verify. 
+
+        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
+        :type transaction_type: str
+        :param transaction_id: The transaction ID. (required)
+        :type transaction_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_signature_challenge_serialize(
+            transaction_type=transaction_type,
+            transaction_id=transaction_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SignatureChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_signature_challenge_without_preload_content(
+        self,
+        transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
+        transaction_id: Annotated[StrictStr, Field(description="The transaction ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get self-custody signature challenge
+
+        This operation issues a one-time, time-bounded message for a self-custody wallet address to sign, in order to prove wallet ownership. The signature is then submitted via [Submit Travel Rule information for deposits](#operation/submit_deposit_travel_rule_info) or [withdrawals](#operation/submit_withdraw_travel_rule_info).  Use this endpoint when you want to verify the counterparty's self-custody address via off-chain signature. For address verification via on-chain micro-deposit, use the Satoshi Test endpoints (`/travel_rule/satoshi_test/...`) instead.  The challenge is valid for a short window (returned as `expires_in`, currently 30 seconds). Calling this endpoint again for the same transaction rotates the challenge — only the latest issued value will verify. 
+
+        :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
+        :type transaction_type: str
+        :param transaction_id: The transaction ID. (required)
+        :type transaction_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_signature_challenge_serialize(
+            transaction_type=transaction_type,
+            transaction_id=transaction_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SignatureChallenge",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_signature_challenge_serialize(
+        self,
+        transaction_type,
+        transaction_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if transaction_type is not None:
+            
+            _query_params.append(('transaction_type', transaction_type))
+            
+        if transaction_id is not None:
+            
+            _query_params.append(('transaction_id', transaction_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/travel_rule/signature_challenge',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def get_transaction_limitation(
         self,
         transaction_type: Annotated[StrictStr, Field(description="The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction. ")],
@@ -55,7 +929,7 @@ class TravelRuleApi:
     ) -> GetTransactionLimitation200Response:
         """Retrieve transaction limitations
 
-        This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
+        <Note>The `self_custody_wallet_challenge` field in the response is deprecated. To obtain a signature challenge, call [Get self-custody signature challenge](#operation/get_signature_challenge) instead. This operation itself is not deprecated and continues to return the VASP list, threshold info, connect wallet list, and Satoshi Test support.</Note>  This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
 
         :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
         :type transaction_type: str
@@ -105,7 +979,7 @@ class TravelRuleApi:
     ) -> ApiResponse[GetTransactionLimitation200Response]:
         """Retrieve transaction limitations
 
-        This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
+        <Note>The `self_custody_wallet_challenge` field in the response is deprecated. To obtain a signature challenge, call [Get self-custody signature challenge](#operation/get_signature_challenge) instead. This operation itself is not deprecated and continues to return the VASP list, threshold info, connect wallet list, and Satoshi Test support.</Note>  This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
 
         :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
         :type transaction_type: str
@@ -155,7 +1029,7 @@ class TravelRuleApi:
     ) -> RESTResponseType:
         """Retrieve transaction limitations
 
-        This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
+        <Note>The `self_custody_wallet_challenge` field in the response is deprecated. To obtain a signature challenge, call [Get self-custody signature challenge](#operation/get_signature_challenge) instead. This operation itself is not deprecated and continues to return the VASP list, threshold info, connect wallet list, and Satoshi Test support.</Note>  This operation retrieves Travel Rule requirements and available options for a transaction based on its transaction type and ID.  Use this endpoint before submitting Travel Rule information to understand the requirements and available options for your transaction. 
 
         :param transaction_type: The transaction type. Possible values include:    - `DEPOSIT`: A deposit transaction.   - `WITHDRAW`: A withdrawal transaction.  (required)
         :type transaction_type: str
@@ -219,6 +1093,262 @@ class TravelRuleApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/travel_rule/transaction/limitation',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_address_verifications(
+        self,
+        status: Annotated[Optional[AddressVerificationStatus], Field(description="Filter by verification status. Allowed values: - `PENDING`: A Satoshi Test challenge is in progress (countdown active or awaiting confirmation). - `VERIFIED`: The address ownership has been confirmed (by signature or by a matched Satoshi Test transfer). - `FAILED`: The verification attempt did not succeed (Satoshi Test expired without match, or signature verification rejected).  Omit this parameter to return records of all three statuses. ")] = None,
+        chain_id: Annotated[Optional[StrictStr], Field(description="Filter by chain ID (e.g. `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`).")] = None,
+        address: Annotated[Optional[StrictStr], Field(description="Filter by counterparty (self-custody) wallet address.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListAddressVerifications200Response:
+        """List address verifications
+
+        List self-custody address verification records under the current organization with optional filters and cursor-based pagination.  Records are sorted by creation time descending (most recent first). Use `limit` plus `before` / `after` cursors from the previous page's `pagination` block to traverse pages.  Each record's `status` is one of `PENDING`, `VERIFIED`, or `FAILED`. 
+
+        :param status: Filter by verification status. Allowed values: - `PENDING`: A Satoshi Test challenge is in progress (countdown active or awaiting confirmation). - `VERIFIED`: The address ownership has been confirmed (by signature or by a matched Satoshi Test transfer). - `FAILED`: The verification attempt did not succeed (Satoshi Test expired without match, or signature verification rejected).  Omit this parameter to return records of all three statuses. 
+        :type status: AddressVerificationStatus
+        :param chain_id: Filter by chain ID (e.g. `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`).
+        :type chain_id: str
+        :param address: Filter by counterparty (self-custody) wallet address.
+        :type address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_address_verifications_serialize(
+            status=status,
+            chain_id=chain_id,
+            address=address,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAddressVerifications200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_address_verifications_with_http_info(
+        self,
+        status: Annotated[Optional[AddressVerificationStatus], Field(description="Filter by verification status. Allowed values: - `PENDING`: A Satoshi Test challenge is in progress (countdown active or awaiting confirmation). - `VERIFIED`: The address ownership has been confirmed (by signature or by a matched Satoshi Test transfer). - `FAILED`: The verification attempt did not succeed (Satoshi Test expired without match, or signature verification rejected).  Omit this parameter to return records of all three statuses. ")] = None,
+        chain_id: Annotated[Optional[StrictStr], Field(description="Filter by chain ID (e.g. `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`).")] = None,
+        address: Annotated[Optional[StrictStr], Field(description="Filter by counterparty (self-custody) wallet address.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListAddressVerifications200Response]:
+        """List address verifications
+
+        List self-custody address verification records under the current organization with optional filters and cursor-based pagination.  Records are sorted by creation time descending (most recent first). Use `limit` plus `before` / `after` cursors from the previous page's `pagination` block to traverse pages.  Each record's `status` is one of `PENDING`, `VERIFIED`, or `FAILED`. 
+
+        :param status: Filter by verification status. Allowed values: - `PENDING`: A Satoshi Test challenge is in progress (countdown active or awaiting confirmation). - `VERIFIED`: The address ownership has been confirmed (by signature or by a matched Satoshi Test transfer). - `FAILED`: The verification attempt did not succeed (Satoshi Test expired without match, or signature verification rejected).  Omit this parameter to return records of all three statuses. 
+        :type status: AddressVerificationStatus
+        :param chain_id: Filter by chain ID (e.g. `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`).
+        :type chain_id: str
+        :param address: Filter by counterparty (self-custody) wallet address.
+        :type address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_address_verifications_serialize(
+            status=status,
+            chain_id=chain_id,
+            address=address,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAddressVerifications200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_address_verifications_without_preload_content(
+        self,
+        status: Annotated[Optional[AddressVerificationStatus], Field(description="Filter by verification status. Allowed values: - `PENDING`: A Satoshi Test challenge is in progress (countdown active or awaiting confirmation). - `VERIFIED`: The address ownership has been confirmed (by signature or by a matched Satoshi Test transfer). - `FAILED`: The verification attempt did not succeed (Satoshi Test expired without match, or signature verification rejected).  Omit this parameter to return records of all three statuses. ")] = None,
+        chain_id: Annotated[Optional[StrictStr], Field(description="Filter by chain ID (e.g. `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`).")] = None,
+        address: Annotated[Optional[StrictStr], Field(description="Filter by counterparty (self-custody) wallet address.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List address verifications
+
+        List self-custody address verification records under the current organization with optional filters and cursor-based pagination.  Records are sorted by creation time descending (most recent first). Use `limit` plus `before` / `after` cursors from the previous page's `pagination` block to traverse pages.  Each record's `status` is one of `PENDING`, `VERIFIED`, or `FAILED`. 
+
+        :param status: Filter by verification status. Allowed values: - `PENDING`: A Satoshi Test challenge is in progress (countdown active or awaiting confirmation). - `VERIFIED`: The address ownership has been confirmed (by signature or by a matched Satoshi Test transfer). - `FAILED`: The verification attempt did not succeed (Satoshi Test expired without match, or signature verification rejected).  Omit this parameter to return records of all three statuses. 
+        :type status: AddressVerificationStatus
+        :param chain_id: Filter by chain ID (e.g. `BTC`, `ETH`, `BASE_ETH`, `BSC_BNB`, `TRON`).
+        :type chain_id: str
+        :param address: Filter by counterparty (self-custody) wallet address.
+        :type address: str
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_address_verifications_serialize(
+            status=status,
+            chain_id=chain_id,
+            address=address,
+            limit=limit,
+            before=before,
+            after=after,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAddressVerifications200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_address_verifications_serialize(
+        self,
+        status,
+        chain_id,
+        address,
+        limit,
+        before,
+        after,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status.value))
+            
+        if chain_id is not None:
+            
+            _query_params.append(('chain_id', chain_id))
+            
+        if address is not None:
+            
+            _query_params.append(('address', address))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/travel_rule/address_verifications',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

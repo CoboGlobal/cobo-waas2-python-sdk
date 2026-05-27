@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.35.0"
+__version__ = "1.36.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -66,6 +66,12 @@ from cobo_waas2.models.address_risk_level import AddressRiskLevel
 from cobo_waas2.models.address_transfer_destination import AddressTransferDestination
 from cobo_waas2.models.address_transfer_destination_account_output import AddressTransferDestinationAccountOutput
 from cobo_waas2.models.address_transfer_destination_utxo_outputs_inner import AddressTransferDestinationUtxoOutputsInner
+from cobo_waas2.models.address_verification import AddressVerification
+from cobo_waas2.models.address_verification_detail import AddressVerificationDetail
+from cobo_waas2.models.address_verification_detail_satoshi_test_detail import AddressVerificationDetailSatoshiTestDetail
+from cobo_waas2.models.address_verification_detail_signature_detail import AddressVerificationDetailSignatureDetail
+from cobo_waas2.models.address_verification_method import AddressVerificationMethod
+from cobo_waas2.models.address_verification_status import AddressVerificationStatus
 from cobo_waas2.models.addresses_event_data import AddressesEventData
 from cobo_waas2.models.addresses_event_data_all_of_addresses import AddressesEventDataAllOfAddresses
 from cobo_waas2.models.allocation_item import AllocationItem
@@ -125,6 +131,7 @@ from cobo_waas2.models.bridging_fee import BridgingFee
 from cobo_waas2.models.broadcast_signed_transactions201_response_inner import BroadcastSignedTransactions201ResponseInner
 from cobo_waas2.models.broadcast_signed_transactions_request import BroadcastSignedTransactionsRequest
 from cobo_waas2.models.callback_message import CallbackMessage
+from cobo_waas2.models.cancel_satoshi_test_challenge_request import CancelSatoshiTestChallengeRequest
 from cobo_waas2.models.chain_info import ChainInfo
 from cobo_waas2.models.chains_event_data import ChainsEventData
 from cobo_waas2.models.change_guard_pubkey200_response import ChangeGuardPubkey200Response
@@ -194,6 +201,7 @@ from cobo_waas2.models.create_refund_link_request import CreateRefundLinkRequest
 from cobo_waas2.models.create_refund_request import CreateRefundRequest
 from cobo_waas2.models.create_report_request import CreateReportRequest
 from cobo_waas2.models.create_safe_wallet_params import CreateSafeWalletParams
+from cobo_waas2.models.create_satoshi_test_challenge_request import CreateSatoshiTestChallengeRequest
 from cobo_waas2.models.create_settlement import CreateSettlement
 from cobo_waas2.models.create_settlement_request_request import CreateSettlementRequestRequest
 from cobo_waas2.models.create_smart_contract_wallet_params import CreateSmartContractWalletParams
@@ -358,6 +366,7 @@ from cobo_waas2.models.link import Link
 from cobo_waas2.models.link_display_info import LinkDisplayInfo
 from cobo_waas2.models.list_address_balances_by_token200_response import ListAddressBalancesByToken200Response
 from cobo_waas2.models.list_address_books200_response import ListAddressBooks200Response
+from cobo_waas2.models.list_address_verifications200_response import ListAddressVerifications200Response
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
 from cobo_waas2.models.list_allocation_items200_response import ListAllocationItems200Response
 from cobo_waas2.models.list_approval_requests200_response import ListApprovalRequests200Response
@@ -370,6 +379,7 @@ from cobo_waas2.models.list_babylon_eligible_stakings200_response_data_inner imp
 from cobo_waas2.models.list_babylon_staking_registrations200_response import ListBabylonStakingRegistrations200Response
 from cobo_waas2.models.list_batch_allocations200_response import ListBatchAllocations200Response
 from cobo_waas2.models.list_bulk_send_items200_response import ListBulkSendItems200Response
+from cobo_waas2.models.list_bulk_sends200_response import ListBulkSends200Response
 from cobo_waas2.models.list_callback_messages200_response import ListCallbackMessages200Response
 from cobo_waas2.models.list_counterparties200_response import ListCounterparties200Response
 from cobo_waas2.models.list_counterparty_entries200_response import ListCounterpartyEntries200Response
@@ -531,6 +541,10 @@ from cobo_waas2.models.safe_wallet import SafeWallet
 from cobo_waas2.models.safe_wallet_delegates import SafeWalletDelegates
 from cobo_waas2.models.safe_wallet_delegates_contract_call import SafeWalletDelegatesContractCall
 from cobo_waas2.models.safe_wallet_delegates_transfer import SafeWalletDelegatesTransfer
+from cobo_waas2.models.satoshi_test_cancel_result import SatoshiTestCancelResult
+from cobo_waas2.models.satoshi_test_challenge import SatoshiTestChallenge
+from cobo_waas2.models.satoshi_test_challenge_action import SatoshiTestChallengeAction
+from cobo_waas2.models.satoshi_test_challenge_status import SatoshiTestChallengeStatus
 from cobo_waas2.models.scopes import Scopes
 from cobo_waas2.models.selected_entity_type import SelectedEntityType
 from cobo_waas2.models.self_custody_wallet import SelfCustodyWallet
@@ -540,6 +554,8 @@ from cobo_waas2.models.settlement import Settlement
 from cobo_waas2.models.settlement_detail import SettlementDetail
 from cobo_waas2.models.settlement_info import SettlementInfo
 from cobo_waas2.models.settlement_type import SettlementType
+from cobo_waas2.models.signature_challenge import SignatureChallenge
+from cobo_waas2.models.signature_detail import SignatureDetail
 from cobo_waas2.models.skip_check_type import SkipCheckType
 from cobo_waas2.models.smart_contract_initiator import SmartContractInitiator
 from cobo_waas2.models.smart_contract_wallet_info import SmartContractWalletInfo
@@ -814,6 +830,7 @@ from cobo_waas2.models.travel_rule_deposit_legal_entity import TravelRuleDeposit
 from cobo_waas2.models.travel_rule_deposit_natural_entity import TravelRuleDepositNaturalEntity
 from cobo_waas2.models.travel_rule_deposit_request import TravelRuleDepositRequest
 from cobo_waas2.models.travel_rule_deposit_request_travel_rule_info import TravelRuleDepositRequestTravelRuleInfo
+from cobo_waas2.models.travel_rule_transaction_type import TravelRuleTransactionType
 from cobo_waas2.models.travel_rule_withdraw_exchanges_or_vasp import TravelRuleWithdrawExchangesOrVASP
 from cobo_waas2.models.travel_rule_withdraw_exchanges_or_vasp_entity_info import TravelRuleWithdrawExchangesOrVASPEntityInfo
 from cobo_waas2.models.travel_rule_withdraw_legal_entity import TravelRuleWithdrawLegalEntity

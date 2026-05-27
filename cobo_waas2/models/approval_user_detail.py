@@ -34,6 +34,7 @@ class ApprovalUserDetail(BaseModel):
     result: Optional[ApprovalResult] = None
     approval_result_code: Optional[StrictInt] = Field(default=None, description="Integer value representing the result of the approval.")
     created_time: Optional[StrictInt] = Field(default=None, description="Timestamp when the approval was created.")
+    expired_time: Optional[StrictInt] = Field(default=None, description="The timestamp when the approval was expired.")
     template_version: Optional[StrictStr] = Field(default=None, description="Version of the template used for the transaction approval.")
     header_title: Optional[StrictStr] = Field(default=None, description="Display title used in the transaction approval.")
     is_for_sign: Optional[StrictBool] = Field(default=None, description="Indicates whether this approval requires signing: - `true`: The user must sign the transaction. - `false`: The user only needs to approve or reject without signing. ")
@@ -42,7 +43,7 @@ class ApprovalUserDetail(BaseModel):
     message_version: Optional[StrictStr] = Field(default=None, description="Version of the message format used for the transaction approval.")
     message: Optional[StrictStr] = Field(default=None, description="Message associated with the transaction approval.")
     extra_message: Optional[StrictStr] = Field(default=None, description="Any additional message or information related to the transaction approval.")
-    __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message"]
+    __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "expired_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +104,7 @@ class ApprovalUserDetail(BaseModel):
             "result": obj.get("result"),
             "approval_result_code": obj.get("approval_result_code"),
             "created_time": obj.get("created_time"),
+            "expired_time": obj.get("expired_time"),
             "template_version": obj.get("template_version"),
             "header_title": obj.get("header_title"),
             "is_for_sign": obj.get("is_for_sign"),
