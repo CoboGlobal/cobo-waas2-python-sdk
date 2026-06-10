@@ -47,6 +47,7 @@ Method | HTTP request | Description
 [**get_settlement_info_by_ids**](PaymentApi.md#get_settlement_info_by_ids) | **GET** /payments/settlement_info | Get withdrawable balances
 [**get_top_up_address**](PaymentApi.md#get_top_up_address) | **GET** /payments/topup/address | Create/Get top-up address
 [**list_allocation_items**](PaymentApi.md#list_allocation_items) | **GET** /payments/allocation_items | List all allocation items
+[**list_balance_changes**](PaymentApi.md#list_balance_changes) | **GET** /payments/balance_changes | List balance changes
 [**list_batch_allocations**](PaymentApi.md#list_batch_allocations) | **GET** /payments/batch_allocations | List all batch allocations
 [**list_bulk_send_items**](PaymentApi.md#list_bulk_send_items) | **GET** /payments/bulk_sends/{bulk_send_id}/items | List bulk send items
 [**list_bulk_sends**](PaymentApi.md#list_bulk_sends) | **GET** /payments/bulk_sends | List bulk sends
@@ -3249,6 +3250,98 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_balance_changes**
+> PaymentBalanceChangeResponse list_balance_changes(source_account, limit=limit, before=before, after=after, token_id=token_id, flow_direction=flow_direction, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, source_type=source_type, source_id=source_id)
+
+List balance changes
+
+This operation retrieves balance changes for the specified source account. Each balance change includes the source information, token ID, changed amount, account balances before and after the change, flow direction, and creation time.  You need to specify `source_account`. Currently, use `developer` as the source account. You can use pagination parameters to control the response size, and filter balance changes by `token_id`, `flow_direction`, `min_created_timestamp`, `max_created_timestamp`, `source_type`, or `source_id`.  <Note>When specifying `source_id`, you must also specify `source_type`.</Note>  For more information, see [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview). 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.payment_balance_change_response import PaymentBalanceChangeResponse
+from cobo_waas2.models.payment_balance_change_source_type import PaymentBalanceChangeSourceType
+from cobo_waas2.models.payment_balance_flow_direction import PaymentBalanceFlowDirection
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    source_account = 'developer'
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    token_id = 'ETH_USDT'
+    flow_direction = cobo_waas2.PaymentBalanceFlowDirection()
+    min_created_timestamp = 1744689600
+    max_created_timestamp = 1744776000
+    source_type = cobo_waas2.PaymentBalanceChangeSourceType()
+    source_id = 'po_1234567890'
+
+    try:
+        # List balance changes
+        api_response = api_instance.list_balance_changes(source_account, limit=limit, before=before, after=after, token_id=token_id, flow_direction=flow_direction, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, source_type=source_type, source_id=source_id)
+        print("The response of PaymentApi->list_balance_changes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_balance_changes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **source_account** | **str**| The source account for which to retrieve balance changes. Currently, use &#x60;developer&#x60;. | 
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **token_id** | **str**| The token ID used to filter balance changes. For a complete list of supported tokens, see [Cobo Payments Guide](https://www.cobo.com/payments/en/guides/overview).  | [optional] 
+ **flow_direction** | [**PaymentBalanceFlowDirection**](.md)| The direction of the balance change relative to the source account. Possible values include: - &#x60;in&#x60;: Funds flow into the source account. - &#x60;out&#x60;: Funds flow out of the source account.  | [optional] 
+ **min_created_timestamp** | **int**| The minimum creation time of balance changes, represented as a UNIX timestamp in seconds. Balance changes created on or after this time are returned. | [optional] 
+ **max_created_timestamp** | **int**| The maximum creation time of balance changes, represented as a UNIX timestamp in seconds. Balance changes created on or before this time are returned. | [optional] 
+ **source_type** | [**PaymentBalanceChangeSourceType**](.md)| The source type used to filter balance changes. Possible values include: - &#x60;Init&#x60;: Balance change caused by initialization. - &#x60;OrderIn&#x60;: Balance change from an order-in payment. - &#x60;LatePayment&#x60;: Balance change from a late payment. - &#x60;TopUp&#x60;: Balance change from a top-up. - &#x60;UnexceptedIn&#x60;: Balance change from an unexpected incoming payment. - &#x60;RefundOut&#x60;: Balance change from a refund payout. - &#x60;Payout&#x60;: Balance change from a payout. - &#x60;UnexceptedOut&#x60;: Balance change from an unexpected outgoing payment. - &#x60;Allocation&#x60;: Balance change from an allocation. - &#x60;SettlementNetwork&#x60;: Balance change from the settlement network. - &#x60;BulkSend&#x60;: Balance change from a bulk send.  &lt;Note&gt;When specifying &#x60;source_id&#x60;, you must also specify &#x60;source_type&#x60;.&lt;/Note&gt;  | [optional] 
+ **source_id** | **str**| The source ID used to filter balance changes.  &lt;Note&gt;When specifying &#x60;source_id&#x60;, you must also specify &#x60;source_type&#x60;.&lt;/Note&gt;  | [optional] 
+
+### Return type
+
+[**PaymentBalanceChangeResponse**](PaymentBalanceChangeResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. The response contains balance changes and pagination information. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

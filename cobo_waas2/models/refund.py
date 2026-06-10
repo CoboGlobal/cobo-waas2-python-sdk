@@ -46,7 +46,7 @@ class Refund(BaseModel):
     charge_merchant_fee: Optional[StrictBool] = Field(default=None, description="Whether to charge developer fee to the merchant for the refund.    - `true`: The fee amount (specified in `merchant_fee_amount`) will be deducted from the merchant's balance and added to the developer's balance    - `false`: The merchant is not charged any developer fee. ")
     merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by `merchant_fee_token_id`. This is only applicable if `charge_merchant_fee` is set to `true`.")
     merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the developer fee. This is only applicable if `charge_merchant_fee` is set to true.")
-    commission_fee: Optional[CommissionFee] = None
+    commission_fee: Optional[CommissionFee] = Field(default=None, description="The commission fee. Not returned when no fee has been incurred, the actual charged amount once incurred, or `0` if refunded.")
     __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id", "commission_fee"]
 
     model_config = ConfigDict(

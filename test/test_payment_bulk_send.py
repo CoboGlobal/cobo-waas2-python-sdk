@@ -41,7 +41,9 @@ class TestPaymentBulkSend(unittest.TestCase):
                 execution_mode = 'Strict',
                 status = 'Pending',
                 created_timestamp = 1744689600,
-                updated_timestamp = 1744689600
+                updated_timestamp = 1744689600,
+                commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
+                    fee_amount = '', )
             )
         else:
             return PaymentBulkSend(

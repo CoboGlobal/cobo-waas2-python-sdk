@@ -32,9 +32,10 @@ class PaymentBulkSendItem(BaseModel):
     receiving_address: StrictStr = Field(description="The receiving address.")
     amount: StrictStr = Field(description="The amount of the cryptocurrency to be sent to the recipient.")
     description: Optional[StrictStr] = Field(default=None, description="A note or comment about the bulk send item.")
+    tx_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash of the bulk send item.")
     status: PaymentBulkSendItemStatus
     validation_status: PaymentBulkSendItemValidationStatus
-    __properties: ClassVar[List[str]] = ["bulk_send_item_id", "token_id", "receiving_address", "amount", "description", "status", "validation_status"]
+    __properties: ClassVar[List[str]] = ["bulk_send_item_id", "token_id", "receiving_address", "amount", "description", "tx_hash", "status", "validation_status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +93,7 @@ class PaymentBulkSendItem(BaseModel):
             "receiving_address": obj.get("receiving_address"),
             "amount": obj.get("amount"),
             "description": obj.get("description"),
+            "tx_hash": obj.get("tx_hash"),
             "status": obj.get("status"),
             "validation_status": obj.get("validation_status")
         })

@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.36.0"
+__version__ = "1.37.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -317,6 +317,7 @@ from cobo_waas2.models.fee_station_sponsor_transaction_description import FeeSta
 from cobo_waas2.models.fee_station_transaction_type import FeeStationTransactionType
 from cobo_waas2.models.fee_station_transfer import FeeStationTransfer
 from cobo_waas2.models.fee_type import FeeType
+from cobo_waas2.models.fiat_transaction_event_data import FiatTransactionEventData
 from cobo_waas2.models.fixed_fee_rate import FixedFeeRate
 from cobo_waas2.models.forced_sweep import ForcedSweep
 from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
@@ -457,12 +458,17 @@ from cobo_waas2.models.order_link_business_info_custom_exchange_rates_inner impo
 from cobo_waas2.models.order_link_business_info_payable_amounts_inner import OrderLinkBusinessInfoPayableAmountsInner
 from cobo_waas2.models.order_status import OrderStatus
 from cobo_waas2.models.org_info import OrgInfo
+from cobo_waas2.models.organization_event_data import OrganizationEventData
 from cobo_waas2.models.original_main_group_handling import OriginalMainGroupHandling
 from cobo_waas2.models.otc_fee import OtcFee
 from cobo_waas2.models.pagination import Pagination
 from cobo_waas2.models.payer_account import PayerAccount
 from cobo_waas2.models.payment_address_update_event_data import PaymentAddressUpdateEventData
 from cobo_waas2.models.payment_allocation_amount import PaymentAllocationAmount
+from cobo_waas2.models.payment_balance_change import PaymentBalanceChange
+from cobo_waas2.models.payment_balance_change_response import PaymentBalanceChangeResponse
+from cobo_waas2.models.payment_balance_change_source_type import PaymentBalanceChangeSourceType
+from cobo_waas2.models.payment_balance_flow_direction import PaymentBalanceFlowDirection
 from cobo_waas2.models.payment_bridge_status import PaymentBridgeStatus
 from cobo_waas2.models.payment_bulk_send import PaymentBulkSend
 from cobo_waas2.models.payment_bulk_send_event import PaymentBulkSendEvent

@@ -573,6 +573,27 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_allocation_items(limit=limit, before=before, after=after, source_account=source_account, destination_account=destination_account, token_id=token_id, batch_allocation_id=batch_allocation_id)
         """
 
+    def test_list_balance_changes(self) -> None:
+        """
+        Test case for list_balance_changes
+
+        List balance changes
+        """
+        """
+        source_account = 'developer'
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        token_id = 'ETH_USDT'
+        flow_direction = cobo_waas2.PaymentBalanceFlowDirection()
+        min_created_timestamp = 1744689600
+        max_created_timestamp = 1744776000
+        source_type = cobo_waas2.PaymentBalanceChangeSourceType()
+        source_id = 'po_1234567890'
+
+        api_response = self.api.list_balance_changes(source_account, limit=limit, before=before, after=after, token_id=token_id, flow_direction=flow_direction, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, source_type=source_type, source_id=source_id)
+        """
+
     def test_list_batch_allocations(self) -> None:
         """
         Test case for list_batch_allocations

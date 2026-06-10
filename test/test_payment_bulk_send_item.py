@@ -39,6 +39,7 @@ class TestPaymentBulkSendItem(unittest.TestCase):
                 receiving_address = '0xabc123456789def0000000000000000000000000',
                 amount = '500.00',
                 description = 'Invoice #INV-2024-001',
+                tx_hash = '0xabc123456789def0000000000000000000000000',
                 status = 'Pending',
                 validation_status = 'Pending'
             )

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **status** | [**PaymentBulkSendStatus**](PaymentBulkSendStatus.md) |  | 
 **created_timestamp** | **int** | The created time of the bulk send, represented as a UNIX timestamp in seconds. | 
 **updated_timestamp** | **int** | The updated time of the bulk send, represented as a UNIX timestamp in seconds. | 
+**commission_fee** | [**CommissionFee**](CommissionFee.md) | The commission fee. Not returned when no fee has been incurred, the actual charged amount once incurred, or &#x60;0&#x60; if refunded. | [optional] 
 
 ## Example
 

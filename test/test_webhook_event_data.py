@@ -35,12 +35,12 @@ class TestWebhookEventData(unittest.TestCase):
         if include_optional:
             return WebhookEventData(
                 data_type = 'Transaction',
-                transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
+                transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 cobo_id = '20231213122855000000000000000000',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 type = 'Deposit',
-                status = 'Screened',
+                status = 'Succeeded',
                 sub_status = 'PendingDoubleCheck',
                 failed_reason = 'Rejected by signer Cobo TSS',
                 chain_id = 'ETH',
@@ -94,9 +94,7 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 description = 'Monthly vendor payments - January 2024',
                 is_loop = False,
-                cobo_category = [
-                    'AutoFueling'
-                    ],
+                cobo_category = ["GasFeeSponsor"],
                 extra = [
                     '{"extra_type":"BabylonBusinessInfo","btc_address_info":{"address":"tb1p8k9f36798z5wkfd3mlq00cjm82c7sp5hudlqaxkdvfw4xaywvw4qzzv2xz","chain_id":"SIGNET_BTC","memo":"","path":"44/1/5/0/4","encoding":"ENCODING_P2TR","pubkey":"xpub6FkyaGRDyh4hayxmbY4YX7q9fuuxt14dNoYv5TphsKLnChVXSaTxY7DPwdeN8Yys5FLhfuajG8pshdXWk9cTzBFUy5rVA4Lx9kwmFUqhZcC","x_only_pubkey":"","root_pubkey":"xpub661MyMwAqRbcGFdLxNuuQvnPTLFs1xHpFQz5iumoDnw4NPofkE8SSrtwUmoy3E52HtcxCH9wXCfhztuuiuusvB3kAb4nt9rT4bkXxujubKm","taproot_script_tree_hash":"","taproot_internal_address":""}}
 '
@@ -105,7 +103,7 @@ class TestWebhookEventData(unittest.TestCase):
                     request_id = 'gas_760a1955-e212-4dfb-a8d0-e66312a1a051', 
                     transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', 
                     main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea', ),
-                created_timestamp = 1721530814236,
+                created_timestamp = 1635744000000,
                 updated_timestamp = 1721530899876,
                 tss_request_id = '20240711114129000132315000003970',
                 source_key_share_holder_group = cobo_waas2.models.source_group.SourceGroup(
@@ -120,7 +118,7 @@ class TestWebhookEventData(unittest.TestCase):
                 wallet = None,
                 vault_id = 'YPdbyVaVGqXXjkUsohHw',
                 project_id = '0111039d-27fb-49ba-b172-6e0aa80e37ec',
-                name = 'Vault name',
+                name = 'My Organization',
                 root_pubkeys = [
                     cobo_waas2.models.root_pubkey.RootPubkey(
                         root_pubkey = 'xpub661MyMwAqRbcG4vPNi58VQJrXW8D9VzmauuRq2rTY3oUVnKGuLTxQxvvoEXgLvZ7N9GQXQkWVgKn1rzEUUEm4NdvrBKUqjpNJEnn2UL4rYq', 
@@ -237,7 +235,7 @@ class TestWebhookEventData(unittest.TestCase):
                 order_amount = '',
                 settlement_status = 'Pending',
                 refund_id = 'R20250304-M1001-1001',
-                amount = '0.0025',
+                amount = '100.00',
                 to_address = '0x9876543210abcdef1234567890abcdef12345678',
                 refund_type = 'Merchant',
                 charge_merchant_fee = False,
@@ -353,24 +351,28 @@ class TestWebhookEventData(unittest.TestCase):
                 disposition_status = 'Submitted',
                 destination_address = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb7',
                 disposition_amount = '1.5',
-                transaction_type = 'Deposit',
+                transaction_type = 'deposit',
                 review_status = 'PendingScreening',
                 funds_status = 'Frozen',
-                screening_id = 'a7b8c9d0-e1f2-4a5b-a23c-7890abcdef12'
+                screening_id = 'a7b8c9d0-e1f2-4a5b-a23c-7890abcdef12',
+                org_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                main_transaction_id = 'b0530b27-104f-4338-87de-de01500326ea',
+                fiat_currency = 'USD',
+                modified_timestamp = 1635744000000
             )
         else:
             return WebhookEventData(
                 data_type = 'Transaction',
-                transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
+                transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 request_id = '123e457-e89b-12d3-a456-426614174004',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                status = 'Screened',
+                status = 'Succeeded',
                 chain_id = 'ETH',
                 token_id = 'ETH_USDT',
                 source = None,
                 destination = None,
                 initiator_type = 'API',
-                created_timestamp = 1721530814236,
+                created_timestamp = 1635744000000,
                 updated_timestamp = 1721530899876,
                 chains = [
                     cobo_waas2.models.chain_info.ChainInfo(
@@ -423,7 +425,7 @@ class TestWebhookEventData(unittest.TestCase):
                 receive_address = '0x1234567890abcdef1234567890abcdef12345678',
                 received_token_amount = '103.0305',
                 refund_id = 'R20250304-M1001-1001',
-                amount = '0.0025',
+                amount = '100.00',
                 to_address = '0x9876543210abcdef1234567890abcdef12345678',
                 settlement_request_id = 'S20250304-1001',
                 settlements = [
@@ -502,10 +504,11 @@ class TestWebhookEventData(unittest.TestCase):
                 execution_mode = 'Strict',
                 disposition_type = 'Refund',
                 disposition_status = 'Submitted',
-                transaction_type = 'Deposit',
+                transaction_type = 'deposit',
                 review_status = 'PendingScreening',
                 funds_status = 'Frozen',
                 screening_id = 'a7b8c9d0-e1f2-4a5b-a23c-7890abcdef12',
+                fiat_currency = 'USD',
         )
         """
 
