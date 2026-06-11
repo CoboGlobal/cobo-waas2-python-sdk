@@ -39,7 +39,7 @@ class PaymentPayoutDetail(BaseModel):
     recipient_info: Optional[PaymentPayoutRecipientInfo] = None
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this payout, usually the user's API key.")
     actual_payout_amount: Optional[StrictStr] = Field(default=None, description="- For `Crypto` payouts: The amount of cryptocurrency sent to the recipient's address, denominated in the token specified in `recipient_info.token_id`. - For `OffRamp` payouts: The amount of fiat currency sent to the recipient's bank account, denominated in the currency specified in `recipient_info.currency`. (Note: The actual amount received may be lower due to additional bank transfer fees.) ")
-    commission_fees: Optional[List[CommissionFee]] = Field(default=None, description="The commission fees of the payout.")
+    commission_fees: Optional[List[CommissionFee]] = Field(default=None, description="The commission fees. Not returned when no fee has been incurred, the actual charged amounts once incurred, or `0` if refunded.")
     remark: Optional[StrictStr] = Field(default=None, description="A note or comment about the payout.")
     status: PaymentPayoutStatus
     created_timestamp: StrictInt = Field(description="The created time of the payout, represented as a UNIX timestamp in seconds.")

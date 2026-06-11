@@ -303,6 +303,7 @@ cobo_waas2/models/fee_station_sponsor_transaction_description.py
 cobo_waas2/models/fee_station_transaction_type.py
 cobo_waas2/models/fee_station_transfer.py
 cobo_waas2/models/fee_type.py
+cobo_waas2/models/fiat_transaction_event_data.py
 cobo_waas2/models/fil_base.py
 cobo_waas2/models/fil_price.py
 cobo_waas2/models/fixed_fee_rate.py
@@ -445,12 +446,17 @@ cobo_waas2/models/order_link_business_info_custom_exchange_rates_inner.py
 cobo_waas2/models/order_link_business_info_payable_amounts_inner.py
 cobo_waas2/models/order_status.py
 cobo_waas2/models/org_info.py
+cobo_waas2/models/organization_event_data.py
 cobo_waas2/models/original_main_group_handling.py
 cobo_waas2/models/otc_fee.py
 cobo_waas2/models/pagination.py
 cobo_waas2/models/payer_account.py
 cobo_waas2/models/payment_address_update_event_data.py
 cobo_waas2/models/payment_allocation_amount.py
+cobo_waas2/models/payment_balance_change.py
+cobo_waas2/models/payment_balance_change_response.py
+cobo_waas2/models/payment_balance_change_source_type.py
+cobo_waas2/models/payment_balance_flow_direction.py
 cobo_waas2/models/payment_bridge_status.py
 cobo_waas2/models/payment_bulk_send.py
 cobo_waas2/models/payment_bulk_send_event.py
@@ -1147,6 +1153,7 @@ docs/FeeStationSponsorTransactionDescription.md
 docs/FeeStationTransactionType.md
 docs/FeeStationTransfer.md
 docs/FeeType.md
+docs/FiatTransactionEventData.md
 docs/FixedFeeRate.md
 docs/ForcedSweep.md
 docs/ForcedSweepRequest.md
@@ -1289,6 +1296,7 @@ docs/OrderLinkBusinessInfoCustomExchangeRatesInner.md
 docs/OrderLinkBusinessInfoPayableAmountsInner.md
 docs/OrderStatus.md
 docs/OrgInfo.md
+docs/OrganizationEventData.md
 docs/OrganizationsApi.md
 docs/OriginalMainGroupHandling.md
 docs/OtcFee.md
@@ -1297,6 +1305,10 @@ docs/PayerAccount.md
 docs/PaymentAddressUpdateEventData.md
 docs/PaymentAllocationAmount.md
 docs/PaymentApi.md
+docs/PaymentBalanceChange.md
+docs/PaymentBalanceChangeResponse.md
+docs/PaymentBalanceChangeSourceType.md
+docs/PaymentBalanceFlowDirection.md
 docs/PaymentBridgeStatus.md
 docs/PaymentBulkSend.md
 docs/PaymentBulkSendEvent.md
@@ -2005,6 +2017,7 @@ test/test_fee_station_sponsor_transaction_description.py
 test/test_fee_station_transaction_type.py
 test/test_fee_station_transfer.py
 test/test_fee_type.py
+test/test_fiat_transaction_event_data.py
 test/test_fil_base.py
 test/test_fil_price.py
 test/test_fixed_fee_rate.py
@@ -2149,6 +2162,7 @@ test/test_order_link_business_info_custom_exchange_rates_inner.py
 test/test_order_link_business_info_payable_amounts_inner.py
 test/test_order_status.py
 test/test_org_info.py
+test/test_organization_event_data.py
 test/test_organizations_api.py
 test/test_original_main_group_handling.py
 test/test_otc_fee.py
@@ -2157,6 +2171,10 @@ test/test_payer_account.py
 test/test_payment_address_update_event_data.py
 test/test_payment_allocation_amount.py
 test/test_payment_api.py
+test/test_payment_balance_change.py
+test/test_payment_balance_change_response.py
+test/test_payment_balance_change_source_type.py
+test/test_payment_balance_flow_direction.py
 test/test_payment_bridge_status.py
 test/test_payment_bulk_send.py
 test/test_payment_bulk_send_event.py

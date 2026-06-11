@@ -43,7 +43,8 @@ class TestListBulkSends200Response(unittest.TestCase):
                         execution_mode = 'Strict', 
                         status = 'Pending', 
                         created_timestamp = 1744689600, 
-                        updated_timestamp = 1744689600, )
+                        updated_timestamp = 1744689600, 
+                        commission_fee = null, )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 

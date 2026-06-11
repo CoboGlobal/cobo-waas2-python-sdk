@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.commission_fee import CommissionFee
 from cobo_waas2.models.payment_bulk_send_execution_mode import PaymentBulkSendExecutionMode
 from cobo_waas2.models.payment_bulk_send_status import PaymentBulkSendStatus
 from typing import Optional, Set
@@ -27,7 +28,7 @@ class PaymentBulkSendEvent(BaseModel):
     """
     PaymentBulkSendEvent
     """  # noqa: E501
-    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `PaymentPayout`: The payment payout event data. - `PaymentBulkSend`: The payment bulk send event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data. - `ComplianceKyaScreenings`: The compliance KYA screenings event data.")
+    data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `PaymentPayout`: The payment payout event data. - `PaymentBulkSend`: The payment bulk send event data. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data. - `ComplianceKyaScreenings`: The compliance KYA screenings event data. - `Organization`: The organization event data. - `FiatTransaction`: The fiat transaction event data.")
     bulk_send_id: StrictStr = Field(description="The bulk send ID.")
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID.")
     source_account: StrictStr = Field(description="The source account from which the bulk send will be made. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
@@ -36,13 +37,14 @@ class PaymentBulkSendEvent(BaseModel):
     status: PaymentBulkSendStatus
     created_timestamp: StrictInt = Field(description="The created time of the bulk send, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the bulk send, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["data_type", "bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp"]
+    commission_fee: Optional[CommissionFee] = Field(default=None, description="The commission fee. Not returned when no fee has been incurred, the actual charged amount once incurred, or `0` if refunded.")
+    __properties: ClassVar[List[str]] = ["data_type", "bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp", "commission_fee"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'PaymentBulkSend', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings', 'ComplianceKyaScreenings']):
-            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'PaymentBulkSend', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings', 'ComplianceKyaScreenings')")
+        if value not in set(['Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'PaymentBulkSend', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings', 'ComplianceKyaScreenings', 'Organization', 'FiatTransaction']):
+            raise ValueError("must be one of enum values ('Transaction', 'TSSRequest', 'Addresses', 'WalletInfo', 'MPCVault', 'Chains', 'Tokens', 'TokenListing', 'PaymentOrder', 'PaymentRefund', 'PaymentSettlement', 'PaymentTransaction', 'PaymentAddressUpdate', 'PaymentPayout', 'PaymentBulkSend', 'BalanceUpdateInfo', 'SuspendedToken', 'ComplianceDisposition', 'ComplianceKytScreenings', 'ComplianceKyaScreenings', 'Organization', 'FiatTransaction')")
         return value
 
     model_config = ConfigDict(
@@ -84,6 +86,9 @@ class PaymentBulkSendEvent(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of commission_fee
+        if self.commission_fee:
+            _dict['commission_fee'] = self.commission_fee.to_dict()
         return _dict
 
     @classmethod
@@ -104,7 +109,8 @@ class PaymentBulkSendEvent(BaseModel):
             "execution_mode": obj.get("execution_mode"),
             "status": obj.get("status"),
             "created_timestamp": obj.get("created_timestamp"),
-            "updated_timestamp": obj.get("updated_timestamp")
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "commission_fee": CommissionFee.from_dict(obj["commission_fee"]) if obj.get("commission_fee") is not None else None
         })
         return _obj
 

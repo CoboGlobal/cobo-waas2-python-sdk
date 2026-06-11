@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.commission_fee import CommissionFee
 from cobo_waas2.models.payment_bulk_send_execution_mode import PaymentBulkSendExecutionMode
 from cobo_waas2.models.payment_bulk_send_status import PaymentBulkSendStatus
 from typing import Optional, Set
@@ -35,7 +36,8 @@ class PaymentBulkSend(BaseModel):
     status: PaymentBulkSendStatus
     created_timestamp: StrictInt = Field(description="The created time of the bulk send, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the bulk send, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp"]
+    commission_fee: Optional[CommissionFee] = Field(default=None, description="The commission fee. Not returned when no fee has been incurred, the actual charged amount once incurred, or `0` if refunded.")
+    __properties: ClassVar[List[str]] = ["bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp", "commission_fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +78,9 @@ class PaymentBulkSend(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of commission_fee
+        if self.commission_fee:
+            _dict['commission_fee'] = self.commission_fee.to_dict()
         return _dict
 
     @classmethod
@@ -95,7 +100,8 @@ class PaymentBulkSend(BaseModel):
             "execution_mode": obj.get("execution_mode"),
             "status": obj.get("status"),
             "created_timestamp": obj.get("created_timestamp"),
-            "updated_timestamp": obj.get("updated_timestamp")
+            "updated_timestamp": obj.get("updated_timestamp"),
+            "commission_fee": CommissionFee.from_dict(obj["commission_fee"]) if obj.get("commission_fee") is not None else None
         })
         return _obj
 
