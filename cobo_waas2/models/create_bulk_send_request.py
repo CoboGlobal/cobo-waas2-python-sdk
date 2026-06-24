@@ -30,7 +30,7 @@ class CreateBulkSendRequest(BaseModel):
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID that is used to track a bulk send request. The request ID is provided by you and must be unique within your system.")
     source_account: StrictStr = Field(description="The source account from which the bulk send will be made. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
     execution_mode: PaymentBulkSendExecutionMode
-    description: Optional[StrictStr] = Field(default=None, description="The description for the entire bulk send batch.")
+    description: Optional[StrictStr] = Field(default=None, description="The description for the entire bulk send batch. Maximum length: 255 characters.")
     payout_params: List[CreateBulkSendRequestPayoutParamsInner] = Field(description="The bulk send items.")
     __properties: ClassVar[List[str]] = ["request_id", "source_account", "execution_mode", "description", "payout_params"]
 

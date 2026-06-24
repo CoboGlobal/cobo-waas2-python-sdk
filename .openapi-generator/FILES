@@ -451,6 +451,7 @@ cobo_waas2/models/original_main_group_handling.py
 cobo_waas2/models/otc_fee.py
 cobo_waas2/models/pagination.py
 cobo_waas2/models/payer_account.py
+cobo_waas2/models/payment_account_balance_update_event_data.py
 cobo_waas2/models/payment_address_update_event_data.py
 cobo_waas2/models/payment_allocation_amount.py
 cobo_waas2/models/payment_balance_change.py
@@ -1302,6 +1303,7 @@ docs/OriginalMainGroupHandling.md
 docs/OtcFee.md
 docs/Pagination.md
 docs/PayerAccount.md
+docs/PaymentAccountBalanceUpdateEventData.md
 docs/PaymentAddressUpdateEventData.md
 docs/PaymentAllocationAmount.md
 docs/PaymentApi.md
@@ -2168,6 +2170,7 @@ test/test_original_main_group_handling.py
 test/test_otc_fee.py
 test/test_pagination.py
 test/test_payer_account.py
+test/test_payment_account_balance_update_event_data.py
 test/test_payment_address_update_event_data.py
 test/test_payment_allocation_amount.py
 test/test_payment_api.py

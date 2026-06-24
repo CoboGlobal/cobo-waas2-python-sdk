@@ -15,24 +15,32 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.chain_info import ChainInfo
-from cobo_waas2.models.wallet_subtype import WalletSubtype
-from cobo_waas2.models.wallet_type import WalletType
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List
+from cobo_waas2.models.payment_balance_change_source_type import PaymentBalanceChangeSourceType
+from cobo_waas2.models.payment_balance_flow_direction import PaymentBalanceFlowDirection
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ChainsEventData(BaseModel):
+class PaymentAccountBalanceUpdateEventData(BaseModel):
     """
-    ChainsEventData
+    This event occurs when the available balance of a Payments account changes for a specific token. The balance change fields are aligned with the `PaymentBalanceChange` object returned by
     """  # noqa: E501
     data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `PaymentPayout`: The payment payout event data. - `PaymentBulkSend`: The payment bulk send event data. - `PaymentAccountBalanceUpdate`: The Payments account balance updated event data, including account information and balance change details. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data. - `ComplianceKyaScreenings`: The compliance KYA screenings event data. - `Organization`: The organization event data. - `FiatTransaction`: The fiat transaction event data.")
-    chains: List[ChainInfo] = Field(description="The enabled chains.")
-    wallet_type: Optional[WalletType] = None
-    wallet_subtypes: Optional[List[WalletSubtype]] = None
-    __properties: ClassVar[List[str]] = ["data_type", "chains", "wallet_type", "wallet_subtypes"]
+    source_account: StrictStr = Field(description="The source account of the balance change. This field uses the same semantics as `source_account` in [List balance changes](https://www.cobo.com/developers/v2/api-references/payment/list-balance-changes). - When the account is a merchant account, this is the merchant ID (merchant code), which you can retrieve by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). - When the account is the developer account, use `developer`. ")
+    source_id: StrictStr = Field(description="The source ID of the balance change.")
+    source_type: PaymentBalanceChangeSourceType
+    token_id: StrictStr = Field(description="The token ID of the balance change.")
+    amount: StrictStr = Field(description="The balance change amount, truncated to two decimal places and represented as a numeric string.")
+    amount_raw: StrictStr = Field(description="The balance change amount in the token's decimal precision, represented as a numeric string.")
+    balance_before: StrictStr = Field(description="The account balance before the balance change, truncated to two decimal places and represented as a numeric string.")
+    balance_before_raw: StrictStr = Field(description="The account balance before the balance change in the token's decimal precision, represented as a numeric string.")
+    balance_after: StrictStr = Field(description="The account balance after the balance change, truncated to two decimal places and represented as a numeric string.")
+    balance_after_raw: StrictStr = Field(description="The account balance after the balance change in the token's decimal precision, represented as a numeric string.")
+    flow_direction: PaymentBalanceFlowDirection
+    update_time: StrictInt = Field(description="The time when the balance was updated, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["data_type", "source_account", "source_id", "source_type", "token_id", "amount", "amount_raw", "balance_before", "balance_before_raw", "balance_after", "balance_after_raw", "flow_direction", "update_time"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
@@ -59,7 +67,7 @@ class ChainsEventData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ChainsEventData from a JSON string"""
+        """Create an instance of PaymentAccountBalanceUpdateEventData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,18 +88,11 @@ class ChainsEventData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in chains (list)
-        _items = []
-        if self.chains:
-            for _item in self.chains:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['chains'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ChainsEventData from a dict"""
+        """Create an instance of PaymentAccountBalanceUpdateEventData from a dict"""
         if obj is None:
             return None
 
@@ -100,9 +101,18 @@ class ChainsEventData(BaseModel):
 
         _obj = cls.model_validate({
             "data_type": obj.get("data_type"),
-            "chains": [ChainInfo.from_dict(_item) for _item in obj["chains"]] if obj.get("chains") is not None else None,
-            "wallet_type": obj.get("wallet_type"),
-            "wallet_subtypes": obj.get("wallet_subtypes")
+            "source_account": obj.get("source_account"),
+            "source_id": obj.get("source_id"),
+            "source_type": obj.get("source_type"),
+            "token_id": obj.get("token_id"),
+            "amount": obj.get("amount"),
+            "amount_raw": obj.get("amount_raw"),
+            "balance_before": obj.get("balance_before"),
+            "balance_before_raw": obj.get("balance_before_raw"),
+            "balance_after": obj.get("balance_after"),
+            "balance_after_raw": obj.get("balance_after_raw"),
+            "flow_direction": obj.get("flow_direction"),
+            "update_time": obj.get("update_time")
         })
         return _obj
 

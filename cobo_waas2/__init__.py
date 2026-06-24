@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.37.0"
+__version__ = "1.38.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -463,6 +463,7 @@ from cobo_waas2.models.original_main_group_handling import OriginalMainGroupHand
 from cobo_waas2.models.otc_fee import OtcFee
 from cobo_waas2.models.pagination import Pagination
 from cobo_waas2.models.payer_account import PayerAccount
+from cobo_waas2.models.payment_account_balance_update_event_data import PaymentAccountBalanceUpdateEventData
 from cobo_waas2.models.payment_address_update_event_data import PaymentAddressUpdateEventData
 from cobo_waas2.models.payment_allocation_amount import PaymentAllocationAmount
 from cobo_waas2.models.payment_balance_change import PaymentBalanceChange

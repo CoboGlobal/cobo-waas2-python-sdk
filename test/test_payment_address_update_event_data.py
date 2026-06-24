@@ -37,6 +37,7 @@ class TestPaymentAddressUpdateEventData(unittest.TestCase):
                 data_type = 'Transaction',
                 custom_payer_id = 'user_abc_10001',
                 payer_id = 'P20250619T0310056d7aa',
+                merchant_id = '1001',
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
                 updated_address = '0x789xyz...456'
