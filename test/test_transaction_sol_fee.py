@@ -35,7 +35,7 @@ class TestTransactionSOLFee(unittest.TestCase):
         if include_optional:
             return TransactionSOLFee(
                 base_fee = '0.000005',
-                rent_amount = '0.00001 ',
+                rent_amount = '0.00001',
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
                 fee_type = 'EVM_EIP_1559',

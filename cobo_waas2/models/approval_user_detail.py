@@ -43,7 +43,8 @@ class ApprovalUserDetail(BaseModel):
     message_version: Optional[StrictStr] = Field(default=None, description="Version of the message format used for the transaction approval.")
     message: Optional[StrictStr] = Field(default=None, description="Message associated with the transaction approval.")
     extra_message: Optional[StrictStr] = Field(default=None, description="Any additional message or information related to the transaction approval.")
-    __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "expired_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message"]
+    result_token: Optional[StrictStr] = Field(default=None, description="The result token appended to the signing content when verifying signatures. The full signing content is constructed as `{message}||{result_token}`. ")
+    __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "expired_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message", "result_token"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +85,11 @@ class ApprovalUserDetail(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if result_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.result_token is None and "result_token" in self.model_fields_set:
+            _dict['result_token'] = None
+
         return _dict
 
     @classmethod
@@ -112,7 +118,8 @@ class ApprovalUserDetail(BaseModel):
             "language": obj.get("language"),
             "message_version": obj.get("message_version"),
             "message": obj.get("message"),
-            "extra_message": obj.get("extra_message")
+            "extra_message": obj.get("extra_message"),
+            "result_token": obj.get("result_token")
         })
         return _obj
 

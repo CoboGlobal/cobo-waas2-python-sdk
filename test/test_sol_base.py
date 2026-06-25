@@ -35,7 +35,7 @@ class TestSOLBase(unittest.TestCase):
         if include_optional:
             return SOLBase(
                 base_fee = '0.000005',
-                rent_amount = '0.00001 '
+                rent_amount = '0.00001'
             )
         else:
             return SOLBase(

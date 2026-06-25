@@ -28,7 +28,7 @@ class CreateBulkSendRequestPayoutParamsInner(BaseModel):
     token_id: StrictStr = Field(description="The token ID of the cryptocurrency to be sent to the recipient.")
     receiving_address: StrictStr = Field(description="The receiving address.")
     amount: StrictStr = Field(description="The amount of the cryptocurrency to be sent to the recipient.")
-    description: Optional[StrictStr] = Field(default=None, description="A note or comment about the bulk send item.")
+    description: Optional[StrictStr] = Field(default=None, description="A note or comment about the bulk send item. Maximum length: 255 characters.")
     __properties: ClassVar[List[str]] = ["token_id", "receiving_address", "amount", "description"]
 
     model_config = ConfigDict(

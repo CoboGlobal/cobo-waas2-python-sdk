@@ -47,7 +47,7 @@ class TestTransactionFee(unittest.TestCase):
                 max_fee_amount = '0.1',
                 fee_rate = '50',
                 base_fee = '0.000005',
-                rent_amount = '0.00001 ',
+                rent_amount = '0.00001',
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
                 gas_base = '0.0002',
