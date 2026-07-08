@@ -38,6 +38,7 @@ from cobo_waas2.models.address_verification_status import AddressVerificationSta
 from cobo_waas2.models.addresses_event_data import AddressesEventData
 from cobo_waas2.models.addresses_event_data_all_of_addresses import AddressesEventDataAllOfAddresses
 from cobo_waas2.models.allocation_item import AllocationItem
+from cobo_waas2.models.allocation_item_status import AllocationItemStatus
 from cobo_waas2.models.allocation_param import AllocationParam
 from cobo_waas2.models.amount_details_inner import AmountDetailsInner
 from cobo_waas2.models.amount_status import AmountStatus
@@ -46,6 +47,7 @@ from cobo_waas2.models.api_log_summary import ApiLogSummary
 from cobo_waas2.models.app_workflow import AppWorkflow
 from cobo_waas2.models.app_workflow_field import AppWorkflowField
 from cobo_waas2.models.app_workflow_policy import AppWorkflowPolicy
+from cobo_waas2.models.approval_action import ApprovalAction
 from cobo_waas2.models.approval_detail import ApprovalDetail
 from cobo_waas2.models.approval_entry import ApprovalEntry
 from cobo_waas2.models.approval_request import ApprovalRequest
@@ -87,6 +89,7 @@ from cobo_waas2.models.base_stake_extra import BaseStakeExtra
 from cobo_waas2.models.base_stake_source import BaseStakeSource
 from cobo_waas2.models.batch_allocation import BatchAllocation
 from cobo_waas2.models.batch_allocation_detail import BatchAllocationDetail
+from cobo_waas2.models.batch_allocation_status import BatchAllocationStatus
 from cobo_waas2.models.batch_check_utxo201_response import BatchCheckUtxo201Response
 from cobo_waas2.models.batch_check_utxo_request import BatchCheckUtxoRequest
 from cobo_waas2.models.batch_utxo_param import BatchUTXOParam
@@ -475,6 +478,7 @@ from cobo_waas2.models.psp_balance import PspBalance
 from cobo_waas2.models.query_approval_statement200_response import QueryApprovalStatement200Response
 from cobo_waas2.models.query_guard_pubkey200_response import QueryGuardPubkey200Response
 from cobo_waas2.models.query_guard_pubkey200_response_addresses_inner import QueryGuardPubkey200ResponseAddressesInner
+from cobo_waas2.models.raw_message_sign_destination import RawMessageSignDestination
 from cobo_waas2.models.refresh_address_balances_by_token200_response import RefreshAddressBalancesByToken200Response
 from cobo_waas2.models.refresh_address_balances_by_token_request import RefreshAddressBalancesByTokenRequest
 from cobo_waas2.models.refresh_permission_token_request import RefreshPermissionTokenRequest
@@ -733,6 +737,7 @@ from cobo_waas2.models.transaction_extra import TransactionExtra
 from cobo_waas2.models.transaction_extra_type import TransactionExtraType
 from cobo_waas2.models.transaction_fil_fee import TransactionFILFee
 from cobo_waas2.models.transaction_fee import TransactionFee
+from cobo_waas2.models.transaction_fee_payer import TransactionFeePayer
 from cobo_waas2.models.transaction_fee_station_wallet_source import TransactionFeeStationWalletSource
 from cobo_waas2.models.transaction_fixed_fee import TransactionFixedFee
 from cobo_waas2.models.transaction_fueling_info import TransactionFuelingInfo

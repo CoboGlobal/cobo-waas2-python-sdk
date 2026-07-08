@@ -44,9 +44,11 @@ class TestBatchAllocationDetail(unittest.TestCase):
                         amount = '500.00', 
                         source_account = '', 
                         destination_account = '', 
-                        description = '', )
+                        description = '', 
+                        status = 'Pending', )
                     ],
                 initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
+                status = 'Pending',
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600
             )

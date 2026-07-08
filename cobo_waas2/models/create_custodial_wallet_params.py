@@ -27,7 +27,7 @@ class CreateCustodialWalletParams(BaseModel):
     """
     The information of Custodial Wallets.
     """  # noqa: E501
-    name: StrictStr = Field(description="The wallet name.")
+    name: StrictStr = Field(description="The wallet name. This field is required and cannot be empty. Letters, numbers, and spaces are supported (for example, `My WaaS 2.0 Wallet`).  <Note>Some special characters are not accepted. For example, the at sign (`@`) is rejected. If the name is empty or contains unsupported characters, the request fails with a `400 Bad Request` error.</Note> ")
     wallet_type: WalletType
     wallet_subtype: WalletSubtype
     enable_auto_sweep: Optional[StrictBool] = Field(default=None, description="Enable the auto-sweep feature for the wallet. This parameter only applies to MPC Wallets and Custodial Wallets (Web3 Wallets).")

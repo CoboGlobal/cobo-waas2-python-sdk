@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr, field_validator
-from typing import List, Optional
+from typing import Any, List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.approval_detail import ApprovalDetail
 from cobo_waas2.models.approval_template import ApprovalTemplate
@@ -1302,7 +1302,7 @@ class TransactionsApi:
     ) -> EstimatedFee:
         """Estimate transaction fee
 
-        This operation estimates the transaction fee of a token transfer or a contract call based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including the request ID, request type, source address, destination address, token ID (only applicable to token transfers), and chain ID (only applicable to contract calls).  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        This operation estimates the transaction fee of a token transfer or a contract call based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including the request ID, request type, source address, destination address, token ID (only applicable to token transfers), and chain ID (only applicable to contract calls).  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees).  <Note>Fee estimates are point-in-time and short-lived. Because on-chain gas prices change continuously, re-estimate the fee immediately before submitting a withdrawal. Submitting a transaction based on a stale estimate may cause the transaction to be rejected because the fee is insufficient.</Note> 
 
         :param estimate_fee_params: The request body to estimate the transaction fee of a token transfer or a contract call.
         :type estimate_fee_params: EstimateFeeParams
@@ -1348,7 +1348,7 @@ class TransactionsApi:
     ) -> ApiResponse[EstimatedFee]:
         """Estimate transaction fee
 
-        This operation estimates the transaction fee of a token transfer or a contract call based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including the request ID, request type, source address, destination address, token ID (only applicable to token transfers), and chain ID (only applicable to contract calls).  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        This operation estimates the transaction fee of a token transfer or a contract call based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including the request ID, request type, source address, destination address, token ID (only applicable to token transfers), and chain ID (only applicable to contract calls).  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees).  <Note>Fee estimates are point-in-time and short-lived. Because on-chain gas prices change continuously, re-estimate the fee immediately before submitting a withdrawal. Submitting a transaction based on a stale estimate may cause the transaction to be rejected because the fee is insufficient.</Note> 
 
         :param estimate_fee_params: The request body to estimate the transaction fee of a token transfer or a contract call.
         :type estimate_fee_params: EstimateFeeParams
@@ -1394,7 +1394,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Estimate transaction fee
 
-        This operation estimates the transaction fee of a token transfer or a contract call based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including the request ID, request type, source address, destination address, token ID (only applicable to token transfers), and chain ID (only applicable to contract calls).  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        This operation estimates the transaction fee of a token transfer or a contract call based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including the request ID, request type, source address, destination address, token ID (only applicable to token transfers), and chain ID (only applicable to contract calls).  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees).  <Note>Fee estimates are point-in-time and short-lived. Because on-chain gas prices change continuously, re-estimate the fee immediately before submitting a withdrawal. Submitting a transaction based on a stale estimate may cause the transaction to be rejected because the fee is insufficient.</Note> 
 
         :param estimate_fee_params: The request body to estimate the transaction fee of a token transfer or a contract call.
         :type estimate_fee_params: EstimateFeeParams
@@ -2192,6 +2192,7 @@ class TransactionsApi:
         self,
         template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
         template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
+        action: Annotated[Optional[Any], Field(description="The approval action type. If omitted, `Transfer` is used by default. Possible values include:   - `Transfer`: To approve a transaction transfer.   - `Drop`: To approve dropping a transaction.   - `SpeedUp`: To approve speeding up a transaction. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2209,6 +2210,8 @@ class TransactionsApi:
         :type template_key: str
         :param template_version: Version of the template.
         :type template_version: str
+        :param action: The approval action type. If omitted, `Transfer` is used by default. Possible values include:   - `Transfer`: To approve a transaction transfer.   - `Drop`: To approve dropping a transaction.   - `SpeedUp`: To approve speeding up a transaction. 
+        :type action: ApprovalAction
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2220,6 +2223,7 @@ class TransactionsApi:
         _param = self._list_transaction_templates_serialize(
             template_key=template_key,
             template_version=template_version,
+            action=action,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -2242,6 +2246,7 @@ class TransactionsApi:
         self,
         template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
         template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
+        action: Annotated[Optional[Any], Field(description="The approval action type. If omitted, `Transfer` is used by default. Possible values include:   - `Transfer`: To approve a transaction transfer.   - `Drop`: To approve dropping a transaction.   - `SpeedUp`: To approve speeding up a transaction. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2259,6 +2264,8 @@ class TransactionsApi:
         :type template_key: str
         :param template_version: Version of the template.
         :type template_version: str
+        :param action: The approval action type. If omitted, `Transfer` is used by default. Possible values include:   - `Transfer`: To approve a transaction transfer.   - `Drop`: To approve dropping a transaction.   - `SpeedUp`: To approve speeding up a transaction. 
+        :type action: ApprovalAction
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2270,6 +2277,7 @@ class TransactionsApi:
         _param = self._list_transaction_templates_serialize(
             template_key=template_key,
             template_version=template_version,
+            action=action,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -2292,6 +2300,7 @@ class TransactionsApi:
         self,
         template_key: Annotated[StrictStr, Field(description="Key of the transaction template used to create an approval message. ")],
         template_version: Annotated[Optional[StrictStr], Field(description="Version of the template.")] = None,
+        action: Annotated[Optional[Any], Field(description="The approval action type. If omitted, `Transfer` is used by default. Possible values include:   - `Transfer`: To approve a transaction transfer.   - `Drop`: To approve dropping a transaction.   - `SpeedUp`: To approve speeding up a transaction. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2309,6 +2318,8 @@ class TransactionsApi:
         :type template_key: str
         :param template_version: Version of the template.
         :type template_version: str
+        :param action: The approval action type. If omitted, `Transfer` is used by default. Possible values include:   - `Transfer`: To approve a transaction transfer.   - `Drop`: To approve dropping a transaction.   - `SpeedUp`: To approve speeding up a transaction. 
+        :type action: ApprovalAction
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2320,6 +2331,7 @@ class TransactionsApi:
         _param = self._list_transaction_templates_serialize(
             template_key=template_key,
             template_version=template_version,
+            action=action,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -2337,6 +2349,7 @@ class TransactionsApi:
         self,
         template_key,
         template_version,
+        action,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2353,6 +2366,10 @@ class TransactionsApi:
         if template_version is not None:
             
             _query_params.append(('template_version', template_version))
+            
+        if action is not None:
+            
+            _query_params.append(('action', action.value))
             
         # process the header parameters
         # process the form parameters

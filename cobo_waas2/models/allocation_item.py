@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.allocation_item_status import AllocationItemStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +33,8 @@ class AllocationItem(BaseModel):
     source_account: Optional[StrictStr] = Field(default=None, description="The source account from which the allocation will be deducted. - If the source account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the source account is the developer account, use the string `\"developer\"`. ")
     destination_account: Optional[StrictStr] = Field(default=None, description="The destination account to which the allocation will be credited. - If the destination account is a merchant account, provide the merchant's ID (e.g., \"M1001\"). - If the destination account is the developer account, use the string `\"developer\"`. ")
     description: StrictStr = Field(description="The description of the allocation item.")
-    __properties: ClassVar[List[str]] = ["allocation_item_id", "batch_allocation_id", "token_id", "amount", "source_account", "destination_account", "description"]
+    status: Optional[AllocationItemStatus] = None
+    __properties: ClassVar[List[str]] = ["allocation_item_id", "batch_allocation_id", "token_id", "amount", "source_account", "destination_account", "description", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +93,8 @@ class AllocationItem(BaseModel):
             "amount": obj.get("amount"),
             "source_account": obj.get("source_account"),
             "destination_account": obj.get("destination_account"),
-            "description": obj.get("description")
+            "description": obj.get("description"),
+            "status": obj.get("status")
         })
         return _obj
 

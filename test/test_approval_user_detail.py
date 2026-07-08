@@ -51,7 +51,8 @@ class TestApprovalUserDetail(unittest.TestCase):
                 message_version = '1.0.0',
                 message = 'Please approve the transaction.',
                 extra_message = 'Please review the transaction details carefully.',
-                result_token = 'abc123token'
+                result_token = 'abc123token',
+                action = 'Transfer'
             )
         else:
             return ApprovalUserDetail(

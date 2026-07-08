@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class PaymentBulkSendItemValidationStatus(str, Enum):
     """
-    The current validation status of the bulk send item. Possible values include: - `Pending`: The bulk send item has not yet been validated. - `Validated`: The bulk send item has passed validation and is ready to be processed. - `ValidationFailed`: The bulk send item has failed validation and cannot be processed. 
+    The current validation status of the bulk send item. Possible values include: - `Pending`: The bulk send item has not yet been validated. - `Validated`: The bulk send item has passed validation and is ready to be processed. - `ValidationFailed`: The bulk send item has failed validation and cannot be processed. - `NotExecuted`: The bulk send item validation was not executed. 
     """
 
     """
@@ -27,6 +27,7 @@ class PaymentBulkSendItemValidationStatus(str, Enum):
     PENDING = 'Pending'
     VALIDATED = 'Validated'
     VALIDATIONFAILED = 'ValidationFailed'
+    NOTEXECUTED = 'NotExecuted'
 
     UNKNOWN = None
 

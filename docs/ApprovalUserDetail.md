@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **message** | **str** | Message associated with the transaction approval. | [optional] 
 **extra_message** | **str** | Any additional message or information related to the transaction approval. | [optional] 
 **result_token** | **str** | The result token appended to the signing content when verifying signatures. The full signing content is constructed as &#x60;{message}||{result_token}&#x60;.  | [optional] 
+**action** | [**ApprovalAction**](ApprovalAction.md) |  | [optional] 
 
 ## Example
 

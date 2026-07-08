@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.allocation_item import AllocationItem
+from cobo_waas2.models.batch_allocation_status import BatchAllocationStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,9 +31,10 @@ class BatchAllocationDetail(BaseModel):
     request_id: StrictStr = Field(description="The request ID provided by you when creating the batch allocation.")
     allocation_items: Optional[List[AllocationItem]] = None
     initiator: Optional[StrictStr] = Field(default=None, description="The initiator of this batch allocation, usually the user's API key.")
+    status: Optional[BatchAllocationStatus] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the batch allocation, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the batch allocation, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["batch_allocation_id", "request_id", "allocation_items", "initiator", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["batch_allocation_id", "request_id", "allocation_items", "initiator", "status", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +98,7 @@ class BatchAllocationDetail(BaseModel):
             "request_id": obj.get("request_id"),
             "allocation_items": [AllocationItem.from_dict(_item) for _item in obj["allocation_items"]] if obj.get("allocation_items") is not None else None,
             "initiator": obj.get("initiator"),
+            "status": obj.get("status"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

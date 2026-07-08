@@ -63,6 +63,7 @@ cobo_waas2/models/address_verification_status.py
 cobo_waas2/models/addresses_event_data.py
 cobo_waas2/models/addresses_event_data_all_of_addresses.py
 cobo_waas2/models/allocation_item.py
+cobo_waas2/models/allocation_item_status.py
 cobo_waas2/models/allocation_param.py
 cobo_waas2/models/amount_details_inner.py
 cobo_waas2/models/amount_status.py
@@ -71,6 +72,7 @@ cobo_waas2/models/api_log_summary.py
 cobo_waas2/models/app_workflow.py
 cobo_waas2/models/app_workflow_field.py
 cobo_waas2/models/app_workflow_policy.py
+cobo_waas2/models/approval_action.py
 cobo_waas2/models/approval_detail.py
 cobo_waas2/models/approval_entry.py
 cobo_waas2/models/approval_request.py
@@ -110,6 +112,7 @@ cobo_waas2/models/base_stake_extra.py
 cobo_waas2/models/base_stake_source.py
 cobo_waas2/models/batch_allocation.py
 cobo_waas2/models/batch_allocation_detail.py
+cobo_waas2/models/batch_allocation_status.py
 cobo_waas2/models/batch_check_utxo201_response.py
 cobo_waas2/models/batch_check_utxo_request.py
 cobo_waas2/models/batch_utxo_param.py
@@ -500,6 +503,7 @@ cobo_waas2/models/psp_balance.py
 cobo_waas2/models/query_approval_statement200_response.py
 cobo_waas2/models/query_guard_pubkey200_response.py
 cobo_waas2/models/query_guard_pubkey200_response_addresses_inner.py
+cobo_waas2/models/raw_message_sign_destination.py
 cobo_waas2/models/refresh_address_balances_by_token200_response.py
 cobo_waas2/models/refresh_address_balances_by_token_request.py
 cobo_waas2/models/refresh_permission_token_request.py
@@ -717,6 +721,7 @@ cobo_waas2/models/transaction_exchange_wallet_source.py
 cobo_waas2/models/transaction_extra.py
 cobo_waas2/models/transaction_extra_type.py
 cobo_waas2/models/transaction_fee.py
+cobo_waas2/models/transaction_fee_payer.py
 cobo_waas2/models/transaction_fee_station_wallet_source.py
 cobo_waas2/models/transaction_fil_fee.py
 cobo_waas2/models/transaction_fixed_fee.py
@@ -906,6 +911,7 @@ docs/AddressVerificationStatus.md
 docs/AddressesEventData.md
 docs/AddressesEventDataAllOfAddresses.md
 docs/AllocationItem.md
+docs/AllocationItemStatus.md
 docs/AllocationParam.md
 docs/AmountDetailsInner.md
 docs/AmountStatus.md
@@ -915,6 +921,7 @@ docs/AppWorkflow.md
 docs/AppWorkflowField.md
 docs/AppWorkflowPolicy.md
 docs/AppWorkflowsApi.md
+docs/ApprovalAction.md
 docs/ApprovalDetail.md
 docs/ApprovalEntry.md
 docs/ApprovalRequest.md
@@ -957,6 +964,7 @@ docs/BaseStakeExtra.md
 docs/BaseStakeSource.md
 docs/BatchAllocation.md
 docs/BatchAllocationDetail.md
+docs/BatchAllocationStatus.md
 docs/BatchCheckUtxo201Response.md
 docs/BatchCheckUtxoRequest.md
 docs/BatchUTXOParam.md
@@ -1354,6 +1362,7 @@ docs/PspBalance.md
 docs/QueryApprovalStatement200Response.md
 docs/QueryGuardPubkey200Response.md
 docs/QueryGuardPubkey200ResponseAddressesInner.md
+docs/RawMessageSignDestination.md
 docs/RefreshAddressBalancesByToken200Response.md
 docs/RefreshAddressBalancesByTokenRequest.md
 docs/RefreshPermissionTokenRequest.md
@@ -1615,6 +1624,7 @@ docs/TransactionExtra.md
 docs/TransactionExtraType.md
 docs/TransactionFILFee.md
 docs/TransactionFee.md
+docs/TransactionFeePayer.md
 docs/TransactionFeeStationWalletSource.md
 docs/TransactionFixedFee.md
 docs/TransactionFuelingInfo.md
@@ -1773,6 +1783,7 @@ test/test_address_verification_status.py
 test/test_addresses_event_data.py
 test/test_addresses_event_data_all_of_addresses.py
 test/test_allocation_item.py
+test/test_allocation_item_status.py
 test/test_allocation_param.py
 test/test_amount_details_inner.py
 test/test_amount_status.py
@@ -1782,6 +1793,7 @@ test/test_app_workflow.py
 test/test_app_workflow_field.py
 test/test_app_workflow_policy.py
 test/test_app_workflows_api.py
+test/test_approval_action.py
 test/test_approval_detail.py
 test/test_approval_entry.py
 test/test_approval_request.py
@@ -1822,6 +1834,7 @@ test/test_base_stake_extra.py
 test/test_base_stake_source.py
 test/test_batch_allocation.py
 test/test_batch_allocation_detail.py
+test/test_batch_allocation_status.py
 test/test_batch_check_utxo201_response.py
 test/test_batch_check_utxo_request.py
 test/test_batch_utxo_param.py
@@ -2221,6 +2234,7 @@ test/test_psp_balance.py
 test/test_query_approval_statement200_response.py
 test/test_query_guard_pubkey200_response.py
 test/test_query_guard_pubkey200_response_addresses_inner.py
+test/test_raw_message_sign_destination.py
 test/test_refresh_address_balances_by_token200_response.py
 test/test_refresh_address_balances_by_token_request.py
 test/test_refresh_permission_token_request.py
@@ -2441,6 +2455,7 @@ test/test_transaction_exchange_wallet_source.py
 test/test_transaction_extra.py
 test/test_transaction_extra_type.py
 test/test_transaction_fee.py
+test/test_transaction_fee_payer.py
 test/test_transaction_fee_station_wallet_source.py
 test/test_transaction_fil_fee.py
 test/test_transaction_fixed_fee.py
