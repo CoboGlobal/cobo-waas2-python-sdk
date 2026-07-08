@@ -40,7 +40,8 @@ class TestAllocationItem(unittest.TestCase):
                 amount = '500.00',
                 source_account = '',
                 destination_account = '',
-                description = ''
+                description = '',
+                status = 'Pending'
             )
         else:
             return AllocationItem(

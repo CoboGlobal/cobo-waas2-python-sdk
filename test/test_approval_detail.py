@@ -61,7 +61,8 @@ class TestApprovalDetail(unittest.TestCase):
                             message_version = '1.0.0', 
                             message = 'Please approve the transaction.', 
                             extra_message = 'Please review the transaction details carefully.', 
-                            result_token = 'abc123token', )
+                            result_token = 'abc123token', 
+                            action = 'Transfer', )
                         ], ),
                 spender = cobo_waas2.models.role_detail.RoleDetail(
                     result = 'Rejected', 
@@ -87,7 +88,8 @@ class TestApprovalDetail(unittest.TestCase):
                             message_version = '1.0.0', 
                             message = 'Please approve the transaction.', 
                             extra_message = 'Please review the transaction details carefully.', 
-                            result_token = 'abc123token', )
+                            result_token = 'abc123token', 
+                            action = 'Transfer', )
                         ], ),
                 approver = cobo_waas2.models.role_detail.RoleDetail(
                     result = 'Rejected', 
@@ -113,7 +115,8 @@ class TestApprovalDetail(unittest.TestCase):
                             message_version = '1.0.0', 
                             message = 'Please approve the transaction.', 
                             extra_message = 'Please review the transaction details carefully.', 
-                            result_token = 'abc123token', )
+                            result_token = 'abc123token', 
+                            action = 'Transfer', )
                         ], )
             )
         else:

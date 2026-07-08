@@ -2867,7 +2867,7 @@ class PaymentApi:
     ) -> Report:
         """Generate reports
 
-         This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. 
+        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param create_report_request: The request body to create payment reports.
         :type create_report_request: CreateReportRequest
@@ -2913,7 +2913,7 @@ class PaymentApi:
     ) -> ApiResponse[Report]:
         """Generate reports
 
-         This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. 
+        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param create_report_request: The request body to create payment reports.
         :type create_report_request: CreateReportRequest
@@ -2959,7 +2959,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Generate reports
 
-         This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. 
+        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param create_report_request: The request body to create payment reports.
         :type create_report_request: CreateReportRequest
@@ -6837,7 +6837,7 @@ class PaymentApi:
     ) -> GetReports200Response:
         """List all reports
 
-        This operation retrieves the information of all reports. 
+        This operation retrieves the information of all reports. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -6899,7 +6899,7 @@ class PaymentApi:
     ) -> ApiResponse[GetReports200Response]:
         """List all reports
 
-        This operation retrieves the information of all reports. 
+        This operation retrieves the information of all reports. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int
@@ -6961,7 +6961,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List all reports
 
-        This operation retrieves the information of all reports. 
+        This operation retrieves the information of all reports. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
         :type limit: int

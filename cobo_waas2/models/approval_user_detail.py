@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.approval_action import ApprovalAction
 from cobo_waas2.models.approval_result import ApprovalResult
 from typing import Optional, Set
 from typing_extensions import Self
@@ -44,7 +45,8 @@ class ApprovalUserDetail(BaseModel):
     message: Optional[StrictStr] = Field(default=None, description="Message associated with the transaction approval.")
     extra_message: Optional[StrictStr] = Field(default=None, description="Any additional message or information related to the transaction approval.")
     result_token: Optional[StrictStr] = Field(default=None, description="The result token appended to the signing content when verifying signatures. The full signing content is constructed as `{message}||{result_token}`. ")
-    __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "expired_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message", "result_token"]
+    action: Optional[ApprovalAction] = None
+    __properties: ClassVar[List[str]] = ["name", "email", "pubkey", "signature", "statement_uuid", "result", "approval_result_code", "created_time", "expired_time", "template_version", "header_title", "is_for_sign", "show_info", "language", "message_version", "message", "extra_message", "result_token", "action"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,11 @@ class ApprovalUserDetail(BaseModel):
         if self.result_token is None and "result_token" in self.model_fields_set:
             _dict['result_token'] = None
 
+        # set to None if action (nullable) is None
+        # and model_fields_set contains the field
+        if self.action is None and "action" in self.model_fields_set:
+            _dict['action'] = None
+
         return _dict
 
     @classmethod
@@ -119,7 +126,8 @@ class ApprovalUserDetail(BaseModel):
             "message_version": obj.get("message_version"),
             "message": obj.get("message"),
             "extra_message": obj.get("extra_message"),
-            "result_token": obj.get("result_token")
+            "result_token": obj.get("result_token"),
+            "action": obj.get("action")
         })
         return _obj
 

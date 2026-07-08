@@ -75,7 +75,8 @@ class TestTransactionExtra(unittest.TestCase):
                 reward_address = '',
                 dapp_name = '',
                 dapp_domain = '',
-                session_id = ''
+                session_id = '',
+                fee_payer = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'
             )
         else:
             return TransactionExtra(

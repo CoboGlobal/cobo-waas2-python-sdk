@@ -268,11 +268,12 @@ class TestWalletsApi(unittest.TestCase):
         wallet_subtype = cobo_waas2.WalletSubtype()
         chain_ids = 'BTC,ETH'
         token_ids = 'ETH_USDT,ETH_USDC'
+        token_addresses = '0xdac17f958d2ee523a2206206994597c13d831ec7'
         limit = 10
         before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
         after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
-        api_response = self.api.list_enabled_tokens(wallet_type=wallet_type, wallet_subtype=wallet_subtype, chain_ids=chain_ids, token_ids=token_ids, limit=limit, before=before, after=after)
+        api_response = self.api.list_enabled_tokens(wallet_type=wallet_type, wallet_subtype=wallet_subtype, chain_ids=chain_ids, token_ids=token_ids, token_addresses=token_addresses, limit=limit, before=before, after=after)
         """
 
     def test_list_supported_chains(self) -> None:

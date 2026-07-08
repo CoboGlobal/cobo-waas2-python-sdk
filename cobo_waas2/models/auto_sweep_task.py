@@ -30,7 +30,7 @@ class AutoSweepTask(BaseModel):
     wallet_id: StrictStr = Field(description="Wallet ID.")
     token_id: StrictStr = Field(description="Token ID of the swept token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
     status: AutoSweepTaskStatus
-    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="IDs of the transactions triggered by the task.")
+    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="IDs of the transactions triggered by the task. This array is empty while the task `status` is `Submitted`, and is populated only after the status becomes `TransactionCreated`. Poll [Get auto-sweep task details](https://www.cobo.com/developers/v2/api-references/autosweep/get-auto-sweep-task-details) until the transaction IDs are available. ")
     failed_reasons: Optional[List[StrictStr]] = Field(default=None, description="Reasons why the task creation failed.")
     created_timestamp: StrictInt = Field(description="The time when the task was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The time when the task was updated, in Unix timestamp format, measured in milliseconds.")

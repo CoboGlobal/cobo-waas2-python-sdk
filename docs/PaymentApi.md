@@ -1249,7 +1249,7 @@ Name | Type | Description  | Notes
 
 Generate reports
 
- This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. 
+This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
 ### Example
 
@@ -2869,7 +2869,7 @@ Name | Type | Description  | Notes
 
 List all reports
 
-This operation retrieves the information of all reports. 
+This operation retrieves the information of all reports. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
 ### Example
 

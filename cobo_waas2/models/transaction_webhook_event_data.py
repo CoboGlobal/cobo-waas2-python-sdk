@@ -57,7 +57,7 @@ class TransactionWebhookEventData(BaseModel):
     initiator_type: TransactionInitiatorType
     confirmed_num: Optional[StrictInt] = Field(default=None, description="The number of confirmations this transaction has received.")
     confirming_threshold: Optional[StrictInt] = Field(default=None, description="The minimum number of confirmations required to deem a transaction secure. The common threshold is 6 for a Bitcoin transaction.")
-    transaction_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash.")
+    transaction_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash (on-chain transaction identifier, also referred to as `txid`).  This property is populated only after the transaction is broadcast on-chain, so it may be `null` or absent before broadcast. In contrast, `transaction_id` (the Cobo internal transaction ID) is assigned at creation and is always present. ")
     block_info: Optional[TransactionBlockInfo] = None
     raw_tx_info: Optional[TransactionRawTxInfo] = None
     replacement: Optional[TransactionReplacement] = None

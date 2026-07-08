@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **dapp_name** | **str** | The dapp name that initiated this transaction. | [optional] 
 **dapp_domain** | **str** | The dapp domain that initiated this transaction | [optional] 
 **session_id** | **str** | The session id that initiated this transaction | [optional] 
+**fee_payer** | **str** | The address of the designated Solana fee payer account that covers the transaction fees, separating the fee payment from the main signer or source account. | [optional] 
 
 ## Example
 

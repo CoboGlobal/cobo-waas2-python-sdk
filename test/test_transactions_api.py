@@ -188,8 +188,9 @@ class TestTransactionsApi(unittest.TestCase):
         """
         template_key = 'withdrawal'
         template_version = '1.0.0'
+        action = cobo_waas2.ApprovalAction()
 
-        api_response = self.api.list_transaction_templates(template_key, template_version=template_version)
+        api_response = self.api.list_transaction_templates(template_key, template_version=template_version, action=action)
         """
 
     def test_list_transactions(self) -> None:

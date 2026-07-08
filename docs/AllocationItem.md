@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **source_account** | **str** | The source account from which the allocation will be deducted. - If the source account is a merchant account, provide the merchant&#39;s ID (e.g., \&quot;M1001\&quot;). - If the source account is the developer account, use the string &#x60;\&quot;developer\&quot;&#x60;.  | [optional] 
 **destination_account** | **str** | The destination account to which the allocation will be credited. - If the destination account is a merchant account, provide the merchant&#39;s ID (e.g., \&quot;M1001\&quot;). - If the destination account is the developer account, use the string &#x60;\&quot;developer\&quot;&#x60;.  | [optional] 
 **description** | **str** | The description of the allocation item. | 
+**status** | [**AllocationItemStatus**](AllocationItemStatus.md) |  | [optional] 
 
 ## Example
 

@@ -42,7 +42,8 @@ class TestListAllocationItems200Response(unittest.TestCase):
                         amount = '500.00', 
                         source_account = '', 
                         destination_account = '', 
-                        description = '', )
+                        description = '', 
+                        status = 'Pending', )
                     ],
                 pagination = cobo_waas2.models.pagination.Pagination(
                     before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1', 
