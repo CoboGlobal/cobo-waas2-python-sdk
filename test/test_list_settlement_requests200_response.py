@@ -61,6 +61,8 @@ class TestListSettlementRequests200Response(unittest.TestCase):
                                         to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                                         amount = '0.15', 
                                         status = 'Submitted', 
+                                        sub_status = 'PendingDoubleCheck', 
+                                        failed_reason = 'Rejected by signer Cobo TSS', 
                                         counterparty = cobo_waas2.models.counterparty.Counterparty(
                                             counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
                                             counterparty_type = 'Individual', 

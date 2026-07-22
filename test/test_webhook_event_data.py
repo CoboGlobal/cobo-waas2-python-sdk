@@ -42,7 +42,7 @@ class TestWebhookEventData(unittest.TestCase):
                 type = 'Deposit',
                 status = 'Succeeded',
                 sub_status = 'PendingDoubleCheck',
-                failed_reason = 'Rejected by signer Cobo TSS',
+                failed_reason = 'Cannot charge payout fee: Fee Station balance is insufficient. Please add funds to Fee Station and try again.',
                 chain_id = 'ETH',
                 token_id = 'Tron_USDT',
                 asset_id = 'USDT',
@@ -209,6 +209,8 @@ class TestWebhookEventData(unittest.TestCase):
                         to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                         amount = '0.15', 
                         status = 'Submitted', 
+                        sub_status = 'PendingDoubleCheck', 
+                        failed_reason = 'Rejected by signer Cobo TSS', 
                         counterparty = cobo_waas2.models.counterparty.Counterparty(
                             counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
                             counterparty_type = 'Individual', 
@@ -267,6 +269,8 @@ class TestWebhookEventData(unittest.TestCase):
                                 to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                                 amount = '0.15', 
                                 status = 'Submitted', 
+                                sub_status = 'PendingDoubleCheck', 
+                                failed_reason = 'Rejected by signer Cobo TSS', 
                                 counterparty = cobo_waas2.models.counterparty.Counterparty(
                                     counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
                                     counterparty_type = 'Individual', 
@@ -462,6 +466,8 @@ class TestWebhookEventData(unittest.TestCase):
                                 to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                                 amount = '0.15', 
                                 status = 'Submitted', 
+                                sub_status = 'PendingDoubleCheck', 
+                                failed_reason = 'Rejected by signer Cobo TSS', 
                                 counterparty = cobo_waas2.models.counterparty.Counterparty(
                                     counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
                                     counterparty_type = 'Individual', 

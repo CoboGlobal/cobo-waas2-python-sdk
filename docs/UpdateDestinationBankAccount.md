@@ -1,5 +1,6 @@
 # UpdateDestinationBankAccount
 
+The bank account details for updating a destination bank account.  For USD company bank accounts, optional prefixed fields may be required depending on `payment_method`: - When `payment_method` is `Swift`, `beneficiary_province` and `beneficiary_post_code` are required. - When `payment_method` is `Local` (HK only), `bank_branch_code` is required. 
 
 ## Properties
 
@@ -16,8 +17,17 @@ Name | Type | Description | Notes
 **iban_code** | **str** | The IBAN code of the bank account. | [optional] 
 **further_credit** | **str** | The further credit of the bank account. | [optional] 
 **intermediary_bank_info** | [**IntermediaryBankInfo**](IntermediaryBankInfo.md) |  | [optional] 
-**country** | **str** | Beneficiary&#39;s country, in ISO 3166-1 alpha-3 format. | [optional] 
+**country** | **str** | The country, in ISO 3166-1 alpha-3 format. | [optional] 
 **city** | **str** | Beneficiary&#39;s city. | [optional] 
+**payment_method** | [**BankAccountPaymentMethod**](BankAccountPaymentMethod.md) |  | [optional] 
+**holder_type** | [**BankAccountHolderType**](BankAccountHolderType.md) |  | [optional] 
+**beneficiary_province** | **str** | The province or state of the beneficiary. Required when &#x60;payment_method&#x60; is &#x60;Swift&#x60;. Cannot be a pure number or contain Chinese characters.  | [optional] 
+**beneficiary_post_code** | **str** | The postal code of the beneficiary. Required when &#x60;payment_method&#x60; is &#x60;Swift&#x60;.  | [optional] 
+**bank_account_name** | **str** | The bank account name. Cannot contain Chinese characters.  | [optional] 
+**bank_branch_code** | **str** | The branch code. Required when &#x60;payment_method&#x60; is &#x60;Local&#x60; (HK only).  | [optional] 
+**bank_country** | **str** | The country, in ISO 3166-1 alpha-3 format. | [optional] 
+**bank_province** | **str** | The province or state of the bank. Cannot be a pure number or contain Chinese characters.  | [optional] 
+**contract_file_id** | **str** | The file ID of the contract document (e.g., cooperation agreement) that proves the business relationship between you and the beneficiary, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file).  | [optional] 
 
 ## Example
 

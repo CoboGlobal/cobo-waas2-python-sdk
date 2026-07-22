@@ -35,7 +35,8 @@ class PaymentBulkSendItem(BaseModel):
     tx_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash of the bulk send item.")
     status: PaymentBulkSendItemStatus
     validation_status: PaymentBulkSendItemValidationStatus
-    __properties: ClassVar[List[str]] = ["bulk_send_item_id", "token_id", "receiving_address", "amount", "description", "tx_hash", "status", "validation_status"]
+    failed_reason: Optional[StrictStr] = Field(default=None, description="The reason why the bulk send item failed.")
+    __properties: ClassVar[List[str]] = ["bulk_send_item_id", "token_id", "receiving_address", "amount", "description", "tx_hash", "status", "validation_status", "failed_reason"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +96,8 @@ class PaymentBulkSendItem(BaseModel):
             "description": obj.get("description"),
             "tx_hash": obj.get("tx_hash"),
             "status": obj.get("status"),
-            "validation_status": obj.get("validation_status")
+            "validation_status": obj.get("validation_status"),
+            "failed_reason": obj.get("failed_reason")
         })
         return _obj
 

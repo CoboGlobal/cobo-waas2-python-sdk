@@ -48,7 +48,8 @@ class TestPaymentEstimateFee201Response(unittest.TestCase):
                         otc_fee = cobo_waas2.models.otc_fee.OtcFee(
                             fee_rate = '', 
                             token_id = '', ), )
-                    ]
+                    ],
+                otc_fixed_fee = '10.00'
             )
         else:
             return PaymentEstimateFee201Response(

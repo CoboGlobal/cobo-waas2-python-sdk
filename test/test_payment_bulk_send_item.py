@@ -41,7 +41,8 @@ class TestPaymentBulkSendItem(unittest.TestCase):
                 description = 'Invoice #INV-2024-001',
                 tx_hash = '0xabc123456789def0000000000000000000000000',
                 status = 'Pending',
-                validation_status = 'Pending'
+                validation_status = 'Pending',
+                failed_reason = 'Cannot charge payout fee: Fee Station balance is insufficient. Please add funds to Fee Station and try again.'
             )
         else:
             return PaymentBulkSendItem(

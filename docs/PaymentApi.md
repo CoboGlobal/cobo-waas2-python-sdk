@@ -37,6 +37,7 @@ Method | HTTP request | Description
 [**get_destination**](PaymentApi.md#get_destination) | **GET** /payments/destination/{destination_id} | Get destination information
 [**get_destination_entry**](PaymentApi.md#get_destination_entry) | **GET** /payments/destination_entry/{destination_entry_id} | Get destination entry information
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
+[**get_merchant_kyc**](PaymentApi.md#get_merchant_kyc) | **GET** /payments/merchants/{merchant_id}/kyc | Get merchant KYC
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
 [**get_payout_by_id**](PaymentApi.md#get_payout_by_id) | **GET** /payments/payouts/{payout_id} | Get payout information
 [**get_psp_balance**](PaymentApi.md#get_psp_balance) | **GET** /payments/balance/psp | Get developer balance
@@ -66,9 +67,9 @@ Method | HTTP request | Description
 [**list_payouts**](PaymentApi.md#list_payouts) | **GET** /payments/payouts | List all payouts
 [**list_settlement_details**](PaymentApi.md#list_settlement_details) | **GET** /payments/settlement_details | List all settlement details
 [**list_settlement_requests**](PaymentApi.md#list_settlement_requests) | **GET** /payments/settlement_requests | List all settlement requests
-[**list_top_up_payer_accounts**](PaymentApi.md#list_top_up_payer_accounts) | **GET** /payments/topup/payer_accounts | List top-up payer accounts
 [**list_top_up_payers**](PaymentApi.md#list_top_up_payers) | **GET** /payments/topup/payers | List payers
 [**payment_estimate_fee**](PaymentApi.md#payment_estimate_fee) | **POST** /payments/estimate_fee | Estimate fees
+[**submit_merchant_kyc**](PaymentApi.md#submit_merchant_kyc) | **POST** /payments/merchants/{merchant_id}/kyc | Submit merchant KYC
 [**trigger_test_payments_webhook_event**](PaymentApi.md#trigger_test_payments_webhook_event) | **POST** /payments/webhooks/trigger | Trigger test webhook event
 [**update_counterparty**](PaymentApi.md#update_counterparty) | **PUT** /payments/counterparty/{counterparty_id} | Update counterparty
 [**update_destination**](PaymentApi.md#update_destination) | **PUT** /payments/destination/{destination_id} | Update destination
@@ -77,6 +78,7 @@ Method | HTTP request | Description
 [**update_payment_order**](PaymentApi.md#update_payment_order) | **PUT** /payments/orders/{order_id} | Update pay-in order
 [**update_refund_by_id**](PaymentApi.md#update_refund_by_id) | **PUT** /payments/refunds/{refund_id} | Update refund order
 [**update_top_up_address**](PaymentApi.md#update_top_up_address) | **PUT** /payments/topup/address | Update top-up address
+[**upload_payment_file**](PaymentApi.md#upload_payment_file) | **POST** /payments/files | Upload file
 
 
 # **batch_get_exchange_rates**
@@ -2494,6 +2496,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_merchant_kyc**
+> MerchantKycSubmission get_merchant_kyc(merchant_id)
+
+Get merchant KYC
+
+This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.merchant_kyc_submission import MerchantKycSubmission
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    merchant_id = 'M1001'
+
+    try:
+        # Get merchant KYC
+        api_response = api_instance.get_merchant_kyc(merchant_id)
+        print("The response of PaymentApi->get_merchant_kyc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_merchant_kyc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **merchant_id** | **str**| The merchant ID. | 
+
+### Return type
+
+[**MerchantKycSubmission**](MerchantKycSubmission.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_payment_order_detail_by_id**
 > Order get_payment_order_detail_by_id(order_id)
 
@@ -4780,86 +4854,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_top_up_payer_accounts**
-> ListTopUpPayerAccounts200Response list_top_up_payer_accounts(limit=limit, before=before, after=after, merchant_id=merchant_id, payer_id=payer_id)
-
-List top-up payer accounts
-
-This operation retrieves the accounts of all payers. You can filter the result by merchant ID and payer_id. 
-
-### Example
-
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.list_top_up_payer_accounts200_response import ListTopUpPayerAccounts200Response
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.PaymentApi(api_client)
-    limit = 10
-    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-    merchant_id = 'M1001'
-    payer_id = 'P20250619T0310056d7aa'
-
-    try:
-        # List top-up payer accounts
-        api_response = api_instance.list_top_up_payer_accounts(limit=limit, before=before, after=after, merchant_id=merchant_id, payer_id=payer_id)
-        print("The response of PaymentApi->list_top_up_payer_accounts:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->list_top_up_payer_accounts: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
- **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
- **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
- **merchant_id** | **str**| The merchant ID. | [optional] 
- **payer_id** | **str**| A unique identifier assigned by Cobo to track and identify individual payers. | [optional] 
-
-### Return type
-
-[**ListTopUpPayerAccounts200Response**](ListTopUpPayerAccounts200Response.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **list_top_up_payers**
 > ListTopUpPayers200Response list_top_up_payers(limit=limit, before=before, after=after, merchant_id=merchant_id, payer_id=payer_id)
 
@@ -4993,6 +4987,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaymentEstimateFee201Response**](PaymentEstimateFee201Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **submit_merchant_kyc**
+> MerchantKycInfo submit_merchant_kyc(merchant_id, submit_merchant_kyc=submit_merchant_kyc)
+
+Submit merchant KYC
+
+This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.merchant_kyc_info import MerchantKycInfo
+from cobo_waas2.models.submit_merchant_kyc import SubmitMerchantKyc
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    merchant_id = 'M1001'
+    submit_merchant_kyc = cobo_waas2.SubmitMerchantKyc()
+
+    try:
+        # Submit merchant KYC
+        api_response = api_instance.submit_merchant_kyc(merchant_id, submit_merchant_kyc=submit_merchant_kyc)
+        print("The response of PaymentApi->submit_merchant_kyc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->submit_merchant_kyc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **merchant_id** | **str**| The merchant ID. | 
+ **submit_merchant_kyc** | [**SubmitMerchantKyc**](SubmitMerchantKyc.md)| The request body to submit merchant KYC information. | [optional] 
+
+### Return type
+
+[**MerchantKycInfo**](MerchantKycInfo.md)
 
 ### Authorization
 
@@ -5603,6 +5672,78 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Top-up address updated successfully. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_payment_file**
+> PaymentUploadedFile upload_payment_file(file)
+
+Upload file
+
+This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.payment_uploaded_file import PaymentUploadedFile
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    file = None
+
+    try:
+        # Upload file
+        api_response = api_instance.upload_payment_file(file)
+        print("The response of PaymentApi->upload_payment_file:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->upload_payment_file: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file** | **bytearray**| The file to upload. | 
+
+### Return type
+
+[**PaymentUploadedFile**](PaymentUploadedFile.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 

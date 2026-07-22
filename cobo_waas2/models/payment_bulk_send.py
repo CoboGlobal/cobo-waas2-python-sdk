@@ -34,10 +34,11 @@ class PaymentBulkSend(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="The description for the entire bulk send batch.")
     execution_mode: PaymentBulkSendExecutionMode
     status: PaymentBulkSendStatus
+    failed_reason: Optional[StrictStr] = Field(default=None, description="The reason why the bulk send failed.")
     created_timestamp: StrictInt = Field(description="The created time of the bulk send, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the bulk send, represented as a UNIX timestamp in seconds.")
     commission_fee: Optional[CommissionFee] = Field(default=None, description="The commission fee. Not returned when no fee has been incurred, the actual charged amount once incurred, or `0` if refunded.")
-    __properties: ClassVar[List[str]] = ["bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "created_timestamp", "updated_timestamp", "commission_fee"]
+    __properties: ClassVar[List[str]] = ["bulk_send_id", "request_id", "source_account", "description", "execution_mode", "status", "failed_reason", "created_timestamp", "updated_timestamp", "commission_fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,6 +100,7 @@ class PaymentBulkSend(BaseModel):
             "description": obj.get("description"),
             "execution_mode": obj.get("execution_mode"),
             "status": obj.get("status"),
+            "failed_reason": obj.get("failed_reason"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "commission_fee": CommissionFee.from_dict(obj["commission_fee"]) if obj.get("commission_fee") is not None else None

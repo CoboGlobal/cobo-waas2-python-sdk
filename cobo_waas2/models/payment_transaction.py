@@ -20,6 +20,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.counterparty import Counterparty
 from cobo_waas2.models.destination import Destination
 from cobo_waas2.models.transaction_status import TransactionStatus
+from cobo_waas2.models.transaction_sub_status import TransactionSubStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,11 +36,13 @@ class PaymentTransaction(BaseModel):
     to_address: StrictStr = Field(description="The destination address of the transaction.")
     amount: StrictStr = Field(description="The amount of cryptocurrency transferred, as a decimal string.")
     status: TransactionStatus
+    sub_status: Optional[TransactionSubStatus] = None
+    failed_reason: Optional[StrictStr] = Field(default=None, description="(This property is applicable to approval failures and signature failures only) The reason why the transaction failed.")
     counterparty: Optional[Counterparty] = None
     destination: Optional[Destination] = None
     created_timestamp: StrictInt = Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: StrictInt = Field(description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["tx_id", "tx_hash", "token_id", "from_address", "to_address", "amount", "status", "counterparty", "destination", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["tx_id", "tx_hash", "token_id", "from_address", "to_address", "amount", "status", "sub_status", "failed_reason", "counterparty", "destination", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,6 +108,8 @@ class PaymentTransaction(BaseModel):
             "to_address": obj.get("to_address"),
             "amount": obj.get("amount"),
             "status": obj.get("status"),
+            "sub_status": obj.get("sub_status"),
+            "failed_reason": obj.get("failed_reason"),
             "counterparty": Counterparty.from_dict(obj["counterparty"]) if obj.get("counterparty") is not None else None,
             "destination": Destination.from_dict(obj["destination"]) if obj.get("destination") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),

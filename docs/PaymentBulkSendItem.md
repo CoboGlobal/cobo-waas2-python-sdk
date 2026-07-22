@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **tx_hash** | **str** | The transaction hash of the bulk send item. | [optional] 
 **status** | [**PaymentBulkSendItemStatus**](PaymentBulkSendItemStatus.md) |  | 
 **validation_status** | [**PaymentBulkSendItemValidationStatus**](PaymentBulkSendItemValidationStatus.md) |  | 
+**failed_reason** | **str** | The reason why the bulk send item failed. | [optional] 
 
 ## Example
 

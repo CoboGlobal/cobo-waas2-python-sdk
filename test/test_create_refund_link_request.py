@@ -34,6 +34,7 @@ class TestCreateRefundLinkRequest(unittest.TestCase):
         model = CreateRefundLinkRequest()
         if include_optional:
             return CreateRefundLinkRequest(
+                request_id = '123e4567-e89b-12d3-a456-426614174004',
                 business_info = cobo_waas2.models.refund_link_business_info.RefundLinkBusinessInfo(
                     order_id = 'O20250304-M1001-1001', 
                     transaction_id = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f', 

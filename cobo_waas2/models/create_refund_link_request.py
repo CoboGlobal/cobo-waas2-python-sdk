@@ -15,8 +15,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from cobo_waas2.models.link_display_info import LinkDisplayInfo
 from cobo_waas2.models.refund_link_business_info import RefundLinkBusinessInfo
 from typing import Optional, Set
@@ -27,9 +28,10 @@ class CreateRefundLinkRequest(BaseModel):
     """
     CreateRefundLinkRequest
     """  # noqa: E501
+    request_id: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(default=None, description="The request ID that is used to track a refund link request. The request ID is provided by you and must be unique.")
     business_info: RefundLinkBusinessInfo
     display_info: Optional[LinkDisplayInfo] = None
-    __properties: ClassVar[List[str]] = ["business_info", "display_info"]
+    __properties: ClassVar[List[str]] = ["request_id", "business_info", "display_info"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +90,7 @@ class CreateRefundLinkRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "request_id": obj.get("request_id"),
             "business_info": RefundLinkBusinessInfo.from_dict(obj["business_info"]) if obj.get("business_info") is not None else None,
             "display_info": LinkDisplayInfo.from_dict(obj["display_info"]) if obj.get("display_info") is not None else None
         })
