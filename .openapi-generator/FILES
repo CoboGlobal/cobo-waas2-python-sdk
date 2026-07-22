@@ -37,7 +37,6 @@ cobo_waas2/crypto/signer.py
 cobo_waas2/crypto/signing_helper.py
 cobo_waas2/exceptions.py
 cobo_waas2/models/__init__.py
-cobo_waas2/models/account.py
 cobo_waas2/models/acquiring_type.py
 cobo_waas2/models/activity.py
 cobo_waas2/models/activity_action.py
@@ -105,6 +104,8 @@ cobo_waas2/models/balance.py
 cobo_waas2/models/balance_update_info.py
 cobo_waas2/models/balance_update_info_event_data.py
 cobo_waas2/models/bank_account.py
+cobo_waas2/models/bank_account_holder_type.py
+cobo_waas2/models/bank_account_payment_method.py
 cobo_waas2/models/bank_account_status.py
 cobo_waas2/models/base_contract_call_source.py
 cobo_waas2/models/base_estimate_staking_fee.py
@@ -407,7 +408,6 @@ cobo_waas2/models/list_token_balances_for_fee_station200_response.py
 cobo_waas2/models/list_token_balances_for_fee_station200_response_data_inner.py
 cobo_waas2/models/list_token_listing_requests200_response.py
 cobo_waas2/models/list_tokenization_blocklist_addresses200_response.py
-cobo_waas2/models/list_top_up_payer_accounts200_response.py
 cobo_waas2/models/list_top_up_payers200_response.py
 cobo_waas2/models/list_top_up_payers200_response_data_inner.py
 cobo_waas2/models/list_transaction_approval_details200_response.py
@@ -427,6 +427,18 @@ cobo_waas2/models/max_fee_amount.py
 cobo_waas2/models/max_transferable_value.py
 cobo_waas2/models/merchant.py
 cobo_waas2/models/merchant_balance.py
+cobo_waas2/models/merchant_kyc_address.py
+cobo_waas2/models/merchant_kyc_company_attachment.py
+cobo_waas2/models/merchant_kyc_company_attachment_file_type.py
+cobo_waas2/models/merchant_kyc_company_info.py
+cobo_waas2/models/merchant_kyc_company_type.py
+cobo_waas2/models/merchant_kyc_info.py
+cobo_waas2/models/merchant_kyc_merchant_type.py
+cobo_waas2/models/merchant_kyc_person_attachment.py
+cobo_waas2/models/merchant_kyc_person_attachment_file_type.py
+cobo_waas2/models/merchant_kyc_person_info.py
+cobo_waas2/models/merchant_kyc_status.py
+cobo_waas2/models/merchant_kyc_submission.py
 cobo_waas2/models/message_sign_destination.py
 cobo_waas2/models/message_sign_destination_type.py
 cobo_waas2/models/message_sign_params.py
@@ -453,7 +465,6 @@ cobo_waas2/models/organization_event_data.py
 cobo_waas2/models/original_main_group_handling.py
 cobo_waas2/models/otc_fee.py
 cobo_waas2/models/pagination.py
-cobo_waas2/models/payer_account.py
 cobo_waas2/models/payment_account_balance_update_event_data.py
 cobo_waas2/models/payment_address_update_event_data.py
 cobo_waas2/models/payment_allocation_amount.py
@@ -487,6 +498,7 @@ cobo_waas2/models/payment_settlement_event.py
 cobo_waas2/models/payment_source_type.py
 cobo_waas2/models/payment_transaction.py
 cobo_waas2/models/payment_transaction_event_data.py
+cobo_waas2/models/payment_uploaded_file.py
 cobo_waas2/models/payment_wallet_balance.py
 cobo_waas2/models/payout_channel.py
 cobo_waas2/models/policy_action.py
@@ -581,6 +593,7 @@ cobo_waas2/models/submit_deposit_travel_rule_info201_response.py
 cobo_waas2/models/submit_kyt_response.py
 cobo_waas2/models/submit_kyt_screenings_decisions_body.py
 cobo_waas2/models/submit_kyt_screenings_review_body.py
+cobo_waas2/models/submit_merchant_kyc.py
 cobo_waas2/models/supported_token.py
 cobo_waas2/models/suspended_token_event_data.py
 cobo_waas2/models/suspended_token_operation_type.py
@@ -884,7 +897,6 @@ cobo_waas2/models/webhook_event_type.py
 cobo_waas2/py.typed
 cobo_waas2/rest.py
 cobo_waas2/server_demo.py
-docs/Account.md
 docs/AcquiringType.md
 docs/Activity.md
 docs/ActivityAction.md
@@ -957,6 +969,8 @@ docs/Balance.md
 docs/BalanceUpdateInfo.md
 docs/BalanceUpdateInfoEventData.md
 docs/BankAccount.md
+docs/BankAccountHolderType.md
+docs/BankAccountPaymentMethod.md
 docs/BankAccountStatus.md
 docs/BaseContractCallSource.md
 docs/BaseEstimateStakingFee.md
@@ -1262,7 +1276,6 @@ docs/ListTokenBalancesForFeeStation200Response.md
 docs/ListTokenBalancesForFeeStation200ResponseDataInner.md
 docs/ListTokenListingRequests200Response.md
 docs/ListTokenizationBlocklistAddresses200Response.md
-docs/ListTopUpPayerAccounts200Response.md
 docs/ListTopUpPayers200Response.md
 docs/ListTopUpPayers200ResponseDataInner.md
 docs/ListTransactionApprovalDetails200Response.md
@@ -1288,6 +1301,18 @@ docs/MaxFeeAmount.md
 docs/MaxTransferableValue.md
 docs/Merchant.md
 docs/MerchantBalance.md
+docs/MerchantKycAddress.md
+docs/MerchantKycCompanyAttachment.md
+docs/MerchantKycCompanyAttachmentFileType.md
+docs/MerchantKycCompanyInfo.md
+docs/MerchantKycCompanyType.md
+docs/MerchantKycInfo.md
+docs/MerchantKycMerchantType.md
+docs/MerchantKycPersonAttachment.md
+docs/MerchantKycPersonAttachmentFileType.md
+docs/MerchantKycPersonInfo.md
+docs/MerchantKycStatus.md
+docs/MerchantKycSubmission.md
 docs/MessageSignDestination.md
 docs/MessageSignDestinationType.md
 docs/MessageSignParams.md
@@ -1310,7 +1335,6 @@ docs/OrganizationsApi.md
 docs/OriginalMainGroupHandling.md
 docs/OtcFee.md
 docs/Pagination.md
-docs/PayerAccount.md
 docs/PaymentAccountBalanceUpdateEventData.md
 docs/PaymentAddressUpdateEventData.md
 docs/PaymentAllocationAmount.md
@@ -1345,6 +1369,7 @@ docs/PaymentSettlementEvent.md
 docs/PaymentSourceType.md
 docs/PaymentTransaction.md
 docs/PaymentTransactionEventData.md
+docs/PaymentUploadedFile.md
 docs/PaymentWalletBalance.md
 docs/PayoutChannel.md
 docs/PolicyAction.md
@@ -1441,6 +1466,7 @@ docs/SubmitDepositTravelRuleInfo201Response.md
 docs/SubmitKytResponse.md
 docs/SubmitKytScreeningsDecisionsBody.md
 docs/SubmitKytScreeningsReviewBody.md
+docs/SubmitMerchantKyc.md
 docs/SupportedToken.md
 docs/SuspendedTokenEventData.md
 docs/SuspendedTokenOperationType.md
@@ -1756,7 +1782,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_account.py
 test/test_acquiring_type.py
 test/test_activity.py
 test/test_activity_action.py
@@ -1827,6 +1852,8 @@ test/test_balance.py
 test/test_balance_update_info.py
 test/test_balance_update_info_event_data.py
 test/test_bank_account.py
+test/test_bank_account_holder_type.py
+test/test_bank_account_payment_method.py
 test/test_bank_account_status.py
 test/test_base_contract_call_source.py
 test/test_base_estimate_staking_fee.py
@@ -2134,7 +2161,6 @@ test/test_list_token_balances_for_fee_station200_response.py
 test/test_list_token_balances_for_fee_station200_response_data_inner.py
 test/test_list_token_listing_requests200_response.py
 test/test_list_tokenization_blocklist_addresses200_response.py
-test/test_list_top_up_payer_accounts200_response.py
 test/test_list_top_up_payers200_response.py
 test/test_list_top_up_payers200_response_data_inner.py
 test/test_list_transaction_approval_details200_response.py
@@ -2154,6 +2180,18 @@ test/test_max_fee_amount.py
 test/test_max_transferable_value.py
 test/test_merchant.py
 test/test_merchant_balance.py
+test/test_merchant_kyc_address.py
+test/test_merchant_kyc_company_attachment.py
+test/test_merchant_kyc_company_attachment_file_type.py
+test/test_merchant_kyc_company_info.py
+test/test_merchant_kyc_company_type.py
+test/test_merchant_kyc_info.py
+test/test_merchant_kyc_merchant_type.py
+test/test_merchant_kyc_person_attachment.py
+test/test_merchant_kyc_person_attachment_file_type.py
+test/test_merchant_kyc_person_info.py
+test/test_merchant_kyc_status.py
+test/test_merchant_kyc_submission.py
 test/test_message_sign_destination.py
 test/test_message_sign_destination_type.py
 test/test_message_sign_params.py
@@ -2182,7 +2220,6 @@ test/test_organizations_api.py
 test/test_original_main_group_handling.py
 test/test_otc_fee.py
 test/test_pagination.py
-test/test_payer_account.py
 test/test_payment_account_balance_update_event_data.py
 test/test_payment_address_update_event_data.py
 test/test_payment_allocation_amount.py
@@ -2217,6 +2254,7 @@ test/test_payment_settlement_event.py
 test/test_payment_source_type.py
 test/test_payment_transaction.py
 test/test_payment_transaction_event_data.py
+test/test_payment_uploaded_file.py
 test/test_payment_wallet_balance.py
 test/test_payout_channel.py
 test/test_policy_action.py
@@ -2313,6 +2351,7 @@ test/test_submit_deposit_travel_rule_info201_response.py
 test/test_submit_kyt_response.py
 test/test_submit_kyt_screenings_decisions_body.py
 test/test_submit_kyt_screenings_review_body.py
+test/test_submit_merchant_kyc.py
 test/test_supported_token.py
 test/test_suspended_token_event_data.py
 test/test_suspended_token_operation_type.py

@@ -187,6 +187,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -199,7 +200,7 @@ class TravelRuleApi:
         if cancel_satoshi_test_challenge_request is not None:
             _body_params = cancel_satoshi_test_challenge_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -356,6 +357,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -368,7 +370,7 @@ class TravelRuleApi:
         if create_satoshi_test_challenge_request is not None:
             _body_params = create_satoshi_test_challenge_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -525,6 +527,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -537,7 +540,7 @@ class TravelRuleApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -694,6 +697,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -708,7 +712,7 @@ class TravelRuleApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -878,6 +882,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -896,7 +901,7 @@ class TravelRuleApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1066,6 +1071,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1084,7 +1090,7 @@ class TravelRuleApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1306,6 +1312,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1340,7 +1347,7 @@ class TravelRuleApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1484,6 +1491,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1494,7 +1502,7 @@ class TravelRuleApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1651,6 +1659,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1663,7 +1672,7 @@ class TravelRuleApi:
         if travel_rule_deposit_request is not None:
             _body_params = travel_rule_deposit_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1820,6 +1829,7 @@ class TravelRuleApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1832,7 +1842,7 @@ class TravelRuleApi:
         if travel_rule_withdraw_request is not None:
             _body_params = travel_rule_withdraw_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"

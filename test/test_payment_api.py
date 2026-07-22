@@ -434,6 +434,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_exchange_rate(token_id, currency)
         """
 
+    def test_get_merchant_kyc(self) -> None:
+        """
+        Test case for get_merchant_kyc
+
+        Get merchant KYC
+        """
+        """
+        merchant_id = 'M1001'
+
+        api_response = self.api.get_merchant_kyc(merchant_id)
+        """
+
     def test_get_payment_order_detail_by_id(self) -> None:
         """
         Test case for get_payment_order_detail_by_id
@@ -876,22 +888,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_settlement_requests(limit=limit, before=before, after=after, request_id=request_id)
         """
 
-    def test_list_top_up_payer_accounts(self) -> None:
-        """
-        Test case for list_top_up_payer_accounts
-
-        List top-up payer accounts
-        """
-        """
-        limit = 10
-        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
-        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
-        merchant_id = 'M1001'
-        payer_id = 'P20250619T0310056d7aa'
-
-        api_response = self.api.list_top_up_payer_accounts(limit=limit, before=before, after=after, merchant_id=merchant_id, payer_id=payer_id)
-        """
-
     def test_list_top_up_payers(self) -> None:
         """
         Test case for list_top_up_payers
@@ -918,6 +914,19 @@ class TestPaymentApi(unittest.TestCase):
         payment_estimate_fee_request = cobo_waas2.PaymentEstimateFeeRequest()
 
         api_response = self.api.payment_estimate_fee(payment_estimate_fee_request=payment_estimate_fee_request)
+        """
+
+    def test_submit_merchant_kyc(self) -> None:
+        """
+        Test case for submit_merchant_kyc
+
+        Submit merchant KYC
+        """
+        """
+        merchant_id = 'M1001'
+        submit_merchant_kyc = cobo_waas2.SubmitMerchantKyc()
+
+        api_response = self.api.submit_merchant_kyc(merchant_id, submit_merchant_kyc=submit_merchant_kyc)
         """
 
     def test_trigger_test_payments_webhook_event(self) -> None:
@@ -1020,6 +1029,18 @@ class TestPaymentApi(unittest.TestCase):
         update_top_up_address = cobo_waas2.UpdateTopUpAddress()
 
         api_response = self.api.update_top_up_address(update_top_up_address=update_top_up_address)
+        """
+
+    def test_upload_payment_file(self) -> None:
+        """
+        Test case for upload_payment_file
+
+        Upload file
+        """
+        """
+        file = None
+
+        api_response = self.api.upload_payment_file(file)
         """
 
 

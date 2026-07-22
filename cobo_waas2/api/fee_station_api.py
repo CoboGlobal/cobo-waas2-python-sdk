@@ -184,6 +184,7 @@ class FeeStationApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -196,7 +197,7 @@ class FeeStationApi:
         if fee_station_check_fee_station_usage is not None:
             _body_params = fee_station_check_fee_station_usage
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -353,6 +354,7 @@ class FeeStationApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -365,7 +367,7 @@ class FeeStationApi:
         if fee_station_transfer is not None:
             _body_params = fee_station_transfer
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -522,6 +524,7 @@ class FeeStationApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -534,7 +537,7 @@ class FeeStationApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -743,6 +746,7 @@ class FeeStationApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -773,7 +777,7 @@ class FeeStationApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1008,6 +1012,7 @@ class FeeStationApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1046,7 +1051,7 @@ class FeeStationApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1385,6 +1390,7 @@ class FeeStationApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1455,7 +1461,7 @@ class FeeStationApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1651,6 +1657,7 @@ class FeeStationApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1677,7 +1684,7 @@ class FeeStationApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"

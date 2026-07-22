@@ -34,6 +34,7 @@ class TestCreateOrderLinkRequest(unittest.TestCase):
         model = CreateOrderLinkRequest()
         if include_optional:
             return CreateOrderLinkRequest(
+                request_id = '123e4567-e89b-12d3-a456-426614174004',
                 business_info = cobo_waas2.models.order_link_business_info.OrderLinkBusinessInfo(
                     merchant_id = '1001', 
                     merchant_order_code = 'M20240201001', 

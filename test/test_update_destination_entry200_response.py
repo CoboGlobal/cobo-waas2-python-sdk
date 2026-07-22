@@ -54,7 +54,16 @@ class TestUpdateDestinationEntry200Response(unittest.TestCase):
                     created_timestamp = 1744689600, 
                     updated_timestamp = 1744689600, 
                     country = 'USA', 
-                    city = 'New York', )
+                    city = 'New York', 
+                    payment_method = 'Swift', 
+                    holder_type = 'Company', 
+                    beneficiary_province = 'Hong Kong', 
+                    beneficiary_post_code = '999077', 
+                    bank_account_name = 'Example Company Limited', 
+                    bank_branch_code = '123', 
+                    bank_country = 'HKG', 
+                    bank_province = 'Hong Kong', 
+                    contract_file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', )
             )
         else:
             return UpdateDestinationEntry200Response(

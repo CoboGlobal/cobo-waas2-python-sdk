@@ -48,8 +48,17 @@ class TestUpdateDestinationBankAccount(unittest.TestCase):
                     bank_name = 'Intermediary Bank', 
                     bank_address = '456 Bank Ave, Cityville, USA', 
                     bank_swift_code = 'BOFAUS33', ),
-                country = 'USA',
-                city = 'New York'
+                country = 'HKG',
+                city = 'New York',
+                payment_method = 'Swift',
+                holder_type = 'Company',
+                beneficiary_province = 'Hong Kong',
+                beneficiary_post_code = '999077',
+                bank_account_name = 'Example Company Limited',
+                bank_branch_code = '123',
+                bank_country = 'HKG',
+                bank_province = 'Hong Kong',
+                contract_file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
             )
         else:
             return UpdateDestinationBankAccount(

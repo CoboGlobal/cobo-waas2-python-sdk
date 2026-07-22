@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.39.0"
+__version__ = "1.40.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -49,7 +49,6 @@ from cobo_waas2.exceptions import ApiAttributeError
 from cobo_waas2.exceptions import ApiException
 
 # import models into sdk package
-from cobo_waas2.models.account import Account
 from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.activity import Activity
 from cobo_waas2.models.activity_action import ActivityAction
@@ -119,6 +118,8 @@ from cobo_waas2.models.balance import Balance
 from cobo_waas2.models.balance_update_info import BalanceUpdateInfo
 from cobo_waas2.models.balance_update_info_event_data import BalanceUpdateInfoEventData
 from cobo_waas2.models.bank_account import BankAccount
+from cobo_waas2.models.bank_account_holder_type import BankAccountHolderType
+from cobo_waas2.models.bank_account_payment_method import BankAccountPaymentMethod
 from cobo_waas2.models.bank_account_status import BankAccountStatus
 from cobo_waas2.models.base_contract_call_source import BaseContractCallSource
 from cobo_waas2.models.base_estimate_staking_fee import BaseEstimateStakingFee
@@ -419,7 +420,6 @@ from cobo_waas2.models.list_token_balances_for_fee_station200_response import Li
 from cobo_waas2.models.list_token_balances_for_fee_station200_response_data_inner import ListTokenBalancesForFeeStation200ResponseDataInner
 from cobo_waas2.models.list_token_listing_requests200_response import ListTokenListingRequests200Response
 from cobo_waas2.models.list_tokenization_blocklist_addresses200_response import ListTokenizationBlocklistAddresses200Response
-from cobo_waas2.models.list_top_up_payer_accounts200_response import ListTopUpPayerAccounts200Response
 from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200Response
 from cobo_waas2.models.list_top_up_payers200_response_data_inner import ListTopUpPayers200ResponseDataInner
 from cobo_waas2.models.list_transaction_approval_details200_response import ListTransactionApprovalDetails200Response
@@ -445,6 +445,18 @@ from cobo_waas2.models.max_fee_amount import MaxFeeAmount
 from cobo_waas2.models.max_transferable_value import MaxTransferableValue
 from cobo_waas2.models.merchant import Merchant
 from cobo_waas2.models.merchant_balance import MerchantBalance
+from cobo_waas2.models.merchant_kyc_address import MerchantKycAddress
+from cobo_waas2.models.merchant_kyc_company_attachment import MerchantKycCompanyAttachment
+from cobo_waas2.models.merchant_kyc_company_attachment_file_type import MerchantKycCompanyAttachmentFileType
+from cobo_waas2.models.merchant_kyc_company_info import MerchantKycCompanyInfo
+from cobo_waas2.models.merchant_kyc_company_type import MerchantKycCompanyType
+from cobo_waas2.models.merchant_kyc_info import MerchantKycInfo
+from cobo_waas2.models.merchant_kyc_merchant_type import MerchantKycMerchantType
+from cobo_waas2.models.merchant_kyc_person_attachment import MerchantKycPersonAttachment
+from cobo_waas2.models.merchant_kyc_person_attachment_file_type import MerchantKycPersonAttachmentFileType
+from cobo_waas2.models.merchant_kyc_person_info import MerchantKycPersonInfo
+from cobo_waas2.models.merchant_kyc_status import MerchantKycStatus
+from cobo_waas2.models.merchant_kyc_submission import MerchantKycSubmission
 from cobo_waas2.models.message_sign_destination import MessageSignDestination
 from cobo_waas2.models.message_sign_destination_type import MessageSignDestinationType
 from cobo_waas2.models.message_sign_params import MessageSignParams
@@ -465,7 +477,6 @@ from cobo_waas2.models.organization_event_data import OrganizationEventData
 from cobo_waas2.models.original_main_group_handling import OriginalMainGroupHandling
 from cobo_waas2.models.otc_fee import OtcFee
 from cobo_waas2.models.pagination import Pagination
-from cobo_waas2.models.payer_account import PayerAccount
 from cobo_waas2.models.payment_account_balance_update_event_data import PaymentAccountBalanceUpdateEventData
 from cobo_waas2.models.payment_address_update_event_data import PaymentAddressUpdateEventData
 from cobo_waas2.models.payment_allocation_amount import PaymentAllocationAmount
@@ -499,6 +510,7 @@ from cobo_waas2.models.payment_settlement_event import PaymentSettlementEvent
 from cobo_waas2.models.payment_source_type import PaymentSourceType
 from cobo_waas2.models.payment_transaction import PaymentTransaction
 from cobo_waas2.models.payment_transaction_event_data import PaymentTransactionEventData
+from cobo_waas2.models.payment_uploaded_file import PaymentUploadedFile
 from cobo_waas2.models.payment_wallet_balance import PaymentWalletBalance
 from cobo_waas2.models.payout_channel import PayoutChannel
 from cobo_waas2.models.policy_action import PolicyAction
@@ -593,6 +605,7 @@ from cobo_waas2.models.submit_deposit_travel_rule_info201_response import Submit
 from cobo_waas2.models.submit_kyt_response import SubmitKytResponse
 from cobo_waas2.models.submit_kyt_screenings_decisions_body import SubmitKytScreeningsDecisionsBody
 from cobo_waas2.models.submit_kyt_screenings_review_body import SubmitKytScreeningsReviewBody
+from cobo_waas2.models.submit_merchant_kyc import SubmitMerchantKyc
 from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.suspended_token_event_data import SuspendedTokenEventData
 from cobo_waas2.models.suspended_token_operation_type import SuspendedTokenOperationType

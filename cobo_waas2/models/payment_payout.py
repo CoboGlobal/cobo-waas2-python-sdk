@@ -41,9 +41,10 @@ class PaymentPayout(BaseModel):
     commission_fees: Optional[List[CommissionFee]] = Field(default=None, description="The commission fees. Not returned when no fee has been incurred, the actual charged amounts once incurred, or `0` if refunded.")
     remark: Optional[StrictStr] = Field(default=None, description="A note or comment about the payout.")
     status: PaymentPayoutStatus
+    failed_reason: Optional[StrictStr] = Field(default=None, description="The reason why the payout failed.")
     created_timestamp: StrictInt = Field(description="The created time of the payout, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the payout, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["payout_id", "request_id", "payout_channel", "source_account", "payout_items", "recipient_info", "initiator", "actual_payout_amount", "commission_fees", "remark", "status", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["payout_id", "request_id", "payout_channel", "source_account", "payout_items", "recipient_info", "initiator", "actual_payout_amount", "commission_fees", "remark", "status", "failed_reason", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,6 +125,7 @@ class PaymentPayout(BaseModel):
             "commission_fees": [CommissionFee.from_dict(_item) for _item in obj["commission_fees"]] if obj.get("commission_fees") is not None else None,
             "remark": obj.get("remark"),
             "status": obj.get("status"),
+            "failed_reason": obj.get("failed_reason"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

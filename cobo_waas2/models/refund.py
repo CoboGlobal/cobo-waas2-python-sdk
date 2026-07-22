@@ -38,6 +38,7 @@ class Refund(BaseModel):
     amount: StrictStr = Field(description="The amount in cryptocurrency to be returned for this refund order.")
     to_address: StrictStr = Field(description="The recipient's wallet address where the refund will be sent.")
     status: RefundStatus
+    failed_reason: Optional[StrictStr] = Field(default=None, description="The reason why the refund failed.")
     refund_type: Optional[RefundType] = None
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The creation time of the refund order, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update time of the refund order, represented as a UNIX timestamp in seconds.")
@@ -47,7 +48,7 @@ class Refund(BaseModel):
     merchant_fee_amount: Optional[StrictStr] = Field(default=None, description="The developer fee amount to charge the merchant, denominated in the cryptocurrency specified by `merchant_fee_token_id`. This is only applicable if `charge_merchant_fee` is set to `true`.")
     merchant_fee_token_id: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for the developer fee. This is only applicable if `charge_merchant_fee` is set to true.")
     commission_fee: Optional[CommissionFee] = Field(default=None, description="The commission fee. Not returned when no fee has been incurred, the actual charged amount once incurred, or `0` if refunded.")
-    __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id", "commission_fee"]
+    __properties: ClassVar[List[str]] = ["request_id", "refund_id", "order_id", "merchant_id", "token_id", "chain_id", "amount", "to_address", "status", "failed_reason", "refund_type", "created_timestamp", "updated_timestamp", "initiator", "transactions", "charge_merchant_fee", "merchant_fee_amount", "merchant_fee_token_id", "commission_fee"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -119,6 +120,7 @@ class Refund(BaseModel):
             "amount": obj.get("amount"),
             "to_address": obj.get("to_address"),
             "status": obj.get("status"),
+            "failed_reason": obj.get("failed_reason"),
             "refund_type": obj.get("refund_type"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),

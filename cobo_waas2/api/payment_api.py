@@ -13,8 +13,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import Field, StrictBytes, StrictInt, StrictStr
+from typing import List, Optional, Union
 from typing_extensions import Annotated
 from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.bank_account_status import BankAccountStatus
@@ -79,9 +79,10 @@ from cobo_waas2.models.list_payment_wallet_balances200_response import ListPayme
 from cobo_waas2.models.list_payouts200_response import ListPayouts200Response
 from cobo_waas2.models.list_settlement_details200_response import ListSettlementDetails200Response
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
-from cobo_waas2.models.list_top_up_payer_accounts200_response import ListTopUpPayerAccounts200Response
 from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200Response
 from cobo_waas2.models.merchant import Merchant
+from cobo_waas2.models.merchant_kyc_info import MerchantKycInfo
+from cobo_waas2.models.merchant_kyc_submission import MerchantKycSubmission
 from cobo_waas2.models.order import Order
 from cobo_waas2.models.payment_allocation_amount import PaymentAllocationAmount
 from cobo_waas2.models.payment_balance_change_response import PaymentBalanceChangeResponse
@@ -92,12 +93,14 @@ from cobo_waas2.models.payment_estimate_fee201_response import PaymentEstimateFe
 from cobo_waas2.models.payment_estimate_fee_request import PaymentEstimateFeeRequest
 from cobo_waas2.models.payment_payout import PaymentPayout
 from cobo_waas2.models.payment_payout_detail import PaymentPayoutDetail
+from cobo_waas2.models.payment_uploaded_file import PaymentUploadedFile
 from cobo_waas2.models.psp_balance import PspBalance
 from cobo_waas2.models.refund import Refund
 from cobo_waas2.models.report import Report
 from cobo_waas2.models.report_status import ReportStatus
 from cobo_waas2.models.report_type import ReportType
 from cobo_waas2.models.settlement import Settlement
+from cobo_waas2.models.submit_merchant_kyc import SubmitMerchantKyc
 from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.top_up_address import TopUpAddress
 from cobo_waas2.models.trigger_test_payment_webhook_event_response import TriggerTestPaymentWebhookEventResponse
@@ -282,6 +285,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -300,7 +304,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -457,6 +461,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -469,7 +474,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -626,6 +631,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -638,7 +644,7 @@ class PaymentApi:
         if create_batch_allocation_request is not None:
             _body_params = create_batch_allocation_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -795,6 +801,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -807,7 +814,7 @@ class PaymentApi:
         if create_bulk_send_request is not None:
             _body_params = create_bulk_send_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -964,6 +971,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -976,7 +984,7 @@ class PaymentApi:
         if create_counterparty_request is not None:
             _body_params = create_counterparty_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1133,6 +1141,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1145,7 +1154,7 @@ class PaymentApi:
         if create_counterparty_entry_request is not None:
             _body_params = create_counterparty_entry_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1302,6 +1311,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1314,7 +1324,7 @@ class PaymentApi:
         if create_crypto_address_request is not None:
             _body_params = create_crypto_address_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1471,6 +1481,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1483,7 +1494,7 @@ class PaymentApi:
         if create_destination_request is not None:
             _body_params = create_destination_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1640,6 +1651,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1652,7 +1664,7 @@ class PaymentApi:
         if create_destination_entry_request is not None:
             _body_params = create_destination_entry_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1809,6 +1821,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1821,7 +1834,7 @@ class PaymentApi:
         if forced_sweep_request is not None:
             _body_params = forced_sweep_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1978,6 +1991,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1990,7 +2004,7 @@ class PaymentApi:
         if create_merchant_request is not None:
             _body_params = create_merchant_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2147,6 +2161,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2159,7 +2174,7 @@ class PaymentApi:
         if create_order_link_request is not None:
             _body_params = create_order_link_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2316,6 +2331,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2328,7 +2344,7 @@ class PaymentApi:
         if create_payment_order_request is not None:
             _body_params = create_payment_order_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2485,6 +2501,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2497,7 +2514,7 @@ class PaymentApi:
         if create_payout_request is not None:
             _body_params = create_payout_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2654,6 +2671,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2666,7 +2684,7 @@ class PaymentApi:
         if create_refund_request is not None:
             _body_params = create_refund_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2823,6 +2841,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2835,7 +2854,7 @@ class PaymentApi:
         if create_refund_link_request is not None:
             _body_params = create_refund_link_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2992,6 +3011,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3004,7 +3024,7 @@ class PaymentApi:
         if create_report_request is not None:
             _body_params = create_report_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3148,6 +3168,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3158,7 +3179,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3315,6 +3336,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3327,7 +3349,7 @@ class PaymentApi:
         if create_settlement_request_request is not None:
             _body_params = create_settlement_request_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3484,6 +3506,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3496,7 +3519,7 @@ class PaymentApi:
         if create_top_up_addresses is not None:
             _body_params = create_top_up_addresses
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3656,6 +3679,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3668,7 +3692,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3854,6 +3878,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3874,7 +3899,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -4034,6 +4059,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -4046,7 +4072,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -4206,6 +4232,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -4218,7 +4245,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -4404,6 +4431,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -4424,7 +4452,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -4607,6 +4635,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -4629,7 +4658,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -4786,6 +4815,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -4798,7 +4828,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -4955,6 +4985,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -4967,7 +4998,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -5124,6 +5155,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -5136,7 +5168,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -5309,6 +5341,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -5325,7 +5358,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -5482,6 +5515,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -5494,7 +5528,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -5667,6 +5701,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -5683,7 +5718,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -5853,6 +5888,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -5867,7 +5903,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -5876,6 +5912,176 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/exchange_rates/{token_id}/{currency}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_merchant_kyc(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> MerchantKycSubmission:
+        """Get merchant KYC
+
+        This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_merchant_kyc_serialize(
+            merchant_id=merchant_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MerchantKycSubmission",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_merchant_kyc_with_http_info(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[MerchantKycSubmission]:
+        """Get merchant KYC
+
+        This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_merchant_kyc_serialize(
+            merchant_id=merchant_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MerchantKycSubmission",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_merchant_kyc_without_preload_content(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get merchant KYC
+
+        This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_merchant_kyc_serialize(
+            merchant_id=merchant_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MerchantKycSubmission",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_merchant_kyc_serialize(
+        self,
+        merchant_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if merchant_id is not None:
+            _path_params['merchant_id'] = merchant_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/merchants/{merchant_id}/kyc',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6024,6 +6230,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -6036,7 +6243,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -6193,6 +6400,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -6205,7 +6413,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -6362,6 +6570,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -6376,7 +6585,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -6533,6 +6742,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -6545,7 +6755,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -6767,6 +6977,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -6801,7 +7012,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -7010,6 +7221,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -7040,7 +7252,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -7197,6 +7409,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -7209,7 +7422,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -7392,6 +7605,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -7414,7 +7628,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -7597,6 +7811,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -7619,7 +7834,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -7854,6 +8069,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -7892,7 +8108,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -8166,6 +8382,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -8216,7 +8433,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -8412,6 +8629,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -8438,7 +8656,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -8634,6 +8852,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -8658,7 +8877,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -8854,6 +9073,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -8880,7 +9100,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -9102,6 +9322,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -9136,7 +9357,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -9371,6 +9592,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -9409,7 +9631,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -9566,6 +9788,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -9580,7 +9803,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -9841,6 +10064,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -9887,7 +10111,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -10122,6 +10346,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -10160,7 +10385,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -10356,6 +10581,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -10382,7 +10608,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -10565,6 +10791,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -10587,7 +10814,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -10809,6 +11036,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -10843,7 +11071,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -11091,6 +11319,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -11133,7 +11362,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -11355,6 +11584,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -11389,7 +11619,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -11533,6 +11763,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -11543,7 +11774,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -11713,6 +11944,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -11731,7 +11963,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -11927,6 +12159,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -11953,7 +12186,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -12162,6 +12395,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -12192,7 +12426,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -12388,6 +12622,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -12414,7 +12649,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -12423,245 +12658,6 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/settlement_requests',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-        )
-
-    @validate_call
-    def list_top_up_payer_accounts(
-        self,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
-        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        payer_id: Annotated[Optional[StrictStr], Field(description="A unique identifier assigned by Cobo to track and identify individual payers.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ListTopUpPayerAccounts200Response:
-        """List top-up payer accounts
-
-        This operation retrieves the accounts of all payers. You can filter the result by merchant ID and payer_id. 
-
-        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
-        :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
-        :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
-        :type after: str
-        :param merchant_id: The merchant ID.
-        :type merchant_id: str
-        :param payer_id: A unique identifier assigned by Cobo to track and identify individual payers.
-        :type payer_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_top_up_payer_accounts_serialize(
-            limit=limit,
-            before=before,
-            after=after,
-            merchant_id=merchant_id,
-            payer_id=payer_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTopUpPayerAccounts200Response",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def list_top_up_payer_accounts_with_http_info(
-        self,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
-        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        payer_id: Annotated[Optional[StrictStr], Field(description="A unique identifier assigned by Cobo to track and identify individual payers.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ApiResponse[ListTopUpPayerAccounts200Response]:
-        """List top-up payer accounts
-
-        This operation retrieves the accounts of all payers. You can filter the result by merchant ID and payer_id. 
-
-        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
-        :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
-        :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
-        :type after: str
-        :param merchant_id: The merchant ID.
-        :type merchant_id: str
-        :param payer_id: A unique identifier assigned by Cobo to track and identify individual payers.
-        :type payer_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_top_up_payer_accounts_serialize(
-            limit=limit,
-            before=before,
-            after=after,
-            merchant_id=merchant_id,
-            payer_id=payer_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTopUpPayerAccounts200Response",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def list_top_up_payer_accounts_without_preload_content(
-        self,
-        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
-        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
-        merchant_id: Annotated[Optional[StrictStr], Field(description="The merchant ID.")] = None,
-        payer_id: Annotated[Optional[StrictStr], Field(description="A unique identifier assigned by Cobo to track and identify individual payers.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> RESTResponseType:
-        """List top-up payer accounts
-
-        This operation retrieves the accounts of all payers. You can filter the result by merchant ID and payer_id. 
-
-        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
-        :type limit: int
-        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
-        :type before: str
-        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
-        :type after: str
-        :param merchant_id: The merchant ID.
-        :type merchant_id: str
-        :param payer_id: A unique identifier assigned by Cobo to track and identify individual payers.
-        :type payer_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_top_up_payer_accounts_serialize(
-            limit=limit,
-            before=before,
-            after=after,
-            merchant_id=merchant_id,
-            payer_id=payer_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTopUpPayerAccounts200Response",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _list_top_up_payer_accounts_serialize(
-        self,
-        limit,
-        before,
-        after,
-        merchant_id,
-        payer_id,
-    ) -> RequestSerialized:
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
-        if before is not None:
-            
-            _query_params.append(('before', before))
-            
-        if after is not None:
-            
-            _query_params.append(('after', after))
-            
-        if merchant_id is not None:
-            
-            _query_params.append(('merchant_id', merchant_id))
-            
-        if payer_id is not None:
-            
-            _query_params.append(('payer_id', payer_id))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/payments/topup/payer_accounts',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12862,6 +12858,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -12892,7 +12889,7 @@ class PaymentApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -13049,6 +13046,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -13061,7 +13059,7 @@ class PaymentApi:
         if payment_estimate_fee_request is not None:
             _body_params = payment_estimate_fee_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -13070,6 +13068,191 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/estimate_fee',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def submit_merchant_kyc(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> MerchantKycInfo:
+        """Submit merchant KYC
+
+        This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param submit_merchant_kyc: The request body to submit merchant KYC information.
+        :type submit_merchant_kyc: SubmitMerchantKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_merchant_kyc_serialize(
+            merchant_id=merchant_id,
+            submit_merchant_kyc=submit_merchant_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "MerchantKycInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def submit_merchant_kyc_with_http_info(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[MerchantKycInfo]:
+        """Submit merchant KYC
+
+        This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param submit_merchant_kyc: The request body to submit merchant KYC information.
+        :type submit_merchant_kyc: SubmitMerchantKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_merchant_kyc_serialize(
+            merchant_id=merchant_id,
+            submit_merchant_kyc=submit_merchant_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "MerchantKycInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def submit_merchant_kyc_without_preload_content(
+        self,
+        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
+        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Submit merchant KYC
+
+        This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+
+        :param merchant_id: The merchant ID. (required)
+        :type merchant_id: str
+        :param submit_merchant_kyc: The request body to submit merchant KYC information.
+        :type submit_merchant_kyc: SubmitMerchantKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._submit_merchant_kyc_serialize(
+            merchant_id=merchant_id,
+            submit_merchant_kyc=submit_merchant_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "MerchantKycInfo",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _submit_merchant_kyc_serialize(
+        self,
+        merchant_id,
+        submit_merchant_kyc,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if merchant_id is not None:
+            _path_params['merchant_id'] = merchant_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if submit_merchant_kyc is not None:
+            _body_params = submit_merchant_kyc
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/merchants/{merchant_id}/kyc',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13218,6 +13401,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -13230,7 +13414,7 @@ class PaymentApi:
         if trigger_test_payments_webhook_event_request is not None:
             _body_params = trigger_test_payments_webhook_event_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -13400,6 +13584,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -13414,7 +13599,7 @@ class PaymentApi:
         if update_counterparty_request is not None:
             _body_params = update_counterparty_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -13584,6 +13769,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -13598,7 +13784,7 @@ class PaymentApi:
         if update_destination_request is not None:
             _body_params = update_destination_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -13768,6 +13954,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -13782,7 +13969,7 @@ class PaymentApi:
         if update_destination_entry_request is not None:
             _body_params = update_destination_entry_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -13952,6 +14139,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -13966,7 +14154,7 @@ class PaymentApi:
         if update_merchant_by_id_request is not None:
             _body_params = update_merchant_by_id_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -14136,6 +14324,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -14150,7 +14339,7 @@ class PaymentApi:
         if update_payment_order_request is not None:
             _body_params = update_payment_order_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -14320,6 +14509,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -14334,7 +14524,7 @@ class PaymentApi:
         if update_refund_by_id_request is not None:
             _body_params = update_refund_by_id_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -14491,6 +14681,7 @@ class PaymentApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -14503,7 +14694,7 @@ class PaymentApi:
         if update_top_up_address is not None:
             _body_params = update_top_up_address
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -14512,6 +14703,176 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/payments/topup/address',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def upload_payment_file(
+        self,
+        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The file to upload.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentUploadedFile:
+        """Upload file
+
+        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+        :param file: The file to upload. (required)
+        :type file: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._upload_payment_file_serialize(
+            file=file,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentUploadedFile",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def upload_payment_file_with_http_info(
+        self,
+        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The file to upload.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentUploadedFile]:
+        """Upload file
+
+        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+        :param file: The file to upload. (required)
+        :type file: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._upload_payment_file_serialize(
+            file=file,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentUploadedFile",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def upload_payment_file_without_preload_content(
+        self,
+        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The file to upload.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Upload file
+
+        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+        :param file: The file to upload. (required)
+        :type file: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._upload_payment_file_serialize(
+            file=file,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentUploadedFile",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _upload_payment_file_serialize(
+        self,
+        file,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if file is not None:
+            _files['file'] = file
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/files',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

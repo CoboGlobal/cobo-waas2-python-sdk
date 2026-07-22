@@ -41,6 +41,7 @@ class TestPaymentBulkSendEvent(unittest.TestCase):
                 description = 'Monthly vendor payments - January 2024',
                 execution_mode = 'Strict',
                 status = 'Pending',
+                failed_reason = 'Cannot charge payout fee: Fee Station balance is insufficient. Please add funds to Fee Station and try again.',
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600,
                 commission_fee = cobo_waas2.models.commission_fee.CommissionFee(

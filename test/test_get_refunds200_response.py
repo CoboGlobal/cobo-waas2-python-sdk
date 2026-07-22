@@ -45,6 +45,7 @@ class TestGetRefunds200Response(unittest.TestCase):
                         amount = '0.0025', 
                         to_address = '0x9876543210abcdef1234567890abcdef12345678', 
                         status = 'Pending', 
+                        failed_reason = 'Cannot charge payout fee: Fee Station balance is insufficient. Please add funds to Fee Station and try again.', 
                         refund_type = 'Merchant', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, 
@@ -58,6 +59,8 @@ class TestGetRefunds200Response(unittest.TestCase):
                                 to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
                                 amount = '0.15', 
                                 status = 'Submitted', 
+                                sub_status = 'PendingDoubleCheck', 
+                                failed_reason = 'Rejected by signer Cobo TSS', 
                                 counterparty = cobo_waas2.models.counterparty.Counterparty(
                                     counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
                                     counterparty_type = 'Individual', 

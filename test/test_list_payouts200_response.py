@@ -64,6 +64,7 @@ class TestListPayouts200Response(unittest.TestCase):
                             ], 
                         remark = 'Payout for customer 123', 
                         status = 'Pending', 
+                        failed_reason = 'Cannot charge payout fee: Fee Station balance is insufficient. Please add funds to Fee Station and try again.', 
                         created_timestamp = 1744689600, 
                         updated_timestamp = 1744689600, )
                     ],

@@ -207,6 +207,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -221,7 +222,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -391,6 +392,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -405,7 +407,7 @@ class WalletsMPCWalletsApi:
         if create_key_share_holder_group_request is not None:
             _body_params = create_key_share_holder_group_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -562,6 +564,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -574,7 +577,7 @@ class WalletsMPCWalletsApi:
         if create_mpc_project_request is not None:
             _body_params = create_mpc_project_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -731,6 +734,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -743,7 +747,7 @@ class WalletsMPCWalletsApi:
         if create_mpc_vault_request is not None:
             _body_params = create_mpc_vault_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -913,6 +917,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -927,7 +932,7 @@ class WalletsMPCWalletsApi:
         if create_tss_request_request is not None:
             _body_params = create_tss_request_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1097,6 +1102,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1111,7 +1117,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1281,6 +1287,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1295,7 +1302,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1465,6 +1472,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1479,7 +1487,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1636,6 +1644,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1648,7 +1657,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1805,6 +1814,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1817,7 +1827,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1987,6 +1997,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2001,7 +2012,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2145,6 +2156,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2155,7 +2167,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2364,6 +2376,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2392,7 +2405,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2601,6 +2614,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2629,7 +2643,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -2812,6 +2826,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -2834,7 +2849,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3043,6 +3058,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3073,7 +3089,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3282,6 +3298,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3310,7 +3327,7 @@ class WalletsMPCWalletsApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3493,6 +3510,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3509,7 +3527,7 @@ class WalletsMPCWalletsApi:
         if update_key_share_holder_group_by_id_request is not None:
             _body_params = update_key_share_holder_group_by_id_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3679,6 +3697,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3693,7 +3712,7 @@ class WalletsMPCWalletsApi:
         if update_mpc_project_by_id_request is not None:
             _body_params = update_mpc_project_by_id_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -3863,6 +3882,7 @@ class WalletsMPCWalletsApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -3877,7 +3897,7 @@ class WalletsMPCWalletsApi:
         if update_mpc_vault_by_id_request is not None:
             _body_params = update_mpc_vault_by_id_request
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"

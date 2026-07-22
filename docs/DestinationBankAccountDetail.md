@@ -27,6 +27,15 @@ Name | Type | Description | Notes
 **bank_account_status** | [**BankAccountStatus**](BankAccountStatus.md) |  | 
 **country** | **str** | Beneficiary&#39;s country, in ISO 3166-1 alpha-3 format. | [optional] 
 **city** | **str** | Beneficiary&#39;s city. | [optional] 
+**payment_method** | [**BankAccountPaymentMethod**](BankAccountPaymentMethod.md) |  | [optional] 
+**holder_type** | [**BankAccountHolderType**](BankAccountHolderType.md) |  | [optional] 
+**beneficiary_province** | **str** | The province or state of the beneficiary. Required when &#x60;payment_method&#x60; is &#x60;Swift&#x60;. Cannot be a pure number or contain Chinese characters.  | [optional] 
+**beneficiary_post_code** | **str** | The postal code of the beneficiary. Required when &#x60;payment_method&#x60; is &#x60;Swift&#x60;.  | [optional] 
+**bank_account_name** | **str** | The bank account name. Cannot contain Chinese characters.  | [optional] 
+**bank_branch_code** | **str** | The branch code. Required when &#x60;payment_method&#x60; is &#x60;Local&#x60; (HK only).  | [optional] 
+**bank_country** | **str** | The country, in ISO 3166-1 alpha-3 format. | [optional] 
+**bank_province** | **str** | The province or state of the bank. Cannot be a pure number or contain Chinese characters.  | [optional] 
+**contract_file_id** | **str** | The file ID of the contract document (e.g., cooperation agreement) that proves the business relationship between you and the beneficiary, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file).  | [optional] 
 **created_timestamp** | **int** | The created time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The updated time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
 

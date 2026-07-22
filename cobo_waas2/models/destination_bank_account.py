@@ -17,6 +17,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cobo_waas2.models.bank_account_holder_type import BankAccountHolderType
+from cobo_waas2.models.bank_account_payment_method import BankAccountPaymentMethod
 from cobo_waas2.models.bank_account_status import BankAccountStatus
 from cobo_waas2.models.intermediary_bank_info import IntermediaryBankInfo
 from typing import Optional, Set
@@ -44,7 +46,16 @@ class DestinationBankAccount(BaseModel):
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the bank account, represented as a UNIX timestamp in seconds.")
     country: Optional[StrictStr] = Field(default=None, description="Beneficiary's country, in ISO 3166-1 alpha-3 format.")
     city: Optional[StrictStr] = Field(default=None, description="Beneficiary's city.")
-    __properties: ClassVar[List[str]] = ["bank_account_id", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "created_timestamp", "updated_timestamp", "country", "city"]
+    payment_method: Optional[BankAccountPaymentMethod] = None
+    holder_type: Optional[BankAccountHolderType] = None
+    beneficiary_province: Optional[StrictStr] = Field(default=None, description="The province or state of the beneficiary. Required when `payment_method` is `Swift`. Cannot be a pure number or contain Chinese characters. ")
+    beneficiary_post_code: Optional[StrictStr] = Field(default=None, description="The postal code of the beneficiary. Required when `payment_method` is `Swift`. ")
+    bank_account_name: Optional[StrictStr] = Field(default=None, description="The bank account name. Cannot contain Chinese characters. ")
+    bank_branch_code: Optional[StrictStr] = Field(default=None, description="The branch code. Required when `payment_method` is `Local` (HK only). ")
+    bank_country: Optional[StrictStr] = Field(default=None, description="The country, in ISO 3166-1 alpha-3 format.")
+    bank_province: Optional[StrictStr] = Field(default=None, description="The province or state of the bank. Cannot be a pure number or contain Chinese characters. ")
+    contract_file_id: Optional[StrictStr] = Field(default=None, description="The file ID of the contract document (e.g., cooperation agreement) that proves the business relationship between you and the beneficiary, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file). ")
+    __properties: ClassVar[List[str]] = ["bank_account_id", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "created_timestamp", "updated_timestamp", "country", "city", "payment_method", "holder_type", "beneficiary_province", "beneficiary_post_code", "bank_account_name", "bank_branch_code", "bank_country", "bank_province", "contract_file_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,7 +127,16 @@ class DestinationBankAccount(BaseModel):
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),
             "country": obj.get("country"),
-            "city": obj.get("city")
+            "city": obj.get("city"),
+            "payment_method": obj.get("payment_method"),
+            "holder_type": obj.get("holder_type"),
+            "beneficiary_province": obj.get("beneficiary_province"),
+            "beneficiary_post_code": obj.get("beneficiary_post_code"),
+            "bank_account_name": obj.get("bank_account_name"),
+            "bank_branch_code": obj.get("bank_branch_code"),
+            "bank_country": obj.get("bank_country"),
+            "bank_province": obj.get("bank_province"),
+            "contract_file_id": obj.get("contract_file_id")
         })
         return _obj
 

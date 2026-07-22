@@ -31,7 +31,8 @@ class PaymentEstimateFeeRequest(BaseModel):
     estimate_fees: List[PaymentEstimateFee] = Field(description="A list of token IDs and amounts for which fees will be calculated.")
     recipient_token_id: Optional[StrictStr] = Field(default=None, description="The token ID that the recipient will receive. Required only when `fee_type` is `CryptoPayoutBridge`.")
     transfer_via_va: Optional[StrictBool] = Field(default=None, description="For OffRamp payout, whether the payout is transferred to a registered bank account via a virtual account (VA) or directly. - `true`: The payout is transferred to a registered bank account via a VA (virtual account). - `false`: The payout is transferred directly to a registered bank account. ")
-    __properties: ClassVar[List[str]] = ["fee_type", "estimate_fees", "recipient_token_id", "transfer_via_va"]
+    bank_account_id: Optional[StrictStr] = Field(default=None, description="The bank account ID, which you can retrieve by calling [List counterparty entries](https://www.cobo.com/developers/v2/api-references/payment/list-counterparty-entries). ")
+    __properties: ClassVar[List[str]] = ["fee_type", "estimate_fees", "recipient_token_id", "transfer_via_va", "bank_account_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +95,8 @@ class PaymentEstimateFeeRequest(BaseModel):
             "fee_type": obj.get("fee_type"),
             "estimate_fees": [PaymentEstimateFee.from_dict(_item) for _item in obj["estimate_fees"]] if obj.get("estimate_fees") is not None else None,
             "recipient_token_id": obj.get("recipient_token_id"),
-            "transfer_via_va": obj.get("transfer_via_va")
+            "transfer_via_va": obj.get("transfer_via_va"),
+            "bank_account_id": obj.get("bank_account_id")
         })
         return _obj
 

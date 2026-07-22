@@ -41,7 +41,8 @@ class TestPaymentEstimateFeeRequest(unittest.TestCase):
                         amount = '500.00', )
                     ],
                 recipient_token_id = '',
-                transfer_via_va = False
+                transfer_via_va = False,
+                bank_account_id = '123e4567-e89b-12d3-a456-426614174003'
             )
         else:
             return PaymentEstimateFeeRequest(

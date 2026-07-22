@@ -186,6 +186,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -198,7 +199,7 @@ class ComplianceApi:
         if create_kya_screenings_body is not None:
             _body_params = create_kya_screenings_body
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -355,6 +356,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -369,7 +371,7 @@ class ComplianceApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -526,6 +528,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -538,7 +541,7 @@ class ComplianceApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -695,6 +698,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -709,7 +713,7 @@ class ComplianceApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -866,6 +870,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -878,7 +883,7 @@ class ComplianceApi:
         if isolate_disposition is not None:
             _body_params = isolate_disposition
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1074,6 +1079,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1100,7 +1106,7 @@ class ComplianceApi:
         # process the form parameters
         # process the body parameter
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1257,6 +1263,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1269,7 +1276,7 @@ class ComplianceApi:
         if refund_disposition is not None:
             _body_params = refund_disposition
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1426,6 +1433,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1438,7 +1446,7 @@ class ComplianceApi:
         if submit_kyt_screenings_review_body is not None:
             _body_params = submit_kyt_screenings_review_body
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1595,6 +1603,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1607,7 +1616,7 @@ class ComplianceApi:
         if submit_kyt_screenings_decisions_body is not None:
             _body_params = submit_kyt_screenings_decisions_body
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1764,6 +1773,7 @@ class ComplianceApi:
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
@@ -1776,7 +1786,7 @@ class ComplianceApi:
         if unfreeze_disposition is not None:
             _body_params = unfreeze_disposition
 
-        # set the HTTP header `Accept`
+        # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
             "Accept": "application/json",
             "Content-Type": "application/json"
