@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class ReportExportFormat(str, Enum):
     """
-    The format of the report. - `CSV`: The report will be exported as a CSV file. - `XLSX`: The report will be exported as an XLSX file. - `ZIP`: The report will be exported as a ZIP file which contains multiple files. 
+    The format of the report. - `CSV`: The report will be exported as a CSV file. - `XLSX`: The report will be exported as an XLSX file. - `ZIP`: The report will be exported as a ZIP file which contains multiple files. - `PDF`: The report will be exported as a PDF file, only supported for balance snapshot report. 
     """
 
     """
@@ -27,6 +27,7 @@ class ReportExportFormat(str, Enum):
     CSV = 'CSV'
     XLSX = 'XLSX'
     ZIP = 'ZIP'
+    PDF = 'PDF'
 
     UNKNOWN = None
 

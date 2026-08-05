@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.40.0"
+__version__ = "1.41.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -489,6 +489,7 @@ from cobo_waas2.models.payment_bulk_send import PaymentBulkSend
 from cobo_waas2.models.payment_bulk_send_event import PaymentBulkSendEvent
 from cobo_waas2.models.payment_bulk_send_execution_mode import PaymentBulkSendExecutionMode
 from cobo_waas2.models.payment_bulk_send_item import PaymentBulkSendItem
+from cobo_waas2.models.payment_bulk_send_item_event import PaymentBulkSendItemEvent
 from cobo_waas2.models.payment_bulk_send_item_status import PaymentBulkSendItemStatus
 from cobo_waas2.models.payment_bulk_send_item_validation_status import PaymentBulkSendItemValidationStatus
 from cobo_waas2.models.payment_bulk_send_status import PaymentBulkSendStatus

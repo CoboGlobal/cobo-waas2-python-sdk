@@ -26,7 +26,7 @@ class PaymentPayoutParam(BaseModel):
     PaymentPayoutParam
     """  # noqa: E501
     token_id: StrictStr = Field(description="The ID of the cryptocurrency you want to pay out. Specify this field when `payout_channel` is set to `Crypto`. Supported values: - USDC: `ETH_USDC`, `ARBITRUM_USDC`, `SOL_USDC`, `BASE_USDC`, `MATIC_USDC`, `BSC_USDC` - USDT: `TRON_USDT`, `ETH_USDT`, `ARBITRUM_USDT`, `SOL_USDT`, `BASE_USDT`, `MATIC_USDT`, `BSC_USDT` ")
-    amount: StrictStr = Field(description="The payout cryptocurrency amount. ")
+    amount: StrictStr = Field(description="The payout amount, provided as a decimal string. You can include up to two nonzero digits after the decimal point; trailing zeros beyond that (for example, `100.500`) are accepted, but a value with more than two nonzero fractional digits (for example, `100.567`) is rejected with an invalid amount format error instead of being rounded. ")
     __properties: ClassVar[List[str]] = ["token_id", "amount"]
 
     model_config = ConfigDict(

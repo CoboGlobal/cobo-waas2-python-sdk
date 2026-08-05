@@ -35,11 +35,11 @@ class TestCreatePaymentOrderRequest(unittest.TestCase):
         if include_optional:
             return CreatePaymentOrderRequest(
                 merchant_id = '1001',
-                merchant_order_code = 'M20240201001',
-                psp_order_code = 'P20240201001',
+                merchant_order_code = 'merchant-inv-55231',
+                psp_order_code = 'psp-order-20240601-00789',
                 pricing_currency = 'USD',
                 pricing_amount = '100.00',
-                fee_amount = '2.00',
+                fee_amount = '2',
                 payable_currency = 'ETH_USDT',
                 payable_amount = '103.03',
                 expired_in = 1800,
@@ -53,8 +53,8 @@ class TestCreatePaymentOrderRequest(unittest.TestCase):
         else:
             return CreatePaymentOrderRequest(
                 merchant_id = '1001',
-                psp_order_code = 'P20240201001',
-                fee_amount = '2.00',
+                psp_order_code = 'psp-order-20240601-00789',
+                fee_amount = '2',
                 payable_currency = 'ETH_USDT',
         )
         """

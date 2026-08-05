@@ -28,13 +28,13 @@ class Order(BaseModel):
     """
     Order
     """  # noqa: E501
-    order_id: StrictStr = Field(description="The order ID.")
+    order_id: StrictStr = Field(description="The unique identifier of the payment order. Cobo assigns this ID when the payment order is created — when that happens depends on which pay-in method you use.  For the direct method, `Create pay-in order` creates the order synchronously and returns `order_id` in the response immediately.  For the payment link method, `Create order link` returns only the hosted link details and does not create an order, so `order_id` does not exist yet at that point. `order_id` becomes available only after the payer opens the hosted payment page, selects the payment token and blockchain network, and submits the order — Cobo creates the order and assigns `order_id` at that moment, not when the link itself was generated. ")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The merchant ID.")
-    merchant_order_code: Optional[StrictStr] = Field(default=None, description="A unique reference code assigned by the merchant to identify this order in their system.")
-    psp_order_code: StrictStr = Field(description="A unique reference code assigned by the developer to identify this order in their system.")
+    merchant_order_code: Optional[StrictStr] = Field(default=None, description="The downstream merchant's order reference, exactly as you supplied it in `merchant_order_code` when creating the order, if you provided one. Present only when a `merchant_order_code` was included at order creation.")
+    psp_order_code: StrictStr = Field(description="The order identifier for your own internal business order, exactly as you supplied it in `psp_order_code` when creating the order. This value is unique within your Cobo organization.")
     pricing_currency: Optional[StrictStr] = Field(default=None, description="The pricing currency of the order.")
     pricing_amount: Optional[StrictStr] = Field(default=None, description="The base amount of the order, excluding the developer fee (specified in `fee_amount`).")
-    fee_amount: StrictStr = Field(description="The developer fee for the order. It is added to the base amount to determine the final charge.")
+    fee_amount: StrictStr = Field(description="The order-level developer charge credited to your developer balance when the order settles. A value of `0` means that no developer fee was charged and the merchant was credited with the full collected amount.  When the collected payment exactly matches the payable amount, the merchant balance is credited with the payable amount minus `fee_amount`, and your developer balance is credited with `fee_amount`. For example, for a payable amount of `104.08` and a `fee_amount` of `2`, the merchant receives `102.08` and you receive `2`.  For related fee settings and settlement details, see [Merchant management](https://www.cobo.com/payments/en/guides/merchants) and [Accounts and fund allocation](https://www.cobo.com/payments/en/guides/amounts-and-balances). ")
     payable_currency: Optional[StrictStr] = Field(default=None, description="The ID of the cryptocurrency used for payment.")
     chain_id: StrictStr = Field(description="The ID of the blockchain network where the payment transaction should be made.")
     payable_amount: StrictStr = Field(description="The cryptocurrency amount to be paid for this order.")

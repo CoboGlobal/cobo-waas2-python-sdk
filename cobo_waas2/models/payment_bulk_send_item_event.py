@@ -17,26 +17,32 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.source_group import SourceGroup
-from cobo_waas2.models.tss_request_status import TSSRequestStatus
-from cobo_waas2.models.tss_request_type import TSSRequestType
+from cobo_waas2.models.payment_bulk_send_item_status import PaymentBulkSendItemStatus
+from cobo_waas2.models.payment_bulk_send_item_validation_status import PaymentBulkSendItemValidationStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TSSRequestWebhookEventData(BaseModel):
+class PaymentBulkSendItemEvent(BaseModel):
     """
-    TSSRequestWebhookEventData
+    PaymentBulkSendItemEvent
     """  # noqa: E501
     data_type: StrictStr = Field(description=" The data type of the event. - `Transaction`: The transaction event data. - `TSSRequest`: The TSS request event data. - `Addresses`: The addresses event data. - `WalletInfo`: The wallet information event data. - `MPCVault`: The MPC vault event data. - `Chains`: The enabled chain event data. - `Tokens`: The enabled token event data. - `TokenListing`: The token listing event data.        - `PaymentOrder`: The payment order event data. - `PaymentRefund`: The payment refund event data. - `PaymentSettlement`: The payment settlement event data. - `PaymentTransaction`: The payment transaction event data. - `PaymentAddressUpdate`: The top-up address update event data. - `PaymentPayout`: The payment payout event data. - `PaymentBulkSend`: The payment bulk send event data. - `PaymentBulkSendItem`: The payment bulk send item event data. - `PaymentAccountBalanceUpdate`: The Payments account balance updated event data, including account information and balance change details. - `BalanceUpdateInfo`: The balance update event data. - `SuspendedToken`: The token suspension event data. - `ComplianceDisposition`: The compliance disposition event data. - `ComplianceKytScreenings`: The compliance KYT screenings event data. - `ComplianceKyaScreenings`: The compliance KYA screenings event data. - `Organization`: The organization event data. - `FiatTransaction`: The fiat transaction event data.")
-    tss_request_id: Optional[StrictStr] = Field(default=None, description="The TSS request ID.")
-    source_key_share_holder_group: Optional[SourceGroup] = None
-    target_key_share_holder_group_id: Optional[StrictStr] = Field(default=None, description="The target key share holder group ID.")
-    type: Optional[TSSRequestType] = None
-    status: Optional[TSSRequestStatus] = None
-    description: Optional[StrictStr] = Field(default=None, description="The description of the TSS request.")
-    created_timestamp: Optional[StrictInt] = Field(default=None, description="The TSS request's creation time in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["data_type", "tss_request_id", "source_key_share_holder_group", "target_key_share_holder_group_id", "type", "status", "description", "created_timestamp"]
+    bulk_send_item_id: StrictStr = Field(description="The bulk send item ID.")
+    token_id: StrictStr = Field(description="The token ID of the cryptocurrency to be sent to the recipient.")
+    receiving_address: StrictStr = Field(description="The receiving address.")
+    amount: StrictStr = Field(description="The amount of the cryptocurrency to be sent to the recipient.")
+    description: Optional[StrictStr] = Field(default=None, description="A note or comment about the bulk send item.")
+    tx_hash: Optional[StrictStr] = Field(default=None, description="The transaction hash of the bulk send item.")
+    status: PaymentBulkSendItemStatus
+    validation_status: PaymentBulkSendItemValidationStatus
+    failed_reason: Optional[StrictStr] = Field(default=None, description="The reason why the bulk send item failed.")
+    bulk_send_id: StrictStr = Field(description="The bulk send ID that this item belongs to.")
+    request_id: Optional[StrictStr] = Field(default=None, description="The request ID of the bulk send batch.")
+    source_account: StrictStr = Field(description="The source account ID of the bulk send batch.")
+    created_timestamp: StrictInt = Field(description="The created time of the bulk send item, represented as a UNIX timestamp in seconds.")
+    updated_timestamp: StrictInt = Field(description="The updated time of the bulk send item, represented as a UNIX timestamp in seconds.")
+    __properties: ClassVar[List[str]] = ["data_type", "bulk_send_item_id", "token_id", "receiving_address", "amount", "description", "tx_hash", "status", "validation_status", "failed_reason", "bulk_send_id", "request_id", "source_account", "created_timestamp", "updated_timestamp"]
 
     @field_validator('data_type')
     def data_type_validate_enum(cls, value):
@@ -63,7 +69,7 @@ class TSSRequestWebhookEventData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TSSRequestWebhookEventData from a JSON string"""
+        """Create an instance of PaymentBulkSendItemEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -84,14 +90,11 @@ class TSSRequestWebhookEventData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of source_key_share_holder_group
-        if self.source_key_share_holder_group:
-            _dict['source_key_share_holder_group'] = self.source_key_share_holder_group.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TSSRequestWebhookEventData from a dict"""
+        """Create an instance of PaymentBulkSendItemEvent from a dict"""
         if obj is None:
             return None
 
@@ -100,13 +103,20 @@ class TSSRequestWebhookEventData(BaseModel):
 
         _obj = cls.model_validate({
             "data_type": obj.get("data_type"),
-            "tss_request_id": obj.get("tss_request_id"),
-            "source_key_share_holder_group": SourceGroup.from_dict(obj["source_key_share_holder_group"]) if obj.get("source_key_share_holder_group") is not None else None,
-            "target_key_share_holder_group_id": obj.get("target_key_share_holder_group_id"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
+            "bulk_send_item_id": obj.get("bulk_send_item_id"),
+            "token_id": obj.get("token_id"),
+            "receiving_address": obj.get("receiving_address"),
+            "amount": obj.get("amount"),
             "description": obj.get("description"),
-            "created_timestamp": obj.get("created_timestamp")
+            "tx_hash": obj.get("tx_hash"),
+            "status": obj.get("status"),
+            "validation_status": obj.get("validation_status"),
+            "failed_reason": obj.get("failed_reason"),
+            "bulk_send_id": obj.get("bulk_send_id"),
+            "request_id": obj.get("request_id"),
+            "source_account": obj.get("source_account"),
+            "created_timestamp": obj.get("created_timestamp"),
+            "updated_timestamp": obj.get("updated_timestamp")
         })
         return _obj
 
