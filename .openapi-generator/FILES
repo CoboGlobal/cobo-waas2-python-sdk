@@ -477,6 +477,7 @@ cobo_waas2/models/payment_bulk_send.py
 cobo_waas2/models/payment_bulk_send_event.py
 cobo_waas2/models/payment_bulk_send_execution_mode.py
 cobo_waas2/models/payment_bulk_send_item.py
+cobo_waas2/models/payment_bulk_send_item_event.py
 cobo_waas2/models/payment_bulk_send_item_status.py
 cobo_waas2/models/payment_bulk_send_item_validation_status.py
 cobo_waas2/models/payment_bulk_send_status.py
@@ -1348,6 +1349,7 @@ docs/PaymentBulkSend.md
 docs/PaymentBulkSendEvent.md
 docs/PaymentBulkSendExecutionMode.md
 docs/PaymentBulkSendItem.md
+docs/PaymentBulkSendItemEvent.md
 docs/PaymentBulkSendItemStatus.md
 docs/PaymentBulkSendItemValidationStatus.md
 docs/PaymentBulkSendStatus.md
@@ -2233,6 +2235,7 @@ test/test_payment_bulk_send.py
 test/test_payment_bulk_send_event.py
 test/test_payment_bulk_send_execution_mode.py
 test/test_payment_bulk_send_item.py
+test/test_payment_bulk_send_item_event.py
 test/test_payment_bulk_send_item_status.py
 test/test_payment_bulk_send_item_validation_status.py
 test/test_payment_bulk_send_status.py

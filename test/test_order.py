@@ -36,11 +36,11 @@ class TestOrder(unittest.TestCase):
             return Order(
                 order_id = '5001',
                 merchant_id = '1001',
-                merchant_order_code = 'M20240201001',
-                psp_order_code = 'P20240201001',
+                merchant_order_code = 'merchant-inv-55231',
+                psp_order_code = 'psp-order-20240601-00789',
                 pricing_currency = 'USD',
                 pricing_amount = '100.00',
-                fee_amount = '2.00',
+                fee_amount = '2',
                 payable_currency = 'ETH_USDT',
                 chain_id = 'ETH',
                 payable_amount = '103.03',
@@ -93,8 +93,8 @@ class TestOrder(unittest.TestCase):
         else:
             return Order(
                 order_id = '5001',
-                psp_order_code = 'P20240201001',
-                fee_amount = '2.00',
+                psp_order_code = 'psp-order-20240601-00789',
+                fee_amount = '2',
                 chain_id = 'ETH',
                 payable_amount = '103.03',
                 exchange_rate = '0.99',

@@ -69,6 +69,7 @@ class WebhookEventType(str, Enum):
     PAYMENT_DOT_SUBSCRIPTION_DOT_STATUS_DOT_UPDATED = 'payment.subscription.status.updated'
     PAYMENT_DOT_CHARGE_DOT_STATUS_DOT_UPDATED = 'payment.charge.status.updated'
     PAYMENT_DOT_BULK_SEND_DOT_STATUS_DOT_UPDATED = 'payment.bulk_send.status.updated'
+    PAYMENT_DOT_BULK_SEND_DOT_ITEM_DOT_STATUS_DOT_UPDATED = 'payment.bulk_send.item.status.updated'
     PAYMENT_DOT_TRANSACTION_DOT_EXTERNAL_DOT_CREATED = 'payment.transaction.external.created'
     PAYMENT_DOT_TRANSACTION_DOT_EXTERNAL_DOT_COMPLETED = 'payment.transaction.external.completed'
     PAYMENT_DOT_TRANSACTION_DOT_SETTLEMENT_NETWORK_DOT_CREATED = 'payment.transaction.settlement_network.created'
