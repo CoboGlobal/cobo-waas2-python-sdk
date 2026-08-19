@@ -20,6 +20,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.auto_fuel_type import AutoFuelType
 from cobo_waas2.models.contract_call_destination import ContractCallDestination
 from cobo_waas2.models.contract_call_source import ContractCallSource
+from cobo_waas2.models.fee_level import FeeLevel
 from cobo_waas2.models.pre_check import PreCheck
 from cobo_waas2.models.transaction_process_type import TransactionProcessType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
@@ -38,10 +39,11 @@ class ContractCallParams(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="The description of the contract call transaction. Maximum length is 2048 characters for MPC Wallets and Custodial Wallets (Web3 Wallets), and 1000 characters for Custodial Wallets (Asset Wallets).")
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     fee: Optional[TransactionRequestFee] = None
+    fee_level: Optional[FeeLevel] = None
     transaction_process_type: Optional[TransactionProcessType] = None
     auto_fuel: Optional[AutoFuelType] = None
     pre_check: Optional[PreCheck] = None
-    __properties: ClassVar[List[str]] = ["request_id", "chain_id", "source", "destination", "description", "category_names", "fee", "transaction_process_type", "auto_fuel", "pre_check"]
+    __properties: ClassVar[List[str]] = ["request_id", "chain_id", "source", "destination", "description", "category_names", "fee", "fee_level", "transaction_process_type", "auto_fuel", "pre_check"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,6 +115,7 @@ class ContractCallParams(BaseModel):
             "description": obj.get("description"),
             "category_names": obj.get("category_names"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
+            "fee_level": obj.get("fee_level"),
             "transaction_process_type": obj.get("transaction_process_type"),
             "auto_fuel": obj.get("auto_fuel"),
             "pre_check": PreCheck.from_dict(obj["pre_check"]) if obj.get("pre_check") is not None else None

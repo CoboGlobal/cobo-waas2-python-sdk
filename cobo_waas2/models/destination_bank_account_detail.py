@@ -20,6 +20,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.bank_account_holder_type import BankAccountHolderType
 from cobo_waas2.models.bank_account_payment_method import BankAccountPaymentMethod
 from cobo_waas2.models.bank_account_status import BankAccountStatus
+from cobo_waas2.models.destination_bank_account_tag import DestinationBankAccountTag
 from cobo_waas2.models.destination_type import DestinationType
 from cobo_waas2.models.intermediary_bank_info import IntermediaryBankInfo
 from typing import Optional, Set
@@ -38,6 +39,7 @@ class DestinationBankAccountDetail(BaseModel):
     destination_contact_address: Optional[StrictStr] = Field(default=None, description="The contact address of the destination.")
     destination_merchant_id: Optional[StrictStr] = Field(default=None, description="The ID of the merchant linked to the destination.")
     bank_account_id: StrictStr = Field(description="The destination bank account ID.")
+    tag: Optional[DestinationBankAccountTag] = None
     account_alias: StrictStr = Field(description="The alias of the bank account.")
     account_number: StrictStr = Field(description="The bank account number.")
     swift_code: StrictStr = Field(description="The SWIFT or BIC code of the bank.")
@@ -63,7 +65,7 @@ class DestinationBankAccountDetail(BaseModel):
     contract_file_id: Optional[StrictStr] = Field(default=None, description="The file ID of the contract document (e.g., cooperation agreement) that proves the business relationship between you and the beneficiary, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file). ")
     created_timestamp: Optional[StrictInt] = Field(default=None, description="The created time of the bank account, represented as a UNIX timestamp in seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The updated time of the bank account, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["destination_id", "destination_name", "destination_type", "destination_email", "destination_country", "destination_contact_address", "destination_merchant_id", "bank_account_id", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "country", "city", "payment_method", "holder_type", "beneficiary_province", "beneficiary_post_code", "bank_account_name", "bank_branch_code", "bank_country", "bank_province", "contract_file_id", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["destination_id", "destination_name", "destination_type", "destination_email", "destination_country", "destination_contact_address", "destination_merchant_id", "bank_account_id", "tag", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "country", "city", "payment_method", "holder_type", "beneficiary_province", "beneficiary_post_code", "bank_account_name", "bank_branch_code", "bank_country", "bank_province", "contract_file_id", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,6 +109,11 @@ class DestinationBankAccountDetail(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of intermediary_bank_info
         if self.intermediary_bank_info:
             _dict['intermediary_bank_info'] = self.intermediary_bank_info.to_dict()
+        # set to None if tag (nullable) is None
+        # and model_fields_set contains the field
+        if self.tag is None and "tag" in self.model_fields_set:
+            _dict['tag'] = None
+
         return _dict
 
     @classmethod
@@ -127,6 +134,7 @@ class DestinationBankAccountDetail(BaseModel):
             "destination_contact_address": obj.get("destination_contact_address"),
             "destination_merchant_id": obj.get("destination_merchant_id"),
             "bank_account_id": obj.get("bank_account_id"),
+            "tag": obj.get("tag"),
             "account_alias": obj.get("account_alias"),
             "account_number": obj.get("account_number"),
             "swift_code": obj.get("swift_code"),

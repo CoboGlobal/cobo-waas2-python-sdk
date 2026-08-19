@@ -34,8 +34,8 @@ class TestFILPrice(unittest.TestCase):
         model = FILPrice()
         if include_optional:
             return FILPrice(
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035',
+                gas_premium = '522508',
+                gas_fee_cap = '522768',
                 gas_limit = '500'
             )
         else:

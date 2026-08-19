@@ -17,7 +17,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.safe_tx_extra_data import SafeTxExtraData
 from cobo_waas2.models.transaction_destination_type import TransactionDestinationType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,8 +29,7 @@ class TransactionMessageSignEIP712Destination(BaseModel):
     destination_type: TransactionDestinationType
     raw_structured_data: Optional[StrictStr] = Field(default=None, description="The raw structured data to be signed, formatted as a JSON string.")
     structured_data: Dict[str, Any] = Field(description="The structured data to be signed, formatted as a JSON object according to the EIP-712 standard.")
-    safe_tx_extra_data: Optional[SafeTxExtraData] = None
-    __properties: ClassVar[List[str]] = ["destination_type", "raw_structured_data", "structured_data", "safe_tx_extra_data"]
+    __properties: ClassVar[List[str]] = ["destination_type", "raw_structured_data", "structured_data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,9 +70,6 @@ class TransactionMessageSignEIP712Destination(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of safe_tx_extra_data
-        if self.safe_tx_extra_data:
-            _dict['safe_tx_extra_data'] = self.safe_tx_extra_data.to_dict()
         return _dict
 
     @classmethod
@@ -89,8 +84,7 @@ class TransactionMessageSignEIP712Destination(BaseModel):
         _obj = cls.model_validate({
             "destination_type": obj.get("destination_type"),
             "raw_structured_data": obj.get("raw_structured_data"),
-            "structured_data": obj.get("structured_data"),
-            "safe_tx_extra_data": SafeTxExtraData.from_dict(obj["safe_tx_extra_data"]) if obj.get("safe_tx_extra_data") is not None else None
+            "structured_data": obj.get("structured_data")
         })
         return _obj
 

@@ -31,6 +31,7 @@ from cobo_waas2.models.message_sign_params import MessageSignParams
 from cobo_waas2.models.transaction_approval_detail import TransactionApprovalDetail
 from cobo_waas2.models.transaction_detail import TransactionDetail
 from cobo_waas2.models.transaction_rbf import TransactionRbf
+from cobo_waas2.models.transaction_receipt import TransactionReceipt
 from cobo_waas2.models.transaction_resend import TransactionResend
 from cobo_waas2.models.transfer_params import TransferParams
 from cobo_waas2.models.wallet_subtype import WalletSubtype
@@ -68,7 +69,7 @@ class TransactionsApi:
     ) -> List[BroadcastSignedTransactions201ResponseInner]:
         """Broadcast signed transactions
 
-        <Note>This operation is only applicable to the staking scenarios.</Note> This operation broadcasts a list of signed transactions.   If you set `auto_broadcast` to `false` when [creating a staking activity](https://www.cobo.com/developers/v2/api-references/stakings/create-stake-activity), the transaction will not be submitted to the blockchain automatically after being signed. In such cases, you can call this operation to broadcast the transaction to the blockchain.  A transaction can only be broadcast if its status is `Broadcasting`. 
+        This operation broadcasts a list of signed transactions to the blockchain.  You can call this operation for transactions that were signed but not broadcast automatically: - Transactions created with `transaction_process_type` set to `SignOnly` by calling the [Transfer token](https://www.cobo.com/developers/v2/api-references/transactions/transfer-token) or [Call smart contract](https://www.cobo.com/developers/v2/api-references/transactions/call-smart-contract) operation. - Staking transactions created with `auto_broadcast` set to `false` when [creating a staking activity](https://www.cobo.com/developers/v2/api-references/staking/create-stake-activity).  A transaction can only be broadcast if its status is `Broadcasting`.  <Note>Broadcasting a transaction created with `transaction_process_type` set to `SignOnly` is only applicable to MPC Wallets and Custodial Wallets (Web3 Wallets).</Note> 
 
         :param broadcast_signed_transactions_request: The request body to broadcast a list of signed transactions.
         :type broadcast_signed_transactions_request: BroadcastSignedTransactionsRequest
@@ -114,7 +115,7 @@ class TransactionsApi:
     ) -> ApiResponse[List[BroadcastSignedTransactions201ResponseInner]]:
         """Broadcast signed transactions
 
-        <Note>This operation is only applicable to the staking scenarios.</Note> This operation broadcasts a list of signed transactions.   If you set `auto_broadcast` to `false` when [creating a staking activity](https://www.cobo.com/developers/v2/api-references/stakings/create-stake-activity), the transaction will not be submitted to the blockchain automatically after being signed. In such cases, you can call this operation to broadcast the transaction to the blockchain.  A transaction can only be broadcast if its status is `Broadcasting`. 
+        This operation broadcasts a list of signed transactions to the blockchain.  You can call this operation for transactions that were signed but not broadcast automatically: - Transactions created with `transaction_process_type` set to `SignOnly` by calling the [Transfer token](https://www.cobo.com/developers/v2/api-references/transactions/transfer-token) or [Call smart contract](https://www.cobo.com/developers/v2/api-references/transactions/call-smart-contract) operation. - Staking transactions created with `auto_broadcast` set to `false` when [creating a staking activity](https://www.cobo.com/developers/v2/api-references/staking/create-stake-activity).  A transaction can only be broadcast if its status is `Broadcasting`.  <Note>Broadcasting a transaction created with `transaction_process_type` set to `SignOnly` is only applicable to MPC Wallets and Custodial Wallets (Web3 Wallets).</Note> 
 
         :param broadcast_signed_transactions_request: The request body to broadcast a list of signed transactions.
         :type broadcast_signed_transactions_request: BroadcastSignedTransactionsRequest
@@ -160,7 +161,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Broadcast signed transactions
 
-        <Note>This operation is only applicable to the staking scenarios.</Note> This operation broadcasts a list of signed transactions.   If you set `auto_broadcast` to `false` when [creating a staking activity](https://www.cobo.com/developers/v2/api-references/stakings/create-stake-activity), the transaction will not be submitted to the blockchain automatically after being signed. In such cases, you can call this operation to broadcast the transaction to the blockchain.  A transaction can only be broadcast if its status is `Broadcasting`. 
+        This operation broadcasts a list of signed transactions to the blockchain.  You can call this operation for transactions that were signed but not broadcast automatically: - Transactions created with `transaction_process_type` set to `SignOnly` by calling the [Transfer token](https://www.cobo.com/developers/v2/api-references/transactions/transfer-token) or [Call smart contract](https://www.cobo.com/developers/v2/api-references/transactions/call-smart-contract) operation. - Staking transactions created with `auto_broadcast` set to `false` when [creating a staking activity](https://www.cobo.com/developers/v2/api-references/staking/create-stake-activity).  A transaction can only be broadcast if its status is `Broadcasting`.  <Note>Broadcasting a transaction created with `transaction_process_type` set to `SignOnly` is only applicable to MPC Wallets and Custodial Wallets (Web3 Wallets).</Note> 
 
         :param broadcast_signed_transactions_request: The request body to broadcast a list of signed transactions.
         :type broadcast_signed_transactions_request: BroadcastSignedTransactionsRequest
@@ -238,7 +239,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Cancel transaction
 
-        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
+        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -284,7 +285,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Cancel transaction
 
-        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
+        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -330,7 +331,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Cancel transaction
 
-        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets and Smart Contract Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
+        This operation cancels a specified transaction. Canceling a transaction stops it while it is still pending. For more information, see [Cancel a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#cancel-a-transaction).  <Note>This operation only applies to transactions from MPC Wallets.</Note>  A transaction can be cancelled if its status is either of the following: - `Submitted` - `PendingScreening` - `PendingAuthorization` - `PendingSignature` (Only when the sub-status is `Queue`, `InsufficientBalance`, `InsufficientBalanceFundLocked`, `PendingSignerApproval`, `PendingSystemProcessing`, or `Built`) 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -614,7 +615,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Call smart contract
 
-        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  For smart contract call examples, you can refer to [Batch transfers using smart contracts](/v2/guides/transactions/batch-transfer) and [Swap tokens on Solana using Jupiter](/v2/guides/transactions/sol-jupiter-swap).  <Note>This operation uses `request_id` to prevent duplicate contract call requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Info> Supported actions vary by blockchain: - EVM chains — Support deploying contracts and calling contract functions. - Solana — Supports calling contract functions only. - TRON — Supports calling contract functions only. - Stellar — Supports XLM trustline creation only. - Cosmos — Supports initiating Cosmos native message-based transactions, such as transfers and staking operations. </Info>  <Note>Currently, this operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets, or Smart Contract Wallets. Refer to the `destination` property for supported contract types.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee, or specify the `fee_level` property to let Cobo calculate the transaction fee based on the selected fee level. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from MPC Wallets on the blockchains that have a similar architecture to Ethereum.</Note> 
 
         :param contract_call_params: The request body for making a contract call.
         :type contract_call_params: ContractCallParams
@@ -660,7 +661,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Call smart contract
 
-        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  For smart contract call examples, you can refer to [Batch transfers using smart contracts](/v2/guides/transactions/batch-transfer) and [Swap tokens on Solana using Jupiter](/v2/guides/transactions/sol-jupiter-swap).  <Note>This operation uses `request_id` to prevent duplicate contract call requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Info> Supported actions vary by blockchain: - EVM chains — Support deploying contracts and calling contract functions. - Solana — Supports calling contract functions only. - TRON — Supports calling contract functions only. - Stellar — Supports XLM trustline creation only. - Cosmos — Supports initiating Cosmos native message-based transactions, such as transfers and staking operations. </Info>  <Note>Currently, this operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets, or Smart Contract Wallets. Refer to the `destination` property for supported contract types.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee, or specify the `fee_level` property to let Cobo calculate the transaction fee based on the selected fee level. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from MPC Wallets on the blockchains that have a similar architecture to Ethereum.</Note> 
 
         :param contract_call_params: The request body for making a contract call.
         :type contract_call_params: ContractCallParams
@@ -706,7 +707,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Call smart contract
 
-        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  For smart contract call examples, you can refer to [Batch transfers using smart contracts](/v2/guides/transactions/batch-transfer) and [Swap tokens on Solana using Jupiter](/v2/guides/transactions/sol-jupiter-swap).  <Note>This operation uses `request_id` to prevent duplicate contract call requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Info> Supported actions vary by blockchain: - EVM chains — Support deploying contracts and calling contract functions. - Solana — Supports calling contract functions only. - TRON — Supports calling contract functions only. - Stellar — Supports XLM trustline creation only. - Cosmos — Supports initiating Cosmos native message-based transactions, such as transfers and staking operations. </Info>  <Note>Currently, this operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets, or Smart Contract Wallets. Refer to the `destination` property for supported contract types.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        This operation creates a transaction to interact with a smart contract on the blockchain.  You need to provide details such as the source address, destination address, and the calldata. You can specify the fee-related properties to limit the transaction fee, or specify the `fee_level` property to let Cobo calculate the transaction fee based on the selected fee level. A transaction request for tracking is returned upon successful operation.  <Note>Currently, this operation only applies to the transactions from MPC Wallets on the blockchains that have a similar architecture to Ethereum.</Note> 
 
         :param contract_call_params: The request body for making a contract call.
         :type contract_call_params: ContractCallParams
@@ -954,7 +955,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Transfer token
 
-        The operation transfers your assets from a wallet created on Cobo Portal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>This operation uses `request_id` to prevent duplicate transfer requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Note>If you make transfers from Custodial Wallets (Asset Wallets) and Exchange Wallets, do not set the fee-related properties, as they will not take effects.</Note>  <Note>You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. To do this, you should use the <code>utxo_outputs</code> property to specify the destination addresses.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        The operation transfers your assets from a wallet created on Cobo Portal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee, or specify the `fee_level` property to let Cobo calculate the transaction fee based on the selected fee level. A transaction request for tracking is returned upon successful operation.  <Note>This operation uses `request_id` to prevent duplicate transfer requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Note>If you make transfers from Custodial Wallets (Asset Wallets) and Exchange Wallets, do not set the fee-related properties, as they will not take effects.</Note>  <Note>You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. To do this, you should use the <code>utxo_outputs</code> property to specify the destination addresses.</Note> 
 
         :param transfer_params: The request body to create a transfer transaction
         :type transfer_params: TransferParams
@@ -1000,7 +1001,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Transfer token
 
-        The operation transfers your assets from a wallet created on Cobo Portal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>This operation uses `request_id` to prevent duplicate transfer requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Note>If you make transfers from Custodial Wallets (Asset Wallets) and Exchange Wallets, do not set the fee-related properties, as they will not take effects.</Note>  <Note>You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. To do this, you should use the <code>utxo_outputs</code> property to specify the destination addresses.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        The operation transfers your assets from a wallet created on Cobo Portal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee, or specify the `fee_level` property to let Cobo calculate the transaction fee based on the selected fee level. A transaction request for tracking is returned upon successful operation.  <Note>This operation uses `request_id` to prevent duplicate transfer requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Note>If you make transfers from Custodial Wallets (Asset Wallets) and Exchange Wallets, do not set the fee-related properties, as they will not take effects.</Note>  <Note>You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. To do this, you should use the <code>utxo_outputs</code> property to specify the destination addresses.</Note> 
 
         :param transfer_params: The request body to create a transfer transaction
         :type transfer_params: TransferParams
@@ -1046,7 +1047,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Transfer token
 
-        The operation transfers your assets from a wallet created on Cobo Portal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee. A transaction request for tracking is returned upon successful operation.  <Note>This operation uses `request_id` to prevent duplicate transfer requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Note>If you make transfers from Custodial Wallets (Asset Wallets) and Exchange Wallets, do not set the fee-related properties, as they will not take effects.</Note>  <Note>You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. To do this, you should use the <code>utxo_outputs</code> property to specify the destination addresses.</Note>  <Info>If you initiate a transaction from a Smart Contract Wallet, a relevant transaction will be triggered from the Delegate to the Cobo Safe's address of the Smart Contract Wallet, with a transfer amount of <code>0</code>.</Info> 
+        The operation transfers your assets from a wallet created on Cobo Portal to another address.  You need to specify details such as the sender address and recipient address, token ID, and the amount to transfer. You can specify the fee-related properties to limit the transaction fee, or specify the `fee_level` property to let Cobo calculate the transaction fee based on the selected fee level. A transaction request for tracking is returned upon successful operation.  <Note>This operation uses `request_id` to prevent duplicate transfer requests. The `request_id` must be unique within the same organization. Duplicate requests with the same `request_id` will be rejected with an error and will not be executed again.</Note>  <Note>If you make transfers from Custodial Wallets (Asset Wallets) and Exchange Wallets, do not set the fee-related properties, as they will not take effects.</Note>  <Note>You can transfer tokens to multiple addresses only if you use MPC Wallets as the transaction source. To do this, you should use the <code>utxo_outputs</code> property to specify the destination addresses.</Note> 
 
         :param transfer_params: The request body to create a transfer transaction
         :type transfer_params: TransferParams
@@ -1125,7 +1126,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Drop transaction
 
-        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be dropped only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
+        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be dropped only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1175,7 +1176,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Drop transaction
 
-        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be dropped only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
+        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be dropped only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1225,7 +1226,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Drop transaction
 
-        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be dropped only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
+        This operation drops a specified transaction. Dropping a transaction leverages RBF to replace the original transaction with a version that effectively cancels it. For more details about dropping a transaction, refer to [Drop a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#drop-a-transaction).  A transaction can be dropped only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -1796,6 +1797,191 @@ class TransactionsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/transactions/{transaction_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_transaction_receipt(
+        self,
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).  This operation currently supports the following chains only: - `ETH`: Ethereum mainnet. - `SETH`: Ethereum Sepolia testnet. ")],
+        tx_hash: Annotated[StrictStr, Field(description="The transaction hash, which is the unique identifier of a transaction on the blockchain. You can retrieve the transaction hash of a transaction by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  You need to specify the hash with the `0x` prefix. ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> TransactionReceipt:
+        """Get transaction receipt
+
+        This operation retrieves the receipt of a specified transaction on a specified EVM-compatible chain, which records the execution result of the transaction, including its status, block information, gas consumption, and the event logs emitted during execution.  You need to specify the chain ID and the transaction hash. The chain ID can be retrieved by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains), and the transaction hash can be retrieved by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  The receipt is read from a blockchain node in real time and is returned as it is recorded on the chain. The event logs are returned in their raw form and are not filtered, so you need to decode them with the contract ABI yourself.  <Note>This operation is applicable to EVM-compatible chains only. It currently supports `ETH` (Ethereum mainnet) and `SETH` (Ethereum Sepolia testnet) only. Requests for any other chain are rejected.</Note>  <Note>You can only retrieve the receipts of the transactions under your organization.</Note>  <Note>A receipt is available only after the transaction has been included in a block. If the transaction is still pending or does not exist on the specified chain, no receipt is returned.</Note>  <Note>This operation is rate-limited to one request per second for each organization. Requests exceeding this limit will be rejected.</Note> 
+
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).  This operation currently supports the following chains only: - `ETH`: Ethereum mainnet. - `SETH`: Ethereum Sepolia testnet.  (required)
+        :type chain_id: str
+        :param tx_hash: The transaction hash, which is the unique identifier of a transaction on the blockchain. You can retrieve the transaction hash of a transaction by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  You need to specify the hash with the `0x` prefix.  (required)
+        :type tx_hash: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_transaction_receipt_serialize(
+            chain_id=chain_id,
+            tx_hash=tx_hash,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TransactionReceipt",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_transaction_receipt_with_http_info(
+        self,
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).  This operation currently supports the following chains only: - `ETH`: Ethereum mainnet. - `SETH`: Ethereum Sepolia testnet. ")],
+        tx_hash: Annotated[StrictStr, Field(description="The transaction hash, which is the unique identifier of a transaction on the blockchain. You can retrieve the transaction hash of a transaction by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  You need to specify the hash with the `0x` prefix. ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[TransactionReceipt]:
+        """Get transaction receipt
+
+        This operation retrieves the receipt of a specified transaction on a specified EVM-compatible chain, which records the execution result of the transaction, including its status, block information, gas consumption, and the event logs emitted during execution.  You need to specify the chain ID and the transaction hash. The chain ID can be retrieved by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains), and the transaction hash can be retrieved by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  The receipt is read from a blockchain node in real time and is returned as it is recorded on the chain. The event logs are returned in their raw form and are not filtered, so you need to decode them with the contract ABI yourself.  <Note>This operation is applicable to EVM-compatible chains only. It currently supports `ETH` (Ethereum mainnet) and `SETH` (Ethereum Sepolia testnet) only. Requests for any other chain are rejected.</Note>  <Note>You can only retrieve the receipts of the transactions under your organization.</Note>  <Note>A receipt is available only after the transaction has been included in a block. If the transaction is still pending or does not exist on the specified chain, no receipt is returned.</Note>  <Note>This operation is rate-limited to one request per second for each organization. Requests exceeding this limit will be rejected.</Note> 
+
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).  This operation currently supports the following chains only: - `ETH`: Ethereum mainnet. - `SETH`: Ethereum Sepolia testnet.  (required)
+        :type chain_id: str
+        :param tx_hash: The transaction hash, which is the unique identifier of a transaction on the blockchain. You can retrieve the transaction hash of a transaction by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  You need to specify the hash with the `0x` prefix.  (required)
+        :type tx_hash: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_transaction_receipt_serialize(
+            chain_id=chain_id,
+            tx_hash=tx_hash,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TransactionReceipt",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_transaction_receipt_without_preload_content(
+        self,
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).  This operation currently supports the following chains only: - `ETH`: Ethereum mainnet. - `SETH`: Ethereum Sepolia testnet. ")],
+        tx_hash: Annotated[StrictStr, Field(description="The transaction hash, which is the unique identifier of a transaction on the blockchain. You can retrieve the transaction hash of a transaction by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  You need to specify the hash with the `0x` prefix. ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get transaction receipt
+
+        This operation retrieves the receipt of a specified transaction on a specified EVM-compatible chain, which records the execution result of the transaction, including its status, block information, gas consumption, and the event logs emitted during execution.  You need to specify the chain ID and the transaction hash. The chain ID can be retrieved by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains), and the transaction hash can be retrieved by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  The receipt is read from a blockchain node in real time and is returned as it is recorded on the chain. The event logs are returned in their raw form and are not filtered, so you need to decode them with the contract ABI yourself.  <Note>This operation is applicable to EVM-compatible chains only. It currently supports `ETH` (Ethereum mainnet) and `SETH` (Ethereum Sepolia testnet) only. Requests for any other chain are rejected.</Note>  <Note>You can only retrieve the receipts of the transactions under your organization.</Note>  <Note>A receipt is available only after the transaction has been included in a block. If the transaction is still pending or does not exist on the specified chain, no receipt is returned.</Note>  <Note>This operation is rate-limited to one request per second for each organization. Requests exceeding this limit will be rejected.</Note> 
+
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).  This operation currently supports the following chains only: - `ETH`: Ethereum mainnet. - `SETH`: Ethereum Sepolia testnet.  (required)
+        :type chain_id: str
+        :param tx_hash: The transaction hash, which is the unique identifier of a transaction on the blockchain. You can retrieve the transaction hash of a transaction by calling [Get transaction information](https://www.cobo.com/developers/v2/api-references/transactions/get-transaction-information).  You need to specify the hash with the `0x` prefix.  (required)
+        :type tx_hash: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_transaction_receipt_serialize(
+            chain_id=chain_id,
+            tx_hash=tx_hash,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TransactionReceipt",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_transaction_receipt_serialize(
+        self,
+        chain_id,
+        tx_hash,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if chain_id is not None:
+            _path_params['chain_id'] = chain_id
+        if tx_hash is not None:
+            _path_params['tx_hash'] = tx_hash
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/transactions/chains/{chain_id}/tx_hash/{tx_hash}/receipt',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2412,15 +2598,15 @@ class TransactionsApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.    - `ExternalSafeTx`: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs, separated by comma.")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         asset_ids: Annotated[Optional[StrictStr], Field(description="(This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account.")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If you specify `min_created_timestamp` without specifying `max_created_timestamp`, `max_created_timestamp` is automatically set to `min_created_timestamp` + 90 days. If you specify both, the time range cannot exceed 90 days.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If you specify `max_created_timestamp` without specifying `min_created_timestamp`, `min_created_timestamp` is automatically set to `max_created_timestamp` - 90 days. If you specify both, the time range cannot exceed 90 days.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
@@ -2449,7 +2635,7 @@ class TransactionsApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.    - `ExternalSafeTx`: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
+        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -2463,9 +2649,9 @@ class TransactionsApi:
         :type asset_ids: str
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).
         :type vault_id: str
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
@@ -2534,15 +2720,15 @@ class TransactionsApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.    - `ExternalSafeTx`: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs, separated by comma.")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         asset_ids: Annotated[Optional[StrictStr], Field(description="(This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account.")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If you specify `min_created_timestamp` without specifying `max_created_timestamp`, `max_created_timestamp` is automatically set to `min_created_timestamp` + 90 days. If you specify both, the time range cannot exceed 90 days.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If you specify `max_created_timestamp` without specifying `min_created_timestamp`, `min_created_timestamp` is automatically set to `max_created_timestamp` - 90 days. If you specify both, the time range cannot exceed 90 days.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
@@ -2571,7 +2757,7 @@ class TransactionsApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.    - `ExternalSafeTx`: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
+        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -2585,9 +2771,9 @@ class TransactionsApi:
         :type asset_ids: str
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).
         :type vault_id: str
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
@@ -2656,15 +2842,15 @@ class TransactionsApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.    - `ExternalSafeTx`: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         wallet_ids: Annotated[Optional[StrictStr], Field(description="A list of wallet IDs, separated by comma.")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         asset_ids: Annotated[Optional[StrictStr], Field(description="(This concept applies to Exchange Wallets only) A list of asset IDs, separated by comma. An asset ID is the unique identifier of the asset held within your linked exchange account.")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         min_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or after the specified time.  If you specify `min_created_timestamp` without specifying `max_created_timestamp`, `max_created_timestamp` is automatically set to `min_created_timestamp` + 90 days. If you specify both, the time range cannot exceed 90 days.  If not provided, the default value is 90 days before the current time. This default value is subject to change. ")] = None,
         max_created_timestamp: Annotated[Optional[StrictInt], Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds. You can use this parameter to filter transactions created on or before the specified time.  If you specify `max_created_timestamp` without specifying `min_created_timestamp`, `min_created_timestamp` is automatically set to `max_created_timestamp` - 90 days. If you specify both, the time range cannot exceed 90 days.  If not provided, the default value is the current time. This default value is subject to change. ")] = None,
@@ -2693,7 +2879,7 @@ class TransactionsApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.    - `ExternalSafeTx`: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
+        :param types: A list of transaction types, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -2707,9 +2893,9 @@ class TransactionsApi:
         :type asset_ids: str
         :param vault_id: The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).
         :type vault_id: str
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
@@ -3271,7 +3457,7 @@ class TransactionsApi:
     ) -> CreateTransferTransaction201Response:
         """Speed up transaction
 
-        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
+        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -3321,7 +3507,7 @@ class TransactionsApi:
     ) -> ApiResponse[CreateTransferTransaction201Response]:
         """Speed up transaction
 
-        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
+        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -3371,7 +3557,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Speed up transaction
 
-        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from Custodial Wallets (Web3 Wallets), MPC Wallets and Smart Contract Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note>  <Info>If you speed up a transaction from a Smart Contract Wallet, two RBF transactions will be triggered, one for the transaction from the Smart Contract Wallet, and the other for the transaction from the Delegate.</Info> 
+        This operation accelerates a specified transaction. Speeding up a transaction will trigger a Replace-By-Fee (RBF) transaction which is a new version of the original transaction. For more details about speeding up a transaction, refer to [Speed up a transaction](https://www.cobo.com/developers/v2/guides/transactions/manage-transactions#speed-up-a-transaction).  You can use the `address` or `included_utxos` properties in the request body to specify the address or UTXOs that will cover the transaction fee. Generally, the transaction fee is paid by the original transaction's source. If that source's balance is insufficient, the specified address or UTXOs can be used to cover the fee.  A transaction can be sped up only if its status is `Broadcasting`.  <Note>This operation only applies to transactions from MPC Wallets. It does not apply to transactions on the following chains: VET, TRON, TVET, SOL, and TON.</Note> 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str

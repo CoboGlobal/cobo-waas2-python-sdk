@@ -44,7 +44,7 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                     listed = False, 
                     attachments = [
                         cobo_waas2.models.merchant_kyc_company_attachment.MerchantKycCompanyAttachment(
-                            file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/business_registration.pdf', 
+                            file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
                             file_type = 'BR', )
                         ], 
                     operation_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
@@ -56,9 +56,9 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                     identify_no = '12345678', 
                     company_name = '示例有限公司', 
                     company_name_en = 'Example Limited', 
-                    establish_date = '2020-01-01', 
-                    commencement_date = '2020-01-01', 
-                    valid_period = '2020-01-01', 
+                    establish_date = '20290322', 
+                    commencement_date = '20290322', 
+                    valid_period = '20290322', 
                     register_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
                         country = 'HK', 
                         state = 'Hong Kong', 
@@ -69,9 +69,9 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                         name = '张三', 
                         name_en = 'Zhang San', 
                         id_number = '110101199001011234', 
-                        date_of_birth = '19900101', 
-                        issue_date = '20180101', 
-                        expiration_date = '20280101', 
+                        date_of_birth = '20290322', 
+                        issue_date = '20290322', 
+                        expiration_date = '20290322', 
                         attachments = [
                             cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
                                 file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 
@@ -83,9 +83,9 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                             name = '张三', 
                             name_en = 'Zhang San', 
                             id_number = '110101199001011234', 
-                            date_of_birth = '19900101', 
-                            issue_date = '20180101', 
-                            expiration_date = '20280101', 
+                            date_of_birth = '20290322', 
+                            issue_date = '20290322', 
+                            expiration_date = '20290322', 
                             attachments = [
                                 cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
                                     file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 
@@ -107,7 +107,7 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                     listed = False, 
                     attachments = [
                         cobo_waas2.models.merchant_kyc_company_attachment.MerchantKycCompanyAttachment(
-                            file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/business_registration.pdf', 
+                            file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
                             file_type = 'BR', )
                         ], 
                     operation_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
@@ -119,9 +119,9 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                     identify_no = '12345678', 
                     company_name = '示例有限公司', 
                     company_name_en = 'Example Limited', 
-                    establish_date = '2020-01-01', 
-                    commencement_date = '2020-01-01', 
-                    valid_period = '2020-01-01', 
+                    establish_date = '20290322', 
+                    commencement_date = '20290322', 
+                    valid_period = '20290322', 
                     register_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
                         country = 'HK', 
                         state = 'Hong Kong', 
@@ -132,9 +132,9 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                         name = '张三', 
                         name_en = 'Zhang San', 
                         id_number = '110101199001011234', 
-                        date_of_birth = '19900101', 
-                        issue_date = '20180101', 
-                        expiration_date = '20280101', 
+                        date_of_birth = '20290322', 
+                        issue_date = '20290322', 
+                        expiration_date = '20290322', 
                         attachments = [
                             cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
                                 file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 
@@ -146,9 +146,9 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                             name = '张三', 
                             name_en = 'Zhang San', 
                             id_number = '110101199001011234', 
-                            date_of_birth = '19900101', 
-                            issue_date = '20180101', 
-                            expiration_date = '20280101', 
+                            date_of_birth = '20290322', 
+                            issue_date = '20290322', 
+                            expiration_date = '20290322', 
                             attachments = [
                                 cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
                                     file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 

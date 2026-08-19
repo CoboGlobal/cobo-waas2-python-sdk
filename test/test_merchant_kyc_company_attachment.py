@@ -34,12 +34,12 @@ class TestMerchantKycCompanyAttachment(unittest.TestCase):
         model = MerchantKycCompanyAttachment()
         if include_optional:
             return MerchantKycCompanyAttachment(
-                file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/business_registration.pdf',
+                file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 file_type = 'BR'
             )
         else:
             return MerchantKycCompanyAttachment(
-                file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/business_registration.pdf',
+                file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 file_type = 'BR',
         )
         """

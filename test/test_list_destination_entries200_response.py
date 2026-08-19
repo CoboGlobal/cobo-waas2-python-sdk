@@ -55,6 +55,7 @@ class TestListDestinationEntries200Response(unittest.TestCase):
                         destination_contact_address = '123 Main St, Anytown, USA', 
                         destination_merchant_id = 'M1001', 
                         bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
+                        tag = 'VA', 
                         account_alias = 'Main Payout Account', 
                         account_number = '4111111111111111', 
                         swift_code = 'BOFAUS33', 

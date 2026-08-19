@@ -65,6 +65,7 @@ class WebhookEventType(str, Enum):
     PAYMENT_DOT_REFUND_DOT_STATUS_DOT_UPDATED = 'payment.refund.status.updated'
     PAYMENT_DOT_SETTLEMENT_DOT_STATUS_DOT_UPDATED = 'payment.settlement.status.updated'
     PAYMENT_DOT_PAYOUT_DOT_STATUS_DOT_UPDATED = 'payment.payout.status.updated'
+    PAYMENT_DOT_BANK_WITHDRAWAL_DOT_STATUS_DOT_UPDATED = 'payment.bank_withdrawal.status.updated'
     PAYMENT_DOT_ADDRESS_DOT_UPDATED = 'payment.address.updated'
     PAYMENT_DOT_SUBSCRIPTION_DOT_STATUS_DOT_UPDATED = 'payment.subscription.status.updated'
     PAYMENT_DOT_CHARGE_DOT_STATUS_DOT_UPDATED = 'payment.charge.status.updated'

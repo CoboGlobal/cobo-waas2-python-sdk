@@ -26,8 +26,8 @@ class TransactionRequestFILFee(BaseModel):
     """
     The preset properties to limit transaction fee.  For more information about the FIL fee model, see [Fee models](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees#fee-models).  You can specify the gas fee cap, gas premium, and gas limit to control fee behavior and prioritization.  Switch between the tabs to display the properties for different transaction fee models. 
     """  # noqa: E501
-    gas_premium: StrictStr = Field(description="An optional tip you can include to prioritize your transaction. The gas premium incentivizes miners to include your transaction sooner than those offering only the base fee.")
-    gas_fee_cap: StrictStr = Field(description="The maximum gas price you are willing to pay per unit of gas.")
+    gas_premium: StrictStr = Field(description="An optional additional fee that users can include to prioritize their transactions over others. It acts like a tip to incentivize miners to select and include your transaction over transactions with only the base fee.")
+    gas_fee_cap: StrictStr = Field(description="The gas_fee_cap is a user-defined limit on how much they are willing to pay per unit of gas.")
     gas_limit: Optional[StrictStr] = Field(default=None, description="The maximum amount of gas your transaction is allowed to consume.")
     fee_type: FeeType
     token_id: StrictStr = Field(description="The token used to pay the transaction fee.")

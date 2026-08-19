@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batch_get_exchange_rates**](PaymentApi.md#batch_get_exchange_rates) | **GET** /payments/exchange_rates | Batch get exchange rates
 [**cancel_refund_by_id**](PaymentApi.md#cancel_refund_by_id) | **PUT** /payments/refunds/{refund_id}/cancel | Cancel refund order
+[**create_bank_withdrawal**](PaymentApi.md#create_bank_withdrawal) | **POST** /payments/bank_withdrawals | Create bank withdrawal
 [**create_batch_allocation**](PaymentApi.md#create_batch_allocation) | **POST** /payments/batch_allocations | Create batch allocation
 [**create_bulk_send**](PaymentApi.md#create_bulk_send) | **POST** /payments/bulk_sends | Create bulk send
 [**create_counterparty**](PaymentApi.md#create_counterparty) | **POST** /payments/counterparty | Create counterparty
@@ -30,6 +31,7 @@ Method | HTTP request | Description
 [**delete_destination_by_id**](PaymentApi.md#delete_destination_by_id) | **DELETE** /payments/destination/{destination_id} | Delete destination
 [**delete_destination_entry**](PaymentApi.md#delete_destination_entry) | **DELETE** /payments/destination_entry/{destination_entry_id} | Delete destination entry
 [**get_available_allocation_amount**](PaymentApi.md#get_available_allocation_amount) | **GET** /payments/allocation_amount | Get available allocation amount
+[**get_bank_withdrawal_by_id**](PaymentApi.md#get_bank_withdrawal_by_id) | **GET** /payments/bank_withdrawals/{bank_withdrawal_id} | Get bank withdrawal information
 [**get_batch_allocation_by_id**](PaymentApi.md#get_batch_allocation_by_id) | **GET** /payments/batch_allocations/{batch_allocation_id} | Get batch allocation information
 [**get_bulk_send_by_id**](PaymentApi.md#get_bulk_send_by_id) | **GET** /payments/bulk_sends/{bulk_send_id} | Get bulk send information
 [**get_counterparty**](PaymentApi.md#get_counterparty) | **GET** /payments/counterparty/{counterparty_id} | Get counterparty information
@@ -38,6 +40,7 @@ Method | HTTP request | Description
 [**get_destination_entry**](PaymentApi.md#get_destination_entry) | **GET** /payments/destination_entry/{destination_entry_id} | Get destination entry information
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
 [**get_merchant_kyc**](PaymentApi.md#get_merchant_kyc) | **GET** /payments/merchants/{merchant_id}/kyc | Get merchant KYC
+[**get_payment_bank_account_balance**](PaymentApi.md#get_payment_bank_account_balance) | **GET** /payments/balance/bank_accounts/{bank_account_id} | Get bank account balance
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
 [**get_payout_by_id**](PaymentApi.md#get_payout_by_id) | **GET** /payments/payouts/{payout_id} | Get payout information
 [**get_psp_balance**](PaymentApi.md#get_psp_balance) | **GET** /payments/balance/psp | Get developer balance
@@ -49,6 +52,7 @@ Method | HTTP request | Description
 [**get_top_up_address**](PaymentApi.md#get_top_up_address) | **GET** /payments/topup/address | Create/Get top-up address
 [**list_allocation_items**](PaymentApi.md#list_allocation_items) | **GET** /payments/allocation_items | List all allocation items
 [**list_balance_changes**](PaymentApi.md#list_balance_changes) | **GET** /payments/balance_changes | List balance changes
+[**list_bank_withdrawals**](PaymentApi.md#list_bank_withdrawals) | **GET** /payments/bank_withdrawals | List bank withdrawals
 [**list_batch_allocations**](PaymentApi.md#list_batch_allocations) | **GET** /payments/batch_allocations | List all batch allocations
 [**list_bulk_send_items**](PaymentApi.md#list_bulk_send_items) | **GET** /payments/bulk_sends/{bulk_send_id}/items | List bulk send items
 [**list_bulk_sends**](PaymentApi.md#list_bulk_sends) | **GET** /payments/bulk_sends | List bulk sends
@@ -221,6 +225,79 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_bank_withdrawal**
+> PaymentBankWithdrawal create_bank_withdrawal(create_bank_withdrawal_request=create_bank_withdrawal_request)
+
+Create bank withdrawal
+
+This operation creates a bank withdrawal from a virtual account to a target bank account. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_bank_withdrawal_request import CreateBankWithdrawalRequest
+from cobo_waas2.models.payment_bank_withdrawal import PaymentBankWithdrawal
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_bank_withdrawal_request = cobo_waas2.CreateBankWithdrawalRequest()
+
+    try:
+        # Create bank withdrawal
+        api_response = api_instance.create_bank_withdrawal(create_bank_withdrawal_request=create_bank_withdrawal_request)
+        print("The response of PaymentApi->create_bank_withdrawal:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_bank_withdrawal: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_bank_withdrawal_request** | [**CreateBankWithdrawalRequest**](CreateBankWithdrawalRequest.md)| The request body to create a bank withdrawal. | [optional] 
+
+### Return type
+
+[**PaymentBankWithdrawal**](PaymentBankWithdrawal.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The bank withdrawal was successfully created. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -1983,6 +2060,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_bank_withdrawal_by_id**
+> PaymentBankWithdrawalDetail get_bank_withdrawal_by_id(bank_withdrawal_id)
+
+Get bank withdrawal information
+
+This operation retrieves the information of a specific bank withdrawal. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.payment_bank_withdrawal_detail import PaymentBankWithdrawalDetail
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    bank_withdrawal_id = '123e4567-e89b-12d3-a456-426614174000'
+
+    try:
+        # Get bank withdrawal information
+        api_response = api_instance.get_bank_withdrawal_by_id(bank_withdrawal_id)
+        print("The response of PaymentApi->get_bank_withdrawal_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_bank_withdrawal_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bank_withdrawal_id** | **str**| The bank withdrawal ID. | 
+
+### Return type
+
+[**PaymentBankWithdrawalDetail**](PaymentBankWithdrawalDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_batch_allocation_by_id**
 > BatchAllocationDetail get_batch_allocation_by_id(batch_allocation_id)
 
@@ -2548,6 +2697,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**MerchantKycSubmission**](MerchantKycSubmission.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_payment_bank_account_balance**
+> PaymentBankAccountBalance get_payment_bank_account_balance(bank_account_id)
+
+Get bank account balance
+
+This operation retrieves the balance of a destination bank account, only available for bank accounts with tag `VA`. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.payment_bank_account_balance import PaymentBankAccountBalance
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    bank_account_id = '123e4567-e89b-12d3-a456-426614174003'
+
+    try:
+        # Get bank account balance
+        api_response = api_instance.get_payment_bank_account_balance(bank_account_id)
+        print("The response of PaymentApi->get_payment_bank_account_balance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_payment_bank_account_balance: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bank_account_id** | **str**| The destination bank account ID. | 
+
+### Return type
+
+[**PaymentBankAccountBalance**](PaymentBankAccountBalance.md)
 
 ### Authorization
 
@@ -3421,6 +3642,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_bank_withdrawals**
+> ListBankWithdrawals200Response list_bank_withdrawals(limit=limit, before=before, after=after, request_id=request_id, status=status)
+
+List bank withdrawals
+
+This operation retrieves the list of bank withdrawals. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_bank_withdrawals200_response import ListBankWithdrawals200Response
+from cobo_waas2.models.payment_bank_withdrawal_status import PaymentBankWithdrawalStatus
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    request_id = 'random_request_id'
+    status = cobo_waas2.PaymentBankWithdrawalStatus()
+
+    try:
+        # List bank withdrawals
+        api_response = api_instance.list_bank_withdrawals(limit=limit, before=before, after=after, request_id=request_id, status=status)
+        print("The response of PaymentApi->list_bank_withdrawals:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_bank_withdrawals: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **request_id** | **str**| The request ID. | [optional] 
+ **status** | [**PaymentBankWithdrawalStatus**](.md)| Filter by bank withdrawal status. | [optional] 
+
+### Return type
+
+[**ListBankWithdrawals200Response**](ListBankWithdrawals200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_batch_allocations**
 > ListBatchAllocations200Response list_batch_allocations(limit=limit, before=before, after=after, request_id=request_id)
 
@@ -3896,7 +4198,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_destination_entries**
-> ListDestinationEntries200Response list_destination_entries(entry_type, limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address, keyword=keyword, bank_account_status=bank_account_status)
+> ListDestinationEntries200Response list_destination_entries(entry_type, limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address, keyword=keyword, bank_account_status=bank_account_status, bank_account_tag=bank_account_tag)
 
 List destination entries
 
@@ -3910,6 +4212,7 @@ This operation retrieves the information of destination entries.
 ```python
 import cobo_waas2
 from cobo_waas2.models.bank_account_status import BankAccountStatus
+from cobo_waas2.models.destination_bank_account_tag import DestinationBankAccountTag
 from cobo_waas2.models.entry_type import EntryType
 from cobo_waas2.models.list_destination_entries200_response import ListDestinationEntries200Response
 from cobo_waas2.rest import ApiException
@@ -3935,10 +4238,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     wallet_address = '0x1234567890abcdef...'
     keyword = 'keyword'
     bank_account_status = cobo_waas2.BankAccountStatus()
+    bank_account_tag = cobo_waas2.DestinationBankAccountTag()
 
     try:
         # List destination entries
-        api_response = api_instance.list_destination_entries(entry_type, limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address, keyword=keyword, bank_account_status=bank_account_status)
+        api_response = api_instance.list_destination_entries(entry_type, limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address, keyword=keyword, bank_account_status=bank_account_status, bank_account_tag=bank_account_tag)
         print("The response of PaymentApi->list_destination_entries:\n")
         pprint(api_response)
     except Exception as e:
@@ -3961,6 +4265,7 @@ Name | Type | Description  | Notes
  **wallet_address** | **str**| The wallet address. | [optional] 
  **keyword** | **str**| A search term for performing fuzzy matches in the search query. | [optional] 
  **bank_account_status** | [**BankAccountStatus**](.md)| BankAccountStatus defines the status of the bank account: - &#x60;Pending&#x60;: The bank account is pending verification by Cobo. - &#x60;Approved&#x60;: The bank account has been approved by Cobo. - &#x60;Rejected&#x60;: The bank account has been rejected by Cobo.  | [optional] 
+ **bank_account_tag** | [**DestinationBankAccountTag**](.md)| Filter destination bank accounts by tag.  | [optional] 
 
 ### Return type
 

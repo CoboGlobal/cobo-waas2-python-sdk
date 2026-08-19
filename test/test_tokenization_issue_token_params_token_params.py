@@ -35,24 +35,35 @@ class TestTokenizationIssueTokenParamsTokenParams(unittest.TestCase):
         if include_optional:
             return TokenizationIssueTokenParamsTokenParams(
                 standard = 'ERC20',
-                name = 'My Awesome Token',
-                symbol = 'MAT',
+                name = 'Global Equity Fund',
+                symbol = 'GEF',
                 decimals = 18,
                 token_access_activated = False,
-                permissions = cobo_waas2.models.tokenization_sol_wrapped_token_permission_params.TokenizationSolWrappedTokenPermissionParams(
-                    wrapper = ["9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM","7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"], 
-                    pauser = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
-                    freezer = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', 
-                    updater = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', ),
-                underlying_token = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'
+                permissions = cobo_waas2.models.tokenization_erc20_fund_token_permission_params.TokenizationERC20FundTokenPermissionParams(
+                    owner = ["0x1234567890abcdef1234567890abcdef12345678"], 
+                    manager = ["0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"], 
+                    nav_updater = ["0x2345678901bcdef2345678901bcdef234567890"], 
+                    redemption_approver = ["0x3456789012cdef3456789012cdef34567890123"], 
+                    settlement_operator = ["0x4567890123def4567890123def456789012345"], 
+                    emergency_guardian = ["0x567890124ef567890124ef5678901234567"], ),
+                underlying_token = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
+                asset_token = '0x4922a015c4407F87432B179bb209e125432E4a2A',
+                initial_nav = '1.0',
+                initial_annual_rate = '0',
+                min_deposit = '0',
+                min_redemption = '0',
+                max_annual_rate = '115792089237316195423570985008687907853269984665640564039457584007913129639935',
+                max_rate_change = '115792089237316195423570985008687907853269984665640564039457584007913129639935',
+                min_update_interval_seconds = 86400
             )
         else:
             return TokenizationIssueTokenParamsTokenParams(
                 standard = 'ERC20',
-                name = 'My Awesome Token',
-                symbol = 'MAT',
+                name = 'Global Equity Fund',
+                symbol = 'GEF',
                 decimals = 18,
                 underlying_token = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
+                asset_token = '0x4922a015c4407F87432B179bb209e125432E4a2A',
         )
         """
 

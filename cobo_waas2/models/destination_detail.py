@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.destination_bank_account import DestinationBankAccount
+from cobo_waas2.models.destination_source import DestinationSource
 from cobo_waas2.models.destination_type import DestinationType
 from cobo_waas2.models.wallet_address import WalletAddress
 from typing import Optional, Set
@@ -31,6 +32,7 @@ class DestinationDetail(BaseModel):
     destination_id: StrictStr = Field(description="The destination ID.")
     destination_type: DestinationType
     destination_name: StrictStr = Field(description="The destination name.")
+    source: Optional[DestinationSource] = None
     country: Optional[StrictStr] = Field(default=None, description="The country of the destination, in ISO 3166-1 alpha-3 format.")
     email: Optional[StrictStr] = Field(default=None, description="The email of the destination.")
     contact_address: Optional[StrictStr] = Field(default=None, description="The contact address of the destination.")
@@ -39,7 +41,7 @@ class DestinationDetail(BaseModel):
     merchant_id: Optional[StrictStr] = Field(default=None, description="The ID of the merchant linked to the destination.")
     created_timestamp: StrictInt = Field(description="The created time of the destination, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the destination, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["destination_id", "destination_type", "destination_name", "country", "email", "contact_address", "wallet_addresses", "bank_accounts", "merchant_id", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["destination_id", "destination_type", "destination_name", "source", "country", "email", "contact_address", "wallet_addresses", "bank_accounts", "merchant_id", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,6 +111,7 @@ class DestinationDetail(BaseModel):
             "destination_id": obj.get("destination_id"),
             "destination_type": obj.get("destination_type"),
             "destination_name": obj.get("destination_name"),
+            "source": obj.get("source"),
             "country": obj.get("country"),
             "email": obj.get("email"),
             "contact_address": obj.get("contact_address"),

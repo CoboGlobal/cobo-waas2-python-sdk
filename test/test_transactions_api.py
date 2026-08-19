@@ -152,6 +152,19 @@ class TestTransactionsApi(unittest.TestCase):
         api_response = self.api.get_transaction_by_id(transaction_id)
         """
 
+    def test_get_transaction_receipt(self) -> None:
+        """
+        Test case for get_transaction_receipt
+
+        Get transaction receipt
+        """
+        """
+        chain_id = 'ETH'
+        tx_hash = '0x239861be9a4afe080c359b7fe4a1d035945ec46256b1a0f44d1267c71de8ec28'
+
+        api_response = self.api.get_transaction_receipt(chain_id, tx_hash)
+        """
+
     def test_list_approval_details(self) -> None:
         """
         Test case for list_approval_details

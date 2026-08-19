@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **wallet_id** | **str** | The wallet ID. | 
 **address** | **str** | The wallet address. | 
 **mpc_used_key_share_holder_group** | [**MpcSigningGroup**](MpcSigningGroup.md) |  | [optional] 
-**delegate** | [**CoboSafeDelegate**](CoboSafeDelegate.md) |  | 
 
 ## Example
 

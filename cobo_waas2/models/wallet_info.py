@@ -18,12 +18,11 @@ from typing import Any, List, Optional
 from cobo_waas2.models.custodial_wallet_info import CustodialWalletInfo
 from cobo_waas2.models.exchange_wallet_info import ExchangeWalletInfo
 from cobo_waas2.models.mpc_wallet_info import MPCWalletInfo
-from cobo_waas2.models.smart_contract_wallet_info import SmartContractWalletInfo
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-WALLETINFO_ONE_OF_SCHEMAS = ["CustodialWalletInfo", "ExchangeWalletInfo", "MPCWalletInfo", "SmartContractWalletInfo"]
+WALLETINFO_ONE_OF_SCHEMAS = ["CustodialWalletInfo", "ExchangeWalletInfo", "MPCWalletInfo"]
 
 class WalletInfo(BaseModel):
     """
@@ -33,12 +32,10 @@ class WalletInfo(BaseModel):
     oneof_schema_1_validator: Optional[CustodialWalletInfo] = None
     # data type: MPCWalletInfo
     oneof_schema_2_validator: Optional[MPCWalletInfo] = None
-    # data type: SmartContractWalletInfo
-    oneof_schema_3_validator: Optional[SmartContractWalletInfo] = None
     # data type: ExchangeWalletInfo
-    oneof_schema_4_validator: Optional[ExchangeWalletInfo] = None
-    actual_instance: Optional[Union[CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo, SmartContractWalletInfo]] = None
-    one_of_schemas: Set[str] = { "CustodialWalletInfo", "ExchangeWalletInfo", "MPCWalletInfo", "SmartContractWalletInfo" }
+    oneof_schema_3_validator: Optional[ExchangeWalletInfo] = None
+    actual_instance: Optional[Union[CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo]] = None
+    one_of_schemas: Set[str] = { "CustodialWalletInfo", "ExchangeWalletInfo", "MPCWalletInfo" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -74,11 +71,6 @@ class WalletInfo(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `MPCWalletInfo`")
         else:
             match += 1
-        # validate data type: SmartContractWalletInfo
-        if not isinstance(v, SmartContractWalletInfo):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `SmartContractWalletInfo`")
-        else:
-            match += 1
         # validate data type: ExchangeWalletInfo
         if not isinstance(v, ExchangeWalletInfo):
             error_messages.append(f"Error! Input type `{type(v)}` is not `ExchangeWalletInfo`")
@@ -86,10 +78,10 @@ class WalletInfo(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo, SmartContractWalletInfo. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo, SmartContractWalletInfo. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -124,11 +116,6 @@ class WalletInfo(BaseModel):
             instance.actual_instance = MPCWalletInfo.from_json(json_str)
             return instance
 
-        # check if data type is `SmartContractWalletInfo`
-        if _data_type == "SmartContract":
-            instance.actual_instance = SmartContractWalletInfo.from_json(json_str)
-            return instance
-
         # check if data type is `CustodialWalletInfo`
         if _data_type == "CustodialWalletInfo":
             instance.actual_instance = CustodialWalletInfo.from_json(json_str)
@@ -144,11 +131,6 @@ class WalletInfo(BaseModel):
             instance.actual_instance = MPCWalletInfo.from_json(json_str)
             return instance
 
-        # check if data type is `SmartContractWalletInfo`
-        if _data_type == "SmartContractWalletInfo":
-            instance.actual_instance = SmartContractWalletInfo.from_json(json_str)
-            return instance
-
         return instance
         # deserialize data into CustodialWalletInfo
         try:
@@ -162,12 +144,6 @@ class WalletInfo(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into SmartContractWalletInfo
-        try:
-            instance.actual_instance = SmartContractWalletInfo.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
         # deserialize data into ExchangeWalletInfo
         try:
             instance.actual_instance = ExchangeWalletInfo.from_json(json_str)
@@ -177,11 +153,11 @@ class WalletInfo(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo, SmartContractWalletInfo. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo, SmartContractWalletInfo. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into WalletInfo with oneOf schemas: CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -195,7 +171,7 @@ class WalletInfo(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo, SmartContractWalletInfo]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CustodialWalletInfo, ExchangeWalletInfo, MPCWalletInfo]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

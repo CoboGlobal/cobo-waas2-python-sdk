@@ -52,15 +52,12 @@ class TestTransferSource(unittest.TestCase):
                     used_tss_node_ids = [
                         'cobo5yb7BNEBwwp5XXedbhnzQfvQtp132W4dH4Jz4x4eDp4KA'
                         ], ),
-                delegate = None,
                 trading_account_type = 'Asset'
             )
         else:
             return TransferSource(
                 source_type = 'Asset',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
-                delegate = None,
                 trading_account_type = 'Asset',
         )
         """

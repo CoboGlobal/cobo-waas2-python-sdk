@@ -34,16 +34,16 @@ class TestTransactionRequestFILFee(unittest.TestCase):
         model = TransactionRequestFILFee()
         if include_optional:
             return TransactionRequestFILFee(
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035',
+                gas_premium = '522508',
+                gas_fee_cap = '522768',
                 gas_limit = '500',
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'ETH'
             )
         else:
             return TransactionRequestFILFee(
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035',
+                gas_premium = '522508',
+                gas_fee_cap = '522768',
                 fee_type = 'EVM_EIP_1559',
                 token_id = 'ETH',
         )

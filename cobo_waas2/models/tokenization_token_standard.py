@@ -28,6 +28,7 @@ class TokenizationTokenStandard(str, Enum):
     SPLTOKEN2022 = 'SPLToken2022'
     ERC20WRAPPER = 'ERC20Wrapper'
     SOLWRAPPER = 'SOLWrapper'
+    ERC20FUND = 'ERC20Fund'
 
     UNKNOWN = None
 

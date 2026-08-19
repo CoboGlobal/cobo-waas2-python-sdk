@@ -18,6 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.auto_fuel_type import AutoFuelType
+from cobo_waas2.models.fee_level import FeeLevel
 from cobo_waas2.models.pre_check import PreCheck
 from cobo_waas2.models.transaction_process_type import TransactionProcessType
 from cobo_waas2.models.transaction_request_fee import TransactionRequestFee
@@ -38,10 +39,11 @@ class TransferParams(BaseModel):
     category_names: Optional[List[StrictStr]] = Field(default=None, description="The custom category for you to identify your transactions.")
     description: Optional[StrictStr] = Field(default=None, description="The description of the transfer.")
     fee: Optional[TransactionRequestFee] = None
+    fee_level: Optional[FeeLevel] = None
     transaction_process_type: Optional[TransactionProcessType] = None
     auto_fuel: Optional[AutoFuelType] = None
     pre_check: Optional[PreCheck] = None
-    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee", "transaction_process_type", "auto_fuel", "pre_check"]
+    __properties: ClassVar[List[str]] = ["request_id", "source", "token_id", "destination", "category_names", "description", "fee", "fee_level", "transaction_process_type", "auto_fuel", "pre_check"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,6 +115,7 @@ class TransferParams(BaseModel):
             "category_names": obj.get("category_names"),
             "description": obj.get("description"),
             "fee": TransactionRequestFee.from_dict(obj["fee"]) if obj.get("fee") is not None else None,
+            "fee_level": obj.get("fee_level"),
             "transaction_process_type": obj.get("transaction_process_type"),
             "auto_fuel": obj.get("auto_fuel"),
             "pre_check": PreCheck.from_dict(obj["pre_check"]) if obj.get("pre_check") is not None else None

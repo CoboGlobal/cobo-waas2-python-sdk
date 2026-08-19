@@ -39,7 +39,7 @@ class TestTransactionFee(unittest.TestCase):
                 effective_gas_price = '100000000',
                 fee_used = '0.1',
                 estimated_fee_used = '0.1',
-                gas_used = '100000000',
+                gas_used = '10000000',
                 max_fee_per_gas = '9000000000000',
                 max_priority_fee_per_gas = '1000000000000',
                 gas_limit = '500',
@@ -50,9 +50,9 @@ class TestTransactionFee(unittest.TestCase):
                 rent_amount = '0.00001',
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
-                gas_base = '0.0002',
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035'
+                gas_base = '100',
+                gas_premium = '522508',
+                gas_fee_cap = '522768'
             )
         else:
             return TransactionFee(

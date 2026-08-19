@@ -35,6 +35,7 @@ class TestDestinationBankAccount(unittest.TestCase):
         if include_optional:
             return DestinationBankAccount(
                 bank_account_id = '123e4567-e89b-12d3-a456-426614174003',
+                tag = 'VA',
                 account_alias = 'Main Payout Account',
                 account_number = '4111111111111111',
                 swift_code = 'BOFAUS33',

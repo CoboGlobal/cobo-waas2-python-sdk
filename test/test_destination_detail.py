@@ -37,6 +37,7 @@ class TestDestinationDetail(unittest.TestCase):
                 destination_id = '123e4567-e89b-12d3-a456-426614174003',
                 destination_type = 'Individual',
                 destination_name = 'Destination A',
+                source = 'Client',
                 country = 'USA',
                 email = 'destination@example.com',
                 contact_address = '123 Main St, Anytown, USA',
@@ -52,6 +53,7 @@ class TestDestinationDetail(unittest.TestCase):
                 bank_accounts = [
                     cobo_waas2.models.destination_bank_account.DestinationBankAccount(
                         bank_account_id = '123e4567-e89b-12d3-a456-426614174003', 
+                        tag = 'VA', 
                         account_alias = 'Main Payout Account', 
                         account_number = '4111111111111111', 
                         swift_code = 'BOFAUS33', 

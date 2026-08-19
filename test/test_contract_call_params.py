@@ -43,6 +43,7 @@ class TestContractCallParams(unittest.TestCase):
                     'Trading'
                     ],
                 fee = None,
+                fee_level = 'Recommended',
                 transaction_process_type = 'AutoProcess',
                 auto_fuel = 'PassiveAutoFuel',
                 pre_check = cobo_waas2.models.pre_check.PreCheck(

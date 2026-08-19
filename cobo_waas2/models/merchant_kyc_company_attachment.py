@@ -26,7 +26,7 @@ class MerchantKycCompanyAttachment(BaseModel):
     """
     MerchantKycCompanyAttachment
     """  # noqa: E501
-    file_id: StrictStr = Field(description="The AWS file link of the uploaded file, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file). ")
+    file_id: StrictStr = Field(description="The file ID of the uploaded file, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file). ")
     file_type: MerchantKycCompanyAttachmentFileType
     __properties: ClassVar[List[str]] = ["file_id", "file_type"]
 

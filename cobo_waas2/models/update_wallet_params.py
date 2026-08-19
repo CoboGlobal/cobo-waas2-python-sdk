@@ -18,12 +18,11 @@ from typing import Any, List, Optional
 from cobo_waas2.models.update_custodial_wallet_params import UpdateCustodialWalletParams
 from cobo_waas2.models.update_exchange_wallet_params import UpdateExchangeWalletParams
 from cobo_waas2.models.update_mpc_wallet_params import UpdateMpcWalletParams
-from cobo_waas2.models.update_smart_contract_wallet_params import UpdateSmartContractWalletParams
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-UPDATEWALLETPARAMS_ONE_OF_SCHEMAS = ["UpdateCustodialWalletParams", "UpdateExchangeWalletParams", "UpdateMpcWalletParams", "UpdateSmartContractWalletParams"]
+UPDATEWALLETPARAMS_ONE_OF_SCHEMAS = ["UpdateCustodialWalletParams", "UpdateExchangeWalletParams", "UpdateMpcWalletParams"]
 
 class UpdateWalletParams(BaseModel):
     """
@@ -33,12 +32,10 @@ class UpdateWalletParams(BaseModel):
     oneof_schema_1_validator: Optional[UpdateCustodialWalletParams] = None
     # data type: UpdateMpcWalletParams
     oneof_schema_2_validator: Optional[UpdateMpcWalletParams] = None
-    # data type: UpdateSmartContractWalletParams
-    oneof_schema_3_validator: Optional[UpdateSmartContractWalletParams] = None
     # data type: UpdateExchangeWalletParams
-    oneof_schema_4_validator: Optional[UpdateExchangeWalletParams] = None
-    actual_instance: Optional[Union[UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams, UpdateSmartContractWalletParams]] = None
-    one_of_schemas: Set[str] = { "UpdateCustodialWalletParams", "UpdateExchangeWalletParams", "UpdateMpcWalletParams", "UpdateSmartContractWalletParams" }
+    oneof_schema_3_validator: Optional[UpdateExchangeWalletParams] = None
+    actual_instance: Optional[Union[UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams]] = None
+    one_of_schemas: Set[str] = { "UpdateCustodialWalletParams", "UpdateExchangeWalletParams", "UpdateMpcWalletParams" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -74,11 +71,6 @@ class UpdateWalletParams(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `UpdateMpcWalletParams`")
         else:
             match += 1
-        # validate data type: UpdateSmartContractWalletParams
-        if not isinstance(v, UpdateSmartContractWalletParams):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `UpdateSmartContractWalletParams`")
-        else:
-            match += 1
         # validate data type: UpdateExchangeWalletParams
         if not isinstance(v, UpdateExchangeWalletParams):
             error_messages.append(f"Error! Input type `{type(v)}` is not `UpdateExchangeWalletParams`")
@@ -86,10 +78,10 @@ class UpdateWalletParams(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams, UpdateSmartContractWalletParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams, UpdateSmartContractWalletParams. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -124,11 +116,6 @@ class UpdateWalletParams(BaseModel):
             instance.actual_instance = UpdateMpcWalletParams.from_json(json_str)
             return instance
 
-        # check if data type is `UpdateSmartContractWalletParams`
-        if _data_type == "SmartContract":
-            instance.actual_instance = UpdateSmartContractWalletParams.from_json(json_str)
-            return instance
-
         # check if data type is `UpdateCustodialWalletParams`
         if _data_type == "UpdateCustodialWalletParams":
             instance.actual_instance = UpdateCustodialWalletParams.from_json(json_str)
@@ -144,11 +131,6 @@ class UpdateWalletParams(BaseModel):
             instance.actual_instance = UpdateMpcWalletParams.from_json(json_str)
             return instance
 
-        # check if data type is `UpdateSmartContractWalletParams`
-        if _data_type == "UpdateSmartContractWalletParams":
-            instance.actual_instance = UpdateSmartContractWalletParams.from_json(json_str)
-            return instance
-
         return instance
         # deserialize data into UpdateCustodialWalletParams
         try:
@@ -162,12 +144,6 @@ class UpdateWalletParams(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into UpdateSmartContractWalletParams
-        try:
-            instance.actual_instance = UpdateSmartContractWalletParams.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
         # deserialize data into UpdateExchangeWalletParams
         try:
             instance.actual_instance = UpdateExchangeWalletParams.from_json(json_str)
@@ -177,11 +153,11 @@ class UpdateWalletParams(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams, UpdateSmartContractWalletParams. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams, UpdateSmartContractWalletParams. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into UpdateWalletParams with oneOf schemas: UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -195,7 +171,7 @@ class UpdateWalletParams(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams, UpdateSmartContractWalletParams]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], UpdateCustodialWalletParams, UpdateExchangeWalletParams, UpdateMpcWalletParams]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

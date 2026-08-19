@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class WalletSubtype(str, Enum):
     """
-    The wallet sub-type. Possible values include: - `Asset`: Custodial Wallets (Asset Wallets). - `Web3`: Custodial Wallets (Web3 Wallets). - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets). - `User-Controlled`: MPC Wallets (User-Controlled Wallets). - `Safe{Wallet}`: Smart Contract Wallets (Safe). - `Main`: Exchange Wallets (Main Account). - `Sub`: Exchange Wallets (Sub Account).  Each wallet sub-type requires a different set of properties. Switch between the above tabs for details. 
+    The wallet sub-type. Possible values include: - `Asset`: Custodial Wallets (Asset Wallets). - `Web3`: Custodial Wallets (Web3 Wallets). - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets). - `User-Controlled`: MPC Wallets (User-Controlled Wallets). - `Main`: Exchange Wallets (Main Account). - `Sub`: Exchange Wallets (Sub Account).  Each wallet sub-type requires a different set of properties. Switch between the above tabs for details. 
     """
 
     """
@@ -28,7 +28,6 @@ class WalletSubtype(str, Enum):
     WEB3 = 'Web3'
     ORG_CONTROLLED = 'Org-Controlled'
     USER_CONTROLLED = 'User-Controlled'
-    SAFE_WALLET = 'Safe{Wallet}'
     MAIN = 'Main'
     SUB = 'Sub'
 
