@@ -54,6 +54,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.cancel_refund_by_id(refund_id)
         """
 
+    def test_create_bank_withdrawal(self) -> None:
+        """
+        Test case for create_bank_withdrawal
+
+        Create bank withdrawal
+        """
+        """
+        create_bank_withdrawal_request = cobo_waas2.CreateBankWithdrawalRequest()
+
+        api_response = self.api.create_bank_withdrawal(create_bank_withdrawal_request=create_bank_withdrawal_request)
+        """
+
     def test_create_batch_allocation(self) -> None:
         """
         Test case for create_batch_allocation
@@ -347,6 +359,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_available_allocation_amount(token_id, source_account, destination_account)
         """
 
+    def test_get_bank_withdrawal_by_id(self) -> None:
+        """
+        Test case for get_bank_withdrawal_by_id
+
+        Get bank withdrawal information
+        """
+        """
+        bank_withdrawal_id = '123e4567-e89b-12d3-a456-426614174000'
+
+        api_response = self.api.get_bank_withdrawal_by_id(bank_withdrawal_id)
+        """
+
     def test_get_batch_allocation_by_id(self) -> None:
         """
         Test case for get_batch_allocation_by_id
@@ -444,6 +468,18 @@ class TestPaymentApi(unittest.TestCase):
         merchant_id = 'M1001'
 
         api_response = self.api.get_merchant_kyc(merchant_id)
+        """
+
+    def test_get_payment_bank_account_balance(self) -> None:
+        """
+        Test case for get_payment_bank_account_balance
+
+        Get bank account balance
+        """
+        """
+        bank_account_id = '123e4567-e89b-12d3-a456-426614174003'
+
+        api_response = self.api.get_payment_bank_account_balance(bank_account_id)
         """
 
     def test_get_payment_order_detail_by_id(self) -> None:
@@ -606,6 +642,22 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.list_balance_changes(source_account, limit=limit, before=before, after=after, token_id=token_id, flow_direction=flow_direction, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, source_type=source_type, source_id=source_id)
         """
 
+    def test_list_bank_withdrawals(self) -> None:
+        """
+        Test case for list_bank_withdrawals
+
+        List bank withdrawals
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        request_id = 'random_request_id'
+        status = cobo_waas2.PaymentBankWithdrawalStatus()
+
+        api_response = self.api.list_bank_withdrawals(limit=limit, before=before, after=after, request_id=request_id, status=status)
+        """
+
     def test_list_batch_allocations(self) -> None:
         """
         Test case for list_batch_allocations
@@ -714,8 +766,9 @@ class TestPaymentApi(unittest.TestCase):
         wallet_address = '0x1234567890abcdef...'
         keyword = 'keyword'
         bank_account_status = cobo_waas2.BankAccountStatus()
+        bank_account_tag = cobo_waas2.DestinationBankAccountTag()
 
-        api_response = self.api.list_destination_entries(entry_type, limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address, keyword=keyword, bank_account_status=bank_account_status)
+        api_response = self.api.list_destination_entries(entry_type, limit=limit, before=before, after=after, destination_id=destination_id, chain_ids=chain_ids, wallet_address=wallet_address, keyword=keyword, bank_account_status=bank_account_status, bank_account_tag=bank_account_tag)
         """
 
     def test_list_destinations(self) -> None:

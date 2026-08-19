@@ -34,7 +34,7 @@ class TestFILBase(unittest.TestCase):
         model = FILBase()
         if include_optional:
             return FILBase(
-                gas_base = '0.0002'
+                gas_base = '100'
             )
         else:
             return FILBase(

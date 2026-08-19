@@ -25,8 +25,8 @@ class FILPrice(BaseModel):
     """
     FILPrice
     """  # noqa: E501
-    gas_premium: Optional[StrictStr] = Field(default=None, description="An optional tip you can include to prioritize your transaction. The gas premium incentivizes miners to include your transaction sooner than those offering only the base fee.")
-    gas_fee_cap: Optional[StrictStr] = Field(default=None, description="The maximum gas price you are willing to pay per unit of gas.")
+    gas_premium: Optional[StrictStr] = Field(default=None, description="An optional additional fee that users can include to prioritize their transactions over others. It acts like a tip to incentivize miners to select and include your transaction over transactions with only the base fee.")
+    gas_fee_cap: Optional[StrictStr] = Field(default=None, description="The gas_fee_cap is a user-defined limit on how much they are willing to pay per unit of gas.")
     gas_limit: Optional[StrictStr] = Field(default=None, description="The maximum amount of gas your transaction is allowed to consume.")
     __properties: ClassVar[List[str]] = ["gas_premium", "gas_fee_cap", "gas_limit"]
 

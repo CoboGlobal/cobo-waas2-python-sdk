@@ -44,8 +44,8 @@ class TestTransactionRequestFee(unittest.TestCase):
                 fee_rate = '50',
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035'
+                gas_premium = '522508',
+                gas_fee_cap = '522768'
             )
         else:
             return TransactionRequestFee(
@@ -56,8 +56,8 @@ class TestTransactionRequestFee(unittest.TestCase):
                 gas_price = '100000000',
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035',
+                gas_premium = '522508',
+                gas_fee_cap = '522768',
         )
         """
 

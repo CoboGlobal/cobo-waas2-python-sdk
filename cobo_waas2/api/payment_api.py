@@ -23,6 +23,7 @@ from cobo_waas2.models.batch_allocation_detail import BatchAllocationDetail
 from cobo_waas2.models.counterparty import Counterparty
 from cobo_waas2.models.counterparty_detail import CounterpartyDetail
 from cobo_waas2.models.counterparty_type import CounterpartyType
+from cobo_waas2.models.create_bank_withdrawal_request import CreateBankWithdrawalRequest
 from cobo_waas2.models.create_batch_allocation_request import CreateBatchAllocationRequest
 from cobo_waas2.models.create_bulk_send_request import CreateBulkSendRequest
 from cobo_waas2.models.create_counterparty_entry201_response import CreateCounterpartyEntry201Response
@@ -49,6 +50,7 @@ from cobo_waas2.models.delete_crypto_address201_response import DeleteCryptoAddr
 from cobo_waas2.models.delete_destination_by_id200_response import DeleteDestinationById200Response
 from cobo_waas2.models.delete_destination_entry200_response import DeleteDestinationEntry200Response
 from cobo_waas2.models.destination import Destination
+from cobo_waas2.models.destination_bank_account_tag import DestinationBankAccountTag
 from cobo_waas2.models.destination_detail import DestinationDetail
 from cobo_waas2.models.destination_type import DestinationType
 from cobo_waas2.models.entry_type import EntryType
@@ -63,6 +65,7 @@ from cobo_waas2.models.get_reports200_response import GetReports200Response
 from cobo_waas2.models.get_settlement_info_by_ids200_response import GetSettlementInfoByIds200Response
 from cobo_waas2.models.link import Link
 from cobo_waas2.models.list_allocation_items200_response import ListAllocationItems200Response
+from cobo_waas2.models.list_bank_withdrawals200_response import ListBankWithdrawals200Response
 from cobo_waas2.models.list_batch_allocations200_response import ListBatchAllocations200Response
 from cobo_waas2.models.list_bulk_send_items200_response import ListBulkSendItems200Response
 from cobo_waas2.models.list_bulk_sends200_response import ListBulkSends200Response
@@ -88,6 +91,10 @@ from cobo_waas2.models.payment_allocation_amount import PaymentAllocationAmount
 from cobo_waas2.models.payment_balance_change_response import PaymentBalanceChangeResponse
 from cobo_waas2.models.payment_balance_change_source_type import PaymentBalanceChangeSourceType
 from cobo_waas2.models.payment_balance_flow_direction import PaymentBalanceFlowDirection
+from cobo_waas2.models.payment_bank_account_balance import PaymentBankAccountBalance
+from cobo_waas2.models.payment_bank_withdrawal import PaymentBankWithdrawal
+from cobo_waas2.models.payment_bank_withdrawal_detail import PaymentBankWithdrawalDetail
+from cobo_waas2.models.payment_bank_withdrawal_status import PaymentBankWithdrawalStatus
 from cobo_waas2.models.payment_bulk_send import PaymentBulkSend
 from cobo_waas2.models.payment_estimate_fee201_response import PaymentEstimateFee201Response
 from cobo_waas2.models.payment_estimate_fee_request import PaymentEstimateFeeRequest
@@ -483,6 +490,176 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/payments/refunds/{refund_id}/cancel',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_bank_withdrawal(
+        self,
+        create_bank_withdrawal_request: Annotated[Optional[CreateBankWithdrawalRequest], Field(description="The request body to create a bank withdrawal.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentBankWithdrawal:
+        """Create bank withdrawal
+
+        This operation creates a bank withdrawal from a virtual account to a target bank account. 
+
+        :param create_bank_withdrawal_request: The request body to create a bank withdrawal.
+        :type create_bank_withdrawal_request: CreateBankWithdrawalRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_bank_withdrawal_serialize(
+            create_bank_withdrawal_request=create_bank_withdrawal_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentBankWithdrawal",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_bank_withdrawal_with_http_info(
+        self,
+        create_bank_withdrawal_request: Annotated[Optional[CreateBankWithdrawalRequest], Field(description="The request body to create a bank withdrawal.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentBankWithdrawal]:
+        """Create bank withdrawal
+
+        This operation creates a bank withdrawal from a virtual account to a target bank account. 
+
+        :param create_bank_withdrawal_request: The request body to create a bank withdrawal.
+        :type create_bank_withdrawal_request: CreateBankWithdrawalRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_bank_withdrawal_serialize(
+            create_bank_withdrawal_request=create_bank_withdrawal_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentBankWithdrawal",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_bank_withdrawal_without_preload_content(
+        self,
+        create_bank_withdrawal_request: Annotated[Optional[CreateBankWithdrawalRequest], Field(description="The request body to create a bank withdrawal.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create bank withdrawal
+
+        This operation creates a bank withdrawal from a virtual account to a target bank account. 
+
+        :param create_bank_withdrawal_request: The request body to create a bank withdrawal.
+        :type create_bank_withdrawal_request: CreateBankWithdrawalRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_bank_withdrawal_serialize(
+            create_bank_withdrawal_request=create_bank_withdrawal_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentBankWithdrawal",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_bank_withdrawal_serialize(
+        self,
+        create_bank_withdrawal_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_bank_withdrawal_request is not None:
+            _body_params = create_bank_withdrawal_request
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/bank_withdrawals',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4676,6 +4853,176 @@ class PaymentApi:
         )
 
     @validate_call
+    def get_bank_withdrawal_by_id(
+        self,
+        bank_withdrawal_id: Annotated[StrictStr, Field(description="The bank withdrawal ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentBankWithdrawalDetail:
+        """Get bank withdrawal information
+
+        This operation retrieves the information of a specific bank withdrawal. 
+
+        :param bank_withdrawal_id: The bank withdrawal ID. (required)
+        :type bank_withdrawal_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_bank_withdrawal_by_id_serialize(
+            bank_withdrawal_id=bank_withdrawal_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBankWithdrawalDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_bank_withdrawal_by_id_with_http_info(
+        self,
+        bank_withdrawal_id: Annotated[StrictStr, Field(description="The bank withdrawal ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentBankWithdrawalDetail]:
+        """Get bank withdrawal information
+
+        This operation retrieves the information of a specific bank withdrawal. 
+
+        :param bank_withdrawal_id: The bank withdrawal ID. (required)
+        :type bank_withdrawal_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_bank_withdrawal_by_id_serialize(
+            bank_withdrawal_id=bank_withdrawal_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBankWithdrawalDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_bank_withdrawal_by_id_without_preload_content(
+        self,
+        bank_withdrawal_id: Annotated[StrictStr, Field(description="The bank withdrawal ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get bank withdrawal information
+
+        This operation retrieves the information of a specific bank withdrawal. 
+
+        :param bank_withdrawal_id: The bank withdrawal ID. (required)
+        :type bank_withdrawal_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_bank_withdrawal_by_id_serialize(
+            bank_withdrawal_id=bank_withdrawal_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBankWithdrawalDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_bank_withdrawal_by_id_serialize(
+        self,
+        bank_withdrawal_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bank_withdrawal_id is not None:
+            _path_params['bank_withdrawal_id'] = bank_withdrawal_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/bank_withdrawals/{bank_withdrawal_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def get_batch_allocation_by_id(
         self,
         batch_allocation_id: Annotated[StrictStr, Field(description="The batch allocation ID.")],
@@ -6082,6 +6429,176 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/merchants/{merchant_id}/kyc',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def get_payment_bank_account_balance(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The destination bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentBankAccountBalance:
+        """Get bank account balance
+
+        This operation retrieves the balance of a destination bank account, only available for bank accounts with tag `VA`. 
+
+        :param bank_account_id: The destination bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payment_bank_account_balance_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBankAccountBalance",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_payment_bank_account_balance_with_http_info(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The destination bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentBankAccountBalance]:
+        """Get bank account balance
+
+        This operation retrieves the balance of a destination bank account, only available for bank accounts with tag `VA`. 
+
+        :param bank_account_id: The destination bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payment_bank_account_balance_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBankAccountBalance",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_payment_bank_account_balance_without_preload_content(
+        self,
+        bank_account_id: Annotated[StrictStr, Field(description="The destination bank account ID.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get bank account balance
+
+        This operation retrieves the balance of a destination bank account, only available for bank accounts with tag `VA`. 
+
+        :param bank_account_id: The destination bank account ID. (required)
+        :type bank_account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_payment_bank_account_balance_serialize(
+            bank_account_id=bank_account_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PaymentBankAccountBalance",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_payment_bank_account_balance_serialize(
+        self,
+        bank_account_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bank_account_id is not None:
+            _path_params['bank_account_id'] = bank_account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/balance/bank_accounts/{bank_account_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8451,6 +8968,246 @@ class PaymentApi:
         )
 
     @validate_call
+    def list_bank_withdrawals(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        status: Annotated[Optional[PaymentBankWithdrawalStatus], Field(description="Filter by bank withdrawal status.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListBankWithdrawals200Response:
+        """List bank withdrawals
+
+        This operation retrieves the list of bank withdrawals. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param request_id: The request ID.
+        :type request_id: str
+        :param status: Filter by bank withdrawal status.
+        :type status: PaymentBankWithdrawalStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_bank_withdrawals_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            request_id=request_id,
+            status=status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBankWithdrawals200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_bank_withdrawals_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        status: Annotated[Optional[PaymentBankWithdrawalStatus], Field(description="Filter by bank withdrawal status.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListBankWithdrawals200Response]:
+        """List bank withdrawals
+
+        This operation retrieves the list of bank withdrawals. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param request_id: The request ID.
+        :type request_id: str
+        :param status: Filter by bank withdrawal status.
+        :type status: PaymentBankWithdrawalStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_bank_withdrawals_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            request_id=request_id,
+            status=status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBankWithdrawals200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_bank_withdrawals_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        request_id: Annotated[Optional[StrictStr], Field(description="The request ID.")] = None,
+        status: Annotated[Optional[PaymentBankWithdrawalStatus], Field(description="Filter by bank withdrawal status.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List bank withdrawals
+
+        This operation retrieves the list of bank withdrawals. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param request_id: The request ID.
+        :type request_id: str
+        :param status: Filter by bank withdrawal status.
+        :type status: PaymentBankWithdrawalStatus
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_bank_withdrawals_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            request_id=request_id,
+            status=status,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListBankWithdrawals200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_bank_withdrawals_serialize(
+        self,
+        limit,
+        before,
+        after,
+        request_id,
+        status,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if request_id is not None:
+            
+            _query_params.append(('request_id', request_id))
+            
+        if status is not None:
+            
+            _query_params.append(('status', status.value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/bank_withdrawals',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_batch_allocations(
         self,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -9832,6 +10589,7 @@ class PaymentApi:
         wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term for performing fuzzy matches in the search query.")] = None,
         bank_account_status: Annotated[Optional[BankAccountStatus], Field(description="BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. ")] = None,
+        bank_account_tag: Annotated[Optional[DestinationBankAccountTag], Field(description="Filter destination bank accounts by tag. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9863,6 +10621,8 @@ class PaymentApi:
         :type keyword: str
         :param bank_account_status: BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. 
         :type bank_account_status: BankAccountStatus
+        :param bank_account_tag: Filter destination bank accounts by tag. 
+        :type bank_account_tag: DestinationBankAccountTag
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9881,6 +10641,7 @@ class PaymentApi:
             wallet_address=wallet_address,
             keyword=keyword,
             bank_account_status=bank_account_status,
+            bank_account_tag=bank_account_tag,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -9910,6 +10671,7 @@ class PaymentApi:
         wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term for performing fuzzy matches in the search query.")] = None,
         bank_account_status: Annotated[Optional[BankAccountStatus], Field(description="BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. ")] = None,
+        bank_account_tag: Annotated[Optional[DestinationBankAccountTag], Field(description="Filter destination bank accounts by tag. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9941,6 +10703,8 @@ class PaymentApi:
         :type keyword: str
         :param bank_account_status: BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. 
         :type bank_account_status: BankAccountStatus
+        :param bank_account_tag: Filter destination bank accounts by tag. 
+        :type bank_account_tag: DestinationBankAccountTag
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9959,6 +10723,7 @@ class PaymentApi:
             wallet_address=wallet_address,
             keyword=keyword,
             bank_account_status=bank_account_status,
+            bank_account_tag=bank_account_tag,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -9988,6 +10753,7 @@ class PaymentApi:
         wallet_address: Annotated[Optional[StrictStr], Field(description="The wallet address.")] = None,
         keyword: Annotated[Optional[StrictStr], Field(description="A search term for performing fuzzy matches in the search query.")] = None,
         bank_account_status: Annotated[Optional[BankAccountStatus], Field(description="BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. ")] = None,
+        bank_account_tag: Annotated[Optional[DestinationBankAccountTag], Field(description="Filter destination bank accounts by tag. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10019,6 +10785,8 @@ class PaymentApi:
         :type keyword: str
         :param bank_account_status: BankAccountStatus defines the status of the bank account: - `Pending`: The bank account is pending verification by Cobo. - `Approved`: The bank account has been approved by Cobo. - `Rejected`: The bank account has been rejected by Cobo. 
         :type bank_account_status: BankAccountStatus
+        :param bank_account_tag: Filter destination bank accounts by tag. 
+        :type bank_account_tag: DestinationBankAccountTag
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10037,6 +10805,7 @@ class PaymentApi:
             wallet_address=wallet_address,
             keyword=keyword,
             bank_account_status=bank_account_status,
+            bank_account_tag=bank_account_tag,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -10061,6 +10830,7 @@ class PaymentApi:
         wallet_address,
         keyword,
         bank_account_status,
+        bank_account_tag,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10106,6 +10876,10 @@ class PaymentApi:
         if bank_account_status is not None:
             
             _query_params.append(('bank_account_status', bank_account_status.value))
+            
+        if bank_account_tag is not None:
+            
+            _query_params.append(('bank_account_tag', bank_account_tag.value))
             
         # process the header parameters
         # process the form parameters

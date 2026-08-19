@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class WalletType(str, Enum):
     """
-    The wallet type. Possible values include:  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+    The wallet type. Possible values include:  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
     """
 
     """
@@ -26,7 +26,6 @@ class WalletType(str, Enum):
     """
     CUSTODIAL = 'Custodial'
     MPC = 'MPC'
-    SMARTCONTRACT = 'SmartContract'
     EXCHANGE = 'Exchange'
 
     UNKNOWN = None

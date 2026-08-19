@@ -34,17 +34,17 @@ class TestEstimatedFILFeeSlow(unittest.TestCase):
         model = EstimatedFILFeeSlow()
         if include_optional:
             return EstimatedFILFeeSlow(
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035',
+                gas_premium = '522508',
+                gas_fee_cap = '522768',
                 gas_limit = '500',
-                gas_base = '0.0002'
+                gas_base = '100'
             )
         else:
             return EstimatedFILFeeSlow(
-                gas_premium = '0.0001',
-                gas_fee_cap = '0.00035',
+                gas_premium = '522508',
+                gas_fee_cap = '522768',
                 gas_limit = '500',
-                gas_base = '0.0002',
+                gas_base = '100',
         )
         """
 

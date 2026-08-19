@@ -22,6 +22,7 @@ from cobo_waas2.models.transaction_destination import TransactionDestination
 from cobo_waas2.models.transaction_fee import TransactionFee
 from cobo_waas2.models.transaction_fueling_info import TransactionFuelingInfo
 from cobo_waas2.models.transaction_initiator_type import TransactionInitiatorType
+from cobo_waas2.models.transaction_process_type import TransactionProcessType
 from cobo_waas2.models.transaction_raw_tx_info import TransactionRawTxInfo
 from cobo_waas2.models.transaction_replacement import TransactionReplacement
 from cobo_waas2.models.transaction_result import TransactionResult
@@ -64,13 +65,14 @@ class TransactionDetail(BaseModel):
     category: Optional[List[StrictStr]] = Field(default=None, description="A custom transaction category for you to identify your transfers more easily.")
     description: Optional[StrictStr] = Field(default=None, description="The description for your transaction.")
     is_loop: Optional[StrictBool] = Field(default=None, description="Whether the transaction was executed as a [Cobo Loop](https://manuals.cobo.com/en/portal/custodial-wallets/cobo-loop) transfer. - `true`: The transaction was executed as a Cobo Loop transfer. - `false`: The transaction was not executed as a Cobo Loop transfer. ")
-    cobo_category: Optional[List[StrictStr]] = Field(default=None, description="The transaction category defined by Cobo. For more details, refer to [Cobo-defined categories](/v2/guides/transactions/manage-transactions#cobo-defined-categories). ")
-    extra: Optional[List[StrictStr]] = Field(default=None, description="A list of JSON-encoded strings containing structured, business-specific extra information for the transaction. Each item corresponds to a specific data type, indicated by the `extra_type` field in the JSON object (for example, \"BabylonBusinessInfo\", \"BtcAddressInfo\"). ")
+    cobo_category: Optional[List[StrictStr]] = Field(default=None, description="The transaction category defined by Cobo. Possible values include:  - `AutoSweep`: An auto-sweep transaction. - `AutoFueling`: A transaction where Fee Station pays transaction fees to an address within your wallet. - `AutoFuelingRefund`: A refund for an auto-fueling transaction. - `BillPayment`: A transaction to pay Cobo bills through Fee Station. - `BillRefund`: A refund for a previously made bill payment. - `CommissionFeeCharge`: A transaction to charge commission fees via Fee Station. - `CommissionFeeRefund`: A refund of previously charged commission fees. ")
+    extra: Optional[List[StrictStr]] = Field(default=None, description="The transaction extra information.")
+    transaction_process_type: Optional[TransactionProcessType] = None
     fueling_info: Optional[TransactionFuelingInfo] = None
     created_timestamp: StrictInt = Field(description="The time when the transaction was created, in Unix timestamp format, measured in milliseconds.")
     updated_timestamp: StrictInt = Field(description="The time when the transaction was updated, in Unix timestamp format, measured in milliseconds.")
     timeline: Optional[List[TransactionTimeline]] = None
-    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "extra", "fueling_info", "created_timestamp", "updated_timestamp", "timeline"]
+    __properties: ClassVar[List[str]] = ["transaction_id", "cobo_id", "request_id", "wallet_id", "type", "status", "sub_status", "failed_reason", "chain_id", "token_id", "asset_id", "source", "destination", "result", "fee", "initiator", "initiator_type", "confirmed_num", "confirming_threshold", "transaction_hash", "block_info", "raw_tx_info", "replacement", "category", "description", "is_loop", "cobo_category", "extra", "transaction_process_type", "fueling_info", "created_timestamp", "updated_timestamp", "timeline"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -182,6 +184,7 @@ class TransactionDetail(BaseModel):
             "is_loop": obj.get("is_loop"),
             "cobo_category": obj.get("cobo_category"),
             "extra": obj.get("extra"),
+            "transaction_process_type": obj.get("transaction_process_type"),
             "fueling_info": TransactionFuelingInfo.from_dict(obj["fueling_info"]) if obj.get("fueling_info") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp"),

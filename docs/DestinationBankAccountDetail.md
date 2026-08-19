@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **destination_contact_address** | **str** | The contact address of the destination. | [optional] 
 **destination_merchant_id** | **str** | The ID of the merchant linked to the destination. | [optional] 
 **bank_account_id** | **str** | The destination bank account ID. | 
+**tag** | [**DestinationBankAccountTag**](DestinationBankAccountTag.md) |  | [optional] 
 **account_alias** | **str** | The alias of the bank account. | 
 **account_number** | **str** | The bank account number. | 
 **swift_code** | **str** | The SWIFT or BIC code of the bank. | 

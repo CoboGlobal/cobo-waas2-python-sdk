@@ -36,7 +36,7 @@ class TestTransactionSource(unittest.TestCase):
             return TransactionSource(
                 source_type = 'DepositFromAddress',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                address = '0x1234567890123456789012345678901234567890',
+                address = '19AR6YWEGbSoY8UT9Ksy9WrmrZPD5sL4Ku',
                 included_utxos = [
                     cobo_waas2.models.transaction_utxo.TransactionUtxo(
                         tx_hash = '7014d7d9b91862d7131f7543d84da3bec60e20be93c23ad01167c48b778fdemo', 
@@ -48,7 +48,6 @@ class TestTransactionSource(unittest.TestCase):
                         vout_n = 0, )
                     ],
                 signer_key_share_holder_group_id = 'b33130a9-6e18-44a9-9e48-8b3b41921f0e',
-                delegate = None,
                 exchange_id = 'binance',
                 trading_account_type = 'Asset',
                 wallet_type = 'Custodial',
@@ -61,7 +60,6 @@ class TestTransactionSource(unittest.TestCase):
             return TransactionSource(
                 source_type = 'DepositFromAddress',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                address = '0x1234567890123456789012345678901234567890',
                 exchange_id = 'binance',
                 wallet_type = 'Custodial',
                 wallet_subtype = 'Asset',

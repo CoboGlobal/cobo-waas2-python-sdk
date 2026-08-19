@@ -31,6 +31,7 @@ from cobo_waas2.models.created_wallet_info import CreatedWalletInfo
 from cobo_waas2.models.delete_wallet_by_id201_response import DeleteWalletById201Response
 from cobo_waas2.models.extended_token_info import ExtendedTokenInfo
 from cobo_waas2.models.get_max_transferable_value_with_fee_model_request import GetMaxTransferableValueWithFeeModelRequest
+from cobo_waas2.models.list_account_balances200_response import ListAccountBalances200Response
 from cobo_waas2.models.list_address_balances_by_token200_response import ListAddressBalancesByToken200Response
 from cobo_waas2.models.list_addresses200_response import ListAddresses200Response
 from cobo_waas2.models.list_supported_chains200_response import ListSupportedChains200Response
@@ -1190,7 +1191,7 @@ class WalletsApi:
     ) -> CreatedWalletInfo:
         """Create wallet
 
-        This operation creates a wallet with the provided information.  <Note>This operation is not applicable to Smart Contract Wallets.</Note> 
+        This operation creates a wallet with the provided information. 
 
         :param create_wallet_params: The request body to create a wallet
         :type create_wallet_params: CreateWalletParams
@@ -1236,7 +1237,7 @@ class WalletsApi:
     ) -> ApiResponse[CreatedWalletInfo]:
         """Create wallet
 
-        This operation creates a wallet with the provided information.  <Note>This operation is not applicable to Smart Contract Wallets.</Note> 
+        This operation creates a wallet with the provided information. 
 
         :param create_wallet_params: The request body to create a wallet
         :type create_wallet_params: CreateWalletParams
@@ -1282,7 +1283,7 @@ class WalletsApi:
     ) -> RESTResponseType:
         """Create wallet
 
-        This operation creates a wallet with the provided information.  <Note>This operation is not applicable to Smart Contract Wallets.</Note> 
+        This operation creates a wallet with the provided information. 
 
         :param create_wallet_params: The request body to create a wallet
         :type create_wallet_params: CreateWalletParams
@@ -2619,6 +2620,208 @@ class WalletsApi:
         )
 
     @validate_call
+    def list_account_balances(
+        self,
+        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. Currently, only the following account-based chains are supported: - `ETH`: Ethereum - `TRON`: TRON - `SOL`: Solana - `SETH`: Ethereum Sepolia Testnet - `TTRON`: TRON Testnet - `SOLDEV_SOL`: Solana Devnet ")],
+        queries: Annotated[StrictStr, Field(description="A comma-separated list of balance queries. Each query is a token ID and a wallet address separated by a colon (:), in the format `{token_id}:{address}`. A maximum of 50 queries can be specified per request to ensure the URL length stays within standard web server limits (typically 8 KB).  You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  Example: `ETH_USDT:0x1c53e3f2f8b59e5d6b6b6b6b6b6b6b6b6b6b6b6b,ETH:0x9bff46afe2b45ffdfd8a99d4990878d0a44a67b8` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListAccountBalances200Response:
+        """List account balances
+
+        This operation retrieves the on-chain token balances of multiple addresses on a specified account-based chain in a single request. All balances in the response are retrieved from the same block state, together with the block number of that block.  You need to specify the wallet ID to scope the balance queries to a specific wallet. The wallet ID can be retrieved by calling [List all wallets](https://www.cobo.com/developers/v2/api-references/wallets/list-all-wallets).  <Note>The returned block number refers to the node's latest block, which may still be reversible. Whether to wait for a certain number of confirmations before using the result is up to you.</Note>  <Note>This operation is rate-limited to one request per second for each organization. Requests exceeding this limit will be rejected.</Note> 
+
+        :param wallet_id: The wallet ID. (required)
+        :type wallet_id: str
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. Currently, only the following account-based chains are supported: - `ETH`: Ethereum - `TRON`: TRON - `SOL`: Solana - `SETH`: Ethereum Sepolia Testnet - `TTRON`: TRON Testnet - `SOLDEV_SOL`: Solana Devnet  (required)
+        :type chain_id: str
+        :param queries: A comma-separated list of balance queries. Each query is a token ID and a wallet address separated by a colon (:), in the format `{token_id}:{address}`. A maximum of 50 queries can be specified per request to ensure the URL length stays within standard web server limits (typically 8 KB).  You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  Example: `ETH_USDT:0x1c53e3f2f8b59e5d6b6b6b6b6b6b6b6b6b6b6b6b,ETH:0x9bff46afe2b45ffdfd8a99d4990878d0a44a67b8`  (required)
+        :type queries: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_account_balances_serialize(
+            wallet_id=wallet_id,
+            chain_id=chain_id,
+            queries=queries,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAccountBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_account_balances_with_http_info(
+        self,
+        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. Currently, only the following account-based chains are supported: - `ETH`: Ethereum - `TRON`: TRON - `SOL`: Solana - `SETH`: Ethereum Sepolia Testnet - `TTRON`: TRON Testnet - `SOLDEV_SOL`: Solana Devnet ")],
+        queries: Annotated[StrictStr, Field(description="A comma-separated list of balance queries. Each query is a token ID and a wallet address separated by a colon (:), in the format `{token_id}:{address}`. A maximum of 50 queries can be specified per request to ensure the URL length stays within standard web server limits (typically 8 KB).  You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  Example: `ETH_USDT:0x1c53e3f2f8b59e5d6b6b6b6b6b6b6b6b6b6b6b6b,ETH:0x9bff46afe2b45ffdfd8a99d4990878d0a44a67b8` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListAccountBalances200Response]:
+        """List account balances
+
+        This operation retrieves the on-chain token balances of multiple addresses on a specified account-based chain in a single request. All balances in the response are retrieved from the same block state, together with the block number of that block.  You need to specify the wallet ID to scope the balance queries to a specific wallet. The wallet ID can be retrieved by calling [List all wallets](https://www.cobo.com/developers/v2/api-references/wallets/list-all-wallets).  <Note>The returned block number refers to the node's latest block, which may still be reversible. Whether to wait for a certain number of confirmations before using the result is up to you.</Note>  <Note>This operation is rate-limited to one request per second for each organization. Requests exceeding this limit will be rejected.</Note> 
+
+        :param wallet_id: The wallet ID. (required)
+        :type wallet_id: str
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. Currently, only the following account-based chains are supported: - `ETH`: Ethereum - `TRON`: TRON - `SOL`: Solana - `SETH`: Ethereum Sepolia Testnet - `TTRON`: TRON Testnet - `SOLDEV_SOL`: Solana Devnet  (required)
+        :type chain_id: str
+        :param queries: A comma-separated list of balance queries. Each query is a token ID and a wallet address separated by a colon (:), in the format `{token_id}:{address}`. A maximum of 50 queries can be specified per request to ensure the URL length stays within standard web server limits (typically 8 KB).  You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  Example: `ETH_USDT:0x1c53e3f2f8b59e5d6b6b6b6b6b6b6b6b6b6b6b6b,ETH:0x9bff46afe2b45ffdfd8a99d4990878d0a44a67b8`  (required)
+        :type queries: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_account_balances_serialize(
+            wallet_id=wallet_id,
+            chain_id=chain_id,
+            queries=queries,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAccountBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_account_balances_without_preload_content(
+        self,
+        wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
+        chain_id: Annotated[StrictStr, Field(description="The chain ID, which is the unique identifier of a blockchain. Currently, only the following account-based chains are supported: - `ETH`: Ethereum - `TRON`: TRON - `SOL`: Solana - `SETH`: Ethereum Sepolia Testnet - `TTRON`: TRON Testnet - `SOLDEV_SOL`: Solana Devnet ")],
+        queries: Annotated[StrictStr, Field(description="A comma-separated list of balance queries. Each query is a token ID and a wallet address separated by a colon (:), in the format `{token_id}:{address}`. A maximum of 50 queries can be specified per request to ensure the URL length stays within standard web server limits (typically 8 KB).  You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  Example: `ETH_USDT:0x1c53e3f2f8b59e5d6b6b6b6b6b6b6b6b6b6b6b6b,ETH:0x9bff46afe2b45ffdfd8a99d4990878d0a44a67b8` ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List account balances
+
+        This operation retrieves the on-chain token balances of multiple addresses on a specified account-based chain in a single request. All balances in the response are retrieved from the same block state, together with the block number of that block.  You need to specify the wallet ID to scope the balance queries to a specific wallet. The wallet ID can be retrieved by calling [List all wallets](https://www.cobo.com/developers/v2/api-references/wallets/list-all-wallets).  <Note>The returned block number refers to the node's latest block, which may still be reversible. Whether to wait for a certain number of confirmations before using the result is up to you.</Note>  <Note>This operation is rate-limited to one request per second for each organization. Requests exceeding this limit will be rejected.</Note> 
+
+        :param wallet_id: The wallet ID. (required)
+        :type wallet_id: str
+        :param chain_id: The chain ID, which is the unique identifier of a blockchain. Currently, only the following account-based chains are supported: - `ETH`: Ethereum - `TRON`: TRON - `SOL`: Solana - `SETH`: Ethereum Sepolia Testnet - `TTRON`: TRON Testnet - `SOLDEV_SOL`: Solana Devnet  (required)
+        :type chain_id: str
+        :param queries: A comma-separated list of balance queries. Each query is a token ID and a wallet address separated by a colon (:), in the format `{token_id}:{address}`. A maximum of 50 queries can be specified per request to ensure the URL length stays within standard web server limits (typically 8 KB).  You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  Example: `ETH_USDT:0x1c53e3f2f8b59e5d6b6b6b6b6b6b6b6b6b6b6b6b,ETH:0x9bff46afe2b45ffdfd8a99d4990878d0a44a67b8`  (required)
+        :type queries: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_account_balances_serialize(
+            wallet_id=wallet_id,
+            chain_id=chain_id,
+            queries=queries,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAccountBalances200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_account_balances_serialize(
+        self,
+        wallet_id,
+        chain_id,
+        queries,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if wallet_id is not None:
+            _path_params['wallet_id'] = wallet_id
+        if chain_id is not None:
+            _path_params['chain_id'] = chain_id
+        # process the query parameters
+        if queries is not None:
+            
+            _query_params.append(('queries', queries))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/wallets/{wallet_id}/chains/{chain_id}/account/balances',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def list_address_balances_by_token(
         self,
         wallet_id: Annotated[StrictStr, Field(description="The wallet ID.")],
@@ -3129,8 +3332,8 @@ class WalletsApi:
     @validate_call
     def list_enabled_chains(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
@@ -3147,9 +3350,9 @@ class WalletsApi:
 
         This operation retrieves all the chains that can be used by your organization.   You can filter the result by wallet type or subtype. If you do not specify a wallet type, this operation returns a combination of chains that can be used by your organization for each wallet type. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param limit: The maximum number of objects to return. The value range is [1, 500].
         :type limit: int
@@ -3191,8 +3394,8 @@ class WalletsApi:
     @validate_call
     def list_enabled_chains_with_http_info(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
@@ -3209,9 +3412,9 @@ class WalletsApi:
 
         This operation retrieves all the chains that can be used by your organization.   You can filter the result by wallet type or subtype. If you do not specify a wallet type, this operation returns a combination of chains that can be used by your organization for each wallet type. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param limit: The maximum number of objects to return. The value range is [1, 500].
         :type limit: int
@@ -3253,8 +3456,8 @@ class WalletsApi:
     @validate_call
     def list_enabled_chains_without_preload_content(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
         after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
@@ -3271,9 +3474,9 @@ class WalletsApi:
 
         This operation retrieves all the chains that can be used by your organization.   You can filter the result by wallet type or subtype. If you do not specify a wallet type, this operation returns a combination of chains that can be used by your organization for each wallet type. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param limit: The maximum number of objects to return. The value range is [1, 500].
         :type limit: int
@@ -3369,8 +3572,8 @@ class WalletsApi:
     @validate_call
     def list_enabled_tokens(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs(Supports up to 500), separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         token_addresses: Annotated[Optional[StrictStr], Field(description="A list of token contract addresses (Supports up to 500), separated by comma. Matching is case-insensitive, so you can pass either lowercase or checksum addresses. Because the same contract address may be deployed on multiple chains, this filter can return tokens across different chain IDs; combine it with `chain_ids` to narrow the result to a specific chain. Native tokens have no contract address and are excluded from the result.")] = None,
@@ -3390,9 +3593,9 @@ class WalletsApi:
 
         This operation retrieves all the tokens that can be used by your organization.   You can filter the result by wallet type, subtype, chain IDs, and token IDs. If you do not specify a wallet type, this operation returns a combination of tokens that can be used by your organization for each wallet type. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -3443,8 +3646,8 @@ class WalletsApi:
     @validate_call
     def list_enabled_tokens_with_http_info(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs(Supports up to 500), separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         token_addresses: Annotated[Optional[StrictStr], Field(description="A list of token contract addresses (Supports up to 500), separated by comma. Matching is case-insensitive, so you can pass either lowercase or checksum addresses. Because the same contract address may be deployed on multiple chains, this filter can return tokens across different chain IDs; combine it with `chain_ids` to narrow the result to a specific chain. Native tokens have no contract address and are excluded from the result.")] = None,
@@ -3464,9 +3667,9 @@ class WalletsApi:
 
         This operation retrieves all the tokens that can be used by your organization.   You can filter the result by wallet type, subtype, chain IDs, and token IDs. If you do not specify a wallet type, this operation returns a combination of tokens that can be used by your organization for each wallet type. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -3517,8 +3720,8 @@ class WalletsApi:
     @validate_call
     def list_enabled_tokens_without_preload_content(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs(Supports up to 500), separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         token_addresses: Annotated[Optional[StrictStr], Field(description="A list of token contract addresses (Supports up to 500), separated by comma. Matching is case-insensitive, so you can pass either lowercase or checksum addresses. Because the same contract address may be deployed on multiple chains, this filter can return tokens across different chain IDs; combine it with `chain_ids` to narrow the result to a specific chain. Native tokens have no contract address and are excluded from the result.")] = None,
@@ -3538,9 +3741,9 @@ class WalletsApi:
 
         This operation retrieves all the tokens that can be used by your organization.   You can filter the result by wallet type, subtype, chain IDs, and token IDs. If you do not specify a wallet type, this operation returns a combination of tokens that can be used by your organization for each wallet type. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -3660,8 +3863,8 @@ class WalletsApi:
     @validate_call
     def list_supported_chains(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
@@ -3679,9 +3882,9 @@ class WalletsApi:
 
         This operation retrieves all chains supported by a specific wallet type or subtype.   It provides details such as the chain ID, chain symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of chains supported by each wallet type. You can filter the result by chain IDs. The chain metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported chains [here](https://www.cobo.com/chains). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -3726,8 +3929,8 @@ class WalletsApi:
     @validate_call
     def list_supported_chains_with_http_info(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
@@ -3745,9 +3948,9 @@ class WalletsApi:
 
         This operation retrieves all chains supported by a specific wallet type or subtype.   It provides details such as the chain ID, chain symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of chains supported by each wallet type. You can filter the result by chain IDs. The chain metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported chains [here](https://www.cobo.com/chains). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -3792,8 +3995,8 @@ class WalletsApi:
     @validate_call
     def list_supported_chains_without_preload_content(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
         before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
@@ -3811,9 +4014,9 @@ class WalletsApi:
 
         This operation retrieves all chains supported by a specific wallet type or subtype.   It provides details such as the chain ID, chain symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of chains supported by each wallet type. You can filter the result by chain IDs. The chain metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported chains [here](https://www.cobo.com/chains). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -3917,8 +4120,8 @@ class WalletsApi:
     @validate_call
     def list_supported_tokens(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs(Supports up to 500), separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
@@ -3937,9 +4140,9 @@ class WalletsApi:
 
         This operation retrieves all tokens supported by a specific wallet type or subtype.   It provides details such as token ID, token symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of tokens supported by each wallet type. You can filter the result by token IDs or chain IDs. The token metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported tokens [here](https://www.cobo.com/tokens). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -3987,8 +4190,8 @@ class WalletsApi:
     @validate_call
     def list_supported_tokens_with_http_info(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs(Supports up to 500), separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
@@ -4007,9 +4210,9 @@ class WalletsApi:
 
         This operation retrieves all tokens supported by a specific wallet type or subtype.   It provides details such as token ID, token symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of tokens supported by each wallet type. You can filter the result by token IDs or chain IDs. The token metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported tokens [here](https://www.cobo.com/tokens). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -4057,8 +4260,8 @@ class WalletsApi:
     @validate_call
     def list_supported_tokens_without_preload_content(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs(Supports up to 500), separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. The value range is [1, 500].")] = None,
@@ -4077,9 +4280,9 @@ class WalletsApi:
 
         This operation retrieves all tokens supported by a specific wallet type or subtype.   It provides details such as token ID, token symbol, and other relevant information. If you do not specify a wallet type, this operation returns a combination of tokens supported by each wallet type. You can filter the result by token IDs or chain IDs. The token metadata is publicly available without any permission restrictions.  Cobo Portal currently supports over 80 blockchains and more than 3,000 tokens. In addition to this operation, you can also view the full list of supported tokens [here](https://www.cobo.com/tokens). We regularly update the list with new additions. If you want to request support for a specific chain or token, please [contact us](https://www.cobo.com/contact). 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param chain_ids: A list of chain IDs(Supports up to 500), separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -4208,7 +4411,7 @@ class WalletsApi:
     ) -> ListTokenBalancesForAddress200Response:
         """List token balances by address
 
-        The operation retrieves a list of token balances for a specified address within a wallet.   <Note>This operation is applicable to MPC Wallets, Custodial Wallets (Web3 Wallets), and Smart Contract Wallets only.</Note> 
+        The operation retrieves a list of token balances for a specified address within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -4274,7 +4477,7 @@ class WalletsApi:
     ) -> ApiResponse[ListTokenBalancesForAddress200Response]:
         """List token balances by address
 
-        The operation retrieves a list of token balances for a specified address within a wallet.   <Note>This operation is applicable to MPC Wallets, Custodial Wallets (Web3 Wallets), and Smart Contract Wallets only.</Note> 
+        The operation retrieves a list of token balances for a specified address within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -4340,7 +4543,7 @@ class WalletsApi:
     ) -> RESTResponseType:
         """List token balances by address
 
-        The operation retrieves a list of token balances for a specified address within a wallet.   <Note>This operation is applicable to MPC Wallets, Custodial Wallets (Web3 Wallets), and Smart Contract Wallets only.</Note> 
+        The operation retrieves a list of token balances for a specified address within a wallet.   <Note>This operation is applicable to MPC Wallets only.</Note> 
 
         :param wallet_id: The wallet ID. (required)
         :type wallet_id: str
@@ -5500,8 +5703,8 @@ class WalletsApi:
     @validate_call
     def list_wallets(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -5520,9 +5723,9 @@ class WalletsApi:
 
         This operation retrieves the information of all wallets under your organization. You can filter the result by wallet type and subtype. For MPC Wallets, you can also filter by project ID and vault ID. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
@@ -5570,8 +5773,8 @@ class WalletsApi:
     @validate_call
     def list_wallets_with_http_info(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -5590,9 +5793,9 @@ class WalletsApi:
 
         This operation retrieves the information of all wallets under your organization. You can filter the result by wallet type and subtype. For MPC Wallets, you can also filter by project ID and vault ID. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str
@@ -5640,8 +5843,8 @@ class WalletsApi:
     @validate_call
     def list_wallets_without_preload_content(
         self,
-        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
-        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) ")] = None,
+        wallet_type: Annotated[Optional[WalletType], Field(description="The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) ")] = None,
+        wallet_subtype: Annotated[Optional[WalletSubtype], Field(description="The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) ")] = None,
         project_id: Annotated[Optional[StrictStr], Field(description="(This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). ")] = None,
         vault_id: Annotated[Optional[StrictStr], Field(description="The vault ID, which you can retrieve by calling [List all vaults](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-vaults).")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
@@ -5660,9 +5863,9 @@ class WalletsApi:
 
         This operation retrieves the information of all wallets under your organization. You can filter the result by wallet type and subtype. For MPC Wallets, you can also filter by project ID and vault ID. 
 
-        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `SmartContract`: [Smart Contract Wallets](https://manuals.cobo.com/en/portal/smart-contract-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
+        :param wallet_type: The wallet type.  - `Custodial`: [Custodial Wallets](https://manuals.cobo.com/en/portal/custodial-wallets/introduction)  - `MPC`: [MPC Wallets](https://manuals.cobo.com/en/portal/mpc-wallets/introduction)  - `Exchange`: [Exchange Wallets](https://manuals.cobo.com/en/portal/exchange-wallets/introduction) 
         :type wallet_type: WalletType
-        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets)  - `Safe{Wallet}`: Smart Contract Wallets (Safe{Wallet}) 
+        :param wallet_subtype: The wallet subtype.  - `Asset`: Custodial Wallets (Asset Wallets)  - `Web3`: Custodial Wallets (Web3 Wallets)  - `Main`: Exchange Wallets (Main Account)  - `Sub`: Exchange Wallets (Sub Account)  - `Org-Controlled`: MPC Wallets (Organization-Controlled Wallets)  - `User-Controlled`: MPC Wallets (User-Controlled Wallets) 
         :type wallet_subtype: WalletSubtype
         :param project_id: (This parameter is only applicable to User-Controlled Wallets.) The project ID, which you can retrieve by calling [List all projects](https://www.cobo.com/developers/v2/api-references/wallets--mpc-wallets/list-all-projects). 
         :type project_id: str

@@ -207,6 +207,20 @@ class TestWalletsApi(unittest.TestCase):
         api_response = self.api.get_wallet_by_id(wallet_id)
         """
 
+    def test_list_account_balances(self) -> None:
+        """
+        Test case for list_account_balances
+
+        List account balances
+        """
+        """
+        wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        chain_id = 'ETH'
+        queries = 'ETH_USDT:0x1c53e3f2f8b59e5d6b6b6b6b6b6b6b6b6b6b6b6b,ETH:0x9bff46afe2b45ffdfd8a99d4990878d0a44a67b8'
+
+        api_response = self.api.list_account_balances(wallet_id, chain_id, queries)
+        """
+
     def test_list_address_balances_by_token(self) -> None:
         """
         Test case for list_address_balances_by_token

@@ -64,6 +64,7 @@ class TestListTopUpPayers200ResponseDataInner(unittest.TestCase):
                             destination_id = '123e4567-e89b-12d3-a456-426614174003', 
                             destination_type = 'Individual', 
                             destination_name = 'Destination A', 
+                            source = 'Client', 
                             country = 'USA', 
                             email = 'destination@example.com', 
                             contact_address = '123 Main St, Anytown, USA', 

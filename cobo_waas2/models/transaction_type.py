@@ -18,7 +18,7 @@ from typing_extensions import Self
 
 class TransactionType(str, Enum):
     """
-    The transaction type. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.    - `ExternalSafeTx`: A transaction to a Smart Contract Wallet (Safe{Wallet}) that requires one or multiple signatures to be executed.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
+    The transaction type. Possible values include:   - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction.   - `ContractCall`: A transaction that interacts with a smart contract.   - `MessageSign`: A transaction that signs a message.   - `Stake`: A transaction that creates a staking request.   - `Unstake`: A transaction that creates a unstaking request. 
     """
 
     """
@@ -28,7 +28,6 @@ class TransactionType(str, Enum):
     WITHDRAWAL = 'Withdrawal'
     CONTRACTCALL = 'ContractCall'
     MESSAGESIGN = 'MessageSign'
-    EXTERNALSAFETX = 'ExternalSafeTx'
     STAKE = 'Stake'
     UNSTAKE = 'Unstake'
 

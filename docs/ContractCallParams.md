@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **description** | **str** | The description of the contract call transaction. Maximum length is 2048 characters for MPC Wallets and Custodial Wallets (Web3 Wallets), and 1000 characters for Custodial Wallets (Asset Wallets). | [optional] 
 **category_names** | **List[str]** | The custom category for you to identify your transactions. | [optional] 
 **fee** | [**TransactionRequestFee**](TransactionRequestFee.md) |  | [optional] 
+**fee_level** | [**FeeLevel**](FeeLevel.md) |  | [optional] 
 **transaction_process_type** | [**TransactionProcessType**](TransactionProcessType.md) |  | [optional] 
 **auto_fuel** | [**AutoFuelType**](AutoFuelType.md) |  | [optional] 
 **pre_check** | [**PreCheck**](PreCheck.md) |  | [optional] 

@@ -37,9 +37,9 @@ class TestMerchantKycPersonInfo(unittest.TestCase):
                 name = '张三',
                 name_en = 'Zhang San',
                 id_number = '110101199001011234',
-                date_of_birth = '19900101',
-                issue_date = '20180101',
-                expiration_date = '20280101',
+                date_of_birth = '20290322',
+                issue_date = '20290322',
+                expiration_date = '20290322',
                 attachments = [
                     cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
                         file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 
@@ -57,9 +57,9 @@ class TestMerchantKycPersonInfo(unittest.TestCase):
                 name = '张三',
                 name_en = 'Zhang San',
                 id_number = '110101199001011234',
-                date_of_birth = '19900101',
-                issue_date = '20180101',
-                expiration_date = '20280101',
+                date_of_birth = '20290322',
+                issue_date = '20290322',
+                expiration_date = '20290322',
                 attachments = [
                     cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
                         file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 

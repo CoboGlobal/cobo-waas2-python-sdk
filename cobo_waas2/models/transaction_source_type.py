@@ -28,7 +28,6 @@ class TransactionSourceType(str, Enum):
     WEB3 = 'Web3'
     ORG_CONTROLLED = 'Org-Controlled'
     USER_CONTROLLED = 'User-Controlled'
-    SAFE_WALLET = 'Safe{Wallet}'
     MAIN = 'Main'
     SUB = 'Sub'
     DEPOSITFROMADDRESS = 'DepositFromAddress'

@@ -22,12 +22,11 @@ from cobo_waas2.models.transaction_deposit_from_loop_source import TransactionDe
 from cobo_waas2.models.transaction_deposit_from_wallet_source import TransactionDepositFromWalletSource
 from cobo_waas2.models.transaction_exchange_wallet_source import TransactionExchangeWalletSource
 from cobo_waas2.models.transaction_mpc_wallet_source import TransactionMPCWalletSource
-from cobo_waas2.models.transaction_smart_contract_safe_wallet_source import TransactionSmartContractSafeWalletSource
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TRANSACTIONSOURCE_ONE_OF_SCHEMAS = ["TransactionCustodialAssetWalletSource", "TransactionCustodialWeb3WalletSource", "TransactionDepositFromAddressSource", "TransactionDepositFromLoopSource", "TransactionDepositFromWalletSource", "TransactionExchangeWalletSource", "TransactionMPCWalletSource", "TransactionSmartContractSafeWalletSource"]
+TRANSACTIONSOURCE_ONE_OF_SCHEMAS = ["TransactionCustodialAssetWalletSource", "TransactionCustodialWeb3WalletSource", "TransactionDepositFromAddressSource", "TransactionDepositFromLoopSource", "TransactionDepositFromWalletSource", "TransactionExchangeWalletSource", "TransactionMPCWalletSource"]
 
 class TransactionSource(BaseModel):
     """
@@ -39,18 +38,16 @@ class TransactionSource(BaseModel):
     oneof_schema_2_validator: Optional[TransactionCustodialWeb3WalletSource] = None
     # data type: TransactionMPCWalletSource
     oneof_schema_3_validator: Optional[TransactionMPCWalletSource] = None
-    # data type: TransactionSmartContractSafeWalletSource
-    oneof_schema_4_validator: Optional[TransactionSmartContractSafeWalletSource] = None
     # data type: TransactionExchangeWalletSource
-    oneof_schema_5_validator: Optional[TransactionExchangeWalletSource] = None
+    oneof_schema_4_validator: Optional[TransactionExchangeWalletSource] = None
     # data type: TransactionDepositFromAddressSource
-    oneof_schema_6_validator: Optional[TransactionDepositFromAddressSource] = None
+    oneof_schema_5_validator: Optional[TransactionDepositFromAddressSource] = None
     # data type: TransactionDepositFromWalletSource
-    oneof_schema_7_validator: Optional[TransactionDepositFromWalletSource] = None
+    oneof_schema_6_validator: Optional[TransactionDepositFromWalletSource] = None
     # data type: TransactionDepositFromLoopSource
-    oneof_schema_8_validator: Optional[TransactionDepositFromLoopSource] = None
-    actual_instance: Optional[Union[TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource, TransactionSmartContractSafeWalletSource]] = None
-    one_of_schemas: Set[str] = { "TransactionCustodialAssetWalletSource", "TransactionCustodialWeb3WalletSource", "TransactionDepositFromAddressSource", "TransactionDepositFromLoopSource", "TransactionDepositFromWalletSource", "TransactionExchangeWalletSource", "TransactionMPCWalletSource", "TransactionSmartContractSafeWalletSource" }
+    oneof_schema_7_validator: Optional[TransactionDepositFromLoopSource] = None
+    actual_instance: Optional[Union[TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource]] = None
+    one_of_schemas: Set[str] = { "TransactionCustodialAssetWalletSource", "TransactionCustodialWeb3WalletSource", "TransactionDepositFromAddressSource", "TransactionDepositFromLoopSource", "TransactionDepositFromWalletSource", "TransactionExchangeWalletSource", "TransactionMPCWalletSource" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -91,11 +88,6 @@ class TransactionSource(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionMPCWalletSource`")
         else:
             match += 1
-        # validate data type: TransactionSmartContractSafeWalletSource
-        if not isinstance(v, TransactionSmartContractSafeWalletSource):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionSmartContractSafeWalletSource`")
-        else:
-            match += 1
         # validate data type: TransactionExchangeWalletSource
         if not isinstance(v, TransactionExchangeWalletSource):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TransactionExchangeWalletSource`")
@@ -118,10 +110,10 @@ class TransactionSource(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource, TransactionSmartContractSafeWalletSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource, TransactionSmartContractSafeWalletSource. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -169,11 +161,6 @@ class TransactionSource(BaseModel):
         # check if data type is `TransactionMPCWalletSource`
         if _data_type == "Org-Controlled":
             instance.actual_instance = TransactionMPCWalletSource.from_json(json_str)
-            return instance
-
-        # check if data type is `TransactionSmartContractSafeWalletSource`
-        if _data_type == "Safe{Wallet}":
-            instance.actual_instance = TransactionSmartContractSafeWalletSource.from_json(json_str)
             return instance
 
         # check if data type is `TransactionExchangeWalletSource`
@@ -226,11 +213,6 @@ class TransactionSource(BaseModel):
             instance.actual_instance = TransactionMPCWalletSource.from_json(json_str)
             return instance
 
-        # check if data type is `TransactionSmartContractSafeWalletSource`
-        if _data_type == "TransactionSmartContractSafeWalletSource":
-            instance.actual_instance = TransactionSmartContractSafeWalletSource.from_json(json_str)
-            return instance
-
         return instance
         # deserialize data into TransactionCustodialAssetWalletSource
         try:
@@ -247,12 +229,6 @@ class TransactionSource(BaseModel):
         # deserialize data into TransactionMPCWalletSource
         try:
             instance.actual_instance = TransactionMPCWalletSource.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into TransactionSmartContractSafeWalletSource
-        try:
-            instance.actual_instance = TransactionSmartContractSafeWalletSource.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -283,11 +259,11 @@ class TransactionSource(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource, TransactionSmartContractSafeWalletSource. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
             return instance
-            # raise ValueError("No match found when deserializing the JSON string into TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource, TransactionSmartContractSafeWalletSource. Details: " + ", ".join(error_messages))
+            # raise ValueError("No match found when deserializing the JSON string into TransactionSource with oneOf schemas: TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -301,7 +277,7 @@ class TransactionSource(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource, TransactionSmartContractSafeWalletSource]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], TransactionCustodialAssetWalletSource, TransactionCustodialWeb3WalletSource, TransactionDepositFromAddressSource, TransactionDepositFromLoopSource, TransactionDepositFromWalletSource, TransactionExchangeWalletSource, TransactionMPCWalletSource]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
