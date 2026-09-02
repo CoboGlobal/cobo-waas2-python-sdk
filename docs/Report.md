@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **start_time** | **int** | The start time of the report. Unix timestamp measured in seconds. | 
 **end_time** | **int** | The end time of the report. Unix timestamp measured in seconds. | 
 **created_timestamp** | **int** | The created time of the report. Unix timestamp measured in seconds. | 
-**report_url** | **str** | The URL of the report. | [optional] 
+**report_url** | **str** | The url of the payment report. (This field will be deprecated, please use download report operation to get the temporary download URL.) | [optional] 
 **report_export_format** | [**ReportExportFormat**](ReportExportFormat.md) |  | 
 **report_status** | [**ReportStatus**](ReportStatus.md) |  | 
 **initiator** | **str** | The initiator of this report. Usually the API key used to generate the report. | 

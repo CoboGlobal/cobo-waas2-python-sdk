@@ -19,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.merchant_kyc_company_info import MerchantKycCompanyInfo
 from cobo_waas2.models.merchant_kyc_merchant_type import MerchantKycMerchantType
+from cobo_waas2.models.merchant_kyc_person_info import MerchantKycPersonInfo
 from cobo_waas2.models.merchant_kyc_status import MerchantKycStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,15 +32,14 @@ class MerchantKycSubmission(BaseModel):
     kyc_submission_id: StrictStr = Field(description="The KYC submission ID.")
     merchant_id: StrictStr = Field(description="The merchant ID.")
     status: MerchantKycStatus
-    email: StrictStr = Field(description="The merchant email address.")
-    phone: StrictStr = Field(description="The merchant phone number.")
     merchant_type: MerchantKycMerchantType
     country: StrictStr = Field(description="The country/region of the merchant, in ISO 3166-1 alpha-3 format.")
     industry: List[StrictStr] = Field(description="The industry categories of the merchant.")
-    company_info: MerchantKycCompanyInfo
+    company_info: Optional[MerchantKycCompanyInfo] = None
+    individual_info: Optional[MerchantKycPersonInfo] = None
     created_timestamp: StrictInt = Field(description="The creation timestamp in Unix seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update timestamp in Unix seconds.")
-    __properties: ClassVar[List[str]] = ["kyc_submission_id", "merchant_id", "status", "email", "phone", "merchant_type", "country", "industry", "company_info", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["kyc_submission_id", "merchant_id", "status", "merchant_type", "country", "industry", "company_info", "individual_info", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +83,9 @@ class MerchantKycSubmission(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of company_info
         if self.company_info:
             _dict['company_info'] = self.company_info.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of individual_info
+        if self.individual_info:
+            _dict['individual_info'] = self.individual_info.to_dict()
         return _dict
 
     @classmethod
@@ -98,12 +101,11 @@ class MerchantKycSubmission(BaseModel):
             "kyc_submission_id": obj.get("kyc_submission_id"),
             "merchant_id": obj.get("merchant_id"),
             "status": obj.get("status"),
-            "email": obj.get("email"),
-            "phone": obj.get("phone"),
             "merchant_type": obj.get("merchant_type"),
             "country": obj.get("country"),
             "industry": obj.get("industry"),
             "company_info": MerchantKycCompanyInfo.from_dict(obj["company_info"]) if obj.get("company_info") is not None else None,
+            "individual_info": MerchantKycPersonInfo.from_dict(obj["individual_info"]) if obj.get("individual_info") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

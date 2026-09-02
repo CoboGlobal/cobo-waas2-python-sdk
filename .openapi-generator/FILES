@@ -247,6 +247,7 @@ cobo_waas2/models/disposition_query_response.py
 cobo_waas2/models/disposition_response.py
 cobo_waas2/models/disposition_status.py
 cobo_waas2/models/disposition_type.py
+cobo_waas2/models/download_report_request.py
 cobo_waas2/models/eigen_layer_lst_stake_extra.py
 cobo_waas2/models/eigen_layer_native_stake_extra.py
 cobo_waas2/models/eigenlayer_validator.py
@@ -509,6 +510,7 @@ cobo_waas2/models/payment_settlement_event.py
 cobo_waas2/models/payment_source_type.py
 cobo_waas2/models/payment_transaction.py
 cobo_waas2/models/payment_transaction_event_data.py
+cobo_waas2/models/payment_upload_file_v2.py
 cobo_waas2/models/payment_uploaded_file.py
 cobo_waas2/models/payment_wallet_balance.py
 cobo_waas2/models/payout_channel.py
@@ -542,6 +544,7 @@ cobo_waas2/models/refund_status.py
 cobo_waas2/models/refund_type.py
 cobo_waas2/models/replace_type.py
 cobo_waas2/models/report.py
+cobo_waas2/models/report_download_response.py
 cobo_waas2/models/report_export_format.py
 cobo_waas2/models/report_status.py
 cobo_waas2/models/report_type.py
@@ -1115,6 +1118,7 @@ docs/DispositionQueryResponse.md
 docs/DispositionResponse.md
 docs/DispositionStatus.md
 docs/DispositionType.md
+docs/DownloadReportRequest.md
 docs/EigenLayerLstStakeExtra.md
 docs/EigenLayerNativeStakeExtra.md
 docs/EigenlayerValidator.md
@@ -1382,6 +1386,7 @@ docs/PaymentSettlementEvent.md
 docs/PaymentSourceType.md
 docs/PaymentTransaction.md
 docs/PaymentTransactionEventData.md
+docs/PaymentUploadFileV2.md
 docs/PaymentUploadedFile.md
 docs/PaymentWalletBalance.md
 docs/PayoutChannel.md
@@ -1417,6 +1422,7 @@ docs/RefundStatus.md
 docs/RefundType.md
 docs/ReplaceType.md
 docs/Report.md
+docs/ReportDownloadResponse.md
 docs/ReportExportFormat.md
 docs/ReportStatus.md
 docs/ReportType.md
@@ -2002,6 +2008,7 @@ test/test_disposition_query_response.py
 test/test_disposition_response.py
 test/test_disposition_status.py
 test/test_disposition_type.py
+test/test_download_report_request.py
 test/test_eigen_layer_lst_stake_extra.py
 test/test_eigen_layer_native_stake_extra.py
 test/test_eigenlayer_validator.py
@@ -2269,6 +2276,7 @@ test/test_payment_settlement_event.py
 test/test_payment_source_type.py
 test/test_payment_transaction.py
 test/test_payment_transaction_event_data.py
+test/test_payment_upload_file_v2.py
 test/test_payment_uploaded_file.py
 test/test_payment_wallet_balance.py
 test/test_payout_channel.py
@@ -2304,6 +2312,7 @@ test/test_refund_status.py
 test/test_refund_type.py
 test/test_replace_type.py
 test/test_report.py
+test/test_report_download_response.py
 test/test_report_export_format.py
 test/test_report_status.py
 test/test_report_type.py

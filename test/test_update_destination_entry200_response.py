@@ -64,6 +64,8 @@ class TestUpdateDestinationEntry200Response(unittest.TestCase):
                     bank_branch_code = '123', 
                     bank_country = 'HKG', 
                     bank_province = 'Hong Kong', 
+                    bank_city = 'Hong Kong', 
+                    routing_value = '021000021', 
                     contract_file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', )
             )
         else:

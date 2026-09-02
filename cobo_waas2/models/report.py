@@ -33,7 +33,7 @@ class Report(BaseModel):
     start_time: StrictInt = Field(description="The start time of the report. Unix timestamp measured in seconds.")
     end_time: StrictInt = Field(description="The end time of the report. Unix timestamp measured in seconds.")
     created_timestamp: StrictInt = Field(description="The created time of the report. Unix timestamp measured in seconds.")
-    report_url: Optional[StrictStr] = Field(default=None, description="The URL of the report.")
+    report_url: Optional[StrictStr] = Field(default=None, description="The url of the payment report. (This field will be deprecated, please use download report operation to get the temporary download URL.)")
     report_export_format: ReportExportFormat
     report_status: ReportStatus
     initiator: StrictStr = Field(description="The initiator of this report. Usually the API key used to generate the report.")

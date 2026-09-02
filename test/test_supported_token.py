@@ -43,7 +43,9 @@ class TestSupportedToken(unittest.TestCase):
                 chain_symbol = 'ETH',
                 chain_icon_url = 'https://d.cobo.com/public/logos/ETH.png',
                 token_icon_url = 'https://d.cobo.com/public/logos/USDT.png',
-                can_off_ramp = True
+                can_off_ramp = True,
+                confirming_threshold = 15,
+                deposit_threshold = '0.05'
             )
         else:
             return SupportedToken(

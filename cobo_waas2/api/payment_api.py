@@ -9,6 +9,7 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
@@ -53,6 +54,7 @@ from cobo_waas2.models.destination import Destination
 from cobo_waas2.models.destination_bank_account_tag import DestinationBankAccountTag
 from cobo_waas2.models.destination_detail import DestinationDetail
 from cobo_waas2.models.destination_type import DestinationType
+from cobo_waas2.models.download_report_request import DownloadReportRequest
 from cobo_waas2.models.entry_type import EntryType
 from cobo_waas2.models.exchange_rate import ExchangeRate
 from cobo_waas2.models.forced_sweep import ForcedSweep
@@ -100,10 +102,12 @@ from cobo_waas2.models.payment_estimate_fee201_response import PaymentEstimateFe
 from cobo_waas2.models.payment_estimate_fee_request import PaymentEstimateFeeRequest
 from cobo_waas2.models.payment_payout import PaymentPayout
 from cobo_waas2.models.payment_payout_detail import PaymentPayoutDetail
+from cobo_waas2.models.payment_upload_file_v2 import PaymentUploadFileV2
 from cobo_waas2.models.payment_uploaded_file import PaymentUploadedFile
 from cobo_waas2.models.psp_balance import PspBalance
 from cobo_waas2.models.refund import Refund
 from cobo_waas2.models.report import Report
+from cobo_waas2.models.report_download_response import ReportDownloadResponse
 from cobo_waas2.models.report_status import ReportStatus
 from cobo_waas2.models.report_type import ReportType
 from cobo_waas2.models.settlement import Settlement
@@ -3063,7 +3067,7 @@ class PaymentApi:
     ) -> Report:
         """Generate reports
 
-        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
+        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. The response does not guarantee a download URL. To retrieve a temporary download URL for a completed report, call download report operation. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param create_report_request: The request body to create payment reports.
         :type create_report_request: CreateReportRequest
@@ -3109,7 +3113,7 @@ class PaymentApi:
     ) -> ApiResponse[Report]:
         """Generate reports
 
-        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
+        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. The response does not guarantee a download URL. To retrieve a temporary download URL for a completed report, call download report operation. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param create_report_request: The request body to create payment reports.
         :type create_report_request: CreateReportRequest
@@ -3155,7 +3159,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Generate reports
 
-        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
+        This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. The response does not guarantee a download URL. To retrieve a temporary download URL for a completed report, call download report operation. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
         :param create_report_request: The request body to create payment reports.
         :type create_report_request: CreateReportRequest
@@ -4638,6 +4642,176 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='DELETE',
             resource_path='/payments/destination_entry/{destination_entry_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def download_report(
+        self,
+        download_report_request: Annotated[DownloadReportRequest, Field(description="The request body to download a payment report.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ReportDownloadResponse:
+        """Download report
+
+        This operation retrieves a temporary download URL for a completed payment report. Endpoint: `POST https://api.dev.cobo.com/v2/payments/reports/download`. 
+
+        :param download_report_request: The request body to download a payment report. (required)
+        :type download_report_request: DownloadReportRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._download_report_serialize(
+            download_report_request=download_report_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ReportDownloadResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def download_report_with_http_info(
+        self,
+        download_report_request: Annotated[DownloadReportRequest, Field(description="The request body to download a payment report.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ReportDownloadResponse]:
+        """Download report
+
+        This operation retrieves a temporary download URL for a completed payment report. Endpoint: `POST https://api.dev.cobo.com/v2/payments/reports/download`. 
+
+        :param download_report_request: The request body to download a payment report. (required)
+        :type download_report_request: DownloadReportRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._download_report_serialize(
+            download_report_request=download_report_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ReportDownloadResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def download_report_without_preload_content(
+        self,
+        download_report_request: Annotated[DownloadReportRequest, Field(description="The request body to download a payment report.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Download report
+
+        This operation retrieves a temporary download URL for a completed payment report. Endpoint: `POST https://api.dev.cobo.com/v2/payments/reports/download`. 
+
+        :param download_report_request: The request body to download a payment report. (required)
+        :type download_report_request: DownloadReportRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._download_report_serialize(
+            download_report_request=download_report_request,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ReportDownloadResponse",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _download_report_serialize(
+        self,
+        download_report_request,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if download_report_request is not None:
+            _body_params = download_report_request
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/reports/download',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12424,7 +12598,7 @@ class PaymentApi:
     ) -> List[SupportedToken]:
         """List supported tokens
 
-        This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision,  contract address, and chain information before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
+        This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision, contract address, chain information, confirmation threshold, and deposit threshold before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -12466,7 +12640,7 @@ class PaymentApi:
     ) -> ApiResponse[List[SupportedToken]]:
         """List supported tokens
 
-        This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision,  contract address, and chain information before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
+        This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision, contract address, chain information, confirmation threshold, and deposit threshold before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -12508,7 +12682,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """List supported tokens
 
-        This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision,  contract address, and chain information before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
+        This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision, contract address, chain information, confirmation threshold, and deposit threshold before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -13854,7 +14028,7 @@ class PaymentApi:
     def submit_merchant_kyc(
         self,
         merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.")] = None,
+        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13866,11 +14040,11 @@ class PaymentApi:
     ) -> MerchantKycInfo:
         """Submit merchant KYC
 
-        This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+        This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
-        :param submit_merchant_kyc: The request body to submit merchant KYC information.
+        :param submit_merchant_kyc: The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
         :type submit_merchant_kyc: SubmitMerchantKyc
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -13904,7 +14078,7 @@ class PaymentApi:
     def submit_merchant_kyc_with_http_info(
         self,
         merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.")] = None,
+        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13916,11 +14090,11 @@ class PaymentApi:
     ) -> ApiResponse[MerchantKycInfo]:
         """Submit merchant KYC
 
-        This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+        This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
-        :param submit_merchant_kyc: The request body to submit merchant KYC information.
+        :param submit_merchant_kyc: The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
         :type submit_merchant_kyc: SubmitMerchantKyc
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -13954,7 +14128,7 @@ class PaymentApi:
     def submit_merchant_kyc_without_preload_content(
         self,
         merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.")] = None,
+        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13966,11 +14140,11 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Submit merchant KYC
 
-        This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+        This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
-        :param submit_merchant_kyc: The request body to submit merchant KYC information.
+        :param submit_merchant_kyc: The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
         :type submit_merchant_kyc: SubmitMerchantKyc
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -15498,9 +15672,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> PaymentUploadedFile:
-        """Upload file
+        """(Deprecated) Upload file
 
-        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param file: The file to upload. (required)
         :type file: bytearray
@@ -15511,6 +15685,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("POST /payments/files is deprecated.", DeprecationWarning)
 
         _param = self._upload_payment_file_serialize(
             file=file,
@@ -15544,9 +15719,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[PaymentUploadedFile]:
-        """Upload file
+        """(Deprecated) Upload file
 
-        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param file: The file to upload. (required)
         :type file: bytearray
@@ -15557,6 +15732,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("POST /payments/files is deprecated.", DeprecationWarning)
 
         _param = self._upload_payment_file_serialize(
             file=file,
@@ -15590,9 +15766,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Upload file
+        """(Deprecated) Upload file
 
-        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param file: The file to upload. (required)
         :type file: bytearray
@@ -15603,6 +15779,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("POST /payments/files is deprecated.", DeprecationWarning)
 
         _param = self._upload_payment_file_serialize(
             file=file,
@@ -15647,6 +15824,176 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/files',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def upload_payment_file_v2(
+        self,
+        payment_upload_file_v2: Annotated[Optional[PaymentUploadFileV2], Field(description="The request body to upload a file.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> PaymentUploadedFile:
+        """Upload file v2
+
+        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+        :param payment_upload_file_v2: The request body to upload a file.
+        :type payment_upload_file_v2: PaymentUploadFileV2
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._upload_payment_file_v2_serialize(
+            payment_upload_file_v2=payment_upload_file_v2,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentUploadedFile",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def upload_payment_file_v2_with_http_info(
+        self,
+        payment_upload_file_v2: Annotated[Optional[PaymentUploadFileV2], Field(description="The request body to upload a file.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[PaymentUploadedFile]:
+        """Upload file v2
+
+        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+        :param payment_upload_file_v2: The request body to upload a file.
+        :type payment_upload_file_v2: PaymentUploadFileV2
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._upload_payment_file_v2_serialize(
+            payment_upload_file_v2=payment_upload_file_v2,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentUploadedFile",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def upload_payment_file_v2_without_preload_content(
+        self,
+        payment_upload_file_v2: Annotated[Optional[PaymentUploadFileV2], Field(description="The request body to upload a file.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Upload file v2
+
+        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+        :param payment_upload_file_v2: The request body to upload a file.
+        :type payment_upload_file_v2: PaymentUploadFileV2
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._upload_payment_file_v2_serialize(
+            payment_upload_file_v2=payment_upload_file_v2,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "PaymentUploadedFile",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _upload_payment_file_v2_serialize(
+        self,
+        payment_upload_file_v2,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if payment_upload_file_v2 is not None:
+            _body_params = payment_upload_file_v2
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/files_v2',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

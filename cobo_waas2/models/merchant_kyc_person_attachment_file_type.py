@@ -36,6 +36,8 @@ class MerchantKycPersonAttachmentFileType(str, Enum):
     HKM_RP = 'HKM_RP'
     HK_SLASH_MAC_MTP = 'HK/Mac_MTP'
     BACK = 'BACK'
+    ID_HAND = 'ID_Hand'
+    POA = 'POA'
 
     UNKNOWN = None
 

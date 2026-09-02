@@ -1,6 +1,6 @@
 # BankAccountHolderType
 
-The holder type of the bank account.
+BankAccountHolderType defines the holder type of the bank account: - `Company`: The bank account holder is a company. - `Personal`: The bank account holder is a personal individual. 
 
 ## Properties
 

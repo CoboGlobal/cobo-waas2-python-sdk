@@ -16,24 +16,17 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from cobo_waas2.models.merchant_kyc_company_info import MerchantKycCompanyInfo
-from cobo_waas2.models.merchant_kyc_merchant_type import MerchantKycMerchantType
-from cobo_waas2.models.merchant_kyc_person_info import MerchantKycPersonInfo
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class SubmitMerchantKyc(BaseModel):
+class ReportDownloadResponse(BaseModel):
     """
-    SubmitMerchantKyc
+    ReportDownloadResponse
     """  # noqa: E501
-    merchant_type: MerchantKycMerchantType
-    country: StrictStr = Field(description="The country/region of the merchant, in ISO 3166-1 alpha-3 format.")
-    industry: List[StrictStr] = Field(description="The industry categories of the merchant.")
-    company_info: Optional[MerchantKycCompanyInfo] = None
-    individual_info: Optional[MerchantKycPersonInfo] = None
-    __properties: ClassVar[List[str]] = ["merchant_type", "country", "industry", "company_info", "individual_info"]
+    download_url: StrictStr = Field(description="The temporary URL used to download the payment report.")
+    __properties: ClassVar[List[str]] = ["download_url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +46,7 @@ class SubmitMerchantKyc(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SubmitMerchantKyc from a JSON string"""
+        """Create an instance of ReportDownloadResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,17 +67,11 @@ class SubmitMerchantKyc(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of company_info
-        if self.company_info:
-            _dict['company_info'] = self.company_info.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of individual_info
-        if self.individual_info:
-            _dict['individual_info'] = self.individual_info.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SubmitMerchantKyc from a dict"""
+        """Create an instance of ReportDownloadResponse from a dict"""
         if obj is None:
             return None
 
@@ -92,11 +79,7 @@ class SubmitMerchantKyc(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "merchant_type": obj.get("merchant_type"),
-            "country": obj.get("country"),
-            "industry": obj.get("industry"),
-            "company_info": MerchantKycCompanyInfo.from_dict(obj["company_info"]) if obj.get("company_info") is not None else None,
-            "individual_info": MerchantKycPersonInfo.from_dict(obj["individual_info"]) if obj.get("individual_info") is not None else None
+            "download_url": obj.get("download_url")
         })
         return _obj
 

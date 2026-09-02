@@ -56,8 +56,10 @@ class DestinationBankAccount(BaseModel):
     bank_branch_code: Optional[StrictStr] = Field(default=None, description="The branch code. Required when `payment_method` is `Local` (HK only). ")
     bank_country: Optional[StrictStr] = Field(default=None, description="The country, in ISO 3166-1 alpha-3 format.")
     bank_province: Optional[StrictStr] = Field(default=None, description="The province or state of the bank. Cannot be a pure number or contain Chinese characters. ")
+    bank_city: Optional[StrictStr] = Field(default=None, description="The city of the bank.")
+    routing_value: Optional[StrictStr] = Field(default=None, description="The routing value of the bank account.")
     contract_file_id: Optional[StrictStr] = Field(default=None, description="The file ID of the contract document (e.g., cooperation agreement) that proves the business relationship between you and the beneficiary, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file). ")
-    __properties: ClassVar[List[str]] = ["bank_account_id", "tag", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "created_timestamp", "updated_timestamp", "country", "city", "payment_method", "holder_type", "beneficiary_province", "beneficiary_post_code", "bank_account_name", "bank_branch_code", "bank_country", "bank_province", "contract_file_id"]
+    __properties: ClassVar[List[str]] = ["bank_account_id", "tag", "account_alias", "account_number", "swift_code", "currency", "beneficiary_name", "beneficiary_address", "bank_name", "bank_address", "iban_code", "further_credit", "intermediary_bank_info", "bank_account_status", "created_timestamp", "updated_timestamp", "country", "city", "payment_method", "holder_type", "beneficiary_province", "beneficiary_post_code", "bank_account_name", "bank_branch_code", "bank_country", "bank_province", "bank_city", "routing_value", "contract_file_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -144,6 +146,8 @@ class DestinationBankAccount(BaseModel):
             "bank_branch_code": obj.get("bank_branch_code"),
             "bank_country": obj.get("bank_country"),
             "bank_province": obj.get("bank_province"),
+            "bank_city": obj.get("bank_city"),
+            "routing_value": obj.get("routing_value"),
             "contract_file_id": obj.get("contract_file_id")
         })
         return _obj
