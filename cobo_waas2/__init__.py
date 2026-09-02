@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.42.0"
+__version__ = "1.43.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -259,6 +259,7 @@ from cobo_waas2.models.disposition_query_response import DispositionQueryRespons
 from cobo_waas2.models.disposition_response import DispositionResponse
 from cobo_waas2.models.disposition_status import DispositionStatus
 from cobo_waas2.models.disposition_type import DispositionType
+from cobo_waas2.models.download_report_request import DownloadReportRequest
 from cobo_waas2.models.eigen_layer_lst_stake_extra import EigenLayerLstStakeExtra
 from cobo_waas2.models.eigen_layer_native_stake_extra import EigenLayerNativeStakeExtra
 from cobo_waas2.models.eigenlayer_validator import EigenlayerValidator
@@ -521,6 +522,7 @@ from cobo_waas2.models.payment_settlement_event import PaymentSettlementEvent
 from cobo_waas2.models.payment_source_type import PaymentSourceType
 from cobo_waas2.models.payment_transaction import PaymentTransaction
 from cobo_waas2.models.payment_transaction_event_data import PaymentTransactionEventData
+from cobo_waas2.models.payment_upload_file_v2 import PaymentUploadFileV2
 from cobo_waas2.models.payment_uploaded_file import PaymentUploadedFile
 from cobo_waas2.models.payment_wallet_balance import PaymentWalletBalance
 from cobo_waas2.models.payout_channel import PayoutChannel
@@ -554,6 +556,7 @@ from cobo_waas2.models.refund_status import RefundStatus
 from cobo_waas2.models.refund_type import RefundType
 from cobo_waas2.models.replace_type import ReplaceType
 from cobo_waas2.models.report import Report
+from cobo_waas2.models.report_download_response import ReportDownloadResponse
 from cobo_waas2.models.report_export_format import ReportExportFormat
 from cobo_waas2.models.report_status import ReportStatus
 from cobo_waas2.models.report_type import ReportType

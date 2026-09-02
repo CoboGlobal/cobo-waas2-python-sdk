@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**delete_crypto_address**](PaymentApi.md#delete_crypto_address) | **POST** /payments/crypto_addresses/{crypto_address_id}/delete | Delete crypto address
 [**delete_destination_by_id**](PaymentApi.md#delete_destination_by_id) | **DELETE** /payments/destination/{destination_id} | Delete destination
 [**delete_destination_entry**](PaymentApi.md#delete_destination_entry) | **DELETE** /payments/destination_entry/{destination_entry_id} | Delete destination entry
+[**download_report**](PaymentApi.md#download_report) | **POST** /payments/reports/download | Download report
 [**get_available_allocation_amount**](PaymentApi.md#get_available_allocation_amount) | **GET** /payments/allocation_amount | Get available allocation amount
 [**get_bank_withdrawal_by_id**](PaymentApi.md#get_bank_withdrawal_by_id) | **GET** /payments/bank_withdrawals/{bank_withdrawal_id} | Get bank withdrawal information
 [**get_batch_allocation_by_id**](PaymentApi.md#get_batch_allocation_by_id) | **GET** /payments/batch_allocations/{batch_allocation_id} | Get batch allocation information
@@ -83,6 +84,7 @@ Method | HTTP request | Description
 [**update_refund_by_id**](PaymentApi.md#update_refund_by_id) | **PUT** /payments/refunds/{refund_id} | Update refund order
 [**update_top_up_address**](PaymentApi.md#update_top_up_address) | **PUT** /payments/topup/address | Update top-up address
 [**upload_payment_file**](PaymentApi.md#upload_payment_file) | **POST** /payments/files | Upload file
+[**upload_payment_file_v2**](PaymentApi.md#upload_payment_file_v2) | **POST** /payments/files_v2 | Upload file v2
 
 
 # **batch_get_exchange_rates**
@@ -1328,7 +1330,7 @@ Name | Type | Description  | Notes
 
 Generate reports
 
-This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
+This operation generates reports for a variety of payment activities, including pay-ins, payouts, and commission fees. The response does not guarantee a download URL. To retrieve a temporary download URL for a completed report, call download report operation. <Note>For `report_types`, report scope, exported field differences, and report-specific usage notes, see [Reports](/payments/en/guides/reports).</Note> 
 
 ### Example
 
@@ -1981,6 +1983,79 @@ Name | Type | Description  | Notes
 **400** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **401** | Unauthorized. Please provide valid credentials. |  -  |
 **403** | Forbidden. You do not have the permission to access the requested resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **download_report**
+> ReportDownloadResponse download_report(download_report_request)
+
+Download report
+
+This operation retrieves a temporary download URL for a completed payment report. Endpoint: `POST https://api.dev.cobo.com/v2/payments/reports/download`. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.download_report_request import DownloadReportRequest
+from cobo_waas2.models.report_download_response import ReportDownloadResponse
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    download_report_request = cobo_waas2.DownloadReportRequest()
+
+    try:
+        # Download report
+        api_response = api_instance.download_report(download_report_request)
+        print("The response of PaymentApi->download_report:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->download_report: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **download_report_request** | [**DownloadReportRequest**](DownloadReportRequest.md)| The request body to download a payment report. | 
+
+### Return type
+
+[**ReportDownloadResponse**](ReportDownloadResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Payment report download URL retrieved successfully. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4786,7 +4861,7 @@ Name | Type | Description  | Notes
 
 List supported tokens
 
-This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision,  contract address, and chain information before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
+This operation retrieves all tokens supported by Cobo Payments.  Use this operation to get token details such as token ID, symbol, decimal precision, contract address, chain information, confirmation threshold, and deposit threshold before creating payment orders.  For more information about Cobo Payments, see [Cobo Payments Overview](https://www.cobo.com/payments/en/guides/overview). 
 
 ### Example
 
@@ -5317,7 +5392,7 @@ Name | Type | Description  | Notes
 
 Submit merchant KYC
 
-This operation submits KYC information for a specified merchant.  You need to provide the merchant contact information, merchant type, country, industry, and company information.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
 ### Example
 
@@ -5362,7 +5437,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **merchant_id** | **str**| The merchant ID. | 
- **submit_merchant_kyc** | [**SubmitMerchantKyc**](SubmitMerchantKyc.md)| The request body to submit merchant KYC information. | [optional] 
+ **submit_merchant_kyc** | [**SubmitMerchantKyc**](SubmitMerchantKyc.md)| The request body to submit merchant KYC information.  Provide either &#x60;company_info&#x60; or &#x60;individual_info&#x60;: - &#x60;company_info&#x60;: Required for company merchants. - &#x60;individual_info&#x60;: Required for individual merchants.  | [optional] 
 
 ### Return type
 
@@ -5987,7 +6062,7 @@ Name | Type | Description  | Notes
 
 Upload file
 
-This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+<Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
 ### Example
 
@@ -6042,6 +6117,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_payment_file_v2**
+> PaymentUploadedFile upload_payment_file_v2(payment_upload_file_v2=payment_upload_file_v2)
+
+Upload file v2
+
+This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.payment_upload_file_v2 import PaymentUploadFileV2
+from cobo_waas2.models.payment_uploaded_file import PaymentUploadedFile
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    payment_upload_file_v2 = cobo_waas2.PaymentUploadFileV2()
+
+    try:
+        # Upload file v2
+        api_response = api_instance.upload_payment_file_v2(payment_upload_file_v2=payment_upload_file_v2)
+        print("The response of PaymentApi->upload_payment_file_v2:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->upload_payment_file_v2: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **payment_upload_file_v2** | [**PaymentUploadFileV2**](PaymentUploadFileV2.md)| The request body to upload a file. | [optional] 
+
+### Return type
+
+[**PaymentUploadedFile**](PaymentUploadedFile.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

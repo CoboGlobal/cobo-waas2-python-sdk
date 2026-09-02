@@ -35,7 +35,9 @@ class SupportedToken(BaseModel):
     chain_icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the chain icon image.")
     token_icon_url: Optional[StrictStr] = Field(default=None, description="The URL of the token icon image.")
     can_off_ramp: Optional[StrictBool] = Field(default=None, description="Whether the token supports fiat off-ramp. - `true`: The token can be used for fiat off-ramp. - `false`: The token cannot be used for fiat off-ramp. ")
-    __properties: ClassVar[List[str]] = ["token_id", "name", "symbol", "decimal", "token_address", "chain_id", "chain_symbol", "chain_icon_url", "token_icon_url", "can_off_ramp"]
+    confirming_threshold: Optional[StrictInt] = Field(default=None, description="The number of blockchain confirmations required for an on-chain transaction on the token's chain, such as 64 for Ethereum. ")
+    deposit_threshold: Optional[StrictStr] = Field(default=None, description="The dust amount threshold for the token, deposits with an amount less than or equal to this threshold are treated as dust and excluded from the payment system. ")
+    __properties: ClassVar[List[str]] = ["token_id", "name", "symbol", "decimal", "token_address", "chain_id", "chain_symbol", "chain_icon_url", "token_icon_url", "can_off_ramp", "confirming_threshold", "deposit_threshold"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -117,7 +119,9 @@ class SupportedToken(BaseModel):
             "chain_symbol": obj.get("chain_symbol"),
             "chain_icon_url": obj.get("chain_icon_url"),
             "token_icon_url": obj.get("token_icon_url"),
-            "can_off_ramp": obj.get("can_off_ramp")
+            "can_off_ramp": obj.get("can_off_ramp"),
+            "confirming_threshold": obj.get("confirming_threshold"),
+            "deposit_threshold": obj.get("deposit_threshold")
         })
         return _obj
 

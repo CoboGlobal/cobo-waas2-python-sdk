@@ -68,7 +68,7 @@ class ApiClient:
         self.rest_client = rest.RESTClientObject(configuration)
         self.default_headers = {}
         # Set default User-Agent.
-        self.user_agent = 'cobo-waas2-python-sdk/1.42.0'
+        self.user_agent = 'cobo-waas2-python-sdk/1.43.0'
 
     def __enter__(self):
         return self
@@ -253,29 +253,32 @@ class ApiClient:
         headers = response_data.getheaders()
         sig = headers.get('biz-resp-signature')
         timestamp = headers.get('biz-timestamp')
-        if not sig or not timestamp:
-            # Responses from proxy (e.g. nginx) may lack signature headers
-            # since the request never reaches the business server.
-            proxy_errors = {
-                414: "Request-URI Too Large",
-                429: "Too Many Requests",
-                502: "Bad Gateway",
-                503: "Service Unavailable",
-            }
-            if response_data.status in proxy_errors:
-                raise ApiException(
-                    status=response_data.status,
-                    reason=proxy_errors[response_data.status],
-                    http_resp=response_data,
-                )
-            raise ApiException("Missing resp signature or timestamp")
-        verified = SignHelper.verify(
-            pub_key=self.configuration.resp_pubkey,
-            signature=sig,
-            content=f"{response_data.data.decode()}|{timestamp}"
-        )
-        if not verified:
-            raise ApiException("Invalid resp signature")
+        if sig and timestamp:
+            verified = SignHelper.verify(
+                pub_key=self.configuration.resp_pubkey,
+                signature=sig,
+                content=f"{response_data.data.decode()}|{timestamp}"
+            )
+            if not verified:
+                raise ApiException(reason="Invalid resp signature")
+        elif 200 <= response_data.status <= 299:
+            # A success response from the business server is always signed;
+            # a 2xx response without signature headers must not be trusted.
+            raise ApiException(
+                status=response_data.status,
+                reason="Missing resp signature or timestamp",
+                http_resp=response_data,
+            )
+        else:
+            # Error responses returned by an intermediary (e.g. gateway, CDN
+            # or load balancer) before the request reaches the business
+            # server carry no signature headers, regardless of status code.
+            # Surface the original HTTP error instead of a signature error.
+            raise ApiException.from_response(
+                http_resp=response_data,
+                body=response_data.data.decode(errors="replace") if response_data.data else None,
+                data=None,
+            )
 
         response_type = response_types_map.get(str(response_data.status), None)
         if not response_type and isinstance(response_data.status, int) and 100 <= response_data.status <= 599:

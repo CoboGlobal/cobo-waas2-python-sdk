@@ -1,6 +1,6 @@
 # ReportStatus
 
-The status of the report. - `Completed`: The report has been generated successfully. - `Failed`: The report could not be generated. 
+The status of the report. - `Processing`: The report is being generated. - `Completed`: The report has been completed. - `Failed`: The report has failed. 
 
 ## Properties
 

@@ -345,6 +345,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.delete_destination_entry(destination_entry_id, destination_id, entry_type)
         """
 
+    def test_download_report(self) -> None:
+        """
+        Test case for download_report
+
+        Download report
+        """
+        """
+        download_report_request = cobo_waas2.DownloadReportRequest()
+
+        api_response = self.api.download_report(download_report_request)
+        """
+
     def test_get_available_allocation_amount(self) -> None:
         """
         Test case for get_available_allocation_amount
@@ -1094,6 +1106,18 @@ class TestPaymentApi(unittest.TestCase):
         file = None
 
         api_response = self.api.upload_payment_file(file)
+        """
+
+    def test_upload_payment_file_v2(self) -> None:
+        """
+        Test case for upload_payment_file_v2
+
+        Upload file v2
+        """
+        """
+        payment_upload_file_v2 = cobo_waas2.PaymentUploadFileV2()
+
+        api_response = self.api.upload_payment_file_v2(payment_upload_file_v2=payment_upload_file_v2)
         """
 
 

@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **chain_icon_url** | **str** | The URL of the chain icon image. | [optional] 
 **token_icon_url** | **str** | The URL of the token icon image. | [optional] 
 **can_off_ramp** | **bool** | Whether the token supports fiat off-ramp. - &#x60;true&#x60;: The token can be used for fiat off-ramp. - &#x60;false&#x60;: The token cannot be used for fiat off-ramp.  | [optional] 
+**confirming_threshold** | **int** | The number of blockchain confirmations required for an on-chain transaction on the token&#39;s chain, such as 64 for Ethereum.  | [optional] 
+**deposit_threshold** | **str** | The dust amount threshold for the token, deposits with an amount less than or equal to this threshold are treated as dust and excluded from the payment system.  | [optional] 
 
 ## Example
 

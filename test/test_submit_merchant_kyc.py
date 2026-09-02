@@ -34,71 +34,6 @@ class TestSubmitMerchantKyc(unittest.TestCase):
         model = SubmitMerchantKyc()
         if include_optional:
             return SubmitMerchantKyc(
-                email = 'merchant@example.com',
-                phone = '+85212345678',
-                merchant_type = 'B2B',
-                country = 'HKG',
-                industry = ["E-commerce"],
-                company_info = cobo_waas2.models.merchant_kyc_company_info.MerchantKycCompanyInfo(
-                    company_type = 'Corporation', 
-                    listed = False, 
-                    attachments = [
-                        cobo_waas2.models.merchant_kyc_company_attachment.MerchantKycCompanyAttachment(
-                            file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
-                            file_type = 'BR', )
-                        ], 
-                    operation_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
-                        country = 'HK', 
-                        state = 'Hong Kong', 
-                        city = 'Hong Kong', 
-                        postcode = '999077', 
-                        line1 = '1 Example Street', ), 
-                    identify_no = '12345678', 
-                    company_name = '示例有限公司', 
-                    company_name_en = 'Example Limited', 
-                    establish_date = '20290322', 
-                    commencement_date = '20290322', 
-                    valid_period = '20290322', 
-                    register_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
-                        country = 'HK', 
-                        state = 'Hong Kong', 
-                        city = 'Hong Kong', 
-                        postcode = '999077', 
-                        line1 = '1 Example Street', ), 
-                    legal_info = cobo_waas2.models.merchant_kyc_person_info.MerchantKycPersonInfo(
-                        name = '张三', 
-                        name_en = 'Zhang San', 
-                        id_number = '110101199001011234', 
-                        date_of_birth = '20290322', 
-                        issue_date = '20290322', 
-                        expiration_date = '20290322', 
-                        attachments = [
-                            cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
-                                file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 
-                                file_type = 'PRC_ID_Emblem', )
-                            ], 
-                        residential_address = , ), 
-                    ubo_infos = [
-                        cobo_waas2.models.merchant_kyc_person_info.MerchantKycPersonInfo(
-                            name = '张三', 
-                            name_en = 'Zhang San', 
-                            id_number = '110101199001011234', 
-                            date_of_birth = '20290322', 
-                            issue_date = '20290322', 
-                            expiration_date = '20290322', 
-                            attachments = [
-                                cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
-                                    file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 
-                                    file_type = 'PRC_ID_Emblem', )
-                                ], 
-                            residential_address = , )
-                        ], 
-                    online_store_url = 'https://example.com/store', )
-            )
-        else:
-            return SubmitMerchantKyc(
-                email = 'merchant@example.com',
-                phone = '+85212345678',
                 merchant_type = 'B2B',
                 country = 'HKG',
                 industry = ["E-commerce"],
@@ -157,6 +92,30 @@ class TestSubmitMerchantKyc(unittest.TestCase):
                             residential_address = , )
                         ], 
                     online_store_url = 'https://example.com/store', ),
+                individual_info = cobo_waas2.models.merchant_kyc_person_info.MerchantKycPersonInfo(
+                    name = '张三', 
+                    name_en = 'Zhang San', 
+                    id_number = '110101199001011234', 
+                    date_of_birth = '20290322', 
+                    issue_date = '20290322', 
+                    expiration_date = '20290322', 
+                    attachments = [
+                        cobo_waas2.models.merchant_kyc_person_attachment.MerchantKycPersonAttachment(
+                            file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/id_card_front.jpg', 
+                            file_type = 'PRC_ID_Emblem', )
+                        ], 
+                    residential_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
+                        country = 'HK', 
+                        state = 'Hong Kong', 
+                        city = 'Hong Kong', 
+                        postcode = '999077', 
+                        line1 = '1 Example Street', ), )
+            )
+        else:
+            return SubmitMerchantKyc(
+                merchant_type = 'B2B',
+                country = 'HKG',
+                industry = ["E-commerce"],
         )
         """
 
