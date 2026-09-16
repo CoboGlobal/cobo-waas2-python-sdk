@@ -34,7 +34,7 @@ class TestMerchantKycAddress(unittest.TestCase):
         model = MerchantKycAddress()
         if include_optional:
             return MerchantKycAddress(
-                country = 'HK',
+                country = 'HKG',
                 state = 'Hong Kong',
                 city = 'Hong Kong',
                 postcode = '999077',
@@ -42,7 +42,7 @@ class TestMerchantKycAddress(unittest.TestCase):
             )
         else:
             return MerchantKycAddress(
-                country = 'HK',
+                country = 'HKG',
                 state = 'Hong Kong',
                 city = 'Hong Kong',
                 postcode = '999077',

@@ -46,7 +46,7 @@ class TestMerchantKycPersonInfo(unittest.TestCase):
                         file_type = 'PRC_ID_Emblem', )
                     ],
                 residential_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
-                    country = 'HK', 
+                    country = 'HKG', 
                     state = 'Hong Kong', 
                     city = 'Hong Kong', 
                     postcode = '999077', 
@@ -66,7 +66,7 @@ class TestMerchantKycPersonInfo(unittest.TestCase):
                         file_type = 'PRC_ID_Emblem', )
                     ],
                 residential_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
-                    country = 'HK', 
+                    country = 'HKG', 
                     state = 'Hong Kong', 
                     city = 'Hong Kong', 
                     postcode = '999077', 

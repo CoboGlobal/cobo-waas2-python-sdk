@@ -25,7 +25,7 @@ class MerchantKycAddress(BaseModel):
     """
     MerchantKycAddress
     """  # noqa: E501
-    country: StrictStr = Field(description="The country.")
+    country: StrictStr = Field(description="The country, in ISO 3166-1 alpha-3 format.")
     state: StrictStr = Field(description="The state or province.")
     city: StrictStr = Field(description="The city.")
     postcode: StrictStr = Field(description="The postal code.")

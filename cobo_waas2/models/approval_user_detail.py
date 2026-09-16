@@ -18,7 +18,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cobo_waas2.models.approval_action import ApprovalAction
-from cobo_waas2.models.approval_result import ApprovalResult
+from cobo_waas2.models.approval_transaction_result import ApprovalTransactionResult
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +32,7 @@ class ApprovalUserDetail(BaseModel):
     pubkey: Optional[StrictStr] = Field(default=None, description="Public key of the user.")
     signature: Optional[StrictStr] = Field(default=None, description="Signature produced by the user for this approval.")
     statement_uuid: Optional[StrictStr] = Field(default=None, description="UUID of the statement associated with this approval.")
-    result: Optional[ApprovalResult] = None
+    result: Optional[ApprovalTransactionResult] = None
     approval_result_code: Optional[StrictInt] = Field(default=None, description="Integer value representing the result of the approval.")
     created_time: Optional[StrictInt] = Field(default=None, description="Timestamp when the approval was created.")
     expired_time: Optional[StrictInt] = Field(default=None, description="The timestamp when the approval was expired.")
