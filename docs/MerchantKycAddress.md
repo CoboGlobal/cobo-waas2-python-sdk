@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**country** | **str** | The country. | 
+**country** | **str** | The country, in ISO 3166-1 alpha-3 format. | 
 **state** | **str** | The state or province. | 
 **city** | **str** | The city. | 
 **postcode** | **str** | The postal code. | 

@@ -39,7 +39,7 @@ class TestApprovalUserDetail(unittest.TestCase):
                 pubkey = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
                 signature = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
                 statement_uuid = 'aff0e1cb-15b2-4e1f-9b9d-a9133715986f',
-                result = 'Approved',
+                result = 'Rejected',
                 approval_result_code = 1,
                 created_time = 1610444045,
                 expired_time = 1610444165,

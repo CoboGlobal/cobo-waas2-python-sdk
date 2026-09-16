@@ -49,7 +49,7 @@ class TestMerchantKycSubmission(unittest.TestCase):
                             file_type = 'BR', )
                         ], 
                     operation_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
-                        country = 'HK', 
+                        country = 'HKG', 
                         state = 'Hong Kong', 
                         city = 'Hong Kong', 
                         postcode = '999077', 
@@ -61,7 +61,7 @@ class TestMerchantKycSubmission(unittest.TestCase):
                     commencement_date = '20290322', 
                     valid_period = '20290322', 
                     register_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
-                        country = 'HK', 
+                        country = 'HKG', 
                         state = 'Hong Kong', 
                         city = 'Hong Kong', 
                         postcode = '999077', 
@@ -108,7 +108,7 @@ class TestMerchantKycSubmission(unittest.TestCase):
                             file_type = 'PRC_ID_Emblem', )
                         ], 
                     residential_address = cobo_waas2.models.merchant_kyc_address.MerchantKycAddress(
-                        country = 'HK', 
+                        country = 'HKG', 
                         state = 'Hong Kong', 
                         city = 'Hong Kong', 
                         postcode = '999077', 
