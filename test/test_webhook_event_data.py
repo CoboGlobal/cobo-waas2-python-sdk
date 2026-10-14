@@ -37,12 +37,14 @@ class TestWebhookEventData(unittest.TestCase):
                 data_type = 'Transaction',
                 transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 cobo_id = '20231213122855000000000000000000',
-                request_id = '123e457-e89b-12d3-a456-426614174004',
+                request_id = '123e4567-e89b-12d3-a456-426614174005',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 type = 'Deposit',
                 status = 'Succeeded',
                 sub_status = 'PendingDoubleCheck',
-                failed_reason = 'Cannot charge payout fee: Fee Station balance is insufficient. Please add funds to Fee Station and try again.',
+                failed_reason = cobo_waas2.models.payment_failed_reason.PaymentFailedReason(
+                    code = 'transaction.rejected_by_policy', 
+                    message = 'The transaction was rejected by a transaction policy.', ),
                 chain_id = 'ETH',
                 token_id = 'Tron_USDT',
                 asset_id = 'USDT',
@@ -50,7 +52,7 @@ class TestWebhookEventData(unittest.TestCase):
                 destination = None,
                 result = None,
                 fee = None,
-                initiator = 'b2ae1b5aaade686c968ef2bbd31cc75ba94e5a85fd9cb0b35b81dcc15f520e9d',
+                initiator = 'ak_test_*********************',
                 initiator_type = 'API',
                 confirmed_num = 12,
                 confirming_threshold = 15,
@@ -188,9 +190,9 @@ class TestWebhookEventData(unittest.TestCase):
                 token_ids = '',
                 operation_type = 'Added',
                 order_id = 'O20250304-M1001-1001',
-                merchant_id = '1001',
-                merchant_order_code = 'merchant-inv-55231',
-                psp_order_code = 'P20240201001',
+                merchant_id = 'M1001',
+                merchant_order_code = 'M20250415001',
+                psp_order_code = 'P20250415001',
                 pricing_currency = 'USD',
                 pricing_amount = '100.00',
                 fee_amount = '2',
@@ -200,53 +202,29 @@ class TestWebhookEventData(unittest.TestCase):
                 amount_tolerance = '0.5',
                 receive_address = '0x1234567890abcdef1234567890abcdef12345678',
                 received_token_amount = '103.0305',
-                expired_at = 1711324800,
+                expired_at = 1744693600,
                 transactions = [
-                    cobo_waas2.models.payment_transaction.PaymentTransaction(
-                        tx_id = 'tx_123e4567-e89b-12d3-a456-426614174003', 
-                        tx_hash = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 
-                        token_id = 'ETH_USDT', 
-                        from_address = '0xF8e4bfc10A2821DF52D3322cB5170E5E9276b537', 
-                        to_address = '0x15B95A2D8af95D9F48148667B6b8B3CdF89e4F15', 
-                        amount = '0.15', 
-                        status = 'Submitted', 
-                        sub_status = 'PendingDoubleCheck', 
-                        failed_reason = 'Rejected by signer Cobo TSS', 
-                        counterparty = cobo_waas2.models.counterparty.Counterparty(
-                            counterparty_id = '123e4567-e89b-12d3-a456-426614174003', 
-                            counterparty_type = 'Individual', 
-                            counterparty_name = 'Counterparty A', 
-                            country = 'USA', 
-                            email = 'counterparty@example.com', 
-                            contact_address = '123 Main St, Anytown, USA', 
-                            created_timestamp = 1744689600, 
-                            updated_timestamp = 1744689600, ), 
-                        destination = cobo_waas2.models.destination.Destination(
-                            destination_id = '123e4567-e89b-12d3-a456-426614174003', 
-                            destination_type = 'Individual', 
-                            destination_name = 'Destination A', 
-                            source = 'Client', 
-                            country = 'USA', 
-                            email = 'destination@example.com', 
-                            contact_address = '123 Main St, Anytown, USA', 
-                            merchant_id = 'M1001', 
-                            created_timestamp = 1744689600, 
-                            updated_timestamp = 1744689600, ), 
-                        created_timestamp = 1610445878970, 
-                        updated_timestamp = 1610445878970, )
+                    cobo_waas2.models.payment_payout_transaction.PaymentPayoutTransaction(
+                        transaction_id = '3f9c1d72-8b45-4e6a-9c13-7d2e5a8f4b60', 
+                        amount = null, 
+                        tx_hash = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                        result = 'Completed', 
+                        failed_reason = cobo_waas2.models.payment_failed_reason.PaymentFailedReason(
+                            code = 'transaction.rejected_by_policy', 
+                            message = 'The transaction was rejected by a transaction policy.', ), )
                     ],
                 currency = 'USD',
                 order_amount = '',
                 settlement_status = 'Pending',
-                refund_id = 'R20250304-M1001-1001',
+                refund_id = 'R20250415-M1001-1001',
                 amount = '100.00',
                 to_address = '0x9876543210abcdef1234567890abcdef12345678',
                 refund_type = 'Merchant',
                 charge_merchant_fee = False,
                 merchant_fee_amount = '0.0001',
                 merchant_fee_token_id = 'ETH_USDT',
-                commission_fee = cobo_waas2.models.commission_fee.CommissionFee(
-                    fee_amount = '', ),
+                commission_fee = cobo_waas2.models.payment_commission_fee_total.PaymentCommissionFeeTotal(
+                    fee_amount = '0.1', ),
                 settlement_request_id = 'S20250304-1001',
                 settlements = [
                     cobo_waas2.models.settlement_detail.SettlementDetail(
@@ -323,14 +301,14 @@ class TestWebhookEventData(unittest.TestCase):
                     info = {"beneficiary_name":"John Doe","beneficiary_address":"123 Main St, Anytown, USA","account_number":"4111111111111111","bank_name":"ABC Bank","bank_country":"USA","bank_address":"456 Bank Ave, Cityville, USA","swift_or_bic":"ABCDEFGH"}, 
                     created_timestamp = 1744689600, 
                     updated_timestamp = 1744689600, ),
-                payer_id = 'P20250619T0310056d7aa',
-                custom_payer_id = 'user_abc_10001',
+                payer_id = 'P20250415T0310056d7aa',
+                custom_payer_id = 'O20250304-P1001-1001',
                 subscription_id = '123e457-e89b-12d3-a456-426614174004',
                 action_id = '123e457-e89b-12d3-a456-426614174004',
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
                 updated_address = '0x789xyz...456',
-                payout_id = '123e457-e89b-12d3-a456-426614174004',
+                payout_id = '123e4567-e89b-12d3-a456-426614174004',
                 source_account = 'M1001',
                 payout_items = [
                     cobo_waas2.models.payment_payout_item.PaymentPayoutItem(
@@ -353,7 +331,7 @@ class TestWebhookEventData(unittest.TestCase):
                     cobo_waas2.models.commission_fee.CommissionFee(
                         fee_amount = '', )
                     ],
-                remark = 'Withdraw funds from VA to payout bank account',
+                remark = 'Create payouts for customer 123',
                 bank_withdrawal_id = '123e4567-e89b-12d3-a456-426614174000',
                 source_bank_account_id = 'dst_ba_1234567890',
                 target_bank_account_id = 'dst_ba_0987654321',
@@ -443,12 +421,59 @@ class TestWebhookEventData(unittest.TestCase):
                         status = 'Pending', 
                         timestamp = 1744689600, )
                     ],
-                bulk_send_id = '123e4567-e89b-12d3-a456-426614174003',
+                bulk_send_id = '123e4567-e89b-12d3-a456-426614174004',
                 execution_mode = 'Strict',
                 bulk_send_item_id = '123e4567-e89b-12d3-a456-426614174003',
-                receiving_address = '0xabc123456789def0000000000000000000000000',
-                tx_hash = '0xabc123456789def0000000000000000000000000',
+                receiving_address = '0x1234567890abcdef1234567890abcdef12345678',
+                tx_hash = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
                 validation_status = 'Pending',
+                screening_mode = 'CoboKyt',
+                topup_address = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+                source_address = '0x1234567890abcdef1234567890abcdef12345678',
+                message = 'Additional information is required before these funds can be credited.',
+                notice_type = 'PaymentUpdated',
+                requested_amount = cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                    amount = '100.00', 
+                    token_id = 'ETH_USDC', 
+                    chain_id = 'ETH', ),
+                credited_amount = cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                    amount = '100.00', 
+                    token_id = 'ETH_USDC', 
+                    chain_id = 'ETH', ),
+                outstanding_amount = cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                    amount = '100.00', 
+                    token_id = 'ETH_USDC', 
+                    chain_id = 'ETH', ),
+                requested_amounts = [
+                    cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', )
+                    ],
+                failed_amounts = [
+                    cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', )
+                    ],
+                requested_target = None,
+                actual_payout_amounts = [
+                    cobo_waas2.models.payment_asset_or_fiat_amount.PaymentAssetOrFiatAmount(
+                        amount_type = 'Crypto', 
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', 
+                        currency = 'USD', )
+                    ],
+                item_count = 1000,
+                failed_item_count = 60,
+                not_executed_item_count = 40,
+                completed_amounts = [
+                    cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', )
+                    ],
                 source_id = 'O202503041234567890',
                 source_type = 'OrderIn',
                 amount_raw = '20',
@@ -475,14 +500,19 @@ class TestWebhookEventData(unittest.TestCase):
             return WebhookEventData(
                 data_type = 'Transaction',
                 transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-                request_id = '123e457-e89b-12d3-a456-426614174004',
+                request_id = '123e4567-e89b-12d3-a456-426614174005',
                 wallet_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 status = 'Succeeded',
+                failed_reason = cobo_waas2.models.payment_failed_reason.PaymentFailedReason(
+                    code = 'transaction.rejected_by_policy', 
+                    message = 'The transaction was rejected by a transaction policy.', ),
                 chain_id = 'ETH',
                 token_id = 'Tron_USDT',
                 source = None,
                 destination = None,
+                initiator = 'ak_test_*********************',
                 initiator_type = 'API',
+                description = 'Invoice #INV-2024-001',
                 created_timestamp = 1635744000000,
                 updated_timestamp = 1721530899876,
                 chains = [
@@ -529,16 +559,32 @@ class TestWebhookEventData(unittest.TestCase):
                 token_ids = '',
                 operation_type = 'Added',
                 order_id = 'O20250304-M1001-1001',
-                psp_order_code = 'P20240201001',
+                merchant_id = 'M1001',
+                merchant_order_code = 'M20250415001',
+                psp_order_code = 'P20250415001',
                 fee_amount = '2',
                 payable_amount = '103.03',
                 exchange_rate = '0.99',
                 receive_address = '0x1234567890abcdef1234567890abcdef12345678',
                 received_token_amount = '103.0305',
+                expired_at = 1744693600,
+                transactions = [
+                    cobo_waas2.models.payment_payout_transaction.PaymentPayoutTransaction(
+                        transaction_id = '3f9c1d72-8b45-4e6a-9c13-7d2e5a8f4b60', 
+                        amount = null, 
+                        tx_hash = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 
+                        result = 'Completed', 
+                        failed_reason = cobo_waas2.models.payment_failed_reason.PaymentFailedReason(
+                            code = 'transaction.rejected_by_policy', 
+                            message = 'The transaction was rejected by a transaction policy.', ), )
+                    ],
                 currency = 'USD',
-                refund_id = 'R20250304-M1001-1001',
+                refund_id = 'R20250415-M1001-1001',
                 amount = '100.00',
                 to_address = '0x9876543210abcdef1234567890abcdef12345678',
+                refund_type = 'Merchant',
+                commission_fee = cobo_waas2.models.payment_commission_fee_total.PaymentCommissionFeeTotal(
+                    fee_amount = '0.1', ),
                 settlement_request_id = 'S20250304-1001',
                 settlements = [
                     cobo_waas2.models.settlement_detail.SettlementDetail(
@@ -608,13 +654,14 @@ class TestWebhookEventData(unittest.TestCase):
                     ],
                 acquiring_type = 'Order',
                 payout_channel = 'Crypto',
-                payer_id = 'P20250619T0310056d7aa',
-                custom_payer_id = 'user_abc_10001',
+                payer_id = 'P20250415T0310056d7aa',
+                custom_payer_id = 'O20250304-P1001-1001',
                 chain = 'ETH',
                 previous_address = '0xAbC123...DEF',
                 updated_address = '0x789xyz...456',
-                payout_id = '123e457-e89b-12d3-a456-426614174004',
+                payout_id = '123e4567-e89b-12d3-a456-426614174004',
                 source_account = 'M1001',
+                remark = 'Create payouts for customer 123',
                 bank_withdrawal_id = '123e4567-e89b-12d3-a456-426614174000',
                 source_bank_account_id = 'dst_ba_1234567890',
                 target_bank_account_id = 'dst_ba_0987654321',
@@ -703,11 +750,59 @@ class TestWebhookEventData(unittest.TestCase):
                         status = 'Pending', 
                         timestamp = 1744689600, )
                     ],
-                bulk_send_id = '123e4567-e89b-12d3-a456-426614174003',
+                bulk_send_id = '123e4567-e89b-12d3-a456-426614174004',
                 execution_mode = 'Strict',
                 bulk_send_item_id = '123e4567-e89b-12d3-a456-426614174003',
-                receiving_address = '0xabc123456789def0000000000000000000000000',
+                receiving_address = '0x1234567890abcdef1234567890abcdef12345678',
+                tx_hash = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
                 validation_status = 'Pending',
+                screening_mode = 'CoboKyt',
+                topup_address = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+                source_address = '0x1234567890abcdef1234567890abcdef12345678',
+                message = 'Additional information is required before these funds can be credited.',
+                notice_type = 'PaymentUpdated',
+                requested_amount = cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                    amount = '100.00', 
+                    token_id = 'ETH_USDC', 
+                    chain_id = 'ETH', ),
+                credited_amount = cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                    amount = '100.00', 
+                    token_id = 'ETH_USDC', 
+                    chain_id = 'ETH', ),
+                outstanding_amount = cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                    amount = '100.00', 
+                    token_id = 'ETH_USDC', 
+                    chain_id = 'ETH', ),
+                requested_amounts = [
+                    cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', )
+                    ],
+                failed_amounts = [
+                    cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', )
+                    ],
+                requested_target = None,
+                actual_payout_amounts = [
+                    cobo_waas2.models.payment_asset_or_fiat_amount.PaymentAssetOrFiatAmount(
+                        amount_type = 'Crypto', 
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', 
+                        currency = 'USD', )
+                    ],
+                item_count = 1000,
+                failed_item_count = 60,
+                not_executed_item_count = 40,
+                completed_amounts = [
+                    cobo_waas2.models.payment_asset_amount.PaymentAssetAmount(
+                        amount = '100.00', 
+                        token_id = 'ETH_USDC', 
+                        chain_id = 'ETH', )
+                    ],
                 source_id = 'O202503041234567890',
                 source_type = 'OrderIn',
                 amount_raw = '20',

@@ -33,7 +33,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for check_fee_station_usage
 
-        Check Fee Station usage
+        Check Billing Center usage
         """
         """
         fee_station_check_fee_station_usage = cobo_waas2.FeeStationCheckFeeStationUsage()
@@ -57,7 +57,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for get_fee_station_transaction_by_id
 
-        Get Fee Station transaction information
+        Get Billing Center transaction information
         """
         """
         transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
@@ -69,7 +69,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for list_fee_station_addresses
 
-        List Fee Station addresses
+        List Billing Center addresses
         """
         """
         chain_ids = 'BTC,ETH'
@@ -85,7 +85,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for list_fee_station_fiat_transactions
 
-        List Fee Station fiat transactions
+        List Billing Center fiat transactions
         """
         """
         transaction_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,557918d2-632a-4fe1-932f-315711f05fe3'
@@ -103,7 +103,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for list_fee_station_transactions
 
-        List all Fee Station transactions
+        List all Billing Center transactions
         """
         """
         request_id = 'web_send_by_user_327_1610444045047'
@@ -129,7 +129,7 @@ class TestFeeStationApi(unittest.TestCase):
         """
         Test case for list_token_balances_for_fee_station
 
-        List Fee Station token balances
+        List Billing Center token balances
         """
         """
         token_ids = 'ETH_USDT,ETH_USDC'

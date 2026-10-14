@@ -27,12 +27,12 @@ class FeeStationCheckFeeStationUsageResponse(BaseModel):
     The fee station evaluation result for the transfer request.
     """  # noqa: E501
     token_id: StrictStr = Field(description="The token used to pay the gas fee for this specific transaction. You can retrieve the IDs of all supported tokens by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
-    balance: StrictStr = Field(description="The current token balance available in Fee Station.")
+    balance: StrictStr = Field(description="The current token balance available in Billing Center.")
     gas_station_type: FeeStationGasStationType
-    is_fee_station_applicable: StrictBool = Field(description="Indicates whether Fee Station is applied for this transfer request.")
-    is_balance_sufficient: StrictBool = Field(description="If Fee Station is used, indicates whether its balance is sufficient to cover the required gas fee.")
+    is_fee_station_applicable: StrictBool = Field(description="Indicates whether Billing Center is applied for this transfer request.")
+    is_balance_sufficient: StrictBool = Field(description="If Billing Center is used, indicates whether its balance is sufficient to cover the required gas fee.")
     total_fee_amount: StrictStr = Field(description="The total gas amount required for this transfer request.")
-    is_sponsor_applicable: StrictBool = Field(description="Indicates whether USD stablecoin sponsorship is applied when the Fee Station balance is insufficient.")
+    is_sponsor_applicable: StrictBool = Field(description="Indicates whether USD stablecoin sponsorship is applied when the Billing Center balance is insufficient.")
     sponsored_fee_amount: StrictStr = Field(description="The amount of gas fee sponsored by USD stablecoin when applicable.")
     sponsored_token_id: Optional[StrictStr] = Field(default=None, description="The token ID used to sponsor the gas fee.")
     __properties: ClassVar[List[str]] = ["token_id", "balance", "gas_station_type", "is_fee_station_applicable", "is_balance_sufficient", "total_fee_amount", "is_sponsor_applicable", "sponsored_fee_amount", "sponsored_token_id"]

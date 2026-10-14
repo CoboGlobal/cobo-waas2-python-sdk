@@ -27,7 +27,7 @@ class TransactionFuelingInfo(BaseModel):
     """  # noqa: E501
     request_id: Optional[StrictStr] = Field(default=None, description="The request ID of the transaction.")
     transaction_id: Optional[StrictStr] = Field(default=None, description="The transaction ID.")
-    main_transaction_id: Optional[StrictStr] = Field(default=None, description="The UUID of the parent (main) transaction that this record is associated with. Set only when the current record is a gas/fee transaction initiated by Fee Station; omit for main transactions.")
+    main_transaction_id: Optional[StrictStr] = Field(default=None, description="The UUID of the parent (main) transaction that this record is associated with. Set only when the current record is a gas/fee transaction initiated by Billing Center; omit for main transactions.")
     __properties: ClassVar[List[str]] = ["request_id", "transaction_id", "main_transaction_id"]
 
     model_config = ConfigDict(

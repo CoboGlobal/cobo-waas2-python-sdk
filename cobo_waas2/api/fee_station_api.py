@@ -48,7 +48,7 @@ class FeeStationApi:
     @validate_call
     def check_fee_station_usage(
         self,
-        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Fee Station usage.")] = None,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Billing Center usage.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,11 +58,11 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> FeeStationCheckFeeStationUsageResponse:
-        """Check Fee Station usage
+        """Check Billing Center usage
 
-        This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
+        This operation evaluates Billing Center usage for the current transaction.   It determines whether Billing Center can be used, checks if the Billing Center balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
-        :param fee_station_check_fee_station_usage: The request body for evaluating Fee Station usage.
+        :param fee_station_check_fee_station_usage: The request body for evaluating Billing Center usage.
         :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -94,7 +94,7 @@ class FeeStationApi:
     @validate_call
     def check_fee_station_usage_with_http_info(
         self,
-        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Fee Station usage.")] = None,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Billing Center usage.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -104,11 +104,11 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[FeeStationCheckFeeStationUsageResponse]:
-        """Check Fee Station usage
+        """Check Billing Center usage
 
-        This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
+        This operation evaluates Billing Center usage for the current transaction.   It determines whether Billing Center can be used, checks if the Billing Center balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
-        :param fee_station_check_fee_station_usage: The request body for evaluating Fee Station usage.
+        :param fee_station_check_fee_station_usage: The request body for evaluating Billing Center usage.
         :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -140,7 +140,7 @@ class FeeStationApi:
     @validate_call
     def check_fee_station_usage_without_preload_content(
         self,
-        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Fee Station usage.")] = None,
+        fee_station_check_fee_station_usage: Annotated[Optional[FeeStationCheckFeeStationUsage], Field(description="The request body for evaluating Billing Center usage.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -150,11 +150,11 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Check Fee Station usage
+        """Check Billing Center usage
 
-        This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
+        This operation evaluates Billing Center usage for the current transaction.   It determines whether Billing Center can be used, checks if the Billing Center balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
-        :param fee_station_check_fee_station_usage: The request body for evaluating Fee Station usage.
+        :param fee_station_check_fee_station_usage: The request body for evaluating Billing Center usage.
         :type fee_station_check_fee_station_usage: FeeStationCheckFeeStationUsage
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -218,7 +218,7 @@ class FeeStationApi:
     @validate_call
     def estimate_fee_station_fee(
         self,
-        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a Fee Station top-up transaction.")] = None,
+        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a Billing Center top-up transaction.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -230,9 +230,9 @@ class FeeStationApi:
     ) -> EstimatedFixedFee:
         """Estimate transaction fee
 
-        <Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        <Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Billing Center usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
-        :param fee_station_transfer: The information about a Fee Station top-up transaction.
+        :param fee_station_transfer: The information about a Billing Center top-up transaction.
         :type fee_station_transfer: FeeStationTransfer
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -264,7 +264,7 @@ class FeeStationApi:
     @validate_call
     def estimate_fee_station_fee_with_http_info(
         self,
-        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a Fee Station top-up transaction.")] = None,
+        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a Billing Center top-up transaction.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -276,9 +276,9 @@ class FeeStationApi:
     ) -> ApiResponse[EstimatedFixedFee]:
         """Estimate transaction fee
 
-        <Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        <Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Billing Center usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
-        :param fee_station_transfer: The information about a Fee Station top-up transaction.
+        :param fee_station_transfer: The information about a Billing Center top-up transaction.
         :type fee_station_transfer: FeeStationTransfer
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -310,7 +310,7 @@ class FeeStationApi:
     @validate_call
     def estimate_fee_station_fee_without_preload_content(
         self,
-        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a Fee Station top-up transaction.")] = None,
+        fee_station_transfer: Annotated[Optional[FeeStationTransfer], Field(description="The information about a Billing Center top-up transaction.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -322,9 +322,9 @@ class FeeStationApi:
     ) -> RESTResponseType:
         """Estimate transaction fee
 
-        <Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+        <Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Billing Center usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
-        :param fee_station_transfer: The information about a Fee Station top-up transaction.
+        :param fee_station_transfer: The information about a Billing Center top-up transaction.
         :type fee_station_transfer: FeeStationTransfer
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -398,9 +398,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> TransactionDetail:
-        """Get Fee Station transaction information
+        """Get Billing Center transaction information
 
-        This operation retrieves detailed information about a specified Fee Station transaction record, such as the transaction status, source address, destination address, and timestamp. 
+        This operation retrieves detailed information about a specified Billing Center transaction record, such as the transaction status, source address, destination address, and timestamp. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -444,9 +444,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[TransactionDetail]:
-        """Get Fee Station transaction information
+        """Get Billing Center transaction information
 
-        This operation retrieves detailed information about a specified Fee Station transaction record, such as the transaction status, source address, destination address, and timestamp. 
+        This operation retrieves detailed information about a specified Billing Center transaction record, such as the transaction status, source address, destination address, and timestamp. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -490,9 +490,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get Fee Station transaction information
+        """Get Billing Center transaction information
 
-        This operation retrieves detailed information about a specified Fee Station transaction record, such as the transaction status, source address, destination address, and timestamp. 
+        This operation retrieves detailed information about a specified Billing Center transaction record, such as the transaction status, source address, destination address, and timestamp. 
 
         :param transaction_id: The transaction ID. (required)
         :type transaction_id: str
@@ -572,9 +572,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ListAddresses200Response:
-        """List Fee Station addresses
+        """List Billing Center addresses
 
-        This operation retrieves a list of deposit addresses of your Fee Station, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
+        This operation retrieves a list of deposit addresses of your Billing Center, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
 
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -634,9 +634,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListAddresses200Response]:
-        """List Fee Station addresses
+        """List Billing Center addresses
 
-        This operation retrieves a list of deposit addresses of your Fee Station, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
+        This operation retrieves a list of deposit addresses of your Billing Center, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
 
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -696,9 +696,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List Fee Station addresses
+        """List Billing Center addresses
 
-        This operation retrieves a list of deposit addresses of your Fee Station, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
+        This operation retrieves a list of deposit addresses of your Billing Center, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
 
         :param chain_ids: A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).
         :type chain_ids: str
@@ -814,9 +814,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ListFeeStationFiatTransactions200Response:
-        """List Fee Station fiat transactions
+        """List Billing Center fiat transactions
 
-        This operation retrieves all Fee Station fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
+        This operation retrieves all Billing Center fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -884,9 +884,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListFeeStationFiatTransactions200Response]:
-        """List Fee Station fiat transactions
+        """List Billing Center fiat transactions
 
-        This operation retrieves all Fee Station fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
+        This operation retrieves all Billing Center fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -954,9 +954,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List Fee Station fiat transactions
+        """List Billing Center fiat transactions
 
-        This operation retrieves all Fee Station fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
+        This operation retrieves all Billing Center fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
 
         :param transaction_ids: A list of transaction IDs, separated by comma.
         :type transaction_ids: str
@@ -1076,7 +1076,7 @@ class FeeStationApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Billing Center, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
@@ -1096,9 +1096,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ListTransactions200Response:
-        """List all Fee Station transactions
+        """List all Billing Center transactions
 
-        This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
+        This operation retrieves all Billing Center transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
         :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
         :type request_id: str
@@ -1108,7 +1108,7 @@ class FeeStationApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
+        :param types: A list of transaction types for Billing Center, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -1178,7 +1178,7 @@ class FeeStationApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Billing Center, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
@@ -1198,9 +1198,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListTransactions200Response]:
-        """List all Fee Station transactions
+        """List all Billing Center transactions
 
-        This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
+        This operation retrieves all Billing Center transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
         :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
         :type request_id: str
@@ -1210,7 +1210,7 @@ class FeeStationApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
+        :param types: A list of transaction types for Billing Center, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -1280,7 +1280,7 @@ class FeeStationApi:
         cobo_ids: Annotated[Optional[StrictStr], Field(description="A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction.")] = None,
         transaction_ids: Annotated[Optional[StrictStr], Field(description="A list of transaction IDs, separated by comma.")] = None,
         transaction_hashes: Annotated[Optional[StrictStr], Field(description="A list of transaction hashes, separated by comma.")] = None,
-        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
+        types: Annotated[Optional[StrictStr], Field(description="A list of transaction types for Billing Center, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. ")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. ")] = None,
         chain_ids: Annotated[Optional[StrictStr], Field(description="A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains).")] = None,
         token_ids: Annotated[Optional[StrictStr], Field(description="A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")] = None,
@@ -1300,9 +1300,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List all Fee Station transactions
+        """List all Billing Center transactions
 
-        This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
+        This operation retrieves all Billing Center transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
         :param request_id: The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.
         :type request_id: str
@@ -1312,7 +1312,7 @@ class FeeStationApi:
         :type transaction_ids: str
         :param transaction_hashes: A list of transaction hashes, separated by comma.
         :type transaction_hashes: str
-        :param types: A list of transaction types for Fee Station, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
+        :param types: A list of transaction types for Billing Center, separated by comma. Possible values include:    - `Deposit`: A deposit transaction.   - `Withdrawal`: A withdrawal transaction. 
         :type types: str
         :param statuses: A list of transaction statuses, separated by comma. Possible values include:    - `Submitted`: The transaction is submitted.   - `PendingScreening`: The transaction is pending screening by Risk Control.    - `PendingAuthorization`: The transaction is pending approvals.   - `PendingSignature`: The transaction is pending signature.    - `Broadcasting`: The transaction is being broadcast.   - `Confirming`: The transaction is waiting for the required number of confirmations.   - `Completed`: The transaction is completed.   - `Failed`: The transaction failed.   - `Rejected`: The transaction is rejected.   - `Pending`: The transaction is waiting to be included in the next block of the blockchain. 
         :type statuses: str
@@ -1495,9 +1495,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ListTokenBalancesForFeeStation200Response:
-        """List Fee Station token balances
+        """List Billing Center token balances
 
-        The operation retrieves a list of token balances within your Fee Station. 
+        The operation retrieves a list of token balances within your Billing Center. 
 
         :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_ids: str
@@ -1553,9 +1553,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> ApiResponse[ListTokenBalancesForFeeStation200Response]:
-        """List Fee Station token balances
+        """List Billing Center token balances
 
-        The operation retrieves a list of token balances within your Fee Station. 
+        The operation retrieves a list of token balances within your Billing Center. 
 
         :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_ids: str
@@ -1611,9 +1611,9 @@ class FeeStationApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """List Fee Station token balances
+        """List Billing Center token balances
 
-        The operation retrieves a list of token balances within your Fee Station. 
+        The operation retrieves a list of token balances within your Billing Center. 
 
         :param token_ids: A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).
         :type token_ids: str

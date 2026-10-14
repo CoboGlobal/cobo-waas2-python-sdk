@@ -1,6 +1,6 @@
 # FeeStationTransfer
 
-The information about a Fee Station top-up transaction.
+The information about a Billing Center top-up transaction.
 
 ## Properties
 

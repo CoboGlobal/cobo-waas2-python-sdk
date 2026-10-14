@@ -30,6 +30,7 @@ class TransactionDestinationType(str, Enum):
     EVM_CONTRACT = 'EVM_Contract'
     SOL_CONTRACT = 'SOL_Contract'
     STELLAR_CONTRACT = 'STELLAR_Contract'
+    SUI_CONTRACT = 'SUI_Contract'
     COSMOS_CONTRACT = 'COSMOS_Contract'
     TRON_CONTRACT = 'TRON_Contract'
     EVM_EIP_191_SIGNATURE = 'EVM_EIP_191_Signature'

@@ -24,13 +24,13 @@ from typing_extensions import Self
 
 class FeeStationCheckFeeStationUsage(BaseModel):
     """
-    The information for evaluating Fee Station usage.
+    The information for evaluating Billing Center usage.
     """  # noqa: E501
     request_id: StrictStr = Field(description="The request ID that is used to track a transaction request. The request ID is provided by you and must be unique within your organization.")
     amount: Optional[StrictStr] = Field(default=None, description="Applicable to transfer requests only. The amount of tokens to be transferred in this request.")
     token_id: Optional[StrictStr] = Field(default=None, description="Applicable to transfer requests only. The token ID of the asset to be transferred.   You can retrieve available token IDs by calling   [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). ")
     fee_token_id: Optional[StrictStr] = Field(default=None, description="The token ID used to pay the gas fee for the main transaction. You can retrieve available token IDs by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).")
-    estimated_fee_amount: StrictStr = Field(description="The estimated transaction fee required for this transfer, before applying any Fee Station rules.")
+    estimated_fee_amount: StrictStr = Field(description="The estimated transaction fee required for this transfer, before applying any Billing Center rules.")
     from_address: StrictStr = Field(description="The blockchain address that initiates the transfer.")
     from_wallet_id: StrictStr = Field(description="The wallet ID.")
     auto_fuel: Optional[AutoFuelType] = None

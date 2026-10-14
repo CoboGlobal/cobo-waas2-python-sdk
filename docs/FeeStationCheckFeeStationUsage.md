@@ -1,6 +1,6 @@
 # FeeStationCheckFeeStationUsage
 
-The information for evaluating Fee Station usage.
+The information for evaluating Billing Center usage.
 
 ## Properties
 
@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **amount** | **str** | Applicable to transfer requests only. The amount of tokens to be transferred in this request. | [optional] 
 **token_id** | **str** | Applicable to transfer requests only. The token ID of the asset to be transferred.   You can retrieve available token IDs by calling   [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens).  | [optional] 
 **fee_token_id** | **str** | The token ID used to pay the gas fee for the main transaction. You can retrieve available token IDs by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | [optional] 
-**estimated_fee_amount** | **str** | The estimated transaction fee required for this transfer, before applying any Fee Station rules. | 
+**estimated_fee_amount** | **str** | The estimated transaction fee required for this transfer, before applying any Billing Center rules. | 
 **from_address** | **str** | The blockchain address that initiates the transfer. | 
 **from_wallet_id** | **str** | The wallet ID. | 
 **auto_fuel** | [**AutoFuelType**](AutoFuelType.md) |  | [optional] 
