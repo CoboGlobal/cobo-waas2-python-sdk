@@ -73,6 +73,7 @@ class TransactionSubStatus(str, Enum):
     PENDINGCOBOKYTCHECK = 'PendingCoboKYTCheck'
     REJECTEDBYCOBOKYT = 'RejectedByCoboKYT'
     PENDINGCOBOTRAVELRULECHECK = 'PendingCoboTravelRuleCheck'
+    ADDITIONALINFORMATIONREQUIRED = 'AdditionalInformationRequired'
 
     UNKNOWN = None
 

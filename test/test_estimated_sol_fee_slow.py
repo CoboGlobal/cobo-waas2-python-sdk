@@ -36,14 +36,14 @@ class TestEstimatedSOLFeeSlow(unittest.TestCase):
             return EstimatedSOLFeeSlow(
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
-                base_fee = '0.000005',
-                rent_amount = '0.00001'
+                base_fee = '5000',
+                rent_amount = '1488440'
             )
         else:
             return EstimatedSOLFeeSlow(
                 compute_unit_price = '0.0001',
                 compute_unit_limit = '200000',
-                base_fee = '0.000005',
+                base_fee = '5000',
         )
         """
 

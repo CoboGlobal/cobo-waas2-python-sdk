@@ -4,21 +4,21 @@ All URIs are relative to *https://api.dev.cobo.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**check_fee_station_usage**](FeeStationApi.md#check_fee_station_usage) | **POST** /fee_station/check_fee_station_usage | Check Fee Station usage
+[**check_fee_station_usage**](FeeStationApi.md#check_fee_station_usage) | **POST** /fee_station/check_fee_station_usage | Check Billing Center usage
 [**estimate_fee_station_fee**](FeeStationApi.md#estimate_fee_station_fee) | **POST** /fee_station/transactions/estimate_fee | Estimate transaction fee
-[**get_fee_station_transaction_by_id**](FeeStationApi.md#get_fee_station_transaction_by_id) | **GET** /fee_station/transactions/{transaction_id} | Get Fee Station transaction information
-[**list_fee_station_addresses**](FeeStationApi.md#list_fee_station_addresses) | **GET** /fee_station/addresses | List Fee Station addresses
-[**list_fee_station_fiat_transactions**](FeeStationApi.md#list_fee_station_fiat_transactions) | **GET** /fee_station/fiat_transactions | List Fee Station fiat transactions
-[**list_fee_station_transactions**](FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all Fee Station transactions
-[**list_token_balances_for_fee_station**](FeeStationApi.md#list_token_balances_for_fee_station) | **GET** /fee_station/tokens | List Fee Station token balances
+[**get_fee_station_transaction_by_id**](FeeStationApi.md#get_fee_station_transaction_by_id) | **GET** /fee_station/transactions/{transaction_id} | Get Billing Center transaction information
+[**list_fee_station_addresses**](FeeStationApi.md#list_fee_station_addresses) | **GET** /fee_station/addresses | List Billing Center addresses
+[**list_fee_station_fiat_transactions**](FeeStationApi.md#list_fee_station_fiat_transactions) | **GET** /fee_station/fiat_transactions | List Billing Center fiat transactions
+[**list_fee_station_transactions**](FeeStationApi.md#list_fee_station_transactions) | **GET** /fee_station/transactions | List all Billing Center transactions
+[**list_token_balances_for_fee_station**](FeeStationApi.md#list_token_balances_for_fee_station) | **GET** /fee_station/tokens | List Billing Center token balances
 
 
 # **check_fee_station_usage**
 > FeeStationCheckFeeStationUsageResponse check_fee_station_usage(fee_station_check_fee_station_usage=fee_station_check_fee_station_usage)
 
-Check Fee Station usage
+Check Billing Center usage
 
-This operation evaluates Fee Station usage for the current transaction.   It determines whether Fee station can be used, checks if the Fee Station balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
+This operation evaluates Billing Center usage for the current transaction.   It determines whether Billing Center can be used, checks if the Billing Center balance is sufficient, and returns a breakdown of the amounts involved, including any portion that must be covered by the user or sponsored in USD stablecoin. 
 
 ### Example
 
@@ -46,7 +46,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     fee_station_check_fee_station_usage = cobo_waas2.FeeStationCheckFeeStationUsage()
 
     try:
-        # Check Fee Station usage
+        # Check Billing Center usage
         api_response = api_instance.check_fee_station_usage(fee_station_check_fee_station_usage=fee_station_check_fee_station_usage)
         print("The response of FeeStationApi->check_fee_station_usage:\n")
         pprint(api_response)
@@ -61,7 +61,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fee_station_check_fee_station_usage** | [**FeeStationCheckFeeStationUsage**](FeeStationCheckFeeStationUsage.md)| The request body for evaluating Fee Station usage. | [optional] 
+ **fee_station_check_fee_station_usage** | [**FeeStationCheckFeeStationUsage**](FeeStationCheckFeeStationUsage.md)| The request body for evaluating Billing Center usage. | [optional] 
 
 ### Return type
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 Estimate transaction fee
 
-<Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Fee Station usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
+<Note>This operation is **deprecated** and retained only for backward compatibility. Use [Check Billing Center usage](https://www.cobo.com/developers/v2/api-references/feestation/check-fee-station-usage) for all new integrations.</Note>  This operation estimates the transaction fee of a token transfer based on the fee model that the chain uses, considering factors such as network congestion and transaction complexity.  You need to specify the transaction information, including destination address, token ID.  The response can contain different properties based on the transaction fee model used by the chain. For the legacy, EIP-1559, and UTXO fee models, Cobo also supports three different transaction speed levels: slow, recommended, and fast. For more information about estimating transaction fees, refer to [Estimate transaction fee](https://www.cobo.com/developers/v2/guides/transactions/estimate-fees). 
 
 ### Example
 
@@ -134,7 +134,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fee_station_transfer** | [**FeeStationTransfer**](FeeStationTransfer.md)| The information about a Fee Station top-up transaction. | [optional] 
+ **fee_station_transfer** | [**FeeStationTransfer**](FeeStationTransfer.md)| The information about a Billing Center top-up transaction. | [optional] 
 
 ### Return type
 
@@ -162,9 +162,9 @@ Name | Type | Description  | Notes
 # **get_fee_station_transaction_by_id**
 > TransactionDetail get_fee_station_transaction_by_id(transaction_id)
 
-Get Fee Station transaction information
+Get Billing Center transaction information
 
-This operation retrieves detailed information about a specified Fee Station transaction record, such as the transaction status, source address, destination address, and timestamp. 
+This operation retrieves detailed information about a specified Billing Center transaction record, such as the transaction status, source address, destination address, and timestamp. 
 
 ### Example
 
@@ -191,7 +191,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     transaction_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
     try:
-        # Get Fee Station transaction information
+        # Get Billing Center transaction information
         api_response = api_instance.get_fee_station_transaction_by_id(transaction_id)
         print("The response of FeeStationApi->get_fee_station_transaction_by_id:\n")
         pprint(api_response)
@@ -234,9 +234,9 @@ Name | Type | Description  | Notes
 # **list_fee_station_addresses**
 > ListAddresses200Response list_fee_station_addresses(chain_ids=chain_ids, addresses=addresses, limit=limit, before=before, after=after)
 
-List Fee Station addresses
+List Billing Center addresses
 
-This operation retrieves a list of deposit addresses of your Fee Station, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
+This operation retrieves a list of deposit addresses of your Billing Center, including the chain ID, address, and additional information. You can filter the result by chain ID and address. 
 
 ### Example
 
@@ -267,7 +267,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
-        # List Fee Station addresses
+        # List Billing Center addresses
         api_response = api_instance.list_fee_station_addresses(chain_ids=chain_ids, addresses=addresses, limit=limit, before=before, after=after)
         print("The response of FeeStationApi->list_fee_station_addresses:\n")
         pprint(api_response)
@@ -314,9 +314,9 @@ Name | Type | Description  | Notes
 # **list_fee_station_fiat_transactions**
 > ListFeeStationFiatTransactions200Response list_fee_station_fiat_transactions(transaction_ids=transaction_ids, transaction_type=transaction_type, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, before=before, after=after, limit=limit)
 
-List Fee Station fiat transactions
+List Billing Center fiat transactions
 
-This operation retrieves all Fee Station fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
+This operation retrieves all Billing Center fiat transactions under your organization.  You can filter the results by request IDs, transaction IDs, transaction type, and created timestamp. You can also paginate your query results. 
 
 ### Example
 
@@ -350,7 +350,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     limit = 10
 
     try:
-        # List Fee Station fiat transactions
+        # List Billing Center fiat transactions
         api_response = api_instance.list_fee_station_fiat_transactions(transaction_ids=transaction_ids, transaction_type=transaction_type, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, before=before, after=after, limit=limit)
         print("The response of FeeStationApi->list_fee_station_fiat_transactions:\n")
         pprint(api_response)
@@ -399,9 +399,9 @@ Name | Type | Description  | Notes
 # **list_fee_station_transactions**
 > ListTransactions200Response list_fee_station_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
 
-List all Fee Station transactions
+List all Billing Center transactions
 
-This operation retrieves all Fee Station transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
+This operation retrieves all Billing Center transactions under your organization.  You can filter the results by request ID, Cobo ID, transaction ID, transaction hash, type, status, and timestamp. You can also paginate and sort your query results. 
 
 ### Example
 
@@ -442,7 +442,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     direction = 'ASC'
 
     try:
-        # List all Fee Station transactions
+        # List all Billing Center transactions
         api_response = api_instance.list_fee_station_transactions(request_id=request_id, cobo_ids=cobo_ids, transaction_ids=transaction_ids, transaction_hashes=transaction_hashes, types=types, statuses=statuses, chain_ids=chain_ids, token_ids=token_ids, asset_ids=asset_ids, min_created_timestamp=min_created_timestamp, max_created_timestamp=max_created_timestamp, limit=limit, before=before, after=after, direction=direction)
         print("The response of FeeStationApi->list_fee_station_transactions:\n")
         pprint(api_response)
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
  **cobo_ids** | **str**| A list of Cobo IDs, separated by comma. A Cobo ID can be used to track a transaction. | [optional] 
  **transaction_ids** | **str**| A list of transaction IDs, separated by comma. | [optional] 
  **transaction_hashes** | **str**| A list of transaction hashes, separated by comma. | [optional] 
- **types** | **str**| A list of transaction types for Fee Station, separated by comma. Possible values include:    - &#x60;Deposit&#x60;: A deposit transaction.   - &#x60;Withdrawal&#x60;: A withdrawal transaction.  | [optional] 
+ **types** | **str**| A list of transaction types for Billing Center, separated by comma. Possible values include:    - &#x60;Deposit&#x60;: A deposit transaction.   - &#x60;Withdrawal&#x60;: A withdrawal transaction.  | [optional] 
  **statuses** | **str**| A list of transaction statuses, separated by comma. Possible values include:    - &#x60;Submitted&#x60;: The transaction is submitted.   - &#x60;PendingScreening&#x60;: The transaction is pending screening by Risk Control.    - &#x60;PendingAuthorization&#x60;: The transaction is pending approvals.   - &#x60;PendingSignature&#x60;: The transaction is pending signature.    - &#x60;Broadcasting&#x60;: The transaction is being broadcast.   - &#x60;Confirming&#x60;: The transaction is waiting for the required number of confirmations.   - &#x60;Completed&#x60;: The transaction is completed.   - &#x60;Failed&#x60;: The transaction failed.   - &#x60;Rejected&#x60;: The transaction is rejected.   - &#x60;Pending&#x60;: The transaction is waiting to be included in the next block of the blockchain.  | [optional] 
  **chain_ids** | **str**| A list of chain IDs, separated by comma. The chain ID is the unique identifier of a blockchain. You can retrieve the IDs of all the chains you can use by calling [List enabled chains](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-chains). | [optional] 
  **token_ids** | **str**| A list of token IDs, separated by comma. The token ID is the unique identifier of a token. You can retrieve the IDs of all the tokens you can use by calling [List enabled tokens](https://www.cobo.com/developers/v2/api-references/wallets/list-enabled-tokens). | [optional] 
@@ -499,9 +499,9 @@ Name | Type | Description  | Notes
 # **list_token_balances_for_fee_station**
 > ListTokenBalancesForFeeStation200Response list_token_balances_for_fee_station(token_ids=token_ids, limit=limit, before=before, after=after)
 
-List Fee Station token balances
+List Billing Center token balances
 
-The operation retrieves a list of token balances within your Fee Station. 
+The operation retrieves a list of token balances within your Billing Center. 
 
 ### Example
 
@@ -531,7 +531,7 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
 
     try:
-        # List Fee Station token balances
+        # List Billing Center token balances
         api_response = api_instance.list_token_balances_for_fee_station(token_ids=token_ids, limit=limit, before=before, after=after)
         print("The response of FeeStationApi->list_token_balances_for_fee_station:\n")
         pprint(api_response)
