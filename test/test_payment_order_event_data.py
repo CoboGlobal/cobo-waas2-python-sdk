@@ -82,6 +82,7 @@ class TestPaymentOrderEventData(unittest.TestCase):
                             email = 'destination@example.com', 
                             contact_address = '123 Main St, Anytown, USA', 
                             merchant_id = 'M1001', 
+                            fiat_entry_kyc_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 
                             created_timestamp = 1744689600, 
                             updated_timestamp = 1744689600, ), 
                         created_timestamp = 1610445878970, 

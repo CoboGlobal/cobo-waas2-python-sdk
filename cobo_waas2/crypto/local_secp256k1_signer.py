@@ -33,7 +33,7 @@ class LocalSecp256k1Signer(Signer):
     def verify(self, signature: str, message_hash: bytes) -> bool:
         signature_bytes = binascii.unhexlify(signature)
         try:
-            self.public_key.verify(signature_bytes, message_hash, sigdecode=sigdecode_der)
+            self.public_key.verify_digest(signature_bytes, message_hash, sigdecode=sigdecode_der)
             print("Signature is valid.")
             return True
         except BadSignatureError:

@@ -34,6 +34,7 @@ from cobo_waas2.models.create_crypto_address_request import CreateCryptoAddressR
 from cobo_waas2.models.create_destination_entry201_response import CreateDestinationEntry201Response
 from cobo_waas2.models.create_destination_entry_request import CreateDestinationEntryRequest
 from cobo_waas2.models.create_destination_request import CreateDestinationRequest
+from cobo_waas2.models.create_fiat_entry_kyc import CreateFiatEntryKyc
 from cobo_waas2.models.create_merchant_request import CreateMerchantRequest
 from cobo_waas2.models.create_order_link_request import CreateOrderLinkRequest
 from cobo_waas2.models.create_payment_order_request import CreatePaymentOrderRequest
@@ -57,6 +58,8 @@ from cobo_waas2.models.destination_type import DestinationType
 from cobo_waas2.models.download_report_request import DownloadReportRequest
 from cobo_waas2.models.entry_type import EntryType
 from cobo_waas2.models.exchange_rate import ExchangeRate
+from cobo_waas2.models.fiat_entry_kyc import FiatEntryKyc
+from cobo_waas2.models.fiat_entry_kyc_detail import FiatEntryKycDetail
 from cobo_waas2.models.forced_sweep import ForcedSweep
 from cobo_waas2.models.forced_sweep_request import ForcedSweepRequest
 from cobo_waas2.models.get_counterparty_entry200_response import GetCounterpartyEntry200Response
@@ -75,6 +78,7 @@ from cobo_waas2.models.list_counterparties200_response import ListCounterparties
 from cobo_waas2.models.list_counterparty_entries200_response import ListCounterpartyEntries200Response
 from cobo_waas2.models.list_destination_entries200_response import ListDestinationEntries200Response
 from cobo_waas2.models.list_destinations200_response import ListDestinations200Response
+from cobo_waas2.models.list_fiat_entry_kyc200_response import ListFiatEntryKyc200Response
 from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
 from cobo_waas2.models.list_merchant_balances200_response import ListMerchantBalances200Response
 from cobo_waas2.models.list_merchants200_response import ListMerchants200Response
@@ -120,6 +124,7 @@ from cobo_waas2.models.update_counterparty_request import UpdateCounterpartyRequ
 from cobo_waas2.models.update_destination_entry200_response import UpdateDestinationEntry200Response
 from cobo_waas2.models.update_destination_entry_request import UpdateDestinationEntryRequest
 from cobo_waas2.models.update_destination_request import UpdateDestinationRequest
+from cobo_waas2.models.update_fiat_entry_kyc import UpdateFiatEntryKyc
 from cobo_waas2.models.update_merchant_by_id_request import UpdateMerchantByIdRequest
 from cobo_waas2.models.update_payment_order_request import UpdatePaymentOrderRequest
 from cobo_waas2.models.update_refund_by_id_request import UpdateRefundByIdRequest
@@ -1537,7 +1542,7 @@ class PaymentApi:
     ) -> DestinationDetail:
         """Create destination
 
-        This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations). 
+        This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations).  You can link the destination to a merchant ID or a fiat entry KYC ID. The fiat entry KYC ID can be retrieved by calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
 
         :param create_destination_request: The request body to create a destination.
         :type create_destination_request: CreateDestinationRequest
@@ -1583,7 +1588,7 @@ class PaymentApi:
     ) -> ApiResponse[DestinationDetail]:
         """Create destination
 
-        This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations). 
+        This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations).  You can link the destination to a merchant ID or a fiat entry KYC ID. The fiat entry KYC ID can be retrieved by calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
 
         :param create_destination_request: The request body to create a destination.
         :type create_destination_request: CreateDestinationRequest
@@ -1629,7 +1634,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Create destination
 
-        This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations). 
+        This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations).  You can link the destination to a merchant ID or a fiat entry KYC ID. The fiat entry KYC ID can be retrieved by calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
 
         :param create_destination_request: The request body to create a destination.
         :type create_destination_request: CreateDestinationRequest
@@ -1854,6 +1859,176 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/destination_entry',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def create_fiat_entry_kyc(
+        self,
+        create_fiat_entry_kyc: Annotated[Optional[CreateFiatEntryKyc], Field(description="The request body to create fiat entry KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> FiatEntryKyc:
+        """Create fiat entry KYC
+
+        This operation creates KYC information for a fiat entry.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  After a successful creation, use the returned `fiat_entry_kyc_id` when calling [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) or [Create destination](https://www.cobo.com/developers/v2/api-references/payment/create-destination). 
+
+        :param create_fiat_entry_kyc: The request body to create fiat entry KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
+        :type create_fiat_entry_kyc: CreateFiatEntryKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_fiat_entry_kyc_serialize(
+            create_fiat_entry_kyc=create_fiat_entry_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "FiatEntryKyc",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def create_fiat_entry_kyc_with_http_info(
+        self,
+        create_fiat_entry_kyc: Annotated[Optional[CreateFiatEntryKyc], Field(description="The request body to create fiat entry KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[FiatEntryKyc]:
+        """Create fiat entry KYC
+
+        This operation creates KYC information for a fiat entry.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  After a successful creation, use the returned `fiat_entry_kyc_id` when calling [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) or [Create destination](https://www.cobo.com/developers/v2/api-references/payment/create-destination). 
+
+        :param create_fiat_entry_kyc: The request body to create fiat entry KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
+        :type create_fiat_entry_kyc: CreateFiatEntryKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_fiat_entry_kyc_serialize(
+            create_fiat_entry_kyc=create_fiat_entry_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "FiatEntryKyc",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def create_fiat_entry_kyc_without_preload_content(
+        self,
+        create_fiat_entry_kyc: Annotated[Optional[CreateFiatEntryKyc], Field(description="The request body to create fiat entry KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Create fiat entry KYC
+
+        This operation creates KYC information for a fiat entry.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  After a successful creation, use the returned `fiat_entry_kyc_id` when calling [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) or [Create destination](https://www.cobo.com/developers/v2/api-references/payment/create-destination). 
+
+        :param create_fiat_entry_kyc: The request body to create fiat entry KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
+        :type create_fiat_entry_kyc: CreateFiatEntryKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._create_fiat_entry_kyc_serialize(
+            create_fiat_entry_kyc=create_fiat_entry_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "FiatEntryKyc",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _create_fiat_entry_kyc_serialize(
+        self,
+        create_fiat_entry_kyc,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_fiat_entry_kyc is not None:
+            _body_params = create_fiat_entry_kyc
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/payments/fiat_entry_kyc',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6442,6 +6617,176 @@ class PaymentApi:
         )
 
     @validate_call
+    def get_fiat_entry_kyc(
+        self,
+        fiat_entry_kyc_id: Annotated[StrictStr, Field(description="The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> FiatEntryKycDetail:
+        """Get fiat entry KYC
+
+        This operation retrieves information about a specified fiat entry KYC.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
+
+        :param fiat_entry_kyc_id: The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  (required)
+        :type fiat_entry_kyc_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_fiat_entry_kyc_serialize(
+            fiat_entry_kyc_id=fiat_entry_kyc_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FiatEntryKycDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_fiat_entry_kyc_with_http_info(
+        self,
+        fiat_entry_kyc_id: Annotated[StrictStr, Field(description="The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[FiatEntryKycDetail]:
+        """Get fiat entry KYC
+
+        This operation retrieves information about a specified fiat entry KYC.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
+
+        :param fiat_entry_kyc_id: The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  (required)
+        :type fiat_entry_kyc_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_fiat_entry_kyc_serialize(
+            fiat_entry_kyc_id=fiat_entry_kyc_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FiatEntryKycDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_fiat_entry_kyc_without_preload_content(
+        self,
+        fiat_entry_kyc_id: Annotated[StrictStr, Field(description="The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). ")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Get fiat entry KYC
+
+        This operation retrieves information about a specified fiat entry KYC.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
+
+        :param fiat_entry_kyc_id: The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  (required)
+        :type fiat_entry_kyc_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_fiat_entry_kyc_serialize(
+            fiat_entry_kyc_id=fiat_entry_kyc_id,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FiatEntryKycDetail",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_fiat_entry_kyc_serialize(
+        self,
+        fiat_entry_kyc_id,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if fiat_entry_kyc_id is not None:
+            _path_params['fiat_entry_kyc_id'] = fiat_entry_kyc_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/fiat_entry_kyc/{fiat_entry_kyc_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def get_merchant_kyc(
         self,
         merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
@@ -6454,9 +6799,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> MerchantKycSubmission:
-        """Get merchant KYC
+        """(Deprecated) Get merchant KYC
 
-        This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+        <Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -6467,6 +6812,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("GET /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
         _param = self._get_merchant_kyc_serialize(
             merchant_id=merchant_id,
@@ -6500,9 +6846,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[MerchantKycSubmission]:
-        """Get merchant KYC
+        """(Deprecated) Get merchant KYC
 
-        This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+        <Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -6513,6 +6859,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("GET /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
         _param = self._get_merchant_kyc_serialize(
             merchant_id=merchant_id,
@@ -6546,9 +6893,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Get merchant KYC
+        """(Deprecated) Get merchant KYC
 
-        This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+        <Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -6559,6 +6906,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("GET /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
         _param = self._get_merchant_kyc_serialize(
             merchant_id=merchant_id,
@@ -11086,6 +11434,7 @@ class PaymentApi:
         destination_type: Annotated[Optional[DestinationType], Field(description="DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. ")] = None,
         country: Annotated[Optional[StrictStr], Field(description="Country code, in ISO 3166-1 alpha-3 format.")] = None,
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        fiat_entry_kyc_ids: Annotated[Optional[StrictStr], Field(description="A list of fiat entry KYC IDs to query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11113,6 +11462,8 @@ class PaymentApi:
         :type country: str
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
+        :param fiat_entry_kyc_ids: A list of fiat entry KYC IDs to query.
+        :type fiat_entry_kyc_ids: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11129,6 +11480,7 @@ class PaymentApi:
             destination_type=destination_type,
             country=country,
             merchant_ids=merchant_ids,
+            fiat_entry_kyc_ids=fiat_entry_kyc_ids,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -11156,6 +11508,7 @@ class PaymentApi:
         destination_type: Annotated[Optional[DestinationType], Field(description="DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. ")] = None,
         country: Annotated[Optional[StrictStr], Field(description="Country code, in ISO 3166-1 alpha-3 format.")] = None,
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        fiat_entry_kyc_ids: Annotated[Optional[StrictStr], Field(description="A list of fiat entry KYC IDs to query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11183,6 +11536,8 @@ class PaymentApi:
         :type country: str
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
+        :param fiat_entry_kyc_ids: A list of fiat entry KYC IDs to query.
+        :type fiat_entry_kyc_ids: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11199,6 +11554,7 @@ class PaymentApi:
             destination_type=destination_type,
             country=country,
             merchant_ids=merchant_ids,
+            fiat_entry_kyc_ids=fiat_entry_kyc_ids,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -11226,6 +11582,7 @@ class PaymentApi:
         destination_type: Annotated[Optional[DestinationType], Field(description="DestinationType defines the type of the destination: - `Individual`: The destination is an individual. - `Organization`: The destination is an organization. ")] = None,
         country: Annotated[Optional[StrictStr], Field(description="Country code, in ISO 3166-1 alpha-3 format.")] = None,
         merchant_ids: Annotated[Optional[StrictStr], Field(description="A list of merchant IDs to query.")] = None,
+        fiat_entry_kyc_ids: Annotated[Optional[StrictStr], Field(description="A list of fiat entry KYC IDs to query.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11253,6 +11610,8 @@ class PaymentApi:
         :type country: str
         :param merchant_ids: A list of merchant IDs to query.
         :type merchant_ids: str
+        :param fiat_entry_kyc_ids: A list of fiat entry KYC IDs to query.
+        :type fiat_entry_kyc_ids: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11269,6 +11628,7 @@ class PaymentApi:
             destination_type=destination_type,
             country=country,
             merchant_ids=merchant_ids,
+            fiat_entry_kyc_ids=fiat_entry_kyc_ids,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -11291,6 +11651,7 @@ class PaymentApi:
         destination_type,
         country,
         merchant_ids,
+        fiat_entry_kyc_ids,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11329,6 +11690,10 @@ class PaymentApi:
             
             _query_params.append(('merchant_ids', merchant_ids))
             
+        if fiat_entry_kyc_ids is not None:
+            
+            _query_params.append(('fiat_entry_kyc_ids', fiat_entry_kyc_ids))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -11342,6 +11707,229 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/destination',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
+    def list_fiat_entry_kyc(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of fiat entry KYC statuses, separated by comma. Possible values include: - `PendingReview`: The fiat entry KYC is pending review. - `Completed`: The fiat entry KYC has been completed. - `Failed`: The fiat entry KYC has failed. - `Disabled`: The fiat entry KYC is disabled and cannot be updated. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ListFiatEntryKyc200Response:
+        """List all fiat entry KYC
+
+        This operation retrieves all fiat entry KYC records under your organization.  You can filter results by KYC statuses and use pagination parameters to control the response size. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param statuses: A list of fiat entry KYC statuses, separated by comma. Possible values include: - `PendingReview`: The fiat entry KYC is pending review. - `Completed`: The fiat entry KYC has been completed. - `Failed`: The fiat entry KYC has failed. - `Disabled`: The fiat entry KYC is disabled and cannot be updated. 
+        :type statuses: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_fiat_entry_kyc_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            statuses=statuses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListFiatEntryKyc200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def list_fiat_entry_kyc_with_http_info(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of fiat entry KYC statuses, separated by comma. Possible values include: - `PendingReview`: The fiat entry KYC is pending review. - `Completed`: The fiat entry KYC has been completed. - `Failed`: The fiat entry KYC has failed. - `Disabled`: The fiat entry KYC is disabled and cannot be updated. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[ListFiatEntryKyc200Response]:
+        """List all fiat entry KYC
+
+        This operation retrieves all fiat entry KYC records under your organization.  You can filter results by KYC statuses and use pagination parameters to control the response size. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param statuses: A list of fiat entry KYC statuses, separated by comma. Possible values include: - `PendingReview`: The fiat entry KYC is pending review. - `Completed`: The fiat entry KYC has been completed. - `Failed`: The fiat entry KYC has failed. - `Disabled`: The fiat entry KYC is disabled and cannot be updated. 
+        :type statuses: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_fiat_entry_kyc_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            statuses=statuses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListFiatEntryKyc200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def list_fiat_entry_kyc_without_preload_content(
+        self,
+        limit: Annotated[Optional[StrictInt], Field(description="The maximum number of objects to return. For most operations, the value range is [1, 50].")] = None,
+        before: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. ")] = None,
+        after: Annotated[Optional[StrictStr], Field(description="A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. ")] = None,
+        statuses: Annotated[Optional[StrictStr], Field(description="A list of fiat entry KYC statuses, separated by comma. Possible values include: - `PendingReview`: The fiat entry KYC is pending review. - `Completed`: The fiat entry KYC has been completed. - `Failed`: The fiat entry KYC has failed. - `Disabled`: The fiat entry KYC is disabled and cannot be updated. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """List all fiat entry KYC
+
+        This operation retrieves all fiat entry KYC records under your organization.  You can filter results by KYC statuses and use pagination parameters to control the response size. 
+
+        :param limit: The maximum number of objects to return. For most operations, the value range is [1, 50].
+        :type limit: int
+        :param before: A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response. 
+        :type before: str
+        :param after: A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response. 
+        :type after: str
+        :param statuses: A list of fiat entry KYC statuses, separated by comma. Possible values include: - `PendingReview`: The fiat entry KYC is pending review. - `Completed`: The fiat entry KYC has been completed. - `Failed`: The fiat entry KYC has failed. - `Disabled`: The fiat entry KYC is disabled and cannot be updated. 
+        :type statuses: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._list_fiat_entry_kyc_serialize(
+            limit=limit,
+            before=before,
+            after=after,
+            statuses=statuses,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListFiatEntryKyc200Response",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _list_fiat_entry_kyc_serialize(
+        self,
+        limit,
+        before,
+        after,
+        statuses,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before is not None:
+            
+            _query_params.append(('before', before))
+            
+        if after is not None:
+            
+            _query_params.append(('after', after))
+            
+        if statuses is not None:
+            
+            _query_params.append(('statuses', statuses))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/payments/fiat_entry_kyc',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14038,9 +14626,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> MerchantKycInfo:
-        """Submit merchant KYC
+        """(Deprecated) Submit merchant KYC
 
-        This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+        <Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -14053,6 +14641,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("POST /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
         _param = self._submit_merchant_kyc_serialize(
             merchant_id=merchant_id,
@@ -14088,9 +14677,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> ApiResponse[MerchantKycInfo]:
-        """Submit merchant KYC
+        """(Deprecated) Submit merchant KYC
 
-        This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+        <Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -14103,6 +14692,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("POST /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
         _param = self._submit_merchant_kyc_serialize(
             merchant_id=merchant_id,
@@ -14138,9 +14728,9 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """Submit merchant KYC
+        """(Deprecated) Submit merchant KYC
 
-        This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+        <Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
         :param merchant_id: The merchant ID. (required)
         :type merchant_id: str
@@ -14153,6 +14743,7 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
+        warnings.warn("POST /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
         _param = self._submit_merchant_kyc_serialize(
             merchant_id=merchant_id,
@@ -14935,6 +15526,191 @@ class PaymentApi:
         )
 
     @validate_call
+    def update_fiat_entry_kyc(
+        self,
+        fiat_entry_kyc_id: Annotated[StrictStr, Field(description="The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). ")],
+        update_fiat_entry_kyc: Annotated[Optional[UpdateFiatEntryKyc], Field(description="The request body to update fiat entry KYC information.  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> FiatEntryKyc:
+        """Update fiat entry KYC
+
+        This operation updates KYC information for a specified fiat entry KYC ID.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc) or [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc).  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field.  <Note>If the fiat entry KYC status is `Disabled`, this operation cannot be used to update KYC information.</Note> 
+
+        :param fiat_entry_kyc_id: The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  (required)
+        :type fiat_entry_kyc_id: str
+        :param update_fiat_entry_kyc: The request body to update fiat entry KYC information.  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field. 
+        :type update_fiat_entry_kyc: UpdateFiatEntryKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_fiat_entry_kyc_serialize(
+            fiat_entry_kyc_id=fiat_entry_kyc_id,
+            update_fiat_entry_kyc=update_fiat_entry_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FiatEntryKyc",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def update_fiat_entry_kyc_with_http_info(
+        self,
+        fiat_entry_kyc_id: Annotated[StrictStr, Field(description="The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). ")],
+        update_fiat_entry_kyc: Annotated[Optional[UpdateFiatEntryKyc], Field(description="The request body to update fiat entry KYC information.  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> ApiResponse[FiatEntryKyc]:
+        """Update fiat entry KYC
+
+        This operation updates KYC information for a specified fiat entry KYC ID.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc) or [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc).  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field.  <Note>If the fiat entry KYC status is `Disabled`, this operation cannot be used to update KYC information.</Note> 
+
+        :param fiat_entry_kyc_id: The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  (required)
+        :type fiat_entry_kyc_id: str
+        :param update_fiat_entry_kyc: The request body to update fiat entry KYC information.  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field. 
+        :type update_fiat_entry_kyc: UpdateFiatEntryKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_fiat_entry_kyc_serialize(
+            fiat_entry_kyc_id=fiat_entry_kyc_id,
+            update_fiat_entry_kyc=update_fiat_entry_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FiatEntryKyc",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def update_fiat_entry_kyc_without_preload_content(
+        self,
+        fiat_entry_kyc_id: Annotated[StrictStr, Field(description="The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). ")],
+        update_fiat_entry_kyc: Annotated[Optional[UpdateFiatEntryKyc], Field(description="The request body to update fiat entry KYC information.  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field. ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+    ) -> RESTResponseType:
+        """Update fiat entry KYC
+
+        This operation updates KYC information for a specified fiat entry KYC ID.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc) or [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc).  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field.  <Note>If the fiat entry KYC status is `Disabled`, this operation cannot be used to update KYC information.</Note> 
+
+        :param fiat_entry_kyc_id: The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  (required)
+        :type fiat_entry_kyc_id: str
+        :param update_fiat_entry_kyc: The request body to update fiat entry KYC information.  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field. 
+        :type update_fiat_entry_kyc: UpdateFiatEntryKyc
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._update_fiat_entry_kyc_serialize(
+            fiat_entry_kyc_id=fiat_entry_kyc_id,
+            update_fiat_entry_kyc=update_fiat_entry_kyc,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FiatEntryKyc",
+            '4XX': "ErrorResponse",
+            '5XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _update_fiat_entry_kyc_serialize(
+        self,
+        fiat_entry_kyc_id,
+        update_fiat_entry_kyc,
+    ) -> RequestSerialized:
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if fiat_entry_kyc_id is not None:
+            _path_params['fiat_entry_kyc_id'] = fiat_entry_kyc_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_fiat_entry_kyc is not None:
+            _body_params = update_fiat_entry_kyc
+
+        # set the HTTP header `Accept` / `Content-Type`
+        _header_params = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/payments/fiat_entry_kyc/{fiat_entry_kyc_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+        )
+
+    @validate_call
     def update_merchant_by_id(
         self,
         merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
@@ -15674,7 +16450,7 @@ class PaymentApi:
     ) -> PaymentUploadedFile:
         """(Deprecated) Upload file
 
-        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param file: The file to upload. (required)
         :type file: bytearray
@@ -15721,7 +16497,7 @@ class PaymentApi:
     ) -> ApiResponse[PaymentUploadedFile]:
         """(Deprecated) Upload file
 
-        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param file: The file to upload. (required)
         :type file: bytearray
@@ -15768,7 +16544,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """(Deprecated) Upload file
 
-        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param file: The file to upload. (required)
         :type file: bytearray
@@ -15847,7 +16623,7 @@ class PaymentApi:
     ) -> PaymentUploadedFile:
         """Upload file v2
 
-        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param payment_upload_file_v2: The request body to upload a file.
         :type payment_upload_file_v2: PaymentUploadFileV2
@@ -15893,7 +16669,7 @@ class PaymentApi:
     ) -> ApiResponse[PaymentUploadedFile]:
         """Upload file v2
 
-        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param payment_upload_file_v2: The request body to upload a file.
         :type payment_upload_file_v2: PaymentUploadFileV2
@@ -15939,7 +16715,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Upload file v2
 
-        This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
         :param payment_upload_file_v2: The request body to upload a file.
         :type payment_upload_file_v2: PaymentUploadFileV2

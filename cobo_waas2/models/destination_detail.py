@@ -39,9 +39,10 @@ class DestinationDetail(BaseModel):
     wallet_addresses: Optional[List[WalletAddress]] = Field(default=None, description="The wallet addresses of the destination.")
     bank_accounts: Optional[List[DestinationBankAccount]] = Field(default=None, description="The bank accounts of the destination.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The ID of the merchant linked to the destination.")
+    fiat_entry_kyc_id: Optional[StrictStr] = Field(default=None, description="The fiat entry KYC ID linked to the destination.")
     created_timestamp: StrictInt = Field(description="The created time of the destination, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the destination, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["destination_id", "destination_type", "destination_name", "source", "country", "email", "contact_address", "wallet_addresses", "bank_accounts", "merchant_id", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["destination_id", "destination_type", "destination_name", "source", "country", "email", "contact_address", "wallet_addresses", "bank_accounts", "merchant_id", "fiat_entry_kyc_id", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -118,6 +119,7 @@ class DestinationDetail(BaseModel):
             "wallet_addresses": [WalletAddress.from_dict(_item) for _item in obj["wallet_addresses"]] if obj.get("wallet_addresses") is not None else None,
             "bank_accounts": [DestinationBankAccount.from_dict(_item) for _item in obj["bank_accounts"]] if obj.get("bank_accounts") is not None else None,
             "merchant_id": obj.get("merchant_id"),
+            "fiat_entry_kyc_id": obj.get("fiat_entry_kyc_id"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

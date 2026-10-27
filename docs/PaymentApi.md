@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**create_crypto_address**](PaymentApi.md#create_crypto_address) | **POST** /payments/crypto_addresses | Create crypto address
 [**create_destination**](PaymentApi.md#create_destination) | **POST** /payments/destination | Create destination
 [**create_destination_entry**](PaymentApi.md#create_destination_entry) | **POST** /payments/destination_entry | Create destination entry
+[**create_fiat_entry_kyc**](PaymentApi.md#create_fiat_entry_kyc) | **POST** /payments/fiat_entry_kyc | Create fiat entry KYC
 [**create_forced_sweep_request**](PaymentApi.md#create_forced_sweep_request) | **POST** /payments/force_sweep_requests | Create forced sweep
 [**create_merchant**](PaymentApi.md#create_merchant) | **POST** /payments/merchants | Create merchant
 [**create_order_link**](PaymentApi.md#create_order_link) | **POST** /payments/links/orders | Create order link
@@ -40,6 +41,7 @@ Method | HTTP request | Description
 [**get_destination**](PaymentApi.md#get_destination) | **GET** /payments/destination/{destination_id} | Get destination information
 [**get_destination_entry**](PaymentApi.md#get_destination_entry) | **GET** /payments/destination_entry/{destination_entry_id} | Get destination entry information
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
+[**get_fiat_entry_kyc**](PaymentApi.md#get_fiat_entry_kyc) | **GET** /payments/fiat_entry_kyc/{fiat_entry_kyc_id} | Get fiat entry KYC
 [**get_merchant_kyc**](PaymentApi.md#get_merchant_kyc) | **GET** /payments/merchants/{merchant_id}/kyc | Get merchant KYC
 [**get_payment_bank_account_balance**](PaymentApi.md#get_payment_bank_account_balance) | **GET** /payments/balance/bank_accounts/{bank_account_id} | Get bank account balance
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
@@ -62,6 +64,7 @@ Method | HTTP request | Description
 [**list_crypto_addresses**](PaymentApi.md#list_crypto_addresses) | **GET** /payments/crypto_addresses | List crypto addresses
 [**list_destination_entries**](PaymentApi.md#list_destination_entries) | **GET** /payments/destination_entry | List destination entries
 [**list_destinations**](PaymentApi.md#list_destinations) | **GET** /payments/destination | List all destinations
+[**list_fiat_entry_kyc**](PaymentApi.md#list_fiat_entry_kyc) | **GET** /payments/fiat_entry_kyc | List all fiat entry KYC
 [**list_forced_sweep_requests**](PaymentApi.md#list_forced_sweep_requests) | **GET** /payments/force_sweep_requests | List forced sweeps
 [**list_merchant_balances**](PaymentApi.md#list_merchant_balances) | **GET** /payments/balance/merchants | List merchant balances
 [**list_merchants**](PaymentApi.md#list_merchants) | **GET** /payments/merchants | List all merchants
@@ -79,6 +82,7 @@ Method | HTTP request | Description
 [**update_counterparty**](PaymentApi.md#update_counterparty) | **PUT** /payments/counterparty/{counterparty_id} | Update counterparty
 [**update_destination**](PaymentApi.md#update_destination) | **PUT** /payments/destination/{destination_id} | Update destination
 [**update_destination_entry**](PaymentApi.md#update_destination_entry) | **PUT** /payments/destination_entry/{destination_entry_id} | Update destination entry
+[**update_fiat_entry_kyc**](PaymentApi.md#update_fiat_entry_kyc) | **PUT** /payments/fiat_entry_kyc/{fiat_entry_kyc_id} | Update fiat entry KYC
 [**update_merchant_by_id**](PaymentApi.md#update_merchant_by_id) | **PUT** /payments/merchants/{merchant_id} | Update merchant
 [**update_payment_order**](PaymentApi.md#update_payment_order) | **PUT** /payments/orders/{order_id} | Update pay-in order
 [**update_refund_by_id**](PaymentApi.md#update_refund_by_id) | **PUT** /payments/refunds/{refund_id} | Update refund order
@@ -675,7 +679,7 @@ Name | Type | Description  | Notes
 
 Create destination
 
-This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations). 
+This operation creates a [destination](https://www.cobo.com/payments/en/guides/destinations).  You can link the destination to a merchant ID or a fiat entry KYC ID. The fiat entry KYC ID can be retrieved by calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
 
 ### Example
 
@@ -796,6 +800,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateDestinationEntry201Response**](CreateDestinationEntry201Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_fiat_entry_kyc**
+> FiatEntryKyc create_fiat_entry_kyc(create_fiat_entry_kyc=create_fiat_entry_kyc)
+
+Create fiat entry KYC
+
+This operation creates KYC information for a fiat entry.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  After a successful creation, use the returned `fiat_entry_kyc_id` when calling [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) or [Create destination](https://www.cobo.com/developers/v2/api-references/payment/create-destination). 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.create_fiat_entry_kyc import CreateFiatEntryKyc
+from cobo_waas2.models.fiat_entry_kyc import FiatEntryKyc
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    create_fiat_entry_kyc = cobo_waas2.CreateFiatEntryKyc()
+
+    try:
+        # Create fiat entry KYC
+        api_response = api_instance.create_fiat_entry_kyc(create_fiat_entry_kyc=create_fiat_entry_kyc)
+        print("The response of PaymentApi->create_fiat_entry_kyc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_fiat_entry_kyc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_fiat_entry_kyc** | [**CreateFiatEntryKyc**](CreateFiatEntryKyc.md)| The request body to create fiat entry KYC information.  Provide either &#x60;company_info&#x60; or &#x60;individual_info&#x60;: - &#x60;company_info&#x60;: Required for company merchants. - &#x60;individual_info&#x60;: Required for individual merchants.  | [optional] 
+
+### Return type
+
+[**FiatEntryKyc**](FiatEntryKyc.md)
 
 ### Authorization
 
@@ -2720,12 +2797,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_fiat_entry_kyc**
+> FiatEntryKycDetail get_fiat_entry_kyc(fiat_entry_kyc_id)
+
+Get fiat entry KYC
+
+This operation retrieves information about a specified fiat entry KYC.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.fiat_entry_kyc_detail import FiatEntryKycDetail
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    fiat_entry_kyc_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+    try:
+        # Get fiat entry KYC
+        api_response = api_instance.get_fiat_entry_kyc(fiat_entry_kyc_id)
+        print("The response of PaymentApi->get_fiat_entry_kyc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_fiat_entry_kyc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fiat_entry_kyc_id** | **str**| The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  | 
+
+### Return type
+
+[**FiatEntryKycDetail**](FiatEntryKycDetail.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_merchant_kyc**
 > MerchantKycSubmission get_merchant_kyc(merchant_id)
 
 Get merchant KYC
 
-This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
+<Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
 
 ### Example
 
@@ -4366,7 +4515,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_destinations**
-> ListDestinations200Response list_destinations(limit=limit, before=before, after=after, keyword=keyword, destination_type=destination_type, country=country, merchant_ids=merchant_ids)
+> ListDestinations200Response list_destinations(limit=limit, before=before, after=after, keyword=keyword, destination_type=destination_type, country=country, merchant_ids=merchant_ids, fiat_entry_kyc_ids=fiat_entry_kyc_ids)
 
 List all destinations
 
@@ -4402,10 +4551,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
     destination_type = cobo_waas2.DestinationType()
     country = 'USA'
     merchant_ids = 'M1001,M1002,M1003'
+    fiat_entry_kyc_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,c9bf9e57-1685-4c89-bafb-ff5af830be8a'
 
     try:
         # List all destinations
-        api_response = api_instance.list_destinations(limit=limit, before=before, after=after, keyword=keyword, destination_type=destination_type, country=country, merchant_ids=merchant_ids)
+        api_response = api_instance.list_destinations(limit=limit, before=before, after=after, keyword=keyword, destination_type=destination_type, country=country, merchant_ids=merchant_ids, fiat_entry_kyc_ids=fiat_entry_kyc_ids)
         print("The response of PaymentApi->list_destinations:\n")
         pprint(api_response)
     except Exception as e:
@@ -4426,10 +4576,89 @@ Name | Type | Description  | Notes
  **destination_type** | [**DestinationType**](.md)| DestinationType defines the type of the destination: - &#x60;Individual&#x60;: The destination is an individual. - &#x60;Organization&#x60;: The destination is an organization.  | [optional] 
  **country** | **str**| Country code, in ISO 3166-1 alpha-3 format. | [optional] 
  **merchant_ids** | **str**| A list of merchant IDs to query. | [optional] 
+ **fiat_entry_kyc_ids** | **str**| A list of fiat entry KYC IDs to query. | [optional] 
 
 ### Return type
 
 [**ListDestinations200Response**](ListDestinations200Response.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_fiat_entry_kyc**
+> ListFiatEntryKyc200Response list_fiat_entry_kyc(limit=limit, before=before, after=after, statuses=statuses)
+
+List all fiat entry KYC
+
+This operation retrieves all fiat entry KYC records under your organization.  You can filter results by KYC statuses and use pagination parameters to control the response size. 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.list_fiat_entry_kyc200_response import ListFiatEntryKyc200Response
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    limit = 10
+    before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+    after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+    statuses = 'PendingReview,Completed'
+
+    try:
+        # List all fiat entry KYC
+        api_response = api_instance.list_fiat_entry_kyc(limit=limit, before=before, after=after, statuses=statuses)
+        print("The response of PaymentApi->list_fiat_entry_kyc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->list_fiat_entry_kyc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| The maximum number of objects to return. For most operations, the value range is [1, 50]. | [optional] [default to 10]
+ **before** | **str**| A cursor indicating the position before the current page. This value is generated by Cobo and returned in the response. If you are paginating forward from the beginning, you do not need to provide it on the first request. When paginating backward (to the previous page), you should pass the before value returned from the last response.  | [optional] 
+ **after** | **str**| A cursor indicating the position after the current page. This value is generated by Cobo and returned in the response. You do not need to provide it on the first request. When paginating forward (to the next page), you should pass the after value returned from the last response.  | [optional] 
+ **statuses** | **str**| A list of fiat entry KYC statuses, separated by comma. Possible values include: - &#x60;PendingReview&#x60;: The fiat entry KYC is pending review. - &#x60;Completed&#x60;: The fiat entry KYC has been completed. - &#x60;Failed&#x60;: The fiat entry KYC has failed. - &#x60;Disabled&#x60;: The fiat entry KYC is disabled and cannot be updated.  | [optional] 
+
+### Return type
+
+[**ListFiatEntryKyc200Response**](ListFiatEntryKyc200Response.md)
 
 ### Authorization
 
@@ -5392,7 +5621,7 @@ Name | Type | Description  | Notes
 
 Submit merchant KYC
 
-This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+<Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
 
 ### Example
 
@@ -5759,6 +5988,81 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_fiat_entry_kyc**
+> FiatEntryKyc update_fiat_entry_kyc(fiat_entry_kyc_id, update_fiat_entry_kyc=update_fiat_entry_kyc)
+
+Update fiat entry KYC
+
+This operation updates KYC information for a specified fiat entry KYC ID.  The fiat entry KYC ID can be retrieved by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc) or [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc).  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field.  <Note>If the fiat entry KYC status is `Disabled`, this operation cannot be used to update KYC information.</Note> 
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Api Key Authentication (CoboAuth):
+
+```python
+import cobo_waas2
+from cobo_waas2.models.fiat_entry_kyc import FiatEntryKyc
+from cobo_waas2.models.update_fiat_entry_kyc import UpdateFiatEntryKyc
+from cobo_waas2.rest import ApiException
+from pprint import pprint
+
+# See configuration.py for a list of all supported configurations.
+configuration = cobo_waas2.Configuration(
+    # Replace `<YOUR_PRIVATE_KEY>` with your private key
+    api_private_key="<YOUR_PRIVATE_KEY>",
+    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
+    host="https://api.dev.cobo.com/v2"
+)
+# Enter a context with an instance of the API client
+with cobo_waas2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cobo_waas2.PaymentApi(api_client)
+    fiat_entry_kyc_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    update_fiat_entry_kyc = cobo_waas2.UpdateFiatEntryKyc()
+
+    try:
+        # Update fiat entry KYC
+        api_response = api_instance.update_fiat_entry_kyc(fiat_entry_kyc_id, update_fiat_entry_kyc=update_fiat_entry_kyc)
+        print("The response of PaymentApi->update_fiat_entry_kyc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->update_fiat_entry_kyc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fiat_entry_kyc_id** | **str**| The fiat entry KYC ID, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  | 
+ **update_fiat_entry_kyc** | [**UpdateFiatEntryKyc**](UpdateFiatEntryKyc.md)| The request body to update fiat entry KYC information.  All fields are optional. Omitted fields keep their existing values. You can pass empty values to clear a field.  | [optional] 
+
+### Return type
+
+[**FiatEntryKyc**](FiatEntryKyc.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The request was successful. |  -  |
+**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
+**5XX** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_merchant_by_id**
 > Merchant update_merchant_by_id(merchant_id, update_merchant_by_id_request=update_merchant_by_id_request)
 
@@ -6062,7 +6366,7 @@ Name | Type | Description  | Notes
 
 Upload file
 
-<Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+<Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
 ### Example
 
@@ -6134,7 +6438,7 @@ Name | Type | Description  | Notes
 
 Upload file v2
 
-This operation uploads a file for payment-related use cases, such as merchant KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Submit merchant KYC](https://www.cobo.com/developers/v2/api-references/payment/submit-merchant-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
 
 ### Example
 

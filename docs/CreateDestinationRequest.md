@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **wallet_addresses** | [**List[CreateWalletAddress]**](CreateWalletAddress.md) | The wallet addresses of the destination. | [optional] 
 **bank_accounts** | [**List[CreateDestinationBankAccount]**](CreateDestinationBankAccount.md) | The bank accounts of the destination. | [optional] 
 **merchant_id** | **str** | The ID of the merchant linked to the destination. | [optional] 
+**fiat_entry_kyc_id** | **str** | The fiat entry KYC ID linked to the destination, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc).  | [optional] 
 **country** | **str** | The country of the destination, in ISO 3166-1 alpha-3 format. | [optional] 
 **email** | **str** | The email of the destination. | [optional] 
 **contact_address** | **str** | The contact address of the destination. | [optional] 

@@ -19,16 +19,17 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "cobo-waas2"
-VERSION = "1.45.0"
+VERSION = "1.46.0"
 PYTHON_REQUIRES = ">=3.9"
 REQUIRES = [
-    "urllib3 >= 2.6.0",
-    "python-dateutil",
-    "pydantic >= 2",
+    "urllib3 >= 2.6.3 ; python_version < '3.10'",
+    "urllib3 >= 2.8.0 ; python_version >= '3.10'",
+    "python-dateutil >= 2.8.2",
+    "pydantic >= 2.4.0",
     "typing-extensions >= 4.7.1",
-    "PyNaCl>=1.5.0",
-    "ecdsa==0.19.0",
-    "fastapi >= 0.103.2",
+    "PyNaCl >= 1.6.2",
+    "ecdsa >= 0.19.2",
+    "fastapi >= 0.109.1",
     "uvicorn==0.22.0",
 ]
 

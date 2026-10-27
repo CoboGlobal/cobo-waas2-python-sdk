@@ -35,9 +35,10 @@ class Destination(BaseModel):
     email: Optional[StrictStr] = Field(default=None, description="The email of the destination.")
     contact_address: Optional[StrictStr] = Field(default=None, description="The contact address of the destination.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The ID of the merchant linked to the destination.")
+    fiat_entry_kyc_id: Optional[StrictStr] = Field(default=None, description="The fiat entry KYC ID linked to the destination.")
     created_timestamp: StrictInt = Field(description="The created time of the destination, represented as a UNIX timestamp in seconds.")
     updated_timestamp: StrictInt = Field(description="The updated time of the destination, represented as a UNIX timestamp in seconds.")
-    __properties: ClassVar[List[str]] = ["destination_id", "destination_type", "destination_name", "source", "country", "email", "contact_address", "merchant_id", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["destination_id", "destination_type", "destination_name", "source", "country", "email", "contact_address", "merchant_id", "fiat_entry_kyc_id", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +99,7 @@ class Destination(BaseModel):
             "email": obj.get("email"),
             "contact_address": obj.get("contact_address"),
             "merchant_id": obj.get("merchant_id"),
+            "fiat_entry_kyc_id": obj.get("fiat_entry_kyc_id"),
             "created_timestamp": obj.get("created_timestamp"),
             "updated_timestamp": obj.get("updated_timestamp")
         })

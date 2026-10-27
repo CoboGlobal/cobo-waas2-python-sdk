@@ -33,10 +33,11 @@ class CreateDestinationRequest(BaseModel):
     wallet_addresses: Optional[List[CreateWalletAddress]] = Field(default=None, description="The wallet addresses of the destination.")
     bank_accounts: Optional[List[CreateDestinationBankAccount]] = Field(default=None, description="The bank accounts of the destination.")
     merchant_id: Optional[StrictStr] = Field(default=None, description="The ID of the merchant linked to the destination.")
+    fiat_entry_kyc_id: Optional[StrictStr] = Field(default=None, description="The fiat entry KYC ID linked to the destination, which you can retrieve by calling [List all fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/list-all-fiat-entry-kyc). ")
     country: Optional[StrictStr] = Field(default=None, description="The country of the destination, in ISO 3166-1 alpha-3 format.")
     email: Optional[StrictStr] = Field(default=None, description="The email of the destination.")
     contact_address: Optional[StrictStr] = Field(default=None, description="The contact address of the destination.")
-    __properties: ClassVar[List[str]] = ["destination_name", "destination_type", "wallet_addresses", "bank_accounts", "merchant_id", "country", "email", "contact_address"]
+    __properties: ClassVar[List[str]] = ["destination_name", "destination_type", "wallet_addresses", "bank_accounts", "merchant_id", "fiat_entry_kyc_id", "country", "email", "contact_address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,6 +109,7 @@ class CreateDestinationRequest(BaseModel):
             "wallet_addresses": [CreateWalletAddress.from_dict(_item) for _item in obj["wallet_addresses"]] if obj.get("wallet_addresses") is not None else None,
             "bank_accounts": [CreateDestinationBankAccount.from_dict(_item) for _item in obj["bank_accounts"]] if obj.get("bank_accounts") is not None else None,
             "merchant_id": obj.get("merchant_id"),
+            "fiat_entry_kyc_id": obj.get("fiat_entry_kyc_id"),
             "country": obj.get("country"),
             "email": obj.get("email"),
             "contact_address": obj.get("contact_address")

@@ -36,7 +36,9 @@ class TestEstimatedEvmLegacyFeeSlow(unittest.TestCase):
             return EstimatedEvmLegacyFeeSlow(
                 gas_price = '100000000',
                 gas_limit = '21000',
-                reserved_fee = '1000000000000'
+                reserved_fee = '1000000000000',
+                fallback = True,
+                fallback_reason = 'execution reverted: ERC20: transfer amount exceeds balance'
             )
         else:
             return EstimatedEvmLegacyFeeSlow(
