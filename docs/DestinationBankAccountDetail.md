@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 **bank_province** | **str** | The province or state of the bank. Cannot be a pure number or contain Chinese characters.  | [optional] 
 **bank_city** | **str** | The city of the bank. | [optional] 
 **routing_value** | **str** | The routing value of the bank account. | [optional] 
-**contract_file_id** | **str** | The file ID of the contract document (e.g., cooperation agreement) that proves the business relationship between you and the beneficiary, which you can retrieve by calling [Upload file](https://www.cobo.com/developers/v2/api-references/payment/upload-file).  | [optional] 
+**contract_file_id** | **str** | The file ID of the contract document (e.g., cooperation agreement) that proves the business relationship between you and the beneficiary, which you can retrieve by calling [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2).  | [optional] 
 **created_timestamp** | **int** | The created time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
 **updated_timestamp** | **int** | The updated time of the bank account, represented as a UNIX timestamp in seconds. | [optional] 
 

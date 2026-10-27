@@ -86,6 +86,7 @@ class TestDestinationDetail(unittest.TestCase):
                         contract_file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', )
                     ],
                 merchant_id = 'M1001',
+                fiat_entry_kyc_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 created_timestamp = 1744689600,
                 updated_timestamp = 1744689600
             )

@@ -150,6 +150,18 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.create_destination_entry(create_destination_entry_request=create_destination_entry_request)
         """
 
+    def test_create_fiat_entry_kyc(self) -> None:
+        """
+        Test case for create_fiat_entry_kyc
+
+        Create fiat entry KYC
+        """
+        """
+        create_fiat_entry_kyc = cobo_waas2.CreateFiatEntryKyc()
+
+        api_response = self.api.create_fiat_entry_kyc(create_fiat_entry_kyc=create_fiat_entry_kyc)
+        """
+
     def test_create_forced_sweep_request(self) -> None:
         """
         Test case for create_forced_sweep_request
@@ -468,6 +480,18 @@ class TestPaymentApi(unittest.TestCase):
         currency = 'USD'
 
         api_response = self.api.get_exchange_rate(token_id, currency)
+        """
+
+    def test_get_fiat_entry_kyc(self) -> None:
+        """
+        Test case for get_fiat_entry_kyc
+
+        Get fiat entry KYC
+        """
+        """
+        fiat_entry_kyc_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+        api_response = self.api.get_fiat_entry_kyc(fiat_entry_kyc_id)
         """
 
     def test_get_merchant_kyc(self) -> None:
@@ -797,8 +821,24 @@ class TestPaymentApi(unittest.TestCase):
         destination_type = cobo_waas2.DestinationType()
         country = 'USA'
         merchant_ids = 'M1001,M1002,M1003'
+        fiat_entry_kyc_ids = 'f47ac10b-58cc-4372-a567-0e02b2c3d479,c9bf9e57-1685-4c89-bafb-ff5af830be8a'
 
-        api_response = self.api.list_destinations(limit=limit, before=before, after=after, keyword=keyword, destination_type=destination_type, country=country, merchant_ids=merchant_ids)
+        api_response = self.api.list_destinations(limit=limit, before=before, after=after, keyword=keyword, destination_type=destination_type, country=country, merchant_ids=merchant_ids, fiat_entry_kyc_ids=fiat_entry_kyc_ids)
+        """
+
+    def test_list_fiat_entry_kyc(self) -> None:
+        """
+        Test case for list_fiat_entry_kyc
+
+        List all fiat entry KYC
+        """
+        """
+        limit = 10
+        before = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGmk1'
+        after = 'RqeEoTkgKG5rpzqYzg2Hd3szmPoj2cE7w5jWwShz3C1vyGSAk'
+        statuses = 'PendingReview,Completed'
+
+        api_response = self.api.list_fiat_entry_kyc(limit=limit, before=before, after=after, statuses=statuses)
         """
 
     def test_list_forced_sweep_requests(self) -> None:
@@ -1043,6 +1083,19 @@ class TestPaymentApi(unittest.TestCase):
         update_destination_entry_request = cobo_waas2.UpdateDestinationEntryRequest()
 
         api_response = self.api.update_destination_entry(destination_entry_id, update_destination_entry_request=update_destination_entry_request)
+        """
+
+    def test_update_fiat_entry_kyc(self) -> None:
+        """
+        Test case for update_fiat_entry_kyc
+
+        Update fiat entry KYC
+        """
+        """
+        fiat_entry_kyc_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+        update_fiat_entry_kyc = cobo_waas2.UpdateFiatEntryKyc()
+
+        api_response = self.api.update_fiat_entry_kyc(fiat_entry_kyc_id, update_fiat_entry_kyc=update_fiat_entry_kyc)
         """
 
     def test_update_merchant_by_id(self) -> None:

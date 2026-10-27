@@ -72,6 +72,7 @@ class TestCreateDestinationRequest(unittest.TestCase):
                         contract_file_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479', )
                     ],
                 merchant_id = 'M1001',
+                fiat_entry_kyc_id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                 country = 'USA',
                 email = 'counterparty@example.com',
                 contact_address = '123 Main St, Anytown, USA'

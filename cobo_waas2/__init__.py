@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.45.0"
+__version__ = "1.46.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -189,6 +189,7 @@ from cobo_waas2.models.create_destination_entry201_response import CreateDestina
 from cobo_waas2.models.create_destination_entry_request import CreateDestinationEntryRequest
 from cobo_waas2.models.create_destination_request import CreateDestinationRequest
 from cobo_waas2.models.create_exchange_wallet_params import CreateExchangeWalletParams
+from cobo_waas2.models.create_fiat_entry_kyc import CreateFiatEntryKyc
 from cobo_waas2.models.create_key_share_holder import CreateKeyShareHolder
 from cobo_waas2.models.create_key_share_holder_group_request import CreateKeyShareHolderGroupRequest
 from cobo_waas2.models.create_kya_screenings_body import CreateKyaScreeningsBody
@@ -309,6 +310,7 @@ from cobo_waas2.models.extended_token_info import ExtendedTokenInfo
 from cobo_waas2.models.fil_base import FILBase
 from cobo_waas2.models.fil_price import FILPrice
 from cobo_waas2.models.fee_amount import FeeAmount
+from cobo_waas2.models.fee_fallback import FeeFallback
 from cobo_waas2.models.fee_gas_limit import FeeGasLimit
 from cobo_waas2.models.fee_level import FeeLevel
 from cobo_waas2.models.fee_rate import FeeRate
@@ -323,6 +325,18 @@ from cobo_waas2.models.fee_station_sponsor_transaction_description import FeeSta
 from cobo_waas2.models.fee_station_transaction_type import FeeStationTransactionType
 from cobo_waas2.models.fee_station_transfer import FeeStationTransfer
 from cobo_waas2.models.fee_type import FeeType
+from cobo_waas2.models.fiat_entry_kyc import FiatEntryKyc
+from cobo_waas2.models.fiat_entry_kyc_address import FiatEntryKycAddress
+from cobo_waas2.models.fiat_entry_kyc_company_attachment import FiatEntryKycCompanyAttachment
+from cobo_waas2.models.fiat_entry_kyc_company_attachment_file_type import FiatEntryKycCompanyAttachmentFileType
+from cobo_waas2.models.fiat_entry_kyc_company_info import FiatEntryKycCompanyInfo
+from cobo_waas2.models.fiat_entry_kyc_company_type import FiatEntryKycCompanyType
+from cobo_waas2.models.fiat_entry_kyc_detail import FiatEntryKycDetail
+from cobo_waas2.models.fiat_entry_kyc_merchant_type import FiatEntryKycMerchantType
+from cobo_waas2.models.fiat_entry_kyc_person_attachment import FiatEntryKycPersonAttachment
+from cobo_waas2.models.fiat_entry_kyc_person_attachment_file_type import FiatEntryKycPersonAttachmentFileType
+from cobo_waas2.models.fiat_entry_kyc_person_info import FiatEntryKycPersonInfo
+from cobo_waas2.models.fiat_entry_kyc_status import FiatEntryKycStatus
 from cobo_waas2.models.fiat_transaction_event_data import FiatTransactionEventData
 from cobo_waas2.models.fixed_fee_rate import FixedFeeRate
 from cobo_waas2.models.forced_sweep import ForcedSweep
@@ -397,6 +411,7 @@ from cobo_waas2.models.list_destination_entries200_response import ListDestinati
 from cobo_waas2.models.list_destinations200_response import ListDestinations200Response
 from cobo_waas2.models.list_exchanges200_response_inner import ListExchanges200ResponseInner
 from cobo_waas2.models.list_fee_station_fiat_transactions200_response import ListFeeStationFiatTransactions200Response
+from cobo_waas2.models.list_fiat_entry_kyc200_response import ListFiatEntryKyc200Response
 from cobo_waas2.models.list_forced_sweep_requests200_response import ListForcedSweepRequests200Response
 from cobo_waas2.models.list_key_share_holder_groups200_response import ListKeyShareHolderGroups200Response
 from cobo_waas2.models.list_key_share_holders200_response import ListKeyShareHolders200Response
@@ -908,6 +923,7 @@ from cobo_waas2.models.update_destination_entry200_response import UpdateDestina
 from cobo_waas2.models.update_destination_entry_request import UpdateDestinationEntryRequest
 from cobo_waas2.models.update_destination_request import UpdateDestinationRequest
 from cobo_waas2.models.update_exchange_wallet_params import UpdateExchangeWalletParams
+from cobo_waas2.models.update_fiat_entry_kyc import UpdateFiatEntryKyc
 from cobo_waas2.models.update_group_action import UpdateGroupAction
 from cobo_waas2.models.update_key_share_holder_group_by_id_request import UpdateKeyShareHolderGroupByIdRequest
 from cobo_waas2.models.update_merchant_by_id_request import UpdateMerchantByIdRequest

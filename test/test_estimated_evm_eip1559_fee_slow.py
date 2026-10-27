@@ -37,7 +37,9 @@ class TestEstimatedEvmEip1559FeeSlow(unittest.TestCase):
                 max_fee_per_gas = '9000000000000',
                 max_priority_fee_per_gas = '1000000000000',
                 gas_limit = '21000',
-                reserved_fee = '1000000000000'
+                reserved_fee = '1000000000000',
+                fallback = True,
+                fallback_reason = 'execution reverted: ERC20: transfer amount exceeds balance'
             )
         else:
             return EstimatedEvmEip1559FeeSlow(

@@ -36,7 +36,7 @@ class TestSubmitMerchantKyc(unittest.TestCase):
             return SubmitMerchantKyc(
                 merchant_type = 'B2B',
                 country = 'HKG',
-                industry = ["E-commerce"],
+                industry = ["Intangible Goods & Service","Websites, IT & Software"],
                 company_info = cobo_waas2.models.merchant_kyc_company_info.MerchantKycCompanyInfo(
                     company_type = 'Corporation', 
                     listed = False, 
@@ -115,7 +115,7 @@ class TestSubmitMerchantKyc(unittest.TestCase):
             return SubmitMerchantKyc(
                 merchant_type = 'B2B',
                 country = 'HKG',
-                industry = ["E-commerce"],
+                industry = ["Intangible Goods & Service","Websites, IT & Software"],
         )
         """
 
