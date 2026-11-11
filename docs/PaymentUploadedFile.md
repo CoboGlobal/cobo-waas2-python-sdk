@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **file_id** | **str** | The AWS file link of the uploaded file. | 
-**expired_timestamp** | **int** | The time when the uploaded file link expires, in Unix timestamp format, measured in milliseconds. | 
 
 ## Example
 

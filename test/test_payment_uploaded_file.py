@@ -34,13 +34,11 @@ class TestPaymentUploadedFile(unittest.TestCase):
         model = PaymentUploadedFile()
         if include_optional:
             return PaymentUploadedFile(
-                file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/business_registration.pdf',
-                expired_timestamp = 1701483266000
+                file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/business_registration.pdf'
             )
         else:
             return PaymentUploadedFile(
                 file_id = 'https://example-bucket.s3.us-east-1.amazonaws.com/uploads/business_registration.pdf',
-                expired_timestamp = 1701483266000,
         )
         """
 

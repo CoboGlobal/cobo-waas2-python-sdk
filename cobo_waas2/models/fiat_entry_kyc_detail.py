@@ -34,13 +34,11 @@ class FiatEntryKycDetail(BaseModel):
     merchant_type: FiatEntryKycMerchantType
     country: StrictStr = Field(description="The country/region of the fiat entry KYC, in ISO 3166-1 alpha-3 format.")
     industry: List[StrictStr] = Field(description="The industry categories of the fiat entry KYC.")
-    email: Optional[StrictStr] = Field(default=None, description="The email address.")
-    phone: Optional[StrictStr] = Field(default=None, description="The phone number.")
     company_info: Optional[FiatEntryKycCompanyInfo] = None
     individual_info: Optional[FiatEntryKycPersonInfo] = None
     created_timestamp: StrictInt = Field(description="The creation timestamp in Unix seconds.")
     updated_timestamp: Optional[StrictInt] = Field(default=None, description="The last update timestamp in Unix seconds.")
-    __properties: ClassVar[List[str]] = ["fiat_entry_kyc_id", "status", "merchant_type", "country", "industry", "email", "phone", "company_info", "individual_info", "created_timestamp", "updated_timestamp"]
+    __properties: ClassVar[List[str]] = ["fiat_entry_kyc_id", "status", "merchant_type", "country", "industry", "company_info", "individual_info", "created_timestamp", "updated_timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,8 +102,6 @@ class FiatEntryKycDetail(BaseModel):
             "merchant_type": obj.get("merchant_type"),
             "country": obj.get("country"),
             "industry": obj.get("industry"),
-            "email": obj.get("email"),
-            "phone": obj.get("phone"),
             "company_info": FiatEntryKycCompanyInfo.from_dict(obj["company_info"]) if obj.get("company_info") is not None else None,
             "individual_info": FiatEntryKycPersonInfo.from_dict(obj["individual_info"]) if obj.get("individual_info") is not None else None,
             "created_timestamp": obj.get("created_timestamp"),

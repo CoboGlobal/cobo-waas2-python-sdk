@@ -10,8 +10,6 @@ Name | Type | Description | Notes
 **merchant_type** | [**FiatEntryKycMerchantType**](FiatEntryKycMerchantType.md) |  | 
 **country** | **str** | The country/region of the fiat entry KYC, in ISO 3166-1 alpha-3 format. | 
 **industry** | **List[str]** | The industry categories of the fiat entry KYC. | 
-**email** | **str** | The email address. | [optional] 
-**phone** | **str** | The phone number. | [optional] 
 **company_info** | [**FiatEntryKycCompanyInfo**](FiatEntryKycCompanyInfo.md) |  | [optional] 
 **individual_info** | [**FiatEntryKycPersonInfo**](FiatEntryKycPersonInfo.md) |  | [optional] 
 **created_timestamp** | **int** | The creation timestamp in Unix seconds. | 

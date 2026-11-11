@@ -494,18 +494,6 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.get_fiat_entry_kyc(fiat_entry_kyc_id)
         """
 
-    def test_get_merchant_kyc(self) -> None:
-        """
-        Test case for get_merchant_kyc
-
-        Get merchant KYC
-        """
-        """
-        merchant_id = 'M1001'
-
-        api_response = self.api.get_merchant_kyc(merchant_id)
-        """
-
     def test_get_payment_bank_account_balance(self) -> None:
         """
         Test case for get_payment_bank_account_balance
@@ -1021,17 +1009,16 @@ class TestPaymentApi(unittest.TestCase):
         api_response = self.api.payment_estimate_fee(payment_estimate_fee_request=payment_estimate_fee_request)
         """
 
-    def test_submit_merchant_kyc(self) -> None:
+    def test_retry_payment_callbacks(self) -> None:
         """
-        Test case for submit_merchant_kyc
+        Test case for retry_payment_callbacks
 
-        Submit merchant KYC
+        Retry payment callbacks
         """
         """
-        merchant_id = 'M1001'
-        submit_merchant_kyc = cobo_waas2.SubmitMerchantKyc()
+        retry_payment_callbacks_request = {"business_type":"refund","business_id":"R20250304-M1001-1001"}
 
-        api_response = self.api.submit_merchant_kyc(merchant_id, submit_merchant_kyc=submit_merchant_kyc)
+        api_response = self.api.retry_payment_callbacks(retry_payment_callbacks_request)
         """
 
     def test_trigger_test_payments_webhook_event(self) -> None:
@@ -1147,18 +1134,6 @@ class TestPaymentApi(unittest.TestCase):
         update_top_up_address = cobo_waas2.UpdateTopUpAddress()
 
         api_response = self.api.update_top_up_address(update_top_up_address=update_top_up_address)
-        """
-
-    def test_upload_payment_file(self) -> None:
-        """
-        Test case for upload_payment_file
-
-        Upload file
-        """
-        """
-        file = None
-
-        api_response = self.api.upload_payment_file(file)
         """
 
     def test_upload_payment_file_v2(self) -> None:
