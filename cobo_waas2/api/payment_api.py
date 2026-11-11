@@ -14,8 +14,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBytes, StrictInt, StrictStr
-from typing import List, Optional, Union
+from pydantic import Field, StrictInt, StrictStr
+from typing import List, Optional
 from typing_extensions import Annotated
 from cobo_waas2.models.acquiring_type import AcquiringType
 from cobo_waas2.models.bank_account_status import BankAccountStatus
@@ -90,8 +90,6 @@ from cobo_waas2.models.list_settlement_details200_response import ListSettlement
 from cobo_waas2.models.list_settlement_requests200_response import ListSettlementRequests200Response
 from cobo_waas2.models.list_top_up_payers200_response import ListTopUpPayers200Response
 from cobo_waas2.models.merchant import Merchant
-from cobo_waas2.models.merchant_kyc_info import MerchantKycInfo
-from cobo_waas2.models.merchant_kyc_submission import MerchantKycSubmission
 from cobo_waas2.models.order import Order
 from cobo_waas2.models.payment_allocation_amount import PaymentAllocationAmount
 from cobo_waas2.models.payment_balance_change_response import PaymentBalanceChangeResponse
@@ -114,8 +112,9 @@ from cobo_waas2.models.report import Report
 from cobo_waas2.models.report_download_response import ReportDownloadResponse
 from cobo_waas2.models.report_status import ReportStatus
 from cobo_waas2.models.report_type import ReportType
+from cobo_waas2.models.retry_payment_callbacks201_response import RetryPaymentCallbacks201Response
+from cobo_waas2.models.retry_payment_callbacks_request import RetryPaymentCallbacksRequest
 from cobo_waas2.models.settlement import Settlement
-from cobo_waas2.models.submit_merchant_kyc import SubmitMerchantKyc
 from cobo_waas2.models.supported_token import SupportedToken
 from cobo_waas2.models.top_up_address import TopUpAddress
 from cobo_waas2.models.trigger_test_payment_webhook_event_response import TriggerTestPaymentWebhookEventResponse
@@ -6778,179 +6777,6 @@ class PaymentApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/payments/fiat_entry_kyc/{fiat_entry_kyc_id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-        )
-
-    @validate_call
-    def get_merchant_kyc(
-        self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> MerchantKycSubmission:
-        """(Deprecated) Get merchant KYC
-
-        <Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
-
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-        warnings.warn("GET /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
-
-        _param = self._get_merchant_kyc_serialize(
-            merchant_id=merchant_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MerchantKycSubmission",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_merchant_kyc_with_http_info(
-        self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ApiResponse[MerchantKycSubmission]:
-        """(Deprecated) Get merchant KYC
-
-        <Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
-
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-        warnings.warn("GET /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
-
-        _param = self._get_merchant_kyc_serialize(
-            merchant_id=merchant_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MerchantKycSubmission",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_merchant_kyc_without_preload_content(
-        self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> RESTResponseType:
-        """(Deprecated) Get merchant KYC
-
-        <Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
-
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-        warnings.warn("GET /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
-
-        _param = self._get_merchant_kyc_serialize(
-            merchant_id=merchant_id,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MerchantKycSubmission",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_merchant_kyc_serialize(
-        self,
-        merchant_id,
-    ) -> RequestSerialized:
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if merchant_id is not None:
-            _path_params['merchant_id'] = merchant_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept` / `Content-Type`
-        _header_params = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/payments/merchants/{merchant_id}/kyc',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14613,10 +14439,9 @@ class PaymentApi:
         )
 
     @validate_call
-    def submit_merchant_kyc(
+    def retry_payment_callbacks(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
+        retry_payment_callbacks_request: Annotated[RetryPaymentCallbacksRequest, Field(description="The request body to retry callback messages for a payment business record.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14625,15 +14450,13 @@ class PaymentApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> MerchantKycInfo:
-        """(Deprecated) Submit merchant KYC
+    ) -> RetryPaymentCallbacks201Response:
+        """Retry payment callbacks
 
-        <Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+        This operation retries eligible callback messages associated with a refund order, payout, or bulk send.  Specify the business record using `business_type` and `business_id`. The record must belong to your organization and be in `PendingDoubleCheck` status. This operation requires the `callback.resend` permission.  For a business record with multiple callback endpoints, this operation attempts to resend each message that is still awaiting a valid response and has remaining attempts. Messages that have received `ok` or `deny`, or have exhausted their attempts, are skipped. All endpoints must return `ok` before the business record can continue processing; any `deny` terminates the business request.  Each message allows up to 30 delivery attempts in total, including the initial attempt and both automatic and manual retries. This operation does not reset the attempt count or resend exhausted messages.  A successful response means the retry request was processed. It does not guarantee that any message was resent or approved, or that the business record has continued processing. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
-        :param submit_merchant_kyc: The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
-        :type submit_merchant_kyc: SubmitMerchantKyc
+        :param retry_payment_callbacks_request: The request body to retry callback messages for a payment business record. (required)
+        :type retry_payment_callbacks_request: RetryPaymentCallbacksRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14641,15 +14464,13 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
-        warnings.warn("POST /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
-        _param = self._submit_merchant_kyc_serialize(
-            merchant_id=merchant_id,
-            submit_merchant_kyc=submit_merchant_kyc,
+        _param = self._retry_payment_callbacks_serialize(
+            retry_payment_callbacks_request=retry_payment_callbacks_request,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "MerchantKycInfo",
+            '201': "RetryPaymentCallbacks201Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -14664,10 +14485,9 @@ class PaymentApi:
         ).data
 
     @validate_call
-    def submit_merchant_kyc_with_http_info(
+    def retry_payment_callbacks_with_http_info(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
+        retry_payment_callbacks_request: Annotated[RetryPaymentCallbacksRequest, Field(description="The request body to retry callback messages for a payment business record.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14676,15 +14496,13 @@ class PaymentApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-    ) -> ApiResponse[MerchantKycInfo]:
-        """(Deprecated) Submit merchant KYC
+    ) -> ApiResponse[RetryPaymentCallbacks201Response]:
+        """Retry payment callbacks
 
-        <Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+        This operation retries eligible callback messages associated with a refund order, payout, or bulk send.  Specify the business record using `business_type` and `business_id`. The record must belong to your organization and be in `PendingDoubleCheck` status. This operation requires the `callback.resend` permission.  For a business record with multiple callback endpoints, this operation attempts to resend each message that is still awaiting a valid response and has remaining attempts. Messages that have received `ok` or `deny`, or have exhausted their attempts, are skipped. All endpoints must return `ok` before the business record can continue processing; any `deny` terminates the business request.  Each message allows up to 30 delivery attempts in total, including the initial attempt and both automatic and manual retries. This operation does not reset the attempt count or resend exhausted messages.  A successful response means the retry request was processed. It does not guarantee that any message was resent or approved, or that the business record has continued processing. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
-        :param submit_merchant_kyc: The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
-        :type submit_merchant_kyc: SubmitMerchantKyc
+        :param retry_payment_callbacks_request: The request body to retry callback messages for a payment business record. (required)
+        :type retry_payment_callbacks_request: RetryPaymentCallbacksRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14692,15 +14510,13 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
-        warnings.warn("POST /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
-        _param = self._submit_merchant_kyc_serialize(
-            merchant_id=merchant_id,
-            submit_merchant_kyc=submit_merchant_kyc,
+        _param = self._retry_payment_callbacks_serialize(
+            retry_payment_callbacks_request=retry_payment_callbacks_request,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "MerchantKycInfo",
+            '201': "RetryPaymentCallbacks201Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -14715,10 +14531,9 @@ class PaymentApi:
         )
 
     @validate_call
-    def submit_merchant_kyc_without_preload_content(
+    def retry_payment_callbacks_without_preload_content(
         self,
-        merchant_id: Annotated[StrictStr, Field(description="The merchant ID.")],
-        submit_merchant_kyc: Annotated[Optional[SubmitMerchantKyc], Field(description="The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. ")] = None,
+        retry_payment_callbacks_request: Annotated[RetryPaymentCallbacksRequest, Field(description="The request body to retry callback messages for a payment business record.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14728,14 +14543,12 @@ class PaymentApi:
             ]
         ] = None,
     ) -> RESTResponseType:
-        """(Deprecated) Submit merchant KYC
+        """Retry payment callbacks
 
-        <Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+        This operation retries eligible callback messages associated with a refund order, payout, or bulk send.  Specify the business record using `business_type` and `business_id`. The record must belong to your organization and be in `PendingDoubleCheck` status. This operation requires the `callback.resend` permission.  For a business record with multiple callback endpoints, this operation attempts to resend each message that is still awaiting a valid response and has remaining attempts. Messages that have received `ok` or `deny`, or have exhausted their attempts, are skipped. All endpoints must return `ok` before the business record can continue processing; any `deny` terminates the business request.  Each message allows up to 30 delivery attempts in total, including the initial attempt and both automatic and manual retries. This operation does not reset the attempt count or resend exhausted messages.  A successful response means the retry request was processed. It does not guarantee that any message was resent or approved, or that the business record has continued processing. 
 
-        :param merchant_id: The merchant ID. (required)
-        :type merchant_id: str
-        :param submit_merchant_kyc: The request body to submit merchant KYC information.  Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants. 
-        :type submit_merchant_kyc: SubmitMerchantKyc
+        :param retry_payment_callbacks_request: The request body to retry callback messages for a payment business record. (required)
+        :type retry_payment_callbacks_request: RetryPaymentCallbacksRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14743,15 +14556,13 @@ class PaymentApi:
         :type _request_timeout: int, tuple(int, int), optional
         :return: Returns the result object.
         """  # noqa: E501
-        warnings.warn("POST /payments/merchants/{merchant_id}/kyc is deprecated.", DeprecationWarning)
 
-        _param = self._submit_merchant_kyc_serialize(
-            merchant_id=merchant_id,
-            submit_merchant_kyc=submit_merchant_kyc,
+        _param = self._retry_payment_callbacks_serialize(
+            retry_payment_callbacks_request=retry_payment_callbacks_request,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "MerchantKycInfo",
+            '201': "RetryPaymentCallbacks201Response",
             '4XX': "ErrorResponse",
             '5XX': "ErrorResponse",
         }
@@ -14761,10 +14572,9 @@ class PaymentApi:
         )
         return response_data.response
 
-    def _submit_merchant_kyc_serialize(
+    def _retry_payment_callbacks_serialize(
         self,
-        merchant_id,
-        submit_merchant_kyc,
+        retry_payment_callbacks_request,
     ) -> RequestSerialized:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -14774,14 +14584,12 @@ class PaymentApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if merchant_id is not None:
-            _path_params['merchant_id'] = merchant_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if submit_merchant_kyc is not None:
-            _body_params = submit_merchant_kyc
+        if retry_payment_callbacks_request is not None:
+            _body_params = retry_payment_callbacks_request
 
         # set the HTTP header `Accept` / `Content-Type`
         _header_params = {
@@ -14791,7 +14599,7 @@ class PaymentApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/payments/merchants/{merchant_id}/kyc',
+            resource_path='/payments/callbacks/retry',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16436,179 +16244,6 @@ class PaymentApi:
         )
 
     @validate_call
-    def upload_payment_file(
-        self,
-        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The file to upload.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> PaymentUploadedFile:
-        """(Deprecated) Upload file
-
-        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
-
-        :param file: The file to upload. (required)
-        :type file: bytearray
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-        warnings.warn("POST /payments/files is deprecated.", DeprecationWarning)
-
-        _param = self._upload_payment_file_serialize(
-            file=file,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "PaymentUploadedFile",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def upload_payment_file_with_http_info(
-        self,
-        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The file to upload.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> ApiResponse[PaymentUploadedFile]:
-        """(Deprecated) Upload file
-
-        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
-
-        :param file: The file to upload. (required)
-        :type file: bytearray
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-        warnings.warn("POST /payments/files is deprecated.", DeprecationWarning)
-
-        _param = self._upload_payment_file_serialize(
-            file=file,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "PaymentUploadedFile",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def upload_payment_file_without_preload_content(
-        self,
-        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The file to upload.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-    ) -> RESTResponseType:
-        """(Deprecated) Upload file
-
-        <Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
-
-        :param file: The file to upload. (required)
-        :type file: bytearray
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :return: Returns the result object.
-        """  # noqa: E501
-        warnings.warn("POST /payments/files is deprecated.", DeprecationWarning)
-
-        _param = self._upload_payment_file_serialize(
-            file=file,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "PaymentUploadedFile",
-            '4XX': "ErrorResponse",
-            '5XX': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _upload_payment_file_serialize(
-        self,
-        file,
-    ) -> RequestSerialized:
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        if file is not None:
-            _files['file'] = file
-        # process the body parameter
-
-        # set the HTTP header `Accept` / `Content-Type`
-        _header_params = {
-            "Accept": "application/json",
-            "Content-Type": "multipart/form-data"
-        }
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/payments/files',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-        )
-
-    @validate_call
     def upload_payment_file_v2(
         self,
         payment_upload_file_v2: Annotated[Optional[PaymentUploadFileV2], Field(description="The request body to upload a file.")] = None,
@@ -16623,7 +16258,7 @@ class PaymentApi:
     ) -> PaymentUploadedFile:
         """Upload file v2
 
-        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). 
 
         :param payment_upload_file_v2: The request body to upload a file.
         :type payment_upload_file_v2: PaymentUploadFileV2
@@ -16669,7 +16304,7 @@ class PaymentApi:
     ) -> ApiResponse[PaymentUploadedFile]:
         """Upload file v2
 
-        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). 
 
         :param payment_upload_file_v2: The request body to upload a file.
         :type payment_upload_file_v2: PaymentUploadFileV2
@@ -16715,7 +16350,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Upload file v2
 
-        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+        This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). 
 
         :param payment_upload_file_v2: The request body to upload a file.
         :type payment_upload_file_v2: PaymentUploadFileV2

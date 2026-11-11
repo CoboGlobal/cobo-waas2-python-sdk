@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +26,7 @@ class PaymentUploadedFile(BaseModel):
     PaymentUploadedFile
     """  # noqa: E501
     file_id: StrictStr = Field(description="The AWS file link of the uploaded file.")
-    expired_timestamp: StrictInt = Field(description="The time when the uploaded file link expires, in Unix timestamp format, measured in milliseconds.")
-    __properties: ClassVar[List[str]] = ["file_id", "expired_timestamp"]
+    __properties: ClassVar[List[str]] = ["file_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,8 +79,7 @@ class PaymentUploadedFile(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "file_id": obj.get("file_id"),
-            "expired_timestamp": obj.get("expired_timestamp")
+            "file_id": obj.get("file_id")
         })
         return _obj
 

@@ -42,7 +42,6 @@ Method | HTTP request | Description
 [**get_destination_entry**](PaymentApi.md#get_destination_entry) | **GET** /payments/destination_entry/{destination_entry_id} | Get destination entry information
 [**get_exchange_rate**](PaymentApi.md#get_exchange_rate) | **GET** /payments/exchange_rates/{token_id}/{currency} | Get exchange rate
 [**get_fiat_entry_kyc**](PaymentApi.md#get_fiat_entry_kyc) | **GET** /payments/fiat_entry_kyc/{fiat_entry_kyc_id} | Get fiat entry KYC
-[**get_merchant_kyc**](PaymentApi.md#get_merchant_kyc) | **GET** /payments/merchants/{merchant_id}/kyc | Get merchant KYC
 [**get_payment_bank_account_balance**](PaymentApi.md#get_payment_bank_account_balance) | **GET** /payments/balance/bank_accounts/{bank_account_id} | Get bank account balance
 [**get_payment_order_detail_by_id**](PaymentApi.md#get_payment_order_detail_by_id) | **GET** /payments/orders/{order_id} | Get pay-in order information
 [**get_payout_by_id**](PaymentApi.md#get_payout_by_id) | **GET** /payments/payouts/{payout_id} | Get payout information
@@ -77,7 +76,7 @@ Method | HTTP request | Description
 [**list_settlement_requests**](PaymentApi.md#list_settlement_requests) | **GET** /payments/settlement_requests | List all settlement requests
 [**list_top_up_payers**](PaymentApi.md#list_top_up_payers) | **GET** /payments/topup/payers | List payers
 [**payment_estimate_fee**](PaymentApi.md#payment_estimate_fee) | **POST** /payments/estimate_fee | Estimate fees
-[**submit_merchant_kyc**](PaymentApi.md#submit_merchant_kyc) | **POST** /payments/merchants/{merchant_id}/kyc | Submit merchant KYC
+[**retry_payment_callbacks**](PaymentApi.md#retry_payment_callbacks) | **POST** /payments/callbacks/retry | Retry payment callbacks
 [**trigger_test_payments_webhook_event**](PaymentApi.md#trigger_test_payments_webhook_event) | **POST** /payments/webhooks/trigger | Trigger test webhook event
 [**update_counterparty**](PaymentApi.md#update_counterparty) | **PUT** /payments/counterparty/{counterparty_id} | Update counterparty
 [**update_destination**](PaymentApi.md#update_destination) | **PUT** /payments/destination/{destination_id} | Update destination
@@ -87,7 +86,6 @@ Method | HTTP request | Description
 [**update_payment_order**](PaymentApi.md#update_payment_order) | **PUT** /payments/orders/{order_id} | Update pay-in order
 [**update_refund_by_id**](PaymentApi.md#update_refund_by_id) | **PUT** /payments/refunds/{refund_id} | Update refund order
 [**update_top_up_address**](PaymentApi.md#update_top_up_address) | **PUT** /payments/topup/address | Update top-up address
-[**upload_payment_file**](PaymentApi.md#upload_payment_file) | **POST** /payments/files | Upload file
 [**upload_payment_file_v2**](PaymentApi.md#upload_payment_file_v2) | **POST** /payments/files_v2 | Upload file v2
 
 
@@ -2869,78 +2867,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_merchant_kyc**
-> MerchantKycSubmission get_merchant_kyc(merchant_id)
-
-Get merchant KYC
-
-<Note>This operation has been deprecated. Please use [Get fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/get-fiat-entry-kyc) instead.</Note>  This operation retrieves the KYC submission for a specified merchant.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants). 
-
-### Example
-
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.merchant_kyc_submission import MerchantKycSubmission
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.PaymentApi(api_client)
-    merchant_id = 'M1001'
-
-    try:
-        # Get merchant KYC
-        api_response = api_instance.get_merchant_kyc(merchant_id)
-        print("The response of PaymentApi->get_merchant_kyc:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->get_merchant_kyc: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **merchant_id** | **str**| The merchant ID. | 
-
-### Return type
-
-[**MerchantKycSubmission**](MerchantKycSubmission.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The request was successful. |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_payment_bank_account_balance**
 > PaymentBankAccountBalance get_payment_bank_account_balance(bank_account_id)
 
@@ -5616,12 +5542,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **submit_merchant_kyc**
-> MerchantKycInfo submit_merchant_kyc(merchant_id, submit_merchant_kyc=submit_merchant_kyc)
+# **retry_payment_callbacks**
+> RetryPaymentCallbacks201Response retry_payment_callbacks(retry_payment_callbacks_request)
 
-Submit merchant KYC
+Retry payment callbacks
 
-<Note>This operation has been deprecated. Please use [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) to create KYC information and [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc) to update KYC information instead.</Note>  This operation submits KYC information for a specified merchant.  You need to provide the merchant type, country, and industry. Provide either `company_info` or `individual_info`: - `company_info`: Required for company merchants. - `individual_info`: Required for individual merchants.  The merchant ID can be retrieved by calling [List all merchants](https://www.cobo.com/developers/v2/api-references/payment/list-all-merchants).  <Note>If the merchant KYC status is `Disabled`, this operation cannot be used to resubmit KYC information.</Note> 
+This operation retries eligible callback messages associated with a refund order, payout, or bulk send.  Specify the business record using `business_type` and `business_id`. The record must belong to your organization and be in `PendingDoubleCheck` status. This operation requires the `callback.resend` permission.  For a business record with multiple callback endpoints, this operation attempts to resend each message that is still awaiting a valid response and has remaining attempts. Messages that have received `ok` or `deny`, or have exhausted their attempts, are skipped. All endpoints must return `ok` before the business record can continue processing; any `deny` terminates the business request.  Each message allows up to 30 delivery attempts in total, including the initial attempt and both automatic and manual retries. This operation does not reset the attempt count or resend exhausted messages.  A successful response means the retry request was processed. It does not guarantee that any message was resent or approved, or that the business record has continued processing. 
 
 ### Example
 
@@ -5630,8 +5556,8 @@ Submit merchant KYC
 
 ```python
 import cobo_waas2
-from cobo_waas2.models.merchant_kyc_info import MerchantKycInfo
-from cobo_waas2.models.submit_merchant_kyc import SubmitMerchantKyc
+from cobo_waas2.models.retry_payment_callbacks201_response import RetryPaymentCallbacks201Response
+from cobo_waas2.models.retry_payment_callbacks_request import RetryPaymentCallbacksRequest
 from cobo_waas2.rest import ApiException
 from pprint import pprint
 
@@ -5646,16 +5572,15 @@ configuration = cobo_waas2.Configuration(
 with cobo_waas2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cobo_waas2.PaymentApi(api_client)
-    merchant_id = 'M1001'
-    submit_merchant_kyc = cobo_waas2.SubmitMerchantKyc()
+    retry_payment_callbacks_request = {"business_type":"refund","business_id":"R20250304-M1001-1001"}
 
     try:
-        # Submit merchant KYC
-        api_response = api_instance.submit_merchant_kyc(merchant_id, submit_merchant_kyc=submit_merchant_kyc)
-        print("The response of PaymentApi->submit_merchant_kyc:\n")
+        # Retry payment callbacks
+        api_response = api_instance.retry_payment_callbacks(retry_payment_callbacks_request)
+        print("The response of PaymentApi->retry_payment_callbacks:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PaymentApi->submit_merchant_kyc: %s\n" % e)
+        print("Exception when calling PaymentApi->retry_payment_callbacks: %s\n" % e)
 ```
 
 
@@ -5665,12 +5590,11 @@ with cobo_waas2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **merchant_id** | **str**| The merchant ID. | 
- **submit_merchant_kyc** | [**SubmitMerchantKyc**](SubmitMerchantKyc.md)| The request body to submit merchant KYC information.  Provide either &#x60;company_info&#x60; or &#x60;individual_info&#x60;: - &#x60;company_info&#x60;: Required for company merchants. - &#x60;individual_info&#x60;: Required for individual merchants.  | [optional] 
+ **retry_payment_callbacks_request** | [**RetryPaymentCallbacksRequest**](RetryPaymentCallbacksRequest.md)| The request body to retry callback messages for a payment business record. | 
 
 ### Return type
 
-[**MerchantKycInfo**](MerchantKycInfo.md)
+[**RetryPaymentCallbacks201Response**](RetryPaymentCallbacks201Response.md)
 
 ### Authorization
 
@@ -5685,7 +5609,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The request was successful. |  -  |
+**201** | The callback retry request was processed. |  -  |
 **4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
 **5XX** | Internal server error. |  -  |
 
@@ -6361,84 +6285,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **upload_payment_file**
-> PaymentUploadedFile upload_payment_file(file)
-
-Upload file
-
-<Note>This operation has been deprecated. Please use [Upload file v2](https://www.cobo.com/developers/v2/api-references/payment/upload-file-v2) instead.</Note>  This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to specify the file to upload. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
-
-### Example
-
-* OAuth Authentication (OAuth2):
-* Api Key Authentication (CoboAuth):
-
-```python
-import cobo_waas2
-from cobo_waas2.models.payment_uploaded_file import PaymentUploadedFile
-from cobo_waas2.rest import ApiException
-from pprint import pprint
-
-# See configuration.py for a list of all supported configurations.
-configuration = cobo_waas2.Configuration(
-    # Replace `<YOUR_PRIVATE_KEY>` with your private key
-    api_private_key="<YOUR_PRIVATE_KEY>",
-    # Select the development environment. To use the production environment, change the URL to https://api.cobo.com/v2.
-    host="https://api.dev.cobo.com/v2"
-)
-# Enter a context with an instance of the API client
-with cobo_waas2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cobo_waas2.PaymentApi(api_client)
-    file = None
-
-    try:
-        # Upload file
-        api_response = api_instance.upload_payment_file(file)
-        print("The response of PaymentApi->upload_payment_file:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentApi->upload_payment_file: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file** | **bytearray**| The file to upload. | 
-
-### Return type
-
-[**PaymentUploadedFile**](PaymentUploadedFile.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [CoboAuth](../README.md#CoboAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | The request was successful. |  -  |
-**4XX** | Bad request. Your request contains malformed syntax or invalid parameters. |  -  |
-**5XX** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **upload_payment_file_v2**
 > PaymentUploadedFile upload_payment_file_v2(payment_upload_file_v2=payment_upload_file_v2)
 
 Upload file v2
 
-This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). The returned file link expires at the time specified by `expired_timestamp`. 
+This operation uploads a file for payment-related use cases, such as fiat entry KYC attachments.  You need to encode the file content in Base64 and include it in the JSON request body together with the original file name. After a successful upload, use the returned AWS file link in `file_id` when calling [Create fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/create-fiat-entry-kyc) or [Update fiat entry KYC](https://www.cobo.com/developers/v2/api-references/payment/update-fiat-entry-kyc). 
 
 ### Example
 

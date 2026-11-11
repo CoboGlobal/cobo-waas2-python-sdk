@@ -39,8 +39,6 @@ class TestFiatEntryKycDetail(unittest.TestCase):
                 merchant_type = 'B2B',
                 country = 'HKG',
                 industry = ["Intangible Goods & Service","Websites, IT & Software"],
-                email = 'user@example.com',
-                phone = '+85212345678',
                 company_info = cobo_waas2.models.fiat_entry_kyc_company_info.FiatEntryKycCompanyInfo(
                     company_type = 'Corporation', 
                     listed = False, 

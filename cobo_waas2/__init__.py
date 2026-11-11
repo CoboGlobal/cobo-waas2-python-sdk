@@ -12,7 +12,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.46.0"
+__version__ = "1.47.0"
 
 # import apis into sdk package
 from cobo_waas2.api.address_books_api import AddressBooksApi
@@ -465,18 +465,6 @@ from cobo_waas2.models.max_fee_amount import MaxFeeAmount
 from cobo_waas2.models.max_transferable_value import MaxTransferableValue
 from cobo_waas2.models.merchant import Merchant
 from cobo_waas2.models.merchant_balance import MerchantBalance
-from cobo_waas2.models.merchant_kyc_address import MerchantKycAddress
-from cobo_waas2.models.merchant_kyc_company_attachment import MerchantKycCompanyAttachment
-from cobo_waas2.models.merchant_kyc_company_attachment_file_type import MerchantKycCompanyAttachmentFileType
-from cobo_waas2.models.merchant_kyc_company_info import MerchantKycCompanyInfo
-from cobo_waas2.models.merchant_kyc_company_type import MerchantKycCompanyType
-from cobo_waas2.models.merchant_kyc_info import MerchantKycInfo
-from cobo_waas2.models.merchant_kyc_merchant_type import MerchantKycMerchantType
-from cobo_waas2.models.merchant_kyc_person_attachment import MerchantKycPersonAttachment
-from cobo_waas2.models.merchant_kyc_person_attachment_file_type import MerchantKycPersonAttachmentFileType
-from cobo_waas2.models.merchant_kyc_person_info import MerchantKycPersonInfo
-from cobo_waas2.models.merchant_kyc_status import MerchantKycStatus
-from cobo_waas2.models.merchant_kyc_submission import MerchantKycSubmission
 from cobo_waas2.models.message_sign_destination import MessageSignDestination
 from cobo_waas2.models.message_sign_destination_type import MessageSignDestinationType
 from cobo_waas2.models.message_sign_params import MessageSignParams
@@ -523,6 +511,7 @@ from cobo_waas2.models.payment_bulk_send_item_update_event_data import PaymentBu
 from cobo_waas2.models.payment_bulk_send_item_validation_status import PaymentBulkSendItemValidationStatus
 from cobo_waas2.models.payment_bulk_send_status import PaymentBulkSendStatus
 from cobo_waas2.models.payment_bulk_send_update_event_data import PaymentBulkSendUpdateEventData
+from cobo_waas2.models.payment_callback_business_type import PaymentCallbackBusinessType
 from cobo_waas2.models.payment_commission_fee_total import PaymentCommissionFeeTotal
 from cobo_waas2.models.payment_estimate_fee import PaymentEstimateFee
 from cobo_waas2.models.payment_estimate_fee201_response import PaymentEstimateFee201Response
@@ -596,6 +585,8 @@ from cobo_waas2.models.report_status import ReportStatus
 from cobo_waas2.models.report_type import ReportType
 from cobo_waas2.models.request_approval import RequestApproval
 from cobo_waas2.models.retry_callback_message201_response import RetryCallbackMessage201Response
+from cobo_waas2.models.retry_payment_callbacks201_response import RetryPaymentCallbacks201Response
+from cobo_waas2.models.retry_payment_callbacks_request import RetryPaymentCallbacksRequest
 from cobo_waas2.models.retry_webhook_event_by_id201_response import RetryWebhookEventById201Response
 from cobo_waas2.models.review_status_type import ReviewStatusType
 from cobo_waas2.models.revoke_approval_request201_response import RevokeApprovalRequest201Response
@@ -642,7 +633,6 @@ from cobo_waas2.models.submit_deposit_travel_rule_info201_response import Submit
 from cobo_waas2.models.submit_kyt_response import SubmitKytResponse
 from cobo_waas2.models.submit_kyt_screenings_decisions_body import SubmitKytScreeningsDecisionsBody
 from cobo_waas2.models.submit_kyt_screenings_review_body import SubmitKytScreeningsReviewBody
-from cobo_waas2.models.submit_merchant_kyc import SubmitMerchantKyc
 from cobo_waas2.models.sui_contract_call_address_balance_operation_type import SuiContractCallAddressBalanceOperationType
 from cobo_waas2.models.sui_contract_call_address_balance_param import SuiContractCallAddressBalanceParam
 from cobo_waas2.models.sui_contract_call_contract_param import SuiContractCallContractParam
